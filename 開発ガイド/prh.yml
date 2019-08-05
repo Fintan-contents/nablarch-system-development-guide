@@ -1,0 +1,6 @@
+version: 1
+rules:
+  - expected: リモート開発
+    pattern: リモートワーク
+  - expected: 我々
+    pattern: Nablarchチーム

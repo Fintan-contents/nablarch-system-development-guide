@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nablarch.example.proman</groupId>
+    <artifactId>proman-project</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>proman-common</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
+    <nablarch.db.url>jdbc:postgresql://localhost:5432/postgres</nablarch.db.url>
+    <nablarch.db.adminUser>postgres</nablarch.db.adminUser>
+    <nablarch.db.adminPassword>password</nablarch.db.adminPassword>
+    <nablarch.db.user>postgres</nablarch.db.user>
+    <nablarch.db.password>password</nablarch.db.password>
+    <nablarch.db.schema>public</nablarch.db.schema>
+    <!-- 'gsp-target'ディレクトリは使用しない。
+    jarで依存関係を解決するのではなく、モジュール参照する場合、
+    プロファイルgspが有効でないと、gsp-target/classesがクラスパスに設定されない。
+    そのため依存モジュールで生成されたEntityを解決できなくなるためである。
+    -->
+    <dba.gsp-target-dir>${project.build.directory}</dba.gsp-target-dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-core-validation-ee</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-dao</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-code-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-date</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-idgenerator-jdbc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.1.3.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-main-default-configuration</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+
+  </dependencies>
+
+  <profiles>
+    <!-- gsp-dba-plugin -->
+    <profile>
+      <id>gsp</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>jp.co.tis.gsp</groupId>
+            <artifactId>gsp-dba-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>gsp-prepare-database</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>generate-ddl</goal>
+                  <goal>execute-ddl</goal>
+                  <goal>load-data</goal>
+                  <!-- commonモジュールも同時にビルドするため、スキーマをartifactにする必要はない -->
+                  <!--                  <goal>export-schema</goal>-->
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>jp.co.tis.gsp</groupId>
+          <artifactId>gsp-dba-maven-plugin</artifactId>
+          <dependencies>
+            <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
+            <dependency>
+              <groupId>org.postgresql</groupId>
+              <artifactId>postgresql</artifactId>
+              <version>${postgres.jdbc.driver.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <extraDdlDirectory>src/main/resources/extraDdl</extraDdlDirectory>
+            <!-- デフォルトではtarget/classesに出力されるが、これだとjarに含まれてしまう。
+                 また、プラグインからはクラスパスではなくファイルシステムから読み取られるのでclassesに入れる必要はない
+            -->
+            <diconDir>target/gsp/dicon</diconDir>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <!--
+       gspプロファイルを指定しないときにでも、mvn clean compileを実行できるようにするため、
+       generate-entityを独立させておく。
+       -->
+      <plugin>
+        <groupId>jp.co.tis.gsp</groupId>
+        <artifactId>gsp-dba-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>gsp-generate-entity</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate-entity</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+

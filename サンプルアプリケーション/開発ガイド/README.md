@@ -1,0 +1,75 @@
+# サンプルアプリ開発プロジェクトガイド
+## はじめに
+本書には、サンプルアプリ開発プロジェクトで開発を行う上でのルールが記載されています。
+
+## 開発標準
+- 配置場所：ファイルサーバーの `02_方式設計\20_開発標準\`
+
+## 設計工程
+### デザインHTML
+- デザインHTMLの配置場所  
+  https://collaborage-ci.keel-dev.net/gitbucket/shaft/proman-project-html
+- [デザインHTMLコーディングガイド](設計工程/デザインHTMLコーディングガイド.md)
+
+### テスト設計
+
+- [設計工程におけるテスト準備](設計工程/設計工程におけるテスト準備.md)
+
+
+### 設計書
+- 配置場所：ファイルサーバーの `03_アプリ設計`
+- [設計ガイド](設計工程/設計ガイド.md)
+
+### 補足事項
+
+- [アプリケーション構成](設計工程/アプリケーション構成.md)
+- [ドメイン定義の進め方](設計工程/ドメイン定義の進め方.md)
+- [コード設計の進め方](設計工程/コード設計の進め方.md)
+- [SQLファイル作成](設計工程/SQLファイル作成.md)
+
+## PGUT工程
+
+### プログラミング工程
+#### 開発環境構築
+- [開発環境構築ガイド](PGUT工程/開発環境構築ガイド.md)
+
+#### バージョン管理ルール
+- [バージョン管理ルール](PGUT工程/バージョン管理ルール.md)
+
+#### プログラミング標準
+##### 規約
+- [コーディングに関する命名規約](PGUT工程/pg/コーディングに関する命名規約.md)
+- [ユニットテストのJavaDocに関する規約](PGUT工程/ut/ユニットテストのJavaDocに関する規約.md)
+- [クラスにフィールドを持たせる際のルール](PGUT工程/pg/クラスにフィールドを持たせる場合のルール.md)
+- [コーディング規約のチェック](PGUT工程/pg/コーディング規約のチェック.md)
+- [静的解析チェック違反発生時の対応方法](PGUT工程/pg/静的解析チェック違反発生時の対応方法.md)
+
+##### 共通
+- PG・UTの進め方
+  - [PG・UT作業の完了条件チェックリスト](PGUT工程/checklist/PG・UT作業の完了条件チェックリスト.xlsx)
+  - [プログラマー向け成果物セルフチェックリスト](PGUT工程/checklist/プログラマー向け成果物セルフチェックリスト.xlsx)
+- [一般的な処理に関する実装方法](PGUT工程/pg/一般的な処理に関する実装方法.md)
+
+##### 画面
+- [画面の一般的な処理に関する実装方法](PGUT工程/pg/画面の一般的な処理に関する実装方法.md)
+
+### 単体テスト工程
+- [単体テストの考え方](PGUT工程/ut/単体テストの考え方.md)
+
+- 取引単体テスト
+  - [テスト項目全般](PGUT工程/ut/取引単体テスト-テスト項目全般.md)
+  - [特定のテスト項目](PGUT工程/ut/取引単体テスト-特定のテスト項目.md) 
+
+
+## 開発環境
+- [redmine(カンバン)](https://collaborage-cq.keel-dev.net/redmine/)
+- [NEXUS](https://collaborage-ci.keel-dev.net/nexus/)
+  - ローカル環境から参照するリポジトリのURLの確認   
+    [NEXUSのリポジトリのURLの確認ツール](https://collaborage-ci.keel-dev.net/nexus/#browse/browse/assets)  
+    このページの表の右側のcopyボタンのクリックする。ローカルから見た場合のリポジトリのURLがコピーされる。
+  - CIサーバからみたリポジトリのURL  
+   [collaborage→プロジェクトの開発準備→ConcourseでのCI追加](https://github.com/Fintan-contents/collaborage/blob/master/doc/dev.md#concourseでのci追加)  の「Mavenリポジトリにデプロイするため、distributionManagementの設定を追加します」を参照。
+- [CI](https://collaborage-ci.keel-dev.net/jenkins/)
+  - [本プロジェクトのCIの説明](開発環境/本プロジェクトのCIの説明.md)
+- [SonarQube](https://collaborage-cq.keel-dev.net/sonarqube/)
+- [demoサーバ](https://collaborage-demo.keel-dev.net/)

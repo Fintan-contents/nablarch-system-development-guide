@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- デフォルトの採番クラス -->
+  <component name="idGenerator" class="com.nablarch.example.proman.common.id.DelegatingIdGenerator">
+    <property name="delegate" ref="sequenceIdGenerator"/>
+  </component>
+
+  <!-- シーケンスオブジェクトを使用する採番クラス -->
+  <component name="sequenceIdGenerator" class="nablarch.common.idgenerator.SequenceIdGenerator" />
+
+  <!-- テーブルを使用する採番クラス -->
+  <component name="tableIdGenerator" class="nablarch.common.idgenerator.TableIdGenerator">
+    <!-- 採番テーブルの定義 -->
+    <property name="tableName" value="ID_GENERATE"/>
+    <property name="idColumnName" value="GENERATOR_ID"/>
+    <property name="noColumnName" value="GENERATED_NO"/>
+  </component>
+
+</component-configuration>

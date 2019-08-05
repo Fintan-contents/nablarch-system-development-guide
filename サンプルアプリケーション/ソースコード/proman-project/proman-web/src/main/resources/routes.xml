@@ -1,0 +1,13 @@
+<routes>
+    <root to="Login#index"/>
+    <get  path="/action/login" to="Login#index"/>
+    <post path="/action/login" to="Login#login"/>
+    <get  path="/action/logout" to="Login#logout"/>
+    <get  path="/action/top" to="TopPage#index"/>
+    <match path="/action/:controller/:action"/>
+    <match path="/action/:controller/:action/:projectId">
+        <requirements>
+            <requirement name="projectId" value="\d+$" />
+        </requirements>
+    </match>
+</routes>
