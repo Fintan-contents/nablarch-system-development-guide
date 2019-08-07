@@ -201,10 +201,5 @@
     <!--<property name="severity" value="warning"/>-->
   <!--</module>-->
 
-  <!-- 設定ファイルによるCheckstyle除外対象の設定 -->
-  <module name="SuppressionFilter">
-    <property name="file" value="${config_loc}/suppressions.xml"/>
-    <property name="optional" value="false"/>
-  </module>
 </module>
 

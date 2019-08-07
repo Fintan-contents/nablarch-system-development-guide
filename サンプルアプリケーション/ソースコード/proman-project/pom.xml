@@ -102,7 +102,8 @@
           <configuration>
             <!-- Checkstyle設定ファイルへのパス -->
             <configLocation>${nablarch.tools.dir}/static-analysis/checkstyle/nablarch-checkstyle.xml</configLocation>
-            <propertyExpansion>config_loc=${nablarch.tools.dir}/static-analysis/checkstyle/</propertyExpansion>
+            <!-- Checkstyle除外対象の設定ファイルへのパス -->
+            <suppressionsLocation>${nablarch.tools.dir}/static-analysis/checkstyle/suppressions.xml</suppressionsLocation>
           </configuration>
         </plugin>
 
