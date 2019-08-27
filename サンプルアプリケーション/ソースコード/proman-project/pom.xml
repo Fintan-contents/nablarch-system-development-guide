@@ -19,6 +19,7 @@
   <modules>
     <module>proman-common</module>
     <module>proman-web</module>
+    <module>proman-batch</module>
   </modules>
 
   <properties>

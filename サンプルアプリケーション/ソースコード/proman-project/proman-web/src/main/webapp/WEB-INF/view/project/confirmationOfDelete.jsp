@@ -96,7 +96,7 @@
                                 <n:write value="${n:formatByDefault('dateTime', form.projectEndDate)}"/>
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="field text">
                             <label>備考</label>
                             <n:write name="form.note"/>
                         </div>

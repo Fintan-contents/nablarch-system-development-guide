@@ -1,0 +1,13 @@
+# 
+# 共通定義部
+# 
+file-type:          "Variable"  # ファイルタイプ        
+text-encoding:      "UTF-8"     # 文字エンコーディング  
+record-separator:   "\r\n"      # 改行コード            
+field-separator:    ","         # フィールド区切り文字  
+quoting-delimiter:  "\""        # フィールド囲み文字    
+
+[Default]# データレコード
+1  functionName  X    #疎通確認OKの機能名  
+2  result        X    #判定結果            
+

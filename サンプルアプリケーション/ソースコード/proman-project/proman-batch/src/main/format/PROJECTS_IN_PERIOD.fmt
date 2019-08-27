@@ -1,0 +1,33 @@
+# 
+# 共通定義部
+# 
+file-type:          "Variable"  # ファイルタイプ        
+text-encoding:      "UTF-8"     # 文字エンコーディング  
+record-separator:   "\r\n"      # 改行コード            
+field-separator:    ","         # フィールド区切り文字  
+quoting-delimiter:  "\""        # フィールド囲み文字    
+
+[Default]# データレコード
+1  project_id           X      #プロジェクトID
+2  project_name         X      #プロジェクト名
+3  project_type         X      #プロジェクト種別
+4  project_class        X      #プロジェクト分類
+5  project_start_date   X      #プロジェクト開始日付
+6  project_end_date     X      #プロジェクト終了日付
+7  organization_id      X      #組織ID
+8  client_id            X      #顧客ID
+9  project_manager      X      #プロジェクトマネージャー
+10 project_leader       X      #プロジェクトリーダー
+11 note                 X      #備考
+12 sales                X      #売上高
+13 version              X      #バージョン番号
+
+
+
+
+
+
+
+
+
+

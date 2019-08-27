@@ -115,3 +115,8 @@ input.code-radio:checked ~ label:after {
 .code-radio-fields {
     flex-wrap: wrap;
 }
+
+/* -------------------- textareaタグ -----------------------*/
+div.text{
+    word-break: break-all;
+}

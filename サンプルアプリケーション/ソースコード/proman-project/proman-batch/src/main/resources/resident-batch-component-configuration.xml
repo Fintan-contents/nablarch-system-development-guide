@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- テーブル定義 -->
+  <import file="nablarch/schema-config.xml" />
+
+  <!-- 精査に使用する文字集合定義 -->
+  <import file="nablarch/core/validation/charset-definition.xml"/>
+
+  <!-- DomainManager 実装クラス設定 -->
+  <!--<component name="domainManager" class="com.nablarch.example.proman.domain.SampleDomainManager"/>-->
+
+  <!-- 環境設定ファイル -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!-- Nablarch共通機能 -->
+  <!-- コード機能 -->
+  <import file="nablarch/common/code.xml" />
+  <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
+  <import file="nablarch/common/dao.xml" />
+  <!-- 日付 -->
+  <import file="nablarch/core/date.xml"/>
+
+
+  <!--
+  バッチ固有の設定読み込み
+  -->
+  <!-- データベース接続・トランザクション設定-->
+  <import file="nablarch/batch/db-for-batch.xml" />
+  <import file="data-source.xml"/>
+
+  <!-- ファイルパス設置 -->
+  <import file="nablarch/batch/filepath-for-batch.xml" />
+  <!-- スレッドコンテキスト機能 -->
+  <import file="nablarch/batch/threadcontext-for-batch.xml" />
+  <!-- 処理停止機能 -->
+  <import file="nablarch/common/standalone/process-stop.xml" />
+  <!-- マルチスレッド実行制御機能 -->
+  <import file="nablarch/common/standalone/multi-thread.xml" />
+  <!-- プロセス常駐化機能 -->
+  <import file="nablarch/common/standalone/process-service.xml" />
+  <!-- リトライ機能 -->
+  <import file="nablarch/common/standalone/standalone-retry.xml" />
+  <!-- データリード機能 -->
+  <import file="nablarch/batch/batch-data-read.xml" />
+
+  <!-- ハンドラキュー構成 -->
+  <list name="handlerQueue">
+
+    <!-- ****************************************
+    メインスレッド部
+    ****************************************-->
+
+    <!-- ステータスコードを終了コードに変換するハンドラ -->
+    <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
+    
+    <!-- スレッドコンテキスト変数削除ハンドラ -->
+    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
+
+    <!-- グローバルエラーハンドラ -->
+    <component class="nablarch.fw.handler.GlobalErrorHandler" />
+
+    <!-- スレッドコンテキスト設定ハンドラ -->
+    <component-ref name="threadContextHandler" />
+
+    <!-- リトライハンドラ -->
+    <component-ref name="retryHandler" />
+
+    <!-- データベース接続管理ハンドラ（業務初期処理・終端処理用） -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- トランザクション制御ハンドラ（業務初期処理・終端処理用） -->
+    <component-ref name="transactionManagementHandler" />
+
+    <!-- ディスパッチ -->
+    <component class="nablarch.fw.handler.RequestPathJavaPackageMapping">
+      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+      <property name="immediate" value="false" />
+    </component>
+
+    <!-- マルチスレッド実行制御ハンドラ -->
+    <component-ref name="multiThreadExecutionHandler" />
+
+    <!--****************************************
+    リクエストスレッド部
+    ****************************************-->
+
+    <!-- データベース接続管理ハンドラ -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- リクエストスレッドループ -->
+    <component-ref name="requestThreadLoopHandler" />
+
+    <!-- 処理停止制御ハンドラ -->
+    <component-ref name="processStopHandler" />
+
+    <!-- データリードハンドラ -->
+    <component-ref name="dataReadHandler" />
+
+    <!-- トランザクション制御ハンドラ -->
+    <component-ref name="transactionManagementHandler" />
+
+  </list>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- common/date.xml:業務日付コンポーネント -->
+        <component-ref name="businessDateProvider" />
+        <!-- common/code.xml:コードのローダ -->
+        <component-ref name="codeLoader" />
+        <!-- common/code.xml:コードのキャッシュ -->
+        <component-ref name="codeCache" />
+        <!-- batch/handler/processStop.xml:処理停止ハンドラ -->
+        <component-ref name="processStopHandler" />
+      </list>
+    </property>
+  </component>
+</component-configuration>
