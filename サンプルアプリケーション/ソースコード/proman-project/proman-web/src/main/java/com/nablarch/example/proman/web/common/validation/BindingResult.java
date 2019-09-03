@@ -120,7 +120,7 @@ public interface BindingResult<T extends Serializable> {
 
         @Override
         public void abortIfInvalid() {
-            throw new IllegalStateException("throwApplicationException method must not be called when validation succeeded.");
+            // バリデーションに成功しているため何もしない。
         }
 
         @Override
