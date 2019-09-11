@@ -24,7 +24,7 @@ URL設計のルールは最小限とします。
 ```xml
   <get    path="/customer"     to="Customer#list" />
   <get    path="/customer/:id" to="Customer#show" />
-  <post   path="/customer" to="Customer#register" />
+  <post   path="/customer"     to="Customer#register" />
   <put    path="/customer/:id" to="Customer#update" />
   <delete path="/customer/:id" to="Customer#delete" />
 ```
