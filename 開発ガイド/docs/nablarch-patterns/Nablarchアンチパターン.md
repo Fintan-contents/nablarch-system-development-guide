@@ -9,8 +9,7 @@ Nablarchが想定する使用方法を踏まえずに設計、製造すると、
 
 ### コンポーネントライフサイクルの誤解によるマルチスレッドバグ
 
-Nablarchの[システムリポジトリ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/repository.html#repository)は、DIコンテナ機能を持つが、他のDIコンテナとの違いを把握しておく必要があります。
-
+Nablarchの[システムリポジトリ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/repository.html#repository)はDIコンテナ機能を持ちますが、他のDIコンテナとコンポーネントライフサイクルが異なります。
 
 Nablarchのシステムリポジトリで管理されるコンポーネントのライフサイクルは`singleton`になります。
 デフォルトのライフサイクルを`prototype`あるいは`request`と誤解し、コンポーネントの状態を書き換えてしまうと、
@@ -42,15 +41,17 @@ Nablarchバッチでは、handleメソッド内で、入力データを元に再
 処理対象件数が増加するほど性能が劣化します。
 createReaderで発行するSQLで、1回のSQLで取得する（JOIN）ことで回避可能です。
 
-1回のSQLでデータを取得できれば、データ取得に必要なSQLは処理対象件数に関わらず最初の1件のみとなりますが、
-N+1問題のあるバッチでは、処理対象件数が100件の場合は101件、10000件の場合は10001件のSQLが発行されることになり、
-深刻な性能劣化を起こす恐れがあります。
+1回のSQLでデータを取得できれば、データ取得に必要なSQLは処理対象件数に関わらず最初の1件のみですが、
+N+1問題のあるバッチでは深刻な性能劣化を起こす恐れがあります。
+処理対象件数が100件の場合は101件、10000件の場合は10001件のSQLが発行されることになります。
+
 
 #### NG例
 
 以下の例では、売上SQLの取得件数+1回、売上明細SQLを実行することになります。
 
-createReaderメソッド
+##### createReaderメソッド
+
 ```sql
 SELECT
   売上ID,
@@ -60,7 +61,8 @@ FROM
 WHERE 売上日 = ?
 ```
 
-handleメソッド
+##### handleメソッド
+
 ```sql
 SELECT
   売上明細ID,
