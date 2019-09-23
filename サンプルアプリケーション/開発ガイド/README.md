@@ -113,13 +113,12 @@
 
 ※サンプルアプリケーションのチーム開発環境（RedmineやJenkinsなど）は公開していないため、以下はリンクにしていませんが、本来はリンクでアクセスできるようにして使用しています。
 
-- [Redmine](https://collaborage-cq.keel-dev.net/redmine/)
+- Redmine
   - タスク、課題、不具合の管理に使用します。
   - アーキチームへの改善要望や静的チェックの変更依頼等、チーム間の依頼を管理するのにも使用します。
-- [NEXUS](https://collaborage-ci.keel-dev.net/nexus/)
+- NEXUS
   - サードパーティーのJARやテスト工程でリリースされたアプリケーションを管理するのに使用します。
-- [Jenkins](https://collaborage-ci.keel-dev.net/jenkins/)
+- Jenkins
   - CIに使用します。CIの内容は[本プロジェクトのCIの説明](開発環境/本プロジェクトのCIの説明.md)を参照してください。
-- [デモサーバ](https://collaborage-demo.keel-dev.net/)
+- デモサーバ
   - デモ用にアプリケーションをデプロイするのに使用します。
-

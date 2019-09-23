@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://checkstyle.sourceforge.net/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+  <!-- JavaDocのチェックを抑止する設定例 -->
+  <suppress checks="(JavadocMethod|WriteTagCheck)"
+            files="com[\\/]example[\\/]suppression[\\/]SuppressionExample.java" />
+</suppressions>
