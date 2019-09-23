@@ -1,19 +1,21 @@
-# 一般的な処理に関する実装方法
-## Serviceクラス
-Serviceクラスは業務ロジックを記述するクラスであります。  
+# Serviceクラスの実装方法
+
+Serviceクラスは業務ロジックを実装するクラスです。  
 ここではServiceクラスについて、全処理方式共通のトピックを記載します。
 
-### DBアクセスに関する実装
-#### Serviceクラスの実装方針
+## Serviceクラスの実装方針
+
 ユニットテスト時にDBアクセス部分をスタブに差し替え可能な実装とします。  
 その手段として、DaoContextクラスをServiceクラスのコンストラクタで初期化し、それを用いてDBアクセスを行います。
 
-補足：  
-DaoContextクラスは、NablarchがUniversalDaoクラス内部で使用しているクラスです。UniversalDaoクラスはインスタンス化せず使うクラスであり、ユニットテスト時の差し替えが不可能であるため、この手法をとります。
+DaoContextクラスは、NablarchがUniversalDaoクラスの内部で使用しているクラスです。 
+UniversalDaoクラスはインスタンス化せずに使うクラスであり、ユニットテスト時の差し替えが不可能であるため、この手法をとります。
 
-#### Serviceクラスの実装方法
-##### コンストラクタの実装
-実装例を以下に示します。
+## Serviceクラスの実装方法
+
+### コンストラクタの実装
+
+実装例を示します。
 
 ````java
 public class ProjectService  {
@@ -33,11 +35,13 @@ public class ProjectService  {
 }
 ````
 ※1 プロダクションコードでは、このコンストラクタを使用してServiceクラスのインスタンスを初期化します。  
-※2 DaoFactoryクラスは、proman-commonプロジェクトに存在するクラスです。  
+※2 DaoFactoryクラスはproman-commonプロジェクトに存在するクラスです。  
 ※3 テストコードでは、このコンストラクタを使用してServiceクラスのインスタンスを初期化します。
 
-##### DaoContextを使用したDBアクセスの実装
-以下に例を示します。
+### DaoContextを使用したDBアクセスの実装
+
+実装例を示します。
+
 ````java
 public class ProjectService  {
     private final DaoContext universalDao;
@@ -49,18 +53,22 @@ public class ProjectService  {
 }
 ````
 
-#### Serviceクラスの使用方法
-##### プロダクションコード
+## Serviceクラスの使用方法
+
+### プロダクションコード
+
 引数無しコンストラクタでインスタンス化します。
 
-以下に例を示します。
+実装例を示します。
+
 ````java
 public class ProjectSearchAction {
     //中略
     public HttpResponse search(HttpRequest request, ExecutionContext context) {
         //中略
         ProjectService searchService = new ProjectService();
-        EntityList<ProjectWithOrganizationSearchResultDto> searchList = searchService.findProjectWithOrganizationByCondition(searchCondition);
+        EntityList<ProjectWithOrganizationSearchResultDto> searchList
+            = searchService.findProjectWithOrganizationByCondition(searchCondition);
         //中略
     }
     //中略
@@ -68,10 +76,12 @@ public class ProjectSearchAction {
 ````
 
 
-##### テストコード
-引数有りコンストラクタで、DaoContextクラスをスタブに差し替えてインスタンス化します。
+### テストコード
 
-以下に例を示します。
+引数有りコンストラクタでDaoContextクラスをスタブに差し替えてインスタンス化します。
+
+実装例を示します。
+
 ````java
 public class ProjectServiceTest {
 
