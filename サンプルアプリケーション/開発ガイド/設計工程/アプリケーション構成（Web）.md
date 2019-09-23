@@ -38,6 +38,12 @@ Nablarchでは、Action以降のクラス構成については特に規定があ
 ## Service
 
 ビジネスロジックを実装します。
+
+HttpRequest, HttpResponse, Formような、Web依存のクラスは使用しないようにします。
+また、ExecutionContextも使用しないようにします。
+これらのクラスの代わりに、そのService用のDTOを引数として受け取るようにします。
+これによりServiceクラスのテスタビリティが保たれます。
+
 データベースアクセスについてはUniversalDaoをクラス単体テスト時に置き換えられるようにします。
 UniversalDaoクラスはstaticメソッドのみを持つので、インターフェイスであるDaoContextを使用します。
 
@@ -66,7 +72,8 @@ DaoContext stub = new DaoContextStub() {
 }
 ```
 
-
+DAO(Data Access Object)クラスを導入することでも、データベースアクセスの置き換えは可能ですが、
+DAOクラス作成にも手間がかかるため、DaoContextの実装を置き換えることとしました。
 
 ## Entity
 
