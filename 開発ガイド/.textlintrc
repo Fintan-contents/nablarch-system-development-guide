@@ -6,6 +6,9 @@
       },
       "sentence-length": {
         "max": 200
+      },
+      "max-ten": {
+        max: 4
       }
     },
     "prh": {

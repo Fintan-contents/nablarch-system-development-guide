@@ -4,3 +4,12 @@ rules:
     pattern: リモートワーク
   - expected: 我々
     pattern: Nablarchチーム
+  - expected: PGUT工程
+    pattern: 製造工程
+  - expected: 開発ガイド
+    pattern: /(Nablarch|サンプル)?開発ガイド/
+    regexpMustEmpty: $1
+    specs:
+      # 「Nablarch開発ガイド」は変換しない
+      - from: Nablarch開発ガイド
+        to: Nablarch開発ガイド
