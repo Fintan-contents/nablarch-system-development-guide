@@ -105,6 +105,23 @@
       <artifactId>nablarch-main-default-configuration</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-testing-default-configuration</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.dev</groupId>
+      <artifactId>nablarch-test-support</artifactId>
+      <version>0.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- コード管理 -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
