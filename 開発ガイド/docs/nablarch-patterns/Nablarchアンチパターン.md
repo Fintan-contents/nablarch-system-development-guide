@@ -9,8 +9,7 @@ Nablarchが想定する使用方法を踏まえずに設計、製造すると、
 
 ### コンポーネントライフサイクルの誤解によるマルチスレッドバグ
 
-Nablarchの[システムリポジトリ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/repository.html#repository)は、DIコンテナ機能を持つが、他のDIコンテナとの違いを把握しておく必要があります。
-
+Nablarchの[システムリポジトリ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/repository.html#repository)はDIコンテナ機能を持ちますが、他のDIコンテナとコンポーネントライフサイクルが異なります。
 
 Nablarchのシステムリポジトリで管理されるコンポーネントのライフサイクルは`singleton`になります。
 デフォルトのライフサイクルを`prototype`あるいは`request`と誤解し、コンポーネントの状態を書き換えてしまうと、
