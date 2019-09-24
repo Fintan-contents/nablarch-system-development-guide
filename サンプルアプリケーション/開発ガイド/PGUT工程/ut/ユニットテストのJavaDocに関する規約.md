@@ -3,11 +3,13 @@
 ## メソッドのJavaDoc
 何を確認するテストか分かるコメントを記載してください。
 
-例：
+### 例
+
 ```
 public class ProjectServiceTest {
 
     private ProjectService sut;
+    
     /**
      * 1件検索処理が正常に呼び出し可能かテストをする。
      * <p>

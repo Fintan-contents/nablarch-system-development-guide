@@ -1,0 +1,41 @@
+<FindBugsFilter>
+
+    <!-- アクセッサを持たないフィールドを許可する。(Formではそのような作りになるケースがある) -->
+    <Match>
+        <Bug pattern="UUF_UNUSED_FIELD" />
+        <Or>
+            <Class name="please.change.me.form.FormClassName"/>
+        </Or>
+    </Match>
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD" />
+        <Or>
+            <Class name="please.change.me.form.FormClassName"/>
+        </Or>
+    </Match>
+
+    <!-- 配列の暴露は、業務アプリでは問題にならないケースが殆んどの為チェック対象外 -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+
+    <!-- 使用不許可APIチェックの対象外クラス指定 -->
+    <Match>
+        <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
+        <Class name="please.change.me.ClassName"/>
+        <Method name="bar" params="java.lang.String, int"/>
+    </Match>
+
+    <!-- すべての検査をチェック対象外にする指定 -->
+    <Match>
+        <Or>
+            <Package name="please.change.me.generated"/>
+            <Class name="~please\.change\.me\..+Impl"/>
+        </Or>
+    </Match>
+
+</FindBugsFilter>
+

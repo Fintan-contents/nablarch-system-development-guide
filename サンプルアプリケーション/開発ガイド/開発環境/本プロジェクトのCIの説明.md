@@ -6,7 +6,7 @@
 
 ## Pipeline定義の所在
 
-- [Jenkinsfile(developブランチ)](https://collaborage-ci.keel-dev.net/gitbucket/shaft/proman-project/blob/develop/Jenkinsfile)  
+- proman-project配下のJenkinsfile(developブランチ)を参照してください。
 
 ## パイプライン定義の使用構文
 
@@ -22,13 +22,13 @@ Jenkinsから変更を毎分ポーリングし、変更があったタイミン�
 
 以下を順に行います。
 
-１．コンパイルおよびユニットテスト  
-２．静的解析
+- １．コンパイルおよびユニットテスト
+- ２．静的解析
 
 以降はdevelopブランチのみ実施します。
 
-３．デモサーバ配置用jarファイルのビルド  
-４．デモサーバへの配置
+- ３．デモサーバ配置用jarファイルのビルド
+- ４．デモサーバへの配置
 
 
-ビルド結果はRocket.Chatへ通知します。
+ビルド結果はチャットへ通知します。
