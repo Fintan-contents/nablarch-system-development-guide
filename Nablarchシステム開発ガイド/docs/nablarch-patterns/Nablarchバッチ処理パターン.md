@@ -2,7 +2,7 @@
 
 ## 起動方法による分類
 
-[Nablarch](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)バッチは、起動方法により以下の2種類に分かれます。
+[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)は、起動方法により以下の2種類に分かれます。
 
 - 都度起動バッチ
 - 常駐バッチ
