@@ -180,7 +180,7 @@
                                 </n:forConfirmationPage>
                             </div>
                         </div>
-                        <div class="field text">
+                        <div class="field">
                             <label>備考</label>
                             <n:textarea rows="3" cols="" name="form.note" errorCss="input-error"/>
                             <n:error errorCss="message-error" name="form.note" /><span>&nbsp;</span>
@@ -190,20 +190,19 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <n:forInputPage>
                                 <div class="field centered aligned">
-                                    <n:a href="/action/top" cssClass="fluid ui primary button">戻る</n:a>
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectCreate/confirmRegistration" cssClass="fluid ui primary button">登録
+                                    <n:button uri="/app/project/confirmRegistration" cssClass="fluid ui primary button">登録
                                     </n:button>
                                 </div>
                             </n:forInputPage>
                             <n:forConfirmationPage>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectCreate/backToEnterRegistration" cssClass="fluid ui primary button">戻る
+                                    <n:button uri="/app/project/backRegistration" cssClass="fluid ui primary button">戻る
                                     </n:button>
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectCreate/register" cssClass="fluid ui primary button"
+                                    <n:button uri="/app/project/register" cssClass="fluid ui primary button"
                                         allowDoubleSubmission="false">確定</n:button>
                                 </div>
                             </n:forConfirmationPage>

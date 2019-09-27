@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.action;
+package com.nablarch.example.proman.web.login;
 
 
 import com.nablarch.example.proman.entity.SystemAccount;
@@ -6,7 +6,6 @@ import com.nablarch.example.proman.entity.Users;
 import com.nablarch.example.proman.web.common.authentication.AuthenticationUtil;
 import com.nablarch.example.proman.web.common.authentication.context.LoginUserPrincipal;
 import com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException;
-import com.nablarch.example.proman.web.form.LoginForm;
 import nablarch.common.dao.UniversalDao;
 import nablarch.common.web.interceptor.InjectForm;
 import nablarch.common.web.session.SessionUtil;
@@ -66,7 +65,7 @@ public class LoginAction {
         SessionUtil.invalidate(context);
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
         SessionUtil.put(context, "userContext", userContext, "httpSession");
-        return new HttpResponse(303, "redirect:///action/top");
+        return new HttpResponse(303, "redirect:///");
     }
 
     /**

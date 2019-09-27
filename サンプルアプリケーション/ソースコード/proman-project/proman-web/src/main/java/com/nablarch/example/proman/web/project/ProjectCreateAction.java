@@ -1,11 +1,7 @@
-package com.nablarch.example.proman.web.action;
+package com.nablarch.example.proman.web.project;
 
 import com.nablarch.example.proman.entity.Organization;
 import com.nablarch.example.proman.entity.Project;
-import com.nablarch.example.proman.web.form.ProjectCreateForm;
-import com.nablarch.example.proman.web.service.ProjectService;
-
-import nablarch.common.code.CodeUtil;
 import nablarch.common.web.interceptor.InjectForm;
 import nablarch.common.web.session.SessionUtil;
 import nablarch.common.web.token.OnDoubleSubmission;
@@ -49,7 +45,7 @@ public class ProjectCreateAction {
      * @return HTTPレスポンス
      */
     @InjectForm(form = ProjectCreateForm.class, prefix = "form")
-    @OnError(type = ApplicationException.class, path = "forward://index")
+    @OnError(type = ApplicationException.class, path = "forward:///app/project/errorRegister")
     public HttpResponse confirmRegistration(HttpRequest request, ExecutionContext context) {
         ProjectCreateForm form = context.getRequestScopedVar("form");
         Project project = BeanUtil.createAndCopy(Project.class, form);
@@ -77,7 +73,7 @@ public class ProjectCreateAction {
         final Project project = SessionUtil.delete(context, "project");
         ProjectService service = new ProjectService();
         service.insertProject(project);
-        return new HttpResponse(303, "redirect://completionRegistration");
+        return new HttpResponse(303, "redirect:///app/project/completionRegistration");
     }
 
     /**
@@ -116,7 +112,7 @@ public class ProjectCreateAction {
 
         context.setRequestScopedVar("form", projectCreateForm);
 
-        return new HttpResponse("forward://index");
+        return new HttpResponse("forward:///app/project/returnRegister");
 
     }
 

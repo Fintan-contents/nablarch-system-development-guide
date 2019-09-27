@@ -27,10 +27,10 @@
         </h1>
         </br>
         <h4 class="ui dividing header">プロジェクト管理</h4>
-        <label class="field">　┗　<n:a href="/action/projectSearch/index">プロジェクト検索</n:a></label></br>
+        <label class="field">　┗　<n:a href="/app/project/search">プロジェクト検索</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="/action/ProjectCreate/index">プロジェクト登録</n:a></label></br>
+                <label class="field">　┗　<n:a href="/app/project/register">プロジェクト登録</n:a></label></br>
             </c:when>
         </c:choose>
         </br>

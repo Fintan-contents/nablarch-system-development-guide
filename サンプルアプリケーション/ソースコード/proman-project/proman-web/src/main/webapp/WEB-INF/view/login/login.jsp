@@ -47,7 +47,7 @@
                 <div class="title-nav page-footer" >
                     <div class="button-nav">
                         <div class="button-block real-button-block" style="float:right">
-                            <n:button uri="/action/login" cssClass="btn btn-raised" allowDoubleSubmission="false">ログイン</n:button>
+                            <n:button uri="/app/login" cssClass="btn btn-raised" allowDoubleSubmission="false">ログイン</n:button>
                         </div>
                     </div>
                 </div>

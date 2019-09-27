@@ -8,8 +8,8 @@
         <div class="item">
             <div class="header">プロジェクト管理</div>
             <div class="menu">
-                <n:a id="projectSearchkLink" href="/action/projectSearch/index" cssClass="item">プロジェクト検索</n:a>
-                <n:a id="projectCreatekLink" href="/action/ProjectCreate/index" cssClass="item">プロジェクト登録</n:a>
+                <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">プロジェクト検索</n:a>
+                <n:a id="projectCreatekLink" href="/app/project/register" cssClass="item">プロジェクト登録</n:a>
             </div>
         </div>
         <div class="item">

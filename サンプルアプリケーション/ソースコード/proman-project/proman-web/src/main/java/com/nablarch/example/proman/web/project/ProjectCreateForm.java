@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.form;
+package com.nablarch.example.proman.web.project;
 
 import com.nablarch.example.proman.common.validation.DateRangeValidator;
 import nablarch.core.validation.ee.Domain;

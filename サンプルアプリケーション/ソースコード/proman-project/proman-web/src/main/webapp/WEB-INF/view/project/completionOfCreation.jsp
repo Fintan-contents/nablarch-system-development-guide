@@ -44,7 +44,7 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">
-                                <n:a href="/action/ProjectCreate/index" cssClass="fluid ui primary button">次へ</n:a>
+                                <n:a href="/app/project/register" cssClass="fluid ui primary button">次へ</n:a>
                             </div>
                             <div class="field centered aligned">&nbsp;</div>
                         </div>

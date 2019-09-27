@@ -148,8 +148,10 @@
 
         <component-ref name="transactionManagementHandler"/>
 
-        <component class="com.nablarch.example.proman.web.handler.PromanErrorForwardHandler"/>
+        <component class="com.nablarch.example.proman.web.common.handler.PromanErrorForwardHandler"/>
 
+        <component class="com.nablarch.example.proman.web.common.handler.LoginUserPrincipalCheckHandler"/>
+        
         <component-ref name="packageMapping"/>
       </list>
     </property>

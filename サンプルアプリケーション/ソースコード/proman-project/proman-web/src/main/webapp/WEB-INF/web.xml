@@ -37,7 +37,7 @@
   -->
   <filter-mapping>
     <filter-name>entryPoint</filter-name>
-    <url-pattern>/action/*</url-pattern>
+    <url-pattern>/app/*</url-pattern>
     <url-pattern>/</url-pattern>
   </filter-mapping>
 

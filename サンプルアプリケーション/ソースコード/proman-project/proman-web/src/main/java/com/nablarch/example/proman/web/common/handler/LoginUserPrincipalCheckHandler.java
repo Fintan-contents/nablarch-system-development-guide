@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.action;
+package com.nablarch.example.proman.web.common.handler;
 
 import nablarch.common.web.session.SessionUtil;
 import nablarch.fw.ExecutionContext;
@@ -25,7 +25,7 @@ public class LoginUserPrincipalCheckHandler implements Handler<HttpRequest, Obje
     @Override
     public Object handle(HttpRequest request, ExecutionContext context) {
         if (SessionUtil.orNull(context, "userContext") == null
-                && !Objects.equals(request.getRequestPath(), "/action/login")) {
+                && !Objects.equals(request.getRequestPath(), "/app/login")) {
             return new HttpResponse("/WEB-INF/view/login/login.jsp");
         }
         return context.handleNext(request);

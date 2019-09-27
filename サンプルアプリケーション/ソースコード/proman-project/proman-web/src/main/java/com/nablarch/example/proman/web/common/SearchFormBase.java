@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.form;
+package com.nablarch.example.proman.web.common;
 
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.Required;

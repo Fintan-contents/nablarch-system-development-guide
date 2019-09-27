@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.handler;
+package com.nablarch.example.proman.web.common.handler;
 
 import nablarch.common.dao.NoDataException;
 import nablarch.common.web.session.SessionKeyNotFoundException;

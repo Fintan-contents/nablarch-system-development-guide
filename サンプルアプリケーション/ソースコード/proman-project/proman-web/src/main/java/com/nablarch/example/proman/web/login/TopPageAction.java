@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.action;
+package com.nablarch.example.proman.web.login;
 
 import nablarch.common.web.session.SessionUtil;
 import nablarch.fw.ExecutionContext;

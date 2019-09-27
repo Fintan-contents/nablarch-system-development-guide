@@ -31,11 +31,11 @@
 </style>
 <div class="ui fixed inverted menu">
     <div class="ui container">
-        <n:a id="topLink" href="#" cssClass="header item">
+        <n:a id="topLink" href="/" cssClass="header item">
             <i class="logo fas fa-database"></i>Proman
         </n:a>
         <div class="right menu">
-            <n:a id="logoutLink" href="/action/login/logout" cssClass="item">
+            <n:a id="logoutLink" href="/app/logout" cssClass="item">
                 ログアウト
             </n:a>
         </div>

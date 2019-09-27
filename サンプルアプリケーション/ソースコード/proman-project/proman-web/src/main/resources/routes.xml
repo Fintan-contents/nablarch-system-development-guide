@@ -1,13 +1,20 @@
 <routes>
-    <root to="Login#index"/>
-    <get  path="/action/login" to="Login#index"/>
-    <post path="/action/login" to="Login#login"/>
-    <get  path="/action/logout" to="Login#logout"/>
-    <get  path="/action/top" to="TopPage#index"/>
-    <match path="/action/:controller/:action"/>
-    <match path="/action/:controller/:action/:projectId">
-        <requirements>
-            <requirement name="projectId" value="\d+$" />
-        </requirements>
-    </match>
+    <scope module="login">
+        <root to="TopPage#index"/>
+        <get  path="/app/login" to="Login#index"/>
+        <post path="/app/login" to="Login#login"/>
+        <get  path="/app/logout" to="Login#logout"/>
+        <get  path="/" to="TopPage#index"/>
+    </scope>
+
+    <scope module="project">
+        <!-- 登録処理 -->
+        <get  path="/app/project/register" to="ProjectCreate#index"/>
+        <post path="/app/project/confirmRegistration" to="ProjectCreate#confirmRegistration"/>
+        <post path="/app/project/register" to="ProjectCreate#register"/>
+        <get  path="/app/project/completionRegistration" to="ProjectCreate#completionRegistration"/>
+        <post path="/app/project/backRegistration" to="ProjectCreate#backToEnterRegistration"/>
+        <post path="/app/project/errorRegister" to="ProjectCreate#index"/>
+        <post path="/app/project/returnRegister" to="ProjectCreate#index"/>
+    </scope>
 </routes>
