@@ -5,10 +5,10 @@ FIND_SYSTEM_ACCOUNT =
 SELECT
   *
 FROM
-  SYSTEM_ACCOUNT
+  system_account
 WHERE
-  LOGIN_ID = ?
-  AND ? BETWEEN EFFECTIVE_DATE_FROM AND EFFECTIVE_DATE_TO
+  login_id = ?
+  AND ? BETWEEN effective_date_from AND effective_date_to
 
 --------------------------------------------------------------------------------
 -- ログインIDを元にシステムアカウント情報を取得するSQL
@@ -17,6 +17,6 @@ FIND_SYSTEM_ACCOUNT_BY_AK =
 SELECT
   *
 FROM
-  SYSTEM_ACCOUNT
+  system_account
 WHERE
-  LOGIN_ID = ?
+  login_id = ?
