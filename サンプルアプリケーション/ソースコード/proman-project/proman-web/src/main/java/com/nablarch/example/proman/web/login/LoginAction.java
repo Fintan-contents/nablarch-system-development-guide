@@ -100,7 +100,7 @@ public class LoginAction {
     public HttpResponse logout(HttpRequest request, ExecutionContext context) {
         SessionUtil.invalidate(context);
 
-        return new HttpResponse(303, "redirect:///action/login");
+        return new HttpResponse(303, "redirect:///app/login");
     }
 
 }

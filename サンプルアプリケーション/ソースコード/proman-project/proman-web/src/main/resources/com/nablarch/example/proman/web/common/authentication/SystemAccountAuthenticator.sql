@@ -8,6 +8,5 @@ update SYSTEM_ACCOUNT
 -- 失敗回数をインクリメント＆アカウントロックを行うSQL
 UPDATE_FAILED_COUNT = 
 update SYSTEM_ACCOUNT
-   set FAILED_COUNT = ?,
-       USER_ID_LOCKED = ?
+   set FAILED_COUNT = ?
  where USER_ID = ?

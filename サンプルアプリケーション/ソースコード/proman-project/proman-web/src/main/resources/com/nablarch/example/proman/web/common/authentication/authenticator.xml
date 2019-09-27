@@ -19,7 +19,7 @@
       </component>
     </property>
     <!-- ユーザIDをロックする認証失敗回数 -->
-    <property name="failedCountToLock" value="5" />
+    <property name="failedCountToLock" value="3" />
   </component>
 
 </component-configuration>

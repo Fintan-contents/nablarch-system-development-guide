@@ -14,7 +14,7 @@ import nablarch.core.db.transaction.SimpleDbTransactionExecutor;
 import nablarch.core.db.transaction.SimpleDbTransactionManager;
 import nablarch.core.util.DateUtil;
 
-import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * データベースに保存されたアカウント情報に対してパスワード認証を行うクラス。<br>
@@ -89,14 +89,14 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
      */
     @Override
     public void authenticate(final String userId, final String password)
-        throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+            throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
 
         if (userId == null || password == null) {
             throw new AuthenticationFailedException(userId);
         }
 
         // 有効期限は日付単位で管理しているので、現在日時から時間を切り捨てた日付を使用する。
-        final Date sysDate = new Date(DateUtil.getDate(SystemTimeUtil.getDateString()).getTime());
+        final java.sql.Date sysDate = convert(DateUtil.getDate(SystemTimeUtil.getDateString()));
         final SystemAccount account;
         try {
             account = UniversalDao.findBySqlFile(
@@ -121,8 +121,12 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
      * @throws UserIdLockedException ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
      * @throws PasswordExpiredException パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
      */
-    private void authenticate(SystemAccount account, String password, Date businessDate)
-        throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+    private void authenticate(SystemAccount account, String password, java.sql.Date businessDate)
+            throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+
+        if (account.getFailedCount() > failedCountToLock) {
+            throw new UserIdLockedException(String.valueOf(account.getUserId()), failedCountToLock);
+        }
 
         // 入力されたパスワードを暗号化ロジックにしたがって暗号化する。
         String encryptedPassword = passwordEncryptor.encrypt(String.valueOf(account.getUserId()), password);
@@ -163,7 +167,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
      * @param businessDate 判定基準日（yyyyMMdd）
      * @return パスワードが有効期限切れの場合　true
      */
-    private boolean isExpiredPassword(SystemAccount account, Date businessDate) {
+    private boolean isExpiredPassword(SystemAccount account, java.util.Date businessDate) {
         return businessDate.compareTo(account.getPasswordExpirationDate()) > 0;
     }
 
@@ -220,12 +224,22 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
                 final SqlPStatement statement = connection.prepareStatementBySqlId(
                         SQL_ID_PREFIX + "UPDATE_FAILED_COUNT");
                 statement.setShort(1, failedCount);
-                statement.setBoolean(2, failedCountToLock <= failedCount);
-                statement.setLong(3, id);
+                statement.setLong(2, id);
                 statement.executeUpdate();
                 return null;
             }
         } .doTransaction();
+    }
+
+
+    private static java.sql.Date convert(java.util.Date d) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return new java.sql.Date(cal.getTimeInMillis());
     }
 }
 
