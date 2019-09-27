@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class ProjectCreateAction {
 
+    private static final String PROJECT_KEY = "projectCreateActionProject";
     /**
      * プロジェクト登録初期画面を表示。
      *
@@ -55,7 +56,7 @@ public class ProjectCreateAction {
 
         // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
         setOrganizationAndDivisionToRequestScope(context);
-        SessionUtil.put(context, "project", project);
+        SessionUtil.put(context, PROJECT_KEY, project);
 
         // 登録情報確認画面を表示
         return new HttpResponse("/WEB-INF/view/project/confirmationOfCreation.jsp");
@@ -70,10 +71,10 @@ public class ProjectCreateAction {
      */
     @OnDoubleSubmission
     public HttpResponse register(HttpRequest request, ExecutionContext context) {
-        final Project project = SessionUtil.delete(context, "project");
+        final Project project = SessionUtil.delete(context, PROJECT_KEY);
         ProjectService service = new ProjectService();
         service.insertProject(project);
-        return new HttpResponse(303, "redirect:///app/project/completionRegistration");
+        return new HttpResponse(303, "redirect:///app/project/completeRegistration");
     }
 
     /**
@@ -83,7 +84,7 @@ public class ProjectCreateAction {
      * @param context 実行コンテキスト
      * @return HTTPレスポンス
      */
-    public HttpResponse completionRegistration(HttpRequest request, ExecutionContext context) {
+    public HttpResponse completeRegistration(HttpRequest request, ExecutionContext context) {
         return new HttpResponse("/WEB-INF/view/project/completionOfCreation.jsp");
     }
 
@@ -96,7 +97,7 @@ public class ProjectCreateAction {
      */
     public HttpResponse backToEnterRegistration(HttpRequest request, ExecutionContext context) {
 
-        Project project = SessionUtil.get(context, "project");
+        Project project = SessionUtil.get(context, PROJECT_KEY);
         ProjectCreateForm projectCreateForm = BeanUtil.createAndCopy(ProjectCreateForm.class, project);
 
         String projectStartDate = DateUtil.formatDate(projectCreateForm.getProjectStartDate(), "yyyy/MM/dd");
@@ -128,7 +129,7 @@ public class ProjectCreateAction {
         List<Organization> topOrganizationList = service.findAllDivision();
         List<Organization> subOrganizationList = service.findAllDepartment();
 
-        SessionUtil.put(context, "project", "");
+        SessionUtil.put(context, PROJECT_KEY, "");
         // 事業部と部門をリクエストスコープに設定する
         context.setRequestScopedVar("topOrganization", topOrganizationList);
         context.setRequestScopedVar("subOrganization", subOrganizationList);
