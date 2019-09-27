@@ -13,8 +13,6 @@
 > Nablarchを使ったアプリケーション実装の最適な実装例を確認したい場合は、
 > Nablarchの[Example](https://nablarch.github.io/docs/LATEST/doc/application_framework/example/index.html)
 > または[解説書](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/index.html)を参照してください。
-> 
-> サンプルアプリケーションはフィードバックを受けて改善を続ける予定です。ぜひ、皆さんのフィードバックをお寄せください。
 
 - [システムのプロファイル](#システムのプロファイル)
 - [システム構成イメージ](#システム構成イメージ)
