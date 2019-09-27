@@ -4,7 +4,7 @@ package com.nablarch.example.proman.common.code;
  * プロジェクト種別
  * @author TIS
  */
-public class C0200001 {
+public final class C0200001 {
 
     private C0200001() {
     }
@@ -12,30 +12,30 @@ public class C0200001 {
     /**
      * ＳＳ
      */
-    public static final String code01 = "01";
+    public static final String CODE_01 = "01";
 
     /**
      * Ｓ
      */
-    public static final String code02 = "02";
+    public static final String CODE_02 = "02";
 
     /**
      * Ａ
      */
-    public static final String code03 = "03";
+    public static final String CODE_03 = "03";
 
     /**
      * Ｂ
      */
-    public static final String code04 = "04";
+    public static final String CODE_04 = "04";
 
     /**
      * Ｃ
      */
-    public static final String code05 = "05";
+    public static final String CODE_05 = "05";
 
     /**
      * Ｄ
      */
-    public static final String code06 = "06";
+    public static final String CODE_06 = "06";
 }
