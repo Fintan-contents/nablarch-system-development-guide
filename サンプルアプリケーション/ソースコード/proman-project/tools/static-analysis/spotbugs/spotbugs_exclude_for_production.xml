@@ -50,6 +50,10 @@
     <Class name="com.nablarch.example.proman.web.common.authentication.SystemAccountAuthenticator"/>
     <Method name="authenticate"/>
   </Match>
-
+  <Match>
+    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
+    <Class name="com.nablarch.example.proman.batch.project.ExportProjectsInPeriodAction"/>
+    <Method name="initialize"/>
+  </Match>
 </FindBugsFilter>
 

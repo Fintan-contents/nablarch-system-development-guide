@@ -261,7 +261,7 @@ public class ProjectDto {
 
     /**
      * バージョン番号のsetter
-     * @param version バージョン番号
+     * @param versionNo バージョン番号
      */
     public void setVersionNo(String versionNo) {
         this.versionNo = versionNo;
