@@ -34,10 +34,12 @@
         <n:a id="topLink" href="/" cssClass="header item">
             <i class="logo fas fa-database"></i>Proman
         </n:a>
-        <div class="right menu">
-            <n:a id="logoutLink" href="/app/logout" cssClass="item">
-                ログアウト
-            </n:a>
-        </div>
+        <c:if test="${userContext != null}">
+            <div class="right menu">
+                <n:a id="logoutLink" href="/app/logout" cssClass="item">
+                    ログアウト
+                </n:a>
+            </div>
+        </c:if>
     </div>
 </div>
