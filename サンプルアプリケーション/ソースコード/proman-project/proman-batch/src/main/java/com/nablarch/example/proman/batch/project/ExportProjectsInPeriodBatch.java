@@ -1,6 +1,5 @@
-package com.nablarch.example.proman.batch.action;
+package com.nablarch.example.proman.batch.project;
 
-import com.nablarch.example.proman.batch.common.bean.ProjectDto;
 import com.nablarch.example.proman.batch.service.ProjectService;
 import nablarch.common.dao.EntityUtil;
 import nablarch.common.databind.ObjectMapper;

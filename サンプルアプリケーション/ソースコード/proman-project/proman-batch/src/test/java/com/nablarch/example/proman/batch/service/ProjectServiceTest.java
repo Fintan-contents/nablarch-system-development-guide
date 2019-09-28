@@ -1,6 +1,6 @@
 package com.nablarch.example.proman.batch.service;
 
-import com.nablarch.example.proman.batch.common.bean.ProjectDto;
+import com.nablarch.example.proman.batch.project.ProjectDto;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
