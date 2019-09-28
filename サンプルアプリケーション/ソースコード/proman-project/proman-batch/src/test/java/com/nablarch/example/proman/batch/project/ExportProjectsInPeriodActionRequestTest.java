@@ -1,6 +1,7 @@
 package com.nablarch.example.proman.batch.project;
 
 import com.nablarch.example.proman.test.BatchRequestTestBase;
+import org.junit.Test;
 
 /**
  * {@link ExportProjectsInPeriodAction} のテストクラス。
@@ -8,4 +9,9 @@ import com.nablarch.example.proman.test.BatchRequestTestBase;
  * @author TIS
  */
 public class ExportProjectsInPeriodActionRequestTest extends BatchRequestTestBase {
+
+    @Test
+    public void testNormalEnd() {
+        execute();
+    }
 }

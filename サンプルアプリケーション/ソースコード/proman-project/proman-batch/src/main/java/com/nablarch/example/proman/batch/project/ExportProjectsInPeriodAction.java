@@ -40,7 +40,7 @@ public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
     /**
      * 出力ファイル名。
      */
-    private static final String OUTPUT_FILE_NAME = "projectsInPeriod";
+    private static final String OUTPUT_FILE_NAME = "N21AA002.csv";
 
     /**
      * ObjectMapper。
@@ -73,7 +73,11 @@ public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 
     @Override
     public Result handle(SqlRow record, ExecutionContext context) {
-        mapper.write(EntityUtil.createEntity(ProjectDto.class, record));
+        ProjectDto dto = EntityUtil.createEntity(ProjectDto.class, record);
+        // 以下のカラムはDtoと型が違いEntityUtilでは設定できないため、明示的にsetterを呼ぶ
+        dto.setProjectStartDate(record.getDate("PROJECT_START_DATE"));
+        dto.setProjectEndDate(record.getDate("PROJECT_END_DATE"));
+        mapper.write(dto);
         return new Success();
     }
 
