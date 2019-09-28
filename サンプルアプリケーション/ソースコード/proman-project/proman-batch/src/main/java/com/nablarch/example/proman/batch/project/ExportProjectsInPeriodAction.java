@@ -33,17 +33,12 @@ import java.sql.Date;
 public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 
     /**
-     * ロガー。
-     */
-    private static final Logger LOGGER = LoggerManager.get(ExportProjectsInPeriodAction.class);
-
-    /**
      * 出力ファイル名。
      */
     private static final String OUTPUT_FILE_NAME = "N21AA002";
 
     /**
-     * ObjectMapper。
+     * 対象プロジェクト情報を出力するためのマッパー。
      */
     private ObjectMapper<ProjectDto> mapper;
 
