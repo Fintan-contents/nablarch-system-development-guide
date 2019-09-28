@@ -1,8 +1,11 @@
-package com.nablarch.example.proman.batch.common.bean;
+package com.nablarch.example.proman.batch.project;
 
 import nablarch.common.databind.csv.Csv;
 import nablarch.common.databind.csv.CsvDataBindConfig;
 import nablarch.common.databind.csv.CsvFormat;
+import nablarch.core.util.DateUtil;
+
+import java.util.Date;
 
 /**
  * 期間内プロジェクト一覧出力のbeanクラス。
@@ -21,8 +24,8 @@ public class ProjectDto {
     private String projectName;
     private String projectType;
     private String projectClass;
-    private String projectStartDate;
-    private String projectEndDate;
+    private Date projectStartDate;
+    private Date projectEndDate;
     private String organizationId;
     private String clientId;
     private String projectManager;
@@ -100,14 +103,14 @@ public class ProjectDto {
      * @return プロジェクト開始日付
      */
     public String getProjectStartDate() {
-        return projectStartDate;
+        return DateUtil.formatDate(projectStartDate, "yyyy/MM/dd");
     }
 
     /**
      * プロジェクト開始日付のsetter
      * @param projectStartDate プロジェクト開始日付
      */
-    public void setProjectStartDate(String projectStartDate) {
+    public void setProjectStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
 
@@ -116,14 +119,14 @@ public class ProjectDto {
      * @return プロジェクト終了日付
      */
     public String getProjectEndDate() {
-        return projectEndDate;
+        return DateUtil.formatDate(projectEndDate, "yyyy/MM/dd");
     }
 
     /**
      * プロジェクト終了日付のsetter
      * @param projectEndDate プロジェクト終了日付
      */
-    public void setProjectEndDate(String projectEndDate) {
+    public void setProjectEndDate(Date projectEndDate) {
         this.projectEndDate = projectEndDate;
     }
 
