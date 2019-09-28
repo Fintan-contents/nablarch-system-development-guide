@@ -30,12 +30,12 @@ import java.sql.Date;
  *
  * @author TIS
  */
-public class ExportProjectsInPeriodBatch extends BatchAction<SqlRow> {
+public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 
     /**
      * ロガー。
      */
-    private static final Logger LOGGER = LoggerManager.get(ExportProjectsInPeriodBatch.class);
+    private static final Logger LOGGER = LoggerManager.get(ExportProjectsInPeriodAction.class);
 
     /**
      * 出力ファイル名。
