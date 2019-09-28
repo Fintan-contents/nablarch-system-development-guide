@@ -1,3 +1,0 @@
-BATCH_REQUEST_ID, BATCH_REQUEST_NAME, PROCESS_HALT_FLG, PROCESS_ACTIVE_FLG, SERVICE_AVAILABLE, RESUME_POINT
-"SampleBatch", "Start-up test", "0", "0", "1", 0
-"SampleResiBatch", "Start-up test", "0", "0", "1", 0

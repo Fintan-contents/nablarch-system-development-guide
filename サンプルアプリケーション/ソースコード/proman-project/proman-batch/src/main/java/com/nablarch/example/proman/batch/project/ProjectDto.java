@@ -1,8 +1,11 @@
-package com.nablarch.example.proman.batch.common.bean;
+package com.nablarch.example.proman.batch.project;
 
 import nablarch.common.databind.csv.Csv;
 import nablarch.common.databind.csv.CsvDataBindConfig;
 import nablarch.common.databind.csv.CsvFormat;
+import nablarch.core.util.DateUtil;
+
+import java.util.Date;
 
 /**
  * 期間内プロジェクト一覧出力のbeanクラス。
@@ -11,25 +14,50 @@ import nablarch.common.databind.csv.CsvFormat;
  */
 @Csv(type = Csv.CsvType.CUSTOM,
         properties = { "projectId", "projectName", "projectType", "projectClass", "projectStartDate",
-                "projectEndDate", "organizationId", "clientId", "projectManager", "projectLeader", "note", "sales", "version" },
+                "projectEndDate", "organizationId", "clientId", "projectManager", "projectLeader", "note", "sales", "versionNo" },
         headers = { "プロジェクトID", "プロジェクト名", "プロジェクト種別", "プロジェクト分類", "プロジェクト開始日付", "プロジェクト終了日付",
                 "組織ID", "顧客ID", "プロジェクトマネージャー", "プロジェクトリーダー", "備考", "売上高", "バージョン番号" })
 @CsvFormat(fieldSeparator = ',', lineSeparator = "\r\n", quote = '\"', ignoreEmptyLine = false,
         requiredHeader = false, charset = "UTF-8", emptyToNull = true, quoteMode = CsvDataBindConfig.QuoteMode.ALL)
 public class ProjectDto {
+    /** プロジェクトID */
     private String projectId;
+
+    /** プロジェクト名 */
     private String projectName;
+
+    /** プロジェクト種別 */
     private String projectType;
+
+    /** プロジェクト分類 */
     private String projectClass;
+
+    /** プロジェクト開始日付 */
     private String projectStartDate;
+
+    /** プロジェクト終了日付 */
     private String projectEndDate;
+
+    /** 組織ID */
     private String organizationId;
+
+    /** 顧客ID */
     private String clientId;
+
+    /** プロジェクトマネージャー */
     private String projectManager;
+
+    /** プロジェクトリーダー */
     private String projectLeader;
+
+    /** 備考 */
     private String note;
+
+    /** 売上高 */
     private String sales;
-    private String version;
+
+    /** バージョン番号 */
+    private String versionNo;
 
     /**
      * プロジェクトIDのgetter
@@ -100,15 +128,15 @@ public class ProjectDto {
      * @return プロジェクト開始日付
      */
     public String getProjectStartDate() {
-        return projectStartDate;
+        return this.projectStartDate;
     }
 
     /**
      * プロジェクト開始日付のsetter
      * @param projectStartDate プロジェクト開始日付
      */
-    public void setProjectStartDate(String projectStartDate) {
-        this.projectStartDate = projectStartDate;
+    public void setProjectStartDate(Date projectStartDate) {
+        this.projectStartDate = DateUtil.formatDate(projectStartDate, "yyyy/MM/dd");;
     }
 
     /**
@@ -116,15 +144,15 @@ public class ProjectDto {
      * @return プロジェクト終了日付
      */
     public String getProjectEndDate() {
-        return projectEndDate;
+        return this.projectEndDate;
     }
 
     /**
      * プロジェクト終了日付のsetter
      * @param projectEndDate プロジェクト終了日付
      */
-    public void setProjectEndDate(String projectEndDate) {
-        this.projectEndDate = projectEndDate;
+    public void setProjectEndDate(Date projectEndDate) {
+        this.projectEndDate = DateUtil.formatDate(projectEndDate, "yyyy/MM/dd");;
     }
 
     /**
@@ -227,15 +255,15 @@ public class ProjectDto {
      * バージョン番号のgetter
      * @return バージョン番号
      */
-    public String getVersion() {
-        return version;
+    public String getVersionNo() {
+        return versionNo;
     }
 
     /**
      * バージョン番号のsetter
-     * @param version バージョン番号
+     * @param versionNo バージョン番号
      */
-    public void setVersion(String version) {
-        this.version = version;
+    public void setVersionNo(String versionNo) {
+        this.versionNo = versionNo;
     }
 }
