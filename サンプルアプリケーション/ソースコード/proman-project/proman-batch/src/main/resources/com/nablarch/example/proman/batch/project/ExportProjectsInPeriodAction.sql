@@ -1,22 +1,23 @@
 FIND_PROJECT_IN_PERIOD =
 SELECT
-    PROJECT_ID,
-    PROJECT_NAME,
-    PROJECT_TYPE,
-    PROJECT_CLASS,
-    PROJECT_START_DATE,
-    PROJECT_END_DATE,
-    ORGANIZATION_ID,
-    CLIENT_ID,
-    PROJECT_MANAGER,
-    PROJECT_LEADER,
-    NOTE,
-    SALES,
-    VERSION_NO
+    project_id projectId,
+    project_name projectName,
+    project_type projectType,
+    project_class projectClass,
+    project_start_date projectStartDate,
+    project_end_date projectEndDate,
+    organization_id organizationId,
+    client_id clientId,
+    project_manager projectManager,
+    project_leader projectLeader,
+    note note,
+    sales sales,
+    version_no versionNo
 FROM
-    PROJECT
+    project
 WHERE
-    PROJECT_START_DATE <= ?
-    AND PROJECT_END_DATE >= ?
+    project_start_date <= ?
+    AND project_end_date >= ?
 ORDER BY
-    PROJECT_START_DATE, PROJECT_END_DATE, PROJECT_NAME
+    project_start_date, project_end_date, project_name
+
