@@ -40,7 +40,7 @@ public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
     /**
      * 出力ファイル名。
      */
-    private static final String OUTPUT_FILE_NAME = "N21AA002.csv";
+    private static final String OUTPUT_FILE_NAME = "N21AA002";
 
     /**
      * ObjectMapper。
@@ -50,7 +50,7 @@ public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
     @Override
     protected void initialize(CommandLine command, ExecutionContext context) {
         FilePathSetting filePathSetting = FilePathSetting.getInstance();
-        File output = filePathSetting.getFile("output",
+        File output = filePathSetting.getFile("csv_output",
                 OUTPUT_FILE_NAME);
         try {
             FileOutputStream outputStream = new FileOutputStream(output);
