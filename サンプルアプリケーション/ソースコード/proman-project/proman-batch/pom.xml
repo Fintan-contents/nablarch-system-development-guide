@@ -38,6 +38,20 @@
       </properties>
     </profile>
 
+    <!-- デモ環境 -->
+    <profile>
+      <id>demo</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <env.name>開発環境</env.name>
+        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.dir>demo</env.dir>
+        <env.classifier>demo</env.classifier>
+      </properties>
+    </profile>
+
     <!-- 本番環境 -->
     <profile>
       <id>prod</id>
