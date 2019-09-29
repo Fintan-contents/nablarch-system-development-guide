@@ -41,9 +41,6 @@
     <!-- デモ環境 -->
     <profile>
       <id>demo</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <env.name>開発環境</env.name>
         <!-- Mavenの環境別リソースのディレクトリ名 -->
