@@ -17,7 +17,7 @@ public class ClimanDomainType {
 
     /** 顧客名 */
     @Length(max = 128)
-    @SystemChar(charsetDef = "全角文字")
+    @SystemChar(charsetDef = "システム許容文字")
     private String clientName;
 
     /** 業種コード */
