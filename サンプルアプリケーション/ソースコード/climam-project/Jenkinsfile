@@ -1,0 +1,44 @@
+pipeline {
+  agent any
+  triggers {
+    pollSCM('*/1 * * * *')
+  }
+  tools {
+    maven 'mvn3'
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '3'))
+  }
+  environment {
+    SONAR_HOST_URL = 'http://10.0.1.133/sonarqube'
+  }
+  stages {
+    stage('mvn install') {
+      steps {
+        echo 'mvn install'
+        sh 'mvn -P gsp clean'
+        sh 'mvn -P gsp generate-resources -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+        sh 'mvn install -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+       }
+       post {
+        success { rocketSend message: 'mvn install', emoji: ':blush:' }
+        failure { rocketSend message: 'mvn install', emoji: ':sob:' }
+      }
+    }
+
+    stage('checkstyle and spotbugs') {
+      steps {
+        echo 'checkstyle and spotbugs'
+        catchError {
+          sh 'mvn checkstyle:checkstyle spotbugs:check  -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+        }
+        sh 'mvn site -s ci/settings.xml'
+        archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/**'
+      }
+      post {
+        success { rocketSend message: 'proman-common checkstyle and spotbugs', emoji: ':blush:' }
+        failure { rocketSend message: 'proman-common checkstyle and spotbugs', emoji: ':sob:' }
+      }
+    }
+  }
+}
