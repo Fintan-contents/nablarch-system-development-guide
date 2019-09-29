@@ -42,7 +42,7 @@ public class ClientService {
      * @throws SearchResultUpperLimitException 検索結果が上限件数を超える場合
      */
     public List<Client> findClient(Client condition) {
-        long limit = Long.valueOf(SystemRepository.get("app.common.search.limit"));
+        long limit = Long.parseLong(SystemRepository.get("app.common.search.limit"));
         long count = daoContext.countBySqlFile(Client.class, "FIND_CLIENT", condition);
         if (count > limit) {
             throw new SearchResultUpperLimitException(limit);
