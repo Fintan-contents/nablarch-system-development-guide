@@ -21,37 +21,23 @@ import java.util.List;
 public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
 
     /** {@link Handler}のリスト */
-    private final List<Handler<HttpRequest, ?>> handlerList;
+    private List<Handler<HttpRequest, ?>> handlerList;
 
     /**
-     * {@link JaxRsHandlerListFactory}を生成する。
+     * {@link BodyConverter}を設定する。
+     * @param bodyConverter {@link BodyConverter}のリスト
      */
-    public ClimanJaxRsHandlerListFactory() {
+    public void setBodyConverter(BodyConverter bodyConverter) {
 
         final List<Handler<HttpRequest, ?>> list = new ArrayList<Handler<HttpRequest, ?>>();
 
         final BodyConvertHandler bodyConvertHandler = new BodyConvertHandler();
-        bodyConvertHandler.addBodyConverter(new ClimanJackson2BodyConverter());
-        bodyConvertHandler.addBodyConverter(new JaxbBodyConverter());
-        bodyConvertHandler.addBodyConverter(new FormUrlEncodedConverter());
+        bodyConvertHandler.addBodyConverter(bodyConverter);
         list.add(bodyConvertHandler);
 
         list.add(new JaxRsBeanValidationHandler());
 
         handlerList = Collections.unmodifiableList(list);
-    }
-
-    /**
-     * {@link Jackson2BodyConverter}のカスタマイズを行うクラス。
-     *
-     * @author TIS
-     */
-    public static final class ClimanJackson2BodyConverter extends Jackson2BodyConverter {
-        @Override
-        protected void configure(ObjectMapper objectMapper) {
-            super.configure(objectMapper);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        }
     }
 
     @Override

@@ -39,16 +39,18 @@
     <property name="methodBinderFactory">
       <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
         <property name="handlerList">
-          <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory"/>
+          <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory">
+            <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+          </component>
         </property>
       </component>
     </property>
   </component>
 
   <!-- ダイアレクト設定 -->
-  <!-- TODO:使用するDBに合わせてダイアレクトを設定すること -->
-  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
+  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
+  <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
@@ -60,7 +62,9 @@
 
         <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
           <property name="errorResponseBuilder">
-            <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder" />
+            <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
+              <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+            </component>
           </property>
           <property name="errorLogWriter">
             <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
