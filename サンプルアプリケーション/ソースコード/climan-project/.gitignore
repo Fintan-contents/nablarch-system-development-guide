@@ -87,6 +87,7 @@ target
 WebContent/META-INF/MANIFEST.MF
 work
 gsp-target/
+*.log
 
 ### JetBrains template
 .idea/
