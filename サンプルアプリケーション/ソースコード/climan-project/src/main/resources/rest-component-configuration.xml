@@ -63,7 +63,7 @@
         <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
           <property name="errorResponseBuilder">
             <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
-              <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+              <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
             </component>
           </property>
           <property name="errorLogWriter">
