@@ -5,5 +5,5 @@
 | プロジェクト   | 役割                                                           |
 |----------------|----------------------------------------------------------------|
 | proman-project | プロジェクト管理システム （**Pro**ject **Man**agement System） |
-| cusman-project | 顧客管理システム （**Cus**tomer **Man**agement System）        |
+| climan-project | 顧客管理システム （**Cli**ent **Man**agement System）        |
 
