@@ -39,14 +39,14 @@
                                 <n:errors filter="global" cssClass="message-error"/>
                             </div>
                             <div class="two fields">
-                                <div class="field">
+                                <div class="required field">
                                     <label>ログインID</label>
                                     <n:text name="loginId" cssClass="form-control" errorCss="input-error" placeholder="ログインID"/>
                                     <%-- エラー表示領域 --%><n:error errorCss="message-error" name="loginId" /><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="two fields">
-                                <div class="field">
+                                <div class="required field">
                                     <label>パスワード</label>
                                     <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" autocomplete="off"/>
                                     <%-- エラー表示領域 --%><n:error errorCss="message-error" name="userPassword" /><span>&nbsp;</span>
