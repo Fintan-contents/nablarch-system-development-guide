@@ -39,7 +39,7 @@
     <property name="methodBinderFactory">
       <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
         <property name="handlerList">
-          <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory"/>
+          <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory"/>
         </property>
       </component>
     </property>
