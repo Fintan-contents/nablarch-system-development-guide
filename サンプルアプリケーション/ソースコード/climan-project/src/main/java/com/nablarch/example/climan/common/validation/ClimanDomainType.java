@@ -10,7 +10,6 @@ import nablarch.core.validation.ee.SystemChar;
  */
 public class ClimanDomainType {
 
-
     /** 顧客ID */
     @Digits(integer = 10)
     private String clientId;
