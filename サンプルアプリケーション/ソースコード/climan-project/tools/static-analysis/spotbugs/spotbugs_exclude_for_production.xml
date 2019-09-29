@@ -16,9 +16,13 @@
       <Class name="com.nablarch.example.climan.common.exception.DuplicateRegistrationException"/>
       <Class name="com.nablarch.example.climan.common.exception.SearchResultUpperLimitException"/>
       <Class name="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder"/>
-      <Class name="com.nablarch.example.climan.web.common.validation.FormBinder" />
-      <Class name="com.nablarch.example.climan.web.common.validation.BindingResult$ValidBindingResult" />
-      <Class name="com.nablarch.example.climan.web.common.validation.BindingResult$InvalidBindingResult" />
+      <Class name="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder$Error"/>
+      <Class name="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory"/>
+      <Class name="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory$ClimanJackson2BodyConverter"/>
+      <Class name="com.nablarch.example.climan.common.validation.FormBinder" />
+      <Class name="com.nablarch.example.climan.common.validation.FormBinder$BindingSource" />
+      <Class name="com.nablarch.example.climan.common.validation.BindingResult$ValidBindingResult" />
+      <Class name="com.nablarch.example.climan.common.validation.BindingResult$InvalidBindingResult" />
     </Or>
   </Match>
 
