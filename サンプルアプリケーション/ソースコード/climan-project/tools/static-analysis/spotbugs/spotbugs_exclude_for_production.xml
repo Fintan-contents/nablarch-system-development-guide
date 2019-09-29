@@ -12,32 +12,14 @@
   <Match>
     <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
     <Or>
-      <Class name="com.nablarch.example.proman.common.validation.MoneyRangeValidator"/>
-      <Class name="com.nablarch.example.proman.common.validation.YYYYMMDDValidator"/>
-      <Class name="com.nablarch.example.proman.common.dao.DaoFactory"/>
+      <Class name="com.nablarch.example.climan.common.dao.DaoFactory"/>
+      <Class name="com.nablarch.example.climan.common.exception.DuplicateRegistrationException"/>
+      <Class name="com.nablarch.example.climan.common.exception.SearchResultUpperLimitException"/>
+      <Class name="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder"/>
+      <Class name="com.nablarch.example.climan.web.common.validation.FormBinder" />
+      <Class name="com.nablarch.example.climan.web.common.validation.BindingResult$ValidBindingResult" />
+      <Class name="com.nablarch.example.climan.web.common.validation.BindingResult$InvalidBindingResult" />
     </Or>
-  </Match>
-
-  <!-- #217 -->
-  <Match>
-    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.encrypt.PBKDF2PasswordEncryptor" />
-  </Match>
-
-  <!-- #218 -->
-  <Match>
-    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException" />
-  </Match>
-  <Match>
-    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.AuthenticationUtil" />
-    <Method name="authenticate"/>
-  </Match>
-  <Match>
-    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.SystemAccountAuthenticator"/>
-    <Method name="authenticate"/>
   </Match>
 
 </FindBugsFilter>
