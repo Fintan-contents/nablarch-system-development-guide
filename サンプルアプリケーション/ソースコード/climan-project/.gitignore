@@ -90,6 +90,7 @@ gsp-target/
 
 ### JetBrains template
 .idea/
+*.iml
 
 ## File-based project format:
 *.iws
