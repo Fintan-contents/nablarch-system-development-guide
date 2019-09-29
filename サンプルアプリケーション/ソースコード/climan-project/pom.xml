@@ -30,7 +30,7 @@
     <nablarch.db.adminPassword>password</nablarch.db.adminPassword>
     <nablarch.db.user>client</nablarch.db.user>
     <nablarch.db.password>password</nablarch.db.password>
-    <nablarch.db.schema></nablarch.db.schema>
+    <nablarch.db.schema>client</nablarch.db.schema>
   </properties>
 
   <reporting>
@@ -134,6 +134,29 @@
                 <scope>runtime</scope>
               </dependency>
             </dependencies>
+            <configuration>
+              <extraDdlDirectory>src/test/resources/extraDdl</extraDdlDirectory>
+              <dataDirectory>${dba.dataDirectory}</dataDirectory>
+              <erdFile>${dba.erdFile}</erdFile>
+              <lengthSemantics>CHAR</lengthSemantics>
+              <outputDirectory>${dba.gsp-target-dir}/output</outputDirectory>
+              <inputDirectory>${dba.gsp-target-dir}/output</inputDirectory>
+              <ddlDirectory>${dba.gsp-target-dir}/output</ddlDirectory>
+              <diconDir>${dba.gsp-target-dir}/classes</diconDir>
+              <rootPackage>${dba.entity.rootPackage}</rootPackage>
+              <entityPackageName>${dba.entity.entityPackage}</entityPackageName>
+              <useAccessor>true</useAccessor>
+              <javaFileDestDir>${dba.entity.javaFileDestDir}</javaFileDestDir>
+              <driver>${nablarch.db.jdbcDriver}</driver>
+              <url>${nablarch.db.url}</url>
+              <adminUser>${nablarch.db.adminUser}</adminUser>
+              <adminPassword>${nablarch.db.adminPassword}</adminPassword>
+              <user>${nablarch.db.user}</user>
+              <password>${nablarch.db.password}</password>
+              <schema>${nablarch.db.schema}</schema>
+              <!-- 以下はimport-schemaゴール用のパラメータ -->
+              <artifactId>${dba.testDataArtifactId}</artifactId>
+            </configuration>
           </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -216,6 +239,29 @@
                 <scope>runtime</scope>
               </dependency>
             </dependencies>
+            <configuration>
+              <extraDdlDirectory>src/test/resources/extraDdl</extraDdlDirectory>
+              <dataDirectory>${dba.dataDirectory}</dataDirectory>
+              <erdFile>${dba.erdFile}</erdFile>
+              <lengthSemantics>CHAR</lengthSemantics>
+              <outputDirectory>${dba.gsp-target-dir}/output</outputDirectory>
+              <inputDirectory>${dba.gsp-target-dir}/output</inputDirectory>
+              <ddlDirectory>${dba.gsp-target-dir}/output</ddlDirectory>
+              <diconDir>${dba.gsp-target-dir}/classes</diconDir>
+              <rootPackage>${dba.entity.rootPackage}</rootPackage>
+              <entityPackageName>${dba.entity.entityPackage}</entityPackageName>
+              <useAccessor>true</useAccessor>
+              <javaFileDestDir>${dba.entity.javaFileDestDir}</javaFileDestDir>
+              <driver>${nablarch.db.jdbcDriver}</driver>
+              <url>${nablarch.db.url}</url>
+              <adminUser>${nablarch.db.adminUser}</adminUser>
+              <adminPassword>${nablarch.db.adminPassword}</adminPassword>
+              <user>${nablarch.db.user}</user>
+              <password>${nablarch.db.password}</password>
+              <schema>${nablarch.db.schema}</schema>
+              <!-- 以下はimport-schemaゴール用のパラメータ -->
+              <artifactId>${dba.testDataArtifactId}</artifactId>
+            </configuration>
           </plugin>
         </plugins>
       </build>
