@@ -2,7 +2,7 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/nablarch-development-standards/nablarch-development-guide",
   "scripts": {
-    "test": "textlint *.md Nablarchシステム開発ガイド サンプルアプリケーション"
+    "test": "textlint *.md Nablarchシステム開発ガイド サンプルプロジェクト"
   },
   "devDependencies": {
     "textlint": "^11.3.1",
