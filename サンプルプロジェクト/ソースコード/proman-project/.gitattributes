@@ -1,0 +1,2 @@
+*.csv text eol=crlf
+*.bat text eol=crlf
