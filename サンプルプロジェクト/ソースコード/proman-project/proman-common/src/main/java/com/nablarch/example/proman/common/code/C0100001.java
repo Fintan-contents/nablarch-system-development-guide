@@ -2,10 +2,12 @@ package com.nablarch.example.proman.common.code;
 
 /**
  * 業種分類
+ *
  * @author TIS
  */
 public final class C0100001 {
 
+    /** 隠蔽コンストラクタ */
     private C0100001() {
     }
 

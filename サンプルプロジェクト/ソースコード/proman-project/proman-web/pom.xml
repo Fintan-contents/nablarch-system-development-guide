@@ -174,20 +174,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>nablarch.tool.inspection</groupId>
-      <artifactId>reportField</artifactId>
-      <version>0.1.0</version>
-      <scope>test</scope>
-    </dependency>
-
-<!--    <dependency>-->
-<!--      <groupId>org.eclipse.jetty</groupId>-->
-<!--      <artifactId>jetty-maven-plugin</artifactId>-->
-<!--      <version>9.4.18.v20190429</version>-->
-<!--      <type>maven-plugin</type>-->
-<!--    </dependency>-->
-
   </dependencies>
 
   <build>
@@ -207,21 +193,6 @@
         <configuration>
           <!-- MANIFEST.MFでClass-Pathを指定すると、依存jar内で定義されているtaglibのuriを正しく解決してくれない。 -->
           <useManifestOnlyJar>false</useManifestOnlyJar>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>net.unit8.waitt</groupId>
-        <artifactId>waitt-maven-plugin</artifactId>
-        <version>1.2.1</version>
-        <configuration>
-          <port>9080</port>
-          <servers>
-            <server>
-              <groupId>net.unit8.waitt.server</groupId>
-              <artifactId>waitt-tomcat8</artifactId>
-              <version>1.2.1</version>
-            </server>
-          </servers>
         </configuration>
       </plugin>
       <plugin>

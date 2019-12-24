@@ -1,6 +1,6 @@
 package com.nablarch.example.proman.web.project;
 
-import com.nablarch.example.proman.common.validation.DateRangeValidator;
+import com.nablarch.example.proman.common.util.DateRelationUtil;
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.Required;
 
@@ -194,6 +194,7 @@ public class ProjectCreateForm implements Serializable {
 
     /**
      * 事業部IDを取得する。
+     *
      * @return 事業部ID
      */
     public String getDivisionId() {
@@ -202,6 +203,7 @@ public class ProjectCreateForm implements Serializable {
 
     /**
      * 事業部IDを設定する。
+     *
      * @param divisionId 設定する事業部ID
      */
     public void setDivisionId(String divisionId) {
@@ -323,9 +325,8 @@ public class ProjectCreateForm implements Serializable {
      *
      * @return 開始日に終了日より後の日付が設定されていた場合は false それ以外（開始日、終了日の両方又はいずれかが未定の場合も含む）は true
      */
-    @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRangeValidator.message}")
+    @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
     private boolean isValidProjectPeriod() {
-        return new DateRangeValidator(projectStartDate, projectEndDate).isValid();
+        return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
-
 }

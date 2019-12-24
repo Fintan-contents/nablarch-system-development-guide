@@ -1,10 +1,10 @@
 package com.nablarch.example.proman.common.validation;
 
+import nablarch.common.code.validator.ee.CodeValue;
 import nablarch.core.validation.ee.Digits;
 import nablarch.core.validation.ee.Length;
 import nablarch.core.validation.ee.NumberRange;
 import nablarch.core.validation.ee.SystemChar;
-import nablarch.common.code.validator.ee.CodeValue;
 
 /**
  * ドメイン定義を表す列挙型。
@@ -37,7 +37,15 @@ public class ProManDomainType {
      * パスワード
      */
     @Length(max = 44)
+    @SystemChar(charsetDef = "ASCII文字")
     private String password;
+
+    /**
+     * プロジェクトID
+     */
+    @Length(max = 20)
+    @SystemChar(charsetDef = "半角英数")
+    private String projectId;
 
     /**
      * プロジェクト名
@@ -63,12 +71,6 @@ public class ProManDomainType {
      */
     @YYYYMMDD()
     private String date;
-
-    /**
-     * 日付(slashあり)
-     */
-    @YYYYMMDD(allowFormat = "yyyy/MM/dd")
-    private String dateWithSlash;
 
     /**
      * ユーザ氏名（漢字）

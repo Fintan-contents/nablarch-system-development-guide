@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * 入力値が指定した形式の日付文字列であるかをバリデーションするクラス。
  * <p/>
- * 日付フォーマットのデフォルト値は「yyyyMMdd」である。
+ * 日付フォーマットのデフォルト値は「yyyy/MM/dd」である。
  *
  * @author Nabu Rakutaro
  */
@@ -56,6 +56,7 @@ public @interface YYYYMMDD {
 
     /**
      * 複数指定用のアノテーション
+     *
      * @author Nabu Rakutaro
      */
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})

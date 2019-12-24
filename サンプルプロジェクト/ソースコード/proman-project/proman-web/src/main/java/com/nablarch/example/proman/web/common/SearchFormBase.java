@@ -1,7 +1,6 @@
 package com.nablarch.example.proman.web.common;
 
 import nablarch.core.validation.ee.Domain;
-import nablarch.core.validation.ee.Required;
 
 
 /**
@@ -14,7 +13,6 @@ public abstract class SearchFormBase {
     /**
      * ページ番号
      */
-    @Required
     @Domain("pageNumber")
     private String pageNumber;
 
