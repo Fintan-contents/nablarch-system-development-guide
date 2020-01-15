@@ -108,13 +108,14 @@ if(matchNr != null){
             <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="応答をファイルへ保存" enabled="true">
-            <stringProp name="FileSaver.filename">test-response</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-          </ResultSaver>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
+new File(outputFileName).write(ctx.getPreviousResult().getResponseDataAsString(), &apos;UTF-8&apos; );</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
       </hashTree>
