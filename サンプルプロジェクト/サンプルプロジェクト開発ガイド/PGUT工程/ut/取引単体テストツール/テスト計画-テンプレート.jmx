@@ -88,12 +88,16 @@ def baseDir = FileServer.getFileServer().getBaseDir();
 def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jmx/,&quot;-&quot;);
 // ファイル名として使えない文字は全て「_」に置換する。
 def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
-def response = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
+def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
+// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
+def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
+
+
 // 既にファイルがあればエラーとする。
-if(!response.exists()) {
-	response.write(prev.getResponseDataAsString(), &apos;UTF-8&apos; );
+if(!responseFile.exists()) {
+	responseFile.write(responseWithoutNablarchToken, &apos;UTF-8&apos; );
 } else {
-	throw new IllegalStateException(&quot;次のファイルが既に存在しています。削除または移動してから再実行してください。&quot; + response.getAbsolutePath());
+	throw new IllegalStateException(&quot;次のファイルが既に存在しています。削除または移動してから再実行してください。&quot; + responseFile.getAbsolutePath());
 }
 </stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
