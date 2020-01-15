@@ -40,19 +40,35 @@
             <stringProp name="RegexExtractor.regex">input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;([^&quot;]+)&quot;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
-            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="RegexExtractor.match_number">-1</stringProp>
             <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
           </RegexExtractor>
           <hashTree/>
           <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
-            <stringProp name="parameters">${hidden_param}</stringProp>
-            <stringProp name="script">sampler.getArguments().removeArgument(&quot;nablarch_hidden&quot;);
-sampler.addArgument(&quot;nablarch_hidden&quot;,Parameters);
-
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">// サンプラーからhiddenを削除
+sampler.getArguments().removeArgument(&quot;nablarch_hidden&quot;);
+// submitされたフォームの名前
+String nablarch_submit = sampler.getArguments().getArgumentsAsMap().get(&quot;nablarch_submit&quot;);
+//　hiddenにマッチした個数
+String matchNr = vars.get(&quot;hidden_param_matchNr&quot;);
+if(matchNr != null){
+  int matchNumber = Integer.parseInt(matchNr);
+  for(i in 1..matchNumber){
+  	String hidden_param = vars.get(&quot;hidden_param_&quot;+i);
+  	// submitされたフォームを含むhiddenをセットする
+  	if(hidden_param != null 
+  	    &amp;&amp; nablarch_submit != null
+  	    &amp;&amp; hidden_param.contains(nablarch_submit)){
+  	  sampler.addArgument(&quot;nablarch_hidden&quot;,hidden_param);
+  	}
+  }
+}
 </stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="TestPlan.comments">nablarch_hidden引き継ぎ用プロセッサー</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="結果をツリーで表示" enabled="true">
