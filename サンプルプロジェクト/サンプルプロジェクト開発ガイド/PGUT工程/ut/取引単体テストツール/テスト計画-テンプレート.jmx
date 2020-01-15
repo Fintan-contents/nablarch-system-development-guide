@@ -48,21 +48,27 @@
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
-            <stringProp name="script">// サンプラーからhiddenを削除
-sampler.getArguments().removeArgument(&quot;nablarch_hidden&quot;);
+            <stringProp name="script">// Nablarchのパラメータ名
+String key_nablarch_hidden  = &quot;nablarch_hidden&quot;;
+String key_nablarch_submit  = &quot;nablarch_submit&quot;;
+// 正規表現抽出で抽出したhiddenの参照名
+String hidden_param_refName = &quot;hidden_param&quot;;
+
+// サンプラーからhiddenを削除
+sampler.getArguments().removeArgument(key_nablarch_hidden);
 // submitされたフォームの名前
-String nablarch_submit = sampler.getArguments().getArgumentsAsMap().get(&quot;nablarch_submit&quot;);
+String nablarch_submit = sampler.getArguments().getArgumentsAsMap().get(key_nablarch_submit);
 //　hiddenにマッチした個数
-String matchNr = vars.get(&quot;hidden_param_matchNr&quot;);
+String matchNr = vars.get(hidden_param_refName + &quot;_matchNr&quot;);
 if(matchNr != null){
   int matchNumber = Integer.parseInt(matchNr);
   for(i in 1..matchNumber){
-  	String hidden_param = vars.get(&quot;hidden_param_&quot;+i);
+  	String hidden_param = vars.get(hidden_param_refName + &quot;_&quot; + i);
   	// submitされたフォームを含むhiddenをセットする
   	if(hidden_param != null 
   	    &amp;&amp; nablarch_submit != null
   	    &amp;&amp; hidden_param.contains(nablarch_submit)){
-  	  sampler.addArgument(&quot;nablarch_hidden&quot;,hidden_param);
+  	  sampler.addArgument(key_nablarch_hidden,hidden_param);
   	}
   }
 }
