@@ -77,6 +77,28 @@ if(matchNr != null){
             <stringProp name="TestPlan.comments">nablarch_hidden引き継ぎ用プロセッサー</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+
+// jmxファイルをbaseDirとする。
+def baseDir = FileServer.getFileServer().getBaseDir();
+def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jmx/,&quot;-&quot;);
+// ファイル名として使えない文字は全て「_」に置換する。
+def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
+def response = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
+// 既にファイルがあればエラーとする。
+if(!response.exists()) {
+	response.write(prev.getResponseDataAsString(), &apos;UTF-8&apos; );
+} else {
+	throw new IllegalStateException(&quot;次のファイルが既に存在しています。削除または移動してから再実行してください。&quot; + response.getAbsolutePath());
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="結果をツリーで表示" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -113,15 +135,6 @@ if(matchNr != null){
             </objProp>
             <stringProp name="filename"></stringProp>
           </ResultCollector>
-          <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
-            <stringProp name="cacheKey">true</stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="script">def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
-new File(outputFileName).write(ctx.getPreviousResult().getResponseDataAsString(), &apos;UTF-8&apos; );</stringProp>
-            <stringProp name="scriptLanguage">groovy</stringProp>
-          </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
       </hashTree>
