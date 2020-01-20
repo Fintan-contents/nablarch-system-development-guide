@@ -147,13 +147,15 @@ if(!responseFile.exists()) {
         <collectionProp name="ProxyControlGui.exclude_list">
           <stringProp name="-2063843150">(?i).*\.(bmp|css|js|gif|ico|jpe?g|png|swf|woff|woff2)</stringProp>
         </collectionProp>
-        <collectionProp name="ProxyControlGui.include_list"/>
+        <collectionProp name="ProxyControlGui.include_list">
+          <stringProp name="-341526244">.+?:9088/.*</stringProp>
+        </collectionProp>
         <boolProp name="ProxyControlGui.capture_http_headers">true</boolProp>
         <intProp name="ProxyControlGui.grouping_mode">0</intProp>
         <boolProp name="ProxyControlGui.add_assertion">false</boolProp>
         <stringProp name="ProxyControlGui.sampler_type_name"></stringProp>
         <boolProp name="ProxyControlGui.sampler_redirect_automatically">false</boolProp>
-        <boolProp name="ProxyControlGui.sampler_follow_redirects">true</boolProp>
+        <boolProp name="ProxyControlGui.sampler_follow_redirects">false</boolProp>
         <boolProp name="ProxyControlGui.use_keepalive">true</boolProp>
         <boolProp name="ProxyControlGui.sampler_download_images">true</boolProp>
         <intProp name="ProxyControlGui.proxy_http_sampler_naming_mode">0</intProp>
@@ -165,7 +167,34 @@ if(!responseFile.exists()) {
         <stringProp name="ProxyControlGui.content_type_include"></stringProp>
         <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
       </ProxyControl>
-      <hashTree/>
+      <hashTree>
+        <JSR223Listener guiclass="TestBeanGUI" testclass="JSR223Listener" testname="JSR223 Listener" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+
+// jmxファイルをbaseDirとする。
+def baseDir = FileServer.getFileServer().getBaseDir();
+def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jmx/,&quot;-&quot;);
+// ファイル名として使えない文字は全て「_」に置換する。
+def outputFileName = sampleResult.getSampleLabel().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
+def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
+// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
+def responseWithoutNablarchToken = sampleResult.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
+
+
+// 既にファイルがあればエラーとする。
+if(!responseFile.exists()) {
+	responseFile.write(responseWithoutNablarchToken, &apos;UTF-8&apos; );
+} else {
+	throw new IllegalStateException(&quot;次のファイルが既に存在しています。削除または移動してから再実行してください。&quot; + responseFile.getAbsolutePath());
+}
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Listener>
+        <hashTree/>
+      </hashTree>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
