@@ -109,7 +109,7 @@
   <!-- TODO:使用するDBに合わせてダイアレクトを設定すること -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>
 
-  <import file="nablarch/webui/threadcontext-for-webui.xml"/>
+  <import file="com/nablarch/example/proman/web/webui/threadcontext-for-webui.xml"/>
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController"
