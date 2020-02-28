@@ -6,7 +6,6 @@ import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import nablarch.common.dao.NoDataException;
-import nablarch.core.message.ApplicationException;
 import org.junit.runner.RunWith;
 
 import javax.persistence.OptimisticLockException;
@@ -23,7 +22,7 @@ public class ErrorHandlingTest {
      * common以外のパッケージで {@link OptimisticLockException} に依存させない。
      */
     @ArchTest
-    public static final ArchRule app_classes_must_not_depend_OptimisticLockException =
+    public static final ArchRule 基盤以外のパッケージでOptimisticLockExceptionを使用しているクラスがないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
                     .should().dependOnClassesThat().areAssignableTo(OptimisticLockException.class);
 
@@ -31,22 +30,9 @@ public class ErrorHandlingTest {
      * common以外のパッケージで {@link NoDataException} に依存させない。
      */
     @ArchTest
-    public  static  final ArchRule app_classes_must_not_depend_NoDataException =
+    public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
             .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
-    /**
-     * Serviceクラスは {@link ApplicationException} を使用しない。
-     */
-    @ArchTest
-    public  static  final ArchRule service_must_not_depend_ApplicationException =
-            ArchRuleDefinition.noClasses().that().haveNameMatching(".+Service")
-                    .should().dependOnClassesThat().areAssignableTo(ApplicationException.class);
 
-    /**
-     * （throws が宣言されたメソッドだけで確認できるようす）Serviceクラスは {@link ApplicationException} をスローするメソッドがないことをやりたかったけどこの方法ではできない。
-     */
-    @ArchTest
-    public  static  final ArchRule service_must_not_depend_ApplicationException2 =
-            ArchRuleDefinition.noMethods().that().areDeclaredInClassesThat().haveNameMatching(".+Service")
-                    .should().declareThrowableOfType(ApplicationException.class);
+
 }

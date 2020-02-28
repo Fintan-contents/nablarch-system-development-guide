@@ -17,13 +17,12 @@ public class NamingRuleTest {
      * Testも検索対象になってしまうためそこについても変更している。
      */
     @ArchTest
-    public static final ArchRule class_naming_rule =
+    public static final ArchRule クラスのネーミングルール =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackages("..common..").and().areTopLevelClasses()
                     .should().haveNameNotMatching(".+Service")
                     .andShould().haveNameNotMatching(".+Action")
                     .andShould().haveNameNotMatching(".+Form")
                     .andShould().haveNameNotMatching(".+DTO")
                     .andShould().haveNameNotMatching(".+Test");
-
 
 }
