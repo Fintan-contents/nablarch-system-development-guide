@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.batch.arch;
+package com.nablarch.example.proman.arch;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
