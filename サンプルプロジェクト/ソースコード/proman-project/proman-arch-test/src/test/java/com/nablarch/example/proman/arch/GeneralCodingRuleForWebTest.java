@@ -11,6 +11,9 @@ import org.junit.runner.RunWith;
 
 import javax.persistence.OptimisticLockException;
 
+/**
+ * webの実装方法に関するテスト。
+ */
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman.web")
 public class GeneralCodingRuleForWebTest {
