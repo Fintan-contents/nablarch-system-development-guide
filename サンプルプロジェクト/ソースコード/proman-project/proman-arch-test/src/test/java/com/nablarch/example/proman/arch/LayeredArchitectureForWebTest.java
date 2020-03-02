@@ -6,10 +6,12 @@ import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
-import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.Architectures;
 import org.junit.runner.RunWith;
 
+/**
+ * アプリケーション構成に関するテスト。
+ */
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class LayeredArchitectureForWebTest {

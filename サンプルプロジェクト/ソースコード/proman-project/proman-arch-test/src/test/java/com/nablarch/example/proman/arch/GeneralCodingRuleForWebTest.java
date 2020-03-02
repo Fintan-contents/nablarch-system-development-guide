@@ -15,25 +15,16 @@ import javax.persistence.OptimisticLockException;
 @AnalyzeClasses(packages = "com.nablarch.example.proman.web")
 public class GeneralCodingRuleForWebTest {
 
-    /**
-     * common以外のパッケージで {@link SessionKeyNotFoundException} に依存させない。
-     */
     @ArchTest
     public static final ArchRule 基盤以外でSessionKeyNotFoundExceptionを使用しないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
                     .should().dependOnClassesThat().areAssignableTo(SessionKeyNotFoundException.class);
 
-    /**
-     * common以外のパッケージで {@link javax.persistence.OptimisticLockException} に依存させない。
-     */
     @ArchTest
     public static final ArchRule 基盤以外のパッケージでOptimisticLockExceptionを使用しているクラスがないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
                     .should().dependOnClassesThat().areAssignableTo(OptimisticLockException.class);
 
-    /**
-     * common以外のパッケージで {@link NoDataException} に依存させない。
-     */
     @ArchTest
     public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
