@@ -6,20 +6,25 @@ import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import nablarch.common.dao.NoDataException;
+import nablarch.common.web.session.SessionKeyNotFoundException;
 import org.junit.runner.RunWith;
 
 import javax.persistence.OptimisticLockException;
 
-/**
- * ハンドリングの仕方までは見れないため、使用されてるか（依存しているか）どうかまでを確認する。
- * throwsで宣言されているものについては確認できる。
- */
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman.web")
-public class ErrorHandlingTest {
+public class GeneralCodingRuleForWebTest {
 
     /**
-     * common以外のパッケージで {@link OptimisticLockException} に依存させない。
+     * common以外のパッケージで {@link SessionKeyNotFoundException} に依存させない。
+     */
+    @ArchTest
+    public static final ArchRule 基盤以外でSessionKeyNotFoundExceptionを使用しないこと =
+            ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
+                    .should().dependOnClassesThat().areAssignableTo(SessionKeyNotFoundException.class);
+
+    /**
+     * common以外のパッケージで {@link javax.persistence.OptimisticLockException} に依存させない。
      */
     @ArchTest
     public static final ArchRule 基盤以外のパッケージでOptimisticLockExceptionを使用しているクラスがないこと =
@@ -33,6 +38,5 @@ public class ErrorHandlingTest {
     public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
             .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
-
 
 }

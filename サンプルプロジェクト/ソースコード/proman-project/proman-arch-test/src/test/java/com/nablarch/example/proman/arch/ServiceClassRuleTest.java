@@ -1,19 +1,17 @@
 package com.nablarch.example.proman.arch;
 
-import com.tngtech.archunit.base.DescribedPredicate;
-import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
-import static com.tngtech.archunit.core.domain.JavaClass.Predicates.TOP_LEVEL_CLASSES;
-import org.junit.runner.RunWith;
 import nablarch.common.dao.DaoContext;
+import nablarch.common.web.session.SessionKeyNotFoundException;
+import org.junit.runner.RunWith;
 
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.nablarch.example.proman.web")
-public class ServiceRuleTest {
+@AnalyzeClasses(packages = "com.nablarch.example.proman")
+public class ServiceClassRuleTest {
 
     /**
      * サービスクラスが持つDaoContextのフィールドがprivateかつfinalであることの確認

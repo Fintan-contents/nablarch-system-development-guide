@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman.batch")
-public class GeneralBatchCodingRuleTest {
+public class GeneralCodingRuleForBatchTest {
 
     @ArchTest
     public static final ArchRule ActionクラスはBatchActionを継承していること =
