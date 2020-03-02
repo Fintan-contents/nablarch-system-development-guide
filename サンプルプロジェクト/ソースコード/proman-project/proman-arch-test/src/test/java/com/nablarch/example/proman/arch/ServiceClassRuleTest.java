@@ -31,4 +31,5 @@ public class ServiceClassRuleTest {
             ArchRuleDefinition.constructors().that().haveRawParameterTypes(DaoContext.class)
                 .and().areDeclaredInClassesThat().haveSimpleNameEndingWith("Service")
                 .should().bePackagePrivate();
+
 }
