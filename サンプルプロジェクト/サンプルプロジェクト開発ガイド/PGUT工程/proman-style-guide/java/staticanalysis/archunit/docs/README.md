@@ -9,3 +9,5 @@
 - JenkinsでのArchUnit実行結果収集方法
   - JUnitのテスト同様の画面からテスト結果を確認する。
 
+ArchUnitを使用して高い頻度でテストする内容を以下で解説します。
+- [ArchUnit利用例](./ArchUnit-commentary.md)
