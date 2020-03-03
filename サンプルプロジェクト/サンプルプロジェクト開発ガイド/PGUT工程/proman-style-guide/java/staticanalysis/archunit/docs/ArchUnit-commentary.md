@@ -1,10 +1,10 @@
-# ArchUnit利用例
+# ArchUnit解説
 
 ArchUnitはアーキテクチャのテストを行うためのライブラリです。
 PJのアーキテクチャ設計により、実装するテストは変わってきます。
-ここではNablarchを使用した場合に、ArchUnitでどのようなテストをすることが多くなるかを説明します。
+ここではNablarchを使用した場合に、頻出するテストパターンをArchUnitでどのように記述するかを解説します。
 
-ArchUnitでおもにチェックできる内容については[ArchUnit User Guide -> What to Check](https://www.archunit.org/userguide/html/000_Index.html#_what_to_check)を参照してください。
+ArchUnitでチェックできる内容については[ArchUnit User Guide -> What to Check](https://www.archunit.org/userguide/html/000_Index.html#_what_to_check)を参照してください。
 
 ## 基本的な内容について
 
@@ -51,7 +51,7 @@ public class ActionRuleTest {
 
 ### チェック対象
 
-上記の例ではクラスをチェック対象にしていましたが、その他にメソッドやコンストラクター、フィールドなどをチェック対象にできます。
+上記の例ではクラスをチェック対象にしていますが、その他にメソッドやコンストラクター、フィールドなどをチェック対象にできます。
 
 また、 `ArchRuleDefinition.noClasses()` などとすることで、「そのようなクラスが存在しないこと」をチェックできます。
 
@@ -84,7 +84,7 @@ public class ExampleRuleTest {
 
 たとえば以下の例では、 `DaoContext` のフィールドはprivateであり、finalであるが、staticでないことをチェックします。
 
-注意しなければならないのは、修飾子について宣言時に付与しないことが意味をもつ場合は必ずそのようなチェックを含むようにしてください。
+注意しなければならないのは、修飾子について宣言時に付与しないことが意味をもつ場合は「〇〇でないこと」のチェックを含むようにしてください。（以下の例ではstaticでないことのチェックをしています。）
 
 ```java
 ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
@@ -100,10 +100,10 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
                 .should().beAssignableTo(BatchAction.class);
 ```
 
-宣言チェックの最後の例では `IOException` をスローするクラスがないことをチェックします。
+最後の例では `IOException` をスローするクラスがないことをチェックします。
 
 ここで対象にできるのは `throws` が宣言されているメソッドのみです。
-実行時例外の場合 `throws` が宣言されるとは限らないので、チェックできません。
+`throws` が宣言されていない実行時例外はチェックできません。
 
 ```java
 ArchRuleDefinition.noMethods().should().declareThrowableOfType(IOException.class);
@@ -115,7 +115,7 @@ ArchRuleDefinition.noMethods().should().declareThrowableOfType(IOException.class
 
 最初の例ではserviceパッケージにあるクラスは、formパッケージにあるクラスへ依存してはいけないというチェックを行います。
 
-否定系なのでそのようなクラスがないことをチェックしています。
+否定系なので`noClasses()`でそのようなクラスがないことをチェックしています。
 
 ```java
 ArchRuleDefinition.noClasses().that().resideInAPackage("..service..")
@@ -124,9 +124,9 @@ ArchRuleDefinition.noClasses().that().resideInAPackage("..service..")
 
 ### レイヤーチェック
 
-レイヤーチェックは[基本となる形式](#基本となる形式)に当てはまらない形式となるチェックです。
+レイヤーチェックは[基本となる形式](#基本となる形式)に当てはまらない特殊な形式でチェックを記述します。
 
-パッケージなどによりレイヤーを定義し、レイヤー間の依存関係をチェックします。
+パッケージなどによりレイヤー名を定義し、定義したレイヤー間の依存関係をチェックします。
 
 たとえば
 
@@ -152,5 +152,5 @@ Architectures.layeredArchitecture()
 
 ## ArchUnitで提供されているAPIで実現できない場合
 
-カスタムルールを実装することで、提供されているAPIでは実現できないようなチェックを行うことができます。
-内容については [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) を参照してください。
+カスタムルールを実装することで、提供されているAPIでは実現できないようなチェックを行うことができます。  
+詳細については [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) を参照してください。

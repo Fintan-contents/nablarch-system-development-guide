@@ -4,10 +4,9 @@
 本PJのArchUnitでのテスト内容解説や、具体的な設定方法、運用ルールなどを記載しています。
 
 - [ArchUnit運用ガイド](./Ops-Rule.md)
-- MavenでのArchUnitの実行方法
-  - JUnitのテスト同様、 Mavenコマンド（`mvn test`）から実行できる。
+- [MavenでのArchUnitの実行方法](./Maven-settings.md)
 - JenkinsでのArchUnit実行結果収集方法
-  - JUnitのテスト同様の画面からテスト結果を確認する。
+  - ArchUnitはJUnitのテストとして実行されます。実行結果もJUnitのテスト結果を確認してください。
 
-ArchUnitを使用して高い頻度でテストする内容を以下で解説します。
-- [ArchUnit利用例](./ArchUnit-commentary.md)
+ArchUnitで頻出するテストの記述方法を以下で解説します。
+- [ArchUnit解説](./ArchUnit-commentary.md)
