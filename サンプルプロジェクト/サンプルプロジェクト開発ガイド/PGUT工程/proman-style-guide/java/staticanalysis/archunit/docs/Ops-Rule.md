@@ -68,7 +68,8 @@ public static final ArchRule DaoContextを引数にとるメソッドはパッ�
 ```java
 @ArchTest
 public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
-        ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
+        ArchRuleDefinition.noClasses()
+        .that().resideOutsideOfPackage("..common..") // #1234
         .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
 ```
 
