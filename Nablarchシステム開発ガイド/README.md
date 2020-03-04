@@ -115,7 +115,7 @@ Nablarchを使ったシステム開発を始めようとしているエンジニ
 IPAの「安全なウェブサイトの作り方」と重複はありますが、「OWASP Top10」も参考となります。
 
 - [安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity.html)
-- [Nablarch機能のセキュリティ対応表](../サンプルプロジェクト/設計書/Nablarch機能のセキュリティ対応表.xlsx)
+- [Nablarch機能のセキュリティ対応表](../サンプルプロジェクト/設計書/Nablarch機能のセキュリティ対応表.xlsx?raw=true)
 - [OWASP Top10](https://github.com/OWASP/Top10)
 
 #### Nablarchパターン集
