@@ -5,6 +5,7 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.library.Architectures;
+import com.tngtech.archunit.core.domain.JavaClass;
 import org.junit.runner.RunWith;
 
 /**
@@ -16,9 +17,9 @@ public class LayeredArchitectureForWebTest {
 
     @ArchTest
     public static final ArchRule アプリケーション構成のテスト = Architectures.layeredArchitecture()
-            .layer("Action").definedBy(PromanRuleUtil.haveEndClassesName("Action"))
-            .layer("Service").definedBy(PromanRuleUtil.haveEndClassesName("Service"))
-            .layer("Form").definedBy(PromanRuleUtil.haveEndClassesName("Form"))
+            .layer("Action").definedBy(JavaClass.Predicates.simpleNameEndingWith("Action"))
+            .layer("Service").definedBy(JavaClass.Predicates.simpleNameEndingWith("Service"))
+            .layer("Form").definedBy(JavaClass.Predicates.simpleNameEndingWith("Form"))
             .whereLayer("Action").mayNotBeAccessedByAnyLayer()
             .whereLayer("Service").mayOnlyBeAccessedByLayers( "Action")
             .whereLayer("Form").mayOnlyBeAccessedByLayers("Action");

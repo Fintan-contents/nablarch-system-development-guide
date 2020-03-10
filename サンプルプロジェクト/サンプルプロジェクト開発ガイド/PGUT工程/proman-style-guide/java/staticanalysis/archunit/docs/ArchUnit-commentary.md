@@ -117,6 +117,8 @@ ArchRuleDefinition.noMethods().should().declareThrowableOfType(IOException.class
 
 否定系なので`noClasses()`でそのようなクラスがないことをチェックしています。
 
+※ パッケージ指定の記法については、[こちら](https://javadoc.io/doc/com.tngtech.archunit/archunit/latest/com/tngtech/archunit/base/PackageMatcher.html)を参照してください。
+
 ```java
 ArchRuleDefinition.noClasses().that().resideInAPackage("..service..")
                 .should().dependOnClassesThat().resideInAPackage("..form..");

@@ -83,7 +83,9 @@ ArchUnitではクラスパス・モジュールパスに含まれるクラスか
 @ArchTest
 public static final ArchRule ActionクラスはBatchActionを継承していること =
         ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
-        .and(DescribedPredicate.not(JavaClass.Predicates.equivalentTo(PromanExampleAction.class)))  // #12345
+        .and(DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(
+                PromanExampleAction.class       // #12345
+                , PromanServiceAction.class)))  // #12346
         .should().beAssignableTo(BatchAction.class);
 ```
 

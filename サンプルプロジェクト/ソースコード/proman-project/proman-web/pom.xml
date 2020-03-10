@@ -226,6 +226,7 @@
               <Target-Environment>${env.name}</Target-Environment>
             </manifestEntries>
           </archive>
+          <!-- 下位モジュールでこのモジュールに含まれるクラスのテストを行うため、war作成時にjarも作成する。 -->
           <attachClasses>true</attachClasses>
           <classesClassifier>classes</classesClassifier>
         </configuration>

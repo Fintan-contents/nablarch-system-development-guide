@@ -22,6 +22,7 @@
       <groupId>com.nablarch.example.proman</groupId>
       <artifactId>proman-web</artifactId>
       <version>0.0.1</version>
+      <!-- proman-webは元々warが成果物のため、このテスト用に作成したjarを読み込む -->
       <classifier>classes</classifier>
       <scope>test</scope>
     </dependency>
