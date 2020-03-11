@@ -82,6 +82,9 @@
         <!-- 追加 -->
         <component-ref name="threadContextHandler"/>
 
+        <!-- 追加 -->
+        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
+
         <component-ref name="dbConnectionManagementHandler"/>
 
         <component-ref name="transactionManagementHandler"/>
