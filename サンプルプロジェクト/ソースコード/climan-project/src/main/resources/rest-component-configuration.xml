@@ -32,6 +32,8 @@
   -->
   <import file="nablarch/webui/db-for-webui.xml"/>
 
+  <!-- スレッドコンテキスト機能 -->
+  <import file="com/nablarch/example/climan/web/webui/threadcontext-for-webui.xml" />
 
   <!--パッケージマッピングの設定 -->
   <component name="packageMapping" class="nablarch.integration.router.RoutesMapping">
@@ -44,6 +46,18 @@
           </component>
         </property>
       </component>
+    </property>
+  </component>
+
+  <!-- レスポンスハンドラの設定 -->
+  <component name="jaxRsResponseHandler" class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+    <property name="errorResponseBuilder">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
+        <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
+      </component>
+    </property>
+    <property name="errorLogWriter">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
     </property>
   </component>
 
@@ -60,16 +74,13 @@
 
         <component class="nablarch.fw.handler.GlobalErrorHandler"/>
 
-        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
-          <property name="errorResponseBuilder">
-            <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
-              <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
-            </component>
-          </property>
-          <property name="errorLogWriter">
-            <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
-          </property>
-        </component>
+        <!-- 追加 -->
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component-ref name="jaxRsResponseHandler" />
+
+        <!-- 追加 -->
+        <component-ref name="threadContextHandler"/>
 
         <component-ref name="dbConnectionManagementHandler"/>
 

@@ -6,7 +6,7 @@ writerNames=stdout,nop,verifier
 
 #\u30C7\u30D0\u30C3\u30B0\u7528\u306E\u6A19\u6E96\u51FA\u529B
 writer.stdout.className=nablarch.core.log.basic.StandardOutputLogWriter
-writer.stdout.formatter.format=$date$ -$logLevel$- $loggerName$ : $message$$information$$stackTrace$
+writer.stdout.formatter.format=$date$ -$logLevel$- $runtimeLoggerName$ [$executionId$] boot_proc = [$bootProcess$] proc_sys = [$processingSystem$] req_id = [$requestId$] usr_id = [$userId$] $message$$information$$stackTrace$
 writer.nop.className=nablarch.test.core.log.NopLogWriter
 writer.verifier.className=nablarch.test.core.log.LogVerifier
 
