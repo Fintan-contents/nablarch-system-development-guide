@@ -30,6 +30,7 @@
             <div class="ui grid">
                 <n:include path="/WEB-INF/view/common/menu.jsp"/>
                 <div class="twelve wide column">
+                <div class="ui form">
                     <div class="ui two column grid">
                         <div class="row">
                             <div class="sixteen wide column">
@@ -98,17 +99,29 @@
                                 <n:write name="project.note"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <n:form method="GET" action="/app/project/backToList">
-                                <button type="submit" class="ui left floated primary button">
-                                    戻る
-                                </button>
-                            </n:form>
+                       </div>
+                        <div class="four fields">
+                            <div class="field centered aligned">&nbsp</div>
+                            <div class="field centered aligned">
+                                <n:a href="/app/project/backToList">
+                                        <button type="submit" class="fluid ui primary button">
+                                            戻る
+                                        </button>
+                                </n:a>
+                            </div>
+                            <div class="field centered aligned">
+                               <n:a href="/app/project/update/${project.projectId}">
+                                        <button type="submit" class="fluid ui primary button">
+                                            更新
+                                        </button>
+                               </n:a>
+                            </div>
+                            <div class="field centered aligned">&nbsp</div>
+                         </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <footer>
             <div class="ui inverted vertical footer segment">
