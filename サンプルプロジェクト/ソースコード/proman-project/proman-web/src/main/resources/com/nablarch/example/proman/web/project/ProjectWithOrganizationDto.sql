@@ -8,6 +8,7 @@ SELECT
     project.sales,
     project.project_start_date,
     project.project_end_date,
+    project.version_no,
     division.organization_name division_name,
     department.organization_name
 FROM
@@ -54,6 +55,7 @@ SELECT
     project.project_start_date,
     project.project_end_date,
     project.note,
+    project.version_no,
     division.organization_name division_name,
     department.organization_name
 FROM
