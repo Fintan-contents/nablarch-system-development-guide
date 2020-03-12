@@ -81,6 +81,14 @@ public class ProjectService {
         universalDao.insert(project);
     }
 
+    /**
+     * プロジェクトを更新する。
+     *
+     * @param project 更新対象
+     */
+    public void updateProject(Project project) {
+        universalDao.update(project);
+    }
 
     /**
      * プロジェクトを検索する。
@@ -101,9 +109,19 @@ public class ProjectService {
      * @param projectId プロジェクトID
      * @return プロジェクト詳細
      */
-    public ProjectWithOrganizationDto findProjectById(Integer projectId) {
+    public ProjectWithOrganizationDto findProjectByIdWithOrganization(Integer projectId) {
         Map<String, Integer> condition = new HashMap<>();
         condition.put("projectId", projectId);
         return universalDao.findBySqlFile(ProjectWithOrganizationDto.class, "FIND_PROJECT_WITH_ORGANIZATION_BY_PROJECT_ID", condition);
+    }
+
+    /**
+     * プロジェクトの詳細を1件検索する。
+     *
+     * @param projectId プロジェクトID
+     * @return プロジェクト詳細
+     */
+    public Project findProjectById(Integer projectId) {
+        return universalDao.findById(Project.class, projectId);
     }
 }

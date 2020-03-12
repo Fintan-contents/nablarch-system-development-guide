@@ -102,7 +102,7 @@ public class ProjectSearchAction {
     public HttpResponse detail(HttpRequest request, ExecutionContext context) {
         ProjectDetailInitialForm form = context.getRequestScopedVar("form");
         ProjectService service = new ProjectService();
-        context.setRequestScopedVar("project", service.findProjectById(Integer.parseInt(form.getProjectId())));
+        context.setRequestScopedVar("project", service.findProjectByIdWithOrganization(Integer.parseInt(form.getProjectId())));
         // TODO 顧客管理システムとの連携ができたら修正
         context.setRequestScopedVar("clientName", "ダミー株式会社");
         return new HttpResponse(DETAIL_JSP_PATH);
