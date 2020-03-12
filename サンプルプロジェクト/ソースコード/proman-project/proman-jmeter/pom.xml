@@ -39,6 +39,45 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- YoyoTool -->
+    <dependency>
+      <groupId>jp.co.tis.adc</groupId>
+      <artifactId>YoyoTool</artifactId>
+      <version>3.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/dump.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.13</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.5</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- 使用するDBに合わせて要修正 -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.10</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- YoyoTool -->
+
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>

@@ -31,6 +31,8 @@ public class JMeterTest {
 
         for (File jmxFile : jmxFiles) {
             // TODO DBセットアップ
+//        new DatabaseLoader().loadFromExcel("./DUMP.xlsm");
+//        new DatabaseLoader().loadFromCsv("./DUMP.xlsm");
 
             runner.runJMeter(jmxFile);
 
