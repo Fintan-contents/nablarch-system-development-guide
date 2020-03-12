@@ -26,3 +26,6 @@ SpotBugsで明らかに問題のあるコードや、後々問題が発生しそ
 
 - [使用不許可APIチェックツール](./staticanalysis/unpublished-api/README.md)
 
+ArchUnitのテストで検出できるアーキテクチャ違反は解消してください。
+
+- [ArchUnitガイド](./staticanalysis/archunit/README.md)
