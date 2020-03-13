@@ -29,7 +29,7 @@ public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
      */
     public void setBodyConverter(BodyConverter bodyConverter) {
 
-        final List<Handler<HttpRequest, ?>> list = new ArrayList<Handler<HttpRequest, ?>>();
+        final List<Handler<HttpRequest, ?>> list = new ArrayList<>();
 
         final BodyConvertHandler bodyConvertHandler = new BodyConvertHandler();
         bodyConvertHandler.addBodyConverter(bodyConverter);
