@@ -2,12 +2,8 @@ package com.nablarch.example.proman.web.common.validation;
 
 import nablarch.test.support.web.servlet.MockServletRequest;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.Vector;
 
 public class PromanMockServletRequest extends MockServletRequest {
 
