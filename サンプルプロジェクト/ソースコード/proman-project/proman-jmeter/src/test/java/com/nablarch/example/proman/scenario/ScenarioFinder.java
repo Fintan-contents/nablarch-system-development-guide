@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.scenario;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

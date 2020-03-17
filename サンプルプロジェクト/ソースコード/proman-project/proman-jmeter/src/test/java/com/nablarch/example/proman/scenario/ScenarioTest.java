@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.scenario;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

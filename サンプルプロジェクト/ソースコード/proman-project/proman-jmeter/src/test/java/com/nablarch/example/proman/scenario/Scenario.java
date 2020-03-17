@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.scenario;
 
 import java.io.File;
 import java.io.FilenameFilter;

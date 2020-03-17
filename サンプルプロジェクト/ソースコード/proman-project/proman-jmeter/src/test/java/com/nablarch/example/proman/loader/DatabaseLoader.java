@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.loader;
 
 import jp.co.tis.adc.CommandManager;
 import jp.co.tis.adc.csv.CsvInsertManager;

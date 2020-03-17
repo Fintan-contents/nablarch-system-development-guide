@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.jmeter;
 
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;

@@ -1,4 +1,4 @@
-package com.nablarch.example.proman;
+package com.nablarch.example.proman.assertion.response;
 
 import org.junit.Test;
 
