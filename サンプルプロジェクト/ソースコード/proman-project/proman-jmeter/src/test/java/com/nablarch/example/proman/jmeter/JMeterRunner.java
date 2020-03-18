@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
+/**
+ * JMeterを実行するためのクラス。
+ * @author Yutaka Kanayama
+ */
 public class JMeterRunner {
     private static final String USER_DEFINED_VAR_KEY_SERVER_HOST = "server.host";
     private static final String USER_DEFINED_VAR_KEY_SERVER_PORT = "server.port";
@@ -21,13 +25,22 @@ public class JMeterRunner {
     private final String serverHost;
     private final String serverPort;
 
-
+    /**
+     * コンストラクタ。
+     * @param jmeterHome JMeterのインストールディレクトリ
+     * @param serverHost 接続先サーバーホスト
+     * @param serverPort 接続先サーバーポート
+     */
     public JMeterRunner(String jmeterHome, String serverHost, String serverPort) {
         this.jmeterHome = jmeterHome;
         this.serverHost = serverHost;
         this.serverPort = serverPort;
     }
 
+    /**
+     * JMeterを実行するための初期化処理を行う。
+     * @throws IOException 初期化処理に失敗した場合
+     */
     public void initialize() throws IOException {
         JMeterUtils.loadJMeterProperties(jmeterHome + "/bin/jmeter.properties");
         JMeterUtils.setJMeterHome(jmeterHome);
@@ -36,7 +49,12 @@ public class JMeterRunner {
         SaveService.loadProperties();
     }
 
-    public void runJMeter(File jmxFile) throws URISyntaxException, IOException {
+    /**
+     * 指定したJMXファイルを実行する。
+     * @param jmxFile JMXファイル
+     * @throws IOException 入出力例外が発生した場合
+     */
+    public void runJMeter(File jmxFile) throws IOException {
         HashTree testPlanTree = SaveService.loadTree(jmxFile);
 
         final FileServer fileServer = FileServer.getFileServer();

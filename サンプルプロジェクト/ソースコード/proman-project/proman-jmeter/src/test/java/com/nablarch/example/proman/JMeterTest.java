@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 各シナリオを実行していくテストクラス。
+ * @author Tanaka Tomoyuki
+ */
 @RunWith(Parameterized.class)
 public class JMeterTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(JMeterTest.class);

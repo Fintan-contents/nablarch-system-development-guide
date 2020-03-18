@@ -4,8 +4,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * {@link ResponseTestSupport} が想定通りテスト可能なことをかくにんする。
- * このテストは後で消す。
+ * {@link ResponseTestSupport} が想定通りテスト可能なことを確認する。
+ * <p/>
+ * パスが実行環境に依存しているので、テンポラリディレクトリなどを使う方法に修正が必要。
  */
 @Ignore
 public class FileTest {
