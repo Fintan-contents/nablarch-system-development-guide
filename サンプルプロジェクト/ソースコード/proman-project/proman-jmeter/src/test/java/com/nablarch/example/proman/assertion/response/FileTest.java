@@ -1,11 +1,13 @@
 package com.nablarch.example.proman.assertion.response;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * {@link ResponseTestSupport} が想定通りテスト可能なことをかくにんする。
  * このテストは後で消す。
  */
+@Ignore
 public class FileTest {
 
     private static final String EXPECTED_PATH = "C:\\shaft\\jmeter\\nablarch-development-guide\\サンプルプロジェクト\\ソースコード\\proman-project\\proman-jmeter\\src\\test\\resources\\jmeter\\shot_1\\resultHtml\\";
