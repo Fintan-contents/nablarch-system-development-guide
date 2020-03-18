@@ -1,11 +1,8 @@
 package com.nablarch.example.climan.common.jaxrs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import nablarch.fw.Handler;
 import nablarch.fw.jaxrs.*;
 import nablarch.fw.web.HttpRequest;
-import nablarch.integration.jaxrs.jackson.Jackson2BodyConverter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +26,7 @@ public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
      */
     public void setBodyConverter(BodyConverter bodyConverter) {
 
-        final List<Handler<HttpRequest, ?>> list = new ArrayList<Handler<HttpRequest, ?>>();
+        final List<Handler<HttpRequest, ?>> list = new ArrayList<>();
 
         final BodyConvertHandler bodyConvertHandler = new BodyConvertHandler();
         bodyConvertHandler.addBodyConverter(bodyConverter);

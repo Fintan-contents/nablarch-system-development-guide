@@ -7,8 +7,6 @@ import nablarch.common.databind.ObjectMapperFactory;
 import nablarch.core.date.BusinessDateUtil;
 import nablarch.core.db.statement.SqlPStatement;
 import nablarch.core.db.statement.SqlRow;
-import nablarch.core.log.Logger;
-import nablarch.core.log.LoggerManager;
 import nablarch.core.util.DateUtil;
 import nablarch.core.util.FilePathSetting;
 import nablarch.fw.DataReader;

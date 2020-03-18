@@ -20,6 +20,7 @@
     <module>proman-common</module>
     <module>proman-web</module>
     <module>proman-batch</module>
+    <module>proman-arch-test</module>
     <module>proman-jmeter</module>
   </modules>
 

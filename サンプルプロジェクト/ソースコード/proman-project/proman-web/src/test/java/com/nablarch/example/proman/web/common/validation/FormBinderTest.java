@@ -1,7 +1,5 @@
 package com.nablarch.example.proman.web.common.validation;
 
-import nablarch.test.support.web.servlet.MockServletRequest;
-
 import nablarch.core.message.ApplicationException;
 import nablarch.core.message.Message;
 import nablarch.core.validation.ee.Length;
