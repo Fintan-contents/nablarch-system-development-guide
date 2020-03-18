@@ -55,7 +55,7 @@ public class JMeterTest {
         loader.loadFromExcel(scenario.getInsertFile());
 
         LOGGER.debug("Run JMeter");
-        JMeterRunner runner = new JMeterRunner(CONFIG.getJmeterHome());
+        JMeterRunner runner = new JMeterRunner(CONFIG.getJmeterHome(), CONFIG.getServerHost(), CONFIG.getServerPort());
         runner.initialize();
         runner.runJMeter(scenario.getJmxFile());
 

@@ -18,6 +18,22 @@ public class Configurations {
     }
 
     /**
+     * 設定値 {@code "server.host"} の値を取得する。
+     * @return {@code "server.host"} の値
+     */
+    public String getServerHost() {
+        return env.getString("server.host");
+    }
+
+    /**
+     * 設定値 {@code "server.port"} の値を取得する。
+     * @return {@code "server.port"} の値
+     */
+    public String getServerPort() {
+        return env.getString("server.port");
+    }
+
+    /**
      * 設定値 {@code "database.driver"} の値を取得する。
      * @return {@code "database.driver"} の値
      */

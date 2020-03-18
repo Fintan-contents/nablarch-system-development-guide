@@ -1,25 +1,36 @@
 package com.nablarch.example.proman.jmeter;
 
+import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.services.FileServer;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
+import org.apache.jorphan.collections.SearchByClass;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collection;
 
 public class JMeterRunner {
-    private final String JMETER_HOME;
+    private static final String USER_DEFINED_VAR_KEY_SERVER_HOST = "server.host";
+    private static final String USER_DEFINED_VAR_KEY_SERVER_PORT = "server.port";
 
-    public JMeterRunner(String jmeterHome) {
-        JMETER_HOME = jmeterHome;
+    private final String jmeterHome;
+    private final String serverHost;
+    private final String serverPort;
+
+
+    public JMeterRunner(String jmeterHome, String serverHost, String serverPort) {
+        this.jmeterHome = jmeterHome;
+        this.serverHost = serverHost;
+        this.serverPort = serverPort;
     }
 
     public void initialize() throws IOException {
-        JMeterUtils.loadJMeterProperties(JMETER_HOME + "/bin/jmeter.properties");
-        JMeterUtils.setJMeterHome(JMETER_HOME);
+        JMeterUtils.loadJMeterProperties(jmeterHome + "/bin/jmeter.properties");
+        JMeterUtils.setJMeterHome(jmeterHome);
         JMeterUtils.initLocale();
         // Initialize JMeter SaveService
         SaveService.loadProperties();
@@ -32,13 +43,19 @@ public class JMeterRunner {
         fileServer.setBasedir(jmxFile.getParent());
         fileServer.setScriptName(jmxFile.getName());
 
+        // ユーザ定義変数のサーバーホストとポートを変更
+        SearchByClass<Arguments> search = new SearchByClass<>(Arguments.class);
+        testPlanTree.traverse(search);
+        Collection<Arguments> searchResults = search.getSearchResults();
+        Arguments arguments = searchResults.iterator().next();
+        arguments.removeArgument(USER_DEFINED_VAR_KEY_SERVER_HOST);
+        arguments.addArgument(USER_DEFINED_VAR_KEY_SERVER_HOST, serverHost);
+        arguments.removeArgument(USER_DEFINED_VAR_KEY_SERVER_PORT);
+        arguments.addArgument(USER_DEFINED_VAR_KEY_SERVER_PORT, serverPort);
+
         // Run JMeter Test
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
         jmeter.configure(testPlanTree);
-        // jmxのユーザ定義変数の設定エレメントで接続先ホストを変数化しているが
-        // 実行時にプロファイルによって動的に変えられないか？
-        // 帰られればCIとローカルで設定ファイルに記載するだけで切り替えられるし
-        // 操作記録した人が修正しなくてもすむ
         jmeter.run();
     }
 }
