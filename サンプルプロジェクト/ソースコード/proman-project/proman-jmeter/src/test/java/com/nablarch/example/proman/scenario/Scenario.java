@@ -26,6 +26,7 @@ public class Scenario {
     static final String DB_DUMP_DIR_NAME = "db_dump";
     static final String RESPONSE_DIR_NAME = "response";
     static final String INSERT_DB_FILE_NAME = "INSERT.xlsm";
+    static final String EXPECTED_DB_FILE_NAME = "EXPECTED.xlsx";
 
     private static final Pattern HTML_FILE_NAME_PATTERN = Pattern.compile("^.*\\.html$");
 
@@ -36,6 +37,7 @@ public class Scenario {
 
     private final File jmxFile;
     private final File insertFile;
+    private final File expectedDatabaseFile;
 
     public Scenario(File jmxFile) {
         this.rootDir = jmxFile.getParentFile().getParentFile();
@@ -45,7 +47,9 @@ public class Scenario {
 
         this.jmxFile = jmxFile;
         this.insertFile = new File(dbDumpDir, INSERT_DB_FILE_NAME);
+        this.expectedDatabaseFile = new File(dbDumpDir, EXPECTED_DB_FILE_NAME);
     }
+
 
     /**
      * このシナリオの JMX ファイルを取得する。
@@ -61,6 +65,14 @@ public class Scenario {
      */
     public File getInsertFile() {
         return insertFile;
+    }
+
+    /**
+     * データベースの期待値を表すファイルを取得する。
+     * @return データベースの期待値を表すファイル
+     */
+    public File getExpectedDatabaseFile() {
+        return expectedDatabaseFile;
     }
 
     /**
@@ -95,6 +107,17 @@ public class Scenario {
         return "Scenario{" +
                 "rootDir=" + rootDir +
                 '}';
+    }
+
+    /**
+     * このテストシナリオの名前を取得する。
+     * <p/>
+     * シナリオの名前は、シナリオのルートディレクトリのディレクトリ名になります。
+     *
+     * @return テストシナリオの名前
+     */
+    public String getName() {
+        return rootDir.getName();
     }
 
     /**

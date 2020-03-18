@@ -34,6 +34,13 @@ public class ScenarioTest {
     }
 
     @Test
+    public void testNameGetter() {
+        String result = sut.getName();
+
+        assertThat(result, is(tempFolder.getRoot().getName()));
+    }
+
+    @Test
     public void testJmxFileGetter() {
         File result = sut.getJmxFile();
 
@@ -45,6 +52,14 @@ public class ScenarioTest {
         File result = sut.getInsertFile();
 
         File expected = new File(tempFolder.getRoot(), Scenario.DB_DUMP_DIR_NAME + "/" + Scenario.INSERT_DB_FILE_NAME);
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void testExpectedDatabaseFileGetter() {
+        File result = sut.getExpectedDatabaseFile();
+
+        File expected = new File(tempFolder.getRoot(), Scenario.DB_DUMP_DIR_NAME + "/" + Scenario.EXPECTED_DB_FILE_NAME);
         assertThat(result, is(expected));
     }
 

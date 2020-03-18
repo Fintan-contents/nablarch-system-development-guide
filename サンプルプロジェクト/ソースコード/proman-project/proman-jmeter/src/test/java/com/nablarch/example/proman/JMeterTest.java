@@ -1,8 +1,10 @@
 package com.nablarch.example.proman;
 
+import com.nablarch.example.proman.assertion.db.DataSourceInitializer;
+import com.nablarch.example.proman.assertion.db.DatabaseComparator;
+import com.nablarch.example.proman.assertion.response.ResponseTestSupport;
 import com.nablarch.example.proman.jmeter.JMeterRunner;
 import com.nablarch.example.proman.loader.DatabaseLoader;
-import com.nablarch.example.proman.assertion.response.ResponseTestSupport;
 import com.nablarch.example.proman.scenario.Scenario;
 import com.nablarch.example.proman.scenario.ScenarioFinder;
 import org.junit.BeforeClass;
@@ -13,6 +15,7 @@ import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,23 +23,34 @@ import java.util.ResourceBundle;
 
 @RunWith(Parameterized.class)
 public class JMeterTest {
-    private static Logger log = LoggerFactory.getLogger(JMeterTest.class);
+    private static final Logger log = LoggerFactory.getLogger(JMeterTest.class);
 
-    private final Scenario scenario;
     private static ResourceBundle properties;
+    private static DataSourceInitializer dataSource;
 
-    public JMeterTest(Scenario scenario) {
+    private final String name;
+    private final Scenario scenario;
+
+    public JMeterTest(String name, Scenario scenario) {
+        this.name = name;
         this.scenario = scenario;
     }
 
     @BeforeClass
     public static void readProperties() {
         properties = ResourceBundle.getBundle("env");
+
+        dataSource = new DataSourceInitializer(
+            properties.getString("database.driver"),
+            properties.getString("database.url"),
+            properties.getString("database.username"),
+            properties.getString("database.password")
+        );
     }
 
     @Test
     public void test() throws Exception {
-        log.debug("scenario jmx={}", scenario.getJmxFile());
+        log.debug("scenario name={} jmx={}", name, scenario.getJmxFile());
 
         log.debug("Setup Database...");
         DatabaseLoader loader = new DatabaseLoader();
@@ -57,15 +71,18 @@ public class JMeterTest {
         }
 
         log.debug("Assert Database");
-        // TODO DB のアサーション
+        try (Connection jdbcConn = dataSource.getConnection()) {
+            DatabaseComparator comparator = new DatabaseComparator(jdbcConn);
+            comparator.compare(scenario.getExpectedDatabaseFile());
+        }
     }
 
-    @Parameters
+    @Parameters(name="Scenario={0}")
     public static Collection<Object[]> findScenarios() {
         List<Object[]> result = new ArrayList<>();
 
         for (Scenario scenario : ScenarioFinder.createOnClasspathRoot().find()) {
-            result.add(new Object[] {scenario});
+            result.add(new Object[] {scenario.getName(), scenario});
         }
 
         return result;
