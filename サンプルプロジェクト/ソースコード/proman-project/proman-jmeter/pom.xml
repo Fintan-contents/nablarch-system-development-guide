@@ -3,13 +3,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
-    <groupId>com.nablarch.example.proman</groupId>
-    <artifactId>proman-project</artifactId>
-    <version>0.0.1</version>
+    <groupId>com.nablarch.archetype</groupId>
+    <artifactId>nablarch-archetype-parent</artifactId>
+    <version>5u16-SNAPSHOT</version>
+    <relativePath/>
   </parent>
+
+  <groupId>com.nablarch.example.proman</groupId>
   <artifactId>proman-jmeter</artifactId>
   <name>proman-jmeter</name>
+  <version>0.0.1</version>
 
   <dependencies>
     <dependency>
@@ -95,6 +100,7 @@
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
+      <version>3.3.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
