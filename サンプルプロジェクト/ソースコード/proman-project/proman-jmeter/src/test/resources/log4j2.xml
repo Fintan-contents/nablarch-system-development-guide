@@ -15,33 +15,28 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<Configuration status="WARN" packages="org.apache.jmeter.gui.logging">
+<Configuration status="WARN">
 
   <Appenders>
 
-    <File name="jmeter-log" fileName="${sys:jmeter.logfile:-jmeter.log}" append="false">
+    <File name="jmeter-log" fileName="log/jmeter-${date:yyyyMMdd_HHmmss}.log" append="true">
       <PatternLayout>
         <pattern>%d %p %c{1.}: %m%n</pattern>
       </PatternLayout>
     </File>
 
-    <GuiLogEvent name="gui-log-event">
-      <PatternLayout>
-        <pattern>%d %p %c{1.}: %m%n</pattern>
-      </PatternLayout>
-    </GuiLogEvent>
-
   </Appenders>
 
   <Loggers>
 
-    <Root level="debug">
+    <Root level="WARN">
       <AppenderRef ref="jmeter-log"/>
-      <AppenderRef ref="gui-log-event"/>
     </Root>
 
-    <Logger name="org.apache.jmeter.junit" level="debug"/>
+    <Logger name="com.nablarch.example.proman" level="info" />
+
     <!--
+    <Logger name="org.apache.jmeter.junit" level="info" />
     <Logger name="org.apache.jmeter.control" level="debug" />
     <Logger name="org.apache.jmeter.testbeans" level="debug" />
     <Logger name="org.apache.jmeter.engine" level="debug" />
@@ -58,8 +53,8 @@
     <Logger name="org.apache.jmeter.protocol.jdbc" level="debug" />
     <Logger name="org.apache.jmeter.protocol.java" level="warn" />
     <Logger name="org.apache.jmeter.testelements.property" level="debug" />
-    -->
     <Logger name="org.apache.jorphan" level="debug"/>
+    -->
 
     <!--
       # Apache HttpClient logging examples

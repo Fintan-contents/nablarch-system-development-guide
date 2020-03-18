@@ -11,7 +11,6 @@ import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.dataset.filter.DefaultColumnFilter;
 
 import java.io.File;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -20,19 +19,14 @@ import java.sql.SQLException;
  * @author Tanaka Tomoyuki
  */
 public class DatabaseComparator {
-
     private final DatabaseConnection conn;
 
     /**
      * コンストラクタ。
-     * @param jdbcConnection テスト対象のデータベースコネクション
+     * @param conn テスト対象のデータベースコネクション
      */
-    public DatabaseComparator(Connection jdbcConnection) {
-        try {
-            this.conn = new DatabaseConnection(jdbcConnection);
-        } catch (DatabaseUnitException e) {
-            throw new RuntimeException(e);
-        }
+    public DatabaseComparator(DatabaseConnection conn) {
+        this.conn = conn;
     }
 
     /**

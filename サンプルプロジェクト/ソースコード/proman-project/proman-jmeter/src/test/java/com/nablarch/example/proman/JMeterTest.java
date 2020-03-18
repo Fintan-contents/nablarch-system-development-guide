@@ -1,5 +1,6 @@
 package com.nablarch.example.proman;
 
+import com.nablarch.example.proman.assertion.db.DBUnitConnectionBuilder;
 import com.nablarch.example.proman.assertion.db.DataSourceInitializer;
 import com.nablarch.example.proman.assertion.db.DatabaseComparator;
 import com.nablarch.example.proman.assertion.response.ResponseTestSupport;
@@ -7,6 +8,7 @@ import com.nablarch.example.proman.jmeter.JMeterRunner;
 import com.nablarch.example.proman.loader.DatabaseLoader;
 import com.nablarch.example.proman.scenario.Scenario;
 import com.nablarch.example.proman.scenario.ScenarioFinder;
+import org.dbunit.database.DatabaseConnection;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +21,12 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @RunWith(Parameterized.class)
 public class JMeterTest {
-    private static final Logger log = LoggerFactory.getLogger(JMeterTest.class);
-
-    private static ResourceBundle properties;
-    private static DataSourceInitializer dataSource;
+    private static final Logger LOGGER = LoggerFactory.getLogger(JMeterTest.class);
+    private static final Configurations CONFIG = new Configurations();
+    private static DataSourceInitializer DATA_SOURCE;
 
     private final String name;
     private final Scenario scenario;
@@ -38,30 +38,28 @@ public class JMeterTest {
 
     @BeforeClass
     public static void readProperties() {
-        properties = ResourceBundle.getBundle("env");
-
-        dataSource = new DataSourceInitializer(
-            properties.getString("database.driver"),
-            properties.getString("database.url"),
-            properties.getString("database.username"),
-            properties.getString("database.password")
+        DATA_SOURCE = new DataSourceInitializer(
+            CONFIG.getDatabaseDriver(),
+            CONFIG.getDatabaseUrl(),
+            CONFIG.getDatabaseUsername(),
+            CONFIG.getDatabasePassword()
         );
     }
 
     @Test
     public void test() throws Exception {
-        log.debug("scenario name={} jmx={}", name, scenario.getJmxFile());
+        LOGGER.info("Scenario name={} jmx={}", name, scenario.getJmxFile());
 
-        log.debug("Setup Database...");
+        LOGGER.debug("Setup Database");
         DatabaseLoader loader = new DatabaseLoader();
         loader.loadFromExcel(scenario.getInsertFile());
 
-        log.debug("Run JMeter");
-        JMeterRunner runner = new JMeterRunner(properties.getString("jmeter.home"));
+        LOGGER.debug("Run JMeter");
+        JMeterRunner runner = new JMeterRunner(CONFIG.getJmeterHome());
         runner.initialize();
         runner.runJMeter(scenario.getJmxFile());
 
-        log.debug("Assert Response");
+        LOGGER.debug("Assert Response");
         List<Scenario.ResponseHtml> responseHtmlList = scenario.getResponseHtmlList();
         for (Scenario.ResponseHtml responseHtml : responseHtmlList) {
             ResponseTestSupport.assertResponse(
@@ -70,9 +68,10 @@ public class JMeterTest {
                     responseHtml.getActual().toString());
         }
 
-        log.debug("Assert Database");
-        try (Connection jdbcConn = dataSource.getConnection()) {
-            DatabaseComparator comparator = new DatabaseComparator(jdbcConn);
+        LOGGER.debug("Assert Database");
+        try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
+            DatabaseConnection conn = DBUnitConnectionBuilder.build(jdbcConn, CONFIG.getDatabaseDriver());
+            DatabaseComparator comparator = new DatabaseComparator(conn);
             comparator.compare(scenario.getExpectedDatabaseFile());
         }
     }
