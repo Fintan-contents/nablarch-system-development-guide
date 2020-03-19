@@ -1,9 +1,13 @@
 package com.nablarch.example.proman.loader;
 
+import com.nablarch.example.proman.Configurations;
 import jp.co.tis.adc.CommandManager;
+import jp.co.tis.adc.InsertManager;
 import jp.co.tis.adc.csv.CsvInsertManager;
+import jp.co.tis.adc.db.DbSetting;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * データベースに初期データをロードするためのクラス。
@@ -14,26 +18,32 @@ import java.io.File;
  */
 public class DatabaseLoader {
 
+    private final Configurations config;
+
+    /**
+     * コンストラクタ。
+     * @param config 設定オブジェクト
+     */
+    public DatabaseLoader(Configurations config) {
+        this.config = config;
+    }
+
     /**
      * Excel ファイルに定義されたデータでロードする。
      * @param file YoyoTool の定義ファイル
      */
     public void loadFromExcel(File file) {
-        CommandManager.main(new String[] {file.toString(), "insert"});
-    }
-
-    /**
-     * CSV ファイルでデータをロードする。
-     * <p/>
-     * CSV ファイルは、引数で指定した定義ファイルと同じディレクトリに存在する、
-     * {@code insert} ディレクトリの下に配置していることを前提とする。
-     * <p/>
-     * この前提は、 YoyoTool の挙動によるものであるため、
-     * CSV の検索仕様については YoyoTool のドキュメント等を参照すること。
-     *
-     * @param file YoyoTool の定義ファイル
-     */
-    public void loadFromCsv(File file) {
-        CsvInsertManager.main(new String[] {file.toString()});
+        try {
+            DbSetting dbSetting = new DbSetting(
+                config.getDatabaseDriver(),
+                config.getDatabaseUrl(),
+                config.getDatabaseUsername(),
+                config.getDatabasePassword()
+            );
+            InsertManager insertManager = new InsertManager(file.getCanonicalPath(), dbSetting);
+            insertManager.insertTable();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -52,31 +52,36 @@ public class JMeterTest {
 
     @Test
     public void test() throws Exception {
-        LOGGER.info("Scenario name={} jmx={}", name, scenario.getJmxFile());
+        try {
+            LOGGER.info("Scenario name={} jmx={}", name, scenario.getJmxFile());
 
-        LOGGER.debug("Setup Database");
-        DatabaseLoader loader = new DatabaseLoader();
-        loader.loadFromExcel(scenario.getInsertFile());
+            LOGGER.debug("Setup Database");
+            DatabaseLoader loader = new DatabaseLoader(CONFIG);
+            loader.loadFromExcel(scenario.getInsertFile());
 
-        LOGGER.debug("Run JMeter");
-        JMeterRunner runner = new JMeterRunner(CONFIG.getJmeterHome(), CONFIG.getServerHost(), CONFIG.getServerPort());
-        runner.initialize();
-        runner.runJMeter(scenario.getJmxFile());
+            LOGGER.debug("Run JMeter");
+            JMeterRunner runner = new JMeterRunner(CONFIG.getJmeterHome(), CONFIG.getServerHost(), CONFIG.getServerPort());
+            runner.initialize();
+            runner.runJMeter(scenario.getJmxFile());
 
-        LOGGER.debug("Assert Response");
-        List<Scenario.ResponseHtml> responseHtmlList = scenario.getResponseHtmlList();
-        for (Scenario.ResponseHtml responseHtml : responseHtmlList) {
-            ResponseTestSupport.assertResponse(
-                    responseHtml.getActual().getAbsolutePath(),
-                    responseHtml.getExpected().toString(),
-                    responseHtml.getActual().toString());
-        }
+            LOGGER.debug("Assert Response");
+            List<Scenario.ResponseHtml> responseHtmlList = scenario.getResponseHtmlList();
+            for (Scenario.ResponseHtml responseHtml : responseHtmlList) {
+                ResponseTestSupport.assertResponse(
+                        responseHtml.getActual().getAbsolutePath(),
+                        responseHtml.getExpected().toString(),
+                        responseHtml.getActual().toString());
+            }
 
-        LOGGER.debug("Assert Database");
-        try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
-            DatabaseConnection conn = DBUnitConnectionBuilder.build(jdbcConn, CONFIG.getDatabaseDriver());
-            DatabaseComparator comparator = new DatabaseComparator(conn);
-            comparator.compare(scenario.getExpectedDatabaseFile());
+            LOGGER.debug("Assert Database");
+            try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
+                DatabaseConnection conn = DBUnitConnectionBuilder.build(jdbcConn, CONFIG.getDatabaseDriver());
+                DatabaseComparator comparator = new DatabaseComparator(conn);
+                comparator.compare(scenario.getExpectedDatabaseFile());
+            }
+        } catch (Exception e) {
+            LOGGER.error("Test Failed", e);
+            throw e;
         }
     }
 
