@@ -34,6 +34,14 @@ public class Configurations {
     }
 
     /**
+     * 設定値 {@code "response.encoding"} の値を取得する。
+     * @return {@code "response.encoding"} の値
+     */
+    public String getResponseEncoding() {
+        return env.getString("response.encoding");
+    }
+
+    /**
      * 設定値 {@code "database.driver"} の値を取得する。
      * @return {@code "database.driver"} の値
      */

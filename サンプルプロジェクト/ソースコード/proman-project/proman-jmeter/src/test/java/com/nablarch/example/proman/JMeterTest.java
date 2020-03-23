@@ -65,9 +65,10 @@ public class JMeterTest {
             runner.runJMeter(scenario.getJmxFile());
 
             LOGGER.debug("Assert Response");
+            ResponseTestSupport responseTestSupport = new ResponseTestSupport(CONFIG);
             List<Scenario.ResponseFile> responseFileList = scenario.getResponseFileList();
             for (Scenario.ResponseFile responseFile : responseFileList) {
-                ResponseTestSupport.assertResponse(
+                responseTestSupport.assertResponse(
                         responseFile.getActual().getAbsolutePath(),
                         responseFile.getExpected().toString(),
                         responseFile.getActual().toString());
