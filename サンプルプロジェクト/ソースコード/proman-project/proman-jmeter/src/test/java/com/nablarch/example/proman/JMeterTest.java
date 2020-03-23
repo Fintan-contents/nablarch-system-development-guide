@@ -75,7 +75,8 @@ public class JMeterTest {
 
             LOGGER.debug("Assert Database");
             try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
-                DatabaseConnection conn = DBUnitConnectionBuilder.build(jdbcConn, CONFIG.getDatabaseDriver());
+                DatabaseConnection conn = DBUnitConnectionBuilder.build(
+                        jdbcConn, CONFIG.getDatabaseSchema(), CONFIG.getDatabaseDriver());
                 DatabaseComparator comparator = new DatabaseComparator(conn);
                 comparator.compare(scenario.getExpectedDatabaseFile());
             }

@@ -50,6 +50,18 @@ public class Configurations {
     }
 
     /**
+     * 設定値 {@code "database.schema"} の値を取得する。
+     * @return {@code "database.schema"} の値
+     */
+    public String getDatabaseSchema() {
+        if (env.containsKey("database.schema")) {
+            return env.getString("database.schema");
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * 設定値 {@code "database.username"} の値を取得する。
      * @return {@code "database.username"} の値
      */

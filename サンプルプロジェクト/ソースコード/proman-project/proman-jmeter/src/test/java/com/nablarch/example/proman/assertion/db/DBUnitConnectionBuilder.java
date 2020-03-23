@@ -19,12 +19,13 @@ public class DBUnitConnectionBuilder {
     /**
      * JDBCコネクションを元に{@link DatabaseConnection}を生成する。
      * @param jdbcConnection JDBCコネクション
+     * @param schema スキーマ
      * @param driver JDBCドライバの完全修飾名
      * @return 生成した {@link DatabaseConnection}
      */
-    public static DatabaseConnection build(Connection jdbcConnection, String driver) {
+    public static DatabaseConnection build(Connection jdbcConnection, String schema, String driver) {
         try {
-            DatabaseConnection conn = new DatabaseConnection(jdbcConnection);
+            DatabaseConnection conn = new DatabaseConnection(jdbcConnection, schema);
             DatabaseConfig config = conn.getConfig();
             config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, createDataTypeFactory(driver));
 
