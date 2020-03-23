@@ -22,12 +22,11 @@
     <get path="/app/project/backToList" to="ProjectSearch#backToList"/>
     <get path="/app/project/detail/:projectId" to="ProjectSearch#detail"/>
     <!-- 更新処理 -->
-    <get path="/app/project/update/:projectId" to="ProjectUpdate#indexFromDetailInitialForm"/>
+    <get path="/app/project/update/:projectId" to="ProjectUpdate#index"/>
     <post path="/app/project/confirmUpdate" to="ProjectUpdate#confirmUpdate"/>
-    <get path="/app/project/completeUpdate" to="ProjectUpdate#completeUpdate"/>
     <post path="/app/project/update" to="ProjectUpdate#update"/>
+    <get path="/app/project/completeUpdate" to="ProjectUpdate#completeUpdate"/>
     <post path="/app/project/backUpdate" to="ProjectUpdate#backToEnterUpdate"/>
-    <post path="/app/project/errorUpdate" to="ProjectUpdate#indexSetPullDown"/>
     <post path="/app/project/moveUpdate" to="ProjectUpdate#indexSetPullDown"/>
     <get path="/app/project/moveUpdate" to="ProjectUpdate#indexSetPullDown"/>
   </scope>
