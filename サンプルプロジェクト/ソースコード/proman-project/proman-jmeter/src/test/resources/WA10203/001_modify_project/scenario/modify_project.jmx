@@ -915,11 +915,11 @@ if(!responseFile.exists()) {
       <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP プロキシサーバ" enabled="true">
         <stringProp name="ProxyControlGui.port">8888</stringProp>
         <collectionProp name="ProxyControlGui.exclude_list">
-          <stringProp name="806942161">(?i).*\.(bmp|gif|ico|jpe?g|png|swf|woff|woff2))</stringProp>
-          <stringProp name="-1060547840">.+\.(js|css)</stringProp>
+          <stringProp name="1134409048">(?i).*\.(bmp|gif|ico|jpe?g|png|swf|woff|woff2)</stringProp>
         </collectionProp>
         <collectionProp name="ProxyControlGui.include_list">
           <stringProp name="-341526244">.+?:9088/.*</stringProp>
+          <stringProp name="-337447132">(?i).*\.(css|js)</stringProp>
         </collectionProp>
         <boolProp name="ProxyControlGui.capture_http_headers">true</boolProp>
         <intProp name="ProxyControlGui.grouping_mode">0</intProp>
