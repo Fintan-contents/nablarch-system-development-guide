@@ -69,7 +69,7 @@ pipeline {
       steps {
         echo 'create batch jar'
         dir(PROJECT_CURRENT_DIR) {
-          sh 'mvn clean package -pl proman-batch  -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -P demo,!development clean package -pl proman-batch -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository -DskipTests=true'
         }
       }
       post {
