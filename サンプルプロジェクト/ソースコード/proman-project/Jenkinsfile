@@ -45,7 +45,9 @@ pipeline {
             sh 'mvn checkstyle:checkstyle spotbugs:check -pl proman-web -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
             sh 'mvn checkstyle:checkstyle spotbugs:check -pl proman-batch -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
           }
-          sh 'mvn site -s ci/settings.xml'
+          sh 'mvn site -pl proman-common -s ci/settings.xml'
+          sh 'mvn site -pl proman-web -s ci/settings.xml'
+          sh 'mvn site -pl proman-batch -s ci/settings.xml'
           archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-common/target/site/**'
           archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-web/target/site/**'
           archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-batch/target/site/**'
