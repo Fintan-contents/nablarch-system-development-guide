@@ -25,23 +25,6 @@ public class ProjectUpdateAction {
     private static final String PROJECT_KEY = "projectUpdateActionProject";
 
     /**
-     * プロジェク更新画面プルダウンを設定してを表示。
-     *　詳細、確認画面遷移からの際に必要なため設定。
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
-     */
-    public HttpResponse indexSetPullDown(HttpRequest request, ExecutionContext context) {
-        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
-        setOrganizationAndDivisionToRequestScope(context);
-
-        Project project = SessionUtil.get(context,PROJECT_KEY);
-        context.setRequestScopedVar("projectId",project.getProjectId());
-
-        return new HttpResponse("/WEB-INF/view/project/update.jsp");
-    }
-
-    /**
      * プロジェクト詳細画面からプロジェクト更新を表示。
      *
      * @param request HTTPリクエスト
@@ -49,29 +32,14 @@ public class ProjectUpdateAction {
      * @return HTTPレスポンス
      */
     @InjectForm(form = ProjectUpdateInitialForm.class)
-    public HttpResponse indexFromDetailInitialForm(HttpRequest request, ExecutionContext context) {
+    public HttpResponse index(HttpRequest request, ExecutionContext context) {
         ProjectUpdateInitialForm form = context.getRequestScopedVar("form");
         ProjectService service = new ProjectService();
         Project project = service.findProjectById(Integer.parseInt(form.getProjectId()));
-
-        ProjectUpdateForm projectUpdateForm = BeanUtil.createAndCopy(ProjectUpdateForm.class, project);
-
-        String projectStartDate = DateUtil.formatDate(projectUpdateForm.getProjectStartDate(), "yyyy/MM/dd");
-        String projectEndDate = DateUtil.formatDate(projectUpdateForm.getProjectEndDate(), "yyyy/MM/dd");
-        projectUpdateForm.setProjectStartDate(projectStartDate);
-        projectUpdateForm.setProjectEndDate(projectEndDate);
-
-        // 設定した事業部/部門のIDを登録確認画面から取得してリクエストスコープに設定する
-        Organization organization = service.findOrganizationById(project.getOrganizationId());
-        Organization division = service.findOrganizationById(organization.getUpperOrganization());
-        projectUpdateForm.setDivisionId(String.valueOf(division.getOrganizationId()));
-
+        ProjectUpdateForm projectUpdateForm = buildFormFromEntity(project, service);
         context.setRequestScopedVar("form", projectUpdateForm);
-
         SessionUtil.put(context, PROJECT_KEY, project);
-
         return new HttpResponse("forward:///app/project/moveUpdate");
-
     }
 
     /**
@@ -82,16 +50,13 @@ public class ProjectUpdateAction {
      * @return HTTPレスポンス
      */
     @InjectForm(form = ProjectUpdateForm.class, prefix = "form")
-    @OnError(type = ApplicationException.class, path = "forward:///app/project/errorUpdate")
+    @OnError(type = ApplicationException.class, path = "forward:///app/project/moveUpdate")
     public HttpResponse confirmUpdate(HttpRequest request, ExecutionContext context) {
         ProjectUpdateForm form = context.getRequestScopedVar("form");
-
         Project project = SessionUtil.get(context, PROJECT_KEY);
         BeanUtil.copy(form, project);
-
         // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
         setOrganizationAndDivisionToRequestScope(context);
-
         // 更新情報確認画面を表示
         return new HttpResponse("/WEB-INF/view/project/confirmationOfUpdate.jsp");
     }
@@ -130,8 +95,20 @@ public class ProjectUpdateAction {
      * @return HTTPレスポンス
      */
     public HttpResponse backToEnterUpdate(HttpRequest request, ExecutionContext context) {
-
         Project project = SessionUtil.get(context, PROJECT_KEY);
+        ProjectUpdateForm projectUpdateForm = buildFormFromEntity(project, new ProjectService());
+        context.setRequestScopedVar("form", projectUpdateForm);
+        return new HttpResponse("forward:///app/project/moveUpdate");
+    }
+
+    /**
+     * プロジェクトエンティティをもとにプロジェクト更新フォームを作成する。
+     *
+     * @param project プロジェクトエンティティ
+     * @param service プロジェクトサービス
+     * @return プロジェクト更新フォーム
+     */
+    private ProjectUpdateForm buildFormFromEntity(Project project, ProjectService service) {
         ProjectUpdateForm projectUpdateForm = BeanUtil.createAndCopy(ProjectUpdateForm.class, project);
 
         String projectStartDate = DateUtil.formatDate(projectUpdateForm.getProjectStartDate(), "yyyy/MM/dd");
@@ -140,15 +117,27 @@ public class ProjectUpdateAction {
         projectUpdateForm.setProjectEndDate(projectEndDate);
 
         // 設定した事業部/部門のIDを更新確認画面から取得してリクエストスコープに設定する
-        ProjectService service = new ProjectService();
         Organization organization = service.findOrganizationById(project.getOrganizationId());
         Organization division = service.findOrganizationById(organization.getUpperOrganization());
         projectUpdateForm.setDivisionId(String.valueOf(division.getOrganizationId()));
 
-        context.setRequestScopedVar("form", projectUpdateForm);
+        return projectUpdateForm;
+    }
 
-        return new HttpResponse("forward:///app/project/moveUpdate");
-
+    /**
+     * プルダウンを設定してプロジェク更新画面を表示。
+     * 詳細、確認画面遷移からの際に必要なため設定。
+     *
+     * @param request HTTPリクエスト
+     * @param context 実行コンテキスト
+     * @return HTTPレスポンス
+     */
+    public HttpResponse indexSetPullDown(HttpRequest request, ExecutionContext context) {
+        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
+        setOrganizationAndDivisionToRequestScope(context);
+        Project project = SessionUtil.get(context, PROJECT_KEY);
+        context.setRequestScopedVar("projectId", project.getProjectId());
+        return new HttpResponse("/WEB-INF/view/project/update.jsp");
     }
 
     /**
