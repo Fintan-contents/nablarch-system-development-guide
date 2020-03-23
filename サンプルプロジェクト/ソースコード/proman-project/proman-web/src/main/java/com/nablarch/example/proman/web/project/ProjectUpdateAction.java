@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * プロジェクト更新
  *
- * @author TIS
+ * @author Goro Kumano
  */
 public class ProjectUpdateAction {
 

@@ -9,7 +9,7 @@ import nablarch.core.validation.ee.SystemChar;
 /**
  * ドメイン定義を表す列挙型。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 @SuppressWarnings("all")
 public class ProManDomainType {

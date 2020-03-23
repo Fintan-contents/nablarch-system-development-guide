@@ -5,7 +5,7 @@ package com.nablarch.example.proman.web.common.authentication.exception;
  * ユーザの認証時にユーザIDがロックされている場合に発生する例外。
  * <p/>
  * 対象ユーザのユーザIDとユーザIDをロックする認証失敗回数を保持する。
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class UserIdLockedException extends AuthenticationException {
 

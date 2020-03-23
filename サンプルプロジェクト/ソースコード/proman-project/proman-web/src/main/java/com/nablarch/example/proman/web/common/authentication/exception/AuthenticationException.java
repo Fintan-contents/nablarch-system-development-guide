@@ -6,7 +6,7 @@ package com.nablarch.example.proman.web.common.authentication.exception;
  * <br>
  * 認証方式に応じて、本クラスを継承した例外クラスを作成する。<br>
  * 本クラス及びサブクラスでは、ユーザへ提示するメッセージの作成に必要な情報を保持し、メッセージの作成は行わない。
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class AuthenticationException extends RuntimeException {
 

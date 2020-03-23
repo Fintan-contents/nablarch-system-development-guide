@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  *
  * 共通で処理する例外を対象に共通エラー応答電文を返す。
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 

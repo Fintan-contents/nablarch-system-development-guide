@@ -3,7 +3,7 @@ package com.nablarch.example.proman.common.code;
 /**
  * プロジェクト分類
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class C0300001 {
 

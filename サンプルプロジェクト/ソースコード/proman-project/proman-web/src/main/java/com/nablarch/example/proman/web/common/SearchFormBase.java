@@ -6,7 +6,7 @@ import nablarch.core.validation.ee.Domain;
 /**
  * 基本フォームクラス。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public abstract class SearchFormBase {
 

@@ -7,7 +7,7 @@ import java.util.Date;
  * ユーザの認証時にパスワードの有効期限が切れている場合に発生する例外。
  * <p/>
  * 対象ユーザのユーザID、パスワード有効期限とチェックに使用した業務日付を保持する。
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PasswordExpiredException extends AuthenticationException {
 

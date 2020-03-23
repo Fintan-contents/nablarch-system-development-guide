@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * ログイン入力フォーム。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginForm implements Serializable {
 

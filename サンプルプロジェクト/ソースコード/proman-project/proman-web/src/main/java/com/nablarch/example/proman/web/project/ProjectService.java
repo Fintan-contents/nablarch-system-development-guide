@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * プロジェクトサービス
  *
- * @author TIS
+ * @author Goro Kumano
  */
 public class ProjectService {
 
