@@ -28,7 +28,7 @@ public class Scenario {
     static final String INSERT_DB_FILE_NAME = "INSERT.xlsm";
     static final String EXPECTED_DB_FILE_NAME = "EXPECTED.xlsx";
 
-    private static final Pattern HTML_FILE_NAME_PATTERN = Pattern.compile("^.*\\.html$");
+    private static final Pattern RESPONSE_FILE_NAME_PATTERN = Pattern.compile("^.*\\.(html|js|css)$");
 
     private final File rootDir;
     private final File dbDumpDir;
@@ -76,27 +76,27 @@ public class Scenario {
     }
 
     /**
-     * レスポンスのHTMLファイルをリストで取得する。
-     * @return レスポンスのHTMLリスト
+     * レスポンスファイルをリストで取得する。
+     * @return レスポンスファイルのリスト
      */
-    public List<ResponseHtml> getResponseHtmlList() {
-        File[] htmlFiles = responseDir.listFiles(new FilenameFilter() {
+    public List<ResponseFile> getResponseFileList() {
+        File[] responseFiles = responseDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return HTML_FILE_NAME_PATTERN.matcher(name).matches();
+                return RESPONSE_FILE_NAME_PATTERN.matcher(name).matches();
             }
         });
 
-        if (htmlFiles == null) {
+        if (responseFiles == null) {
             return Collections.emptyList();
         }
 
-        List<ResponseHtml> result = new ArrayList<>();
+        List<ResponseFile> result = new ArrayList<>();
 
-        for (File htmlInResponseDir : htmlFiles) {
-            String fileName = htmlInResponseDir.getName();
-            ResponseHtml responseHtml = new ResponseHtml(fileName);
-            result.add(responseHtml);
+        for (File responseFile : responseFiles) {
+            String fileName = responseFile.getName();
+            ResponseFile response = new ResponseFile(fileName);
+            result.add(response);
         }
 
         return result;
@@ -121,15 +121,15 @@ public class Scenario {
     }
 
     /**
-     * レスポンスのHTMLにアクセスするためのクラス。
+     * レスポンスファイルにアクセスするためのクラス。
      * @author Tanaka Tomoyuki
      */
-    public class ResponseHtml {
+    public class ResponseFile {
         private final String fileName;
         private final File actual;
         private final File expected;
 
-        private ResponseHtml(String fileName) {
+        private ResponseFile(String fileName) {
             this.fileName = fileName;
             this.actual = new File(scenarioDir, fileName);
             this.expected = new File(responseDir, fileName);
@@ -161,7 +161,7 @@ public class Scenario {
 
         @Override
         public String toString() {
-            return "ResponseHtml{" +
+            return "ResponseFile{" +
                     "fileName='" + fileName + '\'' +
                     ", actual=" + actual +
                     ", expected=" + expected +

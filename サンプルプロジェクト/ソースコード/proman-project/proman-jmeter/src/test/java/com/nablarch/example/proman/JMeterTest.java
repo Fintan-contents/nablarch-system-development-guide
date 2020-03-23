@@ -65,12 +65,12 @@ public class JMeterTest {
             runner.runJMeter(scenario.getJmxFile());
 
             LOGGER.debug("Assert Response");
-            List<Scenario.ResponseHtml> responseHtmlList = scenario.getResponseHtmlList();
-            for (Scenario.ResponseHtml responseHtml : responseHtmlList) {
+            List<Scenario.ResponseFile> responseFileList = scenario.getResponseFileList();
+            for (Scenario.ResponseFile responseFile : responseFileList) {
                 ResponseTestSupport.assertResponse(
-                        responseHtml.getActual().getAbsolutePath(),
-                        responseHtml.getExpected().toString(),
-                        responseHtml.getActual().toString());
+                        responseFile.getActual().getAbsolutePath(),
+                        responseFile.getExpected().toString(),
+                        responseFile.getActual().toString());
             }
 
             LOGGER.debug("Assert Database");

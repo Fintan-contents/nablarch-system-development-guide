@@ -66,19 +66,19 @@ public class ScenarioTest {
     }
 
     @Test
-    public void testResponseHtmlGetter() throws Exception {
+    public void testResponseFileGetter() throws Exception {
         File responseDir = new File(tempFolder.getRoot(), Scenario.RESPONSE_DIR_NAME);
 
         File firstInResponse = touchFile(responseDir, "first.html");
-        File secondInResponse = touchFile(responseDir, "second.html");
-        File thirdInResponse = touchFile(responseDir, "third.html");
+        File secondInResponse = touchFile(responseDir, "second.css");
+        File thirdInResponse = touchFile(responseDir, "third.js");
         touchFile(responseDir, "no-html.txt");
 
         File firstInScenarioDir = new File(scenarioDir, "first.html");
-        File secondInScenarioDir = new File(scenarioDir, "second.html");
-        File thirdInScenarioDir = new File(scenarioDir, "third.html");
+        File secondInScenarioDir = new File(scenarioDir, "second.css");
+        File thirdInScenarioDir = new File(scenarioDir, "third.js");
 
-        List<Scenario.ResponseHtml> result = sut.getResponseHtmlList();
+        List<Scenario.ResponseFile> result = sut.getResponseFileList();
 
         assertThat(result.size(), is(3));
         assertThat(result, hasItem(responseOf(firstInScenarioDir, firstInResponse)));
@@ -97,10 +97,10 @@ public class ScenarioTest {
         return new ResponseOf(actualResponse, expectedResponse);
     }
 
-    private static class ResponseOf extends BaseMatcher<Scenario.ResponseHtml> {
+    private static class ResponseOf extends BaseMatcher<Scenario.ResponseFile> {
         private final File actualResponse;
         private final File expectedResponse;
-        private Scenario.ResponseHtml actual;
+        private Scenario.ResponseFile actual;
 
         private ResponseOf(File actualResponse, File expectedResponse) {
             this.actualResponse = actualResponse;
@@ -109,11 +109,11 @@ public class ScenarioTest {
 
         @Override
         public boolean matches(Object item) {
-            if (!(item instanceof Scenario.ResponseHtml)) {
+            if (!(item instanceof Scenario.ResponseFile)) {
                 return false;
             }
 
-            actual = (Scenario.ResponseHtml) item;
+            actual = (Scenario.ResponseFile) item;
             return Objects.equals(actual.getActual(), actualResponse)
                     && Objects.equals(actual.getExpected(), expectedResponse);
         }

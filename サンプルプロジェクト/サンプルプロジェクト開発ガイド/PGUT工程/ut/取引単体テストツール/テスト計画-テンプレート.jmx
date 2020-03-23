@@ -82,21 +82,42 @@ if(matchNr != null){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="script">import org.apache.jmeter.services.FileServer;
+import java.util.regex.Pattern;
+
+// Content-Typeで拡張子を決定
+def contentType = prev.getContentType();
+def extension;
+if (contentType.contains(&quot;text/css&quot;)) {
+	extension = &quot;.css&quot;;
+} else if (contentType.contains(&quot;application/javascript&quot;)) {
+	extension = &quot;.js&quot;;
+} else {
+	// その他はとりあえず HTML
+	extension = &quot;.html&quot;;
+}
+// Content-Typeから文字コードを抽出（なければデフォルトUTF-8）
+def charsetPattern = Pattern.compile(/charset=([^ ]+)/);
+def matcher = charsetPattern.matcher(contentType);
+def charset = &quot;UTF-8&quot;;
+if (matcher.find()) {
+	charset = matcher.group(1)
+}
 
 // jmxファイルをbaseDirとする。
 def baseDir = FileServer.getFileServer().getBaseDir();
 def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jmx/,&quot;-&quot;);
 // ファイル名として使えない文字は全て「_」に置換する。
-def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + &quot;.html&quot;;
+def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + extension;
 def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
 // エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
+//def responseData = new String(prev.getResponseData(), &quot;UTF-8&quot;);
 def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
 // jsessionid を削除
 def responseWithoutJsessionId = responseWithoutNablarchToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, &quot;&quot;);
 
 // 既にファイルがあればエラーとする。
 if(!responseFile.exists()) {
-	responseFile.write(responseWithoutJsessionId, &apos;UTF-8&apos; );
+	responseFile.write(responseWithoutJsessionId, charset);
 } else {
 	throw new IllegalStateException(&quot;次のファイルが既に存在しています。削除または移動してから再実行してください。&quot; + responseFile.getAbsolutePath());
 }
