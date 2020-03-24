@@ -176,7 +176,7 @@ GSPプラグインで自動生成するため、クラス単体テスト対象�
 #### 1-2. レスポンスを記録する
 ![レスポンスを記録する](regression-test-overview-002.jpg)
 
-また、記録したjmxファイルを実行し、レスポンスファイル（HTML,CSS,JavaScript）を記録します。
+記録したjmxファイルを実行し、レスポンスファイル（HTML,CSS,JavaScript）を記録します。
 
 ### 2. 二回目以降の自動テスト
 ![自動テスト](regression-test-overview-003.jpg)
