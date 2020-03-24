@@ -27,10 +27,12 @@ public class ScenarioTest {
     private File scenarioDir;
     private File jmxFile;
     private Scenario sut;
+    private File dbDumpDir;
 
     @Before
     public void setup() throws Exception {
         scenarioDir = new File(tempFolder.getRoot(), Scenario.SCENARIO_DIR_NAME);
+        dbDumpDir = new File(tempFolder.getRoot(), Scenario.DB_DUMP_DIR_NAME);
         jmxFile = new File(scenarioDir, "sample.jmx");
         sut = new Scenario(jmxFile);
     }
@@ -63,6 +65,18 @@ public class ScenarioTest {
 
         File expected = new File(tempFolder.getRoot(), Scenario.DB_DUMP_DIR_NAME + "/" + Scenario.EXPECTED_DB_FILE_NAME);
         assertThat(result, is(expected));
+    }
+
+    @Test
+    public void testExistsExpectedDatabaseFile_true() throws Exception {
+        touchFile(dbDumpDir, Scenario.EXPECTED_DB_FILE_NAME);
+
+        assertThat(sut.existsExpectedDatabaseFile(), is(true));
+    }
+
+    @Test
+    public void testExistsExpectedDatabaseFile_false() throws Exception {
+        assertThat(sut.existsExpectedDatabaseFile(), is(false));
     }
 
     @Test

@@ -76,6 +76,15 @@ public class Scenario {
     }
 
     /**
+     * データベースの期待値を表すファイルが存在するか確認する。
+     * @return ファイルが存在する場合は {@code true}
+     */
+    public boolean existsExpectedDatabaseFile() {
+        return expectedDatabaseFile.exists()
+                && expectedDatabaseFile.isFile();
+    }
+
+    /**
      * レスポンスファイルをリストで取得する。
      * @return レスポンスファイルのリスト
      */

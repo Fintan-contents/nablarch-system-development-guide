@@ -74,12 +74,16 @@ public class JMeterTest {
                         responseFile.getActual().toString());
             }
 
-            LOGGER.debug("Assert Database");
-            try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
-                DatabaseConnection conn = DBUnitConnectionBuilder.build(
-                        jdbcConn, CONFIG.getDatabaseSchema(), CONFIG.getDatabaseDriver());
-                DatabaseComparator comparator = new DatabaseComparator(conn);
-                comparator.compare(scenario.getExpectedDatabaseFile());
+            if (scenario.existsExpectedDatabaseFile()) {
+                LOGGER.debug("Assert Database");
+                try (Connection jdbcConn = DATA_SOURCE.getConnection()) {
+                    DatabaseConnection conn = DBUnitConnectionBuilder.build(
+                            jdbcConn, CONFIG.getDatabaseSchema(), CONFIG.getDatabaseDriver());
+                    DatabaseComparator comparator = new DatabaseComparator(conn);
+                    comparator.compare(scenario.getExpectedDatabaseFile());
+                }
+            } else {
+                LOGGER.info("Database assertion was skipped because EXPECTED.xlsx does not exists.");
             }
         } catch (Exception e) {
             LOGGER.error("Test Failed", e);
