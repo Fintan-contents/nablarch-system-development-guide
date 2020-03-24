@@ -23,7 +23,7 @@ Nablarchの機能に、二重サブミットトークンをHIDDEN暗号化する
 
 したがって、本ツールを使用する場合は二重サブミットトークンのHIDDEN暗号化機能は使用しないようにしてください。
 
-HIDDEN暗号化機能を無効化する方法は、[クライアントに保持するデータを暗号化する(hidden暗号化) — ∇Nablarch ドキュメント](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/tag.html#tag-hidden-encryption)を参照してください。
+HIDDEN暗号化機能を無効化する方法は、解説書の[クライアントに保持するデータを暗号化する(hidden暗号化)](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/tag.html#tag-hidden-encryption)を参照してください。
 
 ### 実行都度変化する要素について
 実行するたびに結果が変化するような要素が存在すると、アサーションが失敗してしまいます。  
