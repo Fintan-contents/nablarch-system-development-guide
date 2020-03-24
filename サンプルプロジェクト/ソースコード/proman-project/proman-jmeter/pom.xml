@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u16-SNAPSHOT</version>
+    <version>5u16</version>
     <relativePath/>
   </parent>
 
@@ -15,6 +15,19 @@
   <artifactId>proman-jmeter</artifactId>
   <name>proman-jmeter</name>
   <version>0.0.1</version>
+
+  <profiles>
+    <profile>
+      <id>ci</id>
+      <properties>
+        <env.dir>ci</env.dir>
+      </properties>
+    </profile>
+  </profiles>
+
+  <properties>
+    <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -106,6 +119,15 @@
   </dependencies>
   
   <build>
+    <testResources>
+      <testResource>
+        <directory>${env.resources}</directory>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
+
     <plugins>
       <plugin>
         <groupId>com.lazerycode.jmeter</groupId>

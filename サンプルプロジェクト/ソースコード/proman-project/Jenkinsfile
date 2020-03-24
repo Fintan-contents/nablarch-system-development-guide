@@ -133,5 +133,45 @@ pipeline {
         failure { rocketSend message: 'Deploy to demo', emoji: ':sob:' }
       }
     }
+
+    stage('Transaction Test') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
+        echo 'Waiting for demo server starting...'
+        script {
+          try {
+            timeout(time: 10, unit: "MINUTES") {
+              waitUntil(initialRecurrencePeriod: 15000) {
+                def status = sh(
+                  script: "wget -q http://${DEMO_HOST} -O /dev/null",
+                  returnStatus: true
+                )
+                return (status == 0)
+              }
+            }
+          } catch (exception) {
+            error "Timeout. Demo server does not start. ${exception}: ${exception.message}"
+          }
+        }
+
+        echo 'Run Test'
+        dir("${PROJECT_CURRENT_DIR}/proman-jmeter") {
+          catchError {
+            sh "mvn -s ../ci/settings.xml -P ci clean test"
+          }
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'target/test-classes/**'
+          junit "target/surefire-reports/TEST-com.nablarch.example.proman.JMeterTest.xml"
+        }
+      }
+      post {
+        success { rocketSend message: 'Transaction Test', emoji: ':blush:' }
+        failure { rocketSend message: 'Transaction Test', emoji: ':sob:' }
+      }
+    }
   }
 }
