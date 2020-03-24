@@ -162,6 +162,15 @@ JMeterで接続するサーバーのポート番号を設定します。
 server.port=80
 ```
 
+#### response.encoding
+レスポンスファイルの内容を読み込むときにしようする文字コードを設定します。
+
+**設定例**
+
+```properties
+response.encoding=UTF-8
+```
+
 #### database.driver
 データベース接続で使用するJDBCドライバの完全修飾名を設定します。
 
