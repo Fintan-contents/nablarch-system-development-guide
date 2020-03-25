@@ -17,7 +17,7 @@ import javax.persistence.OptimisticLockException;
  * <p/>
  * [参考情報]HTTPステータスコードの使い分けについて、下記を参考とすること。<br>
  * @see <a href="http://qiita.com/kawasima/items/e48180041ace99842779">HTTPステータスコードの使い分け</a>
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PromanErrorForwardHandler implements Handler<Object, Object> {
 

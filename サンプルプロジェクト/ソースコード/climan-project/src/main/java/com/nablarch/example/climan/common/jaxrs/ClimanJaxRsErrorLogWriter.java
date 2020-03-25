@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * 共通エラー応答電文を返す例外はログを出さないようにする。
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClimanJaxRsErrorLogWriter extends JaxRsErrorLogWriter {
 

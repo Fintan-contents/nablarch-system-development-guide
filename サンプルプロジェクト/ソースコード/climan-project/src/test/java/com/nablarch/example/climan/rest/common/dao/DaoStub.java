@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * {@link DaoContext}のスタブ。
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class DaoStub implements DaoContext {
     @Override

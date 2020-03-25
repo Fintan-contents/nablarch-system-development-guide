@@ -2,7 +2,7 @@
 
 実際のプロジェクトでArchUnitを運用していく際のガイドです。
 
-ここでは、アーキテクチャ「違反」という言葉を「ArchUnitを利用してテストしているアーキテクチャルールに違反している」という意味で使用します。
+ここでは、「アーキテクチャ違反」という言葉を「ArchUnitを利用してテストしているアーキテクチャルールに違反している」という意味で使用します。
 
 ## 基本的な考え方
 
@@ -15,7 +15,7 @@
 
 開発者はアーキテクチャ違反を見つけたら対応をしなければなりませんが、 その際違反を回避するための修正をしたことによって、かえってソースコード品質を落とすようなことがあってはいけません。
 
-このような場合は、有識者やプロジェクトのアーキテクトに相談して 適切な対処を仰ぐようにしましょう。
+対応方法に迷う場合は、有識者やプロジェクトのアーキテクトに相談して 適切な対処を仰ぐようにしましょう。
 
 ### 原則3: 正当な理由があってアーキテクチャ違反となる場合、チェック対象から外します
 
@@ -50,43 +50,25 @@ ArchUnitではクラスパス・モジュールパスに含まれるクラスか
 
 アーキテクチャ違反となっている箇所をテスト対象から外すには、大きく分けて以下の2つの方法があります。
 
-- 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する。
 - テストコードに除外対象を記載する。
+- 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する。
 
-後者はテスト対象によって記載が異なるため、注意してください。
-
-### 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する
-
-アーキテクチャテストを行うモジュールの `src/test/resources` 直下に `archunit_ignore_patterns.txt` を作成し、正規表現にて除外する対象を記載します。
-
-```
-# 1234
-.*some\.pkg\.LegacyService.*
-```
-
-`#` をつけることでコメントを記載できるため、次のようにしておくと、後で経緯を追跡できます。
-
-- 課題管理システムの課題管理番号をコメントに記載する
-- バージョン管理システムのコミットコメントに記載する
-
-#### 注意事項
-
-この方法で除外したものは、全てのアーキテクチャテストの対象外になります。
-
-既存のコードがある状態でArchUnitの導入を行った場合など、既存のコードをアーキテクチャテストの対象にしたくないものについて除外設定を行うようにしてください。
+前者はテスト対象によって記載が異なるため、注意してください。
 
 ### 除外対象クラスの設定（テストコードに除外対象を記載）
 
-テスト対象がクラス（レイヤーも含む）の場合、以下のように `and()`（または元々 `that()` がなければ `that()`）の引数に `DescribedPredicate.not(JavaClass.Predicates.equivalentTo(除外対象クラス))` を使用して除外設定を行う。
+テスト対象がクラス（レイヤーも含む）の場合、以下のように `and()`（または元々 `that()` がなければ `that()`）の引数に `DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(除外対象クラス1,除外対象クラス2・・・))` を使用して除外設定を行う。
 
 ``` java
 @ArchTest
 public static final ArchRule ActionクラスはBatchActionを継承していること =
         ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
-        .and(DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(
-                PromanExampleAction.class       // #12345
-                , PromanServiceAction.class)))  // #12346
-        .should().beAssignableTo(BatchAction.class);
+        .and(DescribedPredicate.not(
+                JavaClass.Predicates.belongToAnyOf(
+                  PromanExampleAction.class, // #12345
+                  PromanServiceAction.class  // #12346
+                )
+        )).should().beAssignableTo(BatchAction.class);
 ```
 
 テスト対象がクラス内に含まれるもの（フィールドやメソッドなど）の場合、 `areNotDeclaredIn()` を使用して除外設定をおこなう。
@@ -123,3 +105,23 @@ public  static  final ArchRule 基盤以外のパッケージでNoDataException�
 
 カスタムルールを実装することで、より細かな除外設定を行うことができます。
 内容については [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) を参照してください。
+
+### 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する
+
+アーキテクチャテストを行うモジュールの `src/test/resources` 直下に `archunit_ignore_patterns.txt` を作成し、正規表現にて除外する対象を記載します。
+以下のように書くことでクラス`some.pkg.LegacyService`の違反を無視することができます。
+
+```
+# 1234
+.*some\.pkg\.LegacyService.*
+```
+
+`#` をつけることでコメントを記載できるため、次のようにしておくと、後で経緯を追跡できます。
+
+- 課題管理システムの課題管理番号をコメントに記載する
+- バージョン管理システムのコミットコメントに記載する
+
+#### 注意事項
+
+この方法で除外したものは、全てのアーキテクチャテストの対象外になります。
+除外するテストが最小限となるよう、できる限り前述の「テストコードに除外対象を記載する」方法で除外するようにしてください。

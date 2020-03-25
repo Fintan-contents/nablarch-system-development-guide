@@ -6,7 +6,7 @@ package com.nablarch.example.proman.web.common.authentication.encrypt;
  * <br>
  * 暗号化アルゴリズム毎に本インタフェースの実装クラスを作成する。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public interface PasswordEncryptor {
 

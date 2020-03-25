@@ -24,7 +24,7 @@ import nablarch.fw.web.interceptor.OnError;
  * ログイン／ログアウトの機能を有する。
  * </pre>
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginAction {
 

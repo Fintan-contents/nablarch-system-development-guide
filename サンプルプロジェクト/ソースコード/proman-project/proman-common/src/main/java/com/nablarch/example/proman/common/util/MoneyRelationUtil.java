@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * 金額の大小関係をバリデーションする
  *
- * @author Nabu Rakutaro
+ * @author Goro Kumano
  */
 public class MoneyRelationUtil {
     /** 隠蔽コンストラクタ */

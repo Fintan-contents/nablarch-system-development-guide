@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * プロジェクト登録フォーム。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class ProjectCreateForm implements Serializable {
 

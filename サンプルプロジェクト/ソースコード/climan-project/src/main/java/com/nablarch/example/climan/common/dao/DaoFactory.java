@@ -8,7 +8,7 @@ import nablarch.core.repository.SystemRepository;
 /**
  * {@link DaoContext}取得用クラス
  *
- * @author TIS
+ * @author Masaya Seko
  *
  */
 public class DaoFactory {

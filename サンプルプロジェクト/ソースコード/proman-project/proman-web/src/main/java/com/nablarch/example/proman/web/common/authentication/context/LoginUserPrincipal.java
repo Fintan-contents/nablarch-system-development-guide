@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * ログインユーザー情報
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginUserPrincipal implements Serializable {
 

@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * プロジェクト更新フォーム。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class ProjectUpdateForm implements Serializable {
 

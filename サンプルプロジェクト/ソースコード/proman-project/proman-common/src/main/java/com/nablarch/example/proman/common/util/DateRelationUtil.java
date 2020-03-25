@@ -6,7 +6,7 @@ import nablarch.core.util.StringUtil;
 /**
  * 開始日と終了日の関係が正しいかをバリデーションするクラス。
  *
- * @author Nabu Rakutaro
+ * @author Goro Kumano
  */
 public class DateRelationUtil {
     /** 隠蔽コンストラクタ */

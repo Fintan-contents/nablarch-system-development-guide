@@ -26,7 +26,7 @@ import java.sql.Date;
 /**
  * 期間内プロジェクト一覧出力の都度起動バッチアクションクラス。
  *
- * @author TIS
+ * @author Yutaka Kanayama
  */
 public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 

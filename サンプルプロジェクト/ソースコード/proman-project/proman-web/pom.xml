@@ -63,6 +63,11 @@
           <groupId>com.zaxxer</groupId>
           <artifactId>HikariCP</artifactId>
         </dependency>
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+        </dependency>
       </dependencies>
     </profile>
 
@@ -213,6 +218,21 @@
         <configuration>
           <!-- MANIFEST.MFでClass-Pathを指定すると、依存jar内で定義されているtaglibのuriを正しく解決してくれない。 -->
           <useManifestOnlyJar>false</useManifestOnlyJar>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.unit8.waitt</groupId>
+        <artifactId>waitt-maven-plugin</artifactId>
+        <version>1.2.3</version>
+        <configuration>
+          <port>9080</port>
+          <servers>
+            <server>
+              <groupId>net.unit8.waitt.server</groupId>
+              <artifactId>waitt-tomcat8</artifactId>
+              <version>1.2.3</version>
+            </server>
+          </servers>
         </configuration>
       </plugin>
       <plugin>

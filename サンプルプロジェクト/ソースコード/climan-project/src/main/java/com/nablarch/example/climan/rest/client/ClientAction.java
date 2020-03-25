@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 顧客管理を行うアクションクラス。
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClientAction {
 

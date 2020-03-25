@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 期間内プロジェクト一覧出力のbeanクラス。
  *
- * @author TIS
+ * @author Yutaka Kanayama
  */
 @Csv(type = Csv.CsvType.CUSTOM,
         properties = { "projectId", "projectName", "projectType", "projectClass", "projectStartDate",
