@@ -111,7 +111,7 @@ public class MyService {
     }
     /** テスト用コンストラクタ */
     MyService(DaoContext universalDao) {
-        this.universalDa = universalDao;
+        this.universalDao = universalDao;
     }
 }
 ```
