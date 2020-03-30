@@ -10,13 +10,11 @@ ArchUnitでチェックできる内容については[ArchUnit User Guide -> Wha
 
 ### 基本となる形式
 
-非常によく使用する形式として
+以下の形式が基本となります。
 
 ```
 classes that ${PREDICATE} should ${CONDITION}
 ```
-
-のように記載します。
 
 これは `${PREDICATE}` であるクラスが `${CONDITION}` となることをチェックします。
 

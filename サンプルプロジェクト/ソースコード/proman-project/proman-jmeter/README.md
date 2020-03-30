@@ -294,7 +294,7 @@ DBUnitの検証から特定のカラムを除外するには、そのカラム�
 #### レスポンスファイル作成時に特定の項目を検証から除外する
 
 レスポンスファイルの保存は[JSR223 PostProcessor](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor)というJMeterのコンポーネントを利用しています。
-[JSR223 PostProcessor](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor)の機能を利用して、特定の項目を固定値に上書きしたり削除することで検証対象外にできます。
+[JSR223 PostProcessor](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor)の機能を利用して、特定の項目を固定値に上書きするか削除することで検証対象外にできます。
 
 [テスト計画-テンプレート.jmx](../../../サンプルプロジェクト開発ガイド/PGUT工程/ut/取引単体テストツール/テスト計画-テンプレート.jmx)では二重サブミットトークンとJSESSIONIDを書き換えています。
 書き換えを行っているのは以下の部分です。
