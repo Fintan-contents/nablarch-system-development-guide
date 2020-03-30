@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * 指定された整数の範囲の金額であることを検証するバリデータ。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, String> {
 

@@ -3,7 +3,7 @@ package com.nablarch.example.climan.common.exception;
 /**
  * 検索結果上限エラーを表す例外。
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class SearchResultUpperLimitException extends RuntimeException {
 

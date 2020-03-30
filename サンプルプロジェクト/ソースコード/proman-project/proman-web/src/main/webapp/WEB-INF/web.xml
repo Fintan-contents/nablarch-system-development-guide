@@ -74,6 +74,15 @@
     <location>/WEB-INF/view/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp</location>
   </error-page>
 
+  <mime-mapping>
+      <extension>css</extension>
+      <mime-type>text/css; charset=UTF-8</mime-type>
+  </mime-mapping>
+  <mime-mapping>
+      <extension>js</extension>
+      <mime-type>application/javascript; charset=UTF-8</mime-type>
+  </mime-mapping>
+  
   <!-- tldを指定する場合はコメントアウト
   <jsp-config>
       <taglib>

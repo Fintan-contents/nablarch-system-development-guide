@@ -4,7 +4,7 @@ package com.nablarch.example.proman.web.common.authentication.exception;
  * アカウント情報の不一致により認証に失敗した場合に発生する例外。
  * <p/>
  * 対象ユーザのユーザIDを保持する。
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class AuthenticationFailedException extends AuthenticationException {
 

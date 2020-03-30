@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * ログイン状態チェックハンドラ 。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginUserPrincipalCheckHandler implements Handler<HttpRequest, Object> {
 

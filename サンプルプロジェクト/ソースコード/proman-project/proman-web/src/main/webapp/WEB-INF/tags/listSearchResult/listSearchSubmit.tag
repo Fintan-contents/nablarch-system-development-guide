@@ -8,14 +8,11 @@
 <%--------------------------------------------------------------
 属性
 --------------------------------------------------------------%>
-<%@ attribute name="css" required="false" rtexprvalue="true" %>
 <%@ attribute name="label" required="true" rtexprvalue="true" %>
 <%@ attribute name="enable" required="true" rtexprvalue="true" type="java.lang.Boolean" %>
 <%@ attribute name="uri" required="true" rtexprvalue="true" %>
-<%@ attribute name="name" required="true" rtexprvalue="true" %>
 <%@ attribute name="pageNumber" required="true" rtexprvalue="true" %>
-<%@ attribute name="sortId" required="false" rtexprvalue="true" %>
-<%@ attribute name="listSearchInfoName" required="true" rtexprvalue="true" %>
+<%@ attribute name="submitFormName" required="true" rtexprvalue="true" %>
 
 <%--------------------------------------------------------------
 本体処理
@@ -23,19 +20,16 @@
 <c:if test="${enable}">
     <c:url value="${uri}" var="uri" context="/">
         <c:if test="${not empty pageNumber}">
-            <c:param name="${listSearchInfoName}.pageNumber" value="${pageNumber}" />
-        </c:if>
-        <c:if test="${not empty sortId}">
-            <c:param name="${listSearchInfoName}.sortId" value="${sortId}" />
+            <c:param name="${submitFormName}.pageNumber" value="${pageNumber}"/>
         </c:if>
     </c:url>
-    <n:a href="${uri}" name="${name}" cssClass="item ${css}"><n:write name="label" /></n:a>
+    <n:a href="${uri}" cssClass="item"><n:write name="label"/></n:a>
 </c:if>
 <c:if test="${not enable}">
     <c:if test="${label == pageNumber}">
-        <a class="active item" href="javascript:void(0)"><n:write name="label" /></a>
+        <a class="active item" href="javascript:void(0)"><n:write name="label"/></a>
     </c:if>
     <c:if test="${label != pageNumber}">
-        <a class="item" href="javascript:void(0)"><n:write name="label" /></a>
+        <a class="item" href="javascript:void(0)"><n:write name="label"/></a>
     </c:if>
 </c:if>

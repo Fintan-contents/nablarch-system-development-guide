@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * 金額範囲のバリデーションを行うクラス。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 @Documented
 @Constraint(validatedBy = MoneyRangeValidator.class)

@@ -8,7 +8,7 @@ import nablarch.fw.web.HttpResponse;
 /**
  * Topメニューアクション。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class TopPageAction {
 

@@ -21,7 +21,29 @@
             <enabled>true</enabled>
           </snapshots>
         </repository>
+        <repository>
+          <id>oss-staging</id>
+          <url>https://oss.sonatype.org/content/groups/staging/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
       </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>oss-staging</id>
+          <url>https://oss.sonatype.org/content/groups/staging/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
     </profile>
   </profiles>
   <activeProfiles>

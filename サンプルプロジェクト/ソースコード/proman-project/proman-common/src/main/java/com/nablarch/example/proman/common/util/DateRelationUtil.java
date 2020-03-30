@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.common.validation;
+package com.nablarch.example.proman.common.util;
 
 import nablarch.core.util.DateUtil;
 import nablarch.core.util.StringUtil;
@@ -6,34 +6,25 @@ import nablarch.core.util.StringUtil;
 /**
  * 開始日と終了日の関係が正しいかをバリデーションするクラス。
  *
- * @author Nabu Rakutaro
+ * @author Goro Kumano
  */
-public class DateRangeValidator {
-    /** 開始日 */
-    private final String start;
-    /** 終了日 */
-    private final String end;
-
-    /**
-     * 開始日と終了日を設定するコンストラクタ。
-     *
-     * @param start 開始日
-     * @param end 終了日
-     */
-    public DateRangeValidator(final String start, final String end) {
-        this.start = start;
-        this.end = end;
+public class DateRelationUtil {
+    /** 隠蔽コンストラクタ */
+    private DateRelationUtil() {
     }
 
     /**
      * 開始日より終了日が後（同日を含む）ならtrueを返す。
      * また、どちらかが日付形式でない場合もtrueを返す。
      *
+     * @param start 開始日
+     * @param end   終了日
      * @return 開始日 <= 終了日 なら true
      */
-    public boolean isValid() {
-        if (isValidDate(start) && isValidDate(end)) {
-            return DateUtil.getParsedDate(start, "yyyy/MM/dd").compareTo(DateUtil.getParsedDate(end, "yyyy/MM/dd")) <= 0;
+    public static boolean isValid(String start, String end) {
+        if (isDate(start) && isDate(end)) {
+            return DateUtil.getParsedDate(start, "yyyy/MM/dd")
+                    .compareTo(DateUtil.getParsedDate(end, "yyyy/MM/dd")) <= 0;
         }
         // 日付以外はバリデーション対象外
         return true;
@@ -45,7 +36,7 @@ public class DateRangeValidator {
      * @param date 日付文字列
      * @return 日付形式ならtrue
      */
-    private boolean isValidDate(final String date) {
+    private static boolean isDate(final String date) {
         if (StringUtil.isNullOrEmpty(date)) {
             return false;
         }

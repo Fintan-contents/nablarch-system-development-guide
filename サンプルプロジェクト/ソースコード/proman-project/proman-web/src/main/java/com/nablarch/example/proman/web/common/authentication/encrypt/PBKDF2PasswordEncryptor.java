@@ -18,7 +18,7 @@ import java.security.spec.KeySpec;
  * {@link #iterationCount} に指定された回数のストレッチングを行って暗号化し、
  * 暗号化後のパスワードは、 {@link #keyLength} に設定された長さ（ビット数）となる。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
 

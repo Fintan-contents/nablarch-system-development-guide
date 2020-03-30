@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * {@link ExportProjectsInPeriodAction} のテストクラス。
  *
- * @author TIS
+ * @author Yutaka Kanayama
  */
 public class ExportProjectsInPeriodActionRequestTest extends BatchRequestTestBase {
 
