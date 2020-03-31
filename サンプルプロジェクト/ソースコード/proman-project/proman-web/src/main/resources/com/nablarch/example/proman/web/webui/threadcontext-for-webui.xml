@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- スレッドコンテキスト機能のオンライン用設定 -->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <component name="threadContextHandler"
+             class="nablarch.common.handler.threadcontext.ThreadContextHandler">
+    <property name="attributes">
+      <list>
+        <!-- ユーザID -->
+        <component class="com.nablarch.example.proman.web.common.handler.threadcontext.SessionStoreUserIdAttribute">
+          <property name="anonymousId" value="${nablarch.userIdAttribute.anonymousId}"/>
+        </component>
+
+        <!-- リクエストID -->
+        <component class="nablarch.common.handler.threadcontext.RequestIdAttribute"/>
+
+        <!-- 内部リクエストID -->
+        <component class="nablarch.common.handler.threadcontext.InternalRequestIdAttribute"/>
+
+        <!-- 言語 -->
+        <component class="nablarch.common.web.handler.threadcontext.LanguageAttributeInHttpCookie">
+          <property name="defaultLanguage" value="${nablarch.languageAttribute.defaultLanguage}"/>
+          <property name="supportedLanguages" value="${nablarch.languageAttribute.supportedLanguages}"/>
+          <property name="cookieMaxAge" value="${nablarch.languageAttribute.cookieMaxAge}"/>
+          <!-- 90 days -->
+        </component>
+
+        <!-- 実行時ID -->
+        <component name="executionIdAttribute" class="nablarch.common.handler.threadcontext.ExecutionIdAttribute"/>
+
+        <!-- タイムゾーン -->
+        <component class="nablarch.common.handler.threadcontext.TimeZoneAttribute">
+          <property name="defaultTimeZone" value="${nablarch.timeZoneAttribute.defaultTimeZone}"/>
+        </component>
+      </list>
+    </property>
+  </component>
+
+</component-configuration>

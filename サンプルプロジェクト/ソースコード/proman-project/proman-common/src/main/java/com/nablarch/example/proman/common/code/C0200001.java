@@ -2,10 +2,12 @@ package com.nablarch.example.proman.common.code;
 
 /**
  * プロジェクト種別
- * @author TIS
+ *
+ * @author Masaya Seko
  */
 public final class C0200001 {
 
+    /** 隠蔽コンストラクタ */
     private C0200001() {
     }
 

@@ -6,7 +6,7 @@ import com.nablarch.example.proman.web.common.authentication.exception.Authentic
  * ユーザの認証を行うインタフェース。
  * <p/>
  * 認証方式毎に本インタフェースの実装クラスを作成する。
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public interface PasswordAuthenticator {
 

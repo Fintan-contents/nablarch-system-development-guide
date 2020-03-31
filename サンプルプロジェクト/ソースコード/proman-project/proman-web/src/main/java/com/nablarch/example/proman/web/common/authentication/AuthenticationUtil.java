@@ -10,7 +10,7 @@ import nablarch.core.repository.SystemRepository;
 /**
  * 認証関連の処理のユーティリティクラス。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public final class AuthenticationUtil {
 

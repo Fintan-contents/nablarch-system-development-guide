@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nablarch.archetype</groupId>
+    <artifactId>nablarch-archetype-parent</artifactId>
+    <version>5u16</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.nablarch.example.proman</groupId>
+  <artifactId>proman-jmeter</artifactId>
+  <name>proman-jmeter</name>
+  <version>0.0.1</version>
+
+  <profiles>
+    <profile>
+      <id>ci</id>
+      <properties>
+        <env.dir>ci</env.dir>
+      </properties>
+    </profile>
+  </profiles>
+
+  <properties>
+    <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_java -->
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>ApacheJMeter_java</artifactId>
+      <version>5.2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_http -->
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>ApacheJMeter_http</artifactId>
+      <version>5.2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>ApacheJMeter_functions</artifactId>
+      <version>5.2.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- YoyoTool -->
+    <dependency>
+      <groupId>jp.co.tis.adc</groupId>
+      <artifactId>YoyoTool</artifactId>
+      <version>3.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/dump.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.13</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.5</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- 使用するDBに合わせて要修正 -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.10</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- YoyoTool -->
+
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.dbunit</groupId>
+      <artifactId>dbunit</artifactId>
+      <version>2.7.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>3.3.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <testResources>
+      <testResource>
+        <directory>${env.resources}</directory>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
+
+    <plugins>
+      <plugin>
+        <groupId>com.lazerycode.jmeter</groupId>
+        <artifactId>jmeter-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <!-- Generate JMeter configuration -->
+          <execution>
+            <id>configuration</id>
+            <goals>
+              <goal>configure</goal>
+            </goals>
+          </execution>
+          <!-- Run JMeter tests -->
+          <execution>
+            <id>jmeter-tests</id>
+            <goals>
+              <goal>jmeter</goal>
+            </goals>
+          </execution>
+          <!-- Fail build on errors in test -->
+          <execution>
+            <id>jmeter-check-results</id>
+            <goals>
+              <goal>results</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <resultsFileFormat>xml</resultsFileFormat>
+          <testResultsTimestamp>false</testResultsTimestamp>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

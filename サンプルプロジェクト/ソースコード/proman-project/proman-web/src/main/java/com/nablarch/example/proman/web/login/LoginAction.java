@@ -24,7 +24,7 @@ import nablarch.fw.web.interceptor.OnError;
  * ログイン／ログアウトの機能を有する。
  * </pre>
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginAction {
 
@@ -64,12 +64,12 @@ public class LoginAction {
         // 認証情報をセッション（新規）に格納後、トップ画面にリダイレクトする。
         SessionUtil.invalidate(context);
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
-        SessionUtil.put(context, "userContext", userContext, "httpSession");
+        SessionUtil.put(context, "userContext", userContext);
         return new HttpResponse(303, "redirect:///");
     }
 
     /**
-     *認証情報取得。
+     * 認証情報取得。
      *
      * @param loginId ログインID
      * @return 認証情報

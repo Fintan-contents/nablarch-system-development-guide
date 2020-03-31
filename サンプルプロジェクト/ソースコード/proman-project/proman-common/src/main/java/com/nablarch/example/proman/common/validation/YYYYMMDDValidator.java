@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * 検証処理が実装された内部クラス。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> {
 

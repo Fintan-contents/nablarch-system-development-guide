@@ -1,20 +1,18 @@
 package com.nablarch.example.proman.web.common;
 
 import nablarch.core.validation.ee.Domain;
-import nablarch.core.validation.ee.Required;
 
 
 /**
  * 基本フォームクラス。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public abstract class SearchFormBase {
 
     /**
      * ページ番号
      */
-    @Required
     @Domain("pageNumber")
     private String pageNumber;
 

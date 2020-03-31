@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * プロジェクト登録
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ProjectCreateAction {
 

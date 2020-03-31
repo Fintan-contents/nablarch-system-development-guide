@@ -29,7 +29,7 @@ import java.util.Calendar;
  * そのため、PasswordAuthenticatorのトランザクション制御が個別アプリケーションの処理に影響を与えないように、
  * 個別アプリケーションとは別のトランザクションを使用するように、PasswordAuthenticatorに{@link SimpleDbTransactionManager}を設定すること。
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class SystemAccountAuthenticator implements PasswordAuthenticator {
 
@@ -232,6 +232,12 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     }
 
 
+    /**
+     * 日付型変換
+     *
+     * @param d {@link java.util.Date}型の日付
+     * @return {@link java.sql.Date}型の日付
+     */
     private static java.sql.Date convert(java.util.Date d) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
