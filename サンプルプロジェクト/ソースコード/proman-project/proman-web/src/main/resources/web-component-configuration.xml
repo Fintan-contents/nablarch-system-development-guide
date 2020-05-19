@@ -111,6 +111,10 @@
 
   <import file="com/nablarch/example/proman/web/webui/threadcontext-for-webui.xml"/>
 
+  <!-- CSRF対策 -->
+  <component name="csrfTokenVerificationHandler"
+             class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
+
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController"
              class="nablarch.fw.web.servlet.WebFrontController">
@@ -145,6 +149,8 @@
         <component-ref name="httpErrorHandler"/>
 
         <component-ref name="nablarchTagHandler"/>
+
+        <component-ref name="csrfTokenVerificationHandler" />
 
         <component-ref name="dbConnectionManagementHandler"/>
 

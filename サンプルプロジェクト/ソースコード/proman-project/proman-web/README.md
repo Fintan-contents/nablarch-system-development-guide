@@ -13,7 +13,13 @@ PostgreSQLの初期ユーザーとパスワードは以下の通りに設定し�
 
 ## 起動方法
 
-proman-commonモジュールで以下のコマンドを実行しておいてください。
+proman-projectで以下のコマンドを実行してください。
+```
+$cd proman-common
+$mvn install
+```
+
+proman-commonモジュールで以下のコマンドを実行してください。
 ```
 $cd proman-common
 $mvn -P gsp clean generate-resources
