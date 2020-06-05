@@ -11,10 +11,6 @@ package com.example;
  */
 public class JavadocMethodExample {
 
-    public void noJavadocComment() {  // javadocコメントがありません（NG）。
-
-    }
-
     /**
      * 与えられた数を2倍にします。
      *

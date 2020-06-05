@@ -33,6 +33,8 @@
 - [Indentation](#indentation)
 - [InnerAssignment](#innerassignment)
 - [InterfaceTypeParameterName](#interfacetypeparametername)
+- [MissingJavadocType](#missingjavadoctype)
+- [MissingJavadocMethod](#missingjavadocmethod)
 - [JavadocMethod](#javadocmethod)
 - [JavadocType](#javadoctype)
 - [JavadocVariable](#javadocvariable)
@@ -749,23 +751,42 @@ interface NgInterfaceTypeParameterNameExample2<t> {
 }
 ```
 
-## JavadocMethod
+## MissingJavadocType
+
+クラス、列挙型のJavadocコメント有無をチェックします。
+
+Javadocコメントを記載するようにしてください(OK)。
+Javadocコメントは、コードの読み手にとって重要な情報となります。
 
 ```xml
-    <module name="JavadocMethod">
+    <module name="MissingJavadocType">
+      <property name="scope" value="private"/>
       <property name="severity" value="error"/>
-      <property name="allowUndeclaredRTE" value="true"/>
     </module>
 ```
 
-メソッドのJavadocコメントをチェックします。
+##  MissingJavadocMethod
 
-メソッドにJavadocコメントを記載するようにしてください(OK)。
-Javadocコメントが書かれていない場合、NGとなります。
+メソッドのJavadocコメント有無をチェックします。
 
+Javadocコメントを記載するようにしてください(OK)。
 Javadocコメントは、コードの読み手にとって重要な情報となります。
 
-上記設定では、メソッドに`throws`宣言がなくても非チェック例外の`@params`タグを記載できます（NGとなりません）。
+
+```xml
+    <module name="MissingJavadocMethod">
+      <property name="scope" value="private"/>
+      <property name="severity" value="error"/>
+    </module>
+```
+
+
+## JavadocMethod
+
+メソッドのJavadocコメント記載内容をチェックします。
+
+Javadocコメントに@paramや@returnを記載するようにしてください(OK)。
+書かれていない場合、NGとなります。
 
 
 
