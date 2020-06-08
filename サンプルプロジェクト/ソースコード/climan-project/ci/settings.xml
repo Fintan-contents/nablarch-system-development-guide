@@ -18,14 +18,14 @@
             <enabled>true</enabled>
           </releases>
           <snapshots>
-            <enabled>true</enabled>
+            <enabled>false</enabled>
           </snapshots>
         </repository>
         <repository>
           <id>oss-snapshot</id>
           <url>https://oss.sonatype.org/content/repositories/snapshots</url>
           <releases>
-            <enabled>true</enabled>
+            <enabled>false</enabled>
           </releases>
           <snapshots>
             <enabled>true</enabled>
