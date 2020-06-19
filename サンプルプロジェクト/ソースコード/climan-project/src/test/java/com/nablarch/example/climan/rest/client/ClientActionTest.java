@@ -1,6 +1,7 @@
 package com.nablarch.example.climan.rest.client;
 
 import nablarch.core.date.SystemTimeUtil;
+import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import nablarch.test.core.http.RestTestSupport;
@@ -9,21 +10,26 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link ClientAction}のテストクラス。
  */
 public class ClientActionTest extends RestTestSupport {
+    /**
+     * テスト対象のリクエストパス
+     */
+    public static final String PATH = "/client/";
+
+    /** 不正な顧客名（128文字を超えている） */
     public static final String INVALID_CLIENT_NAME = "129文字abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst";
+    /** 不正な業種コード（コードマスタに存在しない） */
     public static final String INVALID_INDUSTRY_CODE = "04";
 
     /**
@@ -31,69 +37,62 @@ public class ClientActionTest extends RestTestSupport {
      */
     @Test
     public void testInvalidClientSearchForm() {
-        RestMockHttpRequest request = get("/client");
+        RestMockHttpRequest request = get(PATH);
         request.setParam("clientName", INVALID_CLIENT_NAME);
         request.setParam("industryCode", INVALID_INDUSTRY_CODE);
 
         String message = "顧客一覧取得(パラメータ不正)";
         HttpResponse response = sendRequest(request);
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(2))
-                .assertThat("$.messages", hasItems(
-                        "clientName:128文字以下の値を入力してください。"
-                        , "industryCode:不正な値が指定されました。"));
+        assertFaultMessages(message, response
+                , "FB1999901"
+                , 2
+                , "clientName:128文字以下の値を入力してください。", "industryCode:不正な値が指定されました。");
     }
 
     /**
      * 条件なしで顧客一覧を取得した場合、全件取得されること。
      */
     @Test
-    public void testFindClientAll() throws JSONException {
+    public void testFindAll() throws JSONException {
         String message = "顧客一覧全件取得";
-        HttpResponse response = sendRequest(get("/client"));
+        HttpResponse response = sendRequest(get(PATH));
         assertStatusCode(message, HttpResponse.Status.OK, response);
-
-        JSONAssert.assertEquals(message, readTextResource("client-list.json")
-                , response.getBodyString(), JSONCompareMode.LENIENT);
+        assertJsonEquals(message, response, "client-list.json");
     }
 
     /**
      * 検索結果が0件となる条件で顧客一覧を取得した場合、正常レスポンスが返ってくること。
      */
     @Test
-    public void testFindNoClient() {
+    public void testFindNoClients() {
         String message = "検索結果０件";
-        HttpResponse response = sendRequest(get("/client?clientName=存在しない会社"));
+        HttpResponse response = sendRequest(get(PATH + "?clientName=存在しない会社"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$", empty());
+                .assertThat("$", empty(), message + "[結果件数]");
     }
 
     /**
      * 業種コードをパラメータに含めた場合、業種コードに一致する顧客だけが取得されること。
      */
     @Test
-    public void testFindClientByIndustryCode() throws JSONException {
+    public void testFindByIndustryCode() throws JSONException {
         String message = "業種コード検索";
-        HttpResponse response = sendRequest(get("/client?industryCode=01"));
+        HttpResponse response = sendRequest(get(PATH + "?industryCode=01"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
-
-        JSONAssert.assertEquals(message, readTextResource("client-list-industry-code-01.json")
-                , response.getBodyString(), JSONCompareMode.LENIENT);
+        assertJsonEquals(message, response, "client-list-industry-code-01.json");
     }
 
     /**
      * 顧客名をパラメータに含めた場合、顧客名に一致する顧客だけが取得されること。
      */
     @Test
-    public void testFindClientByClientName() throws JSONException {
+    public void testFindByClientName() throws JSONException {
         String message = "顧客名検索";
-        HttpResponse response = sendRequest(get("/client?clientName=テスト会社３"));
+        HttpResponse response = sendRequest(get(PATH + "?clientName=テスト会社３"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
-
-        JSONAssert.assertEquals(message, readTextResource("client-list-client-name-3.json")
-                , response.getBodyString(), JSONCompareMode.LENIENT);
+        assertJsonEquals(message, response, "client-list-client-name-3.json");
     }
 
     /**
@@ -101,15 +100,15 @@ public class ClientActionTest extends RestTestSupport {
      * 業種コードと顧客名に一致する顧客だけが取得されること。
      */
     @Test
-    public void testFindClientByIndustryCodeAndClientName() {
+    public void testFindByIndustryCodeAndClientName() {
         String message = "業種コード＋顧客名検索";
-        HttpResponse response = sendRequest(get("/client?industryCode=01&clientName=テスト会社３"));
+        HttpResponse response = sendRequest(get(PATH + "?industryCode=01&clientName=テスト会社３"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$", hasSize(1))
-                .assertThat("$[0].client_id", is(4))
-                .assertThat("$[0].client_name", is("テスト会社３（農業）"))
-                .assertThat("$[0].industry_code", is("01"));
+                .assertThat("$", hasSize(1), message + "[結果件数]")
+                .assertThat("$[0].client_id", equalTo(4), message + "[顧客ID]")
+                .assertThat("$[0].client_name", equalTo("テスト会社３（農業）"), message + "[顧客名]")
+                .assertThat("$[0].industry_code", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -118,10 +117,10 @@ public class ClientActionTest extends RestTestSupport {
     @Test
     public void testFindUnderUpperLimit() {
         String message = "上限境界値";
-        HttpResponse response = sendRequest(get("/client"));
+        HttpResponse response = sendRequest(get(PATH));
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$", hasSize(1000));
+                .assertThat("$", hasSize(1000), message + "[結果件数]");
     }
 
     /**
@@ -130,11 +129,12 @@ public class ClientActionTest extends RestTestSupport {
     @Test
     public void testFindOverUpperLimit() {
         String message = "上限超過";
-        HttpResponse response = sendRequest(get("/client"));
+        HttpResponse response = sendRequest(get(PATH));
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(1))
-                .assertThat("$.messages", hasItem("検索結果が上限値1,000件を超えました。検索条件を絞り込んで下さい。"));
+        assertFaultMessages(message, response
+                , "FB1999902"
+                , 1
+                , "検索結果が上限値1,000件を超えました。検索条件を絞り込んで下さい。");
     }
 
     /**
@@ -143,25 +143,26 @@ public class ClientActionTest extends RestTestSupport {
     @Test
     public void testInvalidClientGetForm() {
         String message = "顧客詳細取得(パラメータ不正)";
-        HttpResponse response = sendRequest(get("/client/number"));
+        HttpResponse response = sendRequest(get(PATH + "number"));
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(1))
-                .assertThat("$.messages", hasItem("clientId:数値を入力してください。"));
+        assertFaultMessages(message, response
+                , "FB1999901"
+                , 1
+                , "clientId:数値を入力してください。");
     }
 
     /**
      * パスパラメータに顧客IDを指定して顧客が1件だけ取得されること。
      */
     @Test
-    public void testShowClient() {
+    public void testShow() {
         String message = "顧客詳細取得";
-        HttpResponse response = sendRequest(get("/client/1"));
+        HttpResponse response = sendRequest(get(PATH + "1"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$.client_id", is(1))
-                .assertThat("$.client_name", is("テスト会社１（農業）"))
-                .assertThat("$.industry_code", is("01"));
+                .assertThat("$.client_id", equalTo(1), message + "[顧客ID]")
+                .assertThat("$.client_name", equalTo("テスト会社１（農業）"), message + "[顧客名]")
+                .assertThat("$.industry_code", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -170,11 +171,12 @@ public class ClientActionTest extends RestTestSupport {
     @Test
     public void testShowNotExistsClient() {
         String message = "存在しない顧客詳細取得";
-        HttpResponse response = sendRequest(get("/client/9999"));
+        HttpResponse response = sendRequest(get(PATH + "9999"));
         assertStatusCode(message, HttpResponse.Status.NOT_FOUND, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(1))
-                .assertThat("$.messages", hasItem("指定されたデータは存在しません。"));
+        assertFaultMessages(message, response
+                , "FB1999903"
+                , 1
+                , "指定されたデータは存在しません。");
     }
 
     /**
@@ -182,18 +184,17 @@ public class ClientActionTest extends RestTestSupport {
      */
     @Test
     public void testInvalidClientForm() {
-        Map<String, String> form = new HashMap<>();
-        form.put("client_name", INVALID_CLIENT_NAME);
-        form.put("industry_code", INVALID_INDUSTRY_CODE);
+        ClientForm client = new ClientForm();
+        client.setClientName(INVALID_CLIENT_NAME);
+        client.setIndustryCode(INVALID_INDUSTRY_CODE);
 
         String message = "新規登録(パラメータ不正)";
-        HttpResponse response = sendRequest(post("/client/").setBody(form));
+        HttpResponse response = sendRequest(post(PATH).setBody(client));
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(2))
-                .assertThat("$.messages", hasItems(
-                        "clientName:128文字以下の値を入力してください。"
-                        , "industryCode:不正な値が指定されました。"));
+        assertFaultMessages(message, response
+                , "FB1999901"
+                , 2
+                , "clientName:128文字以下の値を入力してください。", "industryCode:不正な値が指定されました。");
     }
 
     /**
@@ -201,16 +202,15 @@ public class ClientActionTest extends RestTestSupport {
      */
     @Test
     public void testRegisterNoParameter() {
-        Map<String, String> form = new HashMap<>();
+        ClientForm client = new ClientForm();
 
         String message = "必須項目なし新規登録";
-        HttpResponse response = sendRequest(post("/client/").setBody(form));
+        HttpResponse response = sendRequest(post(PATH).setBody(client));
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        with(response.getBodyString())
-                .assertThat("$.messages", hasSize(2))
-                .assertThat("$.messages", hasItems(
-                        "clientName:入力してください。"
-                        , "industryCode:入力してください。"));
+        assertFaultMessages(message, response
+                , "FB1999901"
+                , 2
+                , "clientName:入力してください。", "industryCode:入力してください。");
     }
 
     /**
@@ -219,28 +219,31 @@ public class ClientActionTest extends RestTestSupport {
     @Test
     public void testRegisterClient() {
         String clientName = "新規テスト会社" + SystemTimeUtil.getDateTimeMillisString();
-        String queryString = "clientName=" + clientName;
+        String industryCode = "03";
 
         ClientForm client = new ClientForm();
         client.setClientName(clientName);
-        client.setIndustryCode("03");
+        client.setIndustryCode(industryCode);
+
+        String queryString = "?clientName=" + clientName;
 
         String beforeRegister = "登録する顧客名の顧客が存在しないこと";
-        HttpResponse response = sendRequest(get("/client?" + queryString));
+        HttpResponse response = sendRequest(get(PATH + queryString));
         assertStatusCode(beforeRegister, HttpResponse.Status.OK, response);
-        with(response.getBodyString()).assertThat("$", empty());
+        with(response.getBodyString()).assertThat("$", empty(), beforeRegister + "[結果件数]");
 
         String register = "新規登録";
-        HttpResponse registerResponse = sendRequest(post("/client/").setBody(client));
+        HttpResponse registerResponse = sendRequest(post(PATH).setBody(client));
         assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
+        assertTrue(register + "[レスポンスボディ]", StringUtil.isNullOrEmpty(registerResponse.getBodyString()));
 
         String afterRegister = "登録した顧客名の顧客が取得できること";
-        HttpResponse afterRegisterResponse = sendRequest(get("/client?" + queryString));
+        HttpResponse afterRegisterResponse = sendRequest(get(PATH + queryString));
         assertStatusCode(afterRegister, HttpResponse.Status.OK, afterRegisterResponse);
         with(afterRegisterResponse.getBodyString())
-                .assertThat("$", hasSize(1))
-                .assertThat("$..client_name", hasItem(clientName))
-                .assertThat("$..industry_code", hasItem("03"));
+                .assertThat("$", hasSize(1), afterRegister + "[結果件数]")
+                .assertThat("$..client_name", hasItem(clientName), afterRegister + "[顧客名]")
+                .assertThat("$..industry_code", hasItem(industryCode), afterRegister + "[業種コード]");
     }
 
     /**
@@ -248,15 +251,51 @@ public class ClientActionTest extends RestTestSupport {
      */
     @Test
     public void testRegisterDuplicatedClient() {
+        String findMessage = "顧客名検索";
+        HttpResponse findResponse = sendRequest(get(PATH + "?clientName=テスト会社１（農業）"));
+        assertStatusCode(findMessage, HttpResponse.Status.OK, findResponse);
+        with(findResponse.getBodyString())
+                .assertThat("$", hasSize(1), findMessage + "[結果件数]");
+
         ClientForm client = new ClientForm();
         client.setClientName("テスト会社１（農業）");
         client.setIndustryCode("03");
 
-        String message = "新規登録";
-        HttpResponse response = sendRequest(post("/client/").setBody(client));
-        assertStatusCode(message, HttpResponse.Status.CONFLICT, response);
+        String registerMessage = "新規登録";
+        HttpResponse registerResponse = sendRequest(post(PATH).setBody(client));
+        assertStatusCode(registerMessage, HttpResponse.Status.CONFLICT, registerResponse);
+        assertFaultMessages(registerMessage, registerResponse
+                , "FB1999904"
+                , 1
+                , "指定されたデータは既存データと重複するため登録できません。");
+    }
+
+    /**
+     * レスポンスのボディが期待値ファイルに一致することを確認する。
+     *
+     * @param message          メッセージ
+     * @param response         レスポンス
+     * @param expectedFileName 期待値のファイル名
+     * @throws JSONException JSONのパース失敗時例外
+     */
+    private void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
+        JSONAssert.assertEquals(message, readTextResource(expectedFileName)
+                , response.getBodyString(), JSONCompareMode.LENIENT);
+    }
+
+    /**
+     * 障害コードと障害メッセージを確認する。
+     *
+     * @param message   メッセージ
+     * @param response  レスポンス
+     * @param faultCode 期待される障害コード
+     * @param size      期待される障害メッセージサイズ
+     * @param messages  期待される障害メッセージ
+     */
+    private void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
         with(response.getBodyString())
-                .assertThat("$.messages", hasSize(1))
-                .assertThat("$.messages", hasItem("指定されたデータは既存データと重複するため登録できません。"));
+                .assertThat("$.fault_code", equalTo(faultCode), message + "[障害コード]")
+                .assertThat("$.messages", hasSize(size), message + "[障害メッセージサイズ]")
+                .assertThat("$.messages", hasItems(messages), message + "[障害メッセージ]");
     }
 }
