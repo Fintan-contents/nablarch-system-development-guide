@@ -5,6 +5,7 @@ import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import nablarch.test.core.http.RestTestSupport;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONException;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -28,7 +29,7 @@ public class ClientActionTest extends RestTestSupport {
     public static final String PATH = "/client/";
 
     /** 不正な顧客名（128文字を超えている） */
-    public static final String INVALID_CLIENT_NAME = "129文字abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst";
+    public static final String INVALID_CLIENT_NAME = RandomStringUtils.randomAlphanumeric(129);
     /** 不正な業種コード（コードマスタに存在しない） */
     public static final String INVALID_INDUSTRY_CODE = "04";
 
