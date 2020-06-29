@@ -1,19 +1,16 @@
 package com.nablarch.example.climan.rest.client;
 
+import com.nablarch.example.climan.test.ClimanRestTestSupport;
 import nablarch.core.date.SystemTimeUtil;
 import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
-import nablarch.test.core.http.RestTestSupport;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONException;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -22,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * {@link ClientAction}のテストクラス。
  */
-public class ClientActionTest extends RestTestSupport {
+public class ClientActionTest extends ClimanRestTestSupport {
     /**
      * テスト対象のリクエストパス
      */
@@ -72,28 +69,6 @@ public class ClientActionTest extends RestTestSupport {
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
                 .assertThat("$", empty(), message + "[結果件数]");
-    }
-
-    /**
-     * 業種コードをパラメータに含めた場合、業種コードに一致する顧客だけが取得されること。
-     */
-    @Test
-    public void testFindByIndustryCode() throws JSONException {
-        String message = "業種コード検索";
-        HttpResponse response = sendRequest(get(PATH + "?industryCode=01"));
-        assertStatusCode(message, HttpResponse.Status.OK, response);
-        assertJsonEquals(message, response, "client-list-industry-code-01.json");
-    }
-
-    /**
-     * 顧客名をパラメータに含めた場合、顧客名に一致する顧客だけが取得されること。
-     */
-    @Test
-    public void testFindByClientName() throws JSONException {
-        String message = "顧客名検索";
-        HttpResponse response = sendRequest(get(PATH + "?clientName=テスト会社３"));
-        assertStatusCode(message, HttpResponse.Status.OK, response);
-        assertJsonEquals(message, response, "client-list-client-name-3.json");
     }
 
     /**
@@ -269,34 +244,5 @@ public class ClientActionTest extends RestTestSupport {
                 , "FB1999904"
                 , 1
                 , "指定されたデータは既存データと重複するため登録できません。");
-    }
-
-    /**
-     * レスポンスのボディが期待値ファイルに一致することを確認する。
-     *
-     * @param message          メッセージ
-     * @param response         レスポンス
-     * @param expectedFileName 期待値のファイル名
-     * @throws JSONException JSONのパース失敗時例外
-     */
-    private void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
-        JSONAssert.assertEquals(message, readTextResource(expectedFileName)
-                , response.getBodyString(), JSONCompareMode.LENIENT);
-    }
-
-    /**
-     * 障害コードと障害メッセージを確認する。
-     *
-     * @param message   メッセージ
-     * @param response  レスポンス
-     * @param faultCode 期待される障害コード
-     * @param size      期待される障害メッセージサイズ
-     * @param messages  期待される障害メッセージ
-     */
-    private void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
-        with(response.getBodyString())
-                .assertThat("$.fault_code", equalTo(faultCode), message + "[障害コード]")
-                .assertThat("$.messages", hasSize(size), message + "[障害メッセージサイズ]")
-                .assertThat("$.messages", hasItems(messages), message + "[障害メッセージ]");
     }
 }
