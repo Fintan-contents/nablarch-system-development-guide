@@ -1,0 +1,7 @@
+<routes>
+  <scope module="client">
+    <get path="/client/:clientId" to="Client#show"/>
+    <get path="/client/" to="Client#list"/>
+    <post path="/client/" to="Client#register"/>
+  </scope>
+</routes>

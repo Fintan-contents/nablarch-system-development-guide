@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+
+  <import file="batch-boot.xml"/>
+
+  <!-- TODO: 使用するDBに合せて設定してください。 -->
+  <!-- Oracle用の設定 -->
+  <!--
+    <import file="nablarch/test/test-db-info-oracle.xml"/>
+  -->
+  <!-- 汎用のDB設定 -->
+  <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="schema" value="${nablarch.db.schema}"/>
+  </component>
+
+  <!-- テスト用設定 -->
+  <import file="override_test.xml"/>
+
+  <!-- テスティングフレームワークの設定 -->
+  <import file="nablarch/test/test-data.xml"/>
+  <import file="nablarch/test/test-transaction.xml"/>
+
+  <!--
+  マスタデータ復旧設定
+  マスタデータ復旧を使用する際には、いくつかの手順が必要になります。
+  設定追加・変更手順を参照して設定してください。
+  -->
+  <component name="masterDataRestorer"
+             class="nablarch.test.core.db.MasterDataRestorer">
+    <!-- バックアップスキーマ -->
+    <property name="backupSchema" value="PUBLIC"/>
+    <!-- 監視対象テーブル一覧 -->
+    <property name="tablesTobeWatched">
+      <list></list>
+    </property>
+  </component>
+
+<!-- マスタデータ復旧機能の登録 -->
+<!--
+  <list name="testEventListeners">
+    <component class="nablarch.test.RepositoryInitializer"/>
+    <component-ref name="masterDataRestorer"/>
+  </list>
+-->
+</component-configuration>
