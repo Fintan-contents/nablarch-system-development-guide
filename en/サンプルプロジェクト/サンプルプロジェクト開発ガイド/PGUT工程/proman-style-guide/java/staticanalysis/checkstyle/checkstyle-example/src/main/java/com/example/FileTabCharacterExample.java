@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * FileTabCharacterのコード例です。
+ * Example of FileTabCharacter code.
  *
  * @author example
  * @since 1.0.0

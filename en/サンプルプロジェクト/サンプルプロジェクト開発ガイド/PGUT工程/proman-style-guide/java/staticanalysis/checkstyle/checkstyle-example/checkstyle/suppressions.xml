@@ -4,7 +4,7 @@
         "http://checkstyle.sourceforge.net/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-  <!-- JavaDocのチェックを抑止する設定例 -->
+  <!-- Example of setting to stop checking in JavaDoc -->
   <suppress checks="(JavadocMethod|WriteTagCheck)"
             files="com[\\/]example[\\/]suppression[\\/]SuppressionExample.java" />
 </suppressions>

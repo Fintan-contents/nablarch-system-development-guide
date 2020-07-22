@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * IllegalThrowsのコード例です。
+ * Example of IllegalThrows code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,9 +12,9 @@ package com.example;
 public class IllegalThrowsExample {
 
     /**
-     * IllegalThrowsのコード例です。
-     * 
-     * @throws Exception 許可されていない例外（java.lang.Exception）です（NG）
+     * Example of IllegalThrows code.
+     *
+     * @throws Exception Unpermitted exception (java.lang.Exception) (incorrect)
      */
     public void example() throws Exception {
     }

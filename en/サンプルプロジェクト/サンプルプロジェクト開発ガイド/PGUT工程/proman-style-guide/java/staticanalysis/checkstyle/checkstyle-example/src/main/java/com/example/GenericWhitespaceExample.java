@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * GenericWhitespaceのコード例です。
+ * Example of GenericWhitespace code.
  *
  * @author example
  * @since 1.0.0
@@ -21,11 +21,11 @@ public class GenericWhitespaceExample {
      * GenericWhitespaceのコード例です。
      */
     public void example() {
-        // ジェネリクスの<>に不要な空白があります（NG）。
+        // Unnecessary white space in <> for generics (incorrect).
         List< String > bad = new ArrayList<>();
         Map< String, Integer > badToo = new HashMap<>();
 
-        // ジェネリクスの<>に不要な空白がありません（OK）。
+        // Unnecessary white space in <> for generics (correct).
         List<String> good = new ArrayList<>();
         Map<String, Integer> goodToo = new HashMap<>();
     }

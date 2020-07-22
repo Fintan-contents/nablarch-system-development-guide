@@ -3,11 +3,11 @@
  */
 package com.example;
 
-// 実際はListとArrayListしか使っていないのにjava.utilパッケージをまるごとimportしています（NG）。
+// The whole java.util package is imported even though only List and ArrayList are used (incorrect).
 import java.util.*;
 
 /**
- * AvoidStarImportのコード例です。
+ * Example of AvoidStarImport code.
  *
  * @author example
  * @since 1.0.0
@@ -15,7 +15,7 @@ import java.util.*;
 public class AvoidStarImportExample {
 
     /**
-     * AvoidStarImportのコード例です。
+     * Example of AvoidStarImport code.
      */
     public void example() {
         List<String> list = new ArrayList<>();

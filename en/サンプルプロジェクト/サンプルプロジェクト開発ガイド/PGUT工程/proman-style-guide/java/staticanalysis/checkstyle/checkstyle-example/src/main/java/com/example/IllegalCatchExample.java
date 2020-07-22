@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * IllegalCatchのコード例です。
+ * Example of IllegalCatch code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,12 +12,12 @@ package com.example;
 public class IllegalCatchExample {
 
     /**
-     * IllegalCatchのコード例です。
+     * Example of IllegalCatch code.
      */
     public void example() {
         try {
             System.out.println("example");
-        } catch (Exception e) { // 許可されていない例外（java.lang.Exception）をcatchしています（NG）。
+        } catch (Exception e) { // Unpermitted exception (java.lang.Exception) is caught (incorrect).
             e.printStackTrace();
         }
     }
