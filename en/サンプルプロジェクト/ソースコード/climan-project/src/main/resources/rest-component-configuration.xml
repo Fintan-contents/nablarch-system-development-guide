@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- テーブル定義 -->
+  <import file="nablarch/schema-config.xml" />
+
+  <!-- コード機能 -->
+  <import file="nablarch/common/code.xml"/>
+
+  <!-- 精査に使用する文字集合定義 -->
+  <import file="nablarch/core/validation/charset-definition.xml" />
+
+  <!-- ClimanDomainManager 実装クラス設定 -->
+  <component name="domainManager" class="com.nablarch.example.climan.common.validation.ClimanDomainManager"/>
+
+  <!-- BeanValidation実装クラス -->
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
+
+  <!-- 環境設定ファイル -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!-- データベース設定 -->
+  <!--
+  下記設定ファイルを使用することで、JNDIを用いてコネクションがルックアップされる
+  ルックアップに使用する名前は、configファイル中で、「nablarch.connectionFactory.jndiResourceName」というプレースホルダーに設定する。
+
+  ローカルのデータソースからコネクションを取得したい場合は、アーキタイプから生成した直後のプロジェクトに含まれるdb-for-webui_dev.xmlを参考に設定すること。
+  -->
+  <import file="nablarch/webui/db-for-webui.xml"/>
+
+
+  <!--パッケージマッピングの設定 -->
+  <component name="packageMapping" class="nablarch.integration.router.RoutesMapping">
+    <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+    <property name="methodBinderFactory">
+      <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+        <property name="handlerList">
+          <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory">
+            <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+          </component>
+        </property>
+      </component>
+    </property>
+  </component>
+
+  <!-- ダイアレクト設定 -->
+  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
+
+  <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
+
+  <!-- ハンドラキュー構成 -->
+  <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+          <property name="errorResponseBuilder">
+            <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
+              <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
+            </component>
+          </property>
+          <property name="errorLogWriter">
+            <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
+          </property>
+        </component>
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer" class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- パッケージマッピング -->
+        <component-ref name="packageMapping" />
+        <!-- コードのローダ -->
+        <component-ref name="codeLoader" />
+        <!-- コードのキャッシュ -->
+        <component-ref name="codeCache" />
+      </list>
+    </property>
+  </component>
+
+</component-configuration>
