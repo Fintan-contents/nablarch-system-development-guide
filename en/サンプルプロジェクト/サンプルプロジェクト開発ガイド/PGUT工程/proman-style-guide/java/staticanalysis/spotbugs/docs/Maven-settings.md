@@ -85,6 +85,11 @@ If there is a check violation, the following points are output to the console:
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
+[INFO] String オブジェクトを == や != を使用して比較しています。com.example.App.main(String[]) [com.example.App] 該当箇所 App.java:[line 9] ES_COMPARING_STRINGS_WITH_EQ
+```
+
+The bottom line of the console output above has the following meaning:
+```
 [INFO] String objects are compared using == and !=. com.example.App.main(String[]) [com.example.App] applicable location App.java:[line 9] ES_COMPARING_STRINGS_WITH_EQ
 ```
 
