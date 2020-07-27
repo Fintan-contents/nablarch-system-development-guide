@@ -41,7 +41,11 @@
           </dependency>
         </dependencies>
         <configuration>
+<<<<<<< HEAD
           <!-- Checkstyle設定ファイルへのパス -->
+=======
+          <!-- Path to Checkstyle setting file -->
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
           <configLocation>${basedir}/checkstyle/nablarch-checkstyle.xml</configLocation>
           <propertyExpansion>config_loc=${basedir}/checkstyle/</propertyExpansion>
         </configuration>

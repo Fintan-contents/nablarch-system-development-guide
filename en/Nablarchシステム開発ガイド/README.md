@@ -22,7 +22,11 @@
   - [Preparation of setup guide for development environment](#Preparation-of-setup-guide-for-development-environment)
   - [Establishment of development standards](#Establishment-of-development-standards)
 - [Integration test phase](#Integration-test-phase)
+<<<<<<< HEAD
   - [Preparation for integration test (communication confirmation)](#Preparation-for-integration-test-communication-confirmation)
+=======
+  - [Preparation for integration test (operation check)](#Preparation-for-integration-test-operation-check)
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 - [System test phase](#System-test-phase)
 - [Maintenance operation](#Maintenance-operation)
 
@@ -261,7 +265,11 @@ This is a checklist for developers to self-check simple coding mistakes such as 
 
 ## Integration test phase
 
+<<<<<<< HEAD
 ### Preparation for integration test (communication confirmation)
+=======
+### Preparation for integration test (operation check)
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 
 Before starting the integration test (PGUT phase), change the settings for the integration test environment and confirm the communication.
 

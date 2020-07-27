@@ -4,7 +4,11 @@
 package com.example;
 
 /**
+<<<<<<< HEAD
  * FileLengthのコード例です。
+=======
+ * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
  * 
  * @author example
  * @since 1.0.0
@@ -12,7 +16,11 @@ package com.example;
 public class FileLengthExample {
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です（NG）。
+=======
+     * Example of FileLength (incorrect).
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example1() {
         System.out.println();
@@ -118,7 +126,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example2() {
         System.out.println();
@@ -224,7 +236,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example3() {
         System.out.println();
@@ -330,7 +346,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example4() {
         System.out.println();
@@ -436,7 +456,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example5() {
         System.out.println();
@@ -542,7 +566,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example6() {
         System.out.println();
@@ -648,7 +676,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example7() {
         System.out.println();
@@ -754,7 +786,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example8() {
         System.out.println();
@@ -860,7 +896,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example9() {
         System.out.println();
@@ -966,7 +1006,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example10() {
         System.out.println();
@@ -1072,7 +1116,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example11() {
         System.out.println();
@@ -1178,7 +1226,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example12() {
         System.out.println();
@@ -1284,7 +1336,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example13() {
         System.out.println();
@@ -1390,7 +1446,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example14() {
         System.out.println();
@@ -1496,7 +1556,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example15() {
         System.out.println();
@@ -1602,7 +1666,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example16() {
         System.out.println();
@@ -1708,7 +1776,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example17() {
         System.out.println();
@@ -1814,7 +1886,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example18() {
         System.out.println();
@@ -1920,7 +1996,11 @@ public class FileLengthExample {
     }
 
     /**
+<<<<<<< HEAD
      * FileLengthのコード例です。
+=======
+     * Example of FileLength.
+>>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
      */
     public void example19() {
         System.out.println();
