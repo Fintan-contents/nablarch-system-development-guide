@@ -6,9 +6,9 @@ We recommend that you read this section before starting the design.
 
 ## Commonly used patterns in Nablarch
 
-- [Nablarch batch processing pattern](./Nablarchバッチ処理パターン.md)
-- [Asynchronous operation in Nablarch](./Nablarchでの非同期処理.md)
+- [Nablarch batch processing pattern](./Nablarch_batch_processing_pattern.md)
+- [Asynchronous operation in Nablarch](./Asynchronous_operation_in_Nablarch.md)
 
 ## Nablarch anti-pattern
 
-- [Nablarch anti-pattern](Nablarchアンチパターン.md)
+- [Nablarch anti-pattern](Nablarch_anti-pattern.md)
