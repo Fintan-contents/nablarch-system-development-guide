@@ -22,11 +22,7 @@ This is followed due to the following reasons.
 
 ## Reference: Test automation concept
 
-<<<<<<< HEAD
 In the case of a normal Web application, there are points that humans need to check visually (whether the layout is off).
-=======
-In the case of a normal web application, there are points that humans need to check visually (whether the layout is off).
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 For REST, automation of testing is relatively easy as there are no verification points that require such visual observation.
 
 In this project, since the number of WebAPIs to be provided is small and the processing is not complicated, E2E tests were not introduced,

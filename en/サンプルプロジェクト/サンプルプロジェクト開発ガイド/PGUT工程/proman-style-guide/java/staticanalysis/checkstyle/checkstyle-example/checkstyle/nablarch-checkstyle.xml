@@ -10,11 +10,7 @@
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
-<<<<<<< HEAD
   <!-- ソースコードの文字コード指定 -->
-=======
-  <!-- Specify character code for source code -->
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
   <property name="charset" value="UTF-8"/>
   <module name="TreeWalker">
     <module name="AbstractClassName">
@@ -181,19 +177,11 @@
       <property name="severity" value="ignore"/>
     </module>
 
-<<<<<<< HEAD
     <!-- コメントによるCheckstyle除外設定 -->
     <module name="SuppressWithNearbyCommentFilter">
       <!--
         特定の書式のコメントを記載することで該当行をCheckstyle対象外にできる。
         コメント例： // SUPPRESS CHECKSTYLE #12345により除外設定
-=======
-    <!-- Comment-based setting to remove Checkstyle -->
-    <module name="SuppressWithNearbyCommentFilter">
-      <!--
-        Lines can be set so that Checkstyle is not applied by writing a comment in a specific format.
-        Example of comment: // Setting removal using SUPPRESS CHECKSTYLE #12345
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
        -->
       <property name="commentFormat" value="SUPPRESS CHECKSTYLE #\d+"/>
     </module>
@@ -212,11 +200,7 @@
     <property name="severity" value="warning"/>
   </module>
 
-<<<<<<< HEAD
   <!-- 設定ファイルによるCheckstyle除外対象の設定 -->
-=======
-  <!-- Set target for removal of Checkstyle using settings file -->
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
   <module name="SuppressionFilter">
     <property name="file" value="${config_loc}/suppressions.xml"/>
     <property name="optional" value="false"/>

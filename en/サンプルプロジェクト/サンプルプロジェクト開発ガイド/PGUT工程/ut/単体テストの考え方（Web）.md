@@ -37,11 +37,7 @@ Describes the deliverables  created by the developer and how to test them.
 
 ## Action
 
-<<<<<<< HEAD
 In Action class, the operation is manually checked with the subfunction  unit test.
-=======
-In Action class, the operation is manually checked with the subfunction unit test.
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 
 The Action test was usually performed in the request unit test,
 but since it can be confirmed with the subfunction  unit tests other than business logic, we will confirm it manually.

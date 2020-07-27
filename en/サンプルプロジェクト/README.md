@@ -140,9 +140,5 @@ Client management system.
 - Authentication and authorization are not performed for REST API.
 - Internationalization is out of scope.
 - It is assumed that a virus scan is performed on the directory in which the upload file is temporarily stored, and that an error occurs while saving if a virus is detected.
-<<<<<<< HEAD
 - It is assumed that the master table is updated directly for the screen/batch switching control.
-=======
-- It is assumed that the master table is updated directly for the maintenance stop management control.
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 - The confidential information in the application shall be described in plain text in the configuration file on the assumption that security is ensured by the infrastructure.
