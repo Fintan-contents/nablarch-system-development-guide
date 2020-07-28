@@ -14,46 +14,46 @@
 
   <properties>
 
-    <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
+    <!-- Resource directory for each environment (to be switched according to profile) -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
 
   </properties>
 
   <!--
-    このプロファイルは環境を指定するものであり、相互に排他的である。
-    複数のプロファイルを同時に指定してはならない。
+    These profiles specify the environment and are mutually exclusive.
+    Multiple profiles must not be set at the same time.
   -->
   <profiles>
-    <!-- 開発環境 -->
+    <!-- Development environment -->
     <profile>
       <id>development</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <env.name>開発環境</env.name>
-        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
         <env.dir>dev</env.dir>
         <env.classifier>dev</env.classifier>
       </properties>
     </profile>
 
-    <!-- デモ環境 -->
+    <!-- Demo environment -->
     <profile>
       <id>demo</id>
       <properties>
-        <env.name>開発環境</env.name>
-        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
         <env.dir>demo</env.dir>
         <env.classifier>demo</env.classifier>
       </properties>
     </profile>
 
-    <!-- 本番環境 -->
+    <!-- Full-scale operation environment -->
     <profile>
       <id>prod</id>
       <properties>
-        <env.name>本番環境</env.name>
+        <env.name>Full-scale operation environment</env.name>
         <env.dir>prod</env.dir>
         <env.classifier>prod</env.classifier>
       </properties>

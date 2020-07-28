@@ -5,87 +5,87 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- テーブル定義 -->
+  <!-- Table definitions -->
   <import file="nablarch/schema-config.xml" />
 
-  <!-- 精査に使用する文字集合定義 -->
+  <!-- Character set definitions used for scanning -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
 
-  <!-- DomainManager 実装クラス設定 -->
+  <!-- DomainManager implementation class settings -->
   <!--<component name="domainManager" class="com.nablarch.example.proman.domain.SampleDomainManager"/>-->
 
-  <!-- 環境設定ファイル -->
+  <!-- Environment settings file -->
   <config-file file="common.config" />
   <config-file file="env.config" />
 
-  <!-- Nablarch共通機能 -->
-  <!-- コード機能 -->
+  <!-- Common Nablarch features -->
+  <!-- Code features -->
   <import file="nablarch/common/code.xml"/>
-  <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
+  <!-- RDBMS without automatic numbering, setting to use universal DAO -->
   <import file="nablarch/common/dao.xml" />
-  <!-- 日付 -->
+  <!-- Date -->
   <import file="nablarch/core/date.xml"/>
 
 
   <!--
-  バッチ固有の設定読み込み
+  Load batch-specific settings
   -->
-  <!-- データベース設定-->
+  <!-- Database settings-->
   <import file="nablarch/batch/db-for-batch.xml" />
   <import file="data-source.xml"/>
 
-  <!-- ファイルパス設置 -->
+  <!-- File path installation -->
   <import file="filepath-for-batch.xml" />
-  <!-- マルチスレッド実行制御機能 -->
+  <!-- Feature to control multi-thread execution -->
   <import file="nablarch/common/standalone/multi-thread.xml" />
-  <!-- ループ・トランザクション制御機能 -->
+  <!-- Feature to control loops and transactions -->
   <import file="nablarch/batch/loop-transaction.xml" />
-  <!-- データリード機能 -->
+  <!-- Data reading feature -->
   <import file="nablarch/batch/batch-data-read.xml" />
 
-  <!-- ハンドラキュー構成 -->
+  <!-- Handler queue configuration -->
   <list name="handlerQueue">
-    <!-- ステータスコードを終了コードに変換するハンドラ -->
+    <!-- Handler to convert status code into exit code -->
     <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
 
-    <!-- グローバルエラーハンドラ -->
+    <!-- Global error handler -->
     <component class="nablarch.fw.handler.GlobalErrorHandler" />
 
-    <!-- データベース接続ハンドラ -->
+    <!-- Database connection handler -->
     <component-ref name="dbConnectionManagementHandler" />
 
-    <!-- トランザクションマネージャ -->
+    <!-- Transaction manager -->
     <component-ref name="transactionManagementHandler" />
 
-    <!-- ディスパッチ -->
+    <!-- Dispatch -->
     <component class="nablarch.fw.handler.RequestPathJavaPackageMapping">
       <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
       <property name="immediate" value="false" />
     </component>
 
-    <!-- マルチスレッド実行制御ハンドラ -->
+    <!-- Handler to control multi-thread execution -->
     <component-ref name="multiThreadExecutionHandler" />
 
-    <!-- データベース接続ハンドラ -->
+    <!-- Database connection handler -->
     <component-ref name="dbConnectionManagementHandler" />
 
-    <!-- ループ・トランザクション制御ハンドラ -->
+    <!-- Loop and transaction control handler -->
     <component-ref name="loopHandler" />
 
-    <!-- データリードハンドラ -->
+    <!-- Data reading handler -->
     <component-ref name="dataReadHandler" />
   </list>
 
-  <!-- 初期化が必要なコンポーネント -->
+  <!-- Components requiring initialization -->
   <component name="initializer"
              class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
-        <!-- common/date.xml:業務日付コンポーネント -->
+        <!-- common/date.xml: Business date component -->
         <component-ref name="businessDateProvider" />
-        <!-- common/code.xml:コードのローダ -->
+        <!-- common/code.xml: Code loader -->
         <component-ref name="codeLoader" />
-        <!-- common/code.xml:コードのキャッシュ -->
+        <!-- common/code.xml: Code cache -->
         <component-ref name="codeCache" />
       </list>
     </property>

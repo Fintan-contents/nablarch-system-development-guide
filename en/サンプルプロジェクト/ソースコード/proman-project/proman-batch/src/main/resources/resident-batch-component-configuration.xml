@@ -5,120 +5,120 @@
     xmlns="http://tis.co.jp/nablarch/component-configuration"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- テーブル定義 -->
+  <!-- Table definitions -->
   <import file="nablarch/schema-config.xml" />
 
-  <!-- 精査に使用する文字集合定義 -->
+  <!-- Character set definitions used for scanning -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
 
-  <!-- DomainManager 実装クラス設定 -->
+  <!-- DomainManager implementation class settings -->
   <!--<component name="domainManager" class="com.nablarch.example.proman.domain.SampleDomainManager"/>-->
 
-  <!-- 環境設定ファイル -->
+  <!-- Environment settings file -->
   <config-file file="common.config" />
   <config-file file="env.config" />
 
-  <!-- Nablarch共通機能 -->
-  <!-- コード機能 -->
+  <!-- Common Nablarch features -->
+  <!-- Code features -->
   <import file="nablarch/common/code.xml" />
-  <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
+  <!-- RDBMS without automatic numbering, setting to use universal DAO -->
   <import file="nablarch/common/dao.xml" />
-  <!-- 日付 -->
+  <!-- Date -->
   <import file="nablarch/core/date.xml"/>
 
 
   <!--
-  バッチ固有の設定読み込み
+  Load batch-specific settings
   -->
-  <!-- データベース接続・トランザクション設定-->
+  <!-- Database connection and transaction settings-->
   <import file="nablarch/batch/db-for-batch.xml" />
   <import file="data-source.xml"/>
 
-  <!-- ファイルパス設置 -->
+  <!-- File path installation -->
   <import file="nablarch/batch/filepath-for-batch.xml" />
-  <!-- スレッドコンテキスト機能 -->
+  <!-- Thread context feature -->
   <import file="nablarch/batch/threadcontext-for-batch.xml" />
-  <!-- 処理停止機能 -->
+  <!-- Process stop feature -->
   <import file="nablarch/common/standalone/process-stop.xml" />
-  <!-- マルチスレッド実行制御機能 -->
+  <!-- Feature to control multi-thread execution -->
   <import file="nablarch/common/standalone/multi-thread.xml" />
-  <!-- プロセス常駐化機能 -->
+  <!-- Process resident feature -->
   <import file="nablarch/common/standalone/process-service.xml" />
-  <!-- リトライ機能 -->
+  <!-- Retry feature -->
   <import file="nablarch/common/standalone/standalone-retry.xml" />
-  <!-- データリード機能 -->
+  <!-- Data reading feature -->
   <import file="nablarch/batch/batch-data-read.xml" />
 
-  <!-- ハンドラキュー構成 -->
+  <!-- Handler queue configuration -->
   <list name="handlerQueue">
 
     <!-- ****************************************
-    メインスレッド部
+    Main thread
     ****************************************-->
 
-    <!-- ステータスコードを終了コードに変換するハンドラ -->
+    <!-- Handler to convert status code into exit code -->
     <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
-    
-    <!-- スレッドコンテキスト変数削除ハンドラ -->
+
+    <!-- Handler for deleting thread context variables -->
     <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
 
-    <!-- グローバルエラーハンドラ -->
+    <!-- Global error handler -->
     <component class="nablarch.fw.handler.GlobalErrorHandler" />
 
-    <!-- スレッドコンテキスト設定ハンドラ -->
+    <!-- Handler for setting thread context -->
     <component-ref name="threadContextHandler" />
 
-    <!-- リトライハンドラ -->
+    <!-- Retry handler -->
     <component-ref name="retryHandler" />
 
-    <!-- データベース接続管理ハンドラ（業務初期処理・終端処理用） -->
+    <!-- Database connection management handler (for operation entry and exit processes) -->
     <component-ref name="dbConnectionManagementHandler" />
 
-    <!-- トランザクション制御ハンドラ（業務初期処理・終端処理用） -->
+    <!-- Transaction control handler (for operation entry and exit processes) -->
     <component-ref name="transactionManagementHandler" />
 
-    <!-- ディスパッチ -->
+    <!-- Dispatch -->
     <component class="nablarch.fw.handler.RequestPathJavaPackageMapping">
       <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
       <property name="immediate" value="false" />
     </component>
 
-    <!-- マルチスレッド実行制御ハンドラ -->
+    <!-- Handler to control multi-thread execution -->
     <component-ref name="multiThreadExecutionHandler" />
 
     <!--****************************************
-    リクエストスレッド部
+    Request thread section
     ****************************************-->
 
-    <!-- データベース接続管理ハンドラ -->
+    <!-- Database connection management handler -->
     <component-ref name="dbConnectionManagementHandler" />
 
-    <!-- リクエストスレッドループ -->
+    <!-- Request thread loop -->
     <component-ref name="requestThreadLoopHandler" />
 
-    <!-- 処理停止制御ハンドラ -->
+    <!-- Process stop control handler -->
     <component-ref name="processStopHandler" />
 
-    <!-- データリードハンドラ -->
+    <!-- Data reading handler -->
     <component-ref name="dataReadHandler" />
 
-    <!-- トランザクション制御ハンドラ -->
+    <!-- Transaction control handler -->
     <component-ref name="transactionManagementHandler" />
 
   </list>
 
-  <!-- 初期化が必要なコンポーネント -->
+  <!-- Components requiring initialization -->
   <component name="initializer"
              class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
-        <!-- common/date.xml:業務日付コンポーネント -->
+        <!-- common/date.xml: Business date component -->
         <component-ref name="businessDateProvider" />
-        <!-- common/code.xml:コードのローダ -->
+        <!-- common/code.xml: Code loader -->
         <component-ref name="codeLoader" />
-        <!-- common/code.xml:コードのキャッシュ -->
+        <!-- common/code.xml: Code cache -->
         <component-ref name="codeCache" />
-        <!-- batch/handler/processStop.xml:処理停止ハンドラ -->
+        <!-- batch/handler/processStop.xml: Process stop handler -->
         <component-ref name="processStopHandler" />
       </list>
     </property>

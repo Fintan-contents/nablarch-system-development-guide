@@ -1,6 +1,5 @@
 package com.nablarch.example.proman.batch.project;
 
-
 import nablarch.common.dao.EntityUtil;
 import nablarch.common.databind.ObjectMapper;
 import nablarch.common.databind.ObjectMapperFactory;
@@ -24,21 +23,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.Date;
 
-
 /**
- * 期間内プロジェクト一覧出力の都度起動バッチアクションクラス。
+ * Batch action class for startup when a project list is output during the applicable period.
  *
  * @author TIS
  */
 public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 
     /**
-     * 出力ファイル名。
+     * Output file name.
      */
     private static final String OUTPUT_FILE_NAME = "N21AA002";
 
     /**
-     * 対象プロジェクト情報を出力するためのマッパー。
+     * Mapper for outputting relevant project information.
      */
     private ObjectMapper<ProjectDto> mapper;
 
@@ -69,7 +67,7 @@ public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
     @Override
     public Result handle(SqlRow record, ExecutionContext context) {
         ProjectDto dto = EntityUtil.createEntity(ProjectDto.class, record);
-        // 以下のカラムはDtoと型が違いEntityUtilでは設定できないため、明示的にsetterを呼ぶ
+        // The following columns cannot be set using EntityUtil as the Dto and type differ. A setter is therefore called explicitly.
         dto.setProjectStartDate(record.getDate("PROJECT_START_DATE"));
         dto.setProjectEndDate(record.getDate("PROJECT_END_DATE"));
         mapper.write(dto);
