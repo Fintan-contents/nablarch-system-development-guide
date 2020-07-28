@@ -4,9 +4,9 @@
 package com.example;
 
 /**
- * WriteTagのコード例です。
- * 
- * authorタグがあり、値が設定されています（OK）。
+ * Example of WriteTag code.
+ *
+ * There is an author tag and a value is set (OK).
  * 
  * @author example
  */
@@ -14,14 +14,14 @@ public class WriteTagExample {
 }
 
 /**
- * authorタグがありません（NG）。
+ * No author tag (incorrect).
  * 
  */
 interface Ng1WriteTagExample {
 }
 
 /**
- * authorタグはありますが、値がありません（NG）。
+ * There is an author tag but no value is set (incorrect).
  * 
  * @author
  */

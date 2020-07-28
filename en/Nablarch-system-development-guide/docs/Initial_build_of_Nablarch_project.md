@@ -27,6 +27,7 @@ Manually integrate the generated archetype project for multi-modularization.
 #### Handle as an independent project
 
 Handle web, batch and common projects as independent single-module projects.
+
 In this case, each project is related only by dependency, and will not have a parent-child relationship.
 
 

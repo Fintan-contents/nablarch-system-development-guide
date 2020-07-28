@@ -125,7 +125,7 @@ but this project did not use a mock library for the following reasons:
 - Backward compatibility may not be feasible due to version upgrade (ex: JMockit)
 
 
-## SQLファイル
+## SQL file
 
 It is necessary to consider SQL in the design phase, but if you design SQL theoretically, there is a problem that quality cannot be sufficiently ensured. 
 For this reason, it is assumed that the design will be carried out while testing with SQL, and the SQL file is created at the same time.

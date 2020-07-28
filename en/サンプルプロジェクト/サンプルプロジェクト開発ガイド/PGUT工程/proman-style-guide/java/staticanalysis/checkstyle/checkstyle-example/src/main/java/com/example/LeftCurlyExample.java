@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * LeftCurlyのコード例です。
+ * Example of LeftCurly code.
  *
  * @author example
  * @since 1.0.0
@@ -12,15 +12,15 @@ package com.example;
 public class LeftCurlyExample {
 
     /**
-     * LeftCurlyのコード例です。
+     * Example of LeftCurly code.
      */
     public void example() {
         boolean condition = true;
-        if (condition)  // 中括弧が行末にありません（NG）。
+        if (condition)  // Curly bracket is not at the end of the line (incorrect).
         {
 
         } else
-        {               // 中括弧が行末にありません（NG）。
+        {               // Curly bracket is not at the end of the line (incorrect).
 
         }
 
@@ -28,10 +28,10 @@ public class LeftCurlyExample {
         {
 
         } catch (IllegalArgumentException e)
-        {               // 中括弧が行末にありません（NG）。
+        {               // Curly bracket is not at the end of the line (incorrect).
 
         } finally
-        {               // 中括弧が行末にありません（NG）。
+        {               // Curly bracket is not at the end of the line (incorrect).
 
         }
     }

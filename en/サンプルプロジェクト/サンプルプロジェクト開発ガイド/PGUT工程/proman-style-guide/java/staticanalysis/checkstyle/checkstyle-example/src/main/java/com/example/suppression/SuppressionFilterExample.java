@@ -4,20 +4,20 @@
 package com.example.suppression;
 
 /**
- * SuppressionFilterの例です。
+ * Example of SuppressionFilter.
  *
  * @author example
  * @since 1.0.0
  */
 public class SuppressionFilterExample {
 
-    // javadocコメントがありませんが、suppressions.xmlで'JavaDocMethod'チェックを
-    // 除外設定しているため、NGにはなりません。
+    // No javadoc comment, but this is not incorrect
+    // as suppressions.xml is used to set removal of the 'JavaDocMethod' check.
     public void thisMethodShouldNotBeChecked() {
         return;
     }
 
-    // javadocコメントが無いのでNGになります。
+    // Incorrect as there is no javadoc comment.
     public void thisMethodShouldBeChecked() {
     }
 }

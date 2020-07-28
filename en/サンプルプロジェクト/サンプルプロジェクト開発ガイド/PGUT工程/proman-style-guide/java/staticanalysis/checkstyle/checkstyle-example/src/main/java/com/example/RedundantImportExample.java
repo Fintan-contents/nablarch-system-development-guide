@@ -4,14 +4,14 @@
 package com.example;
 
 import java.util.List;
-import java.util.List; // importが重複しています（NG）。
+import java.util.List; // import is duplicated (incorrect).
 
-import java.lang.StringBuilder; // java.langにあるクラスをimportしています（NG）。
+import java.lang.StringBuilder; // A class in java.lang is imported (incorrect).
 
-import com.example.VisibilityModifierExample; // 同じパッケージにあるクラスをimportしています（NG）。
+import com.example.VisibilityModifierExample; // A class in the same package is imported (incorrect).
 
 /**
- * RedundantImportのコード例です。
+ * Example of RedundantImport code.
  * 
  * @author example
  * @since 1.0.0

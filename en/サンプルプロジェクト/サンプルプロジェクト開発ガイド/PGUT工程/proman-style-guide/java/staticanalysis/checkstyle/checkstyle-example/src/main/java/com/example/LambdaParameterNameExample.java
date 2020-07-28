@@ -6,7 +6,7 @@ package com.example;
 import java.util.function.Function;
 
 /**
- * LambdaParameterNameのコード例です。
+ * Example of LambdaParameterName code.
  *
  * @author example
  * @since 1.0.0
@@ -14,16 +14,16 @@ import java.util.function.Function;
 public class LambdaParameterNameExample {
 
     /**
-     * LambdaParameterNameのコード例です。
+     * Example of LambdaParameterName code.
      */
     public void example() {
-        // 先頭が大文字のアルファベットになっています（NG）。
+        // First character is an upper case letter (incorrect).
         Function<String, String> ng1 = BadName -> "NG";
 
-        // アンダースコアを使用しています（NG）。
+        // An underscore is used (incorrect).
         Function<String, String> ng2 = bad_name -> "NG";
 
-        // ルールに従った命名です（OK）。
+        // Name follows the rules (OK).
         Function<String, String> ok = goodName -> "OK";
     }
 }

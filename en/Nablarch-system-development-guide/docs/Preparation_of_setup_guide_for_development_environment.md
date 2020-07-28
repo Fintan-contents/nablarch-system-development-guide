@@ -41,6 +41,7 @@ The image of the actual guide is shown below.
 
 ### PC specifications for development
 
+
 | Required/Recommended | Item     | Spec              |
 |-----------|----------|-----------------------|
 | Required      | OS       | Windows 10 Pro 64bit  |

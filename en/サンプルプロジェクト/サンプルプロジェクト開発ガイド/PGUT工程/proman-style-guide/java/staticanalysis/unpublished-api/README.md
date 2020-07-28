@@ -222,11 +222,7 @@ Install SpotBugs Eclipse plugin from the eclipse marketplace.
 
 Open SpotBugs item from the Eclipse settings.
 
-<<<<<<< HEAD
 Open the "Plugin and misc. Settings" tab and press the "Add" button. 
-=======
-Open the "Plugin and misc. Settings" tab and press the "追加(Add)" button. 
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 Select `nablarch-testing-<version>.jar`.
 
 `nablarch-testing-<version>.jar` should be stored in the local repository of Maven. 

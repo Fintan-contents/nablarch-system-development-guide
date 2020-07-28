@@ -4,26 +4,26 @@
 package com.example;
 
 /**
- * JavadocMethodのコード例です。
+ * Example of JavadocMethod code.
  *
  * @author example
  * @since 1.0.0
  */
 public class JavadocMethodExample {
 
-    public void noJavadocComment() {  // javadocコメントがありません（NG）。
+    public void noJavadocComment() {  // No javadoc comment (incorrect).
 
     }
 
     /**
-     * 与えられた数を2倍にします。
+     * Double the assigned number.
      *
-     * Javadocコメントはありますが、@param、@returnがありません（NG）。
+     * There is a Javadoc comment but @param and @return are missing (incorrect).
      *
-     * メソッドにthrows宣言がなくても非チェック例外の@paramsタグを記載できます
-     * （Checkstyle NGとなりません）
+     * The @params tag indicating an unchecked exception can be written even if the method is not a throws declaration
+     * (this is not an incorrect Checkstyle setting)
      *
-     * @throws IllegalArgumentException 引数が負数の場合
+     * @throws IllegalArgumentException When the argument is a negative number
      */
     public int noParamAndReturnTag(int number) {
         if (number < 0) {

@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * MethodLengthのコード例です。
+ * Example of MethodLength.
  * 
  * @author example
  * @since 1.0.0
@@ -12,7 +12,7 @@ package com.example;
 public class MethodLengthExample {
 
     /**
-     * MethodLengthのコード例です（NG）。
+     * Example of MethodLength (incorrect).
      */
     public void example() {
         System.out.println(1);

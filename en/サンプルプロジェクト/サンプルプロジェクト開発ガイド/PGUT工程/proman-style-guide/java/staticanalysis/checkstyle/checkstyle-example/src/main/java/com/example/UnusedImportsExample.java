@@ -3,21 +3,21 @@
  */
 package com.example;
 
-// 使用されないimport文です（NG）。
+// Unused import text (incorrect).
 import java.math.BigDecimal;
 
-// 使用されているimport文です（OK）。
+// Used import text (OK).
 import java.util.regex.Pattern;
 
 /**
- * UnusedImportsのコード例です。
+ * Example of UnusedImports code.
  *
  * @author example
  * @since 1.0.0
  */
 public class UnusedImportsExample {
 
-    /** 英数字にマッチする正規表現 */
+    /** Regular expression matching alphanumeric characters */
     private static Pattern alphabet = Pattern.compile("^[a-zA-Z]+$");
 }
 

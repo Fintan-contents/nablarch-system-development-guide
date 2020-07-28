@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * StaticVariableNameのコード例です。
+ * Example of StaticVariableName code.
  *
  * @author example
  * @since 1.0.0
@@ -12,17 +12,17 @@ package com.example;
 public class StaticVariableNameExample {
 
     /**
-     * 先頭が大文字のアルファベットになっています（NG）。
+     * First character is an upper case letter (incorrect).
      */
     private static String BadName;
 
     /**
-     * アンダースコアを使用しています（NG）。
+     * An underscore is used (incorrect).
      */
     private static String bad_name;
 
     /**
-     * ルールに従った命名です（OK）。
+     * Name follows the rules (OK).
      */
     private static String goodName;
 }

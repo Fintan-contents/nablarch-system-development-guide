@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * VisibilityModifierのコード例です。
+ * Example of VisibilityModifier code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,27 +12,27 @@ package com.example;
 public class VisibilityModifierExample {
 
     /**
-     * publicなインスタンスフィールドを宣言しています（NG）。
+     * A public instance field is declared (incorrect).
      */
     public int ng1;
 
     /**
-     * protectedなインスタンスフィールドを宣言しています（NG）。
+     * A protected instance field is declared (incorrect).
      */
     protected int ng2;
 
     /**
-     * package privateなインスタンスフィールドを宣言しています（NG）。
+     * A package private instance field is declared (incorrect).
      */
     int ng3;
 
     /**
-     * privateなインスタンスフィールドを宣言しています（OK）。
+     * A private instance field is declared (OK).
      */
     private int ok1;
 
     /**
-     * static finalならスコープはpublicでもOKです（OK）。
+     * Scope can be public for static final (OK).
      */
     public static final int OK2 = 0;
 }

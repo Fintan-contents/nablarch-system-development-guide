@@ -5,19 +5,19 @@ package com.example;
 
 
 /**
- * NoFinalizerのコード例です。
+ * Example of NoFinalizer code.
  *
  * @author example
  * @since 1.0.0
  */
 public class NoFinalizerExample {
 
-    // finalizeメソッドをオーバライドしています（NG）。
+    // finalize method is overwritten (incorrect).
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
 
-        // （リソース解放処理）
+        // (resource deallocation process)
     }
 }
 

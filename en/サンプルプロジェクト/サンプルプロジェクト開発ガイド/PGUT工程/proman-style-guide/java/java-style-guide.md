@@ -60,7 +60,11 @@
   - [7.2.As a general rule, make instance variable private](#no7-2)
   - [7.3.Use local variables by narrowing down the scope as far as possible](#no7-3)
   - [7.4.Avoid re-assignment as far as possible and use final](#no7-4)
+<<<<<<< HEAD
   - [7.5.Do not change the argument state as far as possible](#no7-5)
+=======
+  - [7.5.Do not change the parameter state as far as possible](#no7-5)
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
   - [7.6.For using null as return value, consider the use of optional](#no7-6)
   - [7.7.Bind the appropriate type when using the class that captures type parameters such as collection](#no7-7)
   - [7.8.Consider writing the collection operations concisely using the Stream API](#no7-8)
@@ -160,7 +164,11 @@ The omission is indicated by writing `...`.
 
 ```java
 //Example of omission
+<<<<<<< HEAD
 public void someMethod(...) { //Description of arguments are omitted
+=======
+public void someMethod(...) { //Description of parameters are omitted
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
     ... //Method body is omitted
 }
 ```
@@ -359,7 +367,11 @@ private LocalDateTime updatedAt;
 In Javadoc comments for a method, describe the outline of the process performed by that method.
 Also, describe any preconditions for calling that method.
 
+<<<<<<< HEAD
 Use `@param` for description of arguments, `@return` for description of return values, and `@throws` for description of exceptions that are likely to be thrown.
+=======
+Use `@param` for description of parameters, `@return` for description of return values, and `@throws` for description of exceptions that are likely to be thrown.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 In `@throws`, writing only the Japanese name of the exception class is not sufficient.
 Describe the conditions under which the concerned exception is thrown.
@@ -378,14 +390,24 @@ Describe the conditions under which the concerned exception is thrown.
  */
 ```
 
+<<<<<<< HEAD
 For handling of `null` in arguments and return values shown below, decide which of the two is the default for the entire application in the project.
 
 - `null` is allowed, or not allowed in a argument
+=======
+For handling of `null` in parameters and return values shown below, decide which of the two is the default for the entire application in the project.
+
+- `null` is allowed, or not allowed in a parameter
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 - As a return value, `null` may be returned, or always a `non-null` value is returned
 
 Also, only when there is a deviation from the default, describe to that effect in Javadoc.
 
+<<<<<<< HEAD
 For example, if it is decided as a rule that "as default, `null` will not be allowed in a argument", describe the behavior when a argument that can receive a `null` value receives `null`.
+=======
+For example, if it is decided as a rule that "as default, `null` will not be allowed in a parameter", describe the behavior when a parameter that can receive a `null` value receives `null`.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 ```java
 /**
@@ -639,7 +661,11 @@ class Bar extends Foo {
 
 Due to the complexity, do not call own instance method from inside the constructor.
 
+<<<<<<< HEAD
 Basically, inside the constructor, only the arguments for fields should be set.
+=======
+Basically, inside the constructor, only the parameters for fields should be set.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 To implement a process, make sure that the process is completed inside the constructor.
 
 ```java
@@ -659,7 +685,11 @@ public class Foo {
 
 However, if it is required to write a very long process inside the constructor, consider methods such as implementing the process in a separate class, as shown below.
 
+<<<<<<< HEAD
 - Perform the process prior to calling the constructor and pass its result in the argument of the constructor.
+=======
+- Perform the process prior to calling the constructor and pass its result in the parameter of the constructor.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 - Inside the constructor, delegate the process to a separate class and use its result.
 
 ### <a name="no5-6">5.6.Do not call the static method by using the variable that stored the instance as a receiver</a>
@@ -993,7 +1023,11 @@ Since the abstraction level differs for each layer, though it depends on the lay
 
 Use interfaces instead of implementation classes for declaring method arguments, return values and fields published outside the class.
 
+<<<<<<< HEAD
 When arguments are declared in an implementation class, if the argument type is changed, then the code that calls the method must also be changed.
+=======
+When parameters are declared in an implementation class, if the parameter type is changed, then the code that calls the method must also be changed.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 ```java
 //Not Okay
@@ -1005,13 +1039,21 @@ public void saveItems(final ArrayList<Item> items) {
 
 ```java
 //Code that calls the saveItems method
+<<<<<<< HEAD
 //If the arguments of saveItems are changed from ArrayList to LinkedList,
+=======
+//If the parameters of saveItems are changed from ArrayList to LinkedList,
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 //This code must also be changed (Not Okay)
 final ArrayList<Item> items = ...
 dao.saveItems(items);
 ```
 
+<<<<<<< HEAD
 If the arguments are declared in the interface, the problems mentioned above do not arise as the implementation class is prepared by the caller.
+=======
+If the parameters are declared in the interface, the problems mentioned above do not arise as the implementation class is prepared by the caller.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 ```java
 //OK
@@ -1038,7 +1080,11 @@ public ArrayList<Item> findAllItems() {
 final ArrayList<Item> allitems = dao.findAllItems();
 ```
 
+<<<<<<< HEAD
 Unlike arguments, the variable type declared in the caller code type can be set to the interface.
+=======
+Unlike parameters, the variable type declared in the caller code type can be set to the interface.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 However, to avoid the possibility of declaring the variable type in the implementation class, declare the return value type in the interface as well.
 
 ```java
@@ -1073,6 +1119,7 @@ public void someMethod() {
 
 ### <a name="no6-4">6.4.Apply the overloading of method only for the omission of options</a>
 
+<<<<<<< HEAD
 Overloading the methods where only the sequence of arguments is swapped, and overloading the methods that take arguments of completely different types will complicate the code.
 
 Use method overloading only when defining methods that have omitted optional arguments.
@@ -1081,6 +1128,16 @@ Even in such a case, design the method so that the sequence of arguments is take
 ```java
 //Not Okay
 //Overload with only change in sequence of the arguments
+=======
+Overloading the methods where only the sequence of parameters is swapped, and overloading the methods that take parameters of completely different types will complicate the code.
+
+Use method overloading only when defining methods that have omitted optional parameters.
+Even in such a case, design the method so that the sequence of parameters is taken into account and subsequent parameters are omitted.
+
+```java
+//Not Okay
+//Overload with only change in sequence of the parameters
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 public void updateItem(final ItemCode code, final String name, final int version) {
     ...
 }
@@ -1096,7 +1153,11 @@ public void updateItem(final String name, final int version, final ItemCode code
 
 ```java
 //Not Okay
+<<<<<<< HEAD
 //Overload that takes arguments of completely different types
+=======
+//Overload that takes parameters of completely different types
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 public void updateItem(final ItemCode code, final String name, final int version) {
     ...
 }
@@ -1108,7 +1169,11 @@ public void updateItem(final ItemCode code, final LocalDateTime updatedAt) {
 
 ```java
 //OK
+<<<<<<< HEAD
 //Overload that omits optional arguments
+=======
+//Overload that omits optional parameters
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 public void updateItem(final ItemCode code, final String name, final int version) {
     LocalDateTime defaultUpdatedAt = ...
     updateItem(code, name, defaultUpdatedAt);
@@ -1471,16 +1536,28 @@ final String value2 = "world";
 Try analyzing if re-assign could not be allowed by adding `final` to not only in local variables, but also in fields.
 In some cases, it is necessary to define `setter` due to framework constraints. If not, please make the field such that re-assignment is not allowed as much as possible.
 
+<<<<<<< HEAD
 ### <a name="no7-5">7.5.Do not change the argument state as far as possible</a>
 
 The more local "Change of state" the code is, the whole code tends to be easy to grasp and understand.
 
 When the state of argument is changed, places with change of state increases.
+=======
+### <a name="no7-5">7.5.Do not change the parameter state as far as possible</a>
+
+The more local "Change of state" the code is, the whole code tends to be easy to grasp and understand.
+
+When the state of parameter is changed, places with change of state increases.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 ```java
 //* This is an example of code that is not recommended, and not coded this way is better
 //
+<<<<<<< HEAD
 //After calculating consumption tax, the tax is set in the argument
+=======
+//After calculating consumption tax, the tax is set in the parameter
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 //If possible, it is better for the caller to set the tax on the item just to calculate the consumption tax.
 public BigDecimal calculateTax(final Item item) {
     BigDecimal tax = item.getPrice().multiply(taxRate);
@@ -1489,7 +1566,11 @@ public BigDecimal calculateTax(final Item item) {
 }
 ```
 
+<<<<<<< HEAD
 If it is a `private` method, it is closed within the class, hence the impact range is limited. However, it is recommended not to change the argument state as much as possible in methods that are made public outside of the class, such as `public` and `protected`.
+=======
+If it is a `private` method, it is closed within the class, hence the impact range is limited. However, it is recommended not to change the parameter state as much as possible in methods that are made public outside of the class, such as `public` and `protected`.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 
 ### <a name="no7-6">7.6.For using null as return value, consider the use of optional</a>
@@ -1688,7 +1769,11 @@ final Item[] copied = values.clone();
 ```
 
 The `copyOf` method of the `java.util.Arrays` class can also be used.
+<<<<<<< HEAD
 This method can specify the length to be copied in the second argument.
+=======
+This method can specify the length to be copied in the second parameter.
+>>>>>>> 08d3e328a4a3dc4c77de8b54a2921f0835425413
 
 ```java
 //OK

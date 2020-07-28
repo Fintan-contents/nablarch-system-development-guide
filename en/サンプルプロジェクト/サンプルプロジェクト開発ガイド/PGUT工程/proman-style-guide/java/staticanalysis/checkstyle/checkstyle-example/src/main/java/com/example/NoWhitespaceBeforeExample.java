@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * NoWhitespaceBeforeのコード例です。
+ * Example of NoWhitespaceBefore code.
  *
  * @author example
  * @since 1.0.0
@@ -15,13 +15,13 @@ import java.util.List;
 public class NoWhitespaceBeforeExample {
 
     /**
-     * NoWhitespaceBeforeのコード例です。
+     * Example of NoWhitespaceBefore code.
      */
     public void example() {
-        // セミコロン前に不要な空白があります（NG）。
+        // Unnecessary white space before semicolon (incorrect).
         int i = 0 ;
 
-        // カンマの前に不要な空白があります（NG）。
+        // Unnecessary white space before comma (incorrect).
         List<String> list = Arrays.asList("foo", "bar", "buz");
     }
 }

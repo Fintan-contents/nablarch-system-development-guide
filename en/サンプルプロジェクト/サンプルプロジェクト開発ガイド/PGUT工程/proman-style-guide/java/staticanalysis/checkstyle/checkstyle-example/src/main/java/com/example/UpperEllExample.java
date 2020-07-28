@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * UpperEllのコード例です。
+ * Example of UpperEll code.
  *
  * @author example
  * @since 1.0.0
@@ -12,13 +12,13 @@ package com.example;
 public class UpperEllExample {
 
     /**
-     * UpperEllのコード例です。
+     * Example of UpperEll code.
      */
     public void example() {
-        // 整数リテラルの接尾語に小文字の'l'を使用しています（NG）。
+        // Lower case 'l' is used as the suffix of an integer literal (incorrect).
         long bad = 1l;
 
-        // 整数リテラルの接尾語に大文字の'L'を使用しています（OK）。
+        // Upper case 'L' is used as the suffix of an integer literal (OK).
         long good = 1L;
     }
 }

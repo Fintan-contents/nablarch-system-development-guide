@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * ParameterNameのコード例です。
+ * Example of ParameterName code.
  *
  * @author example
  * @since 1.0.0
@@ -12,11 +12,11 @@ package com.example;
 public class ParameterNameExample {
 
     /**
-     * ParameterNameのコード例です。
-     * 
-     * @param BadName 先頭が大文字のアルファベットになっています（NG）
-     * @param bad_name アンダースコアを使用しています（NG）
-     * @param goodName ルールに従った命名です（OK）
+     * Example of ParameterName code.
+     *
+     * @param BadName: First character is an upper case letter (incorrect)
+     * @param bad_name: An underscore is used (incorrect)
+     * @param goodName: Name follows the rules (OK)
      */
     public void example(String BadName, String bad_name, String goodName) {
     }

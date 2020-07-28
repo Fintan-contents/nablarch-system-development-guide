@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * RightCurlyのコード例です。
+ * Example of RightCurly code.
  *
  * @author example
  * @since 1.0.0
@@ -12,23 +12,23 @@ package com.example;
 public class RightCurlyExample {
 
     /**
-     * RightCurlyのコード例です。
+     * Example of RightCurly code.
      */
     public void example() {
         boolean condition = true;
         if (condition) {
 
-        }   // } と else の間に不要な改行があります（NG）。
+        }   // Unnecessary line break between }  and else (incorrect).
         else {
 
         }
 
         try {
 
-        }   // } と catch の間に不要な改行があります（NG）。
+        }   // Unnecessary line break between }  and catch (incorrect).
         catch (IllegalArgumentException e) {
             //
-        }   // } と finally の間に不要な改行があります（NG）。
+        }   // Unnecessary line break between }  and finally (incorrect).
         finally {
 
         }

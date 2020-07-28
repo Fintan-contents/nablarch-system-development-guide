@@ -4,20 +4,20 @@
 package com.example;
 
 /**
- * TodoCommentのコード例です。
+ * Example of TodoComment code.
  *
  * @author example
  * @since 1.0.0
  */
 public class TodoCommentExample {
     /**
-     * TodoCommentのコード例です。
+     * Example of TodoComment code.
      */
     public void example() {
-        // TODOコメントが残っています（NG）。
-        // TODO 処理が複雑なので後でリファクタリングが必要!
+        // A TODO comment is left (incorrect).
+        // TODO process is too complicated - refactor afterwards!
 
-        // (以下、複雑な処理が延々と続く...)
+        // (prolonged, complicated process continues below...)
     }
 
 
