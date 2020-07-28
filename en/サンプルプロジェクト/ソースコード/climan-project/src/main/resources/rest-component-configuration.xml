@@ -4,36 +4,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- テーブル定義 -->
+  <!-- Table definitions -->
   <import file="nablarch/schema-config.xml" />
 
-  <!-- コード機能 -->
+  <!-- Code features -->
   <import file="nablarch/common/code.xml"/>
 
-  <!-- 精査に使用する文字集合定義 -->
+  <!-- Character set definitions used for scanning -->
   <import file="nablarch/core/validation/charset-definition.xml" />
 
-  <!-- ClimanDomainManager 実装クラス設定 -->
+  <!-- ClimanDomainManager implementation class settings -->
   <component name="domainManager" class="com.nablarch.example.climan.common.validation.ClimanDomainManager"/>
 
-  <!-- BeanValidation実装クラス -->
+  <!-- BeanValidation implementation class -->
   <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
 
-  <!-- 環境設定ファイル -->
+  <!-- Environment settings file -->
   <config-file file="common.config" />
   <config-file file="env.config" />
 
-  <!-- データベース設定 -->
+  <!-- Database settings -->
   <!--
-  下記設定ファイルを使用することで、JNDIを用いてコネクションがルックアップされる
-  ルックアップに使用する名前は、configファイル中で、「nablarch.connectionFactory.jndiResourceName」というプレースホルダーに設定する。
+  The following settings file is used to look up connections using JNDI
+  Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for looking up in the config file.
 
-  ローカルのデータソースからコネクションを取得したい場合は、アーキタイプから生成した直後のプロジェクトに含まれるdb-for-webui_dev.xmlを参考に設定すること。
+  When acquiring a connection from a local data source, refer to db-for-webui_dev.xml in the next project generated from the archetype.
   -->
   <import file="nablarch/webui/db-for-webui.xml"/>
 
 
-  <!--パッケージマッピングの設定 -->
+  <!-- Package mapping settings -->
   <component name="packageMapping" class="nablarch.integration.router.RoutesMapping">
     <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
     <property name="methodBinderFactory">
@@ -47,12 +47,12 @@
     </property>
   </component>
 
-  <!-- ダイアレクト設定 -->
+  <!-- Dialect settings -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
   <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
 
-  <!-- ハンドラキュー構成 -->
+  <!-- Handler queue configuration -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
     <property name="handlerQueue">
       <list>
@@ -80,15 +80,15 @@
     </property>
   </component>
 
-  <!-- 初期化が必要なコンポーネント -->
+  <!-- Components requiring initialization -->
   <component name="initializer" class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
-        <!-- パッケージマッピング -->
+        <!-- Package mapping -->
         <component-ref name="packageMapping" />
-        <!-- コードのローダ -->
+        <!-- Code loader -->
         <component-ref name="codeLoader" />
-        <!-- コードのキャッシュ -->
+        <!-- Code cache -->
         <component-ref name="codeCache" />
       </list>
     </property>

@@ -6,13 +6,13 @@
          version="3.1">
 
   <context-param>
-    <!-- DIコンテナの設定ファイルパス -->
+    <!-- DI container settings file path -->
     <param-name>di.config</param-name>
     <param-value>rest-boot.xml</param-value>
   </context-param>
 
   <context-param>
-    <!-- 設定重複時の動作設定 -->
+    <!-- Operation settings when settings are duplicated -->
     <param-name>di.duplicate-definition-policy</param-name>
     <param-value>OVERRIDE</param-value>
   </context-param>

@@ -16,7 +16,7 @@ import static nablarch.test.Assertion.fail;
 import static org.junit.Assert.*;
 
 /**
- * ClientServiceのテストクラス。
+ * ClientService test class.
  */
 public class ClientServiceTest {
 
@@ -26,9 +26,9 @@ public class ClientServiceTest {
     }
 
     /**
-     * 顧客検索で検索結果が上限件数を超える場合のテスト。
+     * Test executed when the search results in a client search exceed the maximum number.
      *
-     * {@link SearchResultUpperLimitException}が送出され、上限件数が設定されていること。
+     * {@link SearchResultUpperLimitException} must be sent and a maximum number must be set.
      */
     @Test
     public void testFindClientForSearchResultUpperLimitError() {
@@ -50,9 +50,9 @@ public class ClientServiceTest {
     }
 
     /**
-     * 顧客検索で検索結果が上限件数を超えない場合のテスト。
+     * Test executed when the search results in a client search do not exceed the maximum number.
      *
-     * 検索結果が返されること。
+     * Search results are returned.
      */
     @Test
     public void testFindClient() {
@@ -74,9 +74,9 @@ public class ClientServiceTest {
     }
 
     /**
-     * 顧客登録で既に登録されているデータと重複する場合のテスト。
+     * Test executed when data has already been registered in the client registration process.
      *
-     * {@link DuplicateRegistrationException}が送出される。
+     * {@link DuplicateRegistrationException} is sent.
      */
     @Test(expected = DuplicateRegistrationException.class)
     public void testRegisterClientForDuplicateRegistrationException() {
@@ -91,9 +91,9 @@ public class ClientServiceTest {
     }
 
     /**
-     * 顧客登録で既に登録されているデータと重複しない場合のテスト。
+     * Test executed when data has not already been registered in the client registration process.
      *
-     * 登録されること。
+     * Must be registered.
      */
     @Test
     public void testRegisterClient() {

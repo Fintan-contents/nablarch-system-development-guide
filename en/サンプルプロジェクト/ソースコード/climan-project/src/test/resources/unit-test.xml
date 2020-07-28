@@ -7,36 +7,36 @@
   <import file="rest-component-configuration.xml" />
   <import file="override_dev.xml" />
 
-  <!-- テスティングフレームワークの設定 -->
+  <!-- Testing framework settings -->
   <import file="nablarch/test/test-transaction.xml"/>
 
-  <!-- TODO: 使用するDBに合せて設定してください。 -->
-  <!-- Oracle用の設定 -->
+  <!-- TODO: Set according to the database that is used. -->
+  <!-- Settings for Oracle -->
   <!--
     <import file="nablarch/test/test-db-info-oracle.xml"/>
   -->
-  <!-- 汎用のDB設定 -->
+  <!-- General database settings -->
   <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
     <property name="dataSource" ref="dataSource"/>
     <property name="schema" value="${nablarch.db.schema}"/>
   </component>
 
   <!--
-  マスタデータ復旧設定
-  マスタデータ復旧を使用する際には、いくつかの手順が必要になります。
-  設定追加・変更手順を参照して設定してください。
+  Master data recovery settings
+  The process for restoring master data consists of several steps.
+  Refer to the procedures for adding and changing settings when configuring these settings.
   -->
   <component name="masterDataRestorer"
              class="nablarch.test.core.db.MasterDataRestorer">
-    <!-- バックアップスキーマ -->
+    <!-- Backup schema -->
     <property name="backupSchema" value="customer"/>
-    <!-- 監視対象テーブル一覧 -->
+    <!-- List of tables for monitoring -->
     <property name="tablesTobeWatched">
       <list></list>
     </property>
   </component>
 
-<!-- マスタデータ復旧機能の登録 -->
+  <!-- Register master data recovery feature -->
 <!--
   <list name="testEventListeners">
     <component class="nablarch.test.RepositoryInitializer"/>
