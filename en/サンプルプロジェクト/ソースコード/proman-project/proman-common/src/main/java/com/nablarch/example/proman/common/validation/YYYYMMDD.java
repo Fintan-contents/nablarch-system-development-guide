@@ -14,9 +14,9 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 入力値が指定した形式の日付文字列であるかをバリデーションするクラス。
+ * A class for validating whether an input value is a date string in the specified format.
  * <p/>
- * 日付フォーマットのデフォルト値は「yyyyMMdd」である。
+ * The default date format is "yyyyMMdd".
  *
  * @author Nabu Rakutaro
  */
@@ -27,35 +27,35 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface YYYYMMDD {
 
     /**
-     * グループを取得する。
+     * Acquires group.
      *
-     * @return グループ
+     * @return: Group
      */
     Class<?>[] groups() default {};
 
     /**
-     * バリデーションエラー発生時に設定するメッセージ。
+     * Message set when a validation error occurs.
      *
-     * @return メッセージ
+     * @return: Message
      */
     String message() default "{com.nablarch.example.app.entity.core.validation.validator.YYYYMMDD.message}";
 
     /**
-     * Payloadを取得する。
+     * Acquires payload.
      *
      * @return Payload
      */
     Class<? extends Payload>[] payload() default {};
 
     /**
-     * 許容するフォーマット
+     * Permitted format
      *
-     * @return 指定されたフォーマット
+     * @return: Specified format
      */
     String allowFormat() default "yyyy/MM/dd";
 
     /**
-     * 複数指定用のアノテーション
+     * Annotation to specify multiple values
      * @author Nabu Rakutaro
      */
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
@@ -64,9 +64,9 @@ public @interface YYYYMMDD {
     @interface List {
 
         /**
-         * YYYYMMDDの配列を取得する。
+         * Acquires YYYYMMDD array.
          *
-         * @return 指定されたYYYYMMDDの配列
+         * @return: Specified YYYYMMDD array
          */
         YYYYMMDD[] value();
     }

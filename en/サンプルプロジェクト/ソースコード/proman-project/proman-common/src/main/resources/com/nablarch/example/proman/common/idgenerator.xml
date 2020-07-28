@@ -4,17 +4,17 @@
         xmlns="http://tis.co.jp/nablarch/component-configuration"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- デフォルトの採番クラス -->
+  <!-- Default numbering class -->
   <component name="idGenerator" class="com.nablarch.example.proman.common.id.DelegatingIdGenerator">
     <property name="delegate" ref="sequenceIdGenerator"/>
   </component>
 
-  <!-- シーケンスオブジェクトを使用する採番クラス -->
+  <!-- Numbering classes using sequence objects -->
   <component name="sequenceIdGenerator" class="nablarch.common.idgenerator.SequenceIdGenerator" />
 
-  <!-- テーブルを使用する採番クラス -->
+  <!-- Numbering classes using tables -->
   <component name="tableIdGenerator" class="nablarch.common.idgenerator.TableIdGenerator">
-    <!-- 採番テーブルの定義 -->
+    <!-- Definitions of numbering tables -->
     <property name="tableName" value="ID_GENERATE"/>
     <property name="idColumnName" value="GENERATOR_ID"/>
     <property name="noColumnName" value="GENERATED_NO"/>

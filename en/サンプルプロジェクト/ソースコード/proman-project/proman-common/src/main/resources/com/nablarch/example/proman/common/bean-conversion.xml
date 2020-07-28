@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
   <component name="conversionManager" class="nablarch.core.beans.BasicConversionManager">
-    <!-- 日付及び日時の許容するフォーマットを指定する -->
+    <!-- Specify the permitted format for date and date/time values -->
     <property name="datePatterns">
       <list>
         <value>yyyyMMdd</value>

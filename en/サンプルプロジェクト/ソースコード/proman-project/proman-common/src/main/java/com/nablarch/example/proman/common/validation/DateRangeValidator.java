@@ -4,21 +4,21 @@ import nablarch.core.util.DateUtil;
 import nablarch.core.util.StringUtil;
 
 /**
- * 開始日と終了日の関係が正しいかをバリデーションするクラス。
+ * Class for validating whether the relationship between the start date and end date is correct.
  *
  * @author Nabu Rakutaro
  */
 public class DateRangeValidator {
-    /** 開始日 */
+    /** Start date */
     private final String start;
-    /** 終了日 */
+    /** End date */
     private final String end;
 
     /**
-     * 開始日と終了日を設定するコンストラクタ。
+     * Constructor for setting start date and end date.
      *
-     * @param start 開始日
-     * @param end 終了日
+     * @param start: Start date
+     * @param end: End date
      */
     public DateRangeValidator(final String start, final String end) {
         this.start = start;
@@ -26,24 +26,24 @@ public class DateRangeValidator {
     }
 
     /**
-     * 開始日より終了日が後（同日を含む）ならtrueを返す。
-     * また、どちらかが日付形式でない場合もtrueを返す。
+     * True is returned if the end date is later than (or the same date as) the start date.
+     * True is also returned if one of the values is not in date format.
      *
-     * @return 開始日 <= 終了日 なら true
+     * @return: True if start date <= end date
      */
     public boolean isValid() {
         if (isValidDate(start) && isValidDate(end)) {
             return DateUtil.getParsedDate(start, "yyyy/MM/dd").compareTo(DateUtil.getParsedDate(end, "yyyy/MM/dd")) <= 0;
         }
-        // 日付以外はバリデーション対象外
+        // Values other than dates are not subject to validation
         return true;
     }
 
     /**
-     * 文字列が日付形式であるかをチェックする。
+     * Checks that the character string is in date format.
      *
-     * @param date 日付文字列
-     * @return 日付形式ならtrue
+     * @param date: Date string
+     * @return: True if in date format
      */
     private boolean isValidDate(final String date) {
         if (StringUtil.isNullOrEmpty(date)) {

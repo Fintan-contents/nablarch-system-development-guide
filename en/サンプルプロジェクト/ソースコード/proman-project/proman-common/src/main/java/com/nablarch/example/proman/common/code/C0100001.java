@@ -1,7 +1,7 @@
 package com.nablarch.example.proman.common.code;
 
 /**
- * 業種分類
+ * Industry classification
  * @author TIS
  */
 public final class C0100001 {
@@ -10,17 +10,17 @@ public final class C0100001 {
     }
 
     /**
-     * 農業
+     * Agriculture
      */
     public static final String CODE_01 = "01";
 
     /**
-     * 建設業
+     * Construction
      */
     public static final String CODE_02 = "02";
 
     /**
-     * 製造業
+     * Production
      */
     public static final String CODE_03 = "03";
 }

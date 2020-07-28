@@ -1,6 +1,5 @@
 package com.nablarch.example.proman.common.validation;
 
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -15,7 +14,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 金額範囲のバリデーションを行うクラス。
+ * Class for validation of range of monetary values.
  *
  * @author Nabu Rakutaro
  */
@@ -26,37 +25,37 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface MoneyRange {
 
     /**
-     * グループを取得する。
+     * Acquires group.
      *
-     * @return グループ
+     * @return: Group
      */
     Class<?>[] groups() default {};
 
     /**
-     * バリデーションエラー発生時に設定するメッセージ。
+     * Message set when a validation error occurs.
      *
-     * @return メッセージ
+     * @return: Message
      */
     String message() default "{com.nablarch.example.app.entity.core.validation.validator.MoneyRange.message}";
 
     /**
-     * Payloadを取得する。
+     * Acquires payload.
      *
      * @return Payload
      */
     Class<? extends Payload>[] payload() default {};
 
     /**
-     * 最小値を取得する。
+     * Acquires minimum value.
      *
-     * @return 最小値
+     * @return: Minimum value
      */
     long min() default 0;
 
     /**
-     * 最大値を取得する。
+     * Acquires maximum value.
      *
-     * @return 最大値
+     * @return: Maximum value
      */
     long max() default Long.MAX_VALUE;
 
