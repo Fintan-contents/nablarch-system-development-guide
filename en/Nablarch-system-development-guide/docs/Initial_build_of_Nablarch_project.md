@@ -10,39 +10,23 @@ Generate a project by referring to a [blank project](https://nablarch.github.io/
 
 ### Multi-module configuration
 
-<<<<<<< HEAD
-Depending on the system requirements, not only Web applications but also batch applications are often required.
-However, archetypes currently available are single-module projects for each processing method, such as the "Web Projects" and "Nablarch Batch Projects".
-Therefore, you need to think how to bring these multiple projects together.
-
-Conversely, classes and resources such as Entity and Domain commonly used in systems need to be extracted as a common library without duplication in Web and batch projects.
-=======
 Depending on the system requirements, not only web applications but also batch applications are often required.
 However, archetypes currently available are single-module projects for each processing method, such as the "Web Projects" and "Nablarch Batch Projects".
 Therefore, you need to think how to bring these multiple projects together.
 
 Conversely, classes and resources such as Entity and Domain commonly used in systems need to be extracted as a common library without duplication in web and batch projects.
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 
 There are two possible ways to integrate.
 
 #### Integrate into multi-module project
 
-<<<<<<< HEAD
 Integrate into a [multi-module project](https://maven.apache.org/guides/mini/guide-multiple-modules.html) consisting of multiple modules, such as Web, batch, common modules. 
-=======
-Integrate into a [multi-module project](https://maven.apache.org/guides/mini/guide-multiple-modules.html) consisting of multiple modules, such as web, batch, common modules. 
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 Manually integrate the generated archetype project for multi-modularization.
 
 
 #### Handle as an independent project
 
-<<<<<<< HEAD
-Handle Web, batch and common projects as independent single-module projects.
-=======
 Handle web, batch and common projects as independent single-module projects.
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 In this case, each project is related only by dependency, and will not have a parent-child relationship.
 
 

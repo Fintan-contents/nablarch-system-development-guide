@@ -4,25 +4,14 @@
 
 ### PC specifications for development
 
-<<<<<<< HEAD
-| Mandatory/Recommended | Item     | Spec.              |
+| Required/Recommended | Item     | Spec.              |
 | --------- | -------- | --------------------- |
-| Mandatory      | OS       | Windows 10 Pro 64bit  |
-| Mandatory      | CPU      | Core i7-8550U or higher    |
-| Mandatory      | Memory   | 8GB or more              |
-| Mandatory      | Office   | Microsoft Office 2010 |
+| Required      | OS       | Windows 10 Pro 64bit  |
+| Required      | CPU      | Core i7-8550U or higher    |
+| Required      | Memory   | 8GB or more              |
+| Required      | Office   | Microsoft Office 2010 |
 | Recommended      | Monitor   | Full HD or higher           |
 | Recommended      | Disc | SSD                   |
-=======
-| Required/Recommended | Item     | Spec                    |
-|----------------------|----------|-------------------------|
-| Required             | OS       | Windows 10 Pro 64bit    |
-| Required             | CPU      | Core i7-8550U or higher |
-| Required             | Memory   | 8GB or more             |
-| Required             | Office   | Microsoft Office 2010   |
-| Recommended          | Monitor  | Full HD or higher       |
-| Recommended          | disc     | SSD                     |
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 
 
 ## Development environment construction procedure

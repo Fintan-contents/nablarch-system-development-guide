@@ -1,10 +1,6 @@
 # Unit Test Concept (Batch)
 
-<<<<<<< HEAD
-The Web application of this project defines the test method unique to the project.
-=======
 The web application of this project defines the test method unique to the project.
->>>>>>> 2aecddaa5a1529732d5207d5a08823b5737bb34a
 （[Unit Test Concept (Web)](単体テストの考え方（Web）.md)）
 
 In principle, batches observe the [Nablarch standard test method](https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/guide/development_guide/05_UnitTestGuide/index.html).
