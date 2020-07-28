@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * NoWhitespaceAfterのコード例です。
+ * Example of NoWhitespaceAfter code.
  *
  * @author example
  * @since 1.0.0
@@ -12,11 +12,11 @@ package com.example;
 public class NoWhitespaceAfterExample {
 
     /**
-     * NoWhitespaceAfterのコード例です。
+     * Example of NoWhitespaceAfter code.
      */
     public void example() {
         int i = 100;
-        // インクリメント演算子の後ろに不要な空白があります（NG）。
+        // Unnecessary white space after increment operator (incorrect).
         ++ i;
     }
 }

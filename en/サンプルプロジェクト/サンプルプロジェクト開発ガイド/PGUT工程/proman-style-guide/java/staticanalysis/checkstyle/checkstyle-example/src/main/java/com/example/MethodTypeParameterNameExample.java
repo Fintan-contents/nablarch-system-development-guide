@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * MethodTypeParameterNameのコード例です。
+ * Example of MethodTypeParameterName code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,26 +12,26 @@ package com.example;
 public class MethodTypeParameterNameExample<T> {
 
     /**
-     * MethodTypeParameterNameのOK例です。
-     * 
-     * @param <T> 型パラメーターが大文字アルファベット1文字（OK）
+     * Example of correct MethodTypeParameterName.
+     *
+     * @param <T> type parameter is one upper case letter (OK)
      */
     public <T> void okMethod() {
     }
 
     /**
-     * MethodTypeParameterNameのNG例です。
-     * 
-     * @param <FOO> 2文字以上の名前（NG）。
+     * Example of incorrect MethodTypeParameterName.
+     *
+     * @param <FOO>: Name consists of 2 or more characters (incorrect).
      * 
      */
     public <FOO> void ngMethod1() {
     }
 
     /**
-     * MethodTypeParameterNameのNG例です。
-     * 
-     * @param <t> 小文字アルファベットの名前（NG）。
+     * Example of incorrect MethodTypeParameterName.
+     *
+     * @param <t>: Name consists of lower-case letter(s) (incorrect).
      * 
      */
     public <t> void ngMethod2() {

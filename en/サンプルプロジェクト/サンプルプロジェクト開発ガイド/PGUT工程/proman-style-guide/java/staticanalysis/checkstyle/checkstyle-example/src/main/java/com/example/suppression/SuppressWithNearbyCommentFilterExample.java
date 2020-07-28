@@ -4,7 +4,7 @@
 package com.example.suppression;
 
 /**
- * SuppressWithNearbyCommentFilterの例です。
+ * Example of SuppressWithNearbyCommentFilter.
  *
  * @author example
  * @since 1.0.0
@@ -13,13 +13,13 @@ public class SuppressWithNearbyCommentFilterExample {
 
     private int counter_;  // SUPPRESS CHECKSTYLE #12345
 
-    // javadocコメントがありませんが、該当行にCheckstyle除外コメントを
-    // 記載しているので、NGにはなりません。
+    // No javadoc comment, but this is not incorrect
+    // as a comment is used to remove Checkstyle in this line.
     public void thisMethodShouldNotBeChecked() {   // SUPPRESS CHECKSTYLE #123
 
     }
 
-    // javadocコメントが無いのでNGになります。
+    // Incorrect as there is no javadoc comment.
     public void thisMethodShouldBeChecked() {
 
     }

@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * NeedBracesのコード例です。
+ * Example of NeedBraces code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,16 +12,16 @@ package com.example;
 public class NeedBracesExample {
 
     /**
-     * NeedBracesのコード例です。
+     * Example of NeedBraces code.
      */
     public void example() {
         boolean foo = true;
-        // ブロックを { と } で囲っています（OK）。
+        // Block is surrounded with { and } (OK).
         if (foo) {
             System.out.println("Good example");
         }
 
-        // ブロックを { と } で囲っていません（NG）。
+        // Block is not surrounded with { and } (incorrect).
         if (foo)
             System.out.println("Bad example");
     }

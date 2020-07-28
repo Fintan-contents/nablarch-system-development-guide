@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * LocalFinalVariableNameのコード例です。
+ * Example of LocalFinalVariableName code.
  *
  * @author example
  * @since 1.0.0
@@ -12,14 +12,14 @@ package com.example;
 public class LocalFinalVariableNameExample {
 
     /**
-     * LocalFinalVariableNameのコード例です。
+     * Example of LocalFinalVariableName code.
      */
     public void example() {
-        // final修飾されたローカル変数をUPPER_SNAKE_CASEで命名しています（NG）。
-        final String VERY_IMPORTANT_MESSAGE = "こんにちは";
+        // Local variable modified as final is named in UPPER_SNAKE_CASE (incorrect).
+        final String VERY_IMPORTANT_MESSAGE = "Hello";
 
-        // final修飾されたローカル変数をlowerCamelCaseで命名しています（NG）。
-        final String veryImportantMessage = "さようなら";
+        // Local variable modified as final is named in lowerCamelCase (incorrect).
+        final String veryImportantMessage = "Goodbye";
     }
 
 }

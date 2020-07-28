@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * StringLiteralEqualityのコード例です。
+ * Example of StringLiteralEquality code.
  *
  * @author example
  * @since 1.0.0
@@ -12,17 +12,17 @@ package com.example;
 public class StringLiteralEqualityExample {
 
     /**
-     * StringLiteralEqualityのコード例です。
+     * Example of StringLiteralEquality code.
      *
-     * @param s 文字列
+     * @param s: String
      */
     public void example(String s) {
-        // 文字列を==で比較しています（NG）。
+        // Character string is compared with == (incorrect).
         if (s == "something") {
 
         }
 
-        // 文字列をequalsで比較しています（OK）。
+        // Character string is compared with equals (OK).
         if (s.equals("something")) {
             
         }

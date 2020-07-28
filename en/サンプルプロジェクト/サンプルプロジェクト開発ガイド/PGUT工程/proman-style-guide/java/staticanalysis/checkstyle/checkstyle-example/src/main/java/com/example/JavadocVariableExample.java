@@ -4,17 +4,17 @@
 package com.example;
 
 /**
- * JavadocVariableのコード例です。
+ * Example of JavadocVariable code.
  *
  * @author example
  * @since 1.0.0
  */
 public class JavadocVariableExample {
 
-    public static final String HELLO = "こんにちは";    // javadocコメントがありません（NG）。
+    public static final String HELLO = "Hello";    // No javadoc comment (incorrect).
 
-    /** 別れの挨拶 */
-    public static final String GOODBYE = "さようなら";  // javadocコメントがあります（OK）。
+    /** Signoff */
+    public static final String GOODBYE = "Goodbye";  // javadoc comment included （OK）.
 
 }
 

@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * LocalVariableNameのコード例です。
+ * Example of LocalVariableName code.
  *
  * @author example
  * @since 1.0.0
@@ -12,16 +12,16 @@ package com.example;
 public class LocalVariableNameExample {
 
     /**
-     * LocalVariableNameのコード例です。
+     * Example of LocalVariableName code.
      */
     public void example() {
-        // 先頭が大文字のアルファベットになっています（NG）。
+        // First character is an upper case letter (incorrect).
         String BadName = "NG";
 
-        // アンダースコアを使用しています（NG）。
+        // An underscore is used (incorrect).
         String bad_name = "NG";
 
-        // ルールに従った命名です（OK）。
+        // Name follows the rules (OK).
         String goodName = "OK";
     }
 }

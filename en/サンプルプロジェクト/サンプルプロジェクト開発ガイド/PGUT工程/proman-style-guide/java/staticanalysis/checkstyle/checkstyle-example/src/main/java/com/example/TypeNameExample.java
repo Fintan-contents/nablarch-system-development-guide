@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * TypeNameのコード例です。
+ * Example of TypeName code.
  * 
  * @author example
  * @since 1.0.0
@@ -14,7 +14,7 @@ public class TypeNameExample {
 }
 
 /**
- * 先頭が小文字のアルファベットのクラス名（NG）。
+ * The first character of the class name is a lower case letter (incorrect).
  * 
  * @author example
  * @since 1.0.0
@@ -23,7 +23,7 @@ class ngClassName {
 }
 
 /**
- * 先頭が小文字のアルファベットのインターフェース名（NG）。
+ * The first character of the interface name is a lower case letter (incorrect).
  * 
  * @author example
  * @since 1.0.0

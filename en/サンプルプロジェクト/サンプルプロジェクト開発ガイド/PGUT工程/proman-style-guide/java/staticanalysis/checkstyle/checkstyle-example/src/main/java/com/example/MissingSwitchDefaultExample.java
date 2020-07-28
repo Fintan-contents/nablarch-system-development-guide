@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * MissingSwitchDefaultのコード例です。
+ * Example of MissingSwitchDefault code.
  * 
  * @author example
  * @since 1.0.0
@@ -12,13 +12,13 @@ package com.example;
 public class MissingSwitchDefaultExample {
 
     /**
-     * MissingSwitchDefaultのコード例です。
+     * Example of MissingSwitchDefault code.
      *
-     * @param value コード例に使用する値
+     * @param value: Value used in code example
      */
     public void example(int value) {
 
-        //defaultがある（OK）
+        //There is a default (OK)
         switch (value) {
         case 0:
             System.out.println("0");
@@ -31,7 +31,7 @@ public class MissingSwitchDefaultExample {
             break;
         }
 
-        //defaultがない（NG）
+        //There is not default (NG)
         switch (value) {
         case 0:
             System.out.println("0");

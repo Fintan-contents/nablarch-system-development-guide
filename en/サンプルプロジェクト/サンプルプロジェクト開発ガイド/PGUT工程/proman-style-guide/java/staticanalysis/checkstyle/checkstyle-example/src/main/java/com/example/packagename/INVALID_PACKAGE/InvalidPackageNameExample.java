@@ -1,10 +1,10 @@
 /*
  * Header example
  */
-package com.example.packagename.INVALID_PACKAGE;    // パッケージ名が命名規約に違反しています（NG）。
+package com.example.packagename.INVALID_PACKAGE;    // Package name violates naming conventions (incorrect).
 
 /**
- * PackageNameのコード例です。
+ * Example of PackageName code.
  *
  * @author example
  * @since 1.0.0
