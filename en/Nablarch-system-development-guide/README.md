@@ -63,7 +63,7 @@ The deliverables and tasks required for project development are diverse.
 The following diagram shows the development flow in a sample project assuming system development of medium-scale. 
 Use this diagram as a reference when studying the development flow of the project (Initially, you need not understand all the elements in the diagram in the first go. It is enough to grasp that there are deliverables and tasks in every process.)
 
-- [Flow of development using Nablarch](../サンプルプロジェクト/設計書/Nablarchを使用した開発の流れ.xlsx?raw=true)
+- [Flow of development using Nablarch](../サンプルプロジェクト/設計書/Flow_of_development_using_Nablarch.xlsx?raw=true)
 
 
 ## Project plan
@@ -195,13 +195,13 @@ If you proceed with the design without any standard, the UI, such as screen layo
 (Example: Position of buttons, whether to display confirmation and completion screens, unnecessarily rich UI functions).
 To later unify these features, customer approval will be required and the features will need to be modified in parallel. 
 It may not be possible to withdraw the UI after it has been presented. In this case, there is a risk that the UI needs to be created individually in PGUT phase and the required man-hours will exceed the estimate.
-Reference：[UI standard customization](docs/UI標準のカスタマイズ.md)
+Reference：[UI standard customization](docs/UI_standard_customization.md)
 
 For an example of how to customize, refer to the following in the sample project:
 - [Design standard](../サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_方式設計/020_開発標準/010_設計標準)
 - [Test standard](../サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_方式設計/020_開発標準/020_テスト標準)
 
-For the package configuration of the application, refer to ["Package Configuration Review"](docs/パッケージ構成検討.md).
+For the package configuration of the application, refer to ["Package Configuration Review"](docs/Package_configuration_review.md).
 
 
 *1: [Application development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)
@@ -213,7 +213,7 @@ For the package configuration of the application, refer to ["Package Configurati
 The types of tests to be performed depend significantly on the characteristics of your project.
 Refer to the following items when preparing the test standards.
 
-- [Examination of test items](docs/テスト項目の検討.md)
+- [Examination of test items](docs/Examination_of_test_items.md)
 
 
 
@@ -225,20 +225,20 @@ Refer to the following items when preparing the test standards.
 Perform the initial construction of the project using Nablarch.
 Please refer here.
 
-- [Initial build of Nablarch project](./docs/Nablarchプロジェクト初期構築.md)
+- [Initial build of Nablarch project](./docs/Initial_build_of_Nablarch_project.md)
 
 ### Setting up the team development environment
 
 Set up an environment for performing development in teams, such as Git repositories and chats.
 
-- [Setting up the team development environment](./docs/チーム開発環境構築.md)
+- [Setting up the team development environment](./docs/Setting_up_the_team_development_environment.md)
 
 ### Preparation of setup guide for development environment
 
 Prepare a setup guide for the development environment to be used by application developers.
 Please refer here.
 
-- [Preparation of setup guide for development environment](./docs/開発環境構築ガイドの作成.md)
+- [Preparation of setup guide for development environment](./docs/Preparation_of_setup_guide_for_development_environment.md)
 
 
 ### Establishment of development standards
