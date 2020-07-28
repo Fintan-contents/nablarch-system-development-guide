@@ -3,7 +3,7 @@ package com.nablarch.example.climan.common.validation;
 import nablarch.core.validation.ee.DomainManager;
 
 /**
- * {@link DomainManager}の実装クラス。
+ * Implementation class of {@link DomainManager}.
  */
 public class ClimanDomainManager implements DomainManager<ClimanDomainType> {
     @Override

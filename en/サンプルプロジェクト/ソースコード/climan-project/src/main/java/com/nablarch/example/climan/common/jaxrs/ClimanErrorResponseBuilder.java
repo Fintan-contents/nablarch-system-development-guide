@@ -18,20 +18,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * {@link ErrorResponseBuilder}のカスタマイズを行うクラス。
+ * Class for customizing {@link ErrorResponseBuilder}.
  *
- * 共通で処理する例外を対象に共通エラー応答電文を返す。
+ * Returns a common error response for exceptions processed together.
  *
  * @author TIS
  */
 public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
-    /** レスポンスを書きだすコンバータ */
+    /** Converter for writing response */
     private ClimanJackson2BodyConverter climanJackson2BodyConverter;
 
     /**
-     * レスポンスを書きだすコンバータを設定する。
-     * @param climanJackson2BodyConverter レスポンスを書きだすコンバータ
+     * Set converter for writing response.
+     * @param climanJackson2BodyConverter: Converter for writing response
      */
     public void setClimanJackson2BodyConverter(ClimanJackson2BodyConverter climanJackson2BodyConverter) {
         this.climanJackson2BodyConverter = climanJackson2BodyConverter;
@@ -56,9 +56,9 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
     }
 
     /**
-     * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param e アプリケーション例外
-     * @return 共通エラー応答電文のHTTPレスポンス
+     * Generates HTTP response for common error response.
+     * @param e: Application exception
+     * @return: HTTP response for common error response
      */
     private HttpResponse creataHttpResponse(ApplicationException e) {
         List<String> messages = e.getMessages().stream().map(message -> {
@@ -73,12 +73,12 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
     }
 
     /**
-     * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param status ステータスコード
-     * @param faultCode 障害コード
-     * @param messageId メッセージID
-     * @param options メッセージの埋め込みオプション
-     * @return 共通エラー応答電文のHTTPレスポンス
+     * Generates HTTP response for common error response.
+     * @param status: Status code
+     * @param faultCode: Fault code
+     * @param messageId: Message ID
+     * @param options: Option for embedding message
+     * @return HTTP response for common error response
      */
     private HttpResponse createHttpResponse(
             HttpResponse.Status status,
@@ -89,10 +89,10 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
     }
 
     /**
-     * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param status ステータスコード
-     * @param error エラー
-     * @return 共通エラー応答電文のHTTPレスポンス
+     * Generates HTTP response for common error response.
+     * @param status: Status code
+     * @param error: Error
+     * @return HTTP response for common error response
      */
     private HttpResponse createHttpResponse(HttpResponse.Status status, Error error) {
         return new HttpResponse().setStatusCode(status.getStatusCode())
@@ -101,29 +101,29 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
     }
 
     /**
-     * エラー内容を保持するクラス。
+     * Class for retaining error details.
      */
     public static class Error {
 
-        /** 障害コード */
+        /** Fault code */
         private String faultCode;
 
-        /** メッセージ */
+        /** Message */
         private List<String> messages;
 
         /**
-         * エラー内容を生成する。
-         * @param faultCode 障害コード
-         * @param message メッセージ
+         * Generates error details.
+         * @param faultCode: Fault code
+         * @param message: Message
          */
         public Error(String faultCode, String message) {
             this(faultCode, Arrays.asList(message));
         }
 
         /**
-         * エラー内容を生成する。
-         * @param faultCode 障害コード
-         * @param messages メッセージ
+         * Generates error details.
+         * @param faultCode: Fault code
+         * @param messages: Messages
          */
         public Error(String faultCode, List<String> messages) {
             this.faultCode = faultCode;
@@ -131,16 +131,16 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
         }
 
         /**
-         * 障害コードを返す。
-         * @return 障害コード
+         * Returns fault code.
+         * @return: Fault code
          */
         public String getFaultCode() {
             return faultCode;
         }
 
         /**
-         * メッセージを返す。
-         * @return メッセージ
+         * Returns message.
+         * @return: Message
          */
         public List<String> getMessages() {
             return messages;

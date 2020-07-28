@@ -40,11 +40,11 @@
         </dependencies>
         <configuration>
           <xmlOutput>true</xmlOutput>
-          <!-- チェックを除外するフィルターファイル -->
+          <!-- Filter file for removal of checking -->
           <excludeFilterFile>spotbugs/spotbugs_exclude_for_production.xml</excludeFilterFile>
-          <!-- 使用不許可APIチェックツールの設定ファイル -->
+          <!-- Setting file for API check tools that can be set to block usage -->
           <jvmArgs>-Dnablarch-findbugs-config=spotbugs/published-config/production</jvmArgs>
-          <!-- ヒープサイズが足りない場合は増やすことも可能 -->
+          <!-- Heap size can be increased if it is insufficient -->
           <maxHeap>1024</maxHeap>
           <plugins>
             <plugin>

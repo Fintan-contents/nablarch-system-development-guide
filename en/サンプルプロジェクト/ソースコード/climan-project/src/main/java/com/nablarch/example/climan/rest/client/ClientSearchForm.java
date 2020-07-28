@@ -5,45 +5,45 @@ import nablarch.core.validation.ee.Domain;
 import java.io.Serializable;
 
 /**
- * 顧客検索のフォームクラス。
+ * Form class for searching for clients.
  */
 public class ClientSearchForm implements Serializable {
 
-    /** 顧客名 */
+    /** Client name */
     @Domain("clientName")
     private String clientName;
 
-    /** 業種コード */
+    /** Industry code */
     @Domain("industryCode")
     private String industryCode;
 
     /**
-     * 顧客名を返す。
-     * @return 顧客名
+     * Returns client names.
+     * @return: Client names
      */
     public String getClientName() {
         return clientName;
     }
 
     /**
-     * 顧客名を設定する。
-     * @param clientName 顧客名
+     * Set client names.
+     * @param clientName: Client names
      */
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
 
     /**
-     * 業種コードを返す。
-     * @return 業種コード
+     * Returns industry type code.
+     * @return: Industry type code
      */
     public String getIndustryCode() {
         return industryCode;
     }
 
     /**
-     * 業種コードを設定する。
-     * @param industryCode 業種コード
+     * Set industry code.
+     * @param industryCode: Industry code
      */
     public void setIndustryCode(String industryCode) {
         this.industryCode = industryCode;

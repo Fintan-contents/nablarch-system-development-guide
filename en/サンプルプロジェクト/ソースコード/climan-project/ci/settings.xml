@@ -4,9 +4,9 @@
       <id>ci</id>
       <properties>
         <!--
-            以下はGSPが使用する開発環境のDBの接続情報である。
-            全ての開発者が知っても差し支えない情報であるため、
-            全ての開発者が参照できるファイル(本ファイル)に記載している。
+            Below are database connection details for the development environment used by the GSP.
+            It is acceptable for all developers to know this information,
+            so the information is written in a file that all developers can reference (this file).
         -->
         <nablarch.db.url>jdbc:postgresql://postgres:5432/postgres</nablarch.db.url>
       </properties>

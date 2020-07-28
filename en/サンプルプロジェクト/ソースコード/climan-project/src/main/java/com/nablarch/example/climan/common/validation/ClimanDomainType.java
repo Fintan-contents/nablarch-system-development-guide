@@ -6,20 +6,20 @@ import nablarch.core.validation.ee.Length;
 import nablarch.core.validation.ee.SystemChar;
 
 /**
- * ドメイン定義。
+ * Domain definition.
  */
 public class ClimanDomainType {
 
-    /** 顧客ID */
+    /** Client ID */
     @Digits(integer = 10)
     private String clientId;
 
-    /** 顧客名 */
+    /** Client name */
     @Length(max = 128)
-    @SystemChar(charsetDef = "システム許容文字")
+    @SystemChar(charsetDef = "システム許容文字") // Characters permitted by the system
     private String clientName;
 
-    /** 業種コード */
+    /** Industry code */
     @CodeValue(codeId = "C0100001")
     private String industryCode;
 }

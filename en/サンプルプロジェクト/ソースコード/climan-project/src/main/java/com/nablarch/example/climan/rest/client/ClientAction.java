@@ -15,17 +15,17 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * 顧客管理を行うアクションクラス。
+ * Action class for client management.
  *
  * @author TIS
  */
 public class ClientAction {
 
     /**
-     * 顧客を検索する。
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return 検索結果
+     * Searches for clients.
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: Search results
      */
     @Produces(MediaType.APPLICATION_JSON)
     public List<Client> list(HttpRequest request, ExecutionContext context) {
@@ -40,10 +40,10 @@ public class ClientAction {
     }
 
     /**
-     * 顧客詳細を取得する。
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return 顧客詳細
+     * Acquires client details.
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: Client details
      */
     @Produces(MediaType.APPLICATION_JSON)
     public Client show(HttpRequest request, ExecutionContext context) {
@@ -58,10 +58,10 @@ public class ClientAction {
     }
 
     /**
-     * 顧客を登録する。
+     * Registers client.
      *
-     * @param form 顧客登録のフォーム
-     * @return HTTPレスポンス
+     * @param form: Client registration form
+     * @return: HTTP response
      */
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)

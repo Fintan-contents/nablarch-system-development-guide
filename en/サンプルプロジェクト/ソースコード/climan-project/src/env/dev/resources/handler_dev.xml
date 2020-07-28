@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- ハンドラキュー構成 -->
+  <!-- Handler queue configuration -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
     <property name="handlerQueue">
       <list>
@@ -18,8 +18,8 @@
 
         <component-ref name="transactionManagementHandler"/>
 
-        <!-- ホットデプロイハンドラ -->
-        <!--　TODO:開発環境で本ハンドラを使用する場合、各PJでホットデプロイ対象となるパッケージを指定すること
+        <!-- Hot deployment handler -->
+        <!--　TODO: When using this handler in a development environment, specify the packages subject to hot deployment in each project -->
         <component class="nablarch.fw.hotdeploy.HotDeployHandler">
           <property name="targetPackages">
             <list>

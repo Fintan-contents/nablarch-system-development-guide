@@ -14,15 +14,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * {@link JaxRsErrorLogWriter}のカスタマイズを行うクラス。
+ * Class for customizing {@link JaxRsErrorLogWriter}.
  *
- * 共通エラー応答電文を返す例外はログを出さないようにする。
+ * Ensures that exceptions returning a common error response do not output a log.
  *
  * @author TIS
  */
 public class ClimanJaxRsErrorLogWriter extends JaxRsErrorLogWriter {
 
-    /** レスポンスを返すためログ出力しない例外クラス */
+    /** Exceptional class for which logs are not output as responses are returned */
     private static final Set<Class> RESPONSE_EXCEPTIONS = new HashSet<Class>(
             Arrays.asList(SearchResultUpperLimitException.class,
                     DuplicateRegistrationException.class,
