@@ -14,36 +14,36 @@ import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /**
- * リクエストパラメータをformにバインドするクラス。
+ * A class for binding request parameters to forms.
  *
  * @author Tsuyoshi Kawasaki
  * @since 1.0
- * @param <T> フォームクラスの型
+ * @param <T>: Type of form class
  */
 public class FormBinder<T extends Serializable> {
 
-    /** 変換後のフォームクラス */
+    /** Converted form class */
     private final Class<T> formClass;
 
-    /** バリデーション実装 */
+    /** Implementation of validation */
     private final ValidationStrategy strategy;
 
     /**
-     * バインド元になる情報を設定する。
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return 入力元情報
+     * Set the information to be used as the source for binding.
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: Input source information
      */
     public static BindingSource from(HttpRequest request, ExecutionContext context) {
         return from(request, context, "");
     }
 
     /**
-     * バインド元になる情報を設定する。
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @param prefix リクエストパラメータのプレフィックス
-     * @return 入力元情報
+     * Set the information to be used as the source for binding.
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @param prefix: Prefix for request parameters
+     * @return: Input source information
      */
 
     public static BindingSource from(HttpRequest request, ExecutionContext context, String prefix) {
@@ -51,17 +51,17 @@ public class FormBinder<T extends Serializable> {
     }
 
     /**
-     * コンストラクタ。
-     * @param formClass フォームクラス
+     * Constructor.
+     * @param formClass: Form class
      */
     private FormBinder(Class<T> formClass) {
         this(formClass, getDefaultStrategy());
     }
 
     /**
-     * コンストラクタ。
-     * @param formClass フォームクラス
-     * @param strategy バリデーション実装
+     * Constructor.
+     * @param formClass: Form class
+     * @param strategy: Implementation of validation
      */
     private FormBinder(Class<T> formClass, ValidationStrategy strategy) {
         this.formClass = formClass;
@@ -69,26 +69,26 @@ public class FormBinder<T extends Serializable> {
     }
 
     /**
-     * バインドの入力元情報を表すクラス。
+     * Class indicating information to be used as an input source for binding.
      *
      * @author Tsuyoshi Kawasaki
      */
     public static class BindingSource {
 
-        /** リクエストパラメータのプレフィックス */
+        /** Prefix for request parameters */
         private final String prefix;
 
-        /** 実行コンテキスト */
+        /** Context for execution */
         private final ServletExecutionContext context;
 
-        /** HTTPリクエスト */
+        /** HTTP request */
         private final HttpRequest request;
 
         /**
-         * コンストラクタ。
-         * @param request HTTPリクエスト
-         * @param context 実行コンテキスト
-         * @param prefix リクエストパラメータのプレフィックス
+         * Constructor.
+         * @param request: HTTP request
+         * @param context: Context for execution
+         * @param prefix: Prefix for request parameters
          */
         BindingSource(HttpRequest request, ExecutionContext context, String prefix) {
             this.prefix = prefix;
@@ -97,10 +97,10 @@ public class FormBinder<T extends Serializable> {
         }
 
         /**
-         * 指定されたフォームへバインドを行う。
-         * @param formClass フォームクラス
-         * @param <T> フォームクラスの型
-         * @return フォーム
+         * Binds to a specified form.
+         * @param formClass: Form class
+         * @param <T>: Type of form class
+         * @return form
          */
         public <T extends Serializable> BindingResult<T> to(Class<T> formClass) {
             FormBinder<T> formBinder = new FormBinder<>(formClass);
@@ -110,18 +110,18 @@ public class FormBinder<T extends Serializable> {
     }
 
     /**
-     * {@link SystemRepository}から{@link ValidationStrategy}の実装を取得する。
-     * @return {@link ValidationStrategy}の実装
+     * Acquires implementation of {@link ValidationStrategy} from {@link SystemRepository}.
+     * @return: Implementation of {@link ValidationStrategy}
      */
     private static BeanValidationStrategy getDefaultStrategy() {
         return Objects.requireNonNull(SystemRepository.get("validationStrategy"));
     }
 
     /**
-     * 元情報からフォームへのバインディングを行う。
+     * Bindings from the source information to a form.
      *
-     * @param source 元情報
-     * @return バインディング結果
+     * @param source: Source information
+     * @return: Binding results
      */
     private BindingResult<T> bindFrom(BindingSource source) {
         InjectForm annotation = createAnnotation(formClass, source.prefix);
@@ -136,11 +136,11 @@ public class FormBinder<T extends Serializable> {
     }
 
     /**
-     * {@link InjectForm}インスタンスを生成する。
+     * Create a {@link InjectForm} instance.
      *
-     * @param formClass フォームクラス
-     * @param prefix プレフィックス
-     * @return {@link InjectForm}インスタンス
+     * @param formClass: Form class
+     * @param prefix: Prefix
+     * @return {@link InjectForm}: Instance
      */
     private static InjectForm createAnnotation(Class<? extends Serializable> formClass, String prefix) {
 
@@ -162,17 +162,17 @@ public class FormBinder<T extends Serializable> {
 
             @Override
             public String name() {
-                return "form"; // 使用しない。
+                return "form"; // Not used.
             }
 
             @Override
             public String initialize() {
-                return "";  // 使用しない。
+                return "";  // Not used.
             }
 
             @Override
             public String validate() {
-                return "";  // 使用しない。
+                return "";  // Not used.
             }
         };
     }

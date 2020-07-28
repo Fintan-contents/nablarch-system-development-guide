@@ -5,9 +5,9 @@ import nablarch.common.idgenerator.IdGenerator;
 import nablarch.core.repository.initialization.Initializable;
 
 /**
- * ID採番処理を委譲する{@link IdGenerator}実装クラス。
- * {@link IdGenerator}と{@link Initializable}を実装しており、
- * どの実装クラスでも委譲先に設定可能である。
+ * Class for implementation of {@link IdGenerator} for delegation of ID numbering process.
+ * {@link IdGenerator} and {@link Initializable} are implemented
+ * and any implementation class can be set as the delegate.
  *
  * @author Tsuyoshi Kawasaki
  */
@@ -33,9 +33,9 @@ public class DelegatingIdGenerator implements IdGenerator, Initializable {
     }
 
     /**
-     * 実際の採番処理を行う委譲先を設定する。
+     * Set the delegate for the actual numbering process.
      *
-     * @param delegate 委譲先
+     * @param delegate: Delegate
      */
     public void setDelegate(IdGenerator delegate) {
         this.delegate = delegate;

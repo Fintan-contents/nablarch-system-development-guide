@@ -1,7 +1,7 @@
 package com.nablarch.example.proman.common.code;
 
 /**
- * プロジェクト種別
+ * Project type
  * @author TIS
  */
 public final class C0200001 {

@@ -3,16 +3,16 @@ package com.nablarch.example.proman.common.validation;
 import nablarch.core.validation.ee.DomainManager;
 
 /**
- * {@link DomainManager} の実装クラス。
+ * Implementation class of {@link DomainManager}.
  * <p/>
- * ドメインを定義したBeanクラスを返却する。
+ * Returns bean class defining the domain.
  *
  * @author Nabu Rakutaro
  */
 public class ProManDomainManager implements DomainManager<ProManDomainType> {
     @Override
     public Class<ProManDomainType> getDomainBean() {
-        // ドメインBeanのClassオブジェクトを返す
+        // Returns class object for domain bean
         return ProManDomainType.class;
     }
 }

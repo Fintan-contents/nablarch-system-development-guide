@@ -6,27 +6,27 @@ import nablarch.common.dao.DaoContextFactory;
 import nablarch.core.repository.SystemRepository;
 
 /**
- * {@link DaoContext}取得用クラス
+ * Class for acquisition of {@link DaoContext}
  *
  * @author TIS
  *
  */
 public class DaoFactory {
 
-    /** {@link DaoContextFactory}を{@link SystemRepository}からルックアップする際の名前 */
+    /** Name for looking up {@link DaoContextFactory} from {@link SystemRepository} */
     private static final String DAO_CONTEXT_FACTORY = "daoContextFactory";
 
     /**
-     * 隠蔽コンストラクタ。
+     * Masked constructor.
      */
     private DaoFactory() {
     }
 
     /**
-     * {@link DaoContext}を取得する。
+     * Acquires {@link DaoContext}.
      *
-     * {@link #DAO_CONTEXT_FACTORY}で{@link SystemRepository}上に{@link DaoContextFactory}実装が登録されている場合はそのクラスを、
-     * 登録されていない場合には{@link BasicDaoContextFactory}を用いて{@link DaoContext}を生成する。
+     * When implementation of {@link DaoContextFactory} is registered on {@link SystemRepository} in {@link #DAO_CONTEXT_FACTORY}, the corresponding class is generated.
+     * If it is not registered, {@link DaoContext} is generated using {@link BasicDaoContextFactory}.
      *
      * @return DaoContext
      */

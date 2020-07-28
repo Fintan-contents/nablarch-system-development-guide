@@ -1,26 +1,26 @@
 package com.nablarch.example.climan.common.exception;
 
 /**
- * 検索結果上限エラーを表す例外。
+ * Exception indicating maximum search result error.
  *
  * @author TIS
  */
 public class SearchResultUpperLimitException extends RuntimeException {
 
-    /** 検索結果上限件数 */
+    /** Maximum number of search results */
     private long limit;
 
     /**
-     * 検索結果上限エラーを表す例外を生成する。
-     * @param limit 検索結果上限件数
+     * An exception indicating a maximum search result error is generated.
+     * @param limit Maximum number of search results
      */
     public SearchResultUpperLimitException(long limit) {
         this.limit = limit;
     }
 
     /**
-     * 検索結果上限件数を返す。
-     * @return 結果上限件数
+     * Returns maximum number of search results.
+     * @return Maximum number of results
      */
     public long getLimit() {
         return limit;

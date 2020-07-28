@@ -7,7 +7,7 @@ import nablarch.integration.jaxrs.jackson.Jackson2BodyConverter;
 import java.io.IOException;
 
 /**
- * {@link Jackson2BodyConverter}のカスタマイズを行うクラス。
+ * Class for customizing {@link Jackson2BodyConverter}.
  *
  * @author TIS
  */
@@ -19,9 +19,9 @@ public class ClimanJackson2BodyConverter  extends Jackson2BodyConverter {
     }
 
     /**
-     * オブジェクトをJSON文字列に書き出す。
-     * @param value オブジェクト
-     * @return JSON文字列
+     * The object is written in the JSON character string.
+     * @param value: Object
+     * @return: JSON character string
      */
     public String write(Object value) {
         try {

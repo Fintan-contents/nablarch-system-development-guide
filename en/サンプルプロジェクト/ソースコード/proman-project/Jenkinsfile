@@ -11,13 +11,13 @@ pipeline {
   }
   environment {
     SONAR_HOST_URL = 'http://10.0.1.133/sonarqube'
-    // 以下は開発環境の接続情報である。
-    // 全ての開発者が知っても差し支えない情報であるため、全ての開発者が参照できるファイル(本ファイル)に記載している。
+    // Below is connection information for the development environment.
+    // It is acceptable for all developers to know this information, so the information is written in a file that all developers can reference (this file).
     DEMO_HOST = '10.0.1.100'
     DEMO_PORT = '22'
     DEMO_USERNAME = 'centos'
     DEMO_PASSWORD = 'pass789-'
-    //ビルドする際のカレントディレクトリ
+    // Current directory for building
     PROJECT_CURRENT_DIR = 'サンプルプロジェクト/ソースコード/proman-project/'
   }
   stages {

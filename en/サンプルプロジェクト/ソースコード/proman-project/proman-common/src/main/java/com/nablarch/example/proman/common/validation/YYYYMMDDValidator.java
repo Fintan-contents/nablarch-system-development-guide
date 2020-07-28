@@ -7,21 +7,21 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 検証処理が実装された内部クラス。
+ * Internal class in which a verification process is implemented.
  *
  * @author Nabu Rakutaro
  */
 public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> {
 
     /**
-     * 許容するフォーマット
+     * Permitted format
      */
     private String allowFormat;
 
     /**
-     * 検証処理を初期化する。
+     * Initializes the verification format.
      *
-     * @param constraintAnnotation 対象プロパティに付与されたアノテーション
+     * @param constraintAnnotation: Annotation assigned to target property
      */
     @Override
     public void initialize(YYYYMMDD constraintAnnotation) {
@@ -29,11 +29,11 @@ public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> 
     }
 
     /**
-     * 対象の値が {@code allowFormat} で指定するフォーマットに適合しているか検証する。
+     * Verifies whether the target value complies with the format specified in {@code allowFormat}.
      *
-     * @param value   対象の値
-     * @param context バリデーションコンテキスト
-     * @return フォーマットに適合している場合 {@code true}
+     * @param value: Target value
+     * @param context: Validation context
+     * @return: {@code true} if the value complies with the format
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

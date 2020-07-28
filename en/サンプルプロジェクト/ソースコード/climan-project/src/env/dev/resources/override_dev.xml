@@ -6,9 +6,9 @@
 
   <import file="handler_dev.xml"/>
   <!--
-  db-for-webui_dev.xmlを読み込むことで、DBへのコネクションをローカルのdatasouceから取得するように構成している。
-  JNDIを使用したい場合はdb-for-webui_dev.xmlを読み込まないようにしてください。  
-  JNDIのルックアップに使用する名前は、configファイル中で、「nablarch.connectionFactory.jndiResourceName」というプレースホルダーに設定してください。
+  This is configured so that connections to the database are acquired from the local data source by loading db-for-webui_dev.xml.
+  Make sure that db-for-webui_dev.xml is not loaded if you intend to use JNDI.
+  Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for JNDI lookup in the config file.
   -->
   <import file="db-for-webui_dev.xml"/>
 

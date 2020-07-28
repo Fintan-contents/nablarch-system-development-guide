@@ -12,20 +12,20 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * {@link JaxRsHandlerListFactory}のカスタマイズを行うクラス。
+ * Class for customizing {@link JaxRsHandlerListFactory}.
  *
- * Jackson2.xの設定を変更する。
+ * Changes the setting of Jackson2.x.
  *
  * @author TIS
  */
 public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
 
-    /** {@link Handler}のリスト */
+    /** List for {@link Handler} */
     private List<Handler<HttpRequest, ?>> handlerList;
 
     /**
-     * {@link BodyConverter}を設定する。
-     * @param bodyConverter {@link BodyConverter}のリスト
+     * Set {@link BodyConverter}.
+     * @param bodyConverter: List for {@link BodyConverter}
      */
     public void setBodyConverter(BodyConverter bodyConverter) {
 

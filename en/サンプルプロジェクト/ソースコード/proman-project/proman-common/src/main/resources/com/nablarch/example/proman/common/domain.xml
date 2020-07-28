@@ -5,8 +5,7 @@
     xmlns="http://tis.co.jp/nablarch/component-configuration"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-
-  <!-- DomainManager 実装クラス設定 -->
+  <!-- DomainManager implementation class settings -->
   <component name="domainManager" class="com.nablarch.example.proman.common.validation.ProManDomainManager"/>
 
 </component-configuration>

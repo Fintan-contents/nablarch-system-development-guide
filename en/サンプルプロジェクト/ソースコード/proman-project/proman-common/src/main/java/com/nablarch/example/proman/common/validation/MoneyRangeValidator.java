@@ -6,26 +6,26 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 指定された整数の範囲の金額であることを検証するバリデータ。
+ * Validator to verify that the specified integer is a monetary value within the range.
  *
  * @author Nabu Rakutaro
  */
 public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, String> {
 
     /**
-     * 最小値
+     * Minimum value
      */
     private long min;
 
     /**
-     * 最大値
+     * Maximum value
      */
     private long max;
 
     /**
-     * 最小値・最大値を初期化する。
+     * Initializes minimum and maximum value.
      *
-     * @param constraintAnnotation 対象プロパティに付与されたアノテーション
+     * @param constraintAnnotation: Annotation assigned to target property
      */
     @Override
     public void initialize(MoneyRange constraintAnnotation) {
@@ -34,11 +34,11 @@ public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, Stri
     }
 
     /**
-     * 対象の値が{@code min}～{@code max}で指定する範囲内であるか検証する。
+     * Verifies whether the target value is within the specified range ({@code min} - {@code max}).
      *
-     * @param value   対象の値
-     * @param context バリデーションコンテキスト
-     * @return 範囲内である場合{@code true}
+     * @param value: Target value
+     * @param context: Validation context
+     * @return: {@code true} if the value is within the range
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

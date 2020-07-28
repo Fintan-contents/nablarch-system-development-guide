@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
   <!--
-   プロジェクト共通の設定
+   Common project settings
    -->
 
   <import file="com/nablarch/example/proman/common/domain.xml"/>

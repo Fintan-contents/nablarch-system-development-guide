@@ -11,8 +11,8 @@ pipeline {
   }
   environment {
     SONAR_HOST_URL = 'http://10.0.1.133/sonarqube'
-    //ビルドする際のカレントディレクトリ
-    PROJECT_CURRENT_DIR = 'サンプルプロジェクト/ソースコード/climan-project/'
+    //Current directory for building
+    PROJECT_CURRENT_DIR = 'Sample project/Source code/climan-project/'
   }
   stages {
     stage('mvn install') {

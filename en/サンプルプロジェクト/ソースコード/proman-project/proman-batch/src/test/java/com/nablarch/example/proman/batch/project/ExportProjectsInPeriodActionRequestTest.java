@@ -4,7 +4,7 @@ import com.nablarch.example.proman.test.BatchRequestTestBase;
 import org.junit.Test;
 
 /**
- * {@link ExportProjectsInPeriodAction} のテストクラス。
+ * Test class for {@link ExportProjectsInPeriodAction}.
  *
  * @author TIS
  */

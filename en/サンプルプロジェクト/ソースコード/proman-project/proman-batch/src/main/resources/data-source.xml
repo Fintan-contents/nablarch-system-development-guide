@@ -4,12 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- ダイアレクト設定 -->
-  <!-- TODO:使用するDBに合わせてダイアレクトを設定すること -->
+  <!-- Dialect settings -->
+  <!-- TODO: Set dialect according to the database being used -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
-  <!-- データソース設定 -->
-  <!-- TODO: プロジェクトで使用するDB製品にあわせた定義を設定してください。 -->
+  <!-- Database settings -->
+  <!-- TODO: Set definitions suited to the database products used in the project. -->
   <component name="dataSource"
              class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
     <property name="jdbcUrl"         value="${nablarch.db.url}"/>

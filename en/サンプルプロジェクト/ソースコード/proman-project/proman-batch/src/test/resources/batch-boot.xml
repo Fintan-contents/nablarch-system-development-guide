@@ -4,22 +4,22 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- プロダクション用の設定読み込み -->
+  <!-- Load settings for production -->
   <import file="batch-component-configuration.xml"/>
 
-  <!-- ファイルパス設定 -->
+  <!-- File path setting -->
   <import file="filepath-for-batch.xml" />
 
-  <!-- 初期化が必要なコンポーネント -->
+  <!-- Components requiring initialization -->
   <component name="initializer"
              class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
-        <!-- 業務日付コンポーネント -->
+        <!-- Business date component -->
         <component-ref name="businessDateProvider"/>
-        <!-- コードのローダ -->
+        <!-- Code loader -->
         <component-ref name="codeLoader"/>
-        <!-- コードのキャッシュ -->
+        <!-- Code cache -->
         <component-ref name="codeCache"/>
       </list>
     </property>

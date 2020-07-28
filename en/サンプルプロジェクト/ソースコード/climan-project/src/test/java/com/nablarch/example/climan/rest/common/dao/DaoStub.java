@@ -7,7 +7,7 @@ import javax.persistence.OptimisticLockException;
 import java.util.List;
 
 /**
- * {@link DaoContext}のスタブ。
+ * Stub of {@link DaoContext}.
  *
  * @author TIS
  */

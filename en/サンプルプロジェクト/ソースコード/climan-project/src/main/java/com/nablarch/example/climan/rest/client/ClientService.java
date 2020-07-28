@@ -10,7 +10,7 @@ import nablarch.core.repository.SystemRepository;
 import java.util.List;
 
 /**
- * 顧客管理を行うサービスクラス。
+ * Service class for client management.
  */
 public class ClientService {
 
@@ -18,28 +18,28 @@ public class ClientService {
     private final DaoContext daoContext;
 
     /**
-     * サービスを生成する。
+     * Generates services.
      */
     public ClientService() {
         this(DaoFactory.create());
     }
 
     /**
-     * テスト用にサービスを生成する。
-     * @param daoContext テスト用の{@link DaoContext}
+     * Generates services for testing.
+     * @param daoContext {@link DaoContext} for testing
      */
     ClientService(DaoContext daoContext) {
         this.daoContext = daoContext;
     }
 
     /**
-     * 顧客を検索する。
+     * Searches for clients.
      *
-     * 検索条件には顧客名と業種コードを指定できる。顧客IDは指定されても使用しない。
+     * Client names and industry codes can be specified as search conditions. Client IDs are not used even when specified.
      *
-     * @param condition 検索条件
-     * @return 検索結果。見つからない場合は空のリスト
-     * @throws SearchResultUpperLimitException 検索結果が上限件数を超える場合
+     * @param condition: Search conditions
+     * @return: Search results. A blank this is returned if no search results can be found
+     * @throws SearchResultUpperLimitException: Occurs when search results exceed the maximum number
      */
     public List<Client> findClient(Client condition) {
         long limit = Long.parseLong(SystemRepository.get("app.common.search.limit"));
@@ -51,21 +51,21 @@ public class ClientService {
     }
 
     /**
-     * 顧客を取得する。
+     * Acquires clients.
      *
-     * @param clientId 顧客ID
-     * @return 顧客
-     * @throws nablarch.common.dao.NoDataException 顧客が存在しない場合
+     * @param clientId: Client ID
+     * @return: Clients
+     * @throws nablarch.common.dao.NoDataException: Occurs when no clients exist
      */
     public Client findClientById(Integer clientId) {
         return daoContext.findById(Client.class, clientId);
     }
 
     /**
-     * 顧客を登録する。
+     * Registers client.
      *
-     * @param client 登録する顧客
-     * @throws DuplicateRegistrationException 既に登録されている顧客と同じ顧客名が指定された場合
+     * @param client: Client to be registered
+     * @throws DuplicateRegistrationException: Occurs when the client name that is specified is already registered
      */
     public void registerClient(Client client) {
         long count = daoContext.countBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);

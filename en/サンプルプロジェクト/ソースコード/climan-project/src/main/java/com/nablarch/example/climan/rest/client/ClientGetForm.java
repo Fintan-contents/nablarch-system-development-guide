@@ -6,26 +6,26 @@ import nablarch.core.validation.ee.Required;
 import java.io.Serializable;
 
 /**
- * 顧客詳細取得のフォームクラス。
+ * Form class for acquiring client details.
  */
 public class ClientGetForm implements Serializable {
 
-    /** 顧客ID */
+    /** Client ID */
     @Required
     @Domain("clientId")
     private String clientId;
 
     /**
-     * 顧客IDを返す。
-     * @return 顧客ID
+     * Returns client ID.
+     * @return: Client ID
      */
     public String getClientId() {
         return clientId;
     }
 
     /**
-     * 顧客IDを設定する。
-     * @param clientId 顧客ID
+     * Set client ID.
+     * @param clientId: Client ID
      */
     public void setClientId(String clientId) {
         this.clientId = clientId;

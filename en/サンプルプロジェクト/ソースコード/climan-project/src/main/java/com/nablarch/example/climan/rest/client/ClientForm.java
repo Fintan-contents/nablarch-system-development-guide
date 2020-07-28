@@ -6,47 +6,47 @@ import nablarch.core.validation.ee.Required;
 import java.io.Serializable;
 
 /**
- * 顧客登録のフォームクラス。
+ * Client registration form class.
  */
 public class ClientForm implements Serializable {
 
-    /** 顧客名 */
+    /** Client name */
     @Required
     @Domain("clientName")
     private String clientName;
 
-    /** 業種コード */
+    /** Industry code */
     @Required
     @Domain("industryCode")
     private String industryCode;
 
     /**
-     * 顧客名を返す。
-     * @return 顧客名
+     * Returns client names.
+     * @return: Client names
      */
     public String getClientName() {
         return clientName;
     }
 
     /**
-     * 顧客名を設定する。
-     * @param clientName 顧客名
+     * Set client names.
+     * @param clientName: Client names
      */
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
 
     /**
-     * 業種コードを返す。
-     * @return 業種コード
+     * Returns industry type code.
+     * @return: Industry type code
      */
     public String getIndustryCode() {
         return industryCode;
     }
 
     /**
-     * 業種コードを設定する。
-     * @param industryCode 業種コード
+     * Set industry code.
+     * @param industryCode: Industry code
      */
     public void setIndustryCode(String industryCode) {
         this.industryCode = industryCode;

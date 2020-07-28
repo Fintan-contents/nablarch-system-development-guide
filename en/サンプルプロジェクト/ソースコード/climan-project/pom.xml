@@ -14,16 +14,16 @@
   <packaging>war</packaging>
 
   <properties>
-    <!-- ソース及びclassファイルが準拠するJavaのバージョン-->
+    <!-- Version of Java used as a basis for the source and class file -->
     <java.version>1.8</java.version>
 
-    <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
+    <!-- Resource directory for each environment (to be switched according to profile) -->
     <!--suppress UnresolvedMavenProperty -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
     <version.plugins.checkstyle>3.0.0</version.plugins.checkstyle>
     <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
-    <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
+    <!-- Settings of database used by gsp-dba-maven-plugin -->
     <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
     <nablarch.db.url>jdbc:postgresql://localhost:5432/postgres</nablarch.db.url>
     <nablarch.db.adminUser>postgres</nablarch.db.adminUser>
@@ -47,19 +47,19 @@
       </plugins>
   </reporting>
   <!--
-    このプロファイルは環境を指定するものであり、相互に排他的である。
-    複数のプロファイルを同時に指定してはならない。
+    These profiles specify the environment and are mutually exclusive.
+    Multiple profiles must not be set at the same time.
   -->
   <profiles>
-    <!-- 開発環境 -->
+    <!-- Development environment -->
     <profile>
       <id>development</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <env.name>開発環境</env.name>
-        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
         <env.dir>dev</env.dir>
         <env.classifier>dev</env.classifier>
       </properties>
@@ -68,7 +68,7 @@
           <groupId>com.nablarch.framework</groupId>
           <artifactId>nablarch-fw-web-hotdeploy</artifactId>
         </dependency>
-        <!-- TODO: プロジェクトで使用するDB製品にあわせたJDBCドライバに修正してください。 -->
+        <!-- TODO: Modify the JDBC driver so that it is suited to the database products used in the project. -->
         <dependency>
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
@@ -84,23 +84,23 @@
       </dependencies>
     </profile>
 
-    <!-- 本番環境 -->
+    <!-- Full-scale operation environment -->
     <profile>
       <id>prod</id>
       <properties>
-        <env.name>本番環境</env.name>
+        <env.name>Full-scale operation environment</env.name>
         <env.dir>prod</env.dir>
         <env.classifier>prod</env.classifier>
       </properties>
     </profile>
 
     <!--
-    Nablarchのマスタデータ復旧機能用にデータを格納する際に使用するプロファイル。
-    使用の際は、以下を参照すること。
+    Profile used to store data for Nablarch's master data restoration feature.
+    Reference the following when using this.
     https://github.com/coastland/gsp-dba-maven-plugin/blob/master/recipe/backupToDifferentSchema.md
 
-    gsp-dba-pluginでは、H2の場合はデフォルトスキーマのPUBLICしか扱えないためバックアップスキーマ名にPUBLICを指定しています。
-    gsp-dba-pluginで任意のスキーマ名を指定出来るDBの場合は、バックアップスキーマ名を指定して下さい。
+    PUBLIC is specified as the backup schema name for H2 when using gsp-dba-plugin, as only PUBLIC can be handled as the default schema for H2.
+    For databases allowing any schema name to be specified when using gsp-dba-plugin, specify the backup schema name.
     -->
     <profile>
       <id>BACKUP</id>
@@ -126,7 +126,7 @@
               </execution>
             </executions>
             <dependencies>
-              <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
+              <!-- Overwritten with the JDBC driver suited to the database product used with the project -->
               <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
@@ -154,7 +154,7 @@
               <user>${nablarch.db.user}</user>
               <password>${nablarch.db.password}</password>
               <schema>${nablarch.db.schema}</schema>
-              <!-- 以下はimport-schemaゴール用のパラメータ -->
+              <!-- Below are the parameters for import-schema goals -->
               <artifactId>${dba.testDataArtifactId}</artifactId>
             </configuration>
           </plugin>
@@ -182,7 +182,7 @@
               <groupId>org.jacoco</groupId>
               <artifactId>jacoco-maven-plugin</artifactId>
               <configuration>
-                <!-- entityとdomainをカバレッジ対象から外す -->
+                <!-- Remove entity and domain from coverage -->
                 <excludes>
                   <exclude>com/nablarch/example/climan/entity/**</exclude>
                 </excludes>
@@ -231,7 +231,7 @@
               </execution>
             </executions>
             <dependencies>
-              <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
+              <!-- Overwritten with the JDBC driver suited to the database product used with the project -->
               <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
@@ -259,7 +259,7 @@
               <user>${nablarch.db.user}</user>
               <password>${nablarch.db.password}</password>
               <schema>${nablarch.db.schema}</schema>
-              <!-- 以下はimport-schemaゴール用のパラメータ -->
+              <!-- Below are the parameters for import-schema goals -->
               <artifactId>${dba.testDataArtifactId}</artifactId>
             </configuration>
           </plugin>
@@ -339,12 +339,12 @@
       <artifactId>nablarch-common-dao</artifactId>
     </dependency>
 
-    <!-- コード管理機能 -->
+    <!-- Code management feature -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-common-code-jdbc</artifactId>
     </dependency>
-    <!-- UniversalDao使用時、DBに自動採番型が存在しない場合に使用するモジュールが存在している。 -->
+    <!-- There is a module used with UniversalDao when a database does not have automatic numbering. -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-common-idgenerator-jdbc</artifactId>
@@ -370,7 +370,7 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Nablarchのテスティングフレームワークを実行するために必要なライブラリ -->
+    <!-- Library required to execute Nablarch's testing framework -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-fw-batch</artifactId>
@@ -416,9 +416,9 @@
           </dependency>
         </dependencies>
         <configuration>
-          <!-- Checkstyle設定ファイルへのパス -->
+          <!-- Path to Checkstyle setting file -->
           <configLocation>${nablarch.tools.dir}/static-analysis/checkstyle/nablarch-checkstyle.xml</configLocation>
-          <!-- Checkstyle除外対象の設定ファイルへのパス -->
+          <!-- Path to setting file of items exempt from Checkstyle -->
           <suppressionsLocation>${nablarch.tools.dir}/static-analysis/checkstyle/suppressions.xml</suppressionsLocation>
         </configuration>
       </plugin>
@@ -436,11 +436,11 @@
         </dependencies>
         <configuration>
           <xmlOutput>true</xmlOutput>
-          <!-- チェックを除外するフィルターファイル -->
+          <!-- Filter file for removal of checking -->
           <excludeFilterFile>${nablarch.tools.dir}/static-analysis/spotbugs/spotbugs_exclude_for_production.xml</excludeFilterFile>
-          <!-- 使用不許可APIチェックツールの設定ファイル -->
+          <!-- Setting file for API check tools that can be set to block usage -->
           <jvmArgs>-Dnablarch-findbugs-config=${nablarch.tools.dir}/static-analysis/spotbugs/published-config/production</jvmArgs>
-          <!-- ヒープサイズが足りない場合は増やすことも可能 -->
+          <!-- Heap size can be increased if it is insufficient -->
           <maxHeap>1024</maxHeap>
           <plugins>
             <plugin>
@@ -473,13 +473,13 @@
           </servers>
         </configuration>
       </plugin>
-      <!-- ================ここから任意で使用するツールの設定================ -->
-      <!-- gsp-dba-maven-pluginで自動生成したソースをビルド時に使用するための設定 -->
+      <!-- ================The following tool settings can be used if desired================ -->
+      <!-- Setting to use source code automatically generated by the gsp-dba-maven-plugin when building -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
       </plugin>
-      <!-- カバレッジ取得 -->
+      <!-- Get coverage -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -497,7 +497,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- ================ここまで任意で使用するツールの設定================ -->
+      <!-- ================The above tool settings can be used if desired================ -->
     </plugins>
   </build>
 </project>

@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- プロダクション用の設定読み込み -->
+  <!-- Load settings for production -->
   <import file="resident-batch-component-configuration.xml"/>
 
 </component-configuration>
