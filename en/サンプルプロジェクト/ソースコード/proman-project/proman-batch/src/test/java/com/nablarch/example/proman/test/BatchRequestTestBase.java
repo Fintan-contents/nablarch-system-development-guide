@@ -3,23 +3,23 @@ package com.nablarch.example.proman.test;
 import nablarch.test.core.batch.BatchRequestTestSupport;
 
 /**
- * 本プロジェクト専用の{@link BatchRequestTestSupport}継承クラス。<br/>
- * プロジェクト固有の共通処理を提供する。
- * 本プロジェクトにてバッチ処理方式のリクエスト単体テストを作成する場合、
- * {@link BatchRequestTestSupport}を直接継承するのではなく、
- * 本クラスを継承すること。
+ * Dedicated {@link BatchRequestTestSupport} inheritance class for this project. <br/>
+ * Provides a common process specific to the project.
+ * When creating a request unit test using batch processing in the project,
+ * this class is inherited instead of directly inheriting
+ * {@link BatchRequestTestSupport}.
  */
 public abstract class BatchRequestTestBase extends BatchRequestTestSupport {
 
-    /** コンストラクタ。 */
+    /** Constructor. */
     protected BatchRequestTestBase() {
         super();
     }
 
     /**
-     * コンストラクタ。
+     * Constructor.
      *
-     * @param testClass テストクラス
+     * @param testClass: Test class
      */
     public BatchRequestTestBase(Class<?> testClass) {
         super(testClass);
