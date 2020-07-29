@@ -1,6 +1,6 @@
 # Unit Test Concept (REST)
 
-The unit test of REST in this project is essentially the same as the [Web](./単体テストの考え方（Web）.md).
+The unit test of REST in this project is essentially the same as the [Web](./Unit_test_concept_(Web).md).
 JSP is excluded as it is not registered in REST.
 
 The method of the subfunction unit test is described as it is different.
