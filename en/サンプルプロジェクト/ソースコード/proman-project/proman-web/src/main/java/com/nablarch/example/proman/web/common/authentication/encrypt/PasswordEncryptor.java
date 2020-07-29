@@ -1,20 +1,19 @@
 package com.nablarch.example.proman.web.common.authentication.encrypt;
 
-
 /**
- * パスワードの暗号化を行うインタフェース。<br>
+ * Interface for encrypting password. <br>
  * <br>
- * 暗号化アルゴリズム毎に本インタフェースの実装クラスを作成する。
+ * Creates class for implementation of this interface for each encryption algorithm.
  *
  * @author Nabu Rakutaro
  */
 public interface PasswordEncryptor {
 
     /**
-     * パスワードを暗号化する。
-     * @param saltSeed パスワードの暗号化に使用するソルトを生成するために使用する文字列
-     * @param password 暗号化前のパスワード
-     * @return 暗号化後のパスワード
+     * Encrypts passwords.
+     * @param saltSeed: Character string used to generate salt to be used for password encryption
+     * @param password: Unencrypted password
+     * @return: Encrypted password
      */
     String encrypt(String saltSeed, String password);
 }

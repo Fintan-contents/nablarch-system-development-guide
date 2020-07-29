@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" />
-        <title>エラー画面</title>
+        <title>Error screen</title>
     </head>
 
     <body>
@@ -32,12 +32,12 @@
                     <div>
                         <n:form>
                             <div class="title-nav">
-                                <h1 class="page-title">エラー画面</h1>
+                                <h1 class="page-title">Error screen</h1>
                             </div>
                             <div class="message-area">
                                 <p>
-                                    セッションから情報を取得できませんでした。再度ログインを行なってください。<br>
-                                </p>
+                                    Information could not be acquired from session. Log in again. <br>
+                                  </p>
                             </div>
                             <div class="title-nav">
                             </div>

@@ -1,5 +1,5 @@
 <%--------------------------------------------------------------
-検索結果のリスト表示を行うタグ。
+Tags for displaying lists of search results.
 --------------------------------------------------------------%>
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="n" uri="http://tis.co.jp/nablarch" %>
@@ -7,50 +7,50 @@
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags/listSearchResult" %>
 
 <%--------------------------------------------------------------
-属性
+Attributes
 --------------------------------------------------------------%>
-<%-- 全体ラッパ --%>
+<%-- Overall wrapper --%>
 <%@ attribute name="listSearchResultWrapperCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="listSearchInfoName" required="false" rtexprvalue="true" %>
-<%-- 検索結果件数 --%>
+<%-- Number of search results --%>
 <%@ attribute name="useResultCount" required="false" rtexprvalue="true" %>
 <%@ attribute name="resultCountCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="resultCountFragment" required="false" fragment="true" %>
-<%-- ページング --%>
+<%-- Pagination --%>
 <%@ attribute name="usePaging" required="false" rtexprvalue="true" %>
 <%@ attribute name="pagingPosition" required="false" rtexprvalue="true" %>
 <%@ attribute name="pagingCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="searchUri" required="false" rtexprvalue="true" %>
-<%-- ページング(現在のページ番号) --%>
+<%-- Pagination (current page number) --%>
 <%@ attribute name="useCurrentPageNumber" required="false" rtexprvalue="true" %>
 <%@ attribute name="currentPageNumberCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="currentPageNumberFragment" required="false" fragment="true" %>
-<%-- ページング(最初) --%>
+<%-- Pagination (first) --%>
 <%@ attribute name="useFirstSubmit" required="false" rtexprvalue="true" %>
 <%@ attribute name="firstSubmitCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="firstSubmitLabel" required="false" rtexprvalue="true" %>
 <%@ attribute name="firstSubmitName" required="false" rtexprvalue="true" %>
-<%-- ページング(前へ) --%>
+<%-- Pagination (back) --%>
 <%@ attribute name="usePrevSubmit" required="false" rtexprvalue="true" %>
 <%@ attribute name="prevSubmitCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="prevSubmitLabel" required="false" rtexprvalue="true" %>
 <%@ attribute name="prevSubmitName" required="false" rtexprvalue="true" %>
-<%-- ページング(ページ番号(1 2 3 ...n)) --%>
+<%-- Pagination (page number (1 2 3 ...n)) --%>
 <%@ attribute name="usePageNumberSubmit" required="false" rtexprvalue="true" %>
 <%@ attribute name="pageNumberSubmitWrapperCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="pageNumberSubmitCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="pageNumberSubmitName" required="false" rtexprvalue="true" %>
-<%-- ページング(次へ) --%>
+<%-- Pagination (next) --%>
 <%@ attribute name="useNextSubmit" required="false" rtexprvalue="true" %>
 <%@ attribute name="nextSubmitCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="nextSubmitLabel" required="false" rtexprvalue="true" %>
 <%@ attribute name="nextSubmitName" required="false" rtexprvalue="true" %>
-<%-- ページング(最後) --%>
+<%-- Pagination (last) --%>
 <%@ attribute name="useLastSubmit" required="false" rtexprvalue="true" %>
 <%@ attribute name="lastSubmitCss" required="false" rtexprvalue="true" %>
 <%@ attribute name="lastSubmitLabel" required="false" rtexprvalue="true" %>
 <%@ attribute name="lastSubmitName" required="false" rtexprvalue="true" %>
-<%-- 検索結果 --%>
+<%-- Search results --%>
 <%@ attribute name="showResult" required="false" rtexprvalue="true" %>
 <%@ attribute name="resultSetName" required="false" rtexprvalue="true" %>
 <%@ attribute name="resultSetCss" required="false" rtexprvalue="true" %>
@@ -65,16 +65,16 @@
 <%@ attribute name="evenValue" required="false" rtexprvalue="true" %>
 
 <%--------------------------------------------------------------
-デフォルト
+Default
 --------------------------------------------------------------%>
-<%-- 全体ラッパ --%>
+<%-- Overall wrapper --%>
 <c:if test="${empty listSearchResultWrapperCss}"><n:set var="listSearchResultWrapperCss" value="nablarch_listSearchResultWrapper" scope="page" /></c:if>
 <c:if test="${empty pagingPosition}"><n:set var="pagingPosition" value="top" scope="page" /></c:if>
 <c:if test="${empty showResult}"><n:set var="showResult" value="true" scope="page" /></c:if>
-<%-- 検索結果件数 --%>
+<%-- Number of search results --%>
 <c:if test="${empty useResultCount}"><n:set var="useResultCount" value="true" scope="page" /></c:if>
 <c:if test="${empty resultCountCss}"><n:set var="resultCountCss" value="true" scope="page" /></c:if>
-<%-- ページング --%>
+<%-- Pagination --%>
 <c:if test="${empty usePaging}"><n:set var="usePaging" value="true" scope="page" /></c:if>
 
 <c:if test="${empty currentPageNumberCss}"><n:set var="currentPageNumberCss" value="form-control" scope="page" /></c:if>
@@ -94,18 +94,18 @@
 <c:if test="${empty resultSetName}"><n:set var="resultSetName" value="searchResult" scope="page" /></c:if>
 
 <%--------------------------------------------------------------
-本体処理
+Process of main unit
 --------------------------------------------------------------%>
-<%-- 全体ラッパ --%>
+<%-- Overall wrapper --%>
 <n:set var="resultSet" name="${resultSetName}" scope="page" bySingleValue="false" />
-<%-- resultSetはListを継承したクラスであるため、EL式ではindex番号以外でのアクセスができない。 --%>
-<%-- そのため、paginationを一旦別変数に保存して使用する。 --%>
+<%-- For resultSet, only the index number can be accessed using an EL formula as resultSet is a class that inherits a list. --%>
+<%-- For this reason, pagination is temporarily saved to a variable during use. --%>
 <n:set var="pagination" name="${resultSetName}.pagination" scope="page" />
 <c:if test="${resultSet != null}">
 <c:if test="${not empty listSearchInfoName}">
     <n:set var="listSearchInfo" name="${listSearchInfoName}" scope="page" bySingleValue="false" />
 </c:if>
-    <%-- ページング(top) --%>
+    <%-- Pagination (top) --%>
     <c:if test="${(not empty listSearchInfo && (usePaging == 'true')) && ((pagingPosition == 'top') || (pagingPosition == 'both'))}">
     <app:listSearchPaging resultSetName="${resultSetName}"
                         listSearchInfoName="${listSearchInfoName}"
@@ -141,7 +141,7 @@
             <div><span>&nbsp;</span></div>
         </div>
     </c:if>
-    <%-- 検索結果 --%>
+    <%-- Search results --%>
     <c:if test="${showResult}">
         <c:if test="${not empty listSearchInfo}">
             <n:set var="startPosition" value="${pagination.startPosition}" scope="page" />

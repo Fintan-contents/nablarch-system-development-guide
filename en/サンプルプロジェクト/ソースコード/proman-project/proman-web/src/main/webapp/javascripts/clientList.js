@@ -18,7 +18,7 @@ $(function () {
   })();
 
   /**
-   * 選択したクライアント情報を設定する
+   * Set the selected client information
    */
   function setClientInfo() {
     var $td = $(this).parent();
@@ -28,7 +28,7 @@ $(function () {
   }
 
   /**
-   * ダイアログ表示時のイベント
+   * Event when dialog is displayed
    */
   $modal.on('shown.bs.modal', function () {
     $searchClientName.val('');
@@ -37,7 +37,7 @@ $(function () {
   });
 
   /**
-   * ダイアログを閉じるときのイベント
+   * Event when dialog is closed
    */
   $modal.on('hidden.bs.modal', function () {
     $('div.alert-area').remove();
@@ -47,7 +47,7 @@ $(function () {
   });
   
   /**
-   * 顧客検索を行う。
+   * Search for clients.
    */
   function searchClientList() {
     $('div.alert-area').remove();
@@ -90,19 +90,19 @@ $(function () {
         $messageText.append($ul);
       } else {
         $messageArea.addClass('alert-danger');
-        $messageText.append('検索処理に失敗しました。')
+        $messageText.append('Search process failed.')
       }
       $messageArea.show();
     });
   }
 
   /**
-   * 顧客の検索処理
+   * Client search process
    */
   $clientSearchButton.click(searchClientList);
   
   /**
-   * 業種を取得する
+   * Acquires industry
    */
   function findIndustry() {
     $searchIndustryCode.empty();

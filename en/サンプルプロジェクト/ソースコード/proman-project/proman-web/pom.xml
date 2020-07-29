@@ -13,7 +13,7 @@
   <packaging>war</packaging>
 
   <properties>
-    <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
+    <!-- Resource directory for each environment (to be switched according to profile) -->
     <!--suppress UnresolvedMavenProperty -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
     <webxml.path>src/main/webapp/WEB-INF/web.xml</webxml.path>
@@ -21,18 +21,18 @@
 
   <profiles>
     <!--
-    以下のプロファイルは環境を指定するものであり、相互に排他的である。
-    複数のプロファイルを同時に指定してはならない。
+    The following profiles specify the environment and are mutually exclusive.
+    Multiple profiles must not be set at the same time.
     -->
-    <!-- 開発環境 -->
+    <!-- Development environment -->
     <profile>
       <id>development</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <env.name>開発環境</env.name>
-        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
         <env.dir>dev</env.dir>
         <env.classifier>dev</env.classifier>
       </properties>
@@ -48,12 +48,12 @@
       </dependencies>
     </profile>
 
-    <!-- デモ環境 -->
+    <!-- Demo environment -->
     <profile>
       <id>demo</id>
       <properties>
-        <env.name>開発環境</env.name>
-        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
         <env.dir>demo</env.dir>
         <env.classifier>demo</env.classifier>
       </properties>
@@ -65,11 +65,11 @@
       </dependencies>
     </profile>
 
-    <!-- 本番環境 -->
+    <!-- Full-scale operation environment -->
     <profile>
       <id>prod</id>
       <properties>
-        <env.name>本番環境</env.name>
+        <env.name>Full-scale operation environment</env.name>
         <env.dir>prod</env.dir>
         <env.classifier>prod</env.classifier>
       </properties>
@@ -128,12 +128,12 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- コード管理 -->
+    <!-- Code management -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-common-code-jdbc</artifactId>
     </dependency>
-    <!-- UniversalDao使用時、DBに自動採番型が存在しない場合に使用するモジュールが存在している。 -->
+    <!-- There is a module used with UniversalDao when a database does not have automatic numbering. -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-common-idgenerator-jdbc</artifactId>
@@ -205,7 +205,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <!-- MANIFEST.MFでClass-Pathを指定すると、依存jar内で定義されているtaglibのuriを正しく解決してくれない。 -->
+          <!-- When Class-Path is specified using MANIFEST.MF, the uri of the taglib defined in the dependency jar is not resolved correctly. -->
           <useManifestOnlyJar>false</useManifestOnlyJar>
         </configuration>
       </plugin>
@@ -250,12 +250,12 @@
         </executions>
       </plugin>
 
-      <!-- ant経由でJSP静的解析ツールを起動する -->
+      <!-- Start the JSP static analysis tool via ant -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
       </plugin>
-      <!-- カバレッジ取得 -->
+      <!-- Get coverage -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -269,7 +269,7 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
       </plugin>
 
-      <!-- waitt pluginでエラー発生するための暫定回避策 -->
+      <!-- Preliminary measure to avoid errors occurring in the waitt plugin -->
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>

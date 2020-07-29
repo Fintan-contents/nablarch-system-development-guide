@@ -9,18 +9,18 @@ import nablarch.fw.web.HttpResponse;
 import java.util.Objects;
 
 /**
- * ログイン状態チェックハンドラ 。
+ * Handler to check login status.
  *
  * @author Nabu Rakutaro
  */
 public class LoginUserPrincipalCheckHandler implements Handler<HttpRequest, Object> {
 
     /**
-     * セッションからユーザ情報を取得できなかった場合は、ログイン画面を表示。
+     * The login screen is displayed if the user information cannot be acquired from the session.
      *
-     * @param request リクエストデータ
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: Request data
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     @Override
     public Object handle(HttpRequest request, ExecutionContext context) {

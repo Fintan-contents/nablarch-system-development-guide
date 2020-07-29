@@ -5,13 +5,13 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
          version="3.1">
   <context-param>
-    <!-- DIコンテナの設定ファイルパス -->
+    <!-- DI container settings file path -->
     <param-name>di.config</param-name>
     <param-value>web-boot.xml</param-value>
   </context-param>
 
   <context-param>
-    <!-- 設定重複時の動作設定 -->
+    <!-- Operation settings when settings are duplicated -->
     <param-name>di.duplicate-definition-policy</param-name>
     <param-value>OVERRIDE</param-value>
   </context-param>
@@ -30,10 +30,10 @@
   </filter>
 
   <!--
-    以下のURLをアプリケーションに応答させる設定。
-    ・/action/から始まるURL
-    ・コンテキストルート直下
-    (他のURL(画像等のURL)は、APサーバが応答する)
+    Settings in which the following URL responds to applications.
+    ・URLs beginning with /action/
+    ・Immediately below context root
+    (The AP server responds to other URLs (URLs for images, etc.))
   -->
   <filter-mapping>
     <filter-name>entryPoint</filter-name>
@@ -74,7 +74,7 @@
     <location>/WEB-INF/view/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp</location>
   </error-page>
 
-  <!-- tldを指定する場合はコメントアウト
+  <!-- Commented out if tld is specified
   <jsp-config>
       <taglib>
           <taglib-uri>http://tis.co.jp/nablarch</taglib-uri>

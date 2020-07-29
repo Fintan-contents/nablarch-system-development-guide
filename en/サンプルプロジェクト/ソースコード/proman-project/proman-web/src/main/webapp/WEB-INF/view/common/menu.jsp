@@ -6,17 +6,17 @@
 <div class="four wide column row">
     <div class="ui vertical menu">
         <div class="item">
-            <div class="header">プロジェクト管理</div>
+            <div class="header">Project management</div>
             <div class="menu">
-                <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">プロジェクト検索</n:a>
-                <n:a id="projectCreatekLink" href="/app/project/register" cssClass="item">プロジェクト登録</n:a>
+                <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">Project search</n:a>
+                <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">Project registration</n:a>
             </div>
         </div>
         <div class="item">
-            <div class="header">顧客管理</div>
+            <div class="header">Client management</div>
             <div class="menu">
-                <n:a id="clientSearchkLink" href="#" cssClass="item">顧客検索</n:a>
-                <n:a id="clientCreatekLink" href="#" cssClass="item">顧客登録</n:a>
+                <n:a id="clientSearchkLink" href="#" cssClass="item">Client search</n:a>
+                <n:a id="clientCreatekLink" href="#" cssClass="item">Register client</n:a>
             </div>
         </div>
         <div class="item">

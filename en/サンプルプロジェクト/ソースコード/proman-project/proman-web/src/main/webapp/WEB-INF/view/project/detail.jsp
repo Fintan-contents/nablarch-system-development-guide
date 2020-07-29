@@ -16,7 +16,7 @@
     <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></n:script>
     <n:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></n:script>
     <title>
-        プロジェクト詳細 | Proman
+        Project details | Proman
     </title>
     <n:script type="text/javascript">
         $(function(){
@@ -32,14 +32,14 @@
             <n:include path="/WEB-INF/view/common/menu.jsp" />
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト詳細</div>
+                    <div class="ui huge header">Project details</div>
                 </div>
                 <div class="sixteen wide column row">
                     <n:form cssClass="ui form">
                         <n:plainHidden name="project.projectId" id="projectId"/>
                         <div class="two fields">
                             <div class="field">
-                                <label>事業部/部門</label>
+                                <label>Division/department</label>
                                 <div class="field">
                                     <n:write name="project.divisionName"/>
                                 </div>
@@ -52,18 +52,18 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label>PJ名</label>
+                            <label>Project name</label>
                             <n:write name="project.projectName"/>
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>PJ種別</label>
+                                <label>Project type</label>
                                 <div class="field">
                                     <n:code name="project.projectType" codeId ="C0300001" pattern="PATTERN01" />
                                 </div>
                             </div>
                             <div class="field">
-                                <label>PJ分類</label>
+                                <label>Project classification</label>
                                 <div class="field">
                                     <n:code name="project.projectClass" codeId ="C0200001" pattern="PATTERN01" />
                                 </div>
@@ -71,11 +71,11 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>売上高</label>
-                                <n:write value="${n:format('number', project.sales, '###,###,### 千円')}"/>
+                                <label>Sales</label>
+                                <n:write value="${n:format('number', project.sales, '###,###,###,000 yen')}"/>
                             </div>
                             <div class="field">
-                                <label>顧客</label>
+                                <label>Client</label>
                                 <div class="ui action input">
                                 <n:write name="project.clientId"/>
                                 </div>
@@ -93,29 +93,29 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>開始日</label>
+                                <label>Start date</label>
                                 <n:write value="${n:formatByDefault('dateTime', project.projectStartDate)}"/>
                             </div>
                             <div class="field">
-                                <label>終了日</label>
+                                <label>End date</label>
                                 <n:write value="${n:formatByDefault('dateTime', project.projectEndDate)}"/>
                             </div>
                         </div>
                         <div class="field text">
-                            <label>備考</label>
+                            <label>Note</label>
                             <n:write name="project.note"/>
                         </div>
                         <br>
                         <div class="four fields">
                             <div class="field centered aligned">
-                                <n:a id="returnToList" href="#" cssClass="fluid ui primary button">戻る</n:a>
+                                <n:a id="returnToList" href="#" cssClass="fluid ui primary button">Back</n:a>
                             </div>
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">
-                                <n:button uri="/action/ProjectUpdate/index/${project.projectId}" cssClass="fluid ui primary button">更新</n:button>
+                                <n:button uri="/action/ProjectUpdate/index/${project.projectId}" cssClass="fluid ui primary button">Update</n:button>
                             </div>
                             <div class="field centered aligned">
-                                <n:button uri="/action/ProjectDelete/confirmDeletion/${project.projectId}" cssClass="fluid ui youtube button">削除</n:button>
+                                <n:button uri="/action/ProjectDelete/confirmDeletion/${project.projectId}" cssClass="fluid ui youtube button">Delete</n:button>
                             </div>
                         </div>
                     </n:form>

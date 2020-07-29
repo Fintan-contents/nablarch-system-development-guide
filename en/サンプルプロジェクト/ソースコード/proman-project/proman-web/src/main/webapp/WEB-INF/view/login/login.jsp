@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" />
-        <title>ログイン</title>
+        <title>Login</title>
     </head>
 
     <body>
@@ -29,33 +29,33 @@
             <div class="ui grid container">
                 <div class="twelve wide column row">
                     <div class="sixteen wide column row">
-                        <div class="ui huge header">ログイン</div>
+                        <div class="ui huge header">Login</div>
                         </br>
                     </div>
                     <div class="sixteen wide column row">
                         <n:form cssClass="ui form">
-                            <%-- エラー表示領域 --%>
+                            <%-- Error display area --%>
                             <div class="message-area margin-top">
                                 <n:errors filter="global" cssClass="message-error"/>
                             </div>
                             <div class="two fields">
                                 <div class="required field">
-                                    <label>ログインID</label>
-                                    <n:text name="loginId" cssClass="form-control" errorCss="input-error" placeholder="ログインID"/>
-                                    <%-- エラー表示領域 --%><n:error errorCss="message-error" name="loginId" /><span>&nbsp;</span>
+                                    <label>Login ID</label>
+                                    <n:text name="loginId" cssClass="form-control" errorCss="input-error" placeholder="Login ID"/>
+                                    <%-- Error display area --%><n:error errorCss="message-error" name="loginId" /><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="two fields">
                                 <div class="required field">
-                                    <label>パスワード</label>
-                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" autocomplete="off"/>
-                                    <%-- エラー表示領域 --%><n:error errorCss="message-error" name="userPassword" /><span>&nbsp;</span>
+                                    <label>Password</label>
+                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="Password" autocomplete="off"/>
+                                    <%-- Error display area --%><n:error errorCss="message-error" name="userPassword" /><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="six fields">
                                 <div class="field centered aligned">&nbsp;</div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/app/login" cssClass="fluid ui primary button" allowDoubleSubmission="false">ログイン</n:button>
+                                    <n:button uri="/app/login" cssClass="fluid ui primary button" allowDoubleSubmission="false">Login</n:button>
                                 </div>
                             </div>
                         </n:form>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-/* -------------------- スライドメニュー -------------------- */
+/* -------------------- Sliding menus -------------------- */
 #slide_panel {
     position: absolute;
     top: 110px;
@@ -31,7 +31,7 @@ div.active {
     background-position: 0px 0px;
 }
 
-/* -------------------- オリジナルのツリービュー定義 -------------------- */
+/* -------------------- Definitions of original tree view -------------------- */
 .treeview-custom ul {
     margin: 0px;
     padding: 0px;

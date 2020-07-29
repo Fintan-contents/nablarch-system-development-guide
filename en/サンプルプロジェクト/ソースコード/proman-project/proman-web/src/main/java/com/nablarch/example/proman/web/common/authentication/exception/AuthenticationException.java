@@ -1,11 +1,10 @@
 package com.nablarch.example.proman.web.common.authentication.exception;
 
-
 /**
- * ユーザの認証に失敗した場合に発生する例外。<br>
+ * Exception occurring when user authentication fails. <br>
  * <br>
- * 認証方式に応じて、本クラスを継承した例外クラスを作成する。<br>
- * 本クラス及びサブクラスでは、ユーザへ提示するメッセージの作成に必要な情報を保持し、メッセージの作成は行わない。
+ * An exception class inheriting this class is created according to the authentication method. <br>
+ * The information required to create the message to be submitted to the user(s) is retained in this class and its subclasses, and the message is not sent.
  * @author Nabu Rakutaro
  */
 public class AuthenticationException extends RuntimeException {

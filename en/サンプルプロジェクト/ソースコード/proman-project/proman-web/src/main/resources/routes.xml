@@ -8,7 +8,7 @@
     </scope>
 
     <scope module="project">
-        <!-- 登録処理 -->
+        <!-- Registration process -->
         <get  path="/app/project/register" to="ProjectCreate#index"/>
         <post path="/app/project/confirmRegistration" to="ProjectCreate#confirmRegistration"/>
         <post path="/app/project/register" to="ProjectCreate#register"/>

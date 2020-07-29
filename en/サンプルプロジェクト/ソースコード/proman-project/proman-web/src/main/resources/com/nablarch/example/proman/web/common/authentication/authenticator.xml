@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-認証用の設定ファイル
+Authentication settings file
 -->
 <component-configuration
     xmlns="http://tis.co.jp/nablarch/component-configuration"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- 認証モジュールの設定 -->
+  <!-- Authentication module settings -->
   <component name="authenticator"
       class="com.nablarch.example.proman.web.common.authentication.SystemAccountAuthenticator">
     <property name="dbManager">
@@ -18,7 +18,7 @@
         <property name="connectionFactory" ref="connectionFactory" />
       </component>
     </property>
-    <!-- ユーザIDをロックする認証失敗回数 -->
+    <!-- Number of authentication failures before locking the user ID -->
     <property name="failedCountToLock" value="3" />
   </component>
 

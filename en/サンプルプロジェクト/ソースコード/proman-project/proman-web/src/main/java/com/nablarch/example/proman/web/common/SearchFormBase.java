@@ -3,34 +3,33 @@ package com.nablarch.example.proman.web.common;
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.Required;
 
-
 /**
- * 基本フォームクラス。
+ * Basic form class.
  *
  * @author Nabu Rakutaro
  */
 public abstract class SearchFormBase {
 
     /**
-     * ページ番号
+     * Page number
      */
     @Required
     @Domain("pageNumber")
     private String pageNumber;
 
     /**
-     * ページ番号を取得する。
+     * Acquires page number.
      *
-     * @return ページ番号
+     * @return: Page number
      */
     public String getPageNumber() {
         return pageNumber;
     }
 
     /**
-     * ページ番号を設定する。
+     * Set the page number.
      *
-     * @param pageNumber 設定したいページ番号
+     * @param pageNumber: Page number to be set
      */
     public void setPageNumber(String pageNumber) {
         this.pageNumber = pageNumber;

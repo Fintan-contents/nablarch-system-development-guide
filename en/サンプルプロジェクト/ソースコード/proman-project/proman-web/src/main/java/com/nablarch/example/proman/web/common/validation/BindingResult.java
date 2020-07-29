@@ -5,67 +5,67 @@ import nablarch.core.message.ApplicationException;
 import java.io.Serializable;
 
 /**
- * リクエストパラメータからformへのバインド結果を表すインタフェース。
+ * Interface indicating resulting of binding from request parameters to forms.
  *
- * @param <T> フォームクラスの型
+ * @param <T>: Type of form class
  * @author Tsuyoshi Kawasaki
  */
 public interface BindingResult<T extends Serializable> {
 
     /**
-     * バリデーション結果が妥当であるか判定する。
-     * @return バリデーションに成功している場合、真
+     * Indicates whether validation results are suitable.
+     * @return: True when validation is successful
      */
     boolean isValid();
 
     /**
-     * バリデーション結果が妥当でない場合、例外を送出する。
-     * {@link nablarch.fw.web.interceptor.OnError}で画面遷移させる用途等に使用する。
-     * バリデーション結果が妥当である場合、何も起こらない。
+     * An exception is sent when the validation results are unsuitable.
+     * Used for purposes such as screen transitions for {@link nablarch.fw.web.interceptor.OnError}.
+     * If the validation results are suitable, nothing happens.
      *
-     * このメソッドの呼び出しは以下のコードと等価である。
+     * Calling with this method is equivalent to the following code.
      * <pre>
      *     if (!bindingResult.isValid()) {
      *         throwApplicationException();
      *     }
      * </pre>
      *
-     * @throws ApplicationException バリデーション結果を格納した例外
+     * @throws ApplicationException: Exception where validation results are stored
      */
     void abortIfInvalid();
 
     /**
-     * バリデーションエラーのメッセージを格納した{@link ApplicationException}を送出する。
-     * {@link nablarch.fw.web.interceptor.OnError}で画面遷移させる等の用途に使用する。
-     * バリデーション成功時に本メソッドを起動すると例外が発生する(通常プログラムバグ)。
+     * {@link ApplicationException} is sent, containing a validation error message.
+     * Used for purposes such as screen transitions for {@link nablarch.fw.web.interceptor.OnError}.
+     * An exception occurs when this method is started on successful validation (standard program bug).
      *
-     * @throws ApplicationException バリデーションが失敗している場合、必ず送出される
-     * @throws IllegalStateException バリデーションが成功しているにもかかわらず本メソッドを起動した場合
+     * @throws ApplicationException: Always sent when validation fails
+     * @throws IllegalStateException: When this method is started regardless of successful validation
      */
     void throwApplicationException();
 
     /**
-     * バリデーション結果が妥当であるフォームを取得する。
-     * バリデーション失敗時に本メソッドを起動すると例外が発生する(通常プログラムバグ)。
+     * Acquires forms with suitable validation results.
+     * An exception occurs when this method is started on unsuccessful validation (standard program bug).
      *
-     * @return フォーム
-     * @throws IllegalStateException バリデーション結果が妥当でない場合
+     * @return form
+     * @throws IllegalStateException: When validation results are unsuitable
      */
     T getValidForm();
 
     /**
-     * バインディング結果を表すクラス。
-     * @param <T> フォームクラスの型
+     * Class indicating binding results.
+     * @param <T>: Type of form class
      * @author Tsuyoshi Kawasaki
      */
     class InvalidBindingResult<T extends Serializable> implements BindingResult<T> {
 
-        /** バリデーションで発生した例外 */
+        /** Exception occurring in validation */
         private final ApplicationException originalException;
 
         /**
-         * コンストラクタ。
-         * @param exception バリデーションで発生した例外
+         * Constructor.
+         * @param exception: Exception occurring in validation
          */
         InvalidBindingResult(ApplicationException exception) {
             this.originalException = exception;
@@ -83,7 +83,7 @@ public interface BindingResult<T extends Serializable> {
 
         @Override
         public void throwApplicationException() {
-            // スタックトレースを作り直すため、例外を生成しなおす。
+            // Exception is generated again to recreate stack tracing.
             throw new ApplicationException(originalException.getMessages());
         }
 
@@ -96,18 +96,18 @@ public interface BindingResult<T extends Serializable> {
     }
 
     /**
-     * バインディング結果を表すクラス。
-     * @param <T> フォームクラスの型
+     * Class indicating binding results.
+     * @param <T>: Type of form class
      * @author Tsuyoshi Kawasaki
      */
     class ValidBindingResult<T extends Serializable> implements BindingResult<T> {
 
-        /** フォーム */
+        /** Form */
         private final T validForm;
 
         /**
-         * コンストラクタ。
-         * @param form validなフォーム
+         * Constructor.
+         * @param form: Valid form
          */
         ValidBindingResult(T form) {
             this.validForm = form;
@@ -120,7 +120,7 @@ public interface BindingResult<T extends Serializable> {
 
         @Override
         public void abortIfInvalid() {
-            // バリデーションに成功しているため何もしない。
+            // No action is needed, as validation is successful.
         }
 
         @Override

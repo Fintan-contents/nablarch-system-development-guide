@@ -8,320 +8,320 @@ import javax.validation.constraints.AssertTrue;
 import java.io.Serializable;
 
 /**
- * プロジェクト登録フォーム。
+ * Project registration form.
  *
  * @author Nabu Rakutaro
  */
 public class ProjectCreateForm implements Serializable {
 
     /**
-     * シリアルバージョンUID
+     * Serial version UID
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * プロジェクト名
+     * Project name
      */
     @Required
     @Domain("projectName")
     private String projectName;
 
     /**
-     * プロジェクト種別
+     * Project type
      */
     @Required
     @Domain("projectType")
     private String projectType;
 
     /**
-     * プロジェクト分類
+     * Project classification
      */
     @Required
     @Domain("projectClass")
     private String projectClass;
 
     /**
-     * プロジェクト開始日付
+     * Project start date
      */
     @Required
     @Domain("date")
     private String projectStartDate;
 
     /**
-     * プロジェクト終了日付
+     * Project end date
      */
     @Required
     @Domain("date")
     private String projectEndDate;
 
     /**
-     * 事業部ID
+     * Division ID
      */
     @Required
     @Domain("organizationId")
     private String divisionId;
 
     /**
-     * 部門ID
+     * Organization ID
      */
     @Required
     @Domain("organizationId")
     private String organizationId;
 
     /**
-     * 顧客ID
+     * Client ID
      */
-    //TODO:顧客選択が実装されたら必須にする。
+    //TODO: Make this a required item when customer selection is implemented.
     //@Required
     @Domain("id")
     private String clientId;
 
     /**
-     * プロジェクトマネージャー名
+     * Project manager name
      */
     @Required
     @Domain("userName")
     private String projectManager;
 
     /**
-     * プロジェクトリーダー名
+     * Project leader name
      */
     @Required
     @Domain("userName")
     private String projectLeader;
 
     /**
-     * 備考
+     * Note
      */
     @Domain("note")
     private String note;
 
     /**
-     * 売上高
+     * Sales
      */
     @Domain("amountOfMoney")
     private String sales;
 
     /**
-     * プロジェクト名を取得する。
+     * Acquires project name.
      *
-     * @return プロジェクト名
+     * @return: Project name
      */
     public String getProjectName() {
         return projectName;
     }
 
     /**
-     * プロジェクト名を設定する。
+     * Set project name.
      *
-     * @param projectName 設定するプロジェクト名
+     * @param projectName: Project name to be set
      */
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
 
     /**
-     * プロジェクト種別を取得する。
+     * Acquires project type.
      *
-     * @return プロジェクト種別
+     * @return: Project type
      */
     public String getProjectType() {
         return projectType;
     }
 
     /**
-     * プロジェクト種別を設定する。
+     * Set project type.
      *
-     * @param projectType 設定するプロジェクト種別
+     * @param projectType: Project type to be set
      */
     public void setProjectType(String projectType) {
         this.projectType = projectType;
     }
 
     /**
-     * プロジェクト分類を取得する。
+     * Acquires project classification.
      *
-     * @return プロジェクト分類
+     * @return: Project classification
      */
     public String getProjectClass() {
         return projectClass;
     }
 
     /**
-     * プロジェクト分類を設定する。
+     * Set project classification.
      *
-     * @param projectClass 設定するプロジェクト分類
+     * @param projectClass: Project classification to be set
      */
     public void setProjectClass(String projectClass) {
         this.projectClass = projectClass;
     }
 
     /**
-     * プロジェクト開始日付を取得する。
+     * Acquires project start date.
      *
-     * @return プロジェクト開始日付
+     * @return: Project start date
      */
     public String getProjectStartDate() {
         return projectStartDate;
     }
 
     /**
-     * プロジェクト開始日付を設定する。
+     * Set project start date.
      *
-     * @param projectStartDate 設定するプロジェクト開始日付
+     * @param projectStartDate: Project start date to be set
      */
     public void setProjectStartDate(String projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
 
     /**
-     * プロジェクト終了日付を取得する。
+     * Acquires project end date.
      *
-     * @return プロジェクト終了日付
+     * @return: Project end date
      */
     public String getProjectEndDate() {
         return projectEndDate;
     }
 
     /**
-     * プロジェクト終了日付を設定する。
+     * Set project end date.
      *
-     * @param projectEndDate 設定するプロジェクト終了日付
+     * @param projectEndDate: Project end date to be set
      */
     public void setProjectEndDate(String projectEndDate) {
         this.projectEndDate = projectEndDate;
     }
 
     /**
-     * 事業部IDを取得する。
-     * @return 事業部ID
+     * Acquires division ID.
+     * @return: Division ID
      */
     public String getDivisionId() {
         return divisionId;
     }
 
     /**
-     * 事業部IDを設定する。
-     * @param divisionId 設定する事業部ID
+     * Set division ID.
+     * @param divisionId: Division ID to be set
      */
     public void setDivisionId(String divisionId) {
         this.divisionId = divisionId;
     }
 
     /**
-     * 部門IDを取得する。
+     * Acquires department ID.
      *
-     * @return 部門ID
+     * @return department ID
      */
     public String getOrganizationId() {
         return organizationId;
     }
 
     /**
-     * 部門IDを設定する。
+     * Set department ID.
      *
-     * @param organizationId 設定する部門ID
+     * @param organizationId: Department ID to be set
      */
     public void setOrganizationId(String organizationId) {
         this.organizationId = organizationId;
     }
 
     /**
-     * 顧客IDを取得する。
+     * Acquires client ID.
      *
-     * @return 顧客ID
+     * @return: Client ID
      */
     public String getClientId() {
         return clientId;
     }
 
     /**
-     * 顧客IDを設定する。
+     * Set client ID.
      *
-     * @param clientId 設定する顧客ID
+     * @param clientId: Client ID to be set
      */
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
     /**
-     * プロジェクトマネージャー名を取得する。
+     * Acquires project manager name.
      *
-     * @return プロジェクトマネージャー名
+     * @return: Project manager name
      */
     public String getProjectManager() {
         return projectManager;
     }
 
     /**
-     * プロジェクトマネージャー名を設定する。
+     * Set project manager name.
      *
-     * @param projectManager 設定するプロジェクトマネージャー名
+     * @param projectManager: Project manager name to be set
      */
     public void setProjectManager(String projectManager) {
         this.projectManager = projectManager;
     }
 
     /**
-     * プロジェクトリーダー名を取得する。
+     * Acquires project leader name.
      *
-     * @return プロジェクトリーダー名
+     * @return: Project leader name
      */
     public String getProjectLeader() {
         return projectLeader;
     }
 
     /**
-     * プロジェクトリーダー名を設定する。
+     * Set project leader name.
      *
-     * @param projectLeader 設定するプロジェクトリーダー名
+     * @param projectLeader: Project leader name to be set
      */
     public void setProjectLeader(String projectLeader) {
         this.projectLeader = projectLeader;
     }
 
     /**
-     * 備考を取得する。
+     * Acquires note.
      *
-     * @return 備考
+     * @return: Note
      */
     public String getNote() {
         return note;
     }
 
     /**
-     * 備考を設定する。
+     * Set note.
      *
-     * @param note 設定する備考
+     * @param note: Note to be set
      */
     public void setNote(String note) {
         this.note = note;
     }
 
     /**
-     * 売上高を取得する。
+     * Acquires sales.
      *
-     * @return 売上高
+     * @return: Sales
      */
     public String getSales() {
         return sales;
     }
 
     /**
-     * 売上高を設定する。
+     * Set sales.
      *
-     * @param sales 設定する売上高
+     * @param sales: Sales to be set
      */
     public void setSales(String sales) {
         this.sales = sales;
     }
 
     /**
-     * プロジェクト期間（プロジェクト開始日～プロジェクト終了日）正しく設定されているかを判定します。
-     * 開始日に終了日より後の日付が設定されていた場合はプロジェクト期間が正しくないと判定します。
-     * それ以外の場合は問題なしとします。
+     * Determines whether the project period (project start date to project end date) is set correctly.
+     * If the start date is set as a date later than the end date, the project period is judged to be incorrect.
+     * Other settings are accepted.
      *
-     * @return 開始日に終了日より後の日付が設定されていた場合は false それ以外（開始日、終了日の両方又はいずれかが未定の場合も含む）は true
+     * @return: false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRangeValidator.message}")
     private boolean isValidProjectPeriod() {

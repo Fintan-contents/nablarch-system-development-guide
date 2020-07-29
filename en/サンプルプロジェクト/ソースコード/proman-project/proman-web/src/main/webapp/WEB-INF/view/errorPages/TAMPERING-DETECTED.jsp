@@ -6,7 +6,7 @@
 <html>
 <body>
   <p>
-    既にログアウトされています。ログイン後に処理を行ってください。
+    You have already logged out. Log in before performing this process.
   </p>
 </body>
 </html>

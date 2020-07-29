@@ -17,75 +17,75 @@ import nablarch.core.util.DateUtil;
 import java.util.Calendar;
 
 /**
- * データベースに保存されたアカウント情報に対してパスワード認証を行うクラス。<br>
+ * Class for password authentication for account information saved in a database. <br>
  * <br>
- * PasswordAuthenticatorの特徴を下記に示す。
+ * Below are the characteristics of the PasswordAuthenticator.
  * <ul>
- * <li>DBに保存したアカウント情報を使用したパスワード認証ができる。</li>
- * <li>認証時にパスワードの有効期限をチェックできる。</li>
- * <li>連続で指定回数認証に失敗するとユーザIDにロックをかける。(失敗可能回数が指定（0より大きい場合）のみロック機能が有効となる）</li>
+ * <li>Enables password authentication using account information saved in a database. </li>
+ * <li>Enables the expiration dates of passwords to be checked during authentication. </li>
+ * <li>Locks user IDs if authentication fails consecutively the specified number of times. (The locking feature is only enabled if a permissible number of failures (greater than 0) is specified.)</li>
  * </ul>
- * PasswordAuthenticatorでは、認証の成功・失敗に関わらず、認証処理においてDBの更新処理が必要なため、内部でトランザクションのコミットを行う。<br>
- * そのため、PasswordAuthenticatorのトランザクション制御が個別アプリケーションの処理に影響を与えないように、
- * 個別アプリケーションとは別のトランザクションを使用するように、PasswordAuthenticatorに{@link SimpleDbTransactionManager}を設定すること。
+ * Transactions are internally committed by PasswordAuthenticator as a database update process is required during the authentication process regardless of whether authentication is successful or fails. <br>
+ * For this reason, {@link SimpleDbTransactionManager} must be set for PasswordAuthenticator so that the transaction that is used is separated from individual applications.
+ * This stops PasswordAuthenticator's transaction control from affecting the processes of individual applications.
  *
  * @author Nabu Rakutaro
  */
 public class SystemAccountAuthenticator implements PasswordAuthenticator {
 
-    /** ユーザIDをロックする認証失敗回数 */
+    /** Number of authentication failures before locking the user ID */
     private int failedCountToLock;
 
-    /** パスワードの暗号化に使用する{@link PasswordEncryptor} */
+    /** {@link PasswordEncryptor} used for password encryption */
     private PasswordEncryptor passwordEncryptor;
 
-    /** データベースへのトランザクション制御を行う{@link SimpleDbTransactionManager} */
+    /** {@link SimpleDbTransactionManager} used for transaction control of databases */
     private SimpleDbTransactionManager dbManager;
 
-    /** SQL_IDのプレフィックス */
+    /** Prefix of SQL_ID */
     private static final String SQL_ID_PREFIX = SystemAccountAuthenticator.class.getName() + '#';
 
-    /** デフォルトコンストラクタ。 */
+    /** Default constructor. */
     public SystemAccountAuthenticator() {
         failedCountToLock = 0;
     }
 
     /**
-     * ユーザIDをロックする認証失敗回数を設定する。
+     * Set the number of authentication failures before locking the user ID.
      *
-     * @param failedCountToLock ユーザIDをロックする認証失敗回数
+     * @param failedCountToLock: Number of authentication failures before locking the user ID
      */
     public void setFailedCountToLock(int failedCountToLock) {
         this.failedCountToLock = failedCountToLock;
     }
 
     /**
-     * パスワードの暗号化に使用する{@link PasswordEncryptor}を設定する。
+     * Set the {@link PasswordEncryptor} used for password encryption.
      *
-     * @param passwordEncryptor パスワードの暗号化に使用する{@link PasswordEncryptor}
+     * @param passwordEncryptor: {@link PasswordEncryptor} used for password encryption
      */
     public void setPasswordEncryptor(PasswordEncryptor passwordEncryptor) {
         this.passwordEncryptor = passwordEncryptor;
     }
 
     /**
-     * データベースへのトランザクション制御を行う{@link SimpleDbTransactionManager}を設定する。
+     * Set {@link SimpleDbTransactionManager} used for transaction control of databases.
      *
-     * @param dbManager データベースへのトランザクション制御を行う{@link SimpleDbTransactionManager}
+     * @param dbManager: {@link SimpleDbTransactionManager} used for transaction control of databases
      */
     public void setDbManager(SimpleDbTransactionManager dbManager) {
         this.dbManager = dbManager;
     }
 
     /**
-     * アカウント情報を使用してユーザを認証する。
+     * The user is authenticated using the account information.
      *
-     * @param userId ユーザID
-     * @param password パスワード
+     * @param userId: User ID
+     * @param password: Password
      *
-     * @throws AuthenticationFailedException ユーザIDまたはパスワードに一致するユーザが見つからない場合
-     * @throws UserIdLockedException ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
-     * @throws PasswordExpiredException パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
+     * @throws AuthenticationFailedException: When a user matching the user ID or password cannot be found
+     * @throws UserIdLockedException: When a user ID is locked. Authentication is still not performed when this exception is thrown.
+     * @throws PasswordExpiredException: When a password is expired. When this exception is thrown, authentication using the old password is successful.
      */
     @Override
     public void authenticate(final String userId, final String password)
@@ -95,7 +95,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
             throw new AuthenticationFailedException(userId);
         }
 
-        // 有効期限は日付単位で管理しているので、現在日時から時間を切り捨てた日付を使用する。
+        // The time is truncated from the current date/time as the expiration date is managed only as a date.
         final java.sql.Date sysDate = convert(DateUtil.getDate(SystemTimeUtil.getDateString()));
         final SystemAccount account;
         try {
@@ -103,7 +103,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
                     SystemAccount.class,
                     "FIND_SYSTEM_ACCOUNT", new Object[]{userId, sysDate});
         } catch (NoDataException ignored) {
-            // ユーザIDに一致するユーザーが見つからない場合
+            // When a user matching the user ID cannot be found
             throw new AuthenticationFailedException(userId);
         }
 
@@ -111,15 +111,15 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     }
 
     /**
-     * システムアカウントに対してパスワードによる認証を行う。
+     * The system account is authenticated using the password.
      *
-     * @param account システムアカウント
-     * @param password パスワード
-     * @param businessDate 業務日付
+     * @param account: System account
+     * @param password: Password
+     * @param businessDate: Business date
      *
-     * @throws AuthenticationFailedException ユーザIDまたはパスワードに一致するユーザが見つからない場合
-     * @throws UserIdLockedException ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
-     * @throws PasswordExpiredException パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
+     * @throws AuthenticationFailedException: When a user matching the user ID or password cannot be found
+     * @throws UserIdLockedException: When a user ID is locked. Authentication is still not performed when this exception is thrown.
+     * @throws PasswordExpiredException: When a password is expired. When this exception is thrown, authentication using the old password is successful.
      */
     private void authenticate(SystemAccount account, String password, java.sql.Date businessDate)
             throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
@@ -128,16 +128,16 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
             throw new UserIdLockedException(String.valueOf(account.getUserId()), failedCountToLock);
         }
 
-        // 入力されたパスワードを暗号化ロジックにしたがって暗号化する。
+        // The input password is encrypted according to the encryption logic
         String encryptedPassword = passwordEncryptor.encrypt(String.valueOf(account.getUserId()), password);
 
-        // アカウントの認証を行う。
-        // 本サンプルでは、暗号化後パスワードが一致するか否かのみで認証の判定を行う。
+        // The account is authenticated.
+        // For the purposes of this sample, it makes authentication judgments based only on whether the encrypted password matches.
         if (!account.getUserPassword().equals(encryptedPassword)) {
 
-            // ログインの連続失敗回数を記録する場合、
-            // 現在の失敗回数に 1 を加算する。
-            // 記録しない場合は現在の失敗回数のままとする。（変更しない）
+            // When recording the consecutive number of failed logins,
+            // 1 is added to the current number of failures.
+            // If a failure is not recorded, the current number of failures remains as it is (does not change).
             @SuppressWarnings("NumericCastThatLosesPrecision")
             short failedCount = isChecksFailedCount()
                     ? (short) (account.getFailedCount() + Short.valueOf("1"))
@@ -146,11 +146,11 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
             throw new AuthenticationFailedException(String.valueOf(account.getUserId()));
         }
 
-        // ここまでで、認証自体は成功しているので、ログインが成功した情報を残しておく。
+        // Information indicating a successful login is retained as authentication itself is already successful.
         updateAuthenticationSucceed(account.getUserId());
 
-        // パスワード有効期限切れの判定
-        // パスワードの有効期限が切れていたら例外を送出する。
+        // Judgment of expiration of password
+        // An exception is sent if the password is expired.
         if (isExpiredPassword(account, businessDate)) {
 
             throw new PasswordExpiredException(
@@ -161,33 +161,33 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     }
 
     /**
-     * 判定基準日時点で、パスワードが有効期限切れであるか否か。
+     * Indicates whether the password is expired at the reference date/time for judgment.
      *
-     * @param account 判定するアカウント
-     * @param businessDate 判定基準日（yyyyMMdd）
-     * @return パスワードが有効期限切れの場合　true
+     * @param account: Account being judged
+     * @param businessDate: Reference date/time for judgment (yyyyMMdd)
+     * @return: True if the password is expired
      */
     private boolean isExpiredPassword(SystemAccount account, java.util.Date businessDate) {
         return businessDate.compareTo(account.getPasswordExpirationDate()) > 0;
     }
 
     /**
-     * 認証失敗回数チェックの使用有無を取得する。
+     * Acquires information on whether the consecutive number of authentication failures is checked.
      *
-     * @return 認証失敗回数チェックを使用する場合はtrue、使用しない場合はfalse
+     * @return: True if the consecutive number of authentication failures is checked, false if it is not
      */
     private boolean isChecksFailedCount() {
         return failedCountToLock > 0;
     }
 
     /**
-     * 認証成功時のシステムアカウント更新を行う。
+     * The system account is updated when authentication is successful.
      *
-     * @param id 更新対象のシステムアカウントを特定するID
+     * @param id: ID to identify the system account to be updated
      */
     private void updateAuthenticationSucceed(final Integer id) {
-        // システムアカウントの更新処理はログインの成否に関わらず実行するため、
-        // 業務のトランザクションとは別に実行する必要がある。
+        // The system account update process needs to be performed separately from business transactions
+        // as it is performed regardless of whether login is successful.
         new SimpleDbTransactionExecutor<Void>(dbManager) {
             @Override
             public Void execute(final AppDbConnection connection) {
@@ -203,18 +203,18 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     }
 
     /**
-     * 認証失敗時のシステムアカウント更新を行う。
+     * The system account is updated when authentication fails.
      * <pre>
-     * 本サンプルでは、認証失敗回数の更新と失敗回数がロック回数に達した場合のロックのみ行う。
-     * 認証失敗時のロックを実施しない場合はこのメソッド内では何も行わない。
+     * For the purposes of this sample, it only updates the number of failed authentications and locks accounts when authentication fails enough times to activate locking.
+     * Nothing happens in this method if the account is not locked when authentication fails.
      * </pre>
-     * @param id 更新対象のシステムアカウントを特定するID
-     * @param failedCount 失敗回数
+     * @param id: ID to identify the system account to be updated
+     * @param failedCount: Number of failures
      */
     private void updateAuthenticationFailed(final Integer id, final Short failedCount) {
 
         if (!isChecksFailedCount()) {
-            // アカウントロックを行わない場合は、失敗時に何もしない。
+            // Nothing happens on failure if the account is not locked.
             return;
         }
 

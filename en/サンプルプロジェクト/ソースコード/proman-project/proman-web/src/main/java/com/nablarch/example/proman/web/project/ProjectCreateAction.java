@@ -16,7 +16,7 @@ import nablarch.fw.web.interceptor.OnError;
 import java.util.List;
 
 /**
- * プロジェクト登録
+ * Project registration
  *
  * @author TIS
  */
@@ -24,26 +24,26 @@ public class ProjectCreateAction {
 
     private static final String PROJECT_KEY = "projectCreateActionProject";
     /**
-     * プロジェクト登録初期画面を表示。
+     * Displays initial screen for project registration.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
 
-        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
+        // Acquires division/department pull-down menu from database and sets within request scope.
         setOrganizationAndDivisionToRequestScope(context);
 
         return new HttpResponse("/WEB-INF/view/project/create.jsp");
     }
 
     /**
-     * 登録情報確認画面を表示。
+     * Displays screen for confirming registration information.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     @InjectForm(form = ProjectCreateForm.class, prefix = "form")
     @OnError(type = ApplicationException.class, path = "forward:///app/project/errorRegister")
@@ -51,23 +51,23 @@ public class ProjectCreateAction {
         ProjectCreateForm form = context.getRequestScopedVar("form");
         Project project = BeanUtil.createAndCopy(Project.class, form);
 
-        // TODO:顧客選択が実装されたら消す
+        // TODO: Erase when customer selection is implemented
         project.setClientId(0);
 
-        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
+        // Acquires division/department pull-down menu from database and sets within request scope.
         setOrganizationAndDivisionToRequestScope(context);
         SessionUtil.put(context, PROJECT_KEY, project);
 
-        // 登録情報確認画面を表示
+        // Displays screen for confirming registration information
         return new HttpResponse("/WEB-INF/view/project/confirmationOfCreation.jsp");
     }
 
     /**
-     * 登録処理。
+     * Registration process.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     @OnDoubleSubmission
     public HttpResponse register(HttpRequest request, ExecutionContext context) {
@@ -78,22 +78,22 @@ public class ProjectCreateAction {
     }
 
     /**
-     * 登録完了画面を表示。
+     * Displays registration completion screen.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     public HttpResponse completeRegistration(HttpRequest request, ExecutionContext context) {
         return new HttpResponse("/WEB-INF/view/project/completionOfCreation.jsp");
     }
 
     /**
-     * 登録情報入力画面へ戻る。
+     * Returns to registration information input screen.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     public HttpResponse backToEnterRegistration(HttpRequest request, ExecutionContext context) {
 
@@ -105,7 +105,7 @@ public class ProjectCreateAction {
         projectCreateForm.setProjectStartDate(projectStartDate);
         projectCreateForm.setProjectEndDate(projectEndDate);
 
-        // 設定した事業部/部門のIDを登録確認画面から取得してリクエストスコープに設定する
+        // Acquires set division/department ID from registration confirmation screen and sets within request scope.
         ProjectService service = new ProjectService();
         Organization organization = service.findOrganizationById(project.getOrganizationId());
         Organization division = service.findOrganizationById(organization.getUpperOrganization());
@@ -118,19 +118,19 @@ public class ProjectCreateAction {
     }
 
     /**
-     * 事業部と部門をリクエストスコープに設定する。
+     * Sets division and department within request scope.
      *
-     * @param context 実行コンテキスト
+     * @param context: Context for execution
      */
     private void setOrganizationAndDivisionToRequestScope(ExecutionContext context) {
 
-        // 事業部/部門の情報を取得
+        // Acquires division and department information
         ProjectService service = new ProjectService();
         List<Organization> topOrganizationList = service.findAllDivision();
         List<Organization> subOrganizationList = service.findAllDepartment();
 
         SessionUtil.put(context, PROJECT_KEY, "");
-        // 事業部と部門をリクエストスコープに設定する
+        // Sets division and department within request scope
         context.setRequestScopedVar("topOrganization", topOrganizationList);
         context.setRequestScopedVar("subOrganization", subOrganizationList);
     }

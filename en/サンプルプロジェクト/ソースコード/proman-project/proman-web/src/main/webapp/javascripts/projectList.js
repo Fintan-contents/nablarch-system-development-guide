@@ -1,10 +1,10 @@
 $(function() {
-  //ページングタグにより自動生成される要素を削除している
+  //Elements generated automatically by pagination tags are deleted
   $('.true').remove();
 });
 
 $(function() {
-  // ソート条件
+  // Sorting conditions
   $("#sortKey,#sortDir").change(function() {
       $(this).parents('form').submit();
   });

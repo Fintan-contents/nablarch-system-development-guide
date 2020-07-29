@@ -2,11 +2,10 @@ package com.nablarch.example.proman.web.common.authentication.exception;
 
 import java.util.Date;
 
-
 /**
- * ユーザの認証時にパスワードの有効期限が切れている場合に発生する例外。
+ * Exception occurring when the password is found to be expired during user authentication.
  * <p/>
- * 対象ユーザのユーザID、パスワード有効期限とチェックに使用した業務日付を保持する。
+ * The user ID of the user, the expiration date of the password and the business date used for the check are retained.
  * @author Nabu Rakutaro
  */
 public class PasswordExpiredException extends AuthenticationException {
@@ -14,20 +13,20 @@ public class PasswordExpiredException extends AuthenticationException {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** ユーザID */
+    /** User ID */
     private final String userId;
 
-    /** パスワード有効期限 */
+    /** Expiration date of password */
     private final Date passwordExpirationDate;
 
-    /** 業務日付 */
+    /** Business date */
     private final Date businessDate;
 
     /**
-     * コンストラクタ。
-     * @param userId ユーザID
-     * @param passwordExpirationDate パスワードの有効期限
-     * @param businessDate 業務日付
+     * Constructor.
+     * @param userId: User ID
+     * @param passwordExpirationDate: Expiration date of password
+     * @param businessDate: Business date
      */
     public PasswordExpiredException(String userId, Date passwordExpirationDate, Date businessDate) {
         this.userId = userId;
@@ -36,24 +35,24 @@ public class PasswordExpiredException extends AuthenticationException {
     }
 
     /**
-     * ユーザIDを取得する。
-     * @return ユーザID
+     * Acquires user ID.
+     * @return: User ID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * パスワード有効期限を取得する。
-     * @return パスワード有効期限
+     * Acquires expiration date of password.
+     * @return: Expiration date of password
      */
     public Date getPasswordExpirationDate() {
         return passwordExpirationDate;
     }
 
     /**
-     * 業務日付を取得する。
-     * @return 業務日付
+     * Acquires business date.
+     * @return: Business date
      */
     public Date getBusinessDate() {
         return businessDate;
