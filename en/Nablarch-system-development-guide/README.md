@@ -63,7 +63,7 @@ The deliverables and tasks required for project development are diverse.
 The following diagram shows the development flow in a sample project assuming system development of medium-scale. 
 Use this diagram as a reference when studying the development flow of the project (Initially, you need not understand all the elements in the diagram in the first go. It is enough to grasp that there are deliverables and tasks in every process.)
 
-- [Flow of development using Nablarch](../サンプルプロジェクト/設計書/Flow_of_development_using_Nablarch.xlsx?raw=true)
+- [Flow of development using Nablarch](../Sample_Project/Design_Document/Flow_of_development_using_Nablarch.xlsx?raw=true)
 
 
 ## Project plan
@@ -137,7 +137,7 @@ In particular, it will be efficient to refer to the following points.
 
 Checking the above makes it easier to grasp the image of the upcoming work.
 
-- [Sample project](../サンプルプロジェクト)
+- [Sample project](../Sample_Project)
 
 
 #### Notes on sample projects
@@ -174,7 +174,7 @@ This catalog organizes the test types and viewpoints that can be used in applica
 Create a guide summarizing the information needed by developers to proceed with the project.
 
 For an example of how to create a guide, refer to the following in the sample project:
-- [Sample project development guide](../サンプルプロジェクト/サンプルプロジェクト開発ガイド)
+- [Sample project development guide](../Sample_Project/Sample_Project_Development_Guide)
 
 
 ## Design phase
@@ -198,8 +198,8 @@ It may not be possible to withdraw the UI after it has been presented. In this c
 Reference：[UI standard customization](docs/UI_standard_customization.md)
 
 For an example of how to customize, refer to the following in the sample project:
-- [Design standard](../サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_方式設計/020_開発標準/010_設計標準)
-- [Test standard](../サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_方式設計/020_開発標準/020_テスト標準)
+- [Design standard](../Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/010_Design_Standards)
+- [Test standard](../Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards)
 
 For the package configuration of the application, refer to ["Package Configuration Review"](docs/Package_configuration_review.md).
 
