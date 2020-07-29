@@ -20,7 +20,7 @@ Update is performed with the following procedure.
    `<Cloned directory>\proman-project\proman-common\src\main\resources\entity`   
    Quotes "" used before and after the path are not required.
 1. Change column I to "○" for the table to be acquired.   
-   See `3.3.2. Evidence for Subfunction Unit Tests` of `/sample project/design document/A1_Project Management System/020_Architecture Design/020_Development Standard//020_Test Standard/Unit Test Standard.xlsx` to find out which table you will get.  
+   See `3.3.2. Evidence for Subfunction Unit Tests` of `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standard/020_Test_Standard/Unit_Test_Standard.xlsx` to find out which table you will get.  
 1. **Please save DUMP.xlsm.**
 
 #### Get data dump before test execution
@@ -43,11 +43,11 @@ After executing the test target, check the log file, if it is difficult to under
 
 #### Get data dump after test execution
 
-The retrieval method is the same as [Get data dump before test execution](#テスト実行前のデータダンプを取得).  
+The retrieval method is the same as [Get data dump before test execution](#get-data-dump-before-test-execution).  
 Check the pre and post dump, and make sure that the records and columns are updated as expected.   
 After confirmation, change the background color of the updated column to yellow and save.
 
 
 ## After getting the evidence
 
-Save following the procedure of `3.3.4. How to store evidence` of `/sample project/design document/A1_project management system/020_Architecture design/020_development standard/020_test standard/Unit test standard.xlsx`   
+Save following the procedure of `3.3.4. How to store evidence` of `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standard/020_Test_Standard/Unit_Test_Standard.xlsx`   

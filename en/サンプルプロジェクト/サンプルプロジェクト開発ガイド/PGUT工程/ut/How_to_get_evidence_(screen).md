@@ -20,4 +20,4 @@ The screenshot you get is stored in the specified directory.
 
 ### After getting the evidence
 
-Save following the procedure of `3.3.4. How to store evidence` of `/sample project/design document/A1_project management system/020_Architecture design/020_development standard/020_test standard/Unit test standard.xlsx`.  
+Save following the procedure of `3.3.4. How to store evidence` of `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standard/020_Test_Standard/Unit_Test_Standard.xlsx`.  

@@ -1,6 +1,6 @@
 # Application Configuration (REST)
 
-The REST application configuration in this project is essentially the same as the [application configuration (Web)](./アプリケーション構成（Web）.md).
+The REST application configuration in this project is essentially the same as the [application configuration (Web)](./Application_Configuration_(Web).md).
 
 The reason for doing this is given below.
 

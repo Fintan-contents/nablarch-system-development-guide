@@ -2,7 +2,7 @@
 
 The batch application configuration in this project is the same as [Nablarch batch application](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html).
 
-In [application configuration (Web)](アプリケーション構成（Web）.md),
+In [application configuration (Web)](Application_Configuration_(Web).md),
 configuration has been defined in this project to improve the testability, 
 but in the case of batch, the application configuration has not been independently defined in the project.
 
