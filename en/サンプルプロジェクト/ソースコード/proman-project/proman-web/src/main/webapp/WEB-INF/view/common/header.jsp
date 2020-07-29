@@ -14,17 +14,17 @@
     }
 
     .ui.menu .item i.logo {
-        /*　ヘッダ部のロゴのマージン　*/
+        /*　Margin of logo in header　*/
         margin-right: 0.5em;
     }
 
     .main.container {
-        /*コンテンツ部のマージン*/
+        /* Margin of content section*/
         margin-top: 7em;
     }
 
     .ui.footer.segment {
-        /*フッタ部のマージン*/
+        /* Margin of footer section*/
         margin: 1em 0em 0em;
         padding: 0em 0em;
     }
@@ -37,7 +37,7 @@
         <c:if test="${userContext != null}">
             <div class="right menu">
                 <n:a id="logoutLink" href="/app/logout" cssClass="item">
-                    ログアウト
+                    Logout
                 </n:a>
             </div>
         </c:if>

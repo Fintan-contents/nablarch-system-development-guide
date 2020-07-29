@@ -10,13 +10,13 @@ import nablarch.fw.web.HttpResponse.Status;
 import javax.persistence.OptimisticLockException;
 
 /**
- * 特定の例外が送出された場合に、適切なエラー画面に遷移させるハンドラ。
+ * Handler to transition to the applicable error screen when a specific exception is sent.
  * <p/>
- * 本ハンドラを業務アクションハンドラの前段に配置することで、業務アクションメソッドが送出した例外クラスを捕捉し、
- * 例外毎に任意のエラー画面へ遷移させることができる。
+ * Placing this handler before the business action handler makes it possible to determine the exception class sent by the business action method
+ * and transition to the desired error screen for each exception.
  * <p/>
- * [参考情報]HTTPステータスコードの使い分けについて、下記を参考とすること。<br>
- * @see <a href="http://qiita.com/kawasima/items/e48180041ace99842779">HTTPステータスコードの使い分け</a>
+ * Reference information: Refer to the information below to determine the HTTP status code to be used in each situation <br>
+ * @see <a href="http://qiita.com/kawasima/items/e48180041ace99842779">How to select an HTTP status code</a>
  * @author Nabu Rakutaro
  */
 public class PromanErrorForwardHandler implements Handler<Object, Object> {
@@ -25,7 +25,7 @@ public class PromanErrorForwardHandler implements Handler<Object, Object> {
     public Object handle(Object data, ExecutionContext context) {
 
         try {
-            // 後続の業務アクションハンドラが送出した例外をtry-catch文で捕捉する
+            // Determines the exception sent by the action handler indicated afterwards, using a try-catch statement
             return context.handleNext(data);
         } catch (SessionKeyNotFoundException e) {
             throw new HttpErrorResponse(Status.BAD_REQUEST.getStatusCode(),

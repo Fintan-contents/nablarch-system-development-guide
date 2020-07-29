@@ -43,7 +43,7 @@
             });
         </script>
     <title>
-        プロジェクト更新 | Proman
+        Project update | Proman
     </title>
 </head>
 <body>
@@ -55,13 +55,13 @@
             <n:include path="/WEB-INF/view/common/menu.jsp" />
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト更新</div>
+                    <div class="ui huge header">Project update</div>
                 </div>
                 <div class="sixteen wide column row">
                     <n:form useToken="true" cssClass="ui form">
                         <div class="two fields">
                             <div class="required field">
-                                <label>事業部/部門</label>
+                                <label>Division/department</label>
                                 <div class="field">
                                     <n:set var="topOrganizationList" value="${topOrganization}" />
                                     <n:select name="form.divisionId" listName="topOrganizationList" elementValueProperty="organizationId"
@@ -82,20 +82,20 @@
                             </div>
                         </div>
                         <div class="required field">
-                            <label>PJ名</label>
-                            <n:text name="form.projectName" maxlength="128" errorCss="input-error" placeholder="PJ名" />
+                            <label>Project name</label>
+                            <n:text name="form.projectName" maxlength="128" errorCss="input-error" placeholder="Project name" />
                             <n:error errorCss="message-error" name="form.projectName" /><span>&nbsp;</span>
                         </div>
                         <div class="two fields">
                             <div class="required field">
-                                <label>PJ種別</label>
+                                <label>Project type</label>
                                 <div class="field">
                                     <n:codeSelect name="form.projectType" codeId="C0300001" pattern="PATTERN01" />
                                     <n:error errorCss="message-error" name="form.projectType" /><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="required field">
-                                <label>PJ分類</label>
+                                <label>Project classification</label>
                                 <div class="item">
                                     <div class = "fields code-radio-fields">
                                         <n:codeRadioButtons cssClass="code-radio" name="form.projectClass" codeId="C0200001" pattern="PATTERN01" listFormat ="div"/>
@@ -106,9 +106,9 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>売上高</label>
+                                <label>Sales</label>
                                 <n:forInputPage>
-                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="売上高" />
+                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="Sales" />
                                     <n:error errorCss="message-error" name="form.sales" /><span>&nbsp;</span>
                                 </n:forInputPage>
                                 <n:forConfirmationPage>
@@ -116,15 +116,15 @@
                                 </n:forConfirmationPage>
                             </div>
                             <div class="required field">
-                                <label>顧客</label>
+                                <label>Client</label>
                                 <n:forInputPage>
                                     <div class="ui action input">
                                         <n:plainHidden name="form.clientId" />
-                                        <n:text name="form.clientName" maxlength="64" readonly="true" tabindex="-1" id="client-name" placeholder="顧客" />
+                                        <n:text name="form.clientName" maxlength="64" readonly="true" tabindex="-1" id="client-name" placeholder="Client" />
                                         <n:button uri="/action" allowDoubleSubmission="false"
                                             cssClass="ui teal right labeled icon button" disabled="true">
                                             <i class="search icon"></i>
-                                            選択
+                                            Selection
                                         </n:button>
                                     </div>
                                 </n:forInputPage>
@@ -147,12 +147,12 @@
                         </div>
                         <div class="two fields row">
                             <div class="required field">
-                                <label>開始日</label>
+                                <label>Start date</label>
                                 <n:forInputPage>
                                     <div class="ui calendar">
                                         <div class="ui input left icon" id="projectStartDate">
                                             <i class="calendar icon"></i>
-                                            <n:text name="form.projectStartDate" nameAlias="form.date" errorCss="input-error" placeholder="開始日" />
+                                            <n:text name="form.projectStartDate" nameAlias="form.date" errorCss="input-error" placeholder="Start date" />
                                         </div>
                                         <n:error errorCss="message-error" name="form.projectStartDate" /><span>&nbsp;</span>
                                     </div>
@@ -163,12 +163,12 @@
                                 </n:forConfirmationPage>
                             </div>
                             <div class="required field">
-                                <label>終了日</label>
+                                <label>End date</label>
                                 <n:forInputPage>
                                     <div class="ui calendar">
                                         <div class="ui input left icon" id="projectEndDate">
                                             <i class="calendar icon"></i>
-                                            <n:text name="form.projectEndDate" nameAlias="form.date" errorCss="input-error" placeholder="終了日" />
+                                            <n:text name="form.projectEndDate" nameAlias="form.date" errorCss="input-error" placeholder="End date" />
                                         </div>
                                         <n:error errorCss="message-error" name="form.projectEndDate" />
                                         <n:error errorCss="message-error" name="form.validProjectPeriod" /><span>&nbsp;</span>
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                         <div class="field text">
-                            <label>備考</label>
+                            <label>Note</label>
                             <n:textarea rows="3" cols="" name="form.note" errorCss="input-error"/>
                             <n:error errorCss="message-error" name="form.note" /><span>&nbsp;</span>
                         </div>
@@ -190,21 +190,21 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <n:forInputPage>
                                 <div class="field centered aligned">
-                                    <n:a href="/action/projectSearch/show/${project.projectId}" cssClass="fluid ui primary button">戻る</n:a>
+                                    <n:a href="/action/projectSearch/show/${project.projectId}" cssClass="fluid ui primary button">Back</n:a>
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectUpdate/confirmUpdate" cssClass="fluid ui primary button">更新
+                                    <n:button uri="/action/ProjectUpdate/confirmUpdate" cssClass="fluid ui primary button">Update
                                     </n:button>
                                 </div>
                             </n:forInputPage>
                             <n:forConfirmationPage>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectUpdate/backToEnterUpdate" cssClass="fluid ui primary button">戻る
+                                    <n:button uri="/action/ProjectUpdate/backToEnterUpdate" cssClass="fluid ui primary button">Back
                                     </n:button>
                                 </div>
                                 <div class="field centered aligned">
                                     <n:button uri="/action/ProjectUpdate/update" cssClass="fluid ui primary button"
-                                        allowDoubleSubmission="false">確定</n:button>
+                                        allowDoubleSubmission="false">Confirm</n:button>
                                 </div>
                             </n:forConfirmationPage>
                             <div class="field centered aligned">&nbsp;</div>
@@ -215,7 +215,7 @@
         </div>
     <n:include path="/WEB-INF/view/common/footer.jsp" />
 
-    <%-- 顧客検索 --%>
+    <%-- Client search --%>
 </body>
 
 </html>

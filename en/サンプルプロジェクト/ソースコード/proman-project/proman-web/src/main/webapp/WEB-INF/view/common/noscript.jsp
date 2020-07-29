@@ -5,7 +5,7 @@
 
 <noscript>
     <div class="noscriptMessage">
-        JavaScriptが無効になっています。<br/>
-        このサイトはJavaScriptを有効にしてご利用ください。
+        JavaScript is disabled. <br/>
+        Enable JavaScript when using this site. 
     </div>
 </noscript>

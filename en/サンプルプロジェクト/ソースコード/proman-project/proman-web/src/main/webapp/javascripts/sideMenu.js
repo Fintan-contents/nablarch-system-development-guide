@@ -1,5 +1,5 @@
 $(function() {
-  // checkboxチェック
+  // checkbox check
   var url = location.href;
   if (url.indexOf("?") == -1) {
     return;
@@ -17,27 +17,27 @@ $(function() {
 });
 
 $(function() {
-  // 条件となる日付取得
+  // Acquires date used as condition
   var thisYear = new Date().getFullYear();
   var thisYearStartDate = thisYear + "0101";
   var thisYearEndDate = thisYear + "1231";
   var lastYearEndDate = new Date(thisYear - 1 ,11 ,31).getFullYear() + "1231";
 
-  // 今年開始
+  // Start of this year
   $("#startThisYear").each(function() {
     var obj = $(this);
     var link = obj.attr("href");
     obj.attr("href", link + "&searchForm.projectStartDateBegin=" + thisYearStartDate
                           + "&searchForm.projectStartDateEnd=" + thisYearEndDate);
   });
-  // 今年終了
+  // End of this year
   $("#endThisYear").each(function() {
     var obj = $(this);
     var link = obj.attr("href");
     obj.attr("href", link + "&searchForm.projectEndDateBegin=" + thisYearStartDate
                           + "&searchForm.projectEndDateEnd=" + thisYearEndDate);
   });
-  // 昨年までに終了
+  // Finished by last year
   $("#endLastYear").each(function() {
     var obj = $(this);
     var link = obj.attr("href");
@@ -45,7 +45,7 @@ $(function() {
   });
 });
 
-//顧客検索画面ポップアップ
+// Customer search screen popup
 $(function() {
    $("#client_pop").click(function() {
        window.open(this.href,"clientSearch","width=700,height=500,resizable=yes,scrollbars=yes");
@@ -58,7 +58,7 @@ $(function() {
 });
 
 $(function() {
-  // ランクチェックボックス
+  // Rank checkbox
   $('.checkbox').change(function() {
       $(this).parents('form').submit();
   });

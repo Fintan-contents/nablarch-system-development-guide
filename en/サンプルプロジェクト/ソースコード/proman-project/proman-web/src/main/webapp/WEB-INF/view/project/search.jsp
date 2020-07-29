@@ -56,7 +56,7 @@
         });
     </n:script>
     <title>
-        プロジェクト検索 | Proman
+        Project search | Proman
     </title>
 </head>
 
@@ -67,7 +67,7 @@
             <n:include path="/WEB-INF/view/common/menu.jsp" />
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト検索</div>
+                    <div class="ui huge header">Project search</div>
                 </div>
                 <div class="sixteen wide column row">
                     <n:form method="GET" action="/action/projectSearch/search" cssClass="ui form">
@@ -77,7 +77,7 @@
                         <n:plainHidden name="searchForm.pageNumber" id="pageNumber"/>
                         <div class="two fields">
                             <div class="field">
-                                <label>事業部</label>
+                                <label>Division</label>
                                 <div class="field">
                                     <n:set var="topOrganizationList" value="${topOrganization}" />
                                     <n:select name="searchForm.divisionId" listName="topOrganizationList" elementValueProperty="organizationId"
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label>部門</label>
+                                <label>Department</label>
                                 <div class="field">
                                     <n:set var="subOrganizationList" value="${subOrganization}" />
                                     <n:select name="searchForm.organizationId" listName="subOrganizationList" elementValueProperty="organizationId"
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label>PJ分類</label>
+                            <label>Project classification</label>
                             <div class="item">
                                 <div class = "fields code-checkbox-fields">
                                     <n:codeCheckboxes cssClass="code-checkbox" name="searchForm.projectClass" codeId="C0200001" pattern="PATTERN01" listFormat ="span"/>
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label>PJ種別</label>
+                            <label>Project type</label>
                             <div class="item">
                                 <div class="fields code-checkbox-fields">
                                     <n:codeCheckboxes cssClass="code-checkbox" name="searchForm.projectType" codeId="C0300001" pattern="PATTERN01" listFormat ="span"/>
@@ -117,33 +117,33 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>売上高_実績_FROM</label>
-                                <n:text placeholder="売上高_実績_FROM" name="searchForm.salesFrom" />
+                                <label>Sales_results_FROM</label>
+                                <n:text placeholder="Sales_results_FROM" name="searchForm.salesFrom" />
                                 <n:error errorCss="message-error" name="searchForm.salesFrom" /><span>&nbsp;</span>
                             </div>
                             <div class="field">
-                                <label>売上高_実績_TO</label>
-                                <n:text placeholder="売上高_実績_TO" name="searchForm.salesTo" />
+                                <label>Sales_results_TO</label>
+                                <n:text placeholder="Sales_results_TO" name="searchForm.salesTo" />
                                 <n:error errorCss="message-error" name="searchForm.salesTo" /><span>&nbsp;</span>
                             </div>
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>開始日_FROM</label>
+                                <label>Start date_FROM</label>
                                 <div class="ui calendar" id="example1">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <n:text placeholder="開始日_FROM" name="searchForm.projectStartDateBegin" />
+                                        <n:text placeholder="Start date_FROM" name="searchForm.projectStartDateBegin" />
                                         <n:error errorCss="message-error" name="searchForm.projectStartDateBegin" /><span>&nbsp;</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>開始日_TO</label>
+                                <label>Start date_TO</label>
                                 <div class="ui calendar" id="example2">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <n:text placeholder="開始日_TO" name="searchForm.projectStartDateEnd" />
+                                        <n:text placeholder="Start date_TO" name="searchForm.projectStartDateEnd" />
                                         <n:error errorCss="message-error" name="searchForm.projectStartDateEnd" /><span>&nbsp;</span>
                                     </div>
                                 </div>
@@ -151,29 +151,29 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>終了日_FROM</label>
+                                <label>End date_FROM</label>
                                 <div class="ui calendar" id="example3">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <n:text placeholder="終了日_FROM" name="searchForm.projectEndDateBegin" />
+                                        <n:text placeholder="End date_TO" name="searchForm.projectEndDateEnd" />
                                         <n:error errorCss="message-error" name="searchForm.projectEndDateBegin" /><span>&nbsp;</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>終了日_TO</label>
+                                <label>End date_TO</label>
                                 <div class="ui calendar" id="example4">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <n:text placeholder="終了日_TO" name="searchForm.projectEndDateEnd" />
+                                        <n:text placeholder="End date_FROM" name="searchForm.projectEndDateBegin" />
                                         <n:error errorCss="message-error" name="searchForm.projectEndDateEnd" /><span>&nbsp;</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="field">
-                            <label>プロジェクト名で検索</label>
-                            <n:text placeholder="複数指定する場合は半角スペース区切りってください" name="searchForm.projectName" />
+                            <label>Search by project name</label>
+                            <n:text placeholder="Multiple items must be separated by single-byte spaces" name="searchForm.projectName" />
                             <n:error errorCss="message-error" name="searchForm.projectName" /><span>&nbsp;</span>
                         </div>
                         <div class="four fields">
@@ -181,7 +181,7 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">
-                                <n:button cssClass="fluid ui primary button" uri="/action" id="searchButton">検索</n:button>
+                                <n:button cssClass="fluid ui primary button" uri="/action" id="searchButton">Search</n:button>
                             </div>
                         </div>
                     </n:form>
@@ -194,14 +194,14 @@
                     <%-- spacer --%>
                     <div><span>&nbsp;</span></div>
                 </div>
-                <!-- 検索フォームでバリデーションエラーが発生していない場合だけ、検索結果を表示する。 -->
+                <!-- Search results are only displayed if no validation errors occur in the search form. -->
                 <c:if test="${searchResult != null}">
 
                                         <n:form method="GET" action="/action/projectSearch/search">
 
-                                            <%-- 現在の検索結果の表示に使用した検索条件をパラメータとして持つURIを、
-                                               変数としてpageスコープに登録する。
-                                               この変数は、<app:listSearchResult>タグのページング用のURIとして使用される。--%>
+                                            <%-- URIs with parameters consisting of search conditions used to display the current search results
+                                               are registered as variables within the page scope.
+                                               These variables are used as pagination URIs for the <app:listSearchResult> tag. --%>
                                             <c:url value="/action/projectSearch/search" var="uri" context="/">
                                                 <c:param name="searchForm.divisionId" value="${searchForm.divisionId}"/>
                                                 <c:param name="searchForm.organizationId" value="${searchForm.organizationId}"/>
@@ -226,7 +226,7 @@
                                                          value="${searchForm.projectEndDateEnd}"/>
                                             </c:url>
                                         </n:form>
-                    <!-- 検索結果 -->
+                    <!-- Search results -->
                     <app:listSearchResult
                         currentPageNumberCss="form-control"
                         pagingCss="paging"
@@ -244,22 +244,22 @@
                         useResultCount="false">
                         <jsp:attribute name="headerRowFragment">
                             <tr>
-                                <th>プロジェクトID</th>
-                                <th>プロジェクト名</th>
-                                <th>事業部</th>
-                                <th>部門</th>
-                                <th>PJ分類</th>
-                                <th>PJ種別</th>
+                                <th>Project ID</th>
+                                <th>Project name</th>
+                                <th>Division</th>
+                                <th>Department</th>
+                                <th>Project classification</th>
+                                <th>Project type</th>
                                 <th>PM</th>
-                                <th>売上高_実績</th>
-                                <th>開始日</th>
-                                <th>終了日</th>
+                                <th>Sales_results</th>
+                                <th>Start date</th>
+                                <th>End date</th>
                             </tr>
                         </jsp:attribute>
                         <jsp:attribute name="bodyRowFragment">
                             <tr class="info">
                                 <td>
-                                    <!-- プロジェクトIDをパラメータとするリンクを表示する -->
+                                    <!-- Display link with project ID as a parameter -->
                                     <n:a href="/action/projectSearch/show/${row.projectId}">
                                         <n:write name="row.projectId"/>
                                     </n:a>
@@ -283,7 +283,7 @@
                                     <n:write name="row.projectManager" />
                                 </td>
                                 <td>
-                                    <n:write value="${n:format('number', row.sales, '###,###,### 千円')}"/>
+                                    <n:write value="${n:format('number', row.sales, '###,###,###,000 yen')}"/>
                                 </td>
                                 <td>
                                     <n:write value="${n:formatByDefault('dateTime', row.projectStartDate)}" />

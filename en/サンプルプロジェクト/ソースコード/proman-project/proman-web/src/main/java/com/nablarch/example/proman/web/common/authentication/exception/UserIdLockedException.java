@@ -1,10 +1,9 @@
 package com.nablarch.example.proman.web.common.authentication.exception;
 
-
 /**
- * ユーザの認証時にユーザIDがロックされている場合に発生する例外。
+ * Exception occurring when the user ID is locked during user authentication.
  * <p/>
- * 対象ユーザのユーザIDとユーザIDをロックする認証失敗回数を保持する。
+ * The user ID of the applicable user and the number of authentication failures before locking the user ID is retained.
  * @author Nabu Rakutaro
  */
 public class UserIdLockedException extends AuthenticationException {
@@ -12,16 +11,16 @@ public class UserIdLockedException extends AuthenticationException {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** ユーザID */
+    /** User ID */
     private final String userId;
 
-    /** ユーザIDをロックする認証失敗回数 */
+    /** Number of authentication failures before locking the user ID */
     private final int failedCountToLock;
 
     /**
-     * コンストラクタ。
-     * @param userId ユーザID
-     * @param failedCountToLock ユーザIDをロックする認証失敗回数
+     * Constructor.
+     * @param userId: User ID
+     * @param failedCountToLock: Number of authentication failures before locking the user ID
      */
     public UserIdLockedException(String userId, int failedCountToLock) {
         this.userId = userId;
@@ -29,16 +28,16 @@ public class UserIdLockedException extends AuthenticationException {
     }
 
     /**
-     * ユーザIDを取得する。
-     * @return ユーザID
+     * Acquires user ID.
+     * @return: User ID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザIDをロックする認証失敗回数を取得する。
-     * @return ユーザIDをロックする認証失敗回数
+     * Acquires the number of authentication failures before locking the user ID.
+     * @return: Number of authentication failures before locking the user ID
      */
     public int getFailedCountToLock() {
         return failedCountToLock;

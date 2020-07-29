@@ -1,12 +1,12 @@
 <%--------------------------------------------------------------
-行データ、ヘッダ行とボディ行のフラグメントを使用してテーブルを出力するタグ。
+Tags for outputting tables using row data, header row and body row fragments.
 --------------------------------------------------------------%>
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="n" uri="http://tis.co.jp/nablarch" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags/listSearchResult" %>
 <%--------------------------------------------------------------
-属性
+Attributes
 --------------------------------------------------------------%>
 <%@ attribute name="resultSetName" required="true" rtexprvalue="true" %>
 <%@ attribute name="resultSetCss" required="false" rtexprvalue="true" %>
@@ -22,7 +22,7 @@
 <%@ attribute name="startPosition" required="true" rtexprvalue="true" type="java.lang.Integer" %>
 
 <%--------------------------------------------------------------
-デフォルト
+Default
 --------------------------------------------------------------%>
 <c:if test="${empty resultSetCss}"><n:set var="resultSetCss" value="nablarch_resultSet" scope="page" /></c:if>
 <c:if test="${empty varRowName}"><n:set var="varRowName" value="row" scope="page" /></c:if>
@@ -34,14 +34,14 @@
 <c:if test="${empty evenValue}"><n:set var="evenValue" value="nablarch_even" scope="page" /></c:if>
 
 <%--------------------------------------------------------------
-本体処理
+Process of main unit
 --------------------------------------------------------------%>
 <div class="sixteen wide column row">
     <div class="ui centered">
         <table class="ui celled table <n:write name="resultSetCss" withHtmlFormat="false" />">
-            <%-- ヘッダ行 --%>
+            <%-- Header row --%>
             <jsp:invoke fragment="headerRowFragment" />
-            <%-- ボディ行 --%>
+            <%-- Body row --%>
             <n:set var="resultSet" name="${resultSetName}" scope="page" bySingleValue="false" />
             <c:forEach var="nablarch_row" items="${resultSet}" varStatus="nablarch_status">
                 <n:set var="${varRowName}" value="${nablarch_row}" />

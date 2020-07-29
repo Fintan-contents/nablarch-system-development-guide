@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * ログインユーザー情報
+ * Information of logged in user
  *
  * @author Nabu Rakutaro
  */
@@ -15,85 +15,85 @@ public class LoginUserPrincipal implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    /** ユーザID */
+    /** User ID */
     private Integer userId;
 
-    /** 漢字氏名 */
+    /** Name */
     private String kanjiName;
 
-    /** PM職フラグ */
+    /** PM position flag */
     private boolean pmFlag;
 
-    /** 最終ログイン日時 */
+    /** Date/time of last login */
     private Date lastLoginDateTime;
 
     /**
-     * ユーザIDを取得する。
+     * Acquires user ID.
      *
-     * @return ユーザID
+     * @return: User ID
      */
     public Integer getUserId() {
         return userId;
     }
 
     /**
-     * ユーザIDを設定する。
+     * Set user ID.
      *
-     * @param userId ユーザID
+     * @param userId: User ID
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     /**
-     * 漢字氏名を取得する。
+     * Acquires name in kanji.
      *
-     * @return 漢字氏名
+     * @return: Name in kanji
      */
     public String getKanjiName() {
         return kanjiName;
     }
 
     /**
-     * 漢字氏名を設定する。
+     * Set name in kanji.
      *
-     * @param kanjiName 漢字氏名
+     * @param kanjiName: Name in kanji
      */
     public void setKanjiName(String kanjiName) {
         this.kanjiName = kanjiName;
     }
 
     /**
-     * PM職フラグを取得する。
+     * Acquires PM position flag.
      *
-     * @return PM職フラグ
+     * @return: PM position flag
      */
     public boolean isPmFlag() {
         return pmFlag;
     }
 
     /**
-     * PM職フラグを設定する。
+     * Set PM position flag.
      *
-     * @param pmFlag PM職フラグ
+     * @param pmFlag: PM position flag
      */
     public void setPmFlag(boolean pmFlag) {
         this.pmFlag = pmFlag;
     }
 
     /**
-     * 最終ログイン日時を取得する。
+     * Acquires date/time of last login.
      *
-     * @return 最終ログイン日時
+     * @return: Date/time of last login
      */
     public Date getLastLoginDateTime() {
         return lastLoginDateTime;
     }
 
     /**
-     * 最終ログイン日時を設定する。
+     * Set date/time of last login.
      *
-     * @param lastLoginDateTime 最終ログイン日時
+     * @param lastLoginDateTime: Date/time of last login
      */
     public void setLastLoginDateTime(Date lastLoginDateTime) {
         this.lastLoginDateTime = lastLoginDateTime;

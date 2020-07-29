@@ -4,73 +4,73 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- テーブル定義 -->
+  <!-- Table definitions -->
   <import file="nablarch/schema-config.xml" />
 
-  <!-- 精査に使用する文字集合定義 -->
+  <!-- Character set definitions used for scanning -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
 
-  <!-- proman-common設定 -->
+  <!-- proman-common setting -->
   <import file="com/nablarch/example/proman/common.xml"/>
 
-  <!-- BeanValidation実装クラス -->
+  <!-- BeanValidation implementation class -->
   <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
 
-  <!-- 環境設定ファイル -->
+  <!-- Environment settings file -->
   <config-file file="common.config" />
   <config-file file="env.config" />
 
-  <!-- バリデーション -->
+  <!-- Validation -->
   <import file="com/nablarch/example/proman/web/validation/validation.xml" />
 
-  <!-- パスワード暗号化モジュールの設定 -->
-  <!-- 各PJ固有の設定を読み込む。 -->
+  <!-- Password encryption module setting -->
+  <!-- Loads settings for each project. -->
   <import file="com/nablarch/example/proman/web/common/authentication/passwordEncryptor.xml" />
 
-  <!-- 認証設定 -->
-  <!-- 各PJ固有の設定を読み込む。 -->
+  <!-- Authentication settings -->
+  <!-- Loads settings for each project. -->
   <import file="com/nablarch/example/proman/web/common/authentication/authenticator.xml" />
 
-  <!-- Nablarch共通機能 -->
-  <!-- コード機能 -->
+  <!-- Common Nablarch features -->
+  <!-- Code features -->
   <import file="nablarch/common/code.xml"/>
-  <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
+  <!-- RDBMS without automatic numbering, setting to use universal DAO -->
   <import file="nablarch/common/dao.xml" />
 
-  <!-- web固有設定の読み込み -->
-  <!-- データベース設定 -->
+  <!-- Loads web-specific settings -->
+  <!-- Database settings -->
   <!--
-  下記設定ファイルを使用することで、JNDIを用いてコネクションがルックアップされる
-  ルックアップに使用する名前は、configファイル中で、「nablarch.connectionFactory.jndiResourceName」というプレースホルダーに設定する。
+  The following settings file is used to look up connections using JNDI
+  Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for looking up in the config file.
 
-  ローカルのデータソースからコネクションを取得したい場合は、アーキタイプから生成した直後のプロジェクトに含まれるdb-for-webui_dev.xmlを参考に設定すること。
+  When acquiring a connection from a local data source, refer to db-for-webui_dev.xml in the next project generated from the archetype.
   -->
   <import file="nablarch/webui/db-for-webui.xml"/>
 
-  <!-- エラーページ設定 -->
+  <!-- Error page settings -->
   <import file="nablarch/webui/error-page-for-webui.xml" />
 
-  <!-- ファイルパス設置 -->
+  <!-- File path installation -->
   <import file="nablarch/webui/filepath-for-webui.xml" />
 
-  <!-- インターセプタの実行順定義 -->
+  <!-- Definition of interceptor execution order -->
   <import file="nablarch/webui/interceptors.xml" />
 
-  <!-- ファイルアップロード機能設定 -->
+  <!-- File upload feature settings -->
   <import file="nablarch/webui/multipart.xml" />
 
-  <!-- カスタムタグ設定 -->
+  <!-- Custom tag settings -->
   <import file="nablarch/webui/nablarch-tag.xml" />
 
-  <!-- 二重サブミット防止機能 -->
+  <!-- Double submission prevention feature -->
   <import file="nablarch/webui/double-submission.xml" />
 
-  <!-- hidden暗号化機能を使用しないリクエストID -->
+  <!-- Request ID without a hidden encryption feature -->
   <list name="noHiddenEncryptionRequestIds">
     <!-- <value></value> -->
   </list>
 
-  <!-- パッケージマッピングの設定 -->
+  <!-- Package mapping settings -->
   <component name="packageMapping"
              class="nablarch.integration.router.RoutesMapping">
       <property name="routes" value="routes.xml"/>
@@ -79,9 +79,9 @@
       <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
   </component>
 
-  <!-- セッションストア機能 -->
+  <!-- Session store feature -->
   <import file="nablarch/webui/session-store.xml" />
-  <!-- TODO: アプリケーションサーバが冗長化されている場合は、HIDDENストアの暗号化に使用するコンポーネントのプロパティに明示的に暗号化/復号のキーを設定する。-->
+  <!-- TODO: If redundancy is set in the application server, explicitly set a key for encryption and restoration as a property for components used in the encryption of hidden stores. -->
   <!--
   <component name="hiddenStoreEncryptor" class="nablarch.common.encryption.AesEncryptor">
     <property name="key" value="1234567890123456" />
@@ -92,7 +92,7 @@
   <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler" >
     <property name="defaultPages">
       <map>
-        <!-- TODO: 適切なエラー画面作成して設定してください。設定の際は、あわせてweb.xmlも修正してください -->
+        <!-- TODO: Create an applicable error screen when setting this. Modify web.xml at the same time. -->
         <entry key="4.." value="/WEB-INF/view/errorPages/USER_ERROR.jsp" />
         <entry key="403" value="/WEB-INF/view/errorPages/PERMISSION-ERROR.jsp" />
         <entry key="404" value="/WEB-INF/view/errorPages/PAGE_NOT_FOUND_ERROR.jsp" />
@@ -103,13 +103,13 @@
     </property>
   </component>
 
-  <!-- ダイアレクト設定 -->
-  <!-- TODO:使用するDBに合わせてダイアレクトを設定すること -->
+  <!-- Dialect settings -->
+  <!-- TODO: Set dialect according to the database being used -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
   <import file="nablarch/webui/threadcontext-for-webui.xml"/>
 
-  <!-- ハンドラキュー構成 -->
+  <!-- Handler queue configuration -->
   <component name="webFrontController"
              class="nablarch.fw.web.servlet.WebFrontController">
 
@@ -119,7 +119,7 @@
 
         <component class="nablarch.fw.handler.GlobalErrorHandler"/>
 
-        <!-- 追加 -->
+        <!-- Add -->
         <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
 
         <component class="nablarch.fw.web.handler.HttpResponseHandler"/>
@@ -130,10 +130,10 @@
 
         <component-ref name="sessionStoreHandler" />
 
-        <!-- 追加 -->
+        <!-- Add -->
         <component-ref name="threadContextHandler"/>
 
-        <!-- 追加 -->
+        <!-- Add -->
         <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
 
         <component class="nablarch.fw.web.handler.NormalizationHandler" />
@@ -158,29 +158,29 @@
   </component>
 
 
-  <!-- 初期化が必要なコンポーネント -->
+  <!-- Components requiring initialization -->
   <component name="initializer"
              class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
         <component-ref name="codeLoader" />
         <component-ref name="codeCache"/>
-        <!-- web/session-store.xml:DBストア-->
+        <!-- web/session-store.xml: Database store-->
         <component-ref name="dbStore" />
-        <!-- パッケージマッピング-->
+        <!-- Package mapping -->
         <component-ref name="packageMapping"/>
       </list>
     </property>
   </component>
 
-  <!-- 二重サブミット構成 -->
+  <!-- Double submission configuration -->
   <component name="doubleSubmissionHandler"
              class="nablarch.common.web.token.BasicDoubleSubmissionHandler">
-    <!-- 二重サブミットと判定した場合の遷移先のリソースパス -->
+    <!-- Resource path for transition destination when double submission is judged to have occurred -->
     <property name="path" value="/WEB-INF/view/errorPages/DOUBLE_SUBMISSION_ERROR.jsp" />
-    <!-- 二重サブミットと判定した場合の遷移先画面に表示するエラーメッセージに使用するメッセージID -->
+    <!-- Message ID to be used for the error message displayed in the screen to which the system navigates when double submission is judged to have occurred. -->
     <!--<property name="messageId" value="DOUBLE_SUBMISSION_ERROR" />-->
-    <!-- 二重サブミットと判定した場合のレスポンスステータス。デフォルトは400 -->
+    <!-- Response status used when double submission is judged to have occurred. The default is 400. -->
     <property name="statusCode" value="400" />
   </component>
 

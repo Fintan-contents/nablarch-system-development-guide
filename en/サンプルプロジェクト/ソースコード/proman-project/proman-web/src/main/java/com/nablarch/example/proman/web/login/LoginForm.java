@@ -6,7 +6,7 @@ import nablarch.core.validation.ee.Required;
 import java.io.Serializable;
 
 /**
- * ログイン入力フォーム。
+ * Login input form.
  *
  * @author Nabu Rakutaro
  */
@@ -17,43 +17,43 @@ public class LoginForm implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    /** ログインID */
+    /** Login ID */
     @Required
     @Domain("loginId")
     private String loginId;
 
-    /** パスワード */
+    /** Password */
     @Required
     @Domain("password")
     private String userPassword;
 
     /**
-     * ログインIDを取得する。
-     * @return ログインID
+     * Acquires login ID.
+     * @return: Login ID
      */
     public String getLoginId() {
         return loginId;
     }
 
     /**
-     * ログインIDを設定する。
-     * @param loginId ログインID
+     * Set login ID.
+     * @param loginId: Login ID
      */
     public void setLoginId(String loginId) {
         this.loginId = loginId;
     }
 
     /**
-     * パスワードを取得する。
-     * @return パスワード
+     * Acquires password.
+     * @return: Password
      */
     public String getUserPassword() {
         return userPassword;
     }
 
     /**
-     * パスワードを設定する。
-     * @param userPassword パスワード
+     * Set password.
+     * @param userPassword: Password
      */
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;

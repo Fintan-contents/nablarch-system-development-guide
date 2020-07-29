@@ -1,9 +1,9 @@
 package com.nablarch.example.proman.web.common.authentication.exception;
 
 /**
- * アカウント情報の不一致により認証に失敗した場合に発生する例外。
+ * Exception occurring when authentication fails due to a mismatch in account information.
  * <p/>
- * 対象ユーザのユーザIDを保持する。
+ * The user ID of the applicable user is maintained.
  * @author Nabu Rakutaro
  */
 public class AuthenticationFailedException extends AuthenticationException {
@@ -11,20 +11,20 @@ public class AuthenticationFailedException extends AuthenticationException {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** ユーザID */
+    /** User ID */
     private final String userId;
 
     /**
-     * コンストラクタ。
-     * @param userId ユーザID
+     * Constructor.
+     * @param userId: User ID
      */
     public AuthenticationFailedException(String userId) {
         this.userId = userId;
     }
 
     /**
-     * ユーザIDを取得する。
-     * @return ユーザID
+     * Acquires user ID.
+     * @return: User ID
      */
     public String getUserId() {
         return userId;

@@ -9,52 +9,52 @@ import nablarch.common.dao.EntityList;
 import java.util.List;
 
 /**
- * プロジェクトサービス
+ * Project service
  *
  * @author TIS
  */
 public class ProjectService {
 
     /**
-     * 共通DAO
+     * Universal DAO
      */
     private final DaoContext universalDao;
 
     /**
-     * コンストラクタ。
+     * Constructor.
      */
     public ProjectService() {
         this(DaoFactory.create());
     }
 
     /**
-     * コンストラクタ。
-     * @param universalDao 共通DAO
+     * Constructor.
+     * @param universalDao: Universal DAO
      */
     ProjectService(DaoContext universalDao) {
         this.universalDao = universalDao;
     }
+
     /**
-     * 全部の事業部を取得する。
-     * @return 事業部リスト
+     * Acquires entire division.
+     * @return: Division list
      */
     public List<Organization> findAllDivision() {
         return universalDao.findAllBySqlFile(Organization.class, "FIND_ALL_DIVISION");
     }
 
     /**
-     * 全部の部門を取得する。
-     * @return 部門リスト
+     * Acquires entire department.
+     * @return: Department list
      */
     public List<Organization> findAllDepartment() {
         return universalDao.findAllBySqlFile(Organization.class, "FIND_ALL_DEPARTMENT");
     }
 
-
     /**
-     * 指定した組織を取得する。
-     * @param organizationId 組織ID
-     * @return 組織
+     * Acquires specified organization.
+     * @param organizationId Organization ID
+     * @return Organization
      */
     public Organization findOrganizationById(Integer organizationId) {
         Object[] param = { organizationId };
@@ -62,8 +62,8 @@ public class ProjectService {
     }
 
     /**
-     * プロジェクトを登録する。
-     * @param project 登録対象
+     * Registers project.
+     * @param project: Project to be registered
      */
     public void insertProject(Project project) {
         universalDao.insert(project);

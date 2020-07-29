@@ -1,12 +1,12 @@
 <%--------------------------------------------------------------
-検索結果のリスト表示のサブミット要素を出力するタグ。
+Tags for outputting list display submission elements for search results.
 --------------------------------------------------------------%>
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="n" uri="http://tis.co.jp/nablarch" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags/listSearchResult" %>
 <%--------------------------------------------------------------
-属性
+Attributes
 --------------------------------------------------------------%>
 <%@ attribute name="css" required="false" rtexprvalue="true" %>
 <%@ attribute name="label" required="true" rtexprvalue="true" %>
@@ -18,7 +18,7 @@
 <%@ attribute name="listSearchInfoName" required="true" rtexprvalue="true" %>
 
 <%--------------------------------------------------------------
-本体処理
+Process of main unit
 --------------------------------------------------------------%>
 <c:if test="${enable}">
     <c:url value="${uri}" var="uri" context="/">

@@ -3,7 +3,7 @@
  * common.css
  */
 
-/* -------------------- メッセージエリア -------------------- */
+/* -------------------- Message area -------------------- */
 .message-area {
     margin: 20px 0px 20px 30px;
 }
@@ -22,21 +22,21 @@
     font-size:8px;
 }
 
-/* ---------------------- codeタグ -------------------------*/
+/* ---------------------- code tags -------------------------*/
 
-/* codeCheckboxesの実体を隠す。 */
+/* Hides codeCheckboxes entities. */
 input.code-checkbox {
     opacity:0!important;
 }
 
-/* レイアウト調整。codeCheckboxesの相対位置を指定する */
+/* Adjusts layout. Specifies relative position of codeCheckboxes */
 input.code-checkbox + label {
     margin-left: -7px;
     position: relative;
     padding-left: 1.85714em;
 }
 
-/* レイアウト調整。codeCheckboxesの外観を定義する(イベント前) */
+/* Adjusts layout. Defines appearance of codeCheckboxes (before event) */
 input.code-checkbox + label:before {
     position: absolute;
     top: 0;
@@ -48,7 +48,7 @@ input.code-checkbox + label:before {
     border: 1px solid #d4d4d5;
 }
 
-/* レイアウト調整。codeCheckboxesの外観を定義する(イベント後) */
+/* Adjusts layout. Defines appearance of codeCheckboxes (after event) */
 input.code-checkbox + label:after {
     font-family: Checkbox;
     position: absolute;
@@ -59,30 +59,30 @@ input.code-checkbox + label:after {
     text-align: center;
 }
 
-/* レイアウト調整。codeCheckboxesのチェックマーク外観を定義する(イベント後) */
+/* Adjusts layout. Defines appearance of check mark for codeCheckboxes (after event) */
 input.code-checkbox:checked ~ label:after {
     content: '\e800';
     opacity: 1;
 }
 
-/* レイアウト調整。codeCheckboxesの折り返し表示方法を指定する */
+/* Adjusts layout. Specifies wrapped display method for codeCheckboxes */
 .code-checkbox-fields {
     flex-wrap: wrap;
 }
 
-/* codeRadioButtonsの実体を隠す。 */
+/* Hides codeRadioButtons entities. */
 input.code-radio {
     opacity: 0!important;
 }
 
-/* レイアウト調整。codeRadioButtonsの相対位置を指定する */
+/* Adjusts layout. Specifies relative position of codeRadioButtons */
 input.code-radio + label {
     margin-left: -7px;
     position: relative;
     padding-left: 1.85714em;
 }
 
-/* レイアウト調整。codeRadioButtonsの外観を定義する(イベント前) */
+/* Adjusts layout. Defines appearance of codeRadioButtons (before event) */
 input.code-radio + label:before {
     position: absolute;
     content: '';
@@ -94,7 +94,7 @@ input.code-radio + label:before {
     border: 1px solid #d4d4d5;
 }
 
-/* レイアウト調整。codeRadioButtonsの外観を定義する(イベント後) */
+/* Adjusts layout. Defines appearance of codeRadioButtons (after event) */
 input.code-radio + label:after {
     top: 1px;
     left: 0;
@@ -106,17 +106,17 @@ input.code-radio + label:after {
     position: absolute;
 }
 
-/* レイアウト調整。codeRadioButtonsのチェックマーク外観を定義する(イベント後) */
+/* Adjusts layout. Defines appearance of check mark for codeRadioButtons (after event) */
 input.code-radio:checked ~ label:after {
     background-color: rgba(0,0,0,.95);
 }
 
-/* レイアウト調整。codeRadioButtonsの折り返し表示方法を指定する */
+/* Adjusts layout. Specifies wrapped display method for codeRadioButtons */
 .code-radio-fields {
     flex-wrap: wrap;
 }
 
-/* -------------------- textareaタグ -----------------------*/
+/* -------------------- textarea tags -----------------------*/
 div.text{
     word-break: break-all;
 }

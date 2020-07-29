@@ -11,7 +11,7 @@
         <div class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
-              <span class="navbar-brand">顧客検索一覧画面</span>
+              <span class="navbar-brand">Client search list screen</span>
             </div>
           </div>
         </div>
@@ -22,28 +22,28 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="search-client-name" class="col-md-2 control-label">顧客名</label>
+          <label for="search-client-name" class="col-md-2 control-label">Client Name</label>
           <div class="col-md-10">
             <input type="text" class="form-control" id="search-client-name" name="form.clientName">
           </div>
         </div>
         <div class="form-group">
-          <label for="search-industry-code" class="col-md-2 control-label">業種</label>
+          <label for="search-industry-code" class="col-md-2 control-label">Industry</label>
           <div class="col-md-10">
             <select id="search-industry-code" class="form-control" name="form.industryCode">
             </select>
           </div>
         </div>
         <div>
-          <a href="javascript:void(0)" class="btn btn-raised btn-primary pull-right" id="client-search">検索</a>
+          <a href="javascript:void(0)" class="btn btn-raised btn-primary pull-right" id="client-search">Search</a>
         </div>
         <div style="overflow-y: scroll; height: 250px;" class="col-md-12">
           <table class="table table-striped table-hover" id="search-result">
             <thead>
             <tr>
-              <th>顧客ID</th>
-              <th>顧客名</th>
-              <th>業種</th>
+              <th>Client ID</th>
+              <th>Client name</th>
+              <th>Industry</th>
             </tr>
             </thead>
             <tbody>

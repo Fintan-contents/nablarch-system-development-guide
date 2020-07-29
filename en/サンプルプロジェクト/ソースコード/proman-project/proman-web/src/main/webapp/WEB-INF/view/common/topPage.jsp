@@ -16,39 +16,39 @@
     <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></n:script>
     <n:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></n:script>
     <title>
-        トップページ | Proman
+        Home page | Proman
     </title>
 </head>
 <body>
     <n:include path="/WEB-INF/view/common/header.jsp" />
     <div class="ui main container">
         <h1 class="ui header">
-            <div class="content">全社のプロジェクトを収集、活用</div>
+            <div class="content">Collecting and using company-wide projects</div>
         </h1>
         </br>
-        <h4 class="ui dividing header">プロジェクト管理</h4>
-        <label class="field">　┗　<n:a href="/app/project/search">プロジェクト検索</n:a></label></br>
+        <h4 class="ui dividing header">Project management</h4>
+        <label class="field">　┗　<n:a href="/app/project/search">Project search</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="/app/project/register">プロジェクト登録</n:a></label></br>
+                <label class="field">　┗　<n:a href="/app/project/search">Project registration</n:a></label></br>
             </c:when>
         </c:choose>
         </br>
-        <h4 class="ui dividing header">顧客管理</h4>
-        <label class="field">　┗　<n:a href="#">顧客検索</n:a></label></br>
+        <h4 class="ui dividing header">Client management</h4>
+        <label class="field">　┗　<n:a href="#">Client search</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="#">顧客登録</n:a></label></br>
+                <label class="field">　┗　<n:a href="#">Client registration</n:a></label></br>
             </c:when>
         </c:choose>
         </br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <h4 class="ui dividing header">ユーザ別従事プロジェクト抽出</h4>
-                <label class="field">　┗　<n:a href="#">ユーザ別従事プロジェクト抽出指示</n:a></label></br>
+                <h4 class="ui dividing header">Extraction of projects that each user is involved in</h4>
+                <label class="field">　┗　<n:a href="#">Instructions for extraction of projects that each user is involved in</n:a></label></br>
                 </br>
-                <h4 class="ui dividing header">プロジェクト情報一括</h4>
-                <label class="field">　┗　<n:a href="#">プロジェクト一括登録</n:a></label></br>
+                <h4 class="ui dividing header">Project information batches</h4>
+                <label class="field">　┗　<n:a href="#">Batch registration of projects</n:a></label></br>
             </c:when>
         </c:choose>
     </div>

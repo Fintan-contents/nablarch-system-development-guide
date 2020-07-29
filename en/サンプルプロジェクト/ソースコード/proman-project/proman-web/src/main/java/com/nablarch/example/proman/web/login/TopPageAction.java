@@ -6,18 +6,18 @@ import nablarch.fw.web.HttpRequest;
 import nablarch.fw.web.HttpResponse;
 
 /**
- * Topメニューアクション。
+ * Home menu action.
  *
  * @author Nabu Rakutaro
  */
 public class TopPageAction {
 
     /**
-     * Topメニュー画面を表示。
+     * Displays home menu screen.
      *
-     * @param request HTTPリクエスト
-     * @param context 実行コンテキスト
-     * @return HTTPレスポンス
+     * @param request: HTTP request
+     * @param context: Context for execution
+     * @return: HTTP response
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
         SessionUtil.delete(context, "searchForm");

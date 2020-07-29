@@ -3,21 +3,21 @@ package com.nablarch.example.proman.web.common.authentication;
 import com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException;
 
 /**
- * ユーザの認証を行うインタフェース。
+ * User authentication interface.
  * <p/>
- * 認証方式毎に本インタフェースの実装クラスを作成する。
+ * Creates class for implementation of this interface for each authentication method.
  * @author Nabu Rakutaro
  */
 public interface PasswordAuthenticator {
 
     /**
-     * アカウント情報を使用してユーザを認証する。
+     * The user is authenticated using the account information.
      * <p/>
-     * 実装クラスでは、認証方式毎にメソッド引数と送出する可能性がある例外を規定すること。
+     * A method argument and an exception that may be sent must be prescribed for each authentication method in the implementation class.
      *
-     * @param userId ユーザID
-     * @param password パスワード
-     * @throws AuthenticationException 認証例外
+     * @param userId: User ID
+     * @param password: Password
+     * @throws AuthenticationException: Authentication exception
      */
     void authenticate(String userId, String password) throws AuthenticationException;
 }

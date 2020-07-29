@@ -27,18 +27,18 @@ public class FormBinderTest extends TestSupport {
 
     private Input input = new Input();
 
-    /** コンストラクタ */
+    /** Constructor */
     public FormBinderTest() {
         super(FormBinderTest.class);
     }
 
     @Test
-    public void Formへの変換ができること() {
+    public void canBeConvertedToTestFormClass() {
         input.setParam("loginId", "aaa");
         input.setParam("loginPassword", "bbbb");
 
         BindingResult<TestForm> result = FormBinder.from(input.getHttpRequest(), input.getContext()).to(TestForm.class);
-        result.abortIfInvalid();  // validなので例外は発生しない
+        result.abortIfInvalid();  // Exception does not occur as this is valid
 
         TestForm form = result.getValidForm();
         assertThat(form.getLoginId(), is("aaa"));
@@ -46,13 +46,13 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void prefix付きでFormへの変換ができること() {
+    public void canBeConvertedToTestFormClassWithPrifix() {
         input.setParam("prefix.loginId", "aaa");
         input.setParam("prefix.loginPassword", "bbbb");
 
         BindingResult<TestForm> result = FormBinder.from(input.getHttpRequest(), input.getContext(), "prefix")
                 .to(TestForm.class);
-        result.abortIfInvalid();  // validなので例外は発生しない
+        result.abortIfInvalid();  // Exception does not occur as this is valid
 
         TestForm form = result.getValidForm();
         assertThat(form.getLoginId(), is("aaa"));
@@ -60,7 +60,7 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void バリデーションエラーになること() {
+    public void tryCatchApplicationException() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
@@ -72,8 +72,8 @@ public class FormBinderTest extends TestSupport {
             fail();
         } catch (ApplicationException e) {
             List<Message> messages = e.getMessages();
-            assertThat(messages.get(0).formatMessage(), is("パスワードの長さは最大4です!"));
-            assertThat(messages.get(1).formatMessage(), is("ログインIDは必ず入力してください!"));
+            assertThat(messages.get(0).formatMessage(), is("Maximum password length is 4 characters!"));
+            assertThat(messages.get(1).formatMessage(), is("Login ID must be entered!"));
         }
 
     }

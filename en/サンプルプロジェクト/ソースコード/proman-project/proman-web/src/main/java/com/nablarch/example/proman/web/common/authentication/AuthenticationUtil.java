@@ -8,37 +8,37 @@ import com.nablarch.example.proman.web.common.authentication.exception.UserIdLoc
 import nablarch.core.repository.SystemRepository;
 
 /**
- * 認証関連の処理のユーティリティクラス。
+ * Utility class for processes involved in authentication.
  *
  * @author Nabu Rakutaro
  */
 public final class AuthenticationUtil {
 
     /**
-     * パスワード暗号化コンポーネント名。
+     * Component name for password encryption.
      */
     private static final String PASSWORD_ENCRYPTOR = "passwordEncryptor";
 
     /**
-     * Authenticatorコンポーネント名。
+     * Authenticator component name.
      */
     private static final String AUTHENTICATOR = "authenticator";
 
     /**
-     * 隠蔽コンストラクタ。
+     * Masked constructor.
      */
     private AuthenticationUtil() {
     }
 
     /**
-     * パスワードを暗号化する。
+     * Encrypts passwords.
      * <p/>
-     * パスワードの暗号化に使用する {@link PasswordEncryptor} は、 {@link SystemRepository} から
-     * {@value #PASSWORD_ENCRYPTOR} というコンポーネント名で取得する。
+     * The {@link PasswordEncryptor} used for password encryption is acquired from {@link SystemRepository}
+     * using the component name {@value #PASSWORD_ENCRYPTOR}.
      *
-     * @param userId ユーザID
-     * @param password パスワード（平文）
-     * @return 暗号化されたパスワード
+     * @param userId: User ID
+     * @param password: Password (plain text)
+     * @return: Encrypted password
      * @see PasswordEncryptor#encrypt(String, String)
      */
     public static String encryptPassword(String userId, String password) {
@@ -47,16 +47,16 @@ public final class AuthenticationUtil {
     }
 
     /**
-     * ユーザを認証する。
+     * Authenticates the user.
      * <p/>
-     * ユーザの認証に使用する {@link PasswordAuthenticator} は、 {@link SystemRepository} から
-     * {@value #AUTHENTICATOR} というコンポーネント名で取得する。
+     * The {@link PasswordAuthenticator} used for user authentication is acquired from {@link SystemRepository}
+     * using the component name {@value #AUTHENTICATOR}.
      *
-     * @param userId ユーザID
-     * @param password パスワード（平文）
-     * @throws AuthenticationFailedException 認証に失敗した場合
-     * @throws UserIdLockedException ユーザIDがロックされていた場合
-     * @throws PasswordExpiredException パスワードの有効期限が切れていた場合
+     * @param userId: User ID
+     * @param password: Password (plain text)
+     * @throws AuthenticationFailedException: When authentication fails
+     * @throws UserIdLockedException: When a user ID is locked
+     * @throws PasswordExpiredException: When a password is expired
      * @see PasswordAuthenticator#authenticate(String, String)
      */
     public static void authenticate(String userId, String password)
