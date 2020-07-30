@@ -4,9 +4,9 @@
 package com.example;
 
 /**
- * ClassTypeParameterNameのコード例です。
- * 
- * 型パラメーターが大文字アルファベット1文字（OK）。
+ * Example of ClassTypeParameterName code.
+ *
+ * Type parameter is one upper case letter (OK).
  * 
  * @author example
  * @since 1.0.0
@@ -15,7 +15,7 @@ public class ClassTypeParameterNameExample<T> {
 }
 
 /**
- * 2文字以上の名前（NG）。
+ * Name consists of 2 or more characters (incorrect).
  * 
  * @author example
  * @since 1.0.0
@@ -24,7 +24,7 @@ class NgClassTypeParameterNameExample1<FOO> {
 }
 
 /**
- * 小文字アルファベットの名前（NG）。
+ * Name consists of lower-case letter(s) (incorrect).
  * 
  * @author example
  * @since 1.0.0

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * IllegalTypeのコード例です。
+ * Example of IllegalType code.
  * 
  * @author example
  * @since 1.0.0
@@ -15,15 +15,15 @@ import java.util.List;
 public class IllegalTypeExample {
 
     /**
-     * IllegalTypeのコード例です。
+     * Example of IllegalType code.
      */
     public void example() {
 
-        // 変数の型にArrayListは使っています（NG）。
+        // ArrayList is used as the variable type (incorrect).
         ArrayList<String> ng = new ArrayList<>();
 
-        // 変数の型はListを使っています（OK）。
-        // 右辺にArrayListを使うのはOKです。
+        // List is used as the variable type (OK).
+        // OK to use ArrayList on right side.
         List<String> ok = new ArrayList<>();
 
         System.out.println(ok);

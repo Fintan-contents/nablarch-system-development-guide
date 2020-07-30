@@ -13,7 +13,7 @@
                 <style type="text/css">
                     html, body {
                         color: black;
-                        font: 80%/1.5 Verdana, "ＭＳ Ｐゴシック", sans-serif;
+                        font: 80%/1.5 Verdana, "MS PGothic", sans-serif;
                     }
 
                     #mainContents {

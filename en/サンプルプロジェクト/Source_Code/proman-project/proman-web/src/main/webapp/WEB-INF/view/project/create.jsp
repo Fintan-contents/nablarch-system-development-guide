@@ -192,7 +192,7 @@
                                 <div class="field centered aligned">
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/app/project/confirmRegistration" cssClass="fluid ui primary button">登録
+                                    <n:button uri="/app/project/confirmRegistration" cssClass="fluid ui primary button">Confirm
                                     </n:button>
                                 </div>
                             </n:forInputPage>
@@ -203,7 +203,7 @@
                                 </div>
                                 <div class="field centered aligned">
                                     <n:button uri="/app/project/register" cssClass="fluid ui primary button"
-                                        allowDoubleSubmission="false">確定</n:button>
+                                        allowDoubleSubmission="false">Register</n:button>
                                 </div>
                             </n:forConfirmationPage>
                             <div class="field centered aligned">&nbsp;</div>

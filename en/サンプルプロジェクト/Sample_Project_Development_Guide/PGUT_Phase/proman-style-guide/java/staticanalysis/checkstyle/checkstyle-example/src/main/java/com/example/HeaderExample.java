@@ -1,8 +1,8 @@
-//規定のヘッダーが無いのでNG
+// Incorrect as the prescribed header is not used.
 package com.example;
 
 /**
- * Headerのコード例です。
+ * Example of Header code.
  * 
  * @author example
  * @since 1.0.0

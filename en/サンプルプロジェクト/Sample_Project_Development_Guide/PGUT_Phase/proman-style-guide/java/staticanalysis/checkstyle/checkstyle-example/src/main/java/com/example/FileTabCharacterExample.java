@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * FileTabCharacterのコード例です。
+ * Example of FileTabCharacter code.
  *
  * @author example
  * @since 1.0.0
@@ -12,10 +12,10 @@ package com.example;
 public class FileTabCharacterExample {
 
     /**
-     * FileTabCharacterのコード例です。
+     * Example of FileTabCharacter code.
      */
     public void example() {
-	System.out.println("Hello world!");  // この行はインデントにタブが使用されています（NG）。
+	System.out.println("Hello world!");  // This line contains an indent tab (NG)
     }
 
 }

@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * HiddenFieldのコード例です。
+ * Example of HiddenField code.
  * 
  * @author example
  * @since 1.0.0
@@ -14,9 +14,9 @@ public class HiddenFieldExample {
     private String foo;
 
     /**
-     * コンストラクタです。
-     * 
-     * @param foo コンストラクタ引数はフィールドと同名でもOK
+     * Constructor.
+     *
+     * @param foo OK even if constructor argument has the same name as the field.
      *
      */
     public HiddenFieldExample(String foo) {
@@ -24,9 +24,9 @@ public class HiddenFieldExample {
     }
 
     /**
-     * setterです。
+     * Setter.
      * 
-     * @param foo setterの引数はフィールドと同名でもOK
+     * @param foo OK even if setter argument has the same name as the field.
      *
      */
     public void setFoo(String foo) {
@@ -34,21 +34,20 @@ public class HiddenFieldExample {
     }
 
     /**
-     * 引数がNGになる例です。
+     * Example of incorrect argument.
      *
-     * @param foo setter以外のメソッドはフィールドと同名の引数はNG
-     *
+     * @param foo Incorrect if an argument for a method other than setter has the same name as the field.
      */
     public void method1(String foo) {
         System.out.println(foo);
     }
 
     /**
-     * ローカル変数がNGになる例です。
+     * Example of incorrect local variable.
      *
      */
     public void method2() {
-        //フィールドと同名のローカル変数はNG
+        //Incorrect as local variable has the same name as the field
         String foo = "NG";
         System.out.println(foo);
     }

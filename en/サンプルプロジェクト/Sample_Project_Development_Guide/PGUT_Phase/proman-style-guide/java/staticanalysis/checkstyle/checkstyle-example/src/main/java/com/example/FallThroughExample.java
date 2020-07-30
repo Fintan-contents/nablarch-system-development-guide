@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * FallThroughのコード例です。
+ * Example of FallThrough code.
  *
  * @author example
  * @since 1.0.0
@@ -12,82 +12,82 @@ package com.example;
 public class FallThroughExample {
 
     /**
-     * 会員のランクを表す列挙型です。
+     * An enumeration indicating members' rank.
      *
      * @author example
      * @since 1.0.0
      */
     enum MemberRank {
-        /** ゴールド会員 */
+        /** Gold member */
         GOLD,
-        /** シルバー会員 */
+        /** Silver member */
         SILVER,
-        /** ブロンズ会員 */
+        /** Bronze member */
         BRONZE,
     }
 
     /**
-     * FallThroughのコード例です（NG）。
+     * Example of FallThrough code (incorrect).
      *
-     * @param memberRank 会員のランク
+     * @param memberRank Member rank
      */
     public void badExample(MemberRank memberRank) {
         int bonus;
         switch (memberRank) {
         case GOLD:
-            // ゴールド会員の処理...
+            // Gold member process...
             bonus = 1000;
         case SILVER:
-            // ゴールド会員の処理をフォールスルーをしています（NG）。
-            // これはbreak忘れのバグです。
+            // Gold member process has fallen through (incorrect).
+            // This bug is caused by forgetting a break.
 
-            // シルバー会員の場合の処理...
+            // Process for silver member...
             bonus = 100;
             break;
         default:
-            // その他場合の処理...
+            // Process for other members...
             bonus = 10;
         }
     }
 
     /**
-     * FallThroughのコード例です（OK）。
+     * Example of FallThrough code (OK).
      *
-     * @param memberRank 会員のランク
+     * @param memberRank Member rank
      */
     public void goodExample(MemberRank memberRank) {
 
         int bonus;
         switch (memberRank) {
         case GOLD:
-            // ゴールド会員の処理...
+            // Gold member process...
             bonus = 1000;
             break;
         case SILVER:
-            // シルバー会員の場合の処理...
+            // Process for silver member...
             bonus = 100;
             break;
         default:
-            // その他場合の処理...
+            // Process for other members...
             bonus = 10;
         }
     }
 
     /**
-     * FallThroughのコード例です（OKですがgoodExampleメソッドのような書き方を推奨します）。
+     * Example of FallThrough code (OK but writing the code as shown for the goodExample method is recommended).
      *
-     * @param memberRank 会員のランク
+     * @param memberRank Member rank
      */
     public void notBadExample(MemberRank memberRank) {
         int bonus;
         switch (memberRank) {
         case GOLD:
         case SILVER:
-            // ゴールド会員またはシルバー会員の場合の処理...
+            // Process for gold or silver member...
             bonus = 500;
             break;
         default:
-            // その他場合の処理...
+            // Process for other members...
             bonus = 10;
         }
     }

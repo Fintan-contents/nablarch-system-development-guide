@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * Indentationのコード例です。
+ * Example of Indentation code.
  *
  * @author example
  * @since 1.0.0
@@ -12,19 +12,18 @@ package com.example;
 public class Indentation {
 
     /**
-     * IndentationのNG例です。
-     *
-     * @param number 数字
-     * @return 変換後の数値
-     * @throws IllegalArgumentException 引数が0の場合
+     * Example of incorrect indentation.
+     * @param number: Number
+     * @return Converted number
+     * @throws IllegalArgumentException When the argument is 0
      */
     public int invalidExample(int number)
-    throws IllegalArgumentException {   // throwsのインデントが基準を満たしていません。
+    throws IllegalArgumentException {   // throws indent does not meet the criteria.
 
-    int ret;    // メソッド内ステートメントのインデントが基準を満たしていません。
+    int ret;    // Indent for statement in method does not meet the criteria.
 
         switch (number) {
-            // 以下、switchとcaseとが同じインデントではありませんNG
+            // switch and case below do not have the same indent (incorrect)
             case 0:
                 throw new IllegalArgumentException("argument 'number' must not be zero.");
 
@@ -36,19 +35,19 @@ public class Indentation {
     }
 
     /**
-     * IndentationのOK例です。
+     * Example of correct indentation.
      *
-     * @param number 数字
-     * @return 変換後の数値
-     * @throws IllegalArgumentException 引数が0の場合
+     * @param number: Number
+     * @return Converted number
+     * @throws IllegalArgumentException When the argument is 0
      */
     public int validExample(int number)
-            throws IllegalArgumentException {   // throwsのインデントが基準を満たしていません。
+        throws IllegalArgumentException {   // throws indent does not meet the criteria.
 
-        int ret;    // メソッド内ステートメントのインデントが基準を満たしています
+        int ret;    // Indent for statement in method meets the criteria.
 
         switch (number) {
-        // 以下、switchとcaseとが同じインデントであるためOK
+        // The example below is OK as switch and case have the same indent
         case 0:
             throw new IllegalArgumentException("argument 'number' must not be zero.");
 

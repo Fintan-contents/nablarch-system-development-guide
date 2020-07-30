@@ -6,7 +6,7 @@ package com.example;
 import java.util.Arrays;
 
 /**
- * ArrayTypeStyleのコード例です。
+ * Example of ArrayTypeStyle code.
  * 
  * @author example
  * @since 1.0.0
@@ -14,12 +14,12 @@ import java.util.Arrays;
 public class ArrayTypeStyleExample {
 
     /**
-     * ArrayTypeStyleのコード例です。
+     * Example of ArrayTypeStyle code.
      */
     public void example() {
-        // Javaスタイルによる配列宣言（OK）。
+        // Array declared in Java style (OK).
         String[] javaStyleArray = { "foo", "bar", "baz" };
-        // C言語スタイルによる配列宣言（NG）。
+        // Array declared in C language style (incorrect).
         String clangStyleArray[] = { "foo", "bar", "baz" };
 
         System.out.println(Arrays.toString(javaStyleArray));

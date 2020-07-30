@@ -3,14 +3,13 @@
  */
 package com.example;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * GenericWhitespaceのコード例です。
+ * Example of GenericWhitespace code.
  *
  * @author example
  * @since 1.0.0
@@ -18,16 +17,15 @@ import java.util.Map;
 public class GenericWhitespaceExample {
 
     /**
-     * GenericWhitespaceのコード例です。
+     * Example of GenericWhitespace code.
      */
     public void example() {
-        // ジェネリクスの<>に不要な空白があります（NG）。
+        // Unnecessary white space in <> for generics (incorrect).
         List< String > bad = new ArrayList<>();
         Map< String, Integer > badToo = new HashMap<>();
 
-        // ジェネリクスの<>に不要な空白がありません（OK）。
+        // No unnecessary white space in <> for generics (OK).
         List<String> good = new ArrayList<>();
         Map<String, Integer> goodToo = new HashMap<>();
     }
 }
-

@@ -6,7 +6,7 @@ package com.example;
 import java.util.Objects;
 
 /**
- * EqualsHashCodeのコード例です。
+ * Example of EqualsHashCode code.
  *
  * @author example
  * @since 1.0.0
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class EqualsHashCodeExample {
 
     /**
-     * equalsメソッドのみオーバーライドした例（NG）。
+     * Example in which only the equals method is overwritten (OK)
      *
      * @author example
      * @since 1.0.0
@@ -23,13 +23,13 @@ public class EqualsHashCodeExample {
         /** ID */
         private final int id;
 
-        /** 名前 */
+        /** Name */
         private final String name;
 
         /**
-         * コンストラクタ。
+         * Constructor.
          * @param id ID
-         * @param name 名前
+         * @param name Name
          */
         public EqualsOverride(int id, String name) {
             this.id = id;
@@ -48,12 +48,12 @@ public class EqualsHashCodeExample {
             return id == that.id && Objects.equals(name, that.name);
         }
 
-        // equalsメソッドをオーバーライドしているのに、hashCodeメソッドをオーバライドしていません（NG）。
+        // An equals method is overwritten but a hashCode is not (incorrect).
     }
 
 
     /**
-     * equalsメソッドとhashCodeメソッド両方をオーバーライドした例（OK）
+     * An example where both the equals method and the hashCode method are overwritten (OK)
      * @author example
      * @since 1.0.0
      */
@@ -61,20 +61,20 @@ public class EqualsHashCodeExample {
         /** ID */
         private final int id;
 
-        /** 名前 */
+        /** Name */
         private final String name;
 
         /**
-         * コンストラクタ。
+         * Constructor.
          * @param id ID
-         * @param name 名前
+         * @param name Name
          */
         public OverrideEqualsAndHashCode(int id, String name) {
             this.id = id;
             this.name = name;
         }
 
-        // equalsメソッドとhashCodeメソッドを両方ともオーバライドしています（OK）。
+        // Both the equals method and the hashCode method are overwritten (OK).
 
         @Override
         public boolean equals(Object o) {

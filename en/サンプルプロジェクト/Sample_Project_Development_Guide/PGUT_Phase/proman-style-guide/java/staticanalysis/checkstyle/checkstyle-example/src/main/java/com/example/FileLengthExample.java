@@ -4,7 +4,7 @@
 package com.example;
 
 /**
- * FileLengthのコード例です。
+ * Example of FileLength.
  * 
  * @author example
  * @since 1.0.0
@@ -12,7 +12,7 @@ package com.example;
 public class FileLengthExample {
 
     /**
-     * FileLengthのコード例です（NG）。
+     * Example of FileLength (incorrect).
      */
     public void example1() {
         System.out.println();
@@ -118,7 +118,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example2() {
         System.out.println();
@@ -224,7 +224,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example3() {
         System.out.println();
@@ -330,7 +330,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example4() {
         System.out.println();
@@ -436,7 +436,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example5() {
         System.out.println();
@@ -542,7 +542,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example6() {
         System.out.println();
@@ -648,7 +648,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example7() {
         System.out.println();
@@ -754,7 +754,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example8() {
         System.out.println();
@@ -860,7 +860,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example9() {
         System.out.println();
@@ -966,7 +966,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example10() {
         System.out.println();
@@ -1072,7 +1072,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example11() {
         System.out.println();
@@ -1178,7 +1178,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example12() {
         System.out.println();
@@ -1284,7 +1284,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example13() {
         System.out.println();
@@ -1390,7 +1390,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example14() {
         System.out.println();
@@ -1496,7 +1496,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example15() {
         System.out.println();
@@ -1602,7 +1602,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example16() {
         System.out.println();
@@ -1708,7 +1708,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example17() {
         System.out.println();
@@ -1814,7 +1814,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example18() {
         System.out.println();
@@ -1920,7 +1920,7 @@ public class FileLengthExample {
     }
 
     /**
-     * FileLengthのコード例です。
+     * Example of FileLength.
      */
     public void example19() {
         System.out.println();

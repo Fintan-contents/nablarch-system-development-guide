@@ -6,7 +6,7 @@ package com.example;
 import static java.lang.System.out;
 
 /**
- * AvoidStaticImportのコード例です。
+ * Example of AvoidStaticImport code.
  *
  * @author example
  * @since 1.0.0
@@ -14,13 +14,13 @@ import static java.lang.System.out;
 public class AvoidStaticImportExample {
 
     /**
-     * AvoidStaticImportのコード例です。
+     * Example of AvoidStaticImport code.
      */
     public void example() {
-        // static importを使用しています（OK）
+        // static import is used (incorrect)
         out.println("Hello World!");
 
-        // static importを使用していません（OK）
+        // static import is not used (OK)
         System.out.println("Hello World!");
     }
 }
