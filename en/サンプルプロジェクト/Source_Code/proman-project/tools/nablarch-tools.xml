@@ -5,7 +5,7 @@
     <path refid="maven.compile.classpath" />
     <path refid="maven.plugin.classpath" />
   </path>
-  <target name="analyzeJsp" depends="analyzeJspOutputXml" description="JSPの解析を行い、HTMLレポートを出力する。">
+  <target name="analyzeJsp" depends="analyzeJspOutputXml" description="Analyze JSP and output HTML report." >
     <java classname="nablarch.test.tool.sanitizingcheck.HtmlConvert" dir="${nablarch.tools.dir}" fork="true">
       <arg value="${jspanalysis.xmloutput}" />
       <arg value="${jspanalysis.xsl}" />
@@ -16,7 +16,7 @@
     </java>
   </target>
 
-  <target name="analyzeJspOutputXml" description="JSPの解析を行い、XMLレポートを出力する。">
+  <target name="analyzeJspOutputXml" description="Analyze JSP and output HTML report." >
     <java classname="nablarch.test.tool.sanitizingcheck.SanitizingCheckTask" dir="${nablarch.tools.dir}" fork="true">
       <arg value="${jspanalysis.checkjspdir}" />
       <arg value="${jspanalysis.xmloutput}" />
@@ -24,8 +24,8 @@
       <arg value="${jspanalysis.charset}" />
       <arg value="${jspanalysis.lineseparator}" />
       <arg value="${jspanalysis.additionalexts}" />
-      <!-- JSP静的解析ツールにおいて、「チェック対象外とするディレクトリ（ファイル）名を正規表現で設定する」ための項目。
-           parentプロジェクトのpom.xmlにて、本値を有効にした場合は、コメントアウトを解除する。
+      <!-- Item for setting directory (file) names that are exempt from checking as regular expressions using a JSP static analysis tool.
+           Commenting out is deactivated when this value is enabled using pom.xml in the parent project.
       <arg value="${jspanalysis.excludePatterns}" />
       -->
       <classpath>

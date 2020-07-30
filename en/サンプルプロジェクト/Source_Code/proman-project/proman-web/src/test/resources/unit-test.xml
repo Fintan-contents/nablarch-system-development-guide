@@ -4,6 +4,6 @@
         xmlns="http://tis.co.jp/nablarch/component-configuration"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- メインの設定 -->
+  <!-- Main settings -->
   <import file="web-component-configuration.xml"/>
 </component-configuration>

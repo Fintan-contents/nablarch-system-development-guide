@@ -1,6 +1,6 @@
 <FindBugsFilter>
 
-  <!-- 配列の暴露は、業務アプリでは問題にならないケースが殆んどの為チェック対象外 -->
+  <!-- Not checked as exposure of arrays does not usually cause issues in commercial apps -->
   <Match>
     <Bug pattern="EI_EXPOSE_REP"/>
   </Match>
@@ -8,7 +8,7 @@
     <Bug pattern="EI_EXPOSE_REP2"/>
   </Match>
 
-  <!-- 基板部品に対してAPIの使用許可を行う -->
+  <!-- Permit use of API for substrate components -->
   <Match>
     <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
     <Or>

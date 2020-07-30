@@ -8,7 +8,7 @@
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" >
             <head>
                 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-                <title>JSPチェック結果</title>
+                <title>JSP check results</title>
                 
                 <style type="text/css">
                     html, body {
@@ -59,27 +59,27 @@
 
             <body>
                 <div id="mainContents">
-                　　<p class="title">JSPチェック結果</p>
-                        <xsl:choose>
-                        <xsl:when test="count(result/item/errors/error)!=0">
-                            <table class="data">
-                                <tr>
-                                    <th width="50%">
-                                        JSPパス
-                                    </th>
-                                    <th width="50%">
-                                        エラー内容
-                                    </th>
-                                </tr>
-                                <xsl:for-each select="result/item">
-                                        <xsl:call-template name="jspCheck" />
-                                </xsl:for-each>
-                            </table>
-                         </xsl:when>
-                         <xsl:when test="count(result/item/errors/error)=0">
-                            <p class="noErrorMessage">指摘はありませんでした。</p>
-                         </xsl:when>
-                         </xsl:choose>
+                    <p class="title">JSP check results</p>
+                    <xsl:choose>
+                    <xsl:when test="count(result/item/errors/error)!=0">
+                        <table class="data">
+                            <tr>
+                                <th width="50%">
+                                    JSP path
+                                </th>
+                                <th width="50%">
+                                    Error details
+                                </th>
+                            </tr>
+                            <xsl:for-each select="result/item">
+                                    <xsl:call-template name="jspCheck" />
+                            </xsl:for-each>
+                        </table>
+                     </xsl:when>
+                     <xsl:when test="count(result/item/errors/error)=0">
+                         <p class="noErrorMessage">No errors indicated. </p>
+                     </xsl:when>
+                     </xsl:choose>
                 </div>
             </body>
         </html>
@@ -97,7 +97,7 @@
                     <xsl:value-of select="./path"/>
                     </td>
                     <td>
-                    <b>エラー件数 <xsl:value-of select="count(./errors/error)" /> 件</b>
+                        <b>Number of errors <xsl:value-of select="count(./errors/error)" /> errors</b>
                     </td>
                 <xsl:param name="tdFlag" select="1" />
                 </xsl:if>

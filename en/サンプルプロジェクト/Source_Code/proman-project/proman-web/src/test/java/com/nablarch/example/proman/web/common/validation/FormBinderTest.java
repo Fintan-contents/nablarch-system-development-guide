@@ -79,14 +79,14 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void バリデーションエラーの場合formは取得できないこと() {
+    public void cannnotGetFormIfValidationFails() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
         BindingResult<TestForm> result = FormBinder.from(input.getHttpRequest(), input.getContext()).to(TestForm.class);
         assertThat(result.isValid(), is(false));
 
-        // バリデーションに成功していない状態でフォームを取得しようとする
+        // An attempt to acquire form when validation is unsuccessful
         result.getValidForm();
     }
 
@@ -120,15 +120,15 @@ public class FormBinderTest extends TestSupport {
     public static class TestForm implements Serializable {
 
         /**
-         * ログインID
+         * Login ID
          */
-        @Required(message = "ログインIDは必ず入力してください!")
+        @Required(message = "Login ID must be entered!")
         private String loginId;
 
         /**
-         * パスワード
+         * Password
          */
-        @Length(max = 4, message = "パスワードの長さは最大4です!")
+        @Length(max = 4, message = "Maximum password length is 4 characters!")
         private String loginPassword;
 
         public String getLoginId() {

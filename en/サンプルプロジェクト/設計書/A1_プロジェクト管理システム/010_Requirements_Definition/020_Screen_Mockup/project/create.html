@@ -16,17 +16,17 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
     <style type="text/css">
         .ui.menu .item i.logo {
-            /*　ヘッダ部のロゴのマージン　*/
+            /*　Margin of logo in header　*/
             margin-right: 0.5em;
         }
 
         .main.container {
-            /*コンテンツ部のマージン*/
+            /*Margin of content section*/
             margin-top: 7em;
         }
 
         .ui.footer.segment {
-            /*フッタ部のマージン*/
+            /*Margin of footer section*/
             margin: 1em 0em 0em;
             padding: 0em 0em;
         }
@@ -58,7 +58,7 @@
         });
     </script>
     <title>
-        プロジェクト登録 | Proman
+        Project registration | Proman
     </title>
 </head>
 
@@ -70,7 +70,7 @@
             </a>
             <div class="right menu">
                 <a href="#" class="item">
-                    ログアウト
+                    Logout
                 </a>
             </div>
         </div>
@@ -80,17 +80,17 @@
             <div class="four wide column row">
                 <div class="ui vertical menu">
                     <div class="item">
-                        <div class="header">プロジェクト管理</div>
+                        <div class="header">Project management</div>
                         <div class="menu">
-                            <a class="item">プロジェクト検索</a>
-                            <a class="item">プロジェクト登録</a>
+                            <a class="item">Project search</a>
+                            <a class="item">Project registration</a>
                         </div>
                     </div>
                     <div class="item">
-                        <div class="header">顧客管理</div>
+                        <div class="header">Client management</div>
                         <div class="menu">
-                            <a class="item">顧客検索</a>
-                            <a class="item">顧客登録</a>
+                            <a class="item">Client search</a>
+                            <a class="item">Client registration</a>
                         </div>
                     </div>
                     <div class="item">
@@ -99,21 +99,21 @@
             </div>
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト登録</div>
+                    <div class="ui huge header">Project registration</div>
                 </div>
                 <div class="sixteen wide column row">
                     <form class="ui form">
                         <div class="two fields">
                             <div class="required field">
-                                <label>事業部/部門</label>
+                                <label>Division/department</label>
                                 <div class="field">
                                     <select class="ui dropdown">
-                                        <option value="">事業部を選択</option>
-                                        <option value="1">事業部0001</option>
-                                        <option value="2">事業部0002</option>
-                                        <option value="3">事業部0003</option>
-                                        <option value="4">事業部0004</option>
-                                        <option value="5">事業部0005</option>
+                                        <option value="">Select division</option>
+                                        <option value="1">Division 0001</option>
+                                        <option value="2">Division 0002</option>
+                                        <option value="3">Division 0003</option>
+                                        <option value="4">Division 0004</option>
+                                        <option value="5">Division 0005</option>
                                     </select>
                                 </div>
                             </div>
@@ -121,40 +121,38 @@
                                 <label>&nbsp;</label>
                                 <div class="field">
                                     <select class="ui dropdown">
-                                        <option value="">部門を選択</option>
-                                        <option value="1">部門0001</option>
-                                        <option value="2">部門0002</option>
-                                        <option value="3">部門0003</option>
-                                        <option value="4">部門0004</option>
-                                        <option value="5">部門0005</option>
+                                        <option value="">Select department</option>
+                                        <option value="1">Department 0001</option>
+                                        <option value="2">Department 0002</option>
+                                        <option value="3">Department 0003</option>
+                                        <option value="4">Department 0004</option>
+                                        <option value="5">Department 0005</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="required field">
-                            <label>PJ名</label>
-                            <input type="text" placeholder="PJ名">
+                            <label>Project name</label>
+                            <input type="text" placeholder="Project name">
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>PJ種別</label>
+                                <label>Project type</label>
                                 <div class="field">
                                     <select class="ui dropdown">
-                                        <option value="">PJ種別を選択</option>
-                                        <option value="1">新規開発</option>
-                                        <option value="2">保守開発</option>
-                                        <option value="3">ERP導入支援</option>
-                                        <option value="4">保守PJ</option>
-                                        <option value="5">運用</option>
-                                        <option value="6">サービス提供（開発・保守）</option>
-                                        <option value="7">サービス提供（開発・保守以外）</option>
-                                        <option value="8">保守案件</option>
-                                        <option value="9">その他</option>
+                                        <option value="1">New development</option>
+                                        <option value="2">Maintenance development</option>
+                                        <option value="3">ERP introduction support</option>
+                                        <option value="4">Maintenance project</option>
+                                        <option value="6">Service provision (development/maintenance)</option>
+                                        <option value="7">Service provision (other)</option>
+                                        <option value="8">Maintenance case</option>
+                                        <option value="9">Other</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>PJ分類</label>
+                                <label>Project classification</label>
                                 <div class="item">
                                     <div class="six fields">
                                         <div class="field">
@@ -199,16 +197,16 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>売上高</label>
-                                <input type="text" placeholder="売上高">
+                                <label>Sales</label>
+                                <input type="text" placeholder="Sales">
                             </div>
                             <div class="field">
-                                <label>顧客</label>
+                                <label>Client</label>
                                 <div class="ui action input">
-                                    <input type="text" placeholder="顧客" readonly>
+                                    <input type="text" placeholder="Client" readonly>
                                     <button class="ui teal right labeled icon button">
                                         <i class="search icon"></i>
-                                        選択
+                                        Selection
                                     </button>
                                 </div>
                             </div>
@@ -225,26 +223,26 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>開始日</label>
+                                <label>Start date</label>
                                 <div class="ui calendar" id="example1">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="開始日">
+                                        <input type="text" placeholder="Start date">
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>終了日</label>
+                                <label>End date</label>
                                 <div class="ui calendar" id="example2">
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" placeholder="終了日">
+                                        <input type="text" placeholder="End date">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="field">
-                            <label>備考</label>
+                            <label>Note</label>
                             <textarea rows="3"></textarea>
                         </div>
                         <br>
@@ -253,7 +251,7 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">
-                                <div class="fluid ui primary button">確認</div>
+                                <div class="fluid ui primary button">confirm</div>
                             </div>
                         </div>
                     </form>
