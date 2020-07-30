@@ -19,7 +19,7 @@ public abstract class BatchRequestTestBase extends BatchRequestTestSupport {
     /**
      * Constructor.
      *
-     * @param testClass: Test class
+     * @param testClass Test class
      */
     public BatchRequestTestBase(Class<?> testClass) {
         super(testClass);

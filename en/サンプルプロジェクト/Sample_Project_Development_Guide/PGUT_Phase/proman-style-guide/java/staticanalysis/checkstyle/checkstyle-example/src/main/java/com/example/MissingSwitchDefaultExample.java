@@ -14,7 +14,7 @@ public class MissingSwitchDefaultExample {
     /**
      * Example of MissingSwitchDefault code.
      *
-     * @param value: Value used in code example
+     * @param value Value used in code example
      */
     public void example(int value) {
 

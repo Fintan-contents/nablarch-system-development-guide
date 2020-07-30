@@ -25,7 +25,7 @@ public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, Stri
     /**
      * Initializes minimum and maximum value.
      *
-     * @param constraintAnnotation: Annotation assigned to target property
+     * @param constraintAnnotation Annotation assigned to target property
      */
     @Override
     public void initialize(MoneyRange constraintAnnotation) {
@@ -36,9 +36,9 @@ public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, Stri
     /**
      * Verifies whether the target value is within the specified range ({@code min} - {@code max}).
      *
-     * @param value: Target value
-     * @param context: Validation context
-     * @return: {@code true} if the value is within the range
+     * @param value Target value
+     * @param context Validation context
+     * @return {@code true} if the value is within the range
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

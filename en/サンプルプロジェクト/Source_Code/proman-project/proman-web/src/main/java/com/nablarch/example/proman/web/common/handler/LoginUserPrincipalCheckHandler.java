@@ -18,9 +18,9 @@ public class LoginUserPrincipalCheckHandler implements Handler<HttpRequest, Obje
     /**
      * The login screen is displayed if the user information cannot be acquired from the session.
      *
-     * @param request: Request data
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request Request data
+     * @param context Context for execution
+     * @return HTTP response
      */
     @Override
     public Object handle(HttpRequest request, ExecutionContext context) {

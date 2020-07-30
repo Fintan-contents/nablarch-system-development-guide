@@ -25,7 +25,7 @@ public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
 
     /**
      * Set {@link BodyConverter}.
-     * @param bodyConverter: List for {@link BodyConverter}
+     * @param bodyConverter List for {@link BodyConverter}
      */
     public void setBodyConverter(BodyConverter bodyConverter) {
 

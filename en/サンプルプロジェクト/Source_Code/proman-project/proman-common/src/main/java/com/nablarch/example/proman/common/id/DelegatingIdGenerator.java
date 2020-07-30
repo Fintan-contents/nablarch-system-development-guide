@@ -35,7 +35,7 @@ public class DelegatingIdGenerator implements IdGenerator, Initializable {
     /**
      * Set the delegate for the actual numbering process.
      *
-     * @param delegate: Delegate
+     * @param delegate Delegate
      */
     public void setDelegate(IdGenerator delegate) {
         this.delegate = delegate;

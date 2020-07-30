@@ -24,9 +24,9 @@ public class PasswordExpiredException extends AuthenticationException {
 
     /**
      * Constructor.
-     * @param userId: User ID
-     * @param passwordExpirationDate: Expiration date of password
-     * @param businessDate: Business date
+     * @param userId User ID
+     * @param passwordExpirationDate Expiration date of password
+     * @param businessDate Business date
      */
     public PasswordExpiredException(String userId, Date passwordExpirationDate, Date businessDate) {
         this.userId = userId;
@@ -36,7 +36,7 @@ public class PasswordExpiredException extends AuthenticationException {
 
     /**
      * Acquires user ID.
-     * @return: User ID
+     * @return User ID
      */
     public String getUserId() {
         return userId;
@@ -44,7 +44,7 @@ public class PasswordExpiredException extends AuthenticationException {
 
     /**
      * Acquires expiration date of password.
-     * @return: Expiration date of password
+     * @return Expiration date of password
      */
     public Date getPasswordExpirationDate() {
         return passwordExpirationDate;
@@ -52,7 +52,7 @@ public class PasswordExpiredException extends AuthenticationException {
 
     /**
      * Acquires business date.
-     * @return: Business date
+     * @return Business date
      */
     public Date getBusinessDate() {
         return businessDate;

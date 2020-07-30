@@ -17,8 +17,8 @@ public class DateRangeValidator {
     /**
      * Constructor for setting start date and end date.
      *
-     * @param start: Start date
-     * @param end: End date
+     * @param start Start date
+     * @param end End date
      */
     public DateRangeValidator(final String start, final String end) {
         this.start = start;
@@ -29,7 +29,7 @@ public class DateRangeValidator {
      * True is returned if the end date is later than (or the same date as) the start date.
      * True is also returned if one of the values is not in date format.
      *
-     * @return: True if start date <= end date
+     * @return True if start date <= end date
      */
     public boolean isValid() {
         if (isValidDate(start) && isValidDate(end)) {
@@ -42,8 +42,8 @@ public class DateRangeValidator {
     /**
      * Checks that the character string is in date format.
      *
-     * @param date: Date string
-     * @return: True if in date format
+     * @param date Date string
+     * @return True if in date format
      */
     private boolean isValidDate(final String date) {
         if (StringUtil.isNullOrEmpty(date)) {

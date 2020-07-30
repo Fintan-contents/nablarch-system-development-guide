@@ -69,10 +69,10 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
      * If {@code saltSeed} or {@code password} is a null character string, a null character string is returned.
      * {@link IllegalArgumentException} occurs if either is {@code null}.
      *
-     * @param saltSeed: Character string used to generate salt to be used for password encryption
-     * @param password: Unencrypted password
-     * @return: Character string with base-64 encoding for encrypted password
-     * @throws IllegalStateException: When {@link #fixedSalt} is not set
+     * @param saltSeed Character string used to generate salt to be used for password encryption
+     * @param password Unencrypted password
+     * @return Character string with base-64 encoding for encrypted password
+     * @throws IllegalStateException When {@link #fixedSalt} is not set
      * @see Base64Util#encode(byte[])
      */
     @Override
@@ -103,8 +103,8 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
      * <p>
      * If it is incorrect, {@link IllegalArgumentException} is sent.
      *
-     * @param saltSeed: Character string used to generate salt to be used for password encryption
-     * @param password: Unencrypted password
+     * @param saltSeed Character string used to generate salt to be used for password encryption
+     * @param password Unencrypted password
      */
     private void verifyParameter(String saltSeed, String password) {
         if (saltSeed == null || password == null) {
@@ -117,8 +117,8 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
      * <p/>
      * Encryption is judged to have failed if every character of the encrypted password is "0".
      *
-     * @param bytes: Encrypted password
-     * @return: {@code true} if encryption is successful
+     * @param bytes Encrypted password
+     * @return {@code true} if encryption is successful
      */
     private static boolean isSuccessEncryption(byte[] bytes) {
         for (byte b : bytes) {
@@ -132,9 +132,9 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * The returned value is a byte string consisting of {@link #fixedSalt} and {@code saltSeed} joined together with UTF-8 encoding.
      *
-     * @param saltSeed: Character string used to generate salt
-     * @return: Byte string consisting of {@link #fixedSalt} and {@code saltSeed} joined together with UTF-8 encoding.
-     * @throws IllegalStateException: When {@link #fixedSalt} is not set
+     * @param saltSeed Character string used to generate salt
+     * @return Byte string consisting of {@link #fixedSalt} and {@code saltSeed} joined together with UTF-8 encoding.
+     * @throws IllegalStateException When {@link #fixedSalt} is not set
      */
     private byte[] getSalt(String saltSeed) throws IllegalStateException {
         String fixed = getFixedSalt();
@@ -147,7 +147,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Returns the number of stretches for password encryption.
      *
-     * @return: Number of stretches
+     * @return Number of stretches
      */
     public int getIterationCount() {
         return iterationCount;
@@ -156,7 +156,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Sets the number of stretches for password encryption. A positive value must be set.
      *
-     * @param iterationCount: Number of stretches (positive value)
+     * @param iterationCount Number of stretches (positive value)
      */
     public void setIterationCount(int iterationCount) {
         this.iterationCount = iterationCount;
@@ -165,7 +165,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Returns length of encrypted password.
      *
-     * @return: Length of encrypted password
+     * @return Length of encrypted password
      */
     public int getKeyLength() {
         return keyLength;
@@ -174,7 +174,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Set length of encrypted password. A positive value must be set.
      *
-     * @param keyLength: Length of encrypted password
+     * @param keyLength Length of encrypted password
      */
     public void setKeyLength(int keyLength) {
         this.keyLength = keyLength;
@@ -183,7 +183,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Returns fixed string used as salt throughout system.
      *
-     * @return: Fixed string used as salt throughout system
+     * @return Fixed string used as salt throughout system
      */
     public String getFixedSalt() {
         return fixedSalt;
@@ -192,7 +192,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     /**
      * Set fixed string used as salt throughout system.
      *
-     * @param fixedSalt: Fixed string used as salt throughout system
+     * @param fixedSalt Fixed string used as salt throughout system
      */
     public void setFixedSalt(String fixedSalt) {
         this.fixedSalt = fixedSalt;

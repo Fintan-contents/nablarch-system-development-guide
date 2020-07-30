@@ -30,9 +30,9 @@ public class LoginAction {
     /**
      * Displays login screen.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
         return new HttpResponse("/WEB-INF/view/login/login.jsp");
@@ -41,9 +41,9 @@ public class LoginAction {
     /**
      * Login.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     @OnError(type = ApplicationException.class, path = "/WEB-INF/view/login/login.jsp")
     @InjectForm(form = LoginForm.class)
@@ -70,8 +70,8 @@ public class LoginAction {
     /**
      * Acquires authentication information.
      *
-     * @param loginId: Login ID
-     * @return: Authentication information
+     * @param loginId Login ID
+     * @return Authentication information
      */
     private LoginUserPrincipal createLoginUserContext(String loginId) {
         SystemAccount account = UniversalDao
@@ -92,9 +92,9 @@ public class LoginAction {
     /**
      * Logout.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse logout(HttpRequest request, ExecutionContext context) {
         SessionUtil.invalidate(context);

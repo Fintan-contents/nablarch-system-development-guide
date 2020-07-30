@@ -19,7 +19,7 @@ public class ClientSearchForm implements Serializable {
 
     /**
      * Returns client names.
-     * @return: Client names
+     * @return Client names
      */
     public String getClientName() {
         return clientName;
@@ -27,7 +27,7 @@ public class ClientSearchForm implements Serializable {
 
     /**
      * Set client names.
-     * @param clientName: Client names
+     * @param clientName Client names
      */
     public void setClientName(String clientName) {
         this.clientName = clientName;
@@ -35,7 +35,7 @@ public class ClientSearchForm implements Serializable {
 
     /**
      * Returns industry type code.
-     * @return: Industry type code
+     * @return Industry type code
      */
     public String getIndustryCode() {
         return industryCode;
@@ -43,7 +43,7 @@ public class ClientSearchForm implements Serializable {
 
     /**
      * Set industry code.
-     * @param industryCode: Industry code
+     * @param industryCode Industry code
      */
     public void setIndustryCode(String industryCode) {
         this.industryCode = industryCode;

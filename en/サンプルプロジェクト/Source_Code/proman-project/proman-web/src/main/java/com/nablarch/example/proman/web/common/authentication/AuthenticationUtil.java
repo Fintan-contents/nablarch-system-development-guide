@@ -36,9 +36,9 @@ public final class AuthenticationUtil {
      * The {@link PasswordEncryptor} used for password encryption is acquired from {@link SystemRepository}
      * using the component name {@value #PASSWORD_ENCRYPTOR}.
      *
-     * @param userId: User ID
-     * @param password: Password (plain text)
-     * @return: Encrypted password
+     * @param userId User ID
+     * @param password Password (plain text)
+     * @return Encrypted password
      * @see PasswordEncryptor#encrypt(String, String)
      */
     public static String encryptPassword(String userId, String password) {
@@ -52,11 +52,11 @@ public final class AuthenticationUtil {
      * The {@link PasswordAuthenticator} used for user authentication is acquired from {@link SystemRepository}
      * using the component name {@value #AUTHENTICATOR}.
      *
-     * @param userId: User ID
-     * @param password: Password (plain text)
-     * @throws AuthenticationFailedException: When authentication fails
-     * @throws UserIdLockedException: When a user ID is locked
-     * @throws PasswordExpiredException: When a password is expired
+     * @param userId User ID
+     * @param password Password (plain text)
+     * @throws AuthenticationFailedException When authentication fails
+     * @throws UserIdLockedException When a user ID is locked
+     * @throws PasswordExpiredException When a password is expired
      * @see PasswordAuthenticator#authenticate(String, String)
      */
     public static void authenticate(String userId, String password)

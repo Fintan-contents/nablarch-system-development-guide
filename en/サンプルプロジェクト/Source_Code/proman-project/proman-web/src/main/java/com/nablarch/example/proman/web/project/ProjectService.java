@@ -29,7 +29,7 @@ public class ProjectService {
 
     /**
      * Constructor.
-     * @param universalDao: Universal DAO
+     * @param universalDao Universal DAO
      */
     ProjectService(DaoContext universalDao) {
         this.universalDao = universalDao;
@@ -37,7 +37,7 @@ public class ProjectService {
 
     /**
      * Acquires entire division.
-     * @return: Division list
+     * @return Division list
      */
     public List<Organization> findAllDivision() {
         return universalDao.findAllBySqlFile(Organization.class, "FIND_ALL_DIVISION");
@@ -45,7 +45,7 @@ public class ProjectService {
 
     /**
      * Acquires entire department.
-     * @return: Department list
+     * @return Department list
      */
     public List<Organization> findAllDepartment() {
         return universalDao.findAllBySqlFile(Organization.class, "FIND_ALL_DEPARTMENT");
@@ -63,7 +63,7 @@ public class ProjectService {
 
     /**
      * Registers project.
-     * @param project: Project to be registered
+     * @param project Project to be registered
      */
     public void insertProject(Project project) {
         universalDao.insert(project);

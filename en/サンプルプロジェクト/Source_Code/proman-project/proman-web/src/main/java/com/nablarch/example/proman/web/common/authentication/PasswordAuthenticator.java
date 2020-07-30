@@ -15,9 +15,9 @@ public interface PasswordAuthenticator {
      * <p/>
      * A method argument and an exception that may be sent must be prescribed for each authentication method in the implementation class.
      *
-     * @param userId: User ID
-     * @param password: Password
-     * @throws AuthenticationException: Authentication exception
+     * @param userId User ID
+     * @param password Password
+     * @throws AuthenticationException Authentication exception
      */
     void authenticate(String userId, String password) throws AuthenticationException;
 }

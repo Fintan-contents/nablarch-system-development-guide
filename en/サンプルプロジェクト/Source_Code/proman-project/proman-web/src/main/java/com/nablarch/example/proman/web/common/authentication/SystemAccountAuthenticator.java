@@ -53,7 +53,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * Set the number of authentication failures before locking the user ID.
      *
-     * @param failedCountToLock: Number of authentication failures before locking the user ID
+     * @param failedCountToLock Number of authentication failures before locking the user ID
      */
     public void setFailedCountToLock(int failedCountToLock) {
         this.failedCountToLock = failedCountToLock;
@@ -62,7 +62,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * Set the {@link PasswordEncryptor} used for password encryption.
      *
-     * @param passwordEncryptor: {@link PasswordEncryptor} used for password encryption
+     * @param passwordEncryptor {@link PasswordEncryptor} used for password encryption
      */
     public void setPasswordEncryptor(PasswordEncryptor passwordEncryptor) {
         this.passwordEncryptor = passwordEncryptor;
@@ -71,7 +71,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * Set {@link SimpleDbTransactionManager} used for transaction control of databases.
      *
-     * @param dbManager: {@link SimpleDbTransactionManager} used for transaction control of databases
+     * @param dbManager {@link SimpleDbTransactionManager} used for transaction control of databases
      */
     public void setDbManager(SimpleDbTransactionManager dbManager) {
         this.dbManager = dbManager;
@@ -80,12 +80,12 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * The user is authenticated using the account information.
      *
-     * @param userId: User ID
-     * @param password: Password
+     * @param userId User ID
+     * @param password Password
      *
-     * @throws AuthenticationFailedException: When a user matching the user ID or password cannot be found
-     * @throws UserIdLockedException: When a user ID is locked. Authentication is still not performed when this exception is thrown.
-     * @throws PasswordExpiredException: When a password is expired. When this exception is thrown, authentication using the old password is successful.
+     * @throws AuthenticationFailedException When a user matching the user ID or password cannot be found
+     * @throws UserIdLockedException When a user ID is locked. Authentication is still not performed when this exception is thrown.
+     * @throws PasswordExpiredException When a password is expired. When this exception is thrown, authentication using the old password is successful.
      */
     @Override
     public void authenticate(final String userId, final String password)
@@ -113,13 +113,13 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * The system account is authenticated using the password.
      *
-     * @param account: System account
-     * @param password: Password
-     * @param businessDate: Business date
+     * @param account System account
+     * @param password Password
+     * @param businessDate Business date
      *
-     * @throws AuthenticationFailedException: When a user matching the user ID or password cannot be found
-     * @throws UserIdLockedException: When a user ID is locked. Authentication is still not performed when this exception is thrown.
-     * @throws PasswordExpiredException: When a password is expired. When this exception is thrown, authentication using the old password is successful.
+     * @throws AuthenticationFailedException When a user matching the user ID or password cannot be found
+     * @throws UserIdLockedException When a user ID is locked. Authentication is still not performed when this exception is thrown.
+     * @throws PasswordExpiredException When a password is expired. When this exception is thrown, authentication using the old password is successful.
      */
     private void authenticate(SystemAccount account, String password, java.sql.Date businessDate)
             throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
@@ -163,9 +163,9 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * Indicates whether the password is expired at the reference date/time for judgment.
      *
-     * @param account: Account being judged
-     * @param businessDate: Reference date/time for judgment (yyyyMMdd)
-     * @return: True if the password is expired
+     * @param account Account being judged
+     * @param businessDate Reference date/time for judgment (yyyyMMdd)
+     * @return True if the password is expired
      */
     private boolean isExpiredPassword(SystemAccount account, java.util.Date businessDate) {
         return businessDate.compareTo(account.getPasswordExpirationDate()) > 0;
@@ -174,7 +174,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * Acquires information on whether the consecutive number of authentication failures is checked.
      *
-     * @return: True if the consecutive number of authentication failures is checked, false if it is not
+     * @return True if the consecutive number of authentication failures is checked, false if it is not
      */
     private boolean isChecksFailedCount() {
         return failedCountToLock > 0;
@@ -183,7 +183,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * The system account is updated when authentication is successful.
      *
-     * @param id: ID to identify the system account to be updated
+     * @param id ID to identify the system account to be updated
      */
     private void updateAuthenticationSucceed(final Integer id) {
         // The system account update process needs to be performed separately from business transactions
@@ -208,8 +208,8 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
      * For the purposes of this sample, it only updates the number of failed authentications and locks accounts when authentication fails enough times to activate locking.
      * Nothing happens in this method if the account is not locked when authentication fails.
      * </pre>
-     * @param id: ID to identify the system account to be updated
-     * @param failedCount: Number of failures
+     * @param id ID to identify the system account to be updated
+     * @param failedCount Number of failures
      */
     private void updateAuthenticationFailed(final Integer id, final Short failedCount) {
 

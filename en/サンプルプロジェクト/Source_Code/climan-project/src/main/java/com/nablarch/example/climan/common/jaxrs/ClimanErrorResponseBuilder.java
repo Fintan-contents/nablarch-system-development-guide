@@ -31,7 +31,7 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /**
      * Set converter for writing response.
-     * @param climanJackson2BodyConverter: Converter for writing response
+     * @param climanJackson2BodyConverter Converter for writing response
      */
     public void setClimanJackson2BodyConverter(ClimanJackson2BodyConverter climanJackson2BodyConverter) {
         this.climanJackson2BodyConverter = climanJackson2BodyConverter;
@@ -57,8 +57,8 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /**
      * Generates HTTP response for common error response.
-     * @param e: Application exception
-     * @return: HTTP response for common error response
+     * @param e Application exception
+     * @return HTTP response for common error response
      */
     private HttpResponse creataHttpResponse(ApplicationException e) {
         List<String> messages = e.getMessages().stream().map(message -> {
@@ -74,10 +74,10 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /**
      * Generates HTTP response for common error response.
-     * @param status: Status code
-     * @param faultCode: Fault code
-     * @param messageId: Message ID
-     * @param options: Option for embedding message
+     * @param status Status code
+     * @param faultCode Fault code
+     * @param messageId Message ID
+     * @param options Option for embedding message
      * @return HTTP response for common error response
      */
     private HttpResponse createHttpResponse(
@@ -90,8 +90,8 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /**
      * Generates HTTP response for common error response.
-     * @param status: Status code
-     * @param error: Error
+     * @param status Status code
+     * @param error Error
      * @return HTTP response for common error response
      */
     private HttpResponse createHttpResponse(HttpResponse.Status status, Error error) {
@@ -113,8 +113,8 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
         /**
          * Generates error details.
-         * @param faultCode: Fault code
-         * @param message: Message
+         * @param faultCode Fault code
+         * @param message Message
          */
         public Error(String faultCode, String message) {
             this(faultCode, Arrays.asList(message));
@@ -122,8 +122,8 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
         /**
          * Generates error details.
-         * @param faultCode: Fault code
-         * @param messages: Messages
+         * @param faultCode Fault code
+         * @param messages Messages
          */
         public Error(String faultCode, List<String> messages) {
             this.faultCode = faultCode;
@@ -132,7 +132,7 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
         /**
          * Returns fault code.
-         * @return: Fault code
+         * @return Fault code
          */
         public String getFaultCode() {
             return faultCode;
@@ -140,7 +140,7 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
         /**
          * Returns message.
-         * @return: Message
+         * @return Message
          */
         public List<String> getMessages() {
             return messages;

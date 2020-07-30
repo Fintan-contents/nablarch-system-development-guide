@@ -18,7 +18,7 @@ import java.util.Objects;
  *
  * @author Tsuyoshi Kawasaki
  * @since 1.0
- * @param <T>: Type of form class
+ * @param <T> Type of form class
  */
 public class FormBinder<T extends Serializable> {
 
@@ -30,9 +30,9 @@ public class FormBinder<T extends Serializable> {
 
     /**
      * Set the information to be used as the source for binding.
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: Input source information
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return Input source information
      */
     public static BindingSource from(HttpRequest request, ExecutionContext context) {
         return from(request, context, "");
@@ -40,10 +40,10 @@ public class FormBinder<T extends Serializable> {
 
     /**
      * Set the information to be used as the source for binding.
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @param prefix: Prefix for request parameters
-     * @return: Input source information
+     * @param request HTTP request
+     * @param context Context for execution
+     * @param prefix Prefix for request parameters
+     * @return Input source information
      */
 
     public static BindingSource from(HttpRequest request, ExecutionContext context, String prefix) {
@@ -52,7 +52,7 @@ public class FormBinder<T extends Serializable> {
 
     /**
      * Constructor.
-     * @param formClass: Form class
+     * @param formClass Form class
      */
     private FormBinder(Class<T> formClass) {
         this(formClass, getDefaultStrategy());
@@ -60,8 +60,8 @@ public class FormBinder<T extends Serializable> {
 
     /**
      * Constructor.
-     * @param formClass: Form class
-     * @param strategy: Implementation of validation
+     * @param formClass Form class
+     * @param strategy Implementation of validation
      */
     private FormBinder(Class<T> formClass, ValidationStrategy strategy) {
         this.formClass = formClass;
@@ -86,9 +86,9 @@ public class FormBinder<T extends Serializable> {
 
         /**
          * Constructor.
-         * @param request: HTTP request
-         * @param context: Context for execution
-         * @param prefix: Prefix for request parameters
+         * @param request HTTP request
+         * @param context Context for execution
+         * @param prefix Prefix for request parameters
          */
         BindingSource(HttpRequest request, ExecutionContext context, String prefix) {
             this.prefix = prefix;
@@ -98,8 +98,8 @@ public class FormBinder<T extends Serializable> {
 
         /**
          * Binds to a specified form.
-         * @param formClass: Form class
-         * @param <T>: Type of form class
+         * @param formClass Form class
+         * @param <T> Type of form class
          * @return form
          */
         public <T extends Serializable> BindingResult<T> to(Class<T> formClass) {
@@ -111,7 +111,7 @@ public class FormBinder<T extends Serializable> {
 
     /**
      * Acquires implementation of {@link ValidationStrategy} from {@link SystemRepository}.
-     * @return: Implementation of {@link ValidationStrategy}
+     * @return Implementation of {@link ValidationStrategy}
      */
     private static BeanValidationStrategy getDefaultStrategy() {
         return Objects.requireNonNull(SystemRepository.get("validationStrategy"));
@@ -120,8 +120,8 @@ public class FormBinder<T extends Serializable> {
     /**
      * Bindings from the source information to a form.
      *
-     * @param source: Source information
-     * @return: Binding results
+     * @param source Source information
+     * @return Binding results
      */
     private BindingResult<T> bindFrom(BindingSource source) {
         InjectForm annotation = createAnnotation(formClass, source.prefix);
@@ -138,9 +138,9 @@ public class FormBinder<T extends Serializable> {
     /**
      * Create a {@link InjectForm} instance.
      *
-     * @param formClass: Form class
-     * @param prefix: Prefix
-     * @return {@link InjectForm}: Instance
+     * @param formClass Form class
+     * @param prefix Prefix
+     * @return {@link InjectForm} Instance
      */
     private static InjectForm createAnnotation(Class<? extends Serializable> formClass, String prefix) {
 

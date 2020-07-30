@@ -105,7 +105,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project name.
      *
-     * @return: Project name
+     * @return Project name
      */
     public String getProjectName() {
         return projectName;
@@ -114,7 +114,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project name.
      *
-     * @param projectName: Project name to be set
+     * @param projectName Project name to be set
      */
     public void setProjectName(String projectName) {
         this.projectName = projectName;
@@ -123,7 +123,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project type.
      *
-     * @return: Project type
+     * @return Project type
      */
     public String getProjectType() {
         return projectType;
@@ -132,7 +132,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project type.
      *
-     * @param projectType: Project type to be set
+     * @param projectType Project type to be set
      */
     public void setProjectType(String projectType) {
         this.projectType = projectType;
@@ -141,7 +141,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project classification.
      *
-     * @return: Project classification
+     * @return Project classification
      */
     public String getProjectClass() {
         return projectClass;
@@ -150,7 +150,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project classification.
      *
-     * @param projectClass: Project classification to be set
+     * @param projectClass Project classification to be set
      */
     public void setProjectClass(String projectClass) {
         this.projectClass = projectClass;
@@ -159,7 +159,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project start date.
      *
-     * @return: Project start date
+     * @return Project start date
      */
     public String getProjectStartDate() {
         return projectStartDate;
@@ -168,7 +168,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project start date.
      *
-     * @param projectStartDate: Project start date to be set
+     * @param projectStartDate Project start date to be set
      */
     public void setProjectStartDate(String projectStartDate) {
         this.projectStartDate = projectStartDate;
@@ -177,7 +177,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project end date.
      *
-     * @return: Project end date
+     * @return Project end date
      */
     public String getProjectEndDate() {
         return projectEndDate;
@@ -186,7 +186,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project end date.
      *
-     * @param projectEndDate: Project end date to be set
+     * @param projectEndDate Project end date to be set
      */
     public void setProjectEndDate(String projectEndDate) {
         this.projectEndDate = projectEndDate;
@@ -194,7 +194,7 @@ public class ProjectCreateForm implements Serializable {
 
     /**
      * Acquires division ID.
-     * @return: Division ID
+     * @return Division ID
      */
     public String getDivisionId() {
         return divisionId;
@@ -202,7 +202,7 @@ public class ProjectCreateForm implements Serializable {
 
     /**
      * Set division ID.
-     * @param divisionId: Division ID to be set
+     * @param divisionId Division ID to be set
      */
     public void setDivisionId(String divisionId) {
         this.divisionId = divisionId;
@@ -220,7 +220,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set department ID.
      *
-     * @param organizationId: Department ID to be set
+     * @param organizationId Department ID to be set
      */
     public void setOrganizationId(String organizationId) {
         this.organizationId = organizationId;
@@ -229,7 +229,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires client ID.
      *
-     * @return: Client ID
+     * @return Client ID
      */
     public String getClientId() {
         return clientId;
@@ -238,7 +238,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set client ID.
      *
-     * @param clientId: Client ID to be set
+     * @param clientId Client ID to be set
      */
     public void setClientId(String clientId) {
         this.clientId = clientId;
@@ -247,7 +247,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project manager name.
      *
-     * @return: Project manager name
+     * @return Project manager name
      */
     public String getProjectManager() {
         return projectManager;
@@ -256,7 +256,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project manager name.
      *
-     * @param projectManager: Project manager name to be set
+     * @param projectManager Project manager name to be set
      */
     public void setProjectManager(String projectManager) {
         this.projectManager = projectManager;
@@ -265,7 +265,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires project leader name.
      *
-     * @return: Project leader name
+     * @return Project leader name
      */
     public String getProjectLeader() {
         return projectLeader;
@@ -274,7 +274,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set project leader name.
      *
-     * @param projectLeader: Project leader name to be set
+     * @param projectLeader Project leader name to be set
      */
     public void setProjectLeader(String projectLeader) {
         this.projectLeader = projectLeader;
@@ -283,7 +283,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires note.
      *
-     * @return: Note
+     * @return Note
      */
     public String getNote() {
         return note;
@@ -292,7 +292,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set note.
      *
-     * @param note: Note to be set
+     * @param note Note to be set
      */
     public void setNote(String note) {
         this.note = note;
@@ -301,7 +301,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Acquires sales.
      *
-     * @return: Sales
+     * @return Sales
      */
     public String getSales() {
         return sales;
@@ -310,7 +310,7 @@ public class ProjectCreateForm implements Serializable {
     /**
      * Set sales.
      *
-     * @param sales: Sales to be set
+     * @param sales Sales to be set
      */
     public void setSales(String sales) {
         this.sales = sales;
@@ -321,7 +321,7 @@ public class ProjectCreateForm implements Serializable {
      * If the start date is set as a date later than the end date, the project period is judged to be incorrect.
      * Other settings are accepted.
      *
-     * @return: false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
+     * @return false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRangeValidator.message}")
     private boolean isValidProjectPeriod() {

@@ -23,9 +23,9 @@ public class ClientAction {
 
     /**
      * Searches for clients.
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: Search results
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return Search results
      */
     @Produces(MediaType.APPLICATION_JSON)
     public List<Client> list(HttpRequest request, ExecutionContext context) {
@@ -41,9 +41,9 @@ public class ClientAction {
 
     /**
      * Acquires client details.
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: Client details
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return Client details
      */
     @Produces(MediaType.APPLICATION_JSON)
     public Client show(HttpRequest request, ExecutionContext context) {
@@ -60,8 +60,8 @@ public class ClientAction {
     /**
      * Registers client.
      *
-     * @param form: Client registration form
-     * @return: HTTP response
+     * @param form Client registration form
+     * @return HTTP response
      */
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)

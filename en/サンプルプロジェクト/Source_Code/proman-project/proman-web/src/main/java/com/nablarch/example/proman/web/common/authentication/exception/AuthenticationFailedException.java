@@ -16,7 +16,7 @@ public class AuthenticationFailedException extends AuthenticationException {
 
     /**
      * Constructor.
-     * @param userId: User ID
+     * @param userId User ID
      */
     public AuthenticationFailedException(String userId) {
         this.userId = userId;
@@ -24,7 +24,7 @@ public class AuthenticationFailedException extends AuthenticationException {
 
     /**
      * Acquires user ID.
-     * @return: User ID
+     * @return User ID
      */
     public String getUserId() {
         return userId;

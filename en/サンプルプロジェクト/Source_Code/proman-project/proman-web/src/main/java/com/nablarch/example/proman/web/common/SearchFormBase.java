@@ -20,7 +20,7 @@ public abstract class SearchFormBase {
     /**
      * Acquires page number.
      *
-     * @return: Page number
+     * @return Page number
      */
     public String getPageNumber() {
         return pageNumber;
@@ -29,7 +29,7 @@ public abstract class SearchFormBase {
     /**
      * Set the page number.
      *
-     * @param pageNumber: Page number to be set
+     * @param pageNumber Page number to be set
      */
     public void setPageNumber(String pageNumber) {
         this.pageNumber = pageNumber;

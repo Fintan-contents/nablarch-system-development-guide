@@ -20,8 +20,8 @@ public class ClimanJackson2BodyConverter  extends Jackson2BodyConverter {
 
     /**
      * The object is written in the JSON character string.
-     * @param value: Object
-     * @return: JSON character string
+     * @param value Object
+     * @return JSON character string
      */
     public String write(Object value) {
         try {

@@ -17,7 +17,7 @@ public class ClientGetForm implements Serializable {
 
     /**
      * Returns client ID.
-     * @return: Client ID
+     * @return Client ID
      */
     public String getClientId() {
         return clientId;
@@ -25,7 +25,7 @@ public class ClientGetForm implements Serializable {
 
     /**
      * Set client ID.
-     * @param clientId: Client ID
+     * @param clientId Client ID
      */
     public void setClientId(String clientId) {
         this.clientId = clientId;

@@ -14,7 +14,7 @@ public class StringLiteralEqualityExample {
     /**
      * Example of StringLiteralEquality code.
      *
-     * @param s: String
+     * @param s String
      */
     public void example(String s) {
         // Character string is compared with == (incorrect).

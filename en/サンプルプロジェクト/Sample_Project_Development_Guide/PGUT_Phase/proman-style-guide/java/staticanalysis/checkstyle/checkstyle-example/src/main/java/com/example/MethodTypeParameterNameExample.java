@@ -22,7 +22,7 @@ public class MethodTypeParameterNameExample<T> {
     /**
      * Example of incorrect MethodTypeParameterName.
      *
-     * @param <FOO>: Name consists of 2 or more characters (incorrect).
+     * @param <FOO> Name consists of 2 or more characters (incorrect).
      * 
      */
     public <FOO> void ngMethod1() {
@@ -31,7 +31,7 @@ public class MethodTypeParameterNameExample<T> {
     /**
      * Example of incorrect MethodTypeParameterName.
      *
-     * @param <t>: Name consists of lower-case letter(s) (incorrect).
+     * @param <t> Name consists of lower-case letter(s) (incorrect).
      * 
      */
     public <t> void ngMethod2() {

@@ -7,14 +7,14 @@ import java.io.Serializable;
 /**
  * Interface indicating resulting of binding from request parameters to forms.
  *
- * @param <T>: Type of form class
+ * @param <T> Type of form class
  * @author Tsuyoshi Kawasaki
  */
 public interface BindingResult<T extends Serializable> {
 
     /**
      * Indicates whether validation results are suitable.
-     * @return: True when validation is successful
+     * @return True when validation is successful
      */
     boolean isValid();
 
@@ -30,7 +30,7 @@ public interface BindingResult<T extends Serializable> {
      *     }
      * </pre>
      *
-     * @throws ApplicationException: Exception where validation results are stored
+     * @throws ApplicationException Exception where validation results are stored
      */
     void abortIfInvalid();
 
@@ -39,8 +39,8 @@ public interface BindingResult<T extends Serializable> {
      * Used for purposes such as screen transitions for {@link nablarch.fw.web.interceptor.OnError}.
      * An exception occurs when this method is started on successful validation (standard program bug).
      *
-     * @throws ApplicationException: Always sent when validation fails
-     * @throws IllegalStateException: When this method is started regardless of successful validation
+     * @throws ApplicationException Always sent when validation fails
+     * @throws IllegalStateException When this method is started regardless of successful validation
      */
     void throwApplicationException();
 
@@ -49,13 +49,13 @@ public interface BindingResult<T extends Serializable> {
      * An exception occurs when this method is started on unsuccessful validation (standard program bug).
      *
      * @return form
-     * @throws IllegalStateException: When validation results are unsuitable
+     * @throws IllegalStateException When validation results are unsuitable
      */
     T getValidForm();
 
     /**
      * Class indicating binding results.
-     * @param <T>: Type of form class
+     * @param <T> Type of form class
      * @author Tsuyoshi Kawasaki
      */
     class InvalidBindingResult<T extends Serializable> implements BindingResult<T> {
@@ -65,7 +65,7 @@ public interface BindingResult<T extends Serializable> {
 
         /**
          * Constructor.
-         * @param exception: Exception occurring in validation
+         * @param exception Exception occurring in validation
          */
         InvalidBindingResult(ApplicationException exception) {
             this.originalException = exception;
@@ -97,7 +97,7 @@ public interface BindingResult<T extends Serializable> {
 
     /**
      * Class indicating binding results.
-     * @param <T>: Type of form class
+     * @param <T> Type of form class
      * @author Tsuyoshi Kawasaki
      */
     class ValidBindingResult<T extends Serializable> implements BindingResult<T> {
@@ -107,7 +107,7 @@ public interface BindingResult<T extends Serializable> {
 
         /**
          * Constructor.
-         * @param form: Valid form
+         * @param form Valid form
          */
         ValidBindingResult(T form) {
             this.validForm = form;

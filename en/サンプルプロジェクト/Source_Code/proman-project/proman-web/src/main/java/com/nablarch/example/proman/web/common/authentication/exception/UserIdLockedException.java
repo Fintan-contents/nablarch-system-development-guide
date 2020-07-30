@@ -19,8 +19,8 @@ public class UserIdLockedException extends AuthenticationException {
 
     /**
      * Constructor.
-     * @param userId: User ID
-     * @param failedCountToLock: Number of authentication failures before locking the user ID
+     * @param userId User ID
+     * @param failedCountToLock Number of authentication failures before locking the user ID
      */
     public UserIdLockedException(String userId, int failedCountToLock) {
         this.userId = userId;
@@ -29,7 +29,7 @@ public class UserIdLockedException extends AuthenticationException {
 
     /**
      * Acquires user ID.
-     * @return: User ID
+     * @return User ID
      */
     public String getUserId() {
         return userId;
@@ -37,7 +37,7 @@ public class UserIdLockedException extends AuthenticationException {
 
     /**
      * Acquires the number of authentication failures before locking the user ID.
-     * @return: Number of authentication failures before locking the user ID
+     * @return Number of authentication failures before locking the user ID
      */
     public int getFailedCountToLock() {
         return failedCountToLock;

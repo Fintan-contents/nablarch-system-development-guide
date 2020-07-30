@@ -29,7 +29,7 @@ public class LoginForm implements Serializable {
 
     /**
      * Acquires login ID.
-     * @return: Login ID
+     * @return Login ID
      */
     public String getLoginId() {
         return loginId;
@@ -37,7 +37,7 @@ public class LoginForm implements Serializable {
 
     /**
      * Set login ID.
-     * @param loginId: Login ID
+     * @param loginId Login ID
      */
     public void setLoginId(String loginId) {
         this.loginId = loginId;
@@ -45,7 +45,7 @@ public class LoginForm implements Serializable {
 
     /**
      * Acquires password.
-     * @return: Password
+     * @return Password
      */
     public String getUserPassword() {
         return userPassword;
@@ -53,7 +53,7 @@ public class LoginForm implements Serializable {
 
     /**
      * Set password.
-     * @param userPassword: Password
+     * @param userPassword Password
      */
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;

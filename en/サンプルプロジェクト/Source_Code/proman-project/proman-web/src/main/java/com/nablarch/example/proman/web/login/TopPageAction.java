@@ -15,9 +15,9 @@ public class TopPageAction {
     /**
      * Displays home menu screen.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
         SessionUtil.delete(context, "searchForm");

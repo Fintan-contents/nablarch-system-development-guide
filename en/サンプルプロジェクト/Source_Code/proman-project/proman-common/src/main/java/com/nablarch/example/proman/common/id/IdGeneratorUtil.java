@@ -25,8 +25,8 @@ class IdGeneratorUtil {
     /**
      * Performs general-purpose numbering.
      *
-     * @param id: ID used to identify targets for numbering
-     * @return: Assigned number
+     * @param id ID used to identify targets for numbering
+     * @return Assigned number
      */
     static String generateId(String id) {
         return getDefaultIdGenerator().generateId(id);
@@ -35,9 +35,9 @@ class IdGeneratorUtil {
     /**
      * Performs general-purpose numbering.
      *
-     * @param id: ID used to identify targets for numbering
-     * @param idFormatter: IdFormatter for formatting numbered IDs
-     * @return: Assigned number
+     * @param id ID used to identify targets for numbering
+     * @param idFormatter IdFormatter for formatting numbered IDs
+     * @return Assigned number
      */
     static String generateId(String id, IdFormatter idFormatter) {
         return getDefaultIdGenerator().generateId(id, idFormatter);
@@ -46,7 +46,7 @@ class IdGeneratorUtil {
     /**
      * Acquires default {@link IdGenerator}.
      *
-     * @return: Implementation of {@link IdGenerator}
+     * @return Implementation of {@link IdGenerator}
      */
     private static IdGenerator getDefaultIdGenerator() {
         return Objects.requireNonNull(SystemRepository.get(ID_GENERATOR_KEY));

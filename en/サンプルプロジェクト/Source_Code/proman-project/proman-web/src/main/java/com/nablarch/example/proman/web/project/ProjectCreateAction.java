@@ -26,9 +26,9 @@ public class ProjectCreateAction {
     /**
      * Displays initial screen for project registration.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
 
@@ -41,9 +41,9 @@ public class ProjectCreateAction {
     /**
      * Displays screen for confirming registration information.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     @InjectForm(form = ProjectCreateForm.class, prefix = "form")
     @OnError(type = ApplicationException.class, path = "forward:///app/project/errorRegister")
@@ -65,9 +65,9 @@ public class ProjectCreateAction {
     /**
      * Registration process.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     @OnDoubleSubmission
     public HttpResponse register(HttpRequest request, ExecutionContext context) {
@@ -80,9 +80,9 @@ public class ProjectCreateAction {
     /**
      * Displays registration completion screen.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse completeRegistration(HttpRequest request, ExecutionContext context) {
         return new HttpResponse("/WEB-INF/view/project/completionOfCreation.jsp");
@@ -91,9 +91,9 @@ public class ProjectCreateAction {
     /**
      * Returns to registration information input screen.
      *
-     * @param request: HTTP request
-     * @param context: Context for execution
-     * @return: HTTP response
+     * @param request HTTP request
+     * @param context Context for execution
+     * @return HTTP response
      */
     public HttpResponse backToEnterRegistration(HttpRequest request, ExecutionContext context) {
 
@@ -120,7 +120,7 @@ public class ProjectCreateAction {
     /**
      * Sets division and department within request scope.
      *
-     * @param context: Context for execution
+     * @param context Context for execution
      */
     private void setOrganizationAndDivisionToRequestScope(ExecutionContext context) {
 

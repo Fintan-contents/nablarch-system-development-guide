@@ -11,9 +11,9 @@ public interface PasswordEncryptor {
 
     /**
      * Encrypts passwords.
-     * @param saltSeed: Character string used to generate salt to be used for password encryption
-     * @param password: Unencrypted password
-     * @return: Encrypted password
+     * @param saltSeed Character string used to generate salt to be used for password encryption
+     * @param password Unencrypted password
+     * @return Encrypted password
      */
     String encrypt(String saltSeed, String password);
 }

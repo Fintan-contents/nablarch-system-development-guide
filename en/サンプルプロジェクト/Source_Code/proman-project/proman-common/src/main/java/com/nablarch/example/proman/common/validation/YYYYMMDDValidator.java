@@ -21,7 +21,7 @@ public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> 
     /**
      * Initializes the verification format.
      *
-     * @param constraintAnnotation: Annotation assigned to target property
+     * @param constraintAnnotation Annotation assigned to target property
      */
     @Override
     public void initialize(YYYYMMDD constraintAnnotation) {
@@ -31,9 +31,9 @@ public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> 
     /**
      * Verifies whether the target value complies with the format specified in {@code allowFormat}.
      *
-     * @param value: Target value
-     * @param context: Validation context
-     * @return: {@code true} if the value complies with the format
+     * @param value Target value
+     * @param context Validation context
+     * @return {@code true} if the value complies with the format
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

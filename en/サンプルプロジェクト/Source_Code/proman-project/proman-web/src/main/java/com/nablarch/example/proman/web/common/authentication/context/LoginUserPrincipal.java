@@ -30,7 +30,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Acquires user ID.
      *
-     * @return: User ID
+     * @return User ID
      */
     public Integer getUserId() {
         return userId;
@@ -39,7 +39,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Set user ID.
      *
-     * @param userId: User ID
+     * @param userId User ID
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
@@ -48,7 +48,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Acquires name in kanji.
      *
-     * @return: Name in kanji
+     * @return Name in kanji
      */
     public String getKanjiName() {
         return kanjiName;
@@ -57,7 +57,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Set name in kanji.
      *
-     * @param kanjiName: Name in kanji
+     * @param kanjiName Name in kanji
      */
     public void setKanjiName(String kanjiName) {
         this.kanjiName = kanjiName;
@@ -66,7 +66,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Acquires PM position flag.
      *
-     * @return: PM position flag
+     * @return PM position flag
      */
     public boolean isPmFlag() {
         return pmFlag;
@@ -75,7 +75,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Set PM position flag.
      *
-     * @param pmFlag: PM position flag
+     * @param pmFlag PM position flag
      */
     public void setPmFlag(boolean pmFlag) {
         this.pmFlag = pmFlag;
@@ -84,7 +84,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Acquires date/time of last login.
      *
-     * @return: Date/time of last login
+     * @return Date/time of last login
      */
     public Date getLastLoginDateTime() {
         return lastLoginDateTime;
@@ -93,7 +93,7 @@ public class LoginUserPrincipal implements Serializable {
     /**
      * Set date/time of last login.
      *
-     * @param lastLoginDateTime: Date/time of last login
+     * @param lastLoginDateTime Date/time of last login
      */
     public void setLastLoginDateTime(Date lastLoginDateTime) {
         this.lastLoginDateTime = lastLoginDateTime;

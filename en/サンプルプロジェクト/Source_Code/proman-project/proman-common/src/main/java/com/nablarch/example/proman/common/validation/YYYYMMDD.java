@@ -29,14 +29,14 @@ public @interface YYYYMMDD {
     /**
      * Acquires group.
      *
-     * @return: Group
+     * @return Group
      */
     Class<?>[] groups() default {};
 
     /**
      * Message set when a validation error occurs.
      *
-     * @return: Message
+     * @return Message
      */
     String message() default "{com.nablarch.example.app.entity.core.validation.validator.YYYYMMDD.message}";
 
@@ -50,7 +50,7 @@ public @interface YYYYMMDD {
     /**
      * Permitted format
      *
-     * @return: Specified format
+     * @return Specified format
      */
     String allowFormat() default "yyyy/MM/dd";
 
@@ -66,7 +66,7 @@ public @interface YYYYMMDD {
         /**
          * Acquires YYYYMMDD array.
          *
-         * @return: Specified YYYYMMDD array
+         * @return Specified YYYYMMDD array
          */
         YYYYMMDD[] value();
     }

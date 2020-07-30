@@ -37,9 +37,9 @@ public class ClientService {
      *
      * Client names and industry codes can be specified as search conditions. Client IDs are not used even when specified.
      *
-     * @param condition: Search conditions
-     * @return: Search results. A blank this is returned if no search results can be found
-     * @throws SearchResultUpperLimitException: Occurs when search results exceed the maximum number
+     * @param condition Search conditions
+     * @return Search results. A blank this is returned if no search results can be found
+     * @throws SearchResultUpperLimitException Occurs when search results exceed the maximum number
      */
     public List<Client> findClient(Client condition) {
         long limit = Long.parseLong(SystemRepository.get("app.common.search.limit"));
@@ -53,9 +53,9 @@ public class ClientService {
     /**
      * Acquires clients.
      *
-     * @param clientId: Client ID
-     * @return: Clients
-     * @throws nablarch.common.dao.NoDataException: Occurs when no clients exist
+     * @param clientId Client ID
+     * @return Clients
+     * @throws nablarch.common.dao.NoDataException Occurs when no clients exist
      */
     public Client findClientById(Integer clientId) {
         return daoContext.findById(Client.class, clientId);
@@ -64,8 +64,8 @@ public class ClientService {
     /**
      * Registers client.
      *
-     * @param client: Client to be registered
-     * @throws DuplicateRegistrationException: Occurs when the client name that is specified is already registered
+     * @param client Client to be registered
+     * @throws DuplicateRegistrationException Occurs when the client name that is specified is already registered
      */
     public void registerClient(Client client) {
         long count = daoContext.countBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);

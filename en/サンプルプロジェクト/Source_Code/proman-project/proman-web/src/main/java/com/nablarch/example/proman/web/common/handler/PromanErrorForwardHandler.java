@@ -15,7 +15,7 @@ import javax.persistence.OptimisticLockException;
  * Placing this handler before the business action handler makes it possible to determine the exception class sent by the business action method
  * and transition to the desired error screen for each exception.
  * <p/>
- * Reference information: Refer to the information below to determine the HTTP status code to be used in each situation <br>
+ * Reference information Refer to the information below to determine the HTTP status code to be used in each situation <br>
  * @see <a href="http://qiita.com/kawasima/items/e48180041ace99842779">How to select an HTTP status code</a>
  * @author Nabu Rakutaro
  */

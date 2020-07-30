@@ -27,14 +27,14 @@ public @interface MoneyRange {
     /**
      * Acquires group.
      *
-     * @return: Group
+     * @return Group
      */
     Class<?>[] groups() default {};
 
     /**
      * Message set when a validation error occurs.
      *
-     * @return: Message
+     * @return Message
      */
     String message() default "{com.nablarch.example.app.entity.core.validation.validator.MoneyRange.message}";
 
@@ -48,14 +48,14 @@ public @interface MoneyRange {
     /**
      * Acquires minimum value.
      *
-     * @return: Minimum value
+     * @return Minimum value
      */
     long min() default 0;
 
     /**
      * Acquires maximum value.
      *
-     * @return: Maximum value
+     * @return Maximum value
      */
     long max() default Long.MAX_VALUE;
 
