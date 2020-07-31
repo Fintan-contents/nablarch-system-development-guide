@@ -8,75 +8,75 @@ import nablarch.core.util.DateUtil;
 import java.util.Date;
 
 /**
- * 期間内プロジェクト一覧出力のbeanクラス。
+ * bean class for output of project lists during the applicable period.
  *
  * @author TIS
  */
 @Csv(type = Csv.CsvType.CUSTOM,
         properties = { "projectId", "projectName", "projectType", "projectClass", "projectStartDate",
                 "projectEndDate", "organizationId", "clientId", "projectManager", "projectLeader", "note", "sales", "versionNo" },
-        headers = { "プロジェクトID", "プロジェクト名", "プロジェクト種別", "プロジェクト分類", "プロジェクト開始日付", "プロジェクト終了日付",
-                "組織ID", "顧客ID", "プロジェクトマネージャー", "プロジェクトリーダー", "備考", "売上高", "バージョン番号" })
+        headers = { "Project ID", "Project name", "Project type", "Project classification", "Project start date", "Project end date",
+                "Organization ID", "Client ID", "Project manager", "Project leader", "Note", "Sales", "Version number" })
 @CsvFormat(fieldSeparator = ',', lineSeparator = "\r\n", quote = '\"', ignoreEmptyLine = false,
         requiredHeader = false, charset = "UTF-8", emptyToNull = true, quoteMode = CsvDataBindConfig.QuoteMode.ALL)
 public class ProjectDto {
-    /** プロジェクトID */
+    /** Project ID */
     private String projectId;
 
-    /** プロジェクト名 */
+    /** Project name */
     private String projectName;
 
-    /** プロジェクト種別 */
+    /** Project type */
     private String projectType;
 
-    /** プロジェクト分類 */
+    /** Project classification */
     private String projectClass;
 
-    /** プロジェクト開始日付 */
+    /** Project start date */
     private String projectStartDate;
 
-    /** プロジェクト終了日付 */
+    /** Project end date */
     private String projectEndDate;
 
-    /** 組織ID */
+    /** Organization ID */
     private String organizationId;
 
-    /** 顧客ID */
+    /** Client ID */
     private String clientId;
 
-    /** プロジェクトマネージャー */
+    /** Project manager */
     private String projectManager;
 
-    /** プロジェクトリーダー */
+    /** Project leader */
     private String projectLeader;
 
-    /** 備考 */
+    /** Note */
     private String note;
 
-    /** 売上高 */
+    /** Sales */
     private String sales;
 
-    /** バージョン番号 */
+    /** Version number */
     private String versionNo;
 
     /**
-     * プロジェクトIDのgetter
-     * @return プロジェクトID
+     * Project ID getter
+     * @return Project ID
      */
     public String getProjectId() {
         return projectId;
     }
 
     /**
-     * プロジェクトIDのsetter
-     * @param projectId プロジェクトID
+     * Project ID setter
+     * @param projectId Project ID
      */
     public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
     /**
-     * プロジェクト名のgetter
+     * Project name getter
      * @return xx
      */
     public String getProjectName() {
@@ -84,184 +84,184 @@ public class ProjectDto {
     }
 
     /**
-     * プロジェクト名のsetter
-     * @param projectName プロジェクト名
+     * Project name setter
+     * @param projectNameProject name
      */
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
 
     /**
-     * プロジェクト種別のgetter
-     * @return プロジェクト種別
+     * Project type getter
+     * @return Project type
      */
     public String getProjectType() {
         return projectType;
     }
 
     /**
-     * プロジェクト種別のsetter
-     * @param projectType プロジェクト種別
+     * Project type setter
+     * @param projectType Project type
      */
     public void setProjectType(String projectType) {
         this.projectType = projectType;
     }
 
     /**
-     * プロジェクト分類のgetter
-     * @return プロジェクト分類
+     * Project classification getter
+     * @return Project classification
      */
     public String getProjectClass() {
         return projectClass;
     }
 
     /**
-     * プロジェクト分類のsetter
-     * @param projectClass プロジェクト分類
+     * Project classification setter
+     * @param projectClass Project classification
      */
     public void setProjectClass(String projectClass) {
         this.projectClass = projectClass;
     }
 
     /**
-     * プロジェクト開始日付のgetter
-     * @return プロジェクト開始日付
+     * Project start date getter
+     * @return Project start date
      */
     public String getProjectStartDate() {
         return this.projectStartDate;
     }
 
     /**
-     * プロジェクト開始日付のsetter
-     * @param projectStartDate プロジェクト開始日付
+     * Project start date setter
+     * @param projectStartDate Project start date
      */
     public void setProjectStartDate(Date projectStartDate) {
         this.projectStartDate = DateUtil.formatDate(projectStartDate, "yyyy/MM/dd");;
     }
 
     /**
-     * プロジェクト終了日付のgetter
-     * @return プロジェクト終了日付
+     * Project end date getter
+     * @return Project end date
      */
     public String getProjectEndDate() {
         return this.projectEndDate;
     }
 
     /**
-     * プロジェクト終了日付のsetter
-     * @param projectEndDate プロジェクト終了日付
+     * Project end date setter
+     * @param projectEndDate Project end date
      */
     public void setProjectEndDate(Date projectEndDate) {
         this.projectEndDate = DateUtil.formatDate(projectEndDate, "yyyy/MM/dd");;
     }
 
     /**
-     * 組織IDのgetter
-     * @return 組織ID
+     * Organization ID getter
+     * @return Organization ID
      */
     public String getOrganizationId() {
         return organizationId;
     }
 
     /**
-     * 組織IDのsetter
-     * @param organizationId 組織ID
+     * Organization ID setter
+     * @param organizationId Organization ID
      */
     public void setOrganizationId(String organizationId) {
         this.organizationId = organizationId;
     }
 
     /**
-     * 顧客IDのgetter
-     * @return 顧客ID
+     * Client ID getter
+     * @return Client ID
      */
     public String getClientId() {
         return clientId;
     }
 
     /**
-     * 顧客IDのsetter
-     * @param clientId 顧客ID
+     * Client ID setter
+     * @param clientId Client ID
      */
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
     /**
-     * プロジェクトマネージャーのgetter
-     * @return プロジェクトマネージャー
+     * Project manager getter
+     * @return Project manager
      */
     public String getProjectManager() {
         return projectManager;
     }
 
     /**
-     * プロジェクトマネージャーのsetter
-     * @param projectManager プロジェクトマネージャー
+     * Project manager setter
+     * @param projectManager Project manager
      */
     public void setProjectManager(String projectManager) {
         this.projectManager = projectManager;
     }
 
     /**
-     * プロジェクトリーダーのgetter
-     * @return プロジェクトリーダー
+     * Project leader getter
+     * @return Project leader
      */
     public String getProjectLeader() {
         return projectLeader;
     }
 
     /**
-     * プロジェクトリーダーのsetter
-     * @param projectLeader プロジェクトリーダー
+     * Project leader setter
+     * @param projectLeader Project leader
      */
     public void setProjectLeader(String projectLeader) {
         this.projectLeader = projectLeader;
     }
 
     /**
-     * 備考のgetter
-     * @return 備考
+     * Note getter
+     * @return Note
      */
     public String getNote() {
         return note;
     }
 
     /**
-     * 備考のsetter
-     * @param note 備考
+     * Note setter
+     * @param note Note
      */
     public void setNote(String note) {
         this.note = note;
     }
 
     /**
-     * 売上高のgetter
-     * @return 売上高
+     * Sales getter
+     * @return Sales
      */
     public String getSales() {
         return sales;
     }
 
     /**
-     * 売上高のsetter
-     * @param sales 売上高
+     * Sales setter
+     * @param sales Sales
      */
     public void setSales(String sales) {
         this.sales = sales;
     }
 
     /**
-     * バージョン番号のgetter
-     * @return バージョン番号
+     * Version number getter
+     * @return Version number
      */
     public String getVersionNo() {
         return versionNo;
     }
 
     /**
-     * バージョン番号のsetter
-     * @param versionNo バージョン番号
+     * Version number setter
+     * @param versionNo Version number
      */
     public void setVersionNo(String versionNo) {
         this.versionNo = versionNo;
