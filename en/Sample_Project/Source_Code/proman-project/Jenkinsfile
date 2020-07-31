@@ -18,7 +18,7 @@ pipeline {
     DEMO_USERNAME = 'centos'
     DEMO_PASSWORD = 'pass789-'
     // Current directory for building
-    PROJECT_CURRENT_DIR = 'サンプルプロジェクト/ソースコード/proman-project/'
+    PROJECT_CURRENT_DIR = 'Sample_Project/Source_Code/proman-project/'
   }
   stages {
     stage('mvn install') {
