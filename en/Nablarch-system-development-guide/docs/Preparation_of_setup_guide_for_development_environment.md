@@ -49,7 +49,7 @@ The image of the actual guide is shown below.
 | Required      | Memory   | 8GB or more              |
 | Required      | Office   | Microsoft Office 2010 |
 | Recommended      | Monitor   | Full HD or higher           |
-| Recommended      | disc | SSD                   |
+| Recommended      | Disc | SSD                   |
 
 
 ## Development environment construction procedure
