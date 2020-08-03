@@ -1,67 +1,67 @@
-# ArchUnit運用ガイド
+# ArchUnit apply Guide
 
-実際のプロジェクトでArchUnitを運用していく際のガイドです。
+This is a guide for applying ArchUnit in an actual project.
 
-ここでは、「アーキテクチャ違反」という言葉を「ArchUnitを利用してテストしているアーキテクチャルールに違反している」という意味で使用します。
+The term "architecture violation" is used this section to mean "violates the architecture rule being tested using ArchUnit".
 
-## 基本的な考え方
+## Basic Principles
 
-### 原則1: アーキテクチャ違反は全て解決します
+### Principle 1: Resolve all architecture violations
 
-プロジェクトで決めたアーキテクチャに違反したコードはバグを生む温床となり、また改修時の思わぬ影響範囲拡大を招きます。  
-アーキテクチャに違反した場合、自動テストが失敗します。テストの失敗を放置するとアーキテクチャ違反だけではなく、ロジックの問題まで見逃すことになりソースコードの品質を保つことができません。必ずテストが全件成功する状態を維持してください。
+Code that violates the architecture defined in the project is a breeding ground for bugs, and can lead to an unintentional increase in the scope of influence during modifications.  
+If the architecture is violated, automated tests will fail. If a test failure is left unattended, not only the architecture violation will be missed, but also the logic problem will be missed and the quality of the source code will not be maintained. Please make sure that all tests succeed.
 
-### 原則2: アーキテクチャ違反を解消するために品質を下げてはいけません
+### Principle 2: Don't reduce the quality of code to eliminate architecture violations
 
-開発者はアーキテクチャ違反を見つけたら対応をしなければなりませんが、 その際違反を回避するための修正をしたことによって、かえってソースコード品質を落とすようなことがあってはいけません。
+Developers should take action when they find architectural violations, but they should not compromise the quality of the source code by fixing it to avoid the violation.
 
-対応方法に迷う場合は、有識者やプロジェクトのアーキテクトに相談して 適切な対処を仰ぐようにしましょう。
+If Developers are not sure how to deal with it, please consult with experts or project architects for appropriate measures.
 
-### 原則3: 正当な理由があってアーキテクチャ違反となる場合、チェック対象から外します
+### Principle 3: If there is a valid reason for an architectural violation, exclude it from the check
 
-正当な理由がある場合は、アーキテクチャ違反となっているソースコードをチェック対象から除外するようにします。
+If there is a valid reason, will exclude source code that is an architecture violation from the check.
 
-プロジェクトのアーキテクトは開発者からの申請を受けて妥当であると判断した場合、
-該当箇所をチェック対象から除外するようにしてください。
+If the project's architect receives an application from a developer and determines that it is reasonable
+Exclude the relevant sections from the checklist.
 
-この運用をすることによって、違反が放置されたり、開発者が無理に違反を回避したりすることを防げます。
+This operation will prevent violations from being left unattended and developers from being forced to avoid them.
 
-## テスト実行時の注意
+## Notes on Test Execution
 
-### テスト対象のクラスについて
+### About the classes being tested
 
-ArchUnitではクラスパス・モジュールパスに含まれるクラスからパッケージなどにより、絞り込みを行うことが可能です。
+ArchUnit allows you to filter the classes included in the classpath/module path by package.
 
-当たり前のことですが、クラスパス・モジュールパスに含まれないクラスについてはテストすることができません。
+Obviously, classes that are not part of the classpath/module path cannot be tested.
 
-バッチやWebアプリのように処理方式毎にモジュールを分けている場合がこれに当てはまります。
+This is the case if have separate modules for each processing method, such as batch and web apps.
 
-どちらのモジュールにも当てはまるようなテストを行う場合、これらの両方に依存したArchUnitのテスト用モジュール作成を検討してください。
+If want to test for either module, consider creating a module for ArchUnit testing that relies on both of these.
 
-### テスト実行にかかる時間について
+### About the time it takes to execute the test
 
-対象となるクラスの増加などにより、テスト実行に多くの時間を要する可能性があります。
+Due to the increase in the number of target classes and other factors, the test execution may take a lot of time.
 
-許容できない時間を要する場合は、ArchUnitのテスト用モジュール作成をするか、テスト実行時に対象から除外することを検討してください。
+If this is not an unacceptable amount of time, you should consider creating a module for ArchUnit's testing or exclude it from the test runtime.
 
-## 例外登録ルール
+## Exception registration rule
 
-### アーキテクチャ違反除外方法
+### How to Exclude Architecture Violations
 
-アーキテクチャ違反となっている箇所をテスト対象から外すには、大きく分けて以下の2つの方法があります。
+There are two main methods to exclude architecture violations from testing.
 
-- テストコードに除外対象を記載する。
-- 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する。
+- Describe the exclusion target in the test code.
+- Describe in the exclusion configuration file and exclude it from all architecture tests.
 
-前者はテスト対象によって記載が異なるため、注意してください。
+Note that the former is described differently depending on the subject of the test.
 
-### 除外対象クラスの設定（テストコードに除外対象を記載）
+### Configuration of the exclusion target class (the exclusion target is described in the test code)
 
-テスト対象がクラス（レイヤーも含む）の場合、以下のように `and()`（または元々 `that()` がなければ `that()`）の引数に `DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(除外対象クラス1,除外対象クラス2・・・))` を使用して除外設定を行う。
+If the test target is a class (including layers), then the argument to `and()` (or `that()` if there is no `that()` to begin with) is `DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(Excluded Exclude classes 1, 2, and so on...)]` to set up the exclusion.
 
 ``` java
 @ArchTest
-public static final ArchRule ActionクラスはBatchActionを継承していること =
+public static final ArchRule actionClassMustInheritFromBatchAction. =
         ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
         .and(DescribedPredicate.not(
                 JavaClass.Predicates.belongToAnyOf(
@@ -71,57 +71,57 @@ public static final ArchRule ActionクラスはBatchActionを継承している�
         )).should().beAssignableTo(BatchAction.class);
 ```
 
-テスト対象がクラス内に含まれるもの（フィールドやメソッドなど）の場合、 `areNotDeclaredIn()` を使用して除外設定をおこなう。
+If the test target is contained in a class, such as a field or a method, the `areNotDeclaredIn()` is used to set the exclusion.
 
 ``` java
 @ArchTest
-public static final ArchRule DaoContextを引数にとるメソッドはパッケージプライベートであること =
+public static final ArchRule methodsThatTakeDaoContextAsAnArgumentMustBePackagePrivate =
         ArchRuleDefinition.methods().that().haveRawParameterTypes(DaoContext.class)
             .and().areNotDeclaredIn(PromanExamAction.class)  // #1234
             .should().bePackagePrivate();
 ```
 
-除外設定をする場合は次のようにしておくと、後で経緯を追跡できます。
+If make an exclusion setting, can follow the history later by doing the following.
 
-- 課題管理システムの課題管理番号をコメントに記載する
-- バージョン管理システムのコミットコメントに記載する
+- Describe the issue management system's issue management number in the comments of the source code.
+- Include in the commit comments in the version control system.
 
-### 除外対象パッケージ設定（テストコードに除外対象を記載）
+### Configuring the exclusion package (specifying the exclusion target in the test code)
 
-テスト対象がクラスの場合、以下のようにして特定のパッケージを除外できます。
-以下の例では `common` を含むパッケージを除外しています。
+If test targets are classes, can exclude certain packages in the following way.
+In the following example, exclude packages containing `common`.
 
 ```java
 @ArchTest
-public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
+public  static  final ArchRule noClassesUsingNoDataExceptionInNonInstrumentalPackages =
         ArchRuleDefinition.noClasses()
         .that().resideOutsideOfPackage("..common..") // #1234
         .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
 ```
 
-ただし、パッケージは特定の文字列にて対象を決定することになるため、あらかじめパッケージ構成について検討しておく必要があります。
+However, you should consider the package structure beforehand, as packages are subject to specific strings.
 
-### カスタムルールによる除外設定（テストコードに除外対象を記載する）
+### Exclusions by custom rules (to list the exclusions in the test code)
 
-カスタムルールを実装することで、より細かな除外設定を行うことができます。
-内容については [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) を参照してください。
+Custom rules can be implemented to allow for more granular exclusions.
+Refer to the [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) for more information.
 
-### 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する
+### Exclude it from all architecture tests by including it in the exclusion configuration file
 
-アーキテクチャテストを行うモジュールの `src/test/resources` 直下に `archunit_ignore_patterns.txt` を作成し、正規表現にて除外する対象を記載します。
-以下のように書くことでクラス`some.pkg.LegacyService`の違反を無視することができます。
+Create the `archunit_ignore_patterns.txt` under `src/test/resources` of the module for architecture testing, and write regular expressions to exclude them.
+Can ignore violations of class `some.pkg.LegacyService` by writing the following.
 
 ```
 # 1234
 .*some\.pkg\.LegacyService.*
 ```
 
-`#` をつけることでコメントを記載できるため、次のようにしておくと、後で経緯を追跡できます。
+Can include comments by adding a `#` so that you can track the history later if you do the following.
 
-- 課題管理システムの課題管理番号をコメントに記載する
-- バージョン管理システムのコミットコメントに記載する
+- Describe the issue management system's issue management number in the comments of the configuration file.
+- Include in the commit comments in the version control system.
 
-#### 注意事項
+#### Note
 
-この方法で除外したものは、全てのアーキテクチャテストの対象外になります。
-除外するテストが最小限となるよう、できる限り前述の「テストコードに除外対象を記載する」方法で除外するようにしてください。
+Exclusions made in this way will be excluded from all architecture tests.
+To minimize the number of tests to be excluded, try to exclude them as much as possible using the aforementioned "Describe the exclusion target in the test code" method.
