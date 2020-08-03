@@ -30,10 +30,7 @@
 ## Preface
 
 This document indicates as to what should be done before and during development, and what should be referred to, by engineers engaged in system development using Nablarch. The document describes the method considered ideal for most projects to proceed with activities that are considered necessary for system development using Nablarch.
-
 Given the characteristics of most projects using Nablarach, the development process assumes waterfall development.
-
-
 Before starting the project, review this document and study how to proceed with the development.
 
 ### Purpose of this document
@@ -80,11 +77,11 @@ This is a sheet for assigning roles so that the tasks necessary for waterfall de
 ### Requirement definition
 
 These guidelines summarize the method of defining business/system requirements, deliverables, utilization techniques, and know-how at a systematic and practical level.
-- [Requirements definition framework](https://fintan.jp/?p=233)
+- [Requirements definition framework](https://fintan.jp/?p=233)(Only Japanese Edition)
 
 
 This document gives knowledge and techniques for defining practical requirements.
-- [Requirements definition basic training text](https://fintan.jp/?p=1389)
+- [Requirements definition basic training text](https://fintan.jp/?p=1389)(Only Japanese Edition)
 
 
 
@@ -94,14 +91,14 @@ If non-functional requirements such as performance requirements, security requir
 
 For defining non-functional requirements, refer to the Non-functional Requirement Grade provided by IPA.
 
-- [Non-functional requirement grade](https://www.ipa.go.jp/sec/softwareengineering/std/ent03-b.html)
+- [Non-functional requirement grade](https://www.ipa.go.jp/english/sec/reports/20101222.html)
 
 
 ### Architecture design
 
 Carry out the architecture design based on the following sample.
 
-- [Sample document of application architecture design](https://fintan.jp/?p=1323)
+- [Sample document of application architecture design](https://fintan.jp/?p=1323)(Only Japanese Edition)
 
 However, since non-functional requirements of the project have to be incorporated into architecture design, the architecture design should not be completed by modifying the sample. Completing the architecture design document by copying or modifying the sample, leads to mistakes such as the omission of the necessary non-functional requirements and inclusion of system design that is not required.
 
@@ -113,7 +110,7 @@ Either add to the description in the architecture design sample or create a sepa
 For security design, refer to IPA's "How to Create a Secure Website". 
 Design such that all items in the “Security implementation checklist” are “addressed at a fundamental level”. Although there is overlap, check “OWASP Top10” as well.
 
-- [How to make a secure website](https://www.ipa.go.jp/security/vuln/websecurity.html)
+- [How to make a secure website](https://www.ipa.go.jp/security/english/third.html#websecurity)
 - [OWASP Top10](https://github.com/OWASP/Top10)
 
 #### Nablarch pattern collection
@@ -204,7 +201,7 @@ For an example of how to customize, refer to the following in the sample project
 For the package configuration of the application, refer to ["Package Configuration Review"](docs/Package_configuration_review.md).
 
 
-*1: [Application development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)
+*1: [Application development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)(Only Japanese Edition)
 
 
 

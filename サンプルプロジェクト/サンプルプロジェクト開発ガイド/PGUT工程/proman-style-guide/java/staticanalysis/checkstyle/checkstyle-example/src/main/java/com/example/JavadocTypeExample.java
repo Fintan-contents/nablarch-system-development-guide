@@ -13,8 +13,6 @@ package com.example;
 public class JavadocTypeExample<T> {
 }
 
-class NgJavadocTypeExample1 { // javadocコメントがありません（NG）。
-}
 
 /**
  * Javadocコメントはありますが、型パラメーターTの@paramがありません（NG）。

@@ -21,8 +21,8 @@ As an example, the "member management system" has the following business functio
 
 | Business name   | Package name |
 |----------|--------------|
-| Enrollment     | nyukai       |
-| Attribute change | henkou       |
+| Enrollment     | enrollment       |
+| Attribute change | settings       |
 | Point | point        |
 
 ## Example of division by business function
@@ -30,7 +30,7 @@ As an example, the "member management system" has the following business functio
 When divided by business function, it is as follows.
 
 - com.example.member
-  - nyukai
+  - enrollment
     - XXXAction
     - XXXForm
     - XXXDto
@@ -38,7 +38,7 @@ When divided by business function, it is as follows.
     - YYYForm
     - YYYDto
     - ZZZService
-  - henkou
+  - settings
     - (omitted)
   - point
     - (omitted)
@@ -97,32 +97,32 @@ The above two can also be combined.
 
 - com.example.member
   - action
-    - nyukai
+    - enrollment
       - XXXAction
       - YYYAction
-    - henkou
+    - settings
       - (omitted)
     - point
       - (omitted)
   - form
-    - nyukai
+    - enrollment
       - XXXForm
       - YYYForm
-    - henkou
+    - settings
       - (omitted)
     - point
       - (omitted)
   - dto
       - XXXDto
       - YYYDto
-    - henkou
+    - settings
       - (omitted)
     - point
       - (omitted)
   - service
-    - nyukai
+    - enrollment
       - ZZZService
-    - henkou
+    - settings
       - (omitted)
     - point
       - (omitted)
@@ -136,7 +136,7 @@ At first glance it looks good, but it is difficult to handle with [routes.xml](h
 There is a disadvantage that if you try to forcibly use this method, the URL length will be longer.
 
 - com.example.member
-  - nyukai
+  - enrollment
     - action
       - XXXAction
       - YYYAction
@@ -148,7 +148,7 @@ There is a disadvantage that if you try to forcibly use this method, the URL len
       - YYYDto
     - service
       - ZZZService
-  - henkou
+  - settings
     - action
     - (omitted)
   - point
