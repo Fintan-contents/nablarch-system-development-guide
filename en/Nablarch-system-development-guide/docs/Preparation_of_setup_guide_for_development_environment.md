@@ -62,5 +62,5 @@ The image of the actual guide is shown below.
 | IDE                    | IntelliJ             | Community Edition                   | https://www.jetbrains.com/idea/             |
 | Version control tools   | Git                  | 2.21.0 for Windows                  | https://git-scm.com/                        |
 | Browser               | Chrome               | -                                   | https://www.google.com/intl/ja/chrome/      |
-| Data modeling tool | SI Object Browser ER | SI Object Browser ER 18             | (Use in-house license)                      |
+| Data modeling tool | SI Object Browser ER | SI Object Browser ER 18             |                       |
 
