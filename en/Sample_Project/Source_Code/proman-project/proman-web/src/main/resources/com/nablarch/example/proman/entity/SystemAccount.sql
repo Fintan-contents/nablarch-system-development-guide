@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- 利用可能なシステムアカウント情報を取得するSQL
+-- SQL to retrieve available system account information
 --------------------------------------------------------------------------------
 FIND_SYSTEM_ACCOUNT =
 SELECT
@@ -11,7 +11,7 @@ WHERE
   AND ? BETWEEN effective_date_from AND effective_date_to
 
 --------------------------------------------------------------------------------
--- ログインIDを元にシステムアカウント情報を取得するSQL
+-- SQL to retrieve system account information based on login ID
 --------------------------------------------------------------------------------
 FIND_SYSTEM_ACCOUNT_BY_AK =
 SELECT
