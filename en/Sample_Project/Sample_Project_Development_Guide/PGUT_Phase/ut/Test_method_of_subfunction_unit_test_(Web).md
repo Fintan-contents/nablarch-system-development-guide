@@ -94,7 +94,7 @@ Note that the output HTML file has a different value for the double-submit token
 This is because the value of the double-submit token is a value that changes each time it is used, and we do not want unnecessary differences in this value when run regression tests.
 
 ## Store evidence and response
-Various evidence and response files and "テスト計画(test plans)" (jmx files) obtained during the firsst manual test should be stored according to `/サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_Architecture_Design/020_Development_Standards/020_Test_Standards`, `3.3.4. How to store evidence`.
+Various evidence and response files and "テスト計画(test plans)" (jmx files) obtained during the firsst manual test should be stored according to `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards`, `3.3.4. How to store evidence`.
 
 Also, if you use the AutoRunning Tool for subfunction unit tests to perform regression testing, you will need to edit some files for the AutoRunning Tool.  
 For more information, please refer to the AutoRun tool's [README](../../../Source_Code/proman-project/proman-jmeter/README.md) in the runtime tool.

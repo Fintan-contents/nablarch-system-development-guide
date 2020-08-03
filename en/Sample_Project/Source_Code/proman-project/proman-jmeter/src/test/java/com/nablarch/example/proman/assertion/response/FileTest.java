@@ -12,8 +12,8 @@ import org.junit.Test;
 @Ignore
 public class FileTest {
 
-    private static final String EXPECTED_PATH = "C:\\shaft\\jmeter\\nablarch-development-guide\\サンプルプロジェクト\\ソースコード\\proman-project\\proman-jmeter\\src\\test\\resources\\jmeter\\shot_1\\resultHtml\\";
-    private static final String ACTUAL_PATH = "C:\\shaft\\jmeter\\nablarch-development-guide\\サンプルプロジェクト\\ソースコード\\proman-project\\proman-jmeter\\src\\test\\resources\\jmeter\\shot_1\\";
+    private static final String EXPECTED_PATH = "C:\\shaft\\jmeter\\nablarch-development-guide\\Sample_Project\\Source_Code\\proman-project\\proman-jmeter\\src\\test\\resources\\jmeter\\shot_1\\resultHtml\\";
+    private static final String ACTUAL_PATH = "C:\\shaft\\jmeter\\nablarch-development-guide\\Sample_Project\\Source_Code\\proman-project\\proman-jmeter\\src\\test\\resources\\jmeter\\shot_1\\";
     private final ResponseTestSupport sut = new ResponseTestSupport(new Configurations());
 
     /**
