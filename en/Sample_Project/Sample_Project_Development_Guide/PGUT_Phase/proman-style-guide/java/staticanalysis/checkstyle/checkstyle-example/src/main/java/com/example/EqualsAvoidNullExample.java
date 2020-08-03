@@ -29,7 +29,7 @@ public class EqualsAvoidNullExample {
             System.out.println("equality");
         }
 
-        //OK if all values are variables
+        //OK if both values are variables
         if (value1.equals(value2)) {
             System.out.println("equality");
         }
