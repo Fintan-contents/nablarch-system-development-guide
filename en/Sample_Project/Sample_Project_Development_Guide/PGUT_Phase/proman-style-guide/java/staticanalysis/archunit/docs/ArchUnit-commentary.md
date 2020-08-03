@@ -1,33 +1,34 @@
-# ArchUnit解説
+# ArchUnit Guide
 
-ArchUnitはアーキテクチャのテストを行うためのライブラリです。
-PJのアーキテクチャ設計により、実装するテストは変わってきます。
-ここではNablarchを使用した場合に、頻出するテストパターンをArchUnitでどのように記述するかを解説します。
+ArchUnit is a library for testing your architecture.
+The tests you implement will vary depending on the architectural design of the project.
+Here is a description of how ArchUnit can be used to describe frequently occurring test patterns in Nablarch.
 
-ArchUnitでチェックできる内容については[ArchUnit User Guide -> What to Check](https://www.archunit.org/userguide/html/000_Index.html#_what_to_check)を参照してください。
+Refer to the [ArchUnit User Guide -> What to Check](https://www.archunit.org/userguide/html/000_Index.html#_what_to_check) for information on what can be checked with ArchUnit.
 
-## 基本的な内容について
+## About basic contents
 
-### 基本となる形式
 
-以下の形式が基本となります。
+### Basic format
+
+The following format is basic.
 
 ```
 classes that ${PREDICATE} should ${CONDITION}
 ```
 
-これは `${PREDICATE}` であるクラスが `${CONDITION}` となることをチェックします。
+This checks that a class that is `${PREDICATE}` becomes `${CONDITION}`.
 
-この形式に則ったテストコードを以下に示します。
-チェック内容としては、「クラス名の末尾が `Action` であるクラスは `public` であること」です。
+The test code based on this format is shown below.
+The check content is "The class whose class name ends in `Action` is `public`".
 
 ```java
 ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().bePublic();
 ```
 
-このチェックを行ったときにクラス名の末尾が `Action` であるのにパッケージプライベートであるクラスが存在すると違反をおかしていることになります。
+If this check is done and the class name ends in `Action` but it is a package private,  in violation.
 
-ちなみに、上記の内容をJUnit4で実行可能なテストとした場合、以下のようになります。
+By the way, if the above content is a test that can be executed by JUnit4, it would look like the following.
 
 ```java
  
@@ -36,53 +37,54 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().
 public class ActionRuleTest {
 
   @ArchTest
-  public static final ArchRule Actionがpublicであること = ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().bePublic();
+  public static final ArchRule ActionMustBePublic = ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().bePublic();
 
 }
 ```
 
-#### 注意事項
+#### Note
 
-このルールはクラス名の末尾が `Action` であるものに対して、チェックを行います。
+This rule checks if the class name ends with `Action`.
 
-クラス名の末尾が `Action` でなければ、当然チェック対象になりません。
+If the class name does not end in `Action`, it is not checked, of course.
 
-### チェック対象
+### Subject to check
 
-上記の例ではクラスをチェック対象にしていますが、その他にメソッドやコンストラクター、フィールドなどをチェック対象にできます。
+In the above example, classes are checked, but other classes such as methods, constructors, fields, etc. can also be checked.
 
-また、 `ArchRuleDefinition.noClasses()` などとすることで、「そのようなクラスが存在しないこと」をチェックできます。
+Can also check that "no such class exists" by using `ArchRuleDefinition.noClasses()` etc.
 
-### チェック範囲
+### Check range
 
-ArchUnitはテストクラスに `@AnalyzeClasses` を指定することでテスト範囲を指定します。
+ArchUnit specifies a test scope by specifying `@AnalyzeClasses` in the test class.
 
-以下はパッケージを対象にチェックを行う場合の例となります。
+The following is an example of a package check.
 
 ```java
 @AnalyzeClasses(packages = "com.nablarch.example")
 public class ExampleRuleTest {
-    // 省略
+    // omitted
 }
 ```
 
-これによりクラスパス・モジュールパス上にある `com.nablarch.example` パッケージを範囲としたチェックを行います。
+This does a range check on the `com.nablarch.example` package on the classpath/module path.
 
-## よく使用するチェック
 
-よく使用することになる以下の3つのチェックについて、いくつかのコード例と共に解説します。
+## Frequently used checks
 
-- 宣言チェック
-- 依存チェック
-- レイヤーチェック
+Here are three frequently used checks, along with some code examples.
 
-### 宣言チェック
+- Declaration check
+- Dependency check
+- Layer check
 
-宣言チェックでは、クラスやメソッド、フィールドの修飾子、型などを確認することになります。
+### Declaration check
 
-たとえば以下の例では、 `DaoContext` のフィールドはprivateであり、finalであるが、staticでないことをチェックします。
+The declaration check involves checking classes, methods, field qualifiers, types, etc.
 
-注意しなければならないのは、修飾子について宣言時に付与しないことが意味をもつ場合は「〇〇でないこと」のチェックを含むようにしてください。（以下の例ではstaticでないことのチェックをしています。）
+For example, the following example checks that the `DaoContext` field is private and final, but not static.
+
+It should be noted that if the qualifier does not have to be given at the time of declaration, it should include a check "not xx". (The following example checks that it is not static.)
 
 ```java
 ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
@@ -91,52 +93,49 @@ ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
                 .andShould().notBeStatic();
 ```
 
-次の例では、クラス名の末尾がActionの場合、BatchActionを継承していることをチェックします。
+In the following example, if the class name ends in Action, we check that it extends BatchAction.
 
 ```java
 ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
                 .should().beAssignableTo(BatchAction.class);
 ```
 
-最後の例では `IOException` をスローするクラスがないことをチェックします。
+The last example checks that there is no class that throws an `IOException`.
 
-ここで対象にできるのは `throws` が宣言されているメソッドのみです。
-`throws` が宣言されていない実行時例外はチェックできません。
+Only the methods which have `throws` declared can be included here.
+Run-time exceptions where `throws` is not declared cannot be checked.
 
 ```java
 ArchRuleDefinition.noMethods().should().declareThrowableOfType(IOException.class);
 ```
 
-### 依存チェック
+### Dependency check
 
-依存チェックでは、クラス間の依存をチェックします。
+The dependency check checks dependencies between classes.
 
-最初の例ではserviceパッケージにあるクラスは、formパッケージにあるクラスへ依存してはいけないというチェックを行います。
+In the first example, it checks that classes in the service package must not depend on classes in the form package.
 
-否定系なので`noClasses()`でそのようなクラスがないことをチェックしています。
-
-※ パッケージ指定の記法については、[こちら](https://javadoc.io/doc/com.tngtech.archunit/archunit/latest/com/tngtech/archunit/base/PackageMatcher.html)を参照してください。
+Since it's a negation, it uses `noClasses()` to check that there are no such classes.  
+(Please refer to [this](https://javadoc.io/doc/com.tngtech.archunit/archunit/latest/com/tngtech/archunit/base/PackageMatcher.html) for information about the package designations.)
 
 ```java
 ArchRuleDefinition.noClasses().that().resideInAPackage("..service..")
                 .should().dependOnClassesThat().resideInAPackage("..form..");
 ```
 
-### レイヤーチェック
+### Layer check
 
-レイヤーチェックは[基本となる形式](#基本となる形式)に当てはまらない特殊な形式でチェックを記述します。
+Layer checks are written in a special format that does not fit into the [Basic Format](#Basic-format).
 
-パッケージなどによりレイヤー名を定義し、定義したレイヤー間の依存関係をチェックします。
+Define the layer names, for example, by package, and check the dependencies between the defined layers.
 
-たとえば
+For example, here is an example when the following three layers exist.
 
-- コントローラーを配置するactionパッケージ
-- コントローラーからのみ使用するロジックをまとめたserviceパッケージ
-- 画面の入力内容をコントローラーへ移送するformパッケージ
+- Action package to place the controller
+- A service package that contains logic that is only used by the controller
+- A form package that transfers screen input to the controller
 
-という3つのレイヤーがあった際の例を示します。
-
-actionパッケージのみ他のパッケージに依存できるものとし、自パッケージへの依存も禁止するものとします。
+Only the action package can depend on other packages, and the dependency on its own package is also prohibited.
 
 ```java
 Architectures.layeredArchitecture()
@@ -148,9 +147,9 @@ Architectures.layeredArchitecture()
     .whereLayer("Form").mayOnlyBeAccessedByLayers("Action");
 ```
 
-パッケージでそれぞれのレイヤー名を定義した後、それぞれがどこのレイヤーからアクセス可能かをチェックしています。
+After defining each layer name in the package, check from which layer each is accessible.
 
-## ArchUnitで提供されているAPIで実現できない場合
+## If this is not possible with the APIs provided by ArchUnit
 
-カスタムルールを実装することで、提供されているAPIでは実現できないようなチェックを行うことができます。  
-詳細については [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) を参照してください。
+By implementing custom rules, you can perform checks that are not possible with the provided API.  
+For more information, please refer to the [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules).
