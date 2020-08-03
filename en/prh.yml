@@ -1,10 +1,10 @@
 version: 1
 rules:
-  - expected: リモート開発
-    pattern: リモートワーク
-  - expected: 我々
-    pattern: Nablarchチーム
-  - expected: PGUT工程
-    pattern: 製造工程
-  - expected: Nablarchシステム開発ガイド
-    pattern: Nablarch開発ガイド
+  - expected: Remote development
+    pattern: Remote work
+  - expected: Us
+    pattern: Nablarch team
+  - expected: PGUT phase
+    pattern: PGUT phase
+  - expected: Nablarch system development guide
+    pattern: Nablarch development guide
