@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Nablarch Toolbox">
+  <path id="classpath.common">
+    <pathelement location="resources" />
+    <path refid="maven.compile.classpath" />
+    <path refid="maven.plugin.classpath" />
+  </path>
+  <target name="analyzeJsp" depends="analyzeJspOutputXml" description="Analyze JSP and output HTML report." >
+    <java classname="nablarch.test.tool.sanitizingcheck.HtmlConvert" dir="${nablarch.tools.dir}" fork="true">
+      <arg value="${jspanalysis.xmloutput}" />
+      <arg value="${jspanalysis.xsl}" />
+      <arg value="${jspanalysis.htmloutput}" />
+      <classpath>
+        <path refid="classpath.common" />
+      </classpath>
+    </java>
+  </target>
+
+  <target name="analyzeJspOutputXml" description="Analyze JSP and output HTML report." >
+    <java classname="nablarch.test.tool.sanitizingcheck.SanitizingCheckTask" dir="${nablarch.tools.dir}" fork="true">
+      <arg value="${jspanalysis.checkjspdir}" />
+      <arg value="${jspanalysis.xmloutput}" />
+      <arg value="${jspanalysis.checkconfig}" />
+      <arg value="${jspanalysis.charset}" />
+      <arg value="${jspanalysis.lineseparator}" />
+      <arg value="${jspanalysis.additionalexts}" />
+      <!-- Item for setting directory (file) names that are exempt from checking as regular expressions using a JSP static analysis tool.
+           Commenting out is deactivated when this value is enabled using pom.xml in the parent project.
+      <arg value="${jspanalysis.excludePatterns}" />
+      -->
+      <classpath>
+        <path refid="classpath.common" />
+      </classpath>
+    </java>
+  </target>
+</project>
