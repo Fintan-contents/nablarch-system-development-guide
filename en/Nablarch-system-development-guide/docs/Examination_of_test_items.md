@@ -7,7 +7,7 @@ This section describes the concept to select the items to be tested.
 
 ## Collecting test viewpoints
 
-First, create a unit test specification format for the project by referring to the [test type and test viewpoint catalog](https://fintan.jp/?p=45).
+First, create a unit test specification format for the project by referring to the [test type and test viewpoint catalog](https://fintan.jp/?p=45)(Only Japanese Edition).
 
 It does not mean having more test items is better. 
 More test items will make it easier to ensure quality, but will affect cost and delivery time. 
