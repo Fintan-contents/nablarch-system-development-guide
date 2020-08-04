@@ -112,7 +112,7 @@ Guide is described for each role and task shown in the development flow.
   - [How to get evidence (log and DB dump)](PGUT_Phase/ut/How_to_get_evidence_(log_and_DB_dump).md)
 
 #### PGUT (Web)
-- [Application configuration (Web)](Design_Phase/Application_configuration_(Web).md)
+- [Application configuration (Web)](Design_Phase/Application_Configuration_(Web).md)
 - [Unit test concept (Web)](PGUT_Phase/ut/Unit_test_concept_(Web).md)
 - [Implementation method for general processing (Web)](PGUT_Phase/pg/Implementation_method_for_general_processing_(Web).md)
 - [Implementation method to perform validation at any timing (Web)](PGUT_Phase/pg/Implementation_method_to_perform_validation_at_any_timing_(Web).md)

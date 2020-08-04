@@ -16,4 +16,4 @@ For example, if the column called membership number is `CHAR(10)`, the column wi
 ## Domain Bean
 
 In the form class, add a definition to the domain Bean so that you can specify a domain for the item.
-For more information, see [Domain Validation](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/validation/bean_validation.html#bean-validation-domain-validation).
+For more information, see [Domain Validation](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/validation/bean_validation.html#bean-validation-domain-validation).

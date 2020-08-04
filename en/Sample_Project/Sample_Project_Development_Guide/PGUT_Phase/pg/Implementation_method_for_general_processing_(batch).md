@@ -33,14 +33,14 @@ Generate a statement as follows and set it in DatabaseRecordReader.
 
 - The reader inherits and implements `DataReader<form class>`.
 - The action inherits and implements `BatchAction<form class>`.
-- For specific implementation, refer to [Create batch to register files in DB](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/getting_started/nablarch_batch/index.html).
+- For specific implementation, refer to [Create batch to register files in DB](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/nablarch_batch/getting_started/nablarch_batch/index.html).
 
 ## Batch output
 
 ### Batch to output file
 - Use the file path management function for file path management.   
-  [Nablarch application framework reference manual 7.5. File path management](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/file_path_management.html#file-path-management)
+  [Nablarch application framework reference manual 7.5. File path management](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/file_path_management.html#file-path-management)
 - Use data binding for file output.   
-  [Nablarch application framework reference manual 7.4.1. Data binding](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/data_io/data_bind.html)
+  [Nablarch application framework reference manual 7.4.1. Data binding](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/data_io/data_bind.html)
 - Opening files (Generate ObjectMapper) should be done in the overridden BatchActionBase#initialize.  
 - Closing files (close the ObjectMapper) should be done in the overridden BatchActionBase#terminate.
