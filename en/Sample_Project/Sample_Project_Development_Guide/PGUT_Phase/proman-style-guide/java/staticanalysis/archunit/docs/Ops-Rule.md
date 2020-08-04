@@ -1,4 +1,4 @@
-# ArchUnit apply Guide
+# ArchUnit Apply Guide
 
 This is a guide for applying ArchUnit in an actual project.
 

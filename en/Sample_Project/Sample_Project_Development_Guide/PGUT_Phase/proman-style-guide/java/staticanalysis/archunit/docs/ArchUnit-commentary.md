@@ -1,4 +1,4 @@
-# ArchUnit Guide
+# ArchUnit Commentary
 
 ArchUnit is a library for testing your architecture.
 The tests you implement will vary depending on the architectural design of the project.

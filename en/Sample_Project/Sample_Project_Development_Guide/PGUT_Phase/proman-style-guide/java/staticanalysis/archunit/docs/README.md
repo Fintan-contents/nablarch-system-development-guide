@@ -1,12 +1,11 @@
-# ArchUnit利用ガイド
+# ArchUnit Usage Guide
 
-[ArchUnit](https://www.archunit.org/)の利用方法について解説します。
-本PJのArchUnitでのテスト内容解説や、具体的な設定方法、運用ルールなどを記載しています。
+This page explains how to use [ArchUnit](https://www.archunit.org/), how to set up ArchUnit, and the rules for apply it.
 
-- [ArchUnit運用ガイド](./Ops-Rule.md)
-- [MavenでのArchUnitの実行方法](./Maven-settings.md)
-- JenkinsでのArchUnit実行結果収集方法
-  - ArchUnitはJUnitのテストとして実行されます。実行結果もJUnitのテスト結果を確認してください。
+- [ArchUnit Apply Guide](./Ops-Rule.md)
+- [How to run ArchUnit with Maven](./Maven-settings.md)
+- How to collect ArchUnit execution results with Jenkins
+  - ArchUnit runs as a JUnit test. Confirm the JUnit test result as the execution result.
 
-ArchUnitで頻出するテストの記述方法を以下で解説します。
-- [ArchUnit解説](./ArchUnit-commentary.md)
+The following is an explanation of how to write ArchUnit's frequently used tests.
+- [ArchUnit Commentary](./ArchUnit-commentary.md)

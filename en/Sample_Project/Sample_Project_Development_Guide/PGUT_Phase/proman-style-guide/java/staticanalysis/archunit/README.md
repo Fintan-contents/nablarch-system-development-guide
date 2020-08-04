@@ -1,11 +1,11 @@
-# ArchUnitガイド
+# ArchUnit Guide
 
-プロジェクトで[ArchUnit](https://www.archunit.org/)を利用する際のガイドを提供します。
+Provides materials for using [ArchUnit](https://www.archunit.org/) in projects. 
 
-ArchUnitとは、アーキテクチャに関するテストを行うライブラリです。
-ArchUnitでは命名のチェック、依存性のチェック、依存方向（レイヤー）のチェックなど、アーキテクチャに関するテストを行うことができます。
+ArchUnit is a library for architectural testing.
+ArchUnit provides architecture testing, including naming checks, dependency checks, and dependency direction (layers) checks.
 
-このリポジトリには、本プロジェクトでのテスト内容、運用ルール等のドキュメントが含まれます。
+This repository contains documentation of the test content, apply rules, etc. for this project.
 
-- [ArchUnit利用ガイド](./docs/README.md)
-- [サンプルプロジェクト](../../../../../../../サンプルプロジェクト/ソースコード/proman-project)
+- [ArchUnit Usage Guide](./docs/README.md)
+- [Sample Project](../../../../../../../Sample_Project/Source_Code/proman-project)
