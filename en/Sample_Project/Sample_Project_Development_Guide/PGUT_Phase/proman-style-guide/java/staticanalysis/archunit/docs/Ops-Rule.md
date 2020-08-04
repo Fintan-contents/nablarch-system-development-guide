@@ -1,6 +1,6 @@
-# ArchUnit Apply Guide
+# ArchUnit operation guide
 
-This is a guide for applying ArchUnit in an actual project.
+This is a guide for operating ArchUnit in an actual project.
 
 The term "architecture violation" is used this section to mean "violates the architecture rule being tested using ArchUnit".
 
