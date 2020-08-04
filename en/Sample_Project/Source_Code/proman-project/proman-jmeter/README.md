@@ -2,7 +2,7 @@
 This tool is designed to automatically run trade unit tests using JMeter.
 
 Initially, it is configured to allow you to run tests against the sample project's project management system.  
-For information on how to run test scenarios against a project management system, see [Test Method of Subfunction Unit Test (Web)](../../../Sample_Project_Development_Guide/PGUT_Phase/ut/Test_method_of_subfunction_unit_test_(Web).md).
+For information on how to run test scenarios against a project management system, see [Test Method of Automated Subfunction Unit Test (Web)](../../../Sample_Project_Development_Guide/PGUT_Phase/ut/Test_method_of_automated_subfunction_unit_test_(Web).md).
 
 This section explains how this tool works and how to use it.
 
