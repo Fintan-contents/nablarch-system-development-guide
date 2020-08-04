@@ -67,7 +67,7 @@ Use this diagram as a reference when studying the development flow of the projec
 
 This is a sheet for assigning roles so that the tasks necessary for waterfall development are not left out. The sheet aims at eliminating differences in the understanding of the developers, early detection of risks, and preventing problems from getting worse.
 
-- [Role sharing sheet for waterfall development](https://fintan.jp/?p=1326)
+- [Role sharing sheet for waterfall development](https://fintan.jp/?p=1326)(Only Japanese Edition)
 
 
 
@@ -161,11 +161,11 @@ When doing so, use the sample project for reference, and not as a source for cop
 
 
 The contents describe the topics that should be examined during the overall test plan of an application development project.
-- [Overall test planning guide](https://fintan.jp/?p=251)
+- [Overall test planning guide](https://fintan.jp/?p=251)(Only Japanese Edition)
 
 
 This catalog organizes the test types and viewpoints that can be used in application development.
-- [Test type and viewpoint catalog](https://fintan.jp/?p=45)
+- [Test type and viewpoint catalog](https://fintan.jp/?p=45)(Only Japanese Edition)
 
 #### Consideration of testing policy
 
@@ -295,11 +295,11 @@ These are coding conventions that programmers must adhere to, to improve quality
 
 
 This is a checklist for developers to confirm the completion conditions of PG/UT work. 
-- [PG/UT work completion condition checklist](https://fintan.jp/?p=1367)
+- [PG/UT work completion condition checklist](https://fintan.jp/?p=1367)(Only Japanese Edition)
 
 
 This is a checklist for developers to self-check simple coding mistakes such as violations of coding conventions, etc.
-- [Deliverables self-check list for programmers](https://fintan.jp/?p=1369)
+- [Deliverables self-check list for programmers](https://fintan.jp/?p=1369)(Only Japanese Edition)
 
 
 

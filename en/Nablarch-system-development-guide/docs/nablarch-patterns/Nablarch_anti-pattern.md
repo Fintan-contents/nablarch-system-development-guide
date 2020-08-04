@@ -9,7 +9,7 @@ Here are some examples of actual errors.
 
 ### Multithreaded bugs due to the misunderstanding of component lifecycle
 
-The Nablarch [system repository](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/repository.html#repository) has DI container functionality, but the component life cycle is different from other DI containers.
+The Nablarch [system repository](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/repository.html#repository) has DI container functionality, but the component life cycle is different from other DI containers.
 
 The lifecycle of components managed in Nablarch's system repository is a `singleton`.
 Misunderstanding the default life cycle as a `prototype` or `request` and rewriting the state of the component will affect other threads and requests that use the same component.
@@ -129,7 +129,7 @@ In the case of the above example, the SQL issued in the handle will be performed
 This anti-pattern is the same as "loop processing not under the framework control" (Nablarch batch) described above.
 The same problem occurs when Batchlet is used to implement batches that should be designed and implemented with Chunk.
 
-As in the [batch types](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/jsr352/architecture.html#jsr352-batch-type), it is necessary to understand the purpose of each batch and use them appropriately.
+As in the [batch types](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/jsr352/architecture.html#jsr352-batch-type), it is necessary to understand the purpose of each batch and use them appropriately.
 
 | Batch type | Application                                                                                           |
 |--------------|------------------------------------------------------------------------------------------------|

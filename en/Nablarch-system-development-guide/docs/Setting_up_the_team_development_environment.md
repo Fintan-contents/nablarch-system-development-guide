@@ -10,7 +10,7 @@ A variety of tools are required to get started with team development.
 
 
 It is good if an environment is already available, but if not, use
-[Collaborage](https://github.com/Fintan-contents/collaborage/blob/master/README.md)
+[Collaborage](https://github.com/Fintan-contents/collaborage/blob/master/README.md)(Only Japanese Edition)
 to develop the necessary tools.
 
 See the "Development Environment" section of the "Sample Application Development Project Guide" for examples of how to set up an environment.

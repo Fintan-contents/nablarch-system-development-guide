@@ -2,7 +2,7 @@
 
 ## Classification by startup method
 
-[Nablarch batches](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html) are divided into two types depending on the startup method:
+[Nablarch batches](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/nablarch_batch/index.html) are divided into two types depending on the startup method:
 
 - On-demand batch
 - Resident batch
