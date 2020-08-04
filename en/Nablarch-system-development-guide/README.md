@@ -107,10 +107,12 @@ Instead of copying the sample, extract the parts that can be reused and referred
 Attention is required especially for performance and security requirements since they are not covered in the above sample.
 Either add to the description in the architecture design sample or create a separate document such as “Architecture design document (security design)”.
 
-For security design, refer to IPA's "How to Create a Secure Website". 
-Design such that all items in the “Security implementation checklist” are “addressed at a fundamental level”. Although there is overlap, check “OWASP Top10” as well.
+For security design, refer to IPA's "How to Create a Secure Website". Design so that all items in the "セキュリティ実装 チェックリスト(Security Implementation Checklist)" will be "根本的解決(fundamental solutions)".  
+To assist in the security design, a "Nablarch function security matrix" is provided to determine if the items in the checklist can be supported by the features provided in Nablarch. Please set up the project so that the features provided by Nablarch will be enabled, and consider how to deal with the items where the features are not provided.  
+The "OWASP Top 10" is also helpful, although there is some overlap with the IPA's "安全なウェブサイトの作り方(How to Create a Secure Website)".
 
 - [How to make a secure website](https://www.ipa.go.jp/security/english/third.html#websecurity)
+- [Nablarch function security matrix](../Sample_Project/Design_Document/Nablarch_function_security_matrix.xlsx?raw=true)
 - [OWASP Top10](https://github.com/OWASP/Top10)
 
 #### Nablarch pattern collection
@@ -139,7 +141,7 @@ Checking the above makes it easier to grasp the image of the upcoming work.
 
 #### Notes on sample projects
 
-Do not copy and reuse the deliverables of the sample project without studying them.
+Don't divert the deliverables from the sample project without any consideration.
 
 The deliverables of the sample project are based on the requirements and characteristics of the sample project 
 that we have created by customizing the design standards of Nablarch.
@@ -164,6 +166,48 @@ The contents describe the topics that should be examined during the overall test
 
 This catalog organizes the test types and viewpoints that can be used in application development.
 - [Test type and viewpoint catalog](https://fintan.jp/?p=45)
+
+#### Consideration of testing policy
+
+In general, there is a trade-off between quality and cost in testing.
+The testing policy needs to be tailored to the characteristics of the project.
+
+The test method that actively uses the [Nablarch Testing Framework](https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/index.html) has a problem that the test data creation and maintenance are expensive (hereinafter referred to as "Heavy type").
+The [Sample Project](../Sample_Project) uses a lightweight test method that reduces the number of automated test maintenance man-hours without sacrificing quality as much as possible (hereinafter referred to as the "Lightweight type").
+
+It is necessary to consider whether to adopt “Heavy type” or “Lightweight type” in the project depending on the system scale and the amount of change.
+
+##### Heavy type
+
+It creates test classes and test data and executes automated tests.
+Can check not only the database and files, but also the log output, request scope, and other internal system conditions in detail.
+However, due to the large number of deliverables and check points to be created, the amount of revisions that need to be made when changes occur is higher.
+
+**[Conditions suitable for Heavy type]**
+- large scale
+- Fewer changes.
+- Fine-grained regression tests are needed.
+
+The ability to run most of the paths in automated tests makes it ideal for situations where highly accurate regression testing is required.
+It is especially useful for regression testing in large projects when upgrading frameworks, libraries, middleware, etc.
+For more information on Heavy type testing, refer to the following page.
+
+- [Heavy type test Standards](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/master/en/020_Application_Development_Standards/020_Test_Standards/Unit_Test_Standards.xlsx?raw=true)
+
+##### Lightweight type
+
+For points to be checked by manual testing, save labor by omitting automated testing as much as possible.
+In general, when automated testing is reduced, the cost of regression testing rises, but provide a mechanism to maintain regression testing at low cost.
+The regression test can be run based on manual browser operation records.
+
+**[Conditions suitable for Lightweight type]**
+- small to medium scale
+- Lots of changes
+
+For more information on Lightweight type testing, refer to the following page.
+
+- [Lightweight Type test Standards](../Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards/Unit_Test_Standard.xlsx?raw=true)
+- [Unit Test Concept (Web) using Lightweight Type](../Sample_Project\Sample_Project_Development_Guide\PGUT_Phase\ut\Unit_test_concept_(Web).md)
 
 
 ### Creating a development guide for a project
@@ -190,7 +234,7 @@ These contain important design standard documents such as DB design and UI stand
 In particular, UI standard needs to be deployed before starting the full-scale design phase.
 If you proceed with the design without any standard, the UI, such as screen layouts, will vary with each designer and each counter customer.
 (Example: Position of buttons, whether to display confirmation and completion screens, unnecessarily rich UI functions).
-To later unify these features, customer approval will be required and the features will need to be modified in parallel. 
+To later unify these features, customer approval may be required and the features may need to be modified in parallel.
 It may not be possible to withdraw the UI after it has been presented. In this case, there is a risk that the UI needs to be created individually in PGUT phase and the required man-hours will exceed the estimate.
 Reference：[UI standard customization](docs/UI_standard_customization.md)
 
@@ -212,7 +256,10 @@ Refer to the following items when preparing the test standards.
 
 - [Examination of test items](docs/Examination_of_test_items.md)
 
+The Unit Test Standards under [Nablarch Application Design Standard](https://fintan.jp/?p=1145) adopt a Heavy type (\*1) testing strategy for large projects.
+On the other hand, the sample project adopts a Lightweight type (\*1) testing strategy.
 
+*1: see [Consideration of testing policy](#consideration-of-testing-policy)
 
 ## PGUT phase
 
