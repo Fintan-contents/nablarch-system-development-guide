@@ -5,7 +5,7 @@
 Follows the operation guide of the coding convention.
 
 - [Checkstyle operation guide](../../PGUT_Phase/proman-style-guide/java/staticanalysis/checkstyle/docs/Ops-Rule.md)
-- [SpotBugs operation guide](../../PGUT_Phase\proman-style-guide\java\staticanalysis\spotbugs\docs\Ops-Rule.md)
+- [SpotBugs operation guide](../../PGUT_Phase/proman-style-guide/java/staticanalysis/spotbugs/docs/Ops-Rule.md)
 
 ## Specific measures for this project
 

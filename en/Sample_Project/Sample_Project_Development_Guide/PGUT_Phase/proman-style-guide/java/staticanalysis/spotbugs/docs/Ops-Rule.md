@@ -92,5 +92,5 @@ A configuration file can be modified in the Unauthorized API Check Tool to allow
 Review the APIs that failed the unauthorized API check, and if the APIs are required for development, discuss with the project architect.
 If the architect finds that the API is required for development, then edit the configuration file of the Unauthorized API Check Tool to allow the use of the API.
 
-See the explanation of [Unauthorized API Check Tool](../../unpublished-api/README.md#Method to write the configuration file).
+See the explanation of [Unauthorized API Check Tool](../../unpublished-api/README.md#Method-to-write-the-configuration-file).
 
