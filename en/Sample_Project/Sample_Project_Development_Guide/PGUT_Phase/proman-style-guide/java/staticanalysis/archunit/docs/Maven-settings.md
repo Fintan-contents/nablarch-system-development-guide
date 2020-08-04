@@ -1,14 +1,14 @@
-# MavenでのArchUnitの実行方法
+# How to run ArchUnit with Maven
 
-ArchUnitは`mvn test`を実行することで、JUnitのテストとして実行が可能です。
+ArchUnit can be run as a JUnit test by running the `mvn test`.
 
-## チェックを除外するフィルターファイルを配置する
+## Place a filter file to exclude checks
 
-## ArchUnitの依存を組み込む
+## Include ArchUnit dependencies
 
-`pom.xml` を編集します。
+Edit the `pom.xml`.
 
-設定を追加する場所は`dependencies`要素の直下です。
+The place to add the configuration is directly under the `dependencies` element.
 
 ```xml
   <dependencies>
@@ -21,15 +21,15 @@ ArchUnitは`mvn test`を実行することで、JUnitのテストとして実行
   </dependencies>
 ```
 
-## Mavenでテストを実施する
+## Running tests with Maven
 
-テストは次のコマンドで実施できます。
+The tests can be performed with the following commands.
 
 ```sh
 mvn test
 ```
 
-もし違反がある場合は、以下のようにテスト内容と違反した対象が表示されます。
+If there is a violation, the test and the target of the violation will be output as follows.
 
 ```
 [ERROR] Failures:
@@ -38,7 +38,7 @@ Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> does
 Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> has modifier PRIVATE in (ProjectService.java:0)
 ```
 
-すべてのテストに合格した場合は、次のようにコンソールに出力されます。
+If you pass all the tests, the output as follows.
 
 ```sh
 
