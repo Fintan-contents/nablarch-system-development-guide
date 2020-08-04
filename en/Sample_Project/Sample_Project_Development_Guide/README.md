@@ -49,7 +49,7 @@ Guide is described for each role and task shown in the development flow.
 - [Screen mockup creation guide](Requirements_Definition_Phase/Screen_mockup_creation_guide.md)
 - [UI standard](../Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/010_Design_Standards)
   - Please refer to UI standard when creating screen mockups.
-- [Design document format](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/030_%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/010_%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)
+- [Design document format](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/030_%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/010_%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)(Only Japanese Edition)
   - Screen list and screen transition diagram are created at the time of screen mockup creation.
 
 ## Design phase
@@ -59,27 +59,27 @@ Guide is described for each role and task shown in the development flow.
 #### Design (common)
 
 - [Placement location of design document](../Design_Document/A1_Project_Management_System/030_Application_Design)
-- [Design document format](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/030_%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/010_%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)
+- [Design document format](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/030_%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/010_%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)(Only Japanese Edition)
   - Use the format provided by the Nablarch development standard.
-- [Test preparation in the design phase](Design_Document/Test_preparation_in_the_design_phase.md)（Unit test case design）
+- [Test preparation in the design phase](Design_Phase/Test_preparation_in_the_design_phase.md)（Unit test case design）
   - Create test data and test cases during the design phase. For more information, click the link above.
-- [Create SQL file](Design_Document/Create_SQL_file.md)（SQL validation）
+- [Create SQL file](Design_Phase/Create_SQL_file.md)（SQL validation）
   - Create SQL in the design phase. For more information, click the link above.
 
 #### Screen design
 
-- [Method to take a screenshot](Design_Document/Method_to_take_a_screenshot.md)
+- [Method to take a screenshot](Design_Phase/Method_to_take_a_screenshot.md)
 
 #### Web service design
 
-- [WebAPI URL design](Design_Document/WebAPI_URL_design.md)
+- [WebAPI URL design](Design_Phase/WebAPI_URL_design.md)
 
 ### Data modeler
 
 #### Data definition
 
-- [Method to proceed with domain definition](Design_Document/Method_to_proceed_with_domain_definition.md)
-- [Method to proceed with code design](Design_Document/Method_to_proceed_with_code_design.md)
+- [Method to proceed with domain definition](Design_Phase/Method_to_proceed_with_domain_definition.md)
+- [Method to proceed with code design](Design_Phase/Method_to_proceed_with_code_design.md)
 
 #### DB design
 
@@ -112,7 +112,7 @@ Guide is described for each role and task shown in the development flow.
   - [How to get evidence (log and DB dump)](PGUT_Phase/ut/How_to_get_evidence_(log_and_DB_dump).md)
 
 #### PGUT (Web)
-- [Application configuration (Web)](Design_Phase/Application_configuration_(Web).md)
+- [Application configuration (Web)](Design_Phase/Application_Configuration_(Web).md)
 - [Unit test concept (Web)](PGUT_Phase/ut/Unit_test_concept_(Web).md)
 - [Implementation method for general processing (Web)](PGUT_Phase/pg/Implementation_method_for_general_processing_(Web).md)
 - [Implementation method to perform validation at any timing (Web)](PGUT_Phase/pg/Implementation_method_to_perform_validation_at_any_timing_(Web).md)

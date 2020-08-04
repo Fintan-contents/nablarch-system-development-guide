@@ -1,7 +1,7 @@
 # Sample Project
 
 > ＜For those who refer to the sample project＞  
-> The sample project is to have an image of the deliverables created when development is carried out according to the [Nablarch System Development Guide](../Nablarchシステム開発ガイド)
+> The sample project is to have an image of the deliverables created when development is carried out according to the [Nablarch System Development Guide](../Nablarch-system-development-guide)
 > You can refer to the development guides and test standards that are important when carrying out development in a project. 
 > Several functions have been developed using the development guide created with samples for each processing method (Web, batch and REST), and correspondence between design documents and source code can be confirmed.
 >
@@ -11,8 +11,8 @@
 > The sample project focuses on conveying the image of using the Nablarch System Development Guide.
 >   
 > If you would like to see the best examples of application implementation using Nablarch, please refer to Nablarch 
-> [Example](https://nablarch.github.io/docs/LATEST/doc/application_framework/example/index.html) 
-> or [manual](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/index.html).
+> [Example](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/example/index.html) 
+> or [manual](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/index.html).
 
 - [System profile](#System-profile)
 - [System configuration image](#System-configuration-image)

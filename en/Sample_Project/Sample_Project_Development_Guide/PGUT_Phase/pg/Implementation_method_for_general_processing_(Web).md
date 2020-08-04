@@ -99,7 +99,7 @@ Implementation is required to be done for the methods of JSP and Action class.
 
 Implement using allowDoubleSubmission attribute of custom tag of button and useToken attribute of form tag.   
 See below for the implementation method.   
-https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/tag.html#tag-double-submission
+https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/tag.html#tag-double-submission
 
 ###### Implementation method on action class side
 
