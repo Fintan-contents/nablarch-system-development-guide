@@ -127,12 +127,12 @@ The above two can also be combined.
     - point
       - (omitted)
 
-Since `com.example.member.action` can be specified as the root package, it is easier to make entries in the [routes.xml](https://nablarch.github.io/docs/LATEST/doc/application_framework/adaptors/router_adaptor.html).
+Since `com.example.member.action` can be specified as the root package, it is easier to make entries in the [routes.xml](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/adaptors/router_adaptor.html).
     
 
 ### Example of division by business function - class role
 
-At first glance it looks good, but it is difficult to handle with [routes.xml](https://nablarch.github.io/docs/LATEST/doc/application_framework/adaptors/router_adaptor.html) of Nablarch because it allows multiple action packages. 
+At first glance it looks good, but it is difficult to handle with [routes.xml](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/adaptors/router_adaptor.html) of Nablarch because it allows multiple action packages. 
 There is a disadvantage that if you try to forcibly use this method, the URL length will be longer.
 
 - com.example.member
