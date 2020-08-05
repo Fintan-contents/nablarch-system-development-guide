@@ -9,12 +9,15 @@ import com.tngtech.archunit.core.domain.JavaClass;
 import org.junit.runner.RunWith;
 
 /**
- * アプリケーション構成に関するテスト。
+ * Testing application structure.
  */
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class LayeredArchitectureForWebTest {
 
+    /**
+     * Testing application structure.
+     */
     @ArchTest
     public static final ArchRule アプリケーション構成のテスト = Architectures.layeredArchitecture()
             .layer("Action").definedBy(JavaClass.Predicates.simpleNameEndingWith("Action"))

@@ -1,13 +1,13 @@
-# アーキテクチャテストについて
+# About Architecture Testing
 
-このモジュールはアーキテクチャテストを行うためだけのモジュールです。
+This module is for architecture testing purposes only.
 
-システムで使用する資材は配置しないでください。
+Do not place resources to be used in the system.
 
-proman-common, proman-web, proman-batchにあるすべてのクラスに対してテストを行うため、
+Rely on both proman-web and proman-batch to test against all classes in proman-common, proman-web, and proman-batch.
 
-proman-web, proman-batchのどちらにも依存しています。
+## Note
 
-## 注意事項
+Please run `mvn install` on both proman-web and proman-batch to get the latest information before running the test.
 
-テストを実行する前に最新の内容を反映するため、proman-web, proman-batchそれぞれで `mvn install` を行ってください。
+Run `mvn install` on both proman-web and proman-batch to get the latest contents before running the test.

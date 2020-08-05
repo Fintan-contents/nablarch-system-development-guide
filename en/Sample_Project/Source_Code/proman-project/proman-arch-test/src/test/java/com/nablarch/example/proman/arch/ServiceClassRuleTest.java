@@ -9,12 +9,15 @@ import nablarch.common.dao.DaoContext;
 import org.junit.runner.RunWith;
 
 /**
- * Serviceクラスの実装方法に関するルール。
+ * Rules on how to implement the Service class.
  */
 @RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class ServiceClassRuleTest {
 
+    /**
+     * If you have DaoContext in a field, it is private_final but not static.
+     */
     @ArchTest
     public static final ArchRule DaoContextをfieldに持つ場合private_finalであるがstaticじゃないこと =
             ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
@@ -24,7 +27,7 @@ public class ServiceClassRuleTest {
                 .andShould().notBeStatic();
 
     /**
-     * サービスクラスのDaoContextを引数に持つコンストラクタがpackage privateであること。
+     * The constructor with DaoContext as an argument must be package_private.
      */
     @ArchTest
     public static final ArchRule DaoContextを引数に持つコンストラクタはpackage_privateであること =
