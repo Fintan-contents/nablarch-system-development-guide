@@ -32,6 +32,8 @@
   -->
   <import file="nablarch/webui/db-for-webui.xml"/>
 
+  <!-- Thread context features -->
+  <import file="com/nablarch/example/climan/web/webui/threadcontext-for-webui.xml" />
 
   <!-- Package mapping settings -->
   <component name="packageMapping" class="nablarch.integration.router.RoutesMapping">
@@ -47,6 +49,19 @@
     </property>
   </component>
 
+  <!-- response handler settings -->
+  <component name="jaxRsResponseHandler" class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+    <property name="errorResponseBuilder">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
+        <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
+      </component>
+    </property>
+    <property name="errorLogWriter">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
+    </property>
+  </component>
+
+
   <!-- Dialect settings -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
@@ -60,16 +75,16 @@
 
         <component class="nablarch.fw.handler.GlobalErrorHandler"/>
 
-        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
-          <property name="errorResponseBuilder">
-            <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
-              <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
-            </component>
-          </property>
-          <property name="errorLogWriter">
-            <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
-          </property>
-        </component>
+        <!-- add -->
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component-ref name="jaxRsResponseHandler" />
+
+        <!-- add -->
+        <component-ref name="threadContextHandler"/>
+
+        <!-- add -->
+        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
 
         <component-ref name="dbConnectionManagementHandler"/>
 

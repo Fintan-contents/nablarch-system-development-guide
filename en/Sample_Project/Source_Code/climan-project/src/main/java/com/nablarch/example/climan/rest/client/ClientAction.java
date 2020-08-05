@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Action class for client management.
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClientAction {
 

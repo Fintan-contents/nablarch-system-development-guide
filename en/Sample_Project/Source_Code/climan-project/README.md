@@ -1,5 +1,16 @@
 # Client Management System
 
+## Required environment
+
+Refer to the [Development Environment Construction Guide](../../Sample_Project_Development_Guide/PGUT_Phase/Development_environment_construction_guide.md) for the required environment.
+
+Configure the initial user and password for PostgreSQL as follows.
+
+| user     | password|
+|:---------|:--------|
+| postgres | password|
+
+
 ## How to launch
 
 Execute the following commands.

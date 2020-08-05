@@ -16,7 +16,7 @@ import java.util.List;
  *
  * Changes the setting of Jackson2.x.
  *
- * @author TIS
+ * @author Kiyohito Itoh
  */
 public class ClimanJaxRsHandlerListFactory implements JaxRsHandlerListFactory {
 

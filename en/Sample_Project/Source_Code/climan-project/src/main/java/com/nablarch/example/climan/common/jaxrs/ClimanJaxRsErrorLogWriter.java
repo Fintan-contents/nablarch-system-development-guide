@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * Ensures that exceptions returning a common error response do not output a log.
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClimanJaxRsErrorLogWriter extends JaxRsErrorLogWriter {
 
