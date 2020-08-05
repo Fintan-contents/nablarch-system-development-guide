@@ -6,7 +6,7 @@ import java.util.Date;
  * Exception occurring when the password is found to be expired during user authentication.
  * <p/>
  * The user ID of the user, the expiration date of the password and the business date used for the check are retained.
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PasswordExpiredException extends AuthenticationException {
 

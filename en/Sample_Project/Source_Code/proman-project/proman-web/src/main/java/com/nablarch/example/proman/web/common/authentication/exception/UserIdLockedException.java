@@ -4,7 +4,7 @@ package com.nablarch.example.proman.web.common.authentication.exception;
  * Exception occurring when the user ID is locked during user authentication.
  * <p/>
  * The user ID of the applicable user and the number of authentication failures before locking the user ID is retained.
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class UserIdLockedException extends AuthenticationException {
 

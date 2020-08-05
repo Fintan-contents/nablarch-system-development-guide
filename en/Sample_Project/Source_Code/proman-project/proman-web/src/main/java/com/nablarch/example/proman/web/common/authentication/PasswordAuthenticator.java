@@ -6,7 +6,7 @@ import com.nablarch.example.proman.web.common.authentication.exception.Authentic
  * User authentication interface.
  * <p/>
  * Creates class for implementation of this interface for each authentication method.
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public interface PasswordAuthenticator {
 

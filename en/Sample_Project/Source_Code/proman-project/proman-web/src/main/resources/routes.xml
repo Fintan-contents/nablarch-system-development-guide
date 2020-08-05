@@ -1,20 +1,33 @@
 <routes>
-    <scope module="login">
-        <root to="TopPage#index"/>
-        <get  path="/app/login" to="Login#index"/>
-        <post path="/app/login" to="Login#login"/>
-        <get  path="/app/logout" to="Login#logout"/>
-        <get  path="/" to="TopPage#index"/>
-    </scope>
+  <scope module="login">
+    <root to="TopPage#index"/>
+    <get path="/app/login" to="Login#index"/>
+    <post path="/app/login" to="Login#login"/>
+    <get path="/app/logout" to="Login#logout"/>
+    <get path="/" to="TopPage#index"/>
+  </scope>
 
-    <scope module="project">
-        <!-- Registration process -->
-        <get  path="/app/project/register" to="ProjectCreate#index"/>
-        <post path="/app/project/confirmRegistration" to="ProjectCreate#confirmRegistration"/>
-        <post path="/app/project/register" to="ProjectCreate#register"/>
-        <get  path="/app/project/completeRegistration" to="ProjectCreate#completeRegistration"/>
-        <post path="/app/project/backRegistration" to="ProjectCreate#backToEnterRegistration"/>
-        <post path="/app/project/errorRegister" to="ProjectCreate#index"/>
-        <post path="/app/project/returnRegister" to="ProjectCreate#index"/>
-    </scope>
+  <scope module="project">
+    <!-- registration process -->
+    <get path="/app/project/register" to="ProjectCreate#index"/>
+    <post path="/app/project/confirmRegistration" to="ProjectCreate#confirmRegistration"/>
+    <post path="/app/project/register" to="ProjectCreate#register"/>
+    <get path="/app/project/completeRegistration" to="ProjectCreate#completeRegistration"/>
+    <post path="/app/project/backRegistration" to="ProjectCreate#backToEnterRegistration"/>
+    <post path="/app/project/errorRegister" to="ProjectCreate#index"/>
+    <post path="/app/project/returnRegister" to="ProjectCreate#index"/>
+    <!-- reference process -->
+    <get path="/app/project/search" to="ProjectSearch#search"/>
+    <get path="/app/project/list" to="ProjectSearch#list"/>
+    <get path="/app/project/backToList" to="ProjectSearch#backToList"/>
+    <get path="/app/project/detail/:projectId" to="ProjectSearch#detail"/>
+    <!-- update process -->
+    <get path="/app/project/update/:projectId" to="ProjectUpdate#index"/>
+    <post path="/app/project/confirmUpdate" to="ProjectUpdate#confirmUpdate"/>
+    <post path="/app/project/update" to="ProjectUpdate#update"/>
+    <get path="/app/project/completeUpdate" to="ProjectUpdate#completeUpdate"/>
+    <post path="/app/project/backUpdate" to="ProjectUpdate#backToEnterUpdate"/>
+    <post path="/app/project/moveUpdate" to="ProjectUpdate#indexSetPullDown"/>
+    <get path="/app/project/moveUpdate" to="ProjectUpdate#indexSetPullDown"/>
+  </scope>
 </routes>

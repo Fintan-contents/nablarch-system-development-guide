@@ -5,7 +5,7 @@ package com.nablarch.example.proman.web.common.authentication.encrypt;
  * <br>
  * Creates class for implementation of this interface for each encryption algorithm.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public interface PasswordEncryptor {
 

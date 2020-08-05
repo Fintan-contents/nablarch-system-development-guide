@@ -4,7 +4,7 @@ package com.nablarch.example.proman.web.common.authentication.exception;
  * Exception occurring when authentication fails due to a mismatch in account information.
  * <p/>
  * The user ID of the applicable user is maintained.
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class AuthenticationFailedException extends AuthenticationException {
 

@@ -18,7 +18,7 @@ import java.security.spec.KeySpec;
  * The password is encrypted by stretching the number of times specified in {@link #iterationCount}.
  * The encrypted password is the length (bit count) set in {@link #keyLength}.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
 
