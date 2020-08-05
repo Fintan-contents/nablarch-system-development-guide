@@ -1,13 +1,12 @@
 package com.nablarch.example.proman.batch.project;
 
+
 import nablarch.common.dao.EntityUtil;
 import nablarch.common.databind.ObjectMapper;
 import nablarch.common.databind.ObjectMapperFactory;
 import nablarch.core.date.BusinessDateUtil;
 import nablarch.core.db.statement.SqlPStatement;
 import nablarch.core.db.statement.SqlRow;
-import nablarch.core.log.Logger;
-import nablarch.core.log.LoggerManager;
 import nablarch.core.util.DateUtil;
 import nablarch.core.util.FilePathSetting;
 import nablarch.fw.DataReader;
@@ -26,7 +25,7 @@ import java.sql.Date;
 /**
  * Batch action class for startup when a project list is output during the applicable period.
  *
- * @author TIS
+ * @author Yutaka Kanayama
  */
 public class ExportProjectsInPeriodAction extends BatchAction<SqlRow> {
 

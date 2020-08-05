@@ -59,11 +59,11 @@
     <!-- Handler to convert status code into exit code -->
     <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
 
-    <!-- Handler for deleting thread context variables -->
-    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
-
     <!-- Global error handler -->
     <component class="nablarch.fw.handler.GlobalErrorHandler" />
+
+    <!-- Handler for deleting thread context variables -->
+    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
 
     <!-- Handler for setting thread context -->
     <component-ref name="threadContextHandler" />
