@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Internal class in which a verification process is implemented.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class YYYYMMDDValidator implements ConstraintValidator<YYYYMMDD, String> {
 

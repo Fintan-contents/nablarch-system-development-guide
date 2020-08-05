@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Validator to verify that the specified integer is a monetary value within the range.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class MoneyRangeValidator implements ConstraintValidator<MoneyRange, String> {
 

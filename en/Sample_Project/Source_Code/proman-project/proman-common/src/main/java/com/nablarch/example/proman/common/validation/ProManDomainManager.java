@@ -7,7 +7,7 @@ import nablarch.core.validation.ee.DomainManager;
  * <p/>
  * Returns bean class defining the domain.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class ProManDomainManager implements DomainManager<ProManDomainType> {
     @Override
