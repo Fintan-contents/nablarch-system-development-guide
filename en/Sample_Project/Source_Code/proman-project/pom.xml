@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u14</version>
+    <version>5u16</version>
     <relativePath/>
   </parent>
 
@@ -20,6 +20,7 @@
     <module>proman-common</module>
     <module>proman-web</module>
     <module>proman-batch</module>
+    <module>proman-arch-test</module>
   </modules>
 
   <properties>
@@ -51,7 +52,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u14</version>
+        <version>5u16</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -160,16 +161,4 @@
       </plugins>
     </pluginManagement>
   </build>
-  <repositories>
-    <repository>
-      <id>keel-dev-repo</id>
-      <url>https://collaborage-ci.keel-dev.net/nexus/repository/maven-public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 </project>
