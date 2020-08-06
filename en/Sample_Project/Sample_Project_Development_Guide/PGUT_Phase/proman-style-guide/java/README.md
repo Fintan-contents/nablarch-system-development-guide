@@ -26,3 +26,6 @@ Limit the APIs used by the unauthorized API check tool as needed.
 
 - [Unauthorized API check tool](./staticanalysis/unpublished-api/README.md)
 
+Resolve any architectural violations that can be detected by ArchUnit's tests.
+
+- [ArchUnit Guide](./staticanalysis/archunit/README.md)
