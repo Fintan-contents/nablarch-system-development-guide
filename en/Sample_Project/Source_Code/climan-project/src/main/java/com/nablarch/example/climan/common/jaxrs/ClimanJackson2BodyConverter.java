@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Class for customizing {@link Jackson2BodyConverter}.
  *
- * @author TIS
+ * @author Kiyohito Itoh
  */
 public class ClimanJackson2BodyConverter  extends Jackson2BodyConverter {
     @Override

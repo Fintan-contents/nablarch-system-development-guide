@@ -9,7 +9,7 @@ import nablarch.common.code.validator.ee.CodeValue;
 /**
  * Enumerated type indicating domain definition.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 @SuppressWarnings("all")
 public class ProManDomainType {

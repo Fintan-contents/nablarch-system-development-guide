@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Login input form.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginForm implements Serializable {
 

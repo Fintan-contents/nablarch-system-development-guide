@@ -33,6 +33,8 @@ The table of contents is given below.
 - [Indentation](#indentation)
 - [InnerAssignment](#innerassignment)
 - [InterfaceTypeParameterName](#interfacetypeparametername)
+- [MissingJavadocType](#missingjavadoctype)
+- [MissingJavadocMethod](#missingjavadocmethod)
 - [JavadocMethod](#javadocmethod)
 - [JavadocType](#javadoctype)
 - [JavadocVariable](#javadocvariable)
@@ -749,24 +751,40 @@ interface NgInterfaceTypeParameterNameExample2<t> {
 }
 ```
 
-## JavadocMethod
+## MissingJavadocType
+
+Check for the existences of Javadoc comments of class and enumeration type.
+
+Make sure to include Javadoc comments (OK).
+Javadoc comments are important information for code readers.
 
 ```xml
-    <module name="JavadocMethod">
+    <module name="MissingJavadocType">
+      <property name="scope" value="private"/>
       <property name="severity" value="error"/>
-      <property name="allowUndeclaredRTE" value="true"/>
     </module>
 ```
 
-Check Javadoc comments of the method.
+##  MissingJavadocMethod
 
-Make sure to include Javadoc comments in the method (OK).
-If there is no Javadoc comment, it will be Not OK.
+Check for the existences of Javadoc comments of method.
 
+Make sure to include Javadoc comments (OK).
 Javadoc comments are important information for code readers.
 
-In the above setting, you can write the unchecked exception `@throws` tag even if there is no `throws` declaration in the method (it will be Okay).
+```xml
+    <module name="MissingJavadocMethod">
+      <property name="scope" value="private"/>
+      <property name="severity" value="error"/>
+    </module>
+```
 
+## JavadocMethod
+
+Check the Javadoc comment contents of the method.
+
+Please include @param and @return in your Javadoc comments (OK).
+If it is not written, it will be not OK.
 
 
 ```java

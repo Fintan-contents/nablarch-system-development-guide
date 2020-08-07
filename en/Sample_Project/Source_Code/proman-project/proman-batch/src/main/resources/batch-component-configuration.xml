@@ -51,6 +51,12 @@
     <!-- Global error handler -->
     <component class="nablarch.fw.handler.GlobalErrorHandler" />
 
+    <!-- Thread Context Variable Delete Handler -->
+    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
+
+    <!-- Thread Context Variable Management Handler -->
+    <component-ref name="threadContextHandler" />
+
     <!-- Database connection handler -->
     <component-ref name="dbConnectionManagementHandler" />
 

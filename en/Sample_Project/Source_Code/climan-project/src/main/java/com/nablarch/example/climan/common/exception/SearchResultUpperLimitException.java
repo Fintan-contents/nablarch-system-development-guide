@@ -3,7 +3,7 @@ package com.nablarch.example.climan.common.exception;
 /**
  * Exception indicating maximum search result error.
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class SearchResultUpperLimitException extends RuntimeException {
 

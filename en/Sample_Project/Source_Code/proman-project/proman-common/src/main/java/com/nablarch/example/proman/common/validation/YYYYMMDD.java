@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p/>
  * The default date format is "yyyyMMdd".
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 @Documented
 @Constraint(validatedBy = YYYYMMDDValidator.class)
@@ -56,7 +56,8 @@ public @interface YYYYMMDD {
 
     /**
      * Annotation to specify multiple values
-     * @author Nabu Rakutaro
+     *
+     * @author Masaya Seko
      */
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
     @Retention(RUNTIME)

@@ -59,6 +59,7 @@ The installation procedures for the following check tools are described in the [
 - Checkstyle
 - SpotBugs
 - Unauthorized API check tool
+- ArchUnit
 
 Since the execution method of each check tool is described, set so that it can be executed by Maven accordingly. 
  (paths may need to be replaced depending on the project configuration)

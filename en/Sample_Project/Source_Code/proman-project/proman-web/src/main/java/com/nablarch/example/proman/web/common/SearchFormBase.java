@@ -6,14 +6,13 @@ import nablarch.core.validation.ee.Required;
 /**
  * Basic form class.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public abstract class SearchFormBase {
 
     /**
      * Page number
      */
-    @Required
     @Domain("pageNumber")
     private String pageNumber;
 

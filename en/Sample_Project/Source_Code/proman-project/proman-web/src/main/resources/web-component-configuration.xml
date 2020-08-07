@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
   <!-- Table definitions -->
-  <import file="nablarch/schema-config.xml" />
+  <import file="nablarch/schema-config.xml"/>
 
   <!-- Character set definitions used for scanning -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
@@ -14,28 +14,28 @@
   <import file="com/nablarch/example/proman/common.xml"/>
 
   <!-- BeanValidation implementation class -->
-  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy"/>
 
   <!-- Environment settings file -->
-  <config-file file="common.config" />
-  <config-file file="env.config" />
+  <config-file file="common.config"/>
+  <config-file file="env.config"/>
 
   <!-- Validation -->
-  <import file="com/nablarch/example/proman/web/validation/validation.xml" />
+  <import file="com/nablarch/example/proman/web/validation/validation.xml"/>
 
   <!-- Password encryption module setting -->
   <!-- Loads settings for each project. -->
-  <import file="com/nablarch/example/proman/web/common/authentication/passwordEncryptor.xml" />
+  <import file="com/nablarch/example/proman/web/common/authentication/passwordEncryptor.xml"/>
 
   <!-- Authentication settings -->
   <!-- Loads settings for each project. -->
-  <import file="com/nablarch/example/proman/web/common/authentication/authenticator.xml" />
+  <import file="com/nablarch/example/proman/web/common/authentication/authenticator.xml"/>
 
   <!-- Common Nablarch features -->
   <!-- Code features -->
   <import file="nablarch/common/code.xml"/>
   <!-- RDBMS without automatic numbering, setting to use universal DAO -->
-  <import file="nablarch/common/dao.xml" />
+  <import file="nablarch/common/dao.xml"/>
 
   <!-- Loads web-specific settings -->
   <!-- Database settings -->
@@ -48,22 +48,23 @@
   <import file="nablarch/webui/db-for-webui.xml"/>
 
   <!-- Error page settings -->
-  <import file="nablarch/webui/error-page-for-webui.xml" />
+  <import file="nablarch/webui/error-page-for-webui.xml"/>
 
   <!-- File path installation -->
-  <import file="nablarch/webui/filepath-for-webui.xml" />
+  <import file="nablarch/webui/filepath-for-webui.xml"/>
 
   <!-- Definition of interceptor execution order -->
-  <import file="nablarch/webui/interceptors.xml" />
+  <import file="nablarch/webui/interceptors.xml"/>
 
   <!-- File upload feature settings -->
-  <import file="nablarch/webui/multipart.xml" />
+  <import file="nablarch/webui/multipart.xml"/>
 
   <!-- Custom tag settings -->
-  <import file="nablarch/webui/nablarch-tag.xml" />
+  <import file="nablarch/webui/nablarch-tag.xml"/>
 
   <!-- Double submission prevention feature -->
-  <import file="nablarch/webui/double-submission.xml" />
+  <import file="nablarch/webui/double-submission.xml"/>
+  <import file="com/nablarch/example/proman/web/webui/double-submission.xml"/>
 
   <!-- Request ID without a hidden encryption feature -->
   <list name="noHiddenEncryptionRequestIds">
@@ -73,10 +74,10 @@
   <!-- Package mapping settings -->
   <component name="packageMapping"
              class="nablarch.integration.router.RoutesMapping">
-      <property name="routes" value="routes.xml"/>
-      <property name="baseUri" value="" />
-      <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
-      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+    <property name="routes" value="routes.xml"/>
+    <property name="baseUri" value=""/>
+    <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
+    <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
   </component>
 
   <!-- Session store feature -->
@@ -88,26 +89,27 @@
     <property name="iv" value="6543210987654321" />
   </component>
   -->
+  <import file="com/nablarch/example/proman/web/webui/session-store.xml"/>
 
-  <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler" >
+  <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler">
     <property name="defaultPages">
       <map>
         <!-- TODO: Create an applicable error screen when setting this. Modify web.xml at the same time. -->
-        <entry key="4.." value="/WEB-INF/view/errorPages/USER_ERROR.jsp" />
-        <entry key="403" value="/WEB-INF/view/errorPages/PERMISSION-ERROR.jsp" />
-        <entry key="404" value="/WEB-INF/view/errorPages/PAGE_NOT_FOUND_ERROR.jsp" />
-        <entry key="413" value="/WEB-INF/view/errorPages/REQUEST_ENTITY_TOO_LARGE.jsp" />
-        <entry key="5.." value="/WEB-INF/view/errorPages/ERROR.jsp" />
-        <entry key="503" value="/WEB-INF/view/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp" />
+        <entry key="4.." value="/WEB-INF/view/errorPages/USER_ERROR.jsp"/>
+        <entry key="403" value="/WEB-INF/view/errorPages/PERMISSION-ERROR.jsp"/>
+        <entry key="404" value="/WEB-INF/view/errorPages/PAGE_NOT_FOUND_ERROR.jsp"/>
+        <entry key="413" value="/WEB-INF/view/errorPages/REQUEST_ENTITY_TOO_LARGE.jsp"/>
+        <entry key="5.." value="/WEB-INF/view/errorPages/ERROR.jsp"/>
+        <entry key="503" value="/WEB-INF/view/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp"/>
       </map>
     </property>
   </component>
 
   <!-- Dialect settings -->
   <!-- TODO: Set dialect according to the database being used -->
-  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
+  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>
 
-  <import file="nablarch/webui/threadcontext-for-webui.xml"/>
+  <import file="com/nablarch/example/proman/web/webui/threadcontext-for-webui.xml"/>
 
   <!-- Handler queue configuration -->
   <component name="webFrontController"
@@ -124,11 +126,11 @@
 
         <component class="nablarch.fw.web.handler.HttpResponseHandler"/>
 
-        <component class="nablarch.fw.web.handler.SecureHandler" />
+        <component class="nablarch.fw.web.handler.SecureHandler"/>
 
         <component-ref name="multipartHandler"/>
 
-        <component-ref name="sessionStoreHandler" />
+        <component-ref name="sessionStoreHandler"/>
 
         <!-- Add -->
         <component-ref name="threadContextHandler"/>
@@ -136,11 +138,11 @@
         <!-- Add -->
         <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
 
-        <component class="nablarch.fw.web.handler.NormalizationHandler" />
+        <component class="nablarch.fw.web.handler.NormalizationHandler"/>
 
         <component class="nablarch.fw.web.handler.ForwardingHandler"/>
 
-        <component-ref name="httpErrorHandler" />
+        <component-ref name="httpErrorHandler"/>
 
         <component-ref name="nablarchTagHandler"/>
 
@@ -151,7 +153,7 @@
         <component class="com.nablarch.example.proman.web.common.handler.PromanErrorForwardHandler"/>
 
         <component class="com.nablarch.example.proman.web.common.handler.LoginUserPrincipalCheckHandler"/>
-        
+
         <component-ref name="packageMapping"/>
       </list>
     </property>

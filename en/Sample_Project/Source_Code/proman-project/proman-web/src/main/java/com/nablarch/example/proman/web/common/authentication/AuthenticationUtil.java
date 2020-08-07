@@ -10,7 +10,7 @@ import nablarch.core.repository.SystemRepository;
 /**
  * Utility class for processes involved in authentication.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public final class AuthenticationUtil {
 

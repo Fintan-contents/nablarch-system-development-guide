@@ -29,7 +29,7 @@ import java.util.Calendar;
  * For this reason, {@link SimpleDbTransactionManager} must be set for PasswordAuthenticator so that the transaction that is used is separated from individual applications.
  * This stops PasswordAuthenticator's transaction control from affecting the processes of individual applications.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class SystemAccountAuthenticator implements PasswordAuthenticator {
 
@@ -232,6 +232,12 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     }
 
 
+    /**
+     * date-type conversion
+     *
+     * @param d {@link java.util.Date} type date 
+     * @return {@link java.sql.Date} type date 
+     */
     private static java.sql.Date convert(java.util.Date d) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);

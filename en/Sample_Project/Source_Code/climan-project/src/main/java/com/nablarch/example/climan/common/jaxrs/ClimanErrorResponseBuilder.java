@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  *
  * Returns a common error response for exceptions processed together.
  *
- * @author TIS
+ * @author Masaya Seko
  */
 public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 

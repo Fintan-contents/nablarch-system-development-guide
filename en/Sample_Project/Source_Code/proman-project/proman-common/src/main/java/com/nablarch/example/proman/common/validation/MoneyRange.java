@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Class for validation of range of monetary values.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 @Documented
 @Constraint(validatedBy = MoneyRangeValidator.class)

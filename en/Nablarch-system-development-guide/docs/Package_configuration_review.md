@@ -5,10 +5,8 @@
 When it comes to the package configuration there is "no certain way to do this", but there are basic concepts.
 Consider package configuration according to the project characteristics.
 
-If there is a constraint on the URL of the system, it is better to first design the URL and decide the package configuration that can realize the URL.
-This is because when the routing is configured in Nablarch, in some cases the URLs are constrained depending on the package configuration.
-
-For intranet systems, especially when there are no constraints on the URL, it is preferable to decide the package configuration considering the project structure.
+Basically, it is desirable to decide on a package structure that facilitates the division of labor.
+If you divide up the project so that the scope of responsibility for the deliverables is clear, such as assigning a member in charge to each package in consideration of the project structure, it will be easier to proceed with development.
 
 
 The following 2 ways (or a combination) can be used to consider the package configuration.
@@ -51,9 +49,8 @@ For example, assigned as follows:
 - Company A is in charge of xxx subsystem
 - B is in charge of yyy function
 
-In this case, only the deliverables of the assignee are stored under the package, making the division of labor and parallel development easier. 
-For example, if classes that are not used are present under a package, the assignee for that package is responsible. 
-If there are multiple assignees for a single package, the responsibility for the deliverables may be ambiguous.
+In this case, dividing a package into business functions makes it easier to divide labor and parallel development because only that member's work is stored under the package.
+For example, if an unused class is under the package, the person in charge of it is responsible for reviewing the need and removing it.
 
 However, if segregation of a package is too big, development becomes more difficult as too many classes are stored in one package.
 In such a case, the number of classes in 1 package can be reduced by subdividing the package into multiple hierarchies.
@@ -127,7 +124,7 @@ The above two can also be combined.
     - point
       - (omitted)
 
-Since `com.example.member.action` can be specified as the root package, it is easier to make entries in the [routes.xml](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/adaptors/router_adaptor.html).
+In this case, the Action classes are aggregated into a single package. Since `com.example.member.action` can be specified as the root package, it is easier to make entries in the [routes.xml](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/adaptors/router_adaptor.html).
     
 
 ### Example of division by business function - class role

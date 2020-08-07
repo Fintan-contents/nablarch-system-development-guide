@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Handler to check login status.
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginUserPrincipalCheckHandler implements Handler<HttpRequest, Object> {
 

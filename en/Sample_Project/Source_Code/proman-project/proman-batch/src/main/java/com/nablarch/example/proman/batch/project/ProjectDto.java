@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * bean class for output of project lists during the applicable period.
  *
- * @author TIS
+ * @author Yutaka Kanayama
  */
 @Csv(type = Csv.CsvType.CUSTOM,
         properties = { "projectId", "projectName", "projectType", "projectClass", "projectStartDate",

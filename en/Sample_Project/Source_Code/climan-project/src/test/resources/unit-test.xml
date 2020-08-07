@@ -36,6 +36,8 @@
     </property>
   </component>
 
+  <!-- Define Jetty6 as a test HttpServer -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
   <!-- Register master data recovery feature -->
 <!--
   <list name="testEventListeners">

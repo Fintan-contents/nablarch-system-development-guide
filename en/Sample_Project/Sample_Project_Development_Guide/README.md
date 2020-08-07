@@ -118,7 +118,7 @@ Guide is described for each role and task shown in the development flow.
 - [Implementation method to perform validation at any timing (Web)](PGUT_Phase/pg/Implementation_method_to_perform_validation_at_any_timing_(Web).md)
 - [Handling method when an error occurs (Web)](PGUT_Phase/pg/Handling_method_when_an_error_occurs_(Web).md)
 - [Test method of subfunction unit test (Web)](PGUT_Phase/ut/Test_method_of_subfunction_unit_test_(Web).md) 
-- [How to get evidence (screen)](PGUT_Phase/ut/How_to_get_evidence_(screen).md)
+- [Test Method of Automated Subfunction Unit Test (Web)](PGUT_Phase/ut/Test_method_of_automated_subfunction_unit_test_(Web).md)
 
 #### PGUT (batch)
 - [Application configuration (batch)](Design_Phase/Application_configuration_(batch).md)

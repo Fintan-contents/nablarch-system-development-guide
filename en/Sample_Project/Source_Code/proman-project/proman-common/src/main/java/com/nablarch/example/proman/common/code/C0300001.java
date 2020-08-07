@@ -2,10 +2,12 @@ package com.nablarch.example.proman.common.code;
 
 /**
  * Project classification
- * @author TIS
+ *
+ * @author Masaya Seko
  */
 public class C0300001 {
 
+    /** hidden constructor. */
     private C0300001() {
     }
 

@@ -17,7 +17,7 @@ import javax.persistence.OptimisticLockException;
  * <p/>
  * Reference information Refer to the information below to determine the HTTP status code to be used in each situation <br>
  * @see <a href="http://qiita.com/kawasima/items/e48180041ace99842779">How to select an HTTP status code</a>
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class PromanErrorForwardHandler implements Handler<Object, Object> {
 

@@ -23,7 +23,7 @@ import nablarch.fw.web.interceptor.OnError;
  * Has a login/logout feature.
  * </pre>
  *
- * @author Nabu Rakutaro
+ * @author Masaya Seko
  */
 public class LoginAction {
 
