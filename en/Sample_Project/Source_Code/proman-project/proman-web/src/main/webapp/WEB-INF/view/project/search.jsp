@@ -229,7 +229,7 @@
                                     <th>Department</th>
                                     <th>Project classification</th>
                                     <th>Project type</th>
-                                    <th>PM</th>
+                                    <th>PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th>Sales_results</th>
                                     <th>Start date</th>
                                     <th>End date</th>
