@@ -27,28 +27,28 @@
         </h1>
         </br>
         <h4 class="ui dividing header">Project management</h4>
-        <label class="field">　┗　<n:a href="/app/project/search">Project search</n:a></label></br>
+        <label class="field">　+　<n:a href="/app/project/search">Project search</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="/app/project/register">Project registration</n:a></label></br>
+                <label class="field">　+　<n:a href="/app/project/register">Project registration</n:a></label></br>
             </c:when>
         </c:choose>
         </br>
         <h4 class="ui dividing header">Client management</h4>
-        <label class="field">　┗　<n:a href="#">Client search</n:a></label></br>
+        <label class="field">　+　<n:a href="#">Client search</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="#">Client registration</n:a></label></br>
+                <label class="field">　+　<n:a href="#">Client registration</n:a></label></br>
             </c:when>
         </c:choose>
         </br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
                 <h4 class="ui dividing header">Extraction of projects that each user is involved in</h4>
-                <label class="field">　┗　<n:a href="#">Instructions for extraction of projects that each user is involved in</n:a></label></br>
+                <label class="field">　+　<n:a href="#">Instructions for extraction of projects that each user is involved in</n:a></label></br>
                 </br>
                 <h4 class="ui dividing header">Project information batches</h4>
-                <label class="field">　┗　<n:a href="#">Batch registration of projects</n:a></label></br>
+                <label class="field">　+　<n:a href="#">Batch registration of projects</n:a></label></br>
             </c:when>
         </c:choose>
     </div>

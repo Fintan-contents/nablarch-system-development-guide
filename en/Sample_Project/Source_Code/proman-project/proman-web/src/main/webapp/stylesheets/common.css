@@ -120,3 +120,16 @@ input.code-radio:checked ~ label:after {
 div.text{
     word-break: break-all;
 }
+
+/* -------------------- table tags -----------------------*/
+table thead {
+    word-break: break-word;
+}
+table td{
+    word-break: break-all;
+}
+
+/* -------------------- customize semantic-ui class --------------*/
+.column{
+    word-break: break-all;
+}

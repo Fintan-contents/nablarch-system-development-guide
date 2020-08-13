@@ -1,10 +1,10 @@
 package com.nablarch.example.proman.common.validation;
 
+import nablarch.common.code.validator.ee.CodeValue;
 import nablarch.core.validation.ee.Digits;
 import nablarch.core.validation.ee.Length;
 import nablarch.core.validation.ee.NumberRange;
 import nablarch.core.validation.ee.SystemChar;
-import nablarch.common.code.validator.ee.CodeValue;
 
 /**
  * Enumerated type indicating domain definition.
@@ -37,13 +37,21 @@ public class ProManDomainType {
      * Password
      */
     @Length(max = 44)
+    @SystemChar(charsetDef = "ASCII文字")
     private String password;
+
+    /**
+     * Project ID
+     */
+    @Length(max = 20)
+    @SystemChar(charsetDef = "半角英数")
+    private String projectId;
 
     /**
      * Project name
      */
     @Length(max = 128, message = "{domainType.projectName.message}")
-    @SystemChar(charsetDef = "全角文字", message = "{domainType.projectName.message}") // Double-byte characters
+    @SystemChar(charsetDef = "システム許容文字", message = "{domainType.projectName.message}") // Characters permitted by system
     private String projectName;
 
     /**
@@ -65,16 +73,10 @@ public class ProManDomainType {
     private String date;
 
     /**
-     * Date (with slashes)
-     */
-    @YYYYMMDD(allowFormat = "yyyy/MM/dd")
-    private String dateWithSlash;
-
-    /**
      * User name
      */
     @Length(max = 128, message = "{domainType.userName.message}")
-    @SystemChar(charsetDef = "全角文字", message = "{domainType.userName.message}") // Double-byte characters
+    @SystemChar(charsetDef = "システム許容文字", message = "{domainType.userName.message}") // Characters permitted by system
     private String userName;
 
     /**

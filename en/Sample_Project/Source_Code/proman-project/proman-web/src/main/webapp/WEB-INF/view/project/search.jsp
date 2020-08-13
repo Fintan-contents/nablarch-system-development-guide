@@ -229,8 +229,8 @@
                                     <th>Department</th>
                                     <th>Project classification</th>
                                     <th>Project type</th>
-                                    <th>PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th>Sales_results</th>
+                                    <th>PM</th>
+                                    <th>Sales_results (1,000 yen)</th>
                                     <th>Start date</th>
                                     <th>End date</th>
                                 </tr>
@@ -247,7 +247,7 @@
                                     <td><n:code codeId="C0300001" name="row.projectType"/></td>
                                     <td><n:code codeId="C0200001" name="row.projectClass"/></td>
                                     <td><n:write name="row.projectManager"/></td>
-                                    <td><n:write value="${n:format('number', row.sales, '###,###,### yen')}"/></td>
+                                    <td><n:write value="${n:format('number', row.sales, '###,###,###')}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectStartDate)}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectEndDate)}"/></td>
                                 </tr>
