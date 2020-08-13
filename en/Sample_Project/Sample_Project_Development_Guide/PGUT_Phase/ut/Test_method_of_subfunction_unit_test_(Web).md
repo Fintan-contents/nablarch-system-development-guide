@@ -38,7 +38,7 @@ This completes the preparation of the test data registration.
 Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual test.  
 
 1. Copy the [テスト計画-テンプレート.jmx(Test-Plan-template.jmx)](Subfunction_Unit_Test_Tool/テスト計画-テンプレート.jmx) for each test scenario and rename it to your desired name.
-2. Launch JMeter with the [JMeter起動用バッチ.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/JMeter起動用バッチ.bat) that you have configured for your environment.
+2. Launch JMeter with the [start-up-jmeter.bat.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/start-up-jmeter.bat.bat) that you have configured for your environment.
 3. Open the jmx file created in step 1 in JMeter.
 4. select "HTTPプロキシサーバ(HTTP Proxy Server)" on the left side of the screen and click the "開始(Start)" button.
 5. Install a dummy certificate for the proxy.
@@ -49,7 +49,7 @@ Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual
     - After the login screen is displayed, go to [テスト計画(Test Plan)] > [スレッドグループ(Thread Group)] > [記録コントローラ(Record Controller)] and confirm that the line has increased and the request has been recorded.
         - Please access with your device's IP address, because accessing with `localhost` will cause the browser to bypass the proxy even if it is set.
         - If there are no more lines of requests in the "記録コントローラ(Record Controller)" section, the proxy settings are probably wrong.
-        - If the above doesn't help, please check the jmeter.log which should be saved in the same location as the "JMeter起動用バッチ.bat(JMeter startup batch.bat)" used to start JMeter.
+        - If the above doesn't help, please check the jmeter.log which should be saved in the same location as the "start-up-jmeter.bat" used to start JMeter.
 7. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario. Save the "テスト計画(test plan)".
 
 #### Get a hard copy of the screen
@@ -77,7 +77,7 @@ Basically, you can't pause the test plan while it is rerunning. Do not change th
 2. Set the DB to the state before the test is executed. Please refer to [Registering Test Data](#Registering-Test-Data) for the procedure.
 3. Press the 実行(Run) button at the top of the screen.
    - Make sure that the HTML, CSS and JavaScript files are output in the same location as the "テスト計画(test plan)" (jmx file).
-     - If it has not been created, check the contents of jmeter.log that is output to the same position as the "JMeter起動用バッチ.bat(JMeter startup batch.bat)" used to start JMeter.
+     - If it has not been created, check the contents of jmeter.log that is output to the same position as the "start-up-jmeter.bat" used to start JMeter.
      - If the file has already been Recorded, an error will occur. Move or delete the file and then execute it again.
 4. Please check the status of the DB and the output response to see if the results are as expected.
 

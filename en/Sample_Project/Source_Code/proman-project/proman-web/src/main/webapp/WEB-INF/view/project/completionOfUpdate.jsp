@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" />
 
     <title>
-        プロジェクト更新完了 | Proman
+        Project update completed  | Proman
     </title>
 </head>
 
@@ -33,12 +33,12 @@
             <n:include path="/WEB-INF/view/common/menu.jsp" />
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト更新完了</div>
+                    <div class="ui huge header">Project update completed</div>
                 </div>
                 <div class="sixteen wide column row">
                     <form class="ui form">
                         <div class="field centered aligned">
-                              更新が完了しました。
+                            Project update completed.
                         </div>
                         <div class="four fields">
                             <div class="field centered aligned">&nbsp;</div>
