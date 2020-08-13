@@ -74,7 +74,7 @@ Also, configure the CSS and JavaScript to run in secret mode to avoid using the 
 
 Possible to switch to Japanese after launching, but can't save configuration. Therefore, will translate it into Japanese in the following way.
 
-Save and edit the [JMeter起動用バッチ.bat(JMeter startup batch.bat)](./ut/Subfunction_Unit_Test_Tool/JMeter起動用バッチ.bat) to the desired location. (JMeter's own log is saved in the same location as the bat file).
+Save and edit the [start-up-jmeter.bat](./ut/Subfunction_Unit_Test_Tool/start-up-jmeter.bat) to the desired location. (JMeter's own log is saved in the same location as the bat file).
 Set the JMeter save/extraction directory to `JMETER_HOME` as shown below.
 ```
 set JMETER_HOME=C:\tool\apache-jmeter-5.2.1
