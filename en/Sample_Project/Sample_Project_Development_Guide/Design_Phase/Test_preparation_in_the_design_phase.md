@@ -1,11 +1,11 @@
 # Test Preparation in the Design Phase
 
 In the V-shaped model, test cases in the unit test phase are carried out in the design phase. Still, in conventional projects, 
-it is seen in some instances that test cases and test data creation in unit test phase are left to the discretion of the person in charge of the PGUT phase.
+it is seen in some instances that test cases and test data creation in unit test phase are left to the discretion of the person in charge of the Programming Unit testing phase.
 
 This causes the following problems:
 
-- Because the developer does not have business knowledge, the focus on formal testing (if the design and PGUT personnel are different)
+- Because the developer does not have business knowledge, the focus on formal testing (if the design and Programming Unit testing personnel are different)
   - They will end up focusing on program-level white box testing and coverage
 - Each person creates similar test data
   - Data which is meaningless business-wise will be generated in large amounts

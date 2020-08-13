@@ -50,7 +50,7 @@ Check by theoretical review as it is inefficient to write a test code based on l
 
 It is necessary to consider SQL in the design phase, but if you design SQL theoretically, there is a problem that quality cannot be sufficiently ensured. 
 For this reason, it is assumed that the design will be carried while testing with SQL, and the SQL file is created at the same time. 
- (This SQL file will be input to the PGUT phase)
+ (This SQL file will be input to the Programming Unit testing phase)
 
 SQL Executor is the tool used to test SQL.
 

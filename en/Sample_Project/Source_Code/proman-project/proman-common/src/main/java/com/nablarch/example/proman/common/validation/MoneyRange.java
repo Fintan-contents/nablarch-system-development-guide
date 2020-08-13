@@ -1,5 +1,6 @@
 package com.nablarch.example.proman.common.validation;
 
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
