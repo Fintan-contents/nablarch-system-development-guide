@@ -107,9 +107,9 @@ Instead of copying the sample, extract the parts that can be reused and referred
 Attention is required especially for performance and security requirements since they are not covered in the above sample.
 Either add to the description in the architecture design sample or create a separate document such as “Architecture design document (security design)”.
 
-For security design, refer to IPA's "How to Create a Secure Website". Design so that all items in the "セキュリティ実装 チェックリスト(Security Implementation Checklist)" will be "根本的解決(fundamental solutions)".  
+For security design, refer to IPA's "How to Create a Secure Website". Design so that all items in the "Security Implementation Checklist" will be "fundamental solutions".  
 To assist in the security design, a "Nablarch function security matrix" is provided to determine if the items in the checklist can be supported by the features provided in Nablarch. Please set up the project so that the features provided by Nablarch will be enabled, and consider how to deal with the items where the features are not provided.  
-The "OWASP Top 10" is also helpful, although there is some overlap with the IPA's "安全なウェブサイトの作り方(How to Create a Secure Website)".
+The "OWASP Top 10" is also helpful, although there is some overlap with the IPA's "How to Create a Secure Website".
 
 - [How to make a secure website](https://www.ipa.go.jp/security/english/third.html#websecurity)
 - [Nablarch function security matrix](../Sample_Project/Design_Document/Nablarch_function_security_matrix.xlsx?raw=true)
