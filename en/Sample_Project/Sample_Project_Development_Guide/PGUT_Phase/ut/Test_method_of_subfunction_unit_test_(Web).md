@@ -37,20 +37,20 @@ This completes the preparation of the test data registration.
 #### Recording requests in JMeter
 Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual test.  
 
-1. Copy the [テスト計画-テンプレート.jmx(Test-Plan-template.jmx)](Subfunction_Unit_Test_Tool/テスト計画-テンプレート.jmx) for each test scenario and rename it to your desired name.
+1. Copy the [Test-Plan-template.jmx](Subfunction_Unit_Test_Tool/Test-Plan-template.jmx) for each test scenario and rename it to your desired name.
 2. Launch JMeter with the [start-up-jmeter.bat.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/start-up-jmeter.bat.bat) that you have configured for your environment.
 3. Open the jmx file created in step 1 in JMeter.
-4. select "HTTPプロキシサーバ(HTTP Proxy Server)" on the left side of the screen and click the "開始(Start)" button.
+4. select "HTTP(S) Test Script Recorder" on the left side of the screen and click the "Start" button.
 5. Install a dummy certificate for the proxy.
     - Double-click the `ApacheJMeterTemporaryRootCA.crt` which will be generated under the bin directory where you extracted the JMeter.
     - Go to "証明書のインストール(Install Certificates)" -> "現在のユーザー(Current User)" -> "証明書を全て次のストアに配置する(Place All Certificates in Next Store)" and select "信頼されたルート証明機関(Trusted Root Certification Authority)" to install.
     - The certificate is set to expire in 7 days, so you should do this every time it expires.
 6. Open the browser with the Chrome shortcut that has been set to use JMeter as an HTTP proxy server, and access the IP address of your terminal to perform a subfunction unit test. (Start from the login operation)
-    - After the login screen is displayed, go to [テスト計画(Test Plan)] > [スレッドグループ(Thread Group)] > [記録コントローラ(Record Controller)] and confirm that the line has increased and the request has been recorded.
+    - After the login screen is displayed, go to [Test Plan] > [Thread Group] > [Recording Controller] and confirm that the line has increased and the request has been recorded.
         - Please access with your device's IP address, because accessing with `localhost` will cause the browser to bypass the proxy even if it is set.
-        - If there are no more lines of requests in the "記録コントローラ(Record Controller)" section, the proxy settings are probably wrong.
+        - If there are no more lines of requests in the "Recording Controller" section, the proxy settings are probably wrong.
         - If the above doesn't help, please check the jmeter.log which should be saved in the same location as the "start-up-jmeter.bat" used to start JMeter.
-7. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario. Save the "テスト計画(test plan)".
+7. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario. Save the "Test Plan".
 
 #### Get a hard copy of the screen
 
@@ -76,13 +76,13 @@ Basically, you can't pause the test plan while it is rerunning. Do not change th
 1. Open the "テスト計画 (test plan)" (jmx file) created in [Recording requests in JMeter](#Recording-requests-in-JMeter) in JMeter.
 2. Set the DB to the state before the test is executed. Please refer to [Registering Test Data](#Registering-Test-Data) for the procedure.
 3. Press the 実行(Run) button at the top of the screen.
-   - Make sure that the HTML, CSS and JavaScript files are output in the same location as the "テスト計画(test plan)" (jmx file).
+   - Make sure that the HTML, CSS and JavaScript files are output in the same location as the "Test Plan" (jmx file).
      - If it has not been created, check the contents of jmeter.log that is output to the same position as the "start-up-jmeter.bat" used to start JMeter.
      - If the file has already been Recorded, an error will occur. Move or delete the file and then execute it again.
 4. Please check the status of the DB and the output response to see if the results are as expected.
 
 #### Response file
-HTML, CSS and JavaScript files will be output in the same location as the "テスト計画(test plan)" (jmx file).
+HTML, CSS and JavaScript files will be output in the same location as the "Test Plan" (jmx file).
 
 The HTML file obtained here is used to confirm that the response has not changed in the assertion of the automatic test.
 Can't check the look and feel of the HTML file by opening it directly in the browser because the CSS is not applied.  
@@ -94,7 +94,7 @@ Note that the output HTML file has a different value for the double-submit token
 This is because the value of the double-submit token is a value that changes each time it is used, and we do not want unnecessary differences in this value when run regression tests.
 
 ## Store evidence and response
-Various evidence and response files and "テスト計画(test plans)" (jmx files) obtained during the firsst manual test should be stored according to `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards`, `3.3.4. How to store evidence`.
+Various evidence and response files and "Test Plan" (jmx files) obtained during the firsst manual test should be stored according to `/Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards`, `3.3.4. How to store evidence`.
 
 Also, if you use the AutoRunning Tool for subfunction unit tests to perform regression testing, you will need to edit some files for the AutoRunning Tool.  
 For more information, please refer to the AutoRun tool's [README](../../../Source_Code/proman-project/proman-jmeter/README.md) in the runtime tool.
