@@ -42,6 +42,8 @@
   <import file="nablarch/batch/loop-transaction.xml" />
   <!-- Data reading feature -->
   <import file="nablarch/batch/batch-data-read.xml" />
+  <!-- thread context feature -->
+  <import file="nablarch/batch/threadcontext-for-batch.xml" />
 
   <!-- Handler queue configuration -->
   <list name="handlerQueue">
