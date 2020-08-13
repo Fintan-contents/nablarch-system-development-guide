@@ -97,16 +97,22 @@
                             <div class="required field">
                                 <label>Project classification</label>
                                 <div class="item">
-                                    <div class = "fields code-radio-fields">
-                                        <n:codeRadioButtons cssClass="code-radio" name="form.projectClass" codeId="C0200001" pattern="PATTERN01" listFormat ="div"/>
-                                    </div>
+                                    <n:forInputPage>
+                                        <div class = "fields code-radio-fields">
+                                            <n:codeRadioButtons cssClass="code-radio" name="form.projectClass" codeId="C0200001" pattern="PATTERN01" listFormat ="div"/>
+                                        </div>
+                                        <n:error errorCss="message-error" name="form.projectClass" /><span>&nbsp;</span>
+                                    </n:forInputPage>
+                                    <n:forConfirmationPage>
+                                        <n:code name="form.projectClass" codeId="C0200001" pattern="PATTERN01" listFormat ="div"/>
+                                    </n:forConfirmationPage>
                                     <n:error errorCss="message-error" name="form.projectClass" /><span>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>Sales</label>
+                                <label>Sales (1,000 yen)</label>
                                 <n:forInputPage>
                                     <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="Sales" />
                                     <n:error errorCss="message-error" name="form.sales" /><span>&nbsp;</span>
