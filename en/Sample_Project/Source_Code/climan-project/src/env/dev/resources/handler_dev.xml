@@ -28,7 +28,7 @@
         <component-ref name="transactionManagementHandler"/>
 
         <!-- Hot deployment handler -->
-        <!--　TODO: When using this handler in a development environment, specify the packages subject to hot deployment in each project -->
+        <!--　TODO: When using this handler in a development environment, specify the packages subject to hot deployment in each project
         <component class="nablarch.fw.hotdeploy.HotDeployHandler">
           <property name="targetPackages">
             <list>
