@@ -30,7 +30,7 @@
         <label class="field">　┗　<n:a href="/app/project/search">Project search</n:a></label></br>
         <c:choose>
             <c:when test="${userContext != null && userContext.pmFlag}">
-                <label class="field">　┗　<n:a href="/app/project/search">Project registration</n:a></label></br>
+                <label class="field">　┗　<n:a href="/app/project/register">Project registration</n:a></label></br>
             </c:when>
         </c:choose>
         </br>

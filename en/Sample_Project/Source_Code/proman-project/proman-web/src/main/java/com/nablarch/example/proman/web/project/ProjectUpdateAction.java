@@ -55,9 +55,9 @@ public class ProjectUpdateAction {
         ProjectUpdateForm form = context.getRequestScopedVar("form");
         Project project = SessionUtil.get(context, PROJECT_KEY);
         BeanUtil.copy(form, project);
-        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
+        // Get the business unit/division pull-down from the DB and set the request scope
         setOrganizationAndDivisionToRequestScope(context);
-        // 更新情報確認画面を表示
+        // Display the update information confirmation screen.
         return new HttpResponse("/WEB-INF/view/project/confirmationOfUpdate.jsp");
     }
 
@@ -116,7 +116,7 @@ public class ProjectUpdateAction {
         projectUpdateForm.setProjectStartDate(projectStartDate);
         projectUpdateForm.setProjectEndDate(projectEndDate);
 
-        // 設定した事業部/部門のIDを更新確認画面から取得してリクエストスコープに設定する
+        // Retrieve the configured division/department ID from the update confirmation screen and set the request scope.
         Organization organization = service.findOrganizationById(project.getOrganizationId());
         Organization division = service.findOrganizationById(organization.getUpperOrganization());
         projectUpdateForm.setDivisionId(String.valueOf(division.getOrganizationId()));
@@ -133,7 +133,7 @@ public class ProjectUpdateAction {
      * @return HTTP Response
      */
     public HttpResponse indexSetPullDown(HttpRequest request, ExecutionContext context) {
-        // 事業部/部門のプルダウンをDBから取得してリクエストスコープに設定する
+        // Get the business unit/division pull-down from the DB and set the request scope
         setOrganizationAndDivisionToRequestScope(context);
         Project project = SessionUtil.get(context, PROJECT_KEY);
         context.setRequestScopedVar("projectId", project.getProjectId());
@@ -147,12 +147,12 @@ public class ProjectUpdateAction {
      */
     private void setOrganizationAndDivisionToRequestScope(ExecutionContext context) {
 
-        // 事業部/部門の情報を取得
+        // Retrieve business unit/department information
         ProjectService service = new ProjectService();
         List<Organization> topOrganizationList = service.findAllDivision();
         List<Organization> subOrganizationList = service.findAllDepartment();
 
-        // 事業部と部門をリクエストスコープに設定する
+        // Set up business units and departments as request scopes.
         context.setRequestScopedVar("topOrganization", topOrganizationList);
         context.setRequestScopedVar("subOrganization", subOrganizationList);
     }

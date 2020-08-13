@@ -1,6 +1,6 @@
 package com.nablarch.example.proman.web.project;
 
-import com.nablarch.example.proman.common.validation.DateRangeValidator;
+import com.nablarch.example.proman.common.util.DateRelationUtil;
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.Required;
 
@@ -323,9 +323,9 @@ public class ProjectCreateForm implements Serializable {
      *
      * @return false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
      */
-    @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRangeValidator.message}")
+    @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
     private boolean isValidProjectPeriod() {
-        return new DateRangeValidator(projectStartDate, projectEndDate).isValid();
+        return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
 
 }

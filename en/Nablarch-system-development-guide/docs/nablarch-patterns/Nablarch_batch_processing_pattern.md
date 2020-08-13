@@ -19,10 +19,10 @@ The combinations are as follows.
 
 |          | FILE to DB | DB to DB | DB to FILE |
 |----------|------------|----------|------------|
-| On-demand | ○         | ○       | ○         |
-| Resident     | ✕          | ○       | △         |
+| On-demand | ✓         | ✓       | ✓         |
+| Resident     | ✕          | ✓       | △         |
 
-- ○：Use
+- ✓：Use
 - △：Possible in terms of the mechanism but is not used normally
 - ✕：Do not use
 

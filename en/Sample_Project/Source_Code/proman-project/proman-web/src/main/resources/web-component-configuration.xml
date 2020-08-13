@@ -111,6 +111,10 @@
 
   <import file="com/nablarch/example/proman/web/webui/threadcontext-for-webui.xml"/>
 
+  <!-- Measures against CSRF -->
+  <component name="csrfTokenVerificationHandler"
+             class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
+
   <!-- Handler queue configuration -->
   <component name="webFrontController"
              class="nablarch.fw.web.servlet.WebFrontController">
@@ -146,6 +150,8 @@
 
         <component-ref name="nablarchTagHandler"/>
 
+        <component-ref name="csrfTokenVerificationHandler" />
+
         <component-ref name="dbConnectionManagementHandler"/>
 
         <component-ref name="transactionManagementHandler"/>
@@ -165,25 +171,16 @@
              class="nablarch.core.repository.initialization.BasicApplicationInitializer">
     <property name="initializeList">
       <list>
-        <component-ref name="codeLoader" />
+        <component-ref name="codeLoader"/>
         <component-ref name="codeCache"/>
         <!-- web/session-store.xml: Database store-->
-        <component-ref name="dbStore" />
+        <component-ref name="dbStore"/>
+        <component-ref name="expiration"/>
+        <component-ref name="tokenManager"/>
         <!-- Package mapping -->
         <component-ref name="packageMapping"/>
       </list>
     </property>
-  </component>
-
-  <!-- Double submission configuration -->
-  <component name="doubleSubmissionHandler"
-             class="nablarch.common.web.token.BasicDoubleSubmissionHandler">
-    <!-- Resource path for transition destination when double submission is judged to have occurred -->
-    <property name="path" value="/WEB-INF/view/errorPages/DOUBLE_SUBMISSION_ERROR.jsp" />
-    <!-- Message ID to be used for the error message displayed in the screen to which the system navigates when double submission is judged to have occurred. -->
-    <!--<property name="messageId" value="DOUBLE_SUBMISSION_ERROR" />-->
-    <!-- Response status used when double submission is judged to have occurred. The default is 400. -->
-    <property name="statusCode" value="400" />
   </component>
 
 </component-configuration>

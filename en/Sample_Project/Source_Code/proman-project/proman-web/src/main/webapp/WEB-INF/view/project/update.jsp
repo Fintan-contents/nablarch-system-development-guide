@@ -63,7 +63,7 @@
                             <div class="required field">
                                 <label>Division/department</label>
                                 <div class="field">
-                                    <n:set var="topOrganizationList" value="${topOrganization}" />
+                                    <n:set var="topOrganizationList" value="${topOrganization}"/>
                                     <n:select name="form.divisionId" listName="topOrganizationList" elementValueProperty="organizationId"
                                         elementLabelProperty="organizationName" elementLabelPattern="$LABEL$" withNoneOption="true"
                                         cssClass="ui dropdown" />
@@ -76,14 +76,14 @@
                                     <n:set var="subOrganizationList" value="${subOrganization}" />
                                     <n:select name="form.organizationId" listName="subOrganizationList" elementValueProperty="organizationId"
                                         elementLabelProperty="organizationName" elementLabelPattern="$LABEL$" withNoneOption="true"
-                                        cssClass="ui dropdown" />
+                                        cssClass="ui dropdown"/>
                                     <n:error errorCss="message-error" name="form.organizationId" /><span>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="required field">
                             <label>Project name</label>
-                            <n:text name="form.projectName" maxlength="128" errorCss="input-error" placeholder="Project name" />
+                            <n:text name="form.projectName" maxlength="128" errorCss="input-error" />
                             <n:error errorCss="message-error" name="form.projectName" /><span>&nbsp;</span>
                         </div>
                         <div class="two fields">
@@ -108,7 +108,7 @@
                             <div class="field">
                                 <label>Sales</label>
                                 <n:forInputPage>
-                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="Sales" />
+                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;"/>
                                     <n:error errorCss="message-error" name="form.sales" /><span>&nbsp;</span>
                                 </n:forInputPage>
                                 <n:forConfirmationPage>
@@ -136,12 +136,12 @@
                         <div class="two fields">
                             <div class="required field">
                                 <label>PM</label>
-                                <n:text name="form.projectManager" maxlength="64" errorCss="input-error" placeholder="PM" />
+                                <n:text name="form.projectManager" maxlength="64" errorCss="input-error"/>
                                 <n:error errorCss="message-error" name="form.projectManager" /><span>&nbsp;</span>
                             </div>
                             <div class="required field">
                                 <label>PL</label>
-                                <n:text name="form.projectLeader" maxlength="64" errorCss="input-error" placeholder="PL" />
+                                <n:text name="form.projectLeader" maxlength="64" errorCss="input-error"/>
                                 <n:error errorCss="message-error" name="form.projectLeader" /><span>&nbsp;</span>
                             </div>
                         </div>
@@ -190,20 +190,20 @@
                             <div class="field centered aligned">&nbsp;</div>
                             <n:forInputPage>
                                 <div class="field centered aligned">
-                                    <n:a href="/action/projectSearch/show/${project.projectId}" cssClass="fluid ui primary button">Back</n:a>
+                                    <n:a href="/app/project/detail/${projectId}" cssClass="fluid ui primary button">Back</n:a>
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectUpdate/confirmUpdate" cssClass="fluid ui primary button">Update
+                                    <n:button uri="/app/project/confirmUpdate" cssClass="fluid ui primary button">Update
                                     </n:button>
                                 </div>
                             </n:forInputPage>
                             <n:forConfirmationPage>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectUpdate/backToEnterUpdate" cssClass="fluid ui primary button">Back
+                                    <n:button uri="/app/project/backUpdate" cssClass="fluid ui primary button">Back
                                     </n:button>
                                 </div>
                                 <div class="field centered aligned">
-                                    <n:button uri="/action/ProjectUpdate/update" cssClass="fluid ui primary button"
+                                    <n:button uri="/app/project/update" cssClass="fluid ui primary button"
                                         allowDoubleSubmission="false">Confirm</n:button>
                                 </div>
                             </n:forConfirmationPage>
@@ -215,7 +215,7 @@
         </div>
     <n:include path="/WEB-INF/view/common/footer.jsp" />
 
-    <%-- Client search --%>
+    <%-- 顧客検索 --%>
 </body>
 
 </html>
