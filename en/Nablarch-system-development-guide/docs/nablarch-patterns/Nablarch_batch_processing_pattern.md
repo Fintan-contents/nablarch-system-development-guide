@@ -19,12 +19,12 @@ The combinations are as follows.
 
 |          | FILE to DB | DB to DB | DB to FILE |
 |----------|------------|----------|------------|
-| On-demand | ✓         | ✓       | ✓         |
-| Resident     | ✕          | ✓       | △         |
+| On-demand | A         | A       | A         |
+| Resident     | C          | A       | B         |
 
-- ✓：Use
-- △：Possible in terms of the mechanism but is not used normally
-- ✕：Do not use
+- A：Use
+- B：Possible in terms of the mechanism but is not used normally
+- C：Do not use
 
 (Resident batches typically monitor the database, so there is no combination with FILE to DB)
 
