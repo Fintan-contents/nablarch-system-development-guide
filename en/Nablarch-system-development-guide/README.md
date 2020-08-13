@@ -294,8 +294,8 @@ These are coding conventions that programmers must adhere to, to improve quality
 - [Nablarch coding conventions](https://fintan.jp/?p=1145)
 
 
-This is a checklist for developers to confirm the completion conditions of PG/UT work. 
-- [PG/UT work completion condition checklist](https://fintan.jp/?p=1367)(Only Japanese Edition)
+This is a checklist for developers to confirm the completion conditions of Programming Unit testing work. 
+- [Programming Unit testing work completion condition checklist](https://fintan.jp/?p=1367)(Only Japanese Edition)
 
 
 This is a checklist for developers to self-check simple coding mistakes such as violations of coding conventions, etc.

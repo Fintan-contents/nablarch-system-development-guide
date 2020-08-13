@@ -2,7 +2,7 @@
 
 The checklist used in this project.
 
-## PG/UT work completion condition checklist
+## Programming Unit testing work completion condition checklist
 
 ### Original
 
