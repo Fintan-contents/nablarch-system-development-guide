@@ -42,7 +42,7 @@ This document aims to achieve the following.
 * Clear description of how to proceed optimally from external design, which is a specialized area of Nablarch, to Programming Unit testing
 * Demonstration of the effective way of testing with Nablarch
 * Enabling a person who is not familiar with Nablarch (experienced in application development) to carry out development preparation and promotion confidently using the shortest route
-* Guide persons having experience using other frameworks (Xenlon, Seaser, Spring) on the correct usage of Nablarch
+* Guide persons having experience using other frameworks (Struts, Spring) on the correct usage of Nablarch
 
 ### Who should read this document?
 
