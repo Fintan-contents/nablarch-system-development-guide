@@ -65,8 +65,8 @@
                         </div>
                         <div class="row">
                             <div class="column">
-                                <h5 class="ui header">Sales</h5>
-                                <n:write value="${n:format('number', project.sales, '###,###,### 千円')}"/>
+                                <h5 class="ui header">Sales (1,000 yen)</h5>
+                                <n:write value="${n:format('number', project.sales, '###,###,###')}"/>
                             </div>
                             <div class="column">
                                 <h5 class="ui header">Client</h5>

@@ -9,7 +9,7 @@
             <div class="header">Project management</div>
             <div class="menu">
                 <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">Project search</n:a>
-                <n:a id="projectSearchkLink" href="/app/project/search" cssClass="item">Project registration</n:a>
+                <n:a id="projectCreatekLink" href="/app/project/register" cssClass="item">Project registration</n:a>
             </div>
         </div>
         <div class="item">
