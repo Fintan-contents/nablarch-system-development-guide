@@ -104,7 +104,7 @@ public class ProjectSearchAction {
         ProjectService service = new ProjectService();
         context.setRequestScopedVar("project", service.findProjectByIdWithOrganization(Integer.parseInt(form.getProjectId())));
         // TODO Corrected when you can integrate with the client management system.
-        context.setRequestScopedVar("clientName", "ダミー株式会社");
+        context.setRequestScopedVar("clientName", "Dummy Co.");
         return new HttpResponse(DETAIL_JSP_PATH);
     }
 
