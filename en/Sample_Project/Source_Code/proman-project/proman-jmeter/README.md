@@ -279,7 +279,7 @@ At this time, each sheet should be described by the following rules.
 It is also recommended that you select the bottom blank line and remove it explicitly, as DBUnit may misidentify it as a data row even if it looks empty if there is still cell formatting and other information.
 
 #### Exclude certain columns from validation
-Some columns change their stored value every time they are executed (e.g., columns that are numbered by sequence, or columns that store the date and time of execution).  
+Some columns store different values each time the test is run (e.g., columns that are numbered by sequence, or columns that store the date and time of execution).  
 If such columns are included in the validation, the test will always fail when it is rerun.  
 Therefore, such columns must be excluded from the validation.  
 To exclude a particular column from DBUnit's validation, you can remove the column's columns.
