@@ -106,7 +106,7 @@ Then, the directory structure of each test scenario should be as follows.
 
 #### scenario/[scenario name].jmx
 This is a test plan file for JMeter.  
-Please set an easy to understand name for `[scenario name]`.
+Please use any descriptive name for `[scenario name]`.
 
 #### db_dump/INSERT.xlsm
 This is an Excel data file for the data dumping tool for unit tests.  
