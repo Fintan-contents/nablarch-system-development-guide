@@ -12,7 +12,7 @@ import java.sql.Connection;
 /**
  * Class for creating {@link DatabaseConnection} of DBUnit.
  *
- * @author Tanaka Tomoyukiスキーマ
+ * @author Tanaka Tomoyuki
  */
 public class DBUnitConnectionBuilder {
 
