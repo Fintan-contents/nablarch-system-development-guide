@@ -13,7 +13,7 @@ It is assumed that the following software is installed in the execution environm
 * PostgreSQL 10.4.1 or later
 
 ### Supported databases
-Currently, only PostgreSQL is the only database that has been confirmed to work.  
+Currently, only PostgreSQL is the database that has been confirmed to work.  
 For other database products, the unit test data dump tool used for data registration may not work properly.
 
 ## Assumptions and Constraints
@@ -38,7 +38,7 @@ If your application can support this, please mock it.
 
 If it is difficult to mock, refer to [Exclude certain items from validation when creating a response file](#Exclude-certain-items-from-validation-when-creating-a-response-file).
 
-If there are columns in the database, you need to exclude them from the validation.  
+If this is the case for a column in the database, you must exclude that column from the validation.  
 For information on how to exclude certain columns from validation, see [Excluding certain columns from validation](#Exclude-certain-columns-from-validation).
 
 ## Structure
