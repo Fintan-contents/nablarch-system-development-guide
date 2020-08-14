@@ -302,11 +302,12 @@ The response file is saved in JMeter's [JSR223 PostProcessor](https://jmeter.apa
 [JSR223 PostProcessor](https://jmeter.apache.org/usermanual/component_reference.html#JSR223_PostProcessor) to override certain items with fixed values or can exclude it from verification by deleting it.
 
 ```groovy
-// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
-// (Do not write out values that change on a run-by-run basis (double submit tokens) to the file used as evidence.)
+// not write out values that change on a run-by-run basis (double submit tokens) to the file used as evidence.
 def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type="hidden" name="nablarch_hidden" value=")(.*?)(nablarch_token=[^"\|]+)(\|?)(.*?")/, "\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5");
-// jsessionid を削除(Remove the jsessionid)
-def responseWithoutJsessionId = responseWithoutNablarchToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, "");
+// not write out values that change on a run-by-run basis (csrf tokens) to the file used as evidence.
+def responseWithoutCSRFToken = responseWithoutNablarchToken.replaceAll(/(input type="hidden" name="nablarch_hidden" value=")(.*?)(csrf-token=[^"\|]+)(\|?)(.*?")/, "\$1\$2csrf-token=TMP_VALUE_FOR_EVIDENCE\$4\$5");
+// Remove the jsessionid
+def responseWithoutJsessionId = responseWithoutCSRFToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, "");
 ```
 
 `String#replaceAll(String regex, String replacement)` replaces the response with a regular expression.

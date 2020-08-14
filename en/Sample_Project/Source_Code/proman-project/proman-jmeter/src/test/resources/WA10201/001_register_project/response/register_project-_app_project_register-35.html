@@ -43,7 +43,7 @@
             });
         </script>
     <title>
-        プロジェクト更新 | Proman
+        Project registration | Proman
     </title>
 </head>
 <body>
@@ -64,17 +64,17 @@
     }
 
     .ui.menu .item i.logo {
-        /*　ヘッダ部のロゴのマージン　*/
+        /*　Margin of logo in header　*/
         margin-right: 0.5em;
     }
 
     .main.container {
-        /*コンテンツ部のマージン*/
+        /* Margin of content section*/
         margin-top: 7em;
     }
 
     .ui.footer.segment {
-        /*フッタ部のマージン*/
+        /* Margin of footer section*/
         margin: 1em 0em 0em;
         padding: 0em 0em;
     }
@@ -87,7 +87,7 @@
         
             <div class="right menu">
                 <a id="logoutLink" class="item" href="/app/logout">
-                    ログアウト
+                    Logout
                 </a>
             </div>
         
@@ -105,17 +105,17 @@
 <div class="four wide column row">
     <div class="ui vertical menu">
         <div class="item">
-            <div class="header">プロジェクト管理</div>
+            <div class="header">Project management</div>
             <div class="menu">
-                <a id="projectSearchkLink" class="item" href="/app/project/search">プロジェクト検索</a>
-                <a id="projectCreatekLink" class="item" href="/app/project/register">プロジェクト登録</a>
+                <a id="projectSearchkLink" class="item" href="/app/project/search">Project search</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">Project registration</a>
             </div>
         </div>
         <div class="item">
-            <div class="header">顧客管理</div>
+            <div class="header">Client management</div>
             <div class="menu">
-                <a id="clientSearchkLink" class="item" href="#">顧客検索</a>
-                <a id="clientCreatekLink" class="item" href="#">顧客登録</a>
+                <a id="clientSearchkLink" class="item" href="#">Client search</a>
+                <a id="clientCreatekLink" class="item" href="#">Register client</a>
             </div>
         </div>
         <div class="item">
@@ -125,7 +125,7 @@
 
             <div class="twelve wide column row">
                 <div class="sixteen wide column row">
-                    <div class="ui huge header">プロジェクト更新</div>
+                    <div class="ui huge header">Project registration</div>
                 </div>
                 <div class="sixteen wide column row">
                     
@@ -261,15 +261,15 @@ nablarch_submission_info.endMark = {};
 <form class="ui form" name="nablarch_form1" method="post">
                         <div class="two fields">
                             <div class="required field">
-                                <label>事業部/部門</label>
+                                <label>Division/department</label>
                                 <div class="field">
                                     
                                     <select class="ui dropdown" name="form.divisionId">
 <option value=""></option>
-<option value="1" selected="selected">Ａ事業本部</option>
-<option value="2">Ｂ事業本部</option>
+<option value="1">A Division</option>
+<option value="2">B Division</option>
 <option value="7"></option>
-<option value="2147483646">G事業本部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長</option></select>
+<option value="9998">G Division1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678</option></select>
                                     <span>&nbsp;</span>
                                 </div>
                             </div>
@@ -279,66 +279,71 @@ nablarch_submission_info.endMark = {};
                                     
                                     <select class="ui dropdown" name="form.organizationId">
 <option value=""></option>
-<option value="3">Ｃ事業部</option>
-<option value="4" selected="selected">Ｄ事業部</option>
-<option value="5">Ｅ事業部</option>
-<option value="6">Ｆ事業部</option>
+<option value="3">C Department</option>
+<option value="4">D Department</option>
+<option value="5">E Department</option>
+<option value="6">F Department</option>
 <option value="8"></option>
-<option value="2147483647">H事業部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文</option></select>
+<option value="9999">H Department12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</option></select>
                                     <span>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="required field">
-                            <label>PJ名</label>
-                            <input type="text" name="form.projectName" value="プロジェクト名１０" maxlength="128" />
+                            <label>Project name</label>
+                            <input type="text" name="form.projectName" value="" maxlength="128" placeholder="Project name" />
                             <span>&nbsp;</span>
                         </div>
                         <div class="two fields">
                             <div class="required field">
-                                <label>PJ種別</label>
+                                <label>Project type</label>
                                 <div class="field">
                                     <select name="form.projectType">
-<option value="01" selected="selected">新規開発ＰＪ</option>
-<option value="02">保守開発ＰＪ</option>
-<option value="03">ＥＲＰ導入支援</option>
-<option value="04">保守ＰＪ</option>
-<option value="05">運用</option>
-<option value="06">サービス提供（開発・保守）</option>
-<option value="07">サービス提供（開発・保守以外）</option>
-<option value="08">保守案件</option>
-<option value="09">その他</option></select>
+<option value=""></option>
+<option value="01">New Development</option>
+<option value="02">Maintenance development</option>
+<option value="03">Support for ERP</option>
+<option value="04">Maintenance</option>
+<option value="05">Operation</option>
+<option value="06">Service (development)</option>
+<option value="07">Service (others)</option>
+<option value="08">Maintenance case</option>
+<option value="09">Other</option></select>
                                     <span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="required field">
-                                <label>PJ分類</label>
+                                <label>Project classification</label>
                                 <div class="item">
-                                    <div class = "fields code-radio-fields">
-                                        <div><input id="nablarch_radio1" class="code-radio" type="radio" name="form.projectClass" value="01" /><label for="nablarch_radio1">ＳＳ</label></div><div><input id="nablarch_radio2" class="code-radio" type="radio" name="form.projectClass" value="02" /><label for="nablarch_radio2">Ｓ</label></div><div><input id="nablarch_radio3" class="code-radio" type="radio" name="form.projectClass" value="03" /><label for="nablarch_radio3">Ａ</label></div><div><input id="nablarch_radio4" class="code-radio" type="radio" name="form.projectClass" value="04" checked="checked" /><label for="nablarch_radio4">Ｂ</label></div><div><input id="nablarch_radio5" class="code-radio" type="radio" name="form.projectClass" value="05" /><label for="nablarch_radio5">Ｃ</label></div><div><input id="nablarch_radio6" class="code-radio" type="radio" name="form.projectClass" value="06" /><label for="nablarch_radio6">Ｄ</label></div>
-                                    </div>
+                                    
+                                        <div class = "fields code-radio-fields">
+                                            <div><input id="nablarch_radio1" class="code-radio" type="radio" name="form.projectClass" value="01" /><label for="nablarch_radio1">SS</label></div><div><input id="nablarch_radio2" class="code-radio" type="radio" name="form.projectClass" value="02" /><label for="nablarch_radio2">S</label></div><div><input id="nablarch_radio3" class="code-radio" type="radio" name="form.projectClass" value="03" /><label for="nablarch_radio3">A</label></div><div><input id="nablarch_radio4" class="code-radio" type="radio" name="form.projectClass" value="04" /><label for="nablarch_radio4">B</label></div><div><input id="nablarch_radio5" class="code-radio" type="radio" name="form.projectClass" value="05" /><label for="nablarch_radio5">C</label></div><div><input id="nablarch_radio6" class="code-radio" type="radio" name="form.projectClass" value="06" /><label for="nablarch_radio6">D</label></div>
+                                        </div>
+                                        <span>&nbsp;</span>
+                                    
+                                    
                                     <span>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>売上高</label>
+                                <label>Sales (1,000 yen)</label>
                                 
-                                    <input class="form-control width-200" style="float:left;" type="text" name="form.sales" value="19000" maxlength="9" />
+                                    <input class="form-control width-200" style="float:left;" type="text" name="form.sales" value="" maxlength="9" placeholder="Sales" />
                                     <span>&nbsp;</span>
                                 
                                 
                             </div>
                             <div class="required field">
-                                <label>顧客</label>
+                                <label>Client</label>
                                 
                                     <div class="ui action input">
-                                        <input type="hidden" name="form.clientId" value="4" />
-                                        <input id="client-name" tabindex="-1" type="text" name="form.clientName" value="" maxlength="64" readonly="readonly" placeholder="顧客" />
+                                        <input type="hidden" name="form.clientId" value="" />
+                                        <input id="client-name" tabindex="-1" type="text" name="form.clientName" value="" maxlength="64" readonly="readonly" placeholder="Client" />
                                         <button class="ui teal right labeled icon button" name="nablarch_form1_1" disabled="disabled" onclick="return window.nablarch_submit(event, this);">
                                             <i class="search icon"></i>
-                                            選択
+                                            Selection
                                         </button>
                                     </div>
                                 
@@ -348,23 +353,23 @@ nablarch_submission_info.endMark = {};
                         <div class="two fields">
                             <div class="required field">
                                 <label>PM</label>
-                                <input type="text" name="form.projectManager" value="マネージャー１０" maxlength="64" />
+                                <input type="text" name="form.projectManager" value="" maxlength="64" placeholder="PM" />
                                 <span>&nbsp;</span>
                             </div>
                             <div class="required field">
                                 <label>PL</label>
-                                <input type="text" name="form.projectLeader" value="リーダー１０" maxlength="64" />
+                                <input type="text" name="form.projectLeader" value="" maxlength="64" placeholder="PL" />
                                 <span>&nbsp;</span>
                             </div>
                         </div>
                         <div class="two fields row">
                             <div class="required field">
-                                <label>開始日</label>
+                                <label>Start date</label>
                                 
                                     <div class="ui calendar">
                                         <div class="ui input left icon" id="projectStartDate">
                                             <i class="calendar icon"></i>
-                                            <input type="text" name="form.projectStartDate" value="2019/06/10" placeholder="開始日" />
+                                            <input type="text" name="form.projectStartDate" value="" placeholder="Start date" />
                                         </div>
                                         <span>&nbsp;</span>
                                     </div>
@@ -372,12 +377,12 @@ nablarch_submission_info.endMark = {};
                                 
                             </div>
                             <div class="required field">
-                                <label>終了日</label>
+                                <label>End date</label>
                                 
                                     <div class="ui calendar">
                                         <div class="ui input left icon" id="projectEndDate">
                                             <i class="calendar icon"></i>
-                                            <input type="text" name="form.projectEndDate" value="2020/01/09" placeholder="終了日" />
+                                            <input type="text" name="form.projectEndDate" value="" placeholder="End date" />
                                         </div>
                                         
                                         <span>&nbsp;</span>
@@ -386,10 +391,10 @@ nablarch_submission_info.endMark = {};
                                 
                             </div>
                         </div>
-                        <div class="field text">
-                            <label>備考</label>
+                        <div class="field">
+                            <label>Note</label>
                             <textarea name="form.note" rows="3" cols="0">
-備考１０</textarea>
+</textarea>
                             <span>&nbsp;</span>
                         </div>
                         <br>
@@ -397,10 +402,9 @@ nablarch_submission_info.endMark = {};
                             <div class="field centered aligned">&nbsp;</div>
                             
                                 <div class="field centered aligned">
-                                    <a class="fluid ui primary button" href="/app/project/detail/10">戻る</a>
                                 </div>
                                 <div class="field centered aligned">
-                                    <button class="fluid ui primary button" name="nablarch_form1_2" onclick="return window.nablarch_submit(event, this);">更新
+                                    <button class="fluid ui primary button" name="nablarch_form1_2" onclick="return window.nablarch_submit(event, this);">Confirm
                                     </button>
                                 </div>
                             
@@ -408,13 +412,13 @@ nablarch_submission_info.endMark = {};
                             <div class="field centered aligned">&nbsp;</div>
                         </div>
                     
-<input type="hidden" name="nablarch_hidden" value="nablarch_token=TMP_VALUE_FOR_EVIDENCE|nablarch_hidden_submit_nablarch_form1_2=|nablarch_hidden_submit_nablarch_form1_1=" />
+<input type="hidden" name="nablarch_hidden" value="nablarch_token=TMP_VALUE_FOR_EVIDENCE|csrf-token=TMP_VALUE_FOR_EVIDENCE|nablarch_hidden_submit_nablarch_form1_2=|nablarch_hidden_submit_nablarch_form1_1=" />
 <input type="hidden" name="nablarch_submit" value="" />
 <script type="text/javascript">
 <!--
 nablarch_submission_info.nablarch_form1 = {
 "nablarch_form1_1": { "action": "/action", "allowDoubleSubmission": false, "submissionAction": "TRANSITION" },
-"nablarch_form1_2": { "action": "/app/project/confirmUpdate", "allowDoubleSubmission": true, "submissionAction": "TRANSITION" }
+"nablarch_form1_2": { "action": "/app/project/confirmRegistration", "allowDoubleSubmission": true, "submissionAction": "TRANSITION" }
 };
 -->
 </script>

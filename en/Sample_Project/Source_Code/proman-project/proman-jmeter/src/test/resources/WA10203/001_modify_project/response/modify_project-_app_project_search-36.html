@@ -55,7 +55,7 @@
             });
         </script>
         <title>
-            プロジェクト検索 | Proman
+            Project search | Proman
         </title>
     </head>
 
@@ -77,17 +77,17 @@
     }
 
     .ui.menu .item i.logo {
-        /*　ヘッダ部のロゴのマージン　*/
+        /*　Margin of logo in header　*/
         margin-right: 0.5em;
     }
 
     .main.container {
-        /*コンテンツ部のマージン*/
+        /* Margin of content section*/
         margin-top: 7em;
     }
 
     .ui.footer.segment {
-        /*フッタ部のマージン*/
+        /* Margin of footer section*/
         margin: 1em 0em 0em;
         padding: 0em 0em;
     }
@@ -100,7 +100,7 @@
         
             <div class="right menu">
                 <a id="logoutLink" class="item" href="/app/logout">
-                    ログアウト
+                    Logout
                 </a>
             </div>
         
@@ -118,17 +118,17 @@
 <div class="four wide column row">
     <div class="ui vertical menu">
         <div class="item">
-            <div class="header">プロジェクト管理</div>
+            <div class="header">Project management</div>
             <div class="menu">
-                <a id="projectSearchkLink" class="item" href="/app/project/search">プロジェクト検索</a>
-                <a id="projectCreatekLink" class="item" href="/app/project/register">プロジェクト登録</a>
+                <a id="projectSearchkLink" class="item" href="/app/project/search">Project search</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">Project registration</a>
             </div>
         </div>
         <div class="item">
-            <div class="header">顧客管理</div>
+            <div class="header">Client management</div>
             <div class="menu">
-                <a id="clientSearchkLink" class="item" href="#">顧客検索</a>
-                <a id="clientCreatekLink" class="item" href="#">顧客登録</a>
+                <a id="clientSearchkLink" class="item" href="#">Client search</a>
+                <a id="clientCreatekLink" class="item" href="#">Register client</a>
             </div>
         </div>
         <div class="item">
@@ -138,109 +138,109 @@
 
                 <div class="twelve wide column row">
                     <div class="sixteen wide column">
-                        <div class="ui huge header">プロジェクト検索</div>
+                        <div class="ui huge header">Project search</div>
                         
                         
 <form class="ui form" name="nablarch_form1" action="/app/project/list" method="GET">
                             <div class="two fields">
                                 <div class="field">
                                     <label>
-                                        事業部
+                                        Division
                                         <select class="ui dropdown" name="form.divisionId">
-<option value="">事業部を選択</option>
-<option value="1">Ａ事業本部</option>
-<option value="2">Ｂ事業本部</option>
+<option value="">Select a Division</option>
+<option value="1">A Division</option>
+<option value="2">B Division</option>
 <option value="7"></option>
-<option value="2147483646">G事業本部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長</option></select>
+<option value="9998">G Division1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678</option></select>
                                     </label>
                                     
                                 </div>
                                 <div class="field">
                                     <label>
-                                        部門
+                                        Department
                                         <select class="ui dropdown" name="form.organizationId">
-<option value="">部門を選択</option>
-<option value="3">Ｃ事業部</option>
-<option value="4">Ｄ事業部</option>
-<option value="5">Ｅ事業部</option>
-<option value="6">Ｆ事業部</option>
+<option value="">Select a Department</option>
+<option value="3">C Department</option>
+<option value="4">D Department</option>
+<option value="5">E Department</option>
+<option value="6">F Department</option>
 <option value="8"></option>
-<option value="2147483647">H事業部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文</option></select>
+<option value="9999">H Department12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</option></select>
                                     </label>
                                     
                                 </div>
                             </div>
                             <div class="field">
-                                <label>PJ種別</label>
+                                <label>Project type</label>
                                 <div class="fields code-checkbox-fields">
-                                    <span><input id="nablarch_checkbox1" class="code-checkbox" type="checkbox" name="form.projectType" value="01" /><label for="nablarch_checkbox1">新規開発ＰＪ</label></span><span><input id="nablarch_checkbox2" class="code-checkbox" type="checkbox" name="form.projectType" value="02" /><label for="nablarch_checkbox2">保守開発ＰＪ</label></span><span><input id="nablarch_checkbox3" class="code-checkbox" type="checkbox" name="form.projectType" value="03" /><label for="nablarch_checkbox3">ＥＲＰ導入支援</label></span><span><input id="nablarch_checkbox4" class="code-checkbox" type="checkbox" name="form.projectType" value="04" /><label for="nablarch_checkbox4">保守ＰＪ</label></span><span><input id="nablarch_checkbox5" class="code-checkbox" type="checkbox" name="form.projectType" value="05" /><label for="nablarch_checkbox5">運用</label></span><span><input id="nablarch_checkbox6" class="code-checkbox" type="checkbox" name="form.projectType" value="06" /><label for="nablarch_checkbox6">サービス提供（開発・保守）</label></span><span><input id="nablarch_checkbox7" class="code-checkbox" type="checkbox" name="form.projectType" value="07" /><label for="nablarch_checkbox7">サービス提供（開発・保守以外）</label></span><span><input id="nablarch_checkbox8" class="code-checkbox" type="checkbox" name="form.projectType" value="08" /><label for="nablarch_checkbox8">保守案件</label></span><span><input id="nablarch_checkbox9" class="code-checkbox" type="checkbox" name="form.projectType" value="09" /><label for="nablarch_checkbox9">その他</label></span>
+                                    <span><input id="nablarch_checkbox1" class="code-checkbox" type="checkbox" name="form.projectType" value="01" /><label for="nablarch_checkbox1">New&nbsp;Development</label></span><span><input id="nablarch_checkbox2" class="code-checkbox" type="checkbox" name="form.projectType" value="02" /><label for="nablarch_checkbox2">Maintenance&nbsp;development</label></span><span><input id="nablarch_checkbox3" class="code-checkbox" type="checkbox" name="form.projectType" value="03" /><label for="nablarch_checkbox3">Support&nbsp;for&nbsp;ERP</label></span><span><input id="nablarch_checkbox4" class="code-checkbox" type="checkbox" name="form.projectType" value="04" /><label for="nablarch_checkbox4">Maintenance</label></span><span><input id="nablarch_checkbox5" class="code-checkbox" type="checkbox" name="form.projectType" value="05" /><label for="nablarch_checkbox5">Operation</label></span><span><input id="nablarch_checkbox6" class="code-checkbox" type="checkbox" name="form.projectType" value="06" /><label for="nablarch_checkbox6">Service&nbsp;(development)</label></span><span><input id="nablarch_checkbox7" class="code-checkbox" type="checkbox" name="form.projectType" value="07" /><label for="nablarch_checkbox7">Service&nbsp;(others)</label></span><span><input id="nablarch_checkbox8" class="code-checkbox" type="checkbox" name="form.projectType" value="08" /><label for="nablarch_checkbox8">Maintenance&nbsp;case</label></span><span><input id="nablarch_checkbox9" class="code-checkbox" type="checkbox" name="form.projectType" value="09" /><label for="nablarch_checkbox9">Other</label></span>
                                 </div>
                                 
                             </div>
                             <div class="field">
-                                <label>PJ分類</label>
+                                <label>Project classification</label>
                                 <div class="fields code-checkbox-fields">
-                                    <span><input id="nablarch_checkbox10" class="code-checkbox" type="checkbox" name="form.projectClass" value="01" /><label for="nablarch_checkbox10">ＳＳ</label></span><span><input id="nablarch_checkbox11" class="code-checkbox" type="checkbox" name="form.projectClass" value="02" /><label for="nablarch_checkbox11">Ｓ</label></span><span><input id="nablarch_checkbox12" class="code-checkbox" type="checkbox" name="form.projectClass" value="03" /><label for="nablarch_checkbox12">Ａ</label></span><span><input id="nablarch_checkbox13" class="code-checkbox" type="checkbox" name="form.projectClass" value="04" /><label for="nablarch_checkbox13">Ｂ</label></span><span><input id="nablarch_checkbox14" class="code-checkbox" type="checkbox" name="form.projectClass" value="05" /><label for="nablarch_checkbox14">Ｃ</label></span><span><input id="nablarch_checkbox15" class="code-checkbox" type="checkbox" name="form.projectClass" value="06" /><label for="nablarch_checkbox15">Ｄ</label></span>
+                                    <span><input id="nablarch_checkbox10" class="code-checkbox" type="checkbox" name="form.projectClass" value="01" /><label for="nablarch_checkbox10">SS</label></span><span><input id="nablarch_checkbox11" class="code-checkbox" type="checkbox" name="form.projectClass" value="02" /><label for="nablarch_checkbox11">S</label></span><span><input id="nablarch_checkbox12" class="code-checkbox" type="checkbox" name="form.projectClass" value="03" /><label for="nablarch_checkbox12">A</label></span><span><input id="nablarch_checkbox13" class="code-checkbox" type="checkbox" name="form.projectClass" value="04" /><label for="nablarch_checkbox13">B</label></span><span><input id="nablarch_checkbox14" class="code-checkbox" type="checkbox" name="form.projectClass" value="05" /><label for="nablarch_checkbox14">C</label></span><span><input id="nablarch_checkbox15" class="code-checkbox" type="checkbox" name="form.projectClass" value="06" /><label for="nablarch_checkbox15">D</label></span>
                                 </div>
                                 
                             </div>
                             <div class="two fields">
                                 <div class="field">
-                                    <label>売上高_実績_FROM</label>
-                                    <input type="text" name="form.salesFrom" value="" maxlength="9" placeholder="売上高_実績_FROM" />
+                                    <label>Sales_results_FROM</label>
+                                    <input type="text" name="form.salesFrom" value="" maxlength="9" placeholder="Sales_results_FROM" />
                                     
                                     
                                 </div>
                                 <div class="field">
-                                    <label>売上高_実績_TO</label>
-                                    <input type="text" name="form.salesTo" value="" maxlength="9" placeholder="売上高_実績_TO" />
+                                    <label>Sales_results_TO</label>
+                                    <input type="text" name="form.salesTo" value="" maxlength="9" placeholder="Sales_results_TO" />
                                     
                                 </div>
                             </div>
                             <div class="two fields">
                                 <div class="field ui calendar" id="projectStartDateFrom">
-                                    <label>開始日_FROM</label>
+                                    <label>Start date_FROM</label>
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" name="form.projectStartDateFrom" value="" maxlength="10" placeholder="開始日_FROM" />
+                                        <input type="text" name="form.projectStartDateFrom" value="" maxlength="10" placeholder="Start date_FROM" />
                                     </div>
                                     
                                     
                                 </div>
                                 <div class="field ui calendar" id="projectStartDateTo">
-                                    <label>開始日_TO</label>
+                                    <label>Start date_TO</label>
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" name="form.projectStartDateTo" value="" maxlength="10" placeholder="開始日_TO" />
+                                        <input type="text" name="form.projectStartDateTo" value="" maxlength="10" placeholder="Start date_TO" />
                                     </div>
                                     
                                 </div>
                             </div>
                             <div class="two fields">
                                 <div class="field ui calendar" id="projectEndDateFrom">
-                                    <label>終了日_FROM</label>
+                                    <label>End date_FROM</label>
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" name="form.projectEndDateFrom" value="" maxlength="10" placeholder="終了日_FROM" />
+                                        <input type="text" name="form.projectEndDateFrom" value="" maxlength="10" placeholder="End date_FROM" />
                                     </div>
                                     
                                     
                                 </div>
                                 <div class="field ui calendar" id="projectEndDateTo">
-                                    <label>終了日_TO</label>
+                                    <label>End date_TO</label>
                                     <div class="ui input left icon">
                                         <i class="calendar icon"></i>
-                                        <input type="text" name="form.projectEndDateTo" value="" maxlength="10" placeholder="終了日_TO" />
+                                        <input type="text" name="form.projectEndDateTo" value="" maxlength="10" placeholder="End date_TO" />
                                     </div>
                                     
                                 </div>
                             </div>
                             <div class="field">
-                                <label>プロジェクト名で検索</label>
-                                <input type="text" name="form.projectName" value="" maxlength="128" placeholder="プロジェクト名" />
+                                <label>Search by project name</label>
+                                <input type="text" name="form.projectName" value="" maxlength="128" placeholder="Project name" />
                                 
                             </div>
-                            <button type="submit" class="ui right floated primary button">検索</button>
+                            <button type="submit" class="ui right floated primary button">Search</button>
                         
 </form>
                     </div>
