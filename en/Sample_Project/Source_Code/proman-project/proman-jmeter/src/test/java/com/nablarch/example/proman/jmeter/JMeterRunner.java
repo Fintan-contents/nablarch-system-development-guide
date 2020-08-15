@@ -61,7 +61,7 @@ public class JMeterRunner {
         fileServer.setBasedir(jmxFile.getParent());
         fileServer.setScriptName(jmxFile.getName());
 
-        // ユーザ定義変数のサーバーホストとポートを変更
+        // Change server host and port of user-defined variable
         SearchByClass<Arguments> search = new SearchByClass<>(Arguments.class);
         testPlanTree.traverse(search);
         Collection<Arguments> searchResults = search.getSearchResults();

@@ -89,7 +89,7 @@ The `[subfunction ID]` and `[scenario ID]` should be set according to the trade 
 Then, the directory structure of each test scenario should be as follows.
 
 ```
-[シナリオID]
+[scenario ID]
  |-scenario/
  | `-[scenario name].jmx
  |

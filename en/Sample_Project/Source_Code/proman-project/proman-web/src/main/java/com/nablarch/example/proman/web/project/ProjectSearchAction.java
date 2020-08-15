@@ -77,15 +77,15 @@ public class ProjectSearchAction {
      */
     @OnError(type = ApplicationException.class, path = "forward://search")
     public HttpResponse backToList(HttpRequest request, ExecutionContext context) {
-        // 画面遷移前に表示していた検索条件で検索実行
+        // Perform search with the search conditions displayed before the screen transition.
         ProjectSearchConditionDto condition = SessionUtil.get(context, "searchCondition");
         searchProjectAndSetToRequestScope(context, condition);
 
-        // 入力項目に値を復元するためリクエストスコープにフォームを設定する
+        // Set the form in request scope to restore the value to input item.
         ProjectSearchForm form = BeanUtil.createAndCopy(ProjectSearchForm.class, condition);
         context.setRequestScopedVar("form", form);
 
-        // 事業部と部門をリクエストスコープに設定する
+        // Set the division and department to request scope.
         setOrganizationAndDivisionToRequestScope(context);
         return new HttpResponse(SEARCH_JSP_PATH);
     }

@@ -11,7 +11,7 @@ Configure the initial user and password for PostgreSQL as follows.
 | postgres | password|
 
 
-## ビルド方法
+## Build method
 
 Run the following command in the proman-common module.
 ```

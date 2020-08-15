@@ -8,7 +8,7 @@ import javax.validation.constraints.AssertTrue;
 import java.io.Serializable;
 
 /**
- * プロジェクト更新フォーム。
+ * Project update form.
  *
  * @author Masaya Seko
  */

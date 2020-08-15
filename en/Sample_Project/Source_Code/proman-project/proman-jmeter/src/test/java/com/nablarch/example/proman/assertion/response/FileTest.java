@@ -20,7 +20,7 @@ public class FileTest {
      * Make sure you succeed.
      */
     @Test
-    public void test_差分がない() {
+    public void test_no_difference() {
         String fileName = "no_diff.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -28,7 +28,7 @@ public class FileTest {
      * Make sure you succeed.
      */
     @Test
-    public void test_どちらも0byte() {
+    public void test_both_0byte() {
         String fileName = "zero_byte_no_diff.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -36,7 +36,7 @@ public class FileTest {
      * Make sure it fails.
      */
     @Test
-    public void test_差分がある() {
+    public void test_difference() {
         String fileName = "the_diff.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -44,7 +44,7 @@ public class FileTest {
      * Make sure it fails.
      */
     @Test
-    public void test_expectedが多い() {
+    public void test_many_expected() {
         String fileName = "expected_tooMany.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -52,7 +52,7 @@ public class FileTest {
      * Make sure it fails.
      */
     @Test
-    public void test_actualが多い() {
+    public void test_many_actual() {
         String fileName = "actual_tooMany.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -60,7 +60,7 @@ public class FileTest {
      * Make sure it fails.
      */
     @Test
-    public void test_ファイルがexpectedしかない() {
+    public void test_only_expected() {
         String fileName = "only_expected.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
@@ -68,7 +68,7 @@ public class FileTest {
      * Make sure it fails.
      */
     @Test
-    public void test_ファイルがactualしかない() {
+    public void test_only_actual() {
         String fileName = "only_actual.html";
         sut.assertResponse("",EXPECTED_PATH + fileName, ACTUAL_PATH + fileName);
     }
