@@ -25,15 +25,15 @@ Describes the deliverables  created by the developer and how to test them.
 
 | Deliverables         | Theoretical | Class | Subfunction  |
 |----------------|------|--------|------|
-| Action         | -    | -      | o    |
-| Form           | o    | o      | o    |
-| Domain class | o    | -      | o    |
-| Service        | -    | o      | o    |
-| SQL file    | o    | -      | o    |
-| Entity         | -    | -      | o    |
-| DTO            | -    | -      | o    |
-| JSP            | -    | -      | o    |
-| routes.xml     | -    | -      | o    |
+| Action         |      |        | X    |
+| Form           | X    | X      | X    |
+| Domain class | X    |        | X    |
+| Service        |      | X      | X    |
+| SQL file    | X    |        | X    |
+| Entity         |      |        | X    |
+| DTO            |      |        | X    |
+| JSP            |      |        | X    |
+| routes.xml     |      |        | X    |
 
 
 ### Action
