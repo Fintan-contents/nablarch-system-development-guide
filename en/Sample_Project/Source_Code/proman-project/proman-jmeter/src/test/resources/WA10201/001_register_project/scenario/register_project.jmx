@@ -74,7 +74,7 @@ if(matchNr != null){
 }
 </stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
-            <stringProp name="TestPlan.comments">nablarch_hidden引き継ぎ用プロセッサー</stringProp>
+            <stringProp name="TestPlan.comments">Processor to take over the value of nablarch_hidden</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
           <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
