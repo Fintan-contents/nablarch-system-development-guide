@@ -11,9 +11,9 @@ The contents of this document have been verified with Jenkins 2.121.2 and FindBu
 
 First install the FindBugs plugin on Jenkins.
 
-Open Jenkins, on the menu go to "Manage Jenkins" then to "Manage plug-ins" and open the "Available" tab.
+Open Jenkins, on the menu go to "Manage Jenkins" then to "Manage plugins" and open the "Available" tab.
 
-Select "FindBugs Plug-in" and click on "Install without restarting".
+Select "FindBugs Plugin" and click on "Install without restarting".
 
 ## Collect the check results (freestyle project)
 

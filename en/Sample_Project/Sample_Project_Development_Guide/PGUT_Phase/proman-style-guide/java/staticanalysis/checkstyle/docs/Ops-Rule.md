@@ -91,7 +91,7 @@ An example of placing two files in the same directory is shown below.
   </module>
 ```
 
-`${config_loc}` is interpreted as "the directory in which the Checkstyle configuration file is located" when using the Eclipse Checkstyle and IntelliJ Checkstyle-IDEA plug-ins.
+`${config_loc}` is interpreted as "the directory in which the Checkstyle configuration file is located" when using the Eclipse Checkstyle and IntelliJ Checkstyle-IDEA plugins.
 
 When launching from Maven, see [Guide on how to execute Checkstyle with Maven](./Maven-settings.md).
 

@@ -25,7 +25,7 @@ Therefore, it is difficult to think of a good reason to exclude it from the chec
 However, automatically generated source code may be excluded from the check.
 If SpotBugs warning appears in the auto-generated source code, then the tool that performs the automatic generation needs to be corrected.
 
-If you want to exclude the "Unauthorized API Check Tool" that operates as a SpotBugs plug-in, you can exclude it from the check target.
+If you want to exclude the "Unauthorized API Check Tool" that operates as a SpotBugs plugin, you can exclude it from the check target.
 Even in such cases, the exclusion settings should be localized so that only specific classes are excluded, instead of a wide range, such as the entire package.
 
 ## Method to exclude from check

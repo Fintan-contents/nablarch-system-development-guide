@@ -8,9 +8,9 @@ The contents of this document have been verified with Jenkins 2.121.1 and Checks
 
 First install the Checkstyle plugin on Jenkins.
 
-Open Jenkins, on the menu go to "Manage Jenkins" then to "Manage plug-ins" and open the "Available" tab.
+Open Jenkins, on the menu go to "Manage Jenkins" then to "Manage plugins" and open the "Available" tab.
 
-Select "Checkstyle Plug-in" and click on "Install without restarting".
+Select "Checkstyle Plugin" and click on "Install without restarting".
 
 ## Collect the check results (Maven project)
 
