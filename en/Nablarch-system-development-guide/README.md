@@ -16,7 +16,7 @@
   - [Creating a development guide for a project](#Creating-a-development-guide-for-a-project)
 - [Design phase](#Design-phase)
   - [Standardization](#Standardization)
-- [Programming Unit testing phase](#Programming-Unit-testing-phase)
+- [Programming and Unit testing phase](#Programming-and-Unit-testing-phase)
   - [Initial build of Nablarch project](#Initial-build-of-Nablarch-project)
   - [Setting up the team development environment](#Setting-up-the-team-development-environment)
   - [Preparation of setup guide for development environment](#Preparation-of-setup-guide-for-development-environment)
@@ -39,7 +39,7 @@ This document aims to achieve the following.
 
 * Ensure that the content provided by Nablarch (development standards, check tools, etc.) is used effectively
 * Clear description of the most suitable method combining the contents of [Fintan](https://fintan.jp/) and Nablarch
-* Clear description of how to proceed optimally from external design, which is a specialized area of Nablarch, to Programming Unit testing
+* Clear description of how to proceed optimally from external design, which is a specialized area of Nablarch, to Programming and Unit testing
 * Demonstration of the effective way of testing with Nablarch
 * Enabling a person who is not familiar with Nablarch (experienced in application development) to carry out development preparation and promotion confidently using the shortest route
 * Guide persons having experience using other frameworks (Struts, Spring) on the correct usage of Nablarch
@@ -235,7 +235,7 @@ In particular, UI standard needs to be deployed before starting the full-scale d
 If you proceed with the design without any standard, the UI, such as screen layouts, will vary with each designer and each counter customer.
 (Example: Position of buttons, whether to display confirmation and completion screens, unnecessarily rich UI functions).
 To later unify these features, customer approval may be required and the features may need to be modified in parallel.
-It may not be possible to withdraw the UI after it has been presented. In this case, there is a risk that the UI needs to be created individually in Programming Unit testing phase and the required man-hours will exceed the estimate.
+It may not be possible to withdraw the UI after it has been presented. In this case, there is a risk that the UI needs to be created individually in Programming, Unit testing phase and the required man-hours will exceed the estimate.
 Reference：[UI standard customization](docs/UI_standard_customization.md)
 
 For an example of how to customize, refer to the following in the sample project:
@@ -261,7 +261,7 @@ On the other hand, the sample project adopts a Lightweight type (\*1) testing st
 
 *1: see [Consideration of testing policy](#consideration-of-testing-policy)
 
-## Programming Unit testing phase
+## Programming and Unit testing phase
 
 
 ### Initial build of Nablarch project 
@@ -287,7 +287,7 @@ Please refer here.
 
 ### Establishment of development standards
 
-Establish development standards for the Programming Unit testing phase.
+Establish development standards for the Programming and Unit testing phase.
 Refer to the following documents.
 
 These are coding conventions that programmers must adhere to, to improve quality, productivity, and maintainability.
@@ -307,9 +307,9 @@ This is a checklist for developers to self-check simple coding mistakes such as 
 
 ### Preparation for integration test (communication confirmation)
 
-Before starting the integration test (Programming Unit testing phase), change the settings for the integration test environment and confirm the communication.
+Before starting the integration test (Programming and Unit testing phase), change the settings for the integration test environment and confirm the communication.
 
-Many differences occur when migrating from the local development environment to the integration test environment in the Programming Unit testing phase. 
+Many differences occur when migrating from the local development environment to the integration test environment in the Programming and Unit testing phase. 
 (Example: Difference in the file path, whether mock is used). 
 For this reason, it is necessary by allotting extra time for carrying out the settings for the integration test environment.
 If communication is not confirmed adequately before the integration test,
