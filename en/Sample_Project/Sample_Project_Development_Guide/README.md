@@ -93,8 +93,8 @@ Guide is described for each role and task shown in the development flow.
 #### Programming and Unit testing (common)
 
 - Progress method
-  - [Programming Unit testing work completion condition checklist](PGUT_Phase/checklist/PGUT_work_completion_condition_checklist.xlsx?raw=true)
-    - Please work according to the introduction example sheet of condition checklist for Programming Unit testing work completion.
+  - [Programming and Unit testing work completion condition checklist](PGUT_Phase/checklist/PGUT_work_completion_condition_checklist.xlsx?raw=true)
+    - Please work according to the introduction example sheet of condition checklist for Programming and Unit testing work completion.
   - [Deliverable self-checklist for programmers](PGUT_Phase/checklist/Deliverable_self-checklist_for_programmers.xlsx?raw=true)
     - Use the files from the above links for the self-checks that in the case study sheet.
 - Rules
