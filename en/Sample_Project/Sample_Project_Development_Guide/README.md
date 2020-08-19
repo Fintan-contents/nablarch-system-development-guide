@@ -12,12 +12,12 @@
   - [Data modeler](#Data-modeler)
     - [Data definition](#Data-definition)
     - [DB design](#DB-design)
-- [Programming Unit testing phase](#Programming-Unit-testing-phase)
+- [Programming and Unit testing phase](#Programming-and-Unit-testing-phase)
   - [Application engineer](#Application-engineer)
-    - [Programming Unit testing (common)](#Programming-Unit-testing-common)
-    - [Programming Unit testing（Web）](#Programming-Unit-testing-Web)
-    - [Programming Unit testing (batch)](#Programming-Unit-testing-batch)
-    - [Programming Unit testing（REST）](#Programming-Unit-testing-REST)
+    - [Programming and Unit testing (common)](#Programming-and-Unit-testing-common)
+    - [Programming and Unit testing (Web)](#Programming-and-Unit-testing-Web)
+    - [Programming and Unit testing (batch)](#Programming-and-Unit-testing-batch)
+    - [Programming and Unit testing (REST)](#Programming-and-Unit-testing-REST)
 - [Team development environment](#Team-development-environment)
 
 Describes how to proceed with the development of the sample project.
@@ -26,7 +26,7 @@ If you are engaged in developing a sample project, please read this development 
 This development guide is maintained by the architect.
 If you have any questions or doubts about this development guide, consult the architect.
 
-This development guide covers from design to the Programming Unit testing phase.
+This development guide covers from design to the Programming and Unit testing phase.
 
 ## Flow of development
 
@@ -86,11 +86,11 @@ Guide is described for each role and task shown in the development flow.
 - [DB design standards](../Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/010_Design_Standards)
   - Refer to both logical and physical designs.
 
-## Programming Unit testing phase
+## Programming and Unit testing phase
 
 ### Application engineer
 
-#### Programming Unit testing (common)
+#### Programming and Unit testing (common)
 
 - Progress method
   - [Programming Unit testing work completion condition checklist](PGUT_Phase/checklist/PGUT_work_completion_condition_checklist.xlsx?raw=true)
@@ -111,7 +111,7 @@ Guide is described for each role and task shown in the development flow.
 - Test method
   - [How to get evidence (log and DB dump)](PGUT_Phase/ut/How_to_get_evidence_(log_and_DB_dump).md)
 
-#### Programming Unit testing (Web)
+#### Programming and Unit testing (Web)
 - [Application configuration (Web)](Design_Phase/Application_Configuration_(Web).md)
 - [Unit test concept (Web)](PGUT_Phase/ut/Unit_test_concept_(Web).md)
 - [Implementation method for general processing (Web)](PGUT_Phase/pg/Implementation_method_for_general_processing_(Web).md)
@@ -120,12 +120,12 @@ Guide is described for each role and task shown in the development flow.
 - [Test method of subfunction unit test (Web)](PGUT_Phase/ut/Test_method_of_subfunction_unit_test_(Web).md) 
 - [Test Method of Automated Subfunction Unit Test (Web)](PGUT_Phase/ut/Test_method_of_automated_subfunction_unit_test_(Web).md)
 
-#### Programming Unit testing (batch)
+#### Programming and Unit testing (batch)
 - [Application configuration (batch)](Design_Phase/Application_configuration_(batch).md)
 - [Unit test concept (batch)](PGUT_Phase/ut/Unit_test_concept_(batch).md)
 - [Implementation method for general processing (batch)](PGUT_Phase/pg/Implementation_method_for_general_processing_(batch).md)
 
-#### Programming Unit testing (REST)
+#### Programming and Unit testing (REST)
 - [Application Configuration (REST)](Design_Phase/Application_Configuration_(REST).md)
 - [Unit test concept (REST)](PGUT_Phase/ut/Unit_test_concept_(REST).md)
 
