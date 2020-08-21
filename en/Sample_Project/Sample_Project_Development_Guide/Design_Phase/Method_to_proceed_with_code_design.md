@@ -53,5 +53,5 @@ public class C0100001 {
 ```
 
 If you are using code in Java, use a constant called `C0100001.code01` instead of a literal with a code value of `"01"`.
-Though there seems to be no difference between `"01"` and `C0100001.code01`, but when you hover over a constant on the IDE, javadoc comments such as `business classification` and IDE are displayed, which increases the readability.
+Though there seems to be no difference between `"01"` and `C0100001.code01`, but when you hover over a constant on the IDE, javadoc comments such as `business classification` and agriculture are displayed, which increases the readability.
 Using the constant `AGRICULTURE` instead of `code01` is more easier to understand, but this is done to save the trouble of designing physical names.
