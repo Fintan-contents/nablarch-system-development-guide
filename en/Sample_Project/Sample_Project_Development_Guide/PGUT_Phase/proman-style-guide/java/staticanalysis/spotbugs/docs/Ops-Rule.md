@@ -2,7 +2,7 @@
 
 ## Basic concept
 
-### Principle 1: All SpotBugs warnings will be resolved
+### Principle 1: All SpotBugs warnings should be resolved
 
 SpotBugs detects either bug-embedded code or dangerous code that is likely to cause problems later.
 Allowing warnings is synonymous with accepting the risk of a bug or potential problem and should not be done.
