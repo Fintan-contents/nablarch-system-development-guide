@@ -17,7 +17,7 @@ In such cases, consult with an expert or project architect to get the appropriat
 
 Do not try to avoid SpotBugs warnings at your own discretion. SpotBugs is for improving (and not reducing) the code quality, and reducing code quality to avoid this is a step in the wrong direction.
 
-### Principle 3: If there is a SpotBugs warning for a good reason, remove it from the check
+### Principle 3: If you allow a SpotBugs warning for a good reason, remove it from the check
 
 As mentioned in Principle 1, SpotBugs warnings basically indicate the risk of a bug or potential problem.
 Therefore, it is difficult to think of a good reason to exclude it from the check.
