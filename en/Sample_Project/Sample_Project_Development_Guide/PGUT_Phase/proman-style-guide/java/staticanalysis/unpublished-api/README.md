@@ -249,7 +249,7 @@ Right-click the project and select "Find Bugs" from the SpotBugs menu to perform
 
 You can confirm the check results in the bug mark that appears on the left side of the editor or in the SpotBugs perspective.
 
-A limitation of Eclipse is that checks cannot be performed according to the classification of production code and test code, architects and programmers,etc. 
+A limitation of Eclipse is that checks cannot be performed according to the classification of production code and test code, architects and programmers, etc. 
 Therefore, please check according to the classification with CI.
 
 ## Run using Maven
