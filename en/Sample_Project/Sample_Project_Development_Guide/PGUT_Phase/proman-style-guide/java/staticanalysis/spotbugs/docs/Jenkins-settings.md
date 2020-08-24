@@ -33,7 +33,7 @@ Set the "Files to Collect" to `**/spotbugsXml.xml`.
 
 This completes the configuration for collecting check results.
 
-Check results will now be collected when build is implemented. 
+Check results will now be collected when build is exected. 
 Once the check results are collected, a link called "FindBugs warning" will be displayed on the job menu.
 Follow the link for more details on the warning.
 
