@@ -10,6 +10,9 @@ import nablarch.fw.web.HttpResponse;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
  *
  * @author Masaya Seko
  */
+@Path("/client")
 public class ClientAction {
 
     /**
@@ -27,6 +31,7 @@ public class ClientAction {
      * @param context 実行コンテキスト
      * @return 検索結果
      */
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Client> list(HttpRequest request, ExecutionContext context) {
 
@@ -45,6 +50,8 @@ public class ClientAction {
      * @param context 実行コンテキスト
      * @return 顧客詳細
      */
+    @GET
+    @Path("/{clientId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Client show(HttpRequest request, ExecutionContext context) {
 
@@ -63,6 +70,7 @@ public class ClientAction {
      * @param form 顧客登録のフォーム
      * @return HTTPレスポンス
      */
+    @POST
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)
     public HttpResponse register(ClientForm form) {

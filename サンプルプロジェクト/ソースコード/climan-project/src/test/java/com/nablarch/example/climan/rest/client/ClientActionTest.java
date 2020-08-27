@@ -23,7 +23,7 @@ public class ClientActionTest extends ClimanRestTestSupport {
     /**
      * テスト対象のリクエストパス
      */
-    public static final String PATH = "/client/";
+    public static final String PATH = "/client";
 
     /** 不正な顧客名（128文字を超えている） */
     public static final String INVALID_CLIENT_NAME = RandomStringUtils.randomAlphanumeric(129);
@@ -119,7 +119,7 @@ public class ClientActionTest extends ClimanRestTestSupport {
     @Test
     public void testInvalidClientGetForm() {
         String message = "顧客詳細取得(パラメータ不正)";
-        HttpResponse response = sendRequest(get(PATH + "number"));
+        HttpResponse response = sendRequest(get(PATH + "/number"));
         assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
         assertFaultMessages(message, response
                 , "FB1999901"
@@ -133,7 +133,7 @@ public class ClientActionTest extends ClimanRestTestSupport {
     @Test
     public void testShow() {
         String message = "顧客詳細取得";
-        HttpResponse response = sendRequest(get(PATH + "1"));
+        HttpResponse response = sendRequest(get(PATH + "/1"));
         assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
                 .assertThat("$.client_id", equalTo(1), message + "[顧客ID]")
@@ -147,7 +147,7 @@ public class ClientActionTest extends ClimanRestTestSupport {
     @Test
     public void testShowNotExistsClient() {
         String message = "存在しない顧客詳細取得";
-        HttpResponse response = sendRequest(get(PATH + "9999"));
+        HttpResponse response = sendRequest(get(PATH + "/9999"));
         assertStatusCode(message, HttpResponse.Status.NOT_FOUND, response);
         assertFaultMessages(message, response
                 , "FB1999903"
