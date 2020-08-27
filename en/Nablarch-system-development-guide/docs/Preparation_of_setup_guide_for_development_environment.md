@@ -57,7 +57,7 @@ The image of the actual guide is shown below.
 | Item                   | Name                 | Version, edition, etc.           | Supply source                                      |
 |------------------------|----------------------|-------------------------------------|---------------------------------------------|
 | JDK                    | AdoptOpenJDK         | OpenJDK 8 (LTS) HotSpot Windows x64 | https://adoptopenjdk.net/                   |
-| RDBMS                  | PostgreSQL           | PostgreSQL Portable v10.4.1         | https://gareth.flowers/postgresql-portable/ |
+| RDBMS                  | PostgreSQL           | PostgreSQL Portable v10.4.1         | https://github.com/garethflowers/postgresql-portable/releases |
 | Build tools           | Apache Maven         | 3.6.1                               | https://maven.apache.org/                   |
 | IDE                    | IntelliJ             | Community Edition                   | https://www.jetbrains.com/idea/             |
 | Version control tools   | Git                  | 2.21.0 for Windows                  | https://git-scm.com/                        |
