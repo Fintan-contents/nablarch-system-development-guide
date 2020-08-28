@@ -81,4 +81,4 @@ Creates a GSP plugin and automatically generates it from an ER diagram.
 
 ## DTO
 
-Used for transfer data applications.
+Used for data transfer processing.
