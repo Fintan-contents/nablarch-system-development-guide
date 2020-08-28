@@ -109,7 +109,7 @@ public Result handle(ExecutionContext context) {
 
 
 If there is a large number of search results, a large number of UPDATE statements will be executed within a transaction.
-In particular, using [NoInputDataBatchAction](https://nablarch.github.io/docs/LATEST/javadoc/nablarch/fw/action/NoInputDataBatchAction.html)to perform such a loop is a typical mistake.
+In particular, using [NoInputDataBatchAction](https://nablarch.github.io/docs/LATEST/javadoc/nablarch/fw/action/NoInputDataBatchAction.html) to perform such a loop is a typical mistake.
 
 
 In the past, there were cases where transaction control was performed on its own, such as executing a commit after a certain number of times in a loop so that a large number of records could be processed.This means that the processing performed by the framework must be re-implemented on its own, which may cause quality and productivity to decrease.
