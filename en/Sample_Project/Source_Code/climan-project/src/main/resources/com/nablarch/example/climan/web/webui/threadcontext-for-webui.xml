@@ -23,7 +23,7 @@
 
         <!-- Language -->
         <component class="nablarch.common.handler.threadcontext.LanguageAttribute">
-          <property name="defaultLanguage" value="ja"/>
+          <property name="defaultLanguage" value="en"/>
         </component>
 
         <!-- Execution ID -->
