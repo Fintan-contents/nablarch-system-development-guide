@@ -115,6 +115,19 @@
   <component name="csrfTokenVerificationHandler"
              class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
 
+  <!-- Configuring PropertiesStringResourceLoader to default language as English -->
+  <component class="nablarch.core.cache.BasicStaticDataCache" name="messageCache">
+    <property name="loader">
+      <component class="nablarch.core.message.PropertiesStringResourceLoader">
+        <property name="defaultLocale" value="en" />
+      </component>
+    </property>
+  </component>
+  <component name="stringResourceHolder" class="nablarch.core.message.StringResourceHolder">
+    <property name="stringResourceCache" ref="messageCache" />
+  </component>
+
+
   <!-- Handler queue configuration -->
   <component name="webFrontController"
              class="nablarch.fw.web.servlet.WebFrontController">
@@ -173,6 +186,7 @@
       <list>
         <component-ref name="codeLoader"/>
         <component-ref name="codeCache"/>
+        <component-ref name="messageCache" />
         <!-- web/session-store.xml: Database store-->
         <component-ref name="dbStore"/>
         <component-ref name="expiration"/>
