@@ -9,7 +9,7 @@ DaoContext#update throws javax.persistence.OptimisticLockException.
 ### Handling contents
 
 Nothing is done in the application implementation. 
-Transition to the common error screen is controlled on the base side.
+Transition to the common error screen is controlled on the runtime platform side.
 
 ## When the data that should exist in one acquisition could not be acquired
 
@@ -20,7 +20,7 @@ DaoContext#findById throws nablarch.common.dao.NoDataException.
 ### Handling contents
 
 Nothing is done in the application implementation.
-Transition to the common error screen is controlled on the base side.
+Transition to the common error screen is controlled on the runtime platform side.
 
 ## When the search result is 0 in the search
 
