@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- Table definitions -->
+  <import file="nablarch/schema-config.xml" />
+
+  <!-- Character set definitions used for scanning -->
+  <import file="nablarch/core/validation/charset-definition.xml"/>
+
+  <!-- DomainManager implementation class settings -->
+  <!--<component name="domainManager" class="com.nablarch.example.proman.domain.SampleDomainManager"/>-->
+
+  <!-- Environment settings file -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!-- Common Nablarch features -->
+  <!-- Code features -->
+  <import file="nablarch/common/code.xml"/>
+  <!-- RDBMS without automatic numbering, setting to use universal DAO -->
+  <import file="nablarch/common/dao.xml" />
+  <!-- Date -->
+  <import file="nablarch/core/date.xml"/>
+
+
+  <!--
+  Load batch-specific settings
+  -->
+  <!-- Database settings-->
+  <import file="nablarch/batch/db-for-batch.xml" />
+  <import file="data-source.xml"/>
+
+  <!-- File path installation -->
+  <import file="filepath-for-batch.xml" />
+  <!-- Feature to control multi-thread execution -->
+  <import file="nablarch/common/standalone/multi-thread.xml" />
+  <!-- Feature to control loops and transactions -->
+  <import file="nablarch/batch/loop-transaction.xml" />
+  <!-- Data reading feature -->
+  <import file="nablarch/batch/batch-data-read.xml" />
+  <!-- thread context feature -->
+  <import file="nablarch/batch/threadcontext-for-batch.xml" />
+
+  <!-- Handler queue configuration -->
+  <list name="handlerQueue">
+    <!-- Handler to convert status code into exit code -->
+    <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
+
+    <!-- Global error handler -->
+    <component class="nablarch.fw.handler.GlobalErrorHandler" />
+
+    <!-- Thread Context Variable Delete Handler -->
+    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
+
+    <!-- Thread Context Variable Management Handler -->
+    <component-ref name="threadContextHandler" />
+
+    <!-- Database connection handler -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- Transaction manager -->
+    <component-ref name="transactionManagementHandler" />
+
+    <!-- Dispatch -->
+    <component class="nablarch.fw.handler.RequestPathJavaPackageMapping">
+      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+      <property name="immediate" value="false" />
+    </component>
+
+    <!-- Handler to control multi-thread execution -->
+    <component-ref name="multiThreadExecutionHandler" />
+
+    <!-- Database connection handler -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- Loop and transaction control handler -->
+    <component-ref name="loopHandler" />
+
+    <!-- Data reading handler -->
+    <component-ref name="dataReadHandler" />
+  </list>
+
+  <!-- Components requiring initialization -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- common/date.xml: Business date component -->
+        <component-ref name="businessDateProvider" />
+        <!-- common/code.xml: Code loader -->
+        <component-ref name="codeLoader" />
+        <!-- common/code.xml: Code cache -->
+        <component-ref name="codeCache" />
+      </list>
+    </property>
+  </component>
+</component-configuration>

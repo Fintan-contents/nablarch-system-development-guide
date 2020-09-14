@@ -1,0 +1,30 @@
+<settings>
+  <profiles>
+    <profile>
+      <id>ci</id>
+      <properties>
+        <!--
+            Below are database connection details for the development environment used by the GSP.
+            It is acceptable for all developers to know this information,
+            so the information is written in a file that all developers can reference (this file).
+        -->
+        <nablarch.db.url>jdbc:postgresql://postgres:5432/postgres</nablarch.db.url>
+      </properties>
+      <repositories>
+        <repository>
+          <id>keel-dev-repo</id>
+          <url>http://proxy/nexus/repository/maven-releases/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>ci</activeProfile>
+  </activeProfiles>
+</settings>

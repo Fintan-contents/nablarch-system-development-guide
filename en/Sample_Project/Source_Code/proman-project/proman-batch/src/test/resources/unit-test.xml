@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+
+  <import file="batch-boot.xml"/>
+
+  <!-- TODO: Set according to the database that is used. -->
+  <!-- Settings for Oracle -->
+  <!--
+    <import file="nablarch/test/test-db-info-oracle.xml"/>
+  -->
+  <!-- General database settings -->
+  <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="schema" value="${nablarch.db.schema}"/>
+  </component>
+
+  <!-- Test settings -->
+  <import file="override_test.xml"/>
+
+  <!-- Testing framework settings -->
+  <import file="nablarch/test/test-data.xml"/>
+  <import file="nablarch/test/test-transaction.xml"/>
+
+  <!--
+  Master data recovery settings
+  The process for restoring master data consists of several steps.
+  Refer to the procedures for adding and changing settings when configuring these settings.
+  -->
+  <component name="masterDataRestorer"
+             class="nablarch.test.core.db.MasterDataRestorer">
+    <!-- Backup schema -->
+    <property name="backupSchema" value="PUBLIC"/>
+    <!-- List of tables for monitoring -->
+    <property name="tablesTobeWatched">
+      <list></list>
+    </property>
+  </component>
+
+<!-- Register master data recovery feature -->
+<!--
+  <list name="testEventListeners">
+    <component class="nablarch.test.RepositoryInitializer"/>
+    <component-ref name="masterDataRestorer"/>
+  </list>
+-->
+</component-configuration>

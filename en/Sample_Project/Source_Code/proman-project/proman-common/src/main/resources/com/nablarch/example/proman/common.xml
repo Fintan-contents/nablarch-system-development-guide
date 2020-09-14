@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!--
+   Common project settings
+   -->
+
+  <import file="com/nablarch/example/proman/common/domain.xml"/>
+  <import file="com/nablarch/example/proman/common/idgenerator.xml"/>
+  <import file="com/nablarch/example/proman/common/system-time.xml"/>
+  <import file="com/nablarch/example/proman/common/bean-conversion.xml"/>
+
+</component-configuration>

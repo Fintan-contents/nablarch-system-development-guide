@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <component name="conversionManager" class="nablarch.core.beans.BasicConversionManager">
+    <!-- Specify the permitted format for date and date/time values -->
+    <property name="datePatterns">
+      <list>
+        <value>yyyyMMdd</value>
+        <value>yyyy/MM/dd</value>
+      </list>
+    </property>
+  </component>
+</component-configuration>

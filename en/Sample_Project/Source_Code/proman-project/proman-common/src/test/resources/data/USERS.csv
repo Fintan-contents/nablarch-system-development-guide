@@ -1,0 +1,6 @@
+"user_id","kanji_name","kana_name","pm_flag"
+"105","PM User1","PM User1(kana name)","true"
+"106","PM User2","PM User2(kana name)","true"
+"107","Normal User 1","Normal User 1(kana name)","false"
+"108","Normal User 2","Normal User 2(kana name)","false"
+"109","Normal User 3","Normal User 3(kana name)","false"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- Load settings for production -->
+  <import file="batch-component-configuration.xml"/>
+
+  <!-- File path setting -->
+  <import file="filepath-for-batch.xml" />
+
+  <!-- Components requiring initialization -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- Business date component -->
+        <component-ref name="businessDateProvider"/>
+        <!-- Code loader -->
+        <component-ref name="codeLoader"/>
+        <!-- Code cache -->
+        <component-ref name="codeCache"/>
+      </list>
+    </property>
+  </component>
+
+</component-configuration>
