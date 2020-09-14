@@ -207,7 +207,7 @@ The regression test can be run based on manual browser operation records.
 For more information on Lightweight type testing, refer to the following page.
 
 - [Lightweight Type test Standards](../Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards/Unit_Test_Standard.xlsx?raw=true)
-- [Unit Test Concept (Web) using Lightweight Type](../Sample_Project\Sample_Project_Development_Guide\PGUT_Phase\ut\Unit_test_concept_(Web).md)
+- [Unit Test Concept (Web) using Lightweight Type](../Sample_Project/Sample_Project_Development_Guide/PGUT_Phase/ut/Unit_test_concept_(Web).md)
 
 
 ### Creating a development guide for a project
