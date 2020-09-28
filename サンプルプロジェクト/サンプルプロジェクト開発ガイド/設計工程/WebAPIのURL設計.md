@@ -20,11 +20,43 @@ URL設計のルールは最小限とします。
 ## ルーティング例
 
 ルーティング設定の具体例を以下に示します。
+本プロジェクトでは[JAX-RSのPathアノテーションによるルーティング](https://nablarch.github.io/docs/LATEST/doc/application_framework/adaptors/router_adaptor.html#jax-rspath)を使用します。
 
-```xml
-  <get    path="/customer"     to="Customer#list" />
-  <get    path="/customer/:id" to="Customer#show" />
-  <post   path="/customer"     to="Customer#register" />
-  <put    path="/customer/:id" to="Customer#update" />
-  <delete path="/customer/:id" to="Customer#delete" />
+```java
+@Path("/client")
+public class ClientAction {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Client> list(HttpRequest request, ExecutionContext context) {
+      // 省略
+    }
+
+    @GET
+    @Path("/{clientId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Client show(HttpRequest request, ExecutionContext context) {
+      // 省略
+    }
+
+    @POST
+    @Valid
+    @Consumes(MediaType.APPLICATION_JSON)
+    public HttpResponse register(ClientForm form) {
+      // 省略
+    }
+
+    @PUT
+    @Path("/{clientId}")
+    @Valid
+    @Consumes(MediaType.APPLICATION_JSON)
+    public HttpResponse update(ClientForm form) {
+      // 省略
+    }
+
+    @DELETE
+    @Path("/{clientId}")
+    public HttpResponse delete(HttpRequest request, ExecutionContext context) {
+      // 省略
+    }
+}
 ```

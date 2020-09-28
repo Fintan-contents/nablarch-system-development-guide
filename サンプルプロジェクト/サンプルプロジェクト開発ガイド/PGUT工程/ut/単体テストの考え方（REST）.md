@@ -16,7 +16,6 @@ RESTでは、原則として[Nablarch標準のテスト方法](https://nablarch.
 | SQLファイル    | o    | -          | o              |
 | Entity         | -    | -          | o              |
 | DTO            | -    | -          | o              |
-| routes.xml     | -    | -          | o              |
 
 ## Action
 
@@ -45,7 +44,3 @@ RESTでは、原則として[Nablarch標準のテスト方法](https://nablarch.
 ## DTO
 
 [単体テストの考え方（Web）](単体テストの考え方（Web）.md) 同様です。
-
-### routes.xml
-
-リクエスト単体テストで確認します。
