@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nablarch.example.proman</groupId>
+    <artifactId>proman-project</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>proman-web</artifactId>
+  <version>0.0.1</version>
+  <packaging>war</packaging>
+
+  <properties>
+    <!-- Resource directory for each environment (to be switched according to profile) -->
+    <!--suppress UnresolvedMavenProperty -->
+    <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
+    <webxml.path>src/main/webapp/WEB-INF/web.xml</webxml.path>
+  </properties>
+
+  <profiles>
+    <!--
+    The following profiles specify the environment and are mutually exclusive.
+    Multiple profiles must not be set at the same time.
+    -->
+    <!-- Development environment -->
+    <profile>
+      <id>development</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
+        <env.dir>dev</env.dir>
+        <env.classifier>dev</env.classifier>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.nablarch.framework</groupId>
+          <artifactId>nablarch-fw-web-hotdeploy</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- Demo environment -->
+    <profile>
+      <id>demo</id>
+      <properties>
+        <env.name>Development environment</env.name>
+        <!-- Directory name of resources for each Maven environment -->
+        <env.dir>demo</env.dir>
+        <env.classifier>demo</env.classifier>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- Full-scale operation environment -->
+    <profile>
+      <id>prod</id>
+      <properties>
+        <env.name>Full-scale operation environment</env.name>
+        <env.dir>prod</env.dir>
+        <env.classifier>prod</env.classifier>
+      </properties>
+    </profile>
+  </profiles>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nablarch.example.proman</groupId>
+      <artifactId>proman-common</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.profile</groupId>
+      <artifactId>nablarch-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>taglibs</groupId>
+          <artifactId>standard</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-main-default-configuration</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.eclipse.jdt.core.compiler</groupId>
+          <artifactId>ecj</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing-jetty6</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-testing-default-configuration</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.dev</groupId>
+      <artifactId>nablarch-test-support</artifactId>
+      <version>0.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Code management -->
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-code-jdbc</artifactId>
+    </dependency>
+    <!-- There is a module used with UniversalDao when a database does not have automatic numbering. -->
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-idgenerator-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-web-dbstore</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-web-doublesubmit-jdbc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.1.3.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${env.resources}</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- When Class-Path is specified using MANIFEST.MF, the uri of the taglib defined in the dependency jar is not resolved correctly. -->
+          <useManifestOnlyJar>false</useManifestOnlyJar>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.unit8.waitt</groupId>
+        <artifactId>waitt-maven-plugin</artifactId>
+        <version>1.2.3</version>
+        <configuration>
+          <port>9080</port>
+          <servers>
+            <server>
+              <groupId>net.unit8.waitt.server</groupId>
+              <artifactId>waitt-tomcat8</artifactId>
+              <version>1.2.3</version>
+            </server>
+          </servers>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <webXml>${webxml.path}</webXml>
+          <classifier>${env.classifier}</classifier>
+          <archive>
+            <manifestEntries>
+              <Target-Environment>${env.name}</Target-Environment>
+            </manifestEntries>
+          </archive>
+          <!-- In order to test the classes included in this module in the lower level modules, we also create a jar when creating the war. -->
+          <attachClasses>true</attachClasses>
+          <classesClassifier>classes</classesClassifier>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-descriptor</id>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Start the JSP static analysis tool via ant -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+      </plugin>
+      <!-- Get coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- Preliminary measure to avoid errors occurring in the waitt plugin -->
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.18.v20190429</version>
+        <configuration>
+          <webAppConfig>
+            <contextPath>/</contextPath>
+          </webAppConfig>
+          <httpConnector>
+            <port>9088</port>
+          </httpConnector>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

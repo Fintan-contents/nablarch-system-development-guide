@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- double-submit configuration -->
+  <component name="doubleSubmissionHandler"
+             class="nablarch.common.web.token.BasicDoubleSubmissionHandler">
+    <!-- The resource path to which the transition is to be made if it is determined to be a double submit -->
+    <property name="path" value="/WEB-INF/view/errorPages/DOUBLE_SUBMISSION_ERROR.jsp"/>
+    <!-- Message ID to be used for the error message displayed on the screen to which the transition is made when double submission is judged.-->
+    <!--<property name="messageId" value="DOUBLE_SUBMISSION_ERROR" />-->
+    <!-- The response status of a double submission. The default is 400 -->
+    <property name="statusCode" value="400"/>
+  </component>
+
+  <!-- Storing a token in the database-->
+  <component name="tokenManager" class="nablarch.common.web.token.DbTokenManager">
+    <property name="dbManager">
+      <component class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="tokenTransaction"/>
+      </component>
+    </property>
+  </component>
+  <component name="tokenGenerator" class="nablarch.common.web.token.UUIDV4TokenGenerator"/>
+
+</component-configuration>

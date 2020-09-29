@@ -1,0 +1,41 @@
+<FindBugsFilter>
+
+    <!-- Fields without an accessor are permitted. (May be created like this when Form is used.) -->
+    <Match>
+        <Bug pattern="UUF_UNUSED_FIELD" />
+        <Or>
+            <Class name="please.change.me.form.FormClassName"/>
+        </Or>
+    </Match>
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD" />
+        <Or>
+            <Class name="please.change.me.form.FormClassName"/>
+        </Or>
+    </Match>
+
+    <!-- Not checked as exposure of arrays does not usually cause issues in commercial apps -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+
+    <!-- Specified as a class not subject to API check tools that can be set to block usage -->
+    <Match>
+        <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
+        <Class name="please.change.me.ClassName"/>
+        <Method name="bar" params="java.lang.String, int"/>
+    </Match>
+
+    <!-- All inspections are set as exempt from testing -->
+    <Match>
+        <Or>
+            <Package name="please.change.me.generated"/>
+            <Class name="~please\.change\.me\..+Impl"/>
+        </Or>
+    </Match>
+
+</FindBugsFilter>
+

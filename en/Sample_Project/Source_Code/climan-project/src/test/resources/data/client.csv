@@ -1,0 +1,7 @@
+CLIENT_ID,CLIENT_NAME,INDUSTRY_CODE
+"1","Test company1(Agriculture)","01"
+"2","Test company2(Agriculture)","01"
+"3","Test company2(Construction)","02"
+"4","Test company3(Agriculture)","01"
+"5","Test company3(Construction)","02"
+"6","Test company3(Production)","03"
