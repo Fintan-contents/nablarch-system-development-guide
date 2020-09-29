@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+    <!-- File path definition -->
+    <component name="filePathSetting" class="nablarch.core.util.FilePathSetting" autowireType="None">
+        <property name="basePathSettings">
+            <map>
+                <!-- Directory for storing format definition files -->
+                <entry key="format" value="${nablarch.filePathSetting.basePathSettings.format}" />
+                <!-- Output directory -->
+                <entry key="output" value="${nablarch.filePathSetting.basePathSettings.output}" />
+                <!-- CSV output directory -->
+                <entry key="csv_output" value="${nablarch.filePathSetting.basePathSettings.csv_output}" />
+                <!-- Directory for storing batch input files -->
+                <entry key="input" value="${nablarch.filePathSetting.basePathSettings.input}" />
+            </map>
+        </property>
+        <property name="fileExtensions">
+            <map>
+                <!-- Format definition file extension -->
+                <entry key="format" value="fmt" />
+                <entry key="csv_output" value="csv" />
+            </map>
+        </property>
+    </component>
+
+</component-configuration>

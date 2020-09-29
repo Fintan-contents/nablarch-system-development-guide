@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- Table definitions -->
+  <import file="nablarch/schema-config.xml" />
+
+  <!-- Code features -->
+  <import file="nablarch/common/code.xml"/>
+
+  <!-- Character set definitions used for scanning -->
+  <import file="nablarch/core/validation/charset-definition.xml" />
+
+  <!-- ClimanDomainManager implementation class settings -->
+  <component name="domainManager" class="com.nablarch.example.climan.common.validation.ClimanDomainManager"/>
+
+  <!-- BeanValidation implementation class -->
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
+
+  <!-- Environment settings file -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!-- Database settings -->
+  <!--
+  The following settings file is used to look up connections using JNDI
+  Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for looking up in the config file.
+
+  When acquiring a connection from a local data source, refer to db-for-webui_dev.xml in the next project generated from the archetype.
+  -->
+  <import file="nablarch/webui/db-for-webui.xml"/>
+
+  <!-- Thread context features -->
+  <import file="com/nablarch/example/climan/web/webui/threadcontext-for-webui.xml" />
+
+  <!-- Package mapping settings -->
+  <component name="packageMapping" class="nablarch.integration.router.RoutesMapping">
+    <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+    <property name="methodBinderFactory">
+      <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+        <property name="handlerList">
+          <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory">
+            <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+          </component>
+        </property>
+      </component>
+    </property>
+  </component>
+
+  <!-- response handler settings -->
+  <component name="jaxRsResponseHandler" class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+    <property name="errorResponseBuilder">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
+        <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
+      </component>
+    </property>
+    <property name="errorLogWriter">
+      <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsErrorLogWriter" />
+    </property>
+  </component>
+
+  <!-- Dialect settings -->
+  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
+
+  <!-- Configuring PropertiesStringResourceLoader to default language as English -->
+  <component class="nablarch.core.cache.BasicStaticDataCache" name="messageCache">
+    <property name="loader">
+      <component class="nablarch.core.message.PropertiesStringResourceLoader">
+        <property name="defaultLocale" value="en" />
+      </component>
+    </property>
+  </component>
+  <component name="stringResourceHolder" class="nablarch.core.message.StringResourceHolder">
+    <property name="stringResourceCache" ref="messageCache" />
+  </component>
+
+  <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
+
+
+  <!-- Handler queue configuration -->
+  <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <!-- add -->
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component-ref name="jaxRsResponseHandler" />
+
+        <!-- add -->
+        <component-ref name="threadContextHandler"/>
+
+        <!-- add -->
+        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <!-- Components requiring initialization -->
+  <component name="initializer" class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- Package mapping -->
+        <component-ref name="packageMapping" />
+        <!-- Code loader -->
+        <component-ref name="codeLoader" />
+        <!-- Code cache -->
+        <component-ref name="codeCache" />
+        <!-- Message cache -->
+        <component-ref name="messageCache" />
+      </list>
+    </property>
+  </component>
+
+</component-configuration>

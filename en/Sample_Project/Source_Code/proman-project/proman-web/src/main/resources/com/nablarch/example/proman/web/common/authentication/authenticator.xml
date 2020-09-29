@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Authentication settings file
+-->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- Authentication module settings -->
+  <component name="authenticator"
+      class="com.nablarch.example.proman.web.common.authentication.SystemAccountAuthenticator">
+    <property name="dbManager">
+      <component
+          class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="authenticator" />
+        <property name="transactionFactory" ref="transactionFactory" />
+        <property name="connectionFactory" ref="connectionFactory" />
+      </component>
+    </property>
+    <!-- Number of authentication failures before locking the user ID -->
+    <property name="failedCountToLock" value="3" />
+  </component>
+
+</component-configuration>

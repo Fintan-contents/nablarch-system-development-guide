@@ -1,0 +1,10 @@
+version: 1
+rules:
+  - expected: Remote development
+    pattern: Remote work
+  - expected: Us
+    pattern: Nablarch team
+  - expected: PGUT phase
+    pattern: PGUT phase
+  - expected: Nablarch system development guide
+    pattern: Nablarch development guide
