@@ -66,9 +66,16 @@
       <property name="tokens" value="ASSIGN"/>
     </module>
     <module name="InterfaceTypeParameterName"/>
+    <module name="MissingJavadocType">
+      <property name="scope" value="private"/>
+      <property name="severity" value="error"/>
+    </module>
+    <module name="MissingJavadocMethod">
+      <property name="scope" value="private"/>
+      <property name="severity" value="error"/>
+    </module>
     <module name="JavadocMethod">
       <property name="severity" value="error"/>
-      <property name="allowUndeclaredRTE" value="true"/>
     </module>
     <module name="JavadocType">
       <property name="severity" value="error"/>
@@ -79,11 +86,6 @@
     </module>
     <module name="LambdaParameterName"/>
     <module name="LeftCurly"/>
-    <module name="LineLength">
-      <property name="ignorePattern" value="^import"/>
-      <property name="max" value="150"/>
-      <property name="tabWidth" value="4"/>
-    </module>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
     <module name="MemberName"/>
@@ -190,6 +192,12 @@
 
   <module name="FileLength">
     <property name="severity" value="error"/>
+  </module>
+
+  <module name="LineLength">
+    <property name="ignorePattern" value="^import"/>
+    <property name="max" value="150"/>
+    <property name="tabWidth" value="4"/>
   </module>
 
   <module name="FileTabCharacter">
