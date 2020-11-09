@@ -8,6 +8,8 @@
 - サンプルプロジェクトの改善
   - CheckStyleのバージョンを8.29にバージョンアップしました。
     バージョンが古く、不正なXMLを読み込ませることでXXE攻撃成立の可能性があったためです。
+  - 使用しているJUnitを4.13.1に更新しました。  
+    [Security fix: TemporaryFolder now limits access to temporary folders on Java 1.7 or later](https://github.com/junit-team/junit4/blob/HEAD/doc/ReleaseNotes4.13.1.md#security-fix-temporaryfolder-now-limits-access-to-temporary-folders-on-java-17-or-later) の適用のためです。
 
 ## 3.1 (2020-09-29)
 ### 更新内容
