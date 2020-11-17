@@ -20,7 +20,7 @@
     <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
     <!--suppress UnresolvedMavenProperty -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
-    <version.plugins.checkstyle>3.0.0</version.plugins.checkstyle>
+    <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
     <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
     <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
@@ -444,7 +444,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.11</version>
+            <version>8.29</version>
           </dependency>
         </dependencies>
         <configuration>
