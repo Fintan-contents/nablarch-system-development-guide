@@ -3,7 +3,7 @@
 本プロジェクトのWebアプリケーションでは、プロジェクト独自のテスト方法を定義しています。
 （[単体テストの考え方（Web）](単体テストの考え方（Web）.md)）
 
-RESTでは、原則として[Nablarch標準のテスト方法](https://nablarch.github.io/docs/LATEST/doc/development_tools/rest_testing_framework/02_development_guide/index.html)を踏襲します。
+RESTでは、原則として[Nablarch標準のテスト方法](https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/index.html)を踏襲します。
 
 開発者が作成する成果物とそのテスト方法を記載します。
 
