@@ -12,17 +12,17 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
 /**
- * 顧客管理システム向けRESTfulウェブサービステストサポートクラス。
- * 顧客管理システムで使用するレスポンスのアサーションをもつ。
+ * RESTful web service test support class for client management system.
+ * It has response assertions for use in client management systems.
  */
 public class ClimanRestTestSupport extends RestTestSupport {
     /**
-     * レスポンスのボディが期待値ファイルに一致することを確認する。
+     * Test that the body of the response matches the expected value file.
      *
-     * @param message          メッセージ
-     * @param response         レスポンス
-     * @param expectedFileName 期待値のファイル名
-     * @throws JSONException JSONのパース失敗時例外
+     * @param message          Message
+     * @param response         Response
+     * @param expectedFileName Expected file name
+     * @throws JSONException Exception when JSON parsing fails
      */
     protected void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
         JSONAssert.assertEquals(message, readTextResource(expectedFileName)
@@ -30,18 +30,18 @@ public class ClimanRestTestSupport extends RestTestSupport {
     }
 
     /**
-     * 障害コードと障害メッセージを確認する。
+     * Test fault code and fault message.
      *
-     * @param message   メッセージ
-     * @param response  レスポンス
-     * @param faultCode 期待される障害コード
-     * @param size      期待される障害メッセージサイズ
-     * @param messages  期待される障害メッセージ
+     * @param message   Message
+     * @param response  Response
+     * @param faultCode Expected fault code
+     * @param size      Expected fault message size
+     * @param messages  Expected fault message
      */
     protected void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
         with(response.getBodyString())
-                .assertThat("$.fault_code", equalTo(faultCode), message + "[障害コード]")
-                .assertThat("$.messages", hasSize(size), message + "[障害メッセージサイズ]")
-                .assertThat("$.messages", hasItems(messages), message + "[障害メッセージ]");
+                .assertThat("$.fault_code", equalTo(faultCode), message + "[fault code]")
+                .assertThat("$.messages", hasSize(size), message + "[fault message size]")
+                .assertThat("$.messages", hasItems(messages), message + "[fault message]");
     }
 }
