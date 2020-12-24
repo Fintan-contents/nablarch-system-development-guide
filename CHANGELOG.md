@@ -2,7 +2,7 @@
 
 このプロジェクトに対するすべての重要な変更は、このファイルに文書化されます。
 
-## 3.2 (2021-xx-xx)
+## 3.3 (2021-xx-xx)
 ### 更新内容
 #### 変更
 - サンプルプロジェクトの改善
@@ -10,6 +10,10 @@
     バージョンが古く、不正なXMLを読み込ませることでXXE攻撃成立の可能性があったためです。
   - 使用しているJUnitを4.13.1に更新しました。  
     [Security fix: TemporaryFolder now limits access to temporary folders on Java 1.7 or later](https://github.com/junit-team/junit4/blob/HEAD/doc/ReleaseNotes4.13.1.md#security-fix-temporaryfolder-now-limits-access-to-temporary-folders-on-java-17-or-later) の適用のためです。
+## 3.2 (2020-12-23)
+### 更新内容
+#### 変更
+- 英語版を更新。内容は日本語版のバージョン3.1に準ずる。
 
 ## 3.1 (2020-09-29)
 ### 更新内容

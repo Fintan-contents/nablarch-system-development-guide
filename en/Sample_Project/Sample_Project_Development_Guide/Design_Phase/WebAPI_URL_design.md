@@ -20,11 +20,44 @@ rules for URL design are minimized.
 ## Routing example
 
 Specific examples of routing settings are given below.
+In this project, use [routing by Path annotation in JAX-RS](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/adaptors/router_adaptor.html#mapping-in-jax-rs-path-annotation).
 
-```xml
-  <get    path="/customer"     to="Customer#list" />
-  <get    path="/customer/:id" to="Customer#show" />
-  <post   path="/customer"     to="Customer#register" />
-  <put    path="/customer/:id" to="Customer#update" />
-  <delete path="/customer/:id" to="Customer#delete" />
+
+```java
+@Path("/client")
+public class ClientAction {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Client> list(HttpRequest request, ExecutionContext context) {
+      // Omitted
+    }
+
+    @GET
+    @Path("/{clientId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Client show(HttpRequest request, ExecutionContext context) {
+      // Omitted
+    }
+
+    @POST
+    @Valid
+    @Consumes(MediaType.APPLICATION_JSON)
+    public HttpResponse register(ClientForm form) {
+      // Omitted
+    }
+
+    @PUT
+    @Path("/{clientId}")
+    @Valid
+    @Consumes(MediaType.APPLICATION_JSON)
+    public HttpResponse update(ClientForm form) {
+      // Omitted
+    }
+
+    @DELETE
+    @Path("/{clientId}")
+    public HttpResponse delete(HttpRequest request, ExecutionContext context) {
+      // Omitted
+    }
+}
 ```

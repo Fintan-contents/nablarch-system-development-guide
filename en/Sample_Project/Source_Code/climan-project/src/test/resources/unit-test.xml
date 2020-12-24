@@ -8,42 +8,27 @@
   <import file="override_dev.xml" />
 
   <!-- Testing framework settings -->
+  <import file="nablarch/test/test-data.xml"/>
   <import file="nablarch/test/test-transaction.xml"/>
+  <import file="nablarch/test/rest-request-test.xml"/>
 
-  <!-- TODO: Set according to the database that is used. -->
-  <!-- Settings for Oracle -->
-  <!--
-    <import file="nablarch/test/test-db-info-oracle.xml"/>
-  -->
+  <component name="restMockHttpRequestBuilder" class="nablarch.fw.web.RestMockHttpRequestBuilder">
+    <property name="defaultContentType" value="application/json"/>
+    <property name="bodyConverters">
+      <list>
+        <component class="com.nablarch.example.climan.rest.common.web.ClimanJacksonBodyConverter"/>
+        <component class="nablarch.fw.web.StringBodyConverter"/>
+      </list>
+    </property>
+  </component>
+
   <!-- General database settings -->
   <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
     <property name="dataSource" ref="dataSource"/>
     <property name="schema" value="${nablarch.db.schema}"/>
   </component>
 
-  <!--
-  Master data recovery settings
-  The process for restoring master data consists of several steps.
-  Refer to the procedures for adding and changing settings when configuring these settings.
-  -->
-  <component name="masterDataRestorer"
-             class="nablarch.test.core.db.MasterDataRestorer">
-    <!-- Backup schema -->
-    <property name="backupSchema" value="customer"/>
-    <!-- List of tables for monitoring -->
-    <property name="tablesTobeWatched">
-      <list></list>
-    </property>
-  </component>
-
   <!-- Define Jetty6 as a test HttpServer -->
   <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
-  <!-- Register master data recovery feature -->
-<!--
-  <list name="testEventListeners">
-    <component class="nablarch.test.RepositoryInitializer"/>
-    <component-ref name="masterDataRestorer"/>
-  </list>
--->
 
 </component-configuration>
