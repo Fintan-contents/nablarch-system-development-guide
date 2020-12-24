@@ -19,7 +19,7 @@ public class ServiceClassRuleTest {
      * If you have DaoContext in a field, it is private_final but not static.
      */
     @ArchTest
-    public static final ArchRule DaoContextをfieldに持つ場合private_finalであるがstaticじゃないこと =
+    public static final ArchRule ifYouHaveDaoContextAsFieldItMustBePrivateFinalButNotStatic =
             ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
                 .and().areDeclaredInClassesThat().haveSimpleNameEndingWith("Service")
                 .should().bePrivate()
@@ -30,7 +30,7 @@ public class ServiceClassRuleTest {
      * The constructor with DaoContext as an argument must be package_private.
      */
     @ArchTest
-    public static final ArchRule DaoContextを引数に持つコンストラクタはpackage_privateであること =
+    public static final ArchRule constructorWithDaoContextAsArgumentMustBePackagePrivate =
             ArchRuleDefinition.constructors().that().haveRawParameterTypes(DaoContext.class)
                 .and().areDeclaredInClassesThat().haveSimpleNameEndingWith("Service")
                 .should().bePackagePrivate();

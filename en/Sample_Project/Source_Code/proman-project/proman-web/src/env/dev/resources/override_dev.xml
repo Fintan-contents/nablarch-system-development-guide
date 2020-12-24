@@ -11,5 +11,7 @@
   -->
   <import file="db-for-webui_dev.xml"/>
 
+  <!-- Disable the CSRF token verification handler as it is not needed for local development environment builds. -->
+  <component name="csrfTokenVerificationHandler" class="com.nablarch.example.proman.common.handler.PassThroughHandler" />
 
 </component-configuration>

@@ -1,32 +1,46 @@
 # Unit Test Concept (REST)
 
-The unit test of REST in this project is essentially the same as the [Web](./Unit_test_concept_(Web).md).
-JSP is excluded as it is not registered in REST.
+This project's web application has defined its own test method for the project.
+（[Unit Test Concept (Web)](./Unit_test_concept_(Web).md)）
 
-The method of the subfunction unit test is described as it is different.
+In principle, REST follows [Nablarch standard testing method](https://nablarch.github.io/docs/LATEST/doc/en/development_tools/testing_framework/index.html).
 
-## Subfunction unit test
+Describes the deliverables to be created by the developer and how they will be tested.
 
-[curl（cURL）](https://curl.haxx.se/) instead of a browser is used for the subfunction unit test of REST.
-This is followed due to the following reasons.
+| Deliverables  | Theoretical | Class      | Request |
+| ------------- | ----------- | ---------- | ------- |
+| Action        |             |            | X       |
+| Form          | X           | X          | X       |
+| Domain class  | X           |            | X       |
+| Service       |             | X          | X       |
+| SQL file      | X           |            | X       |
+| Entity        |             |            | X       |
+| DTO           |             |            | X       |
 
-- Reproducibility
-  - Saving the text makes it easy to reproduce the request
-- Ease of implementation
-  - Information is readily available and many developers are already proficient
-  - Available as standard on Windows and can be used immediately
-  - The number of APIs in this project is small, and large-scale test tools are not required
-- Continuation
-  - Widely used, unlikely to not be available in the future
+## Action
 
+operation is checked with request unit test.
 
-## Reference: Test automation concept
+## Form
 
-In the case of a normal web application, there are points that humans need to check visually (whether the layout is off).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
 
-For REST, automation of testing is relatively easy as there are no verification points that require such visual observation.
+## Domain class
 
-In this project, since the number of WebAPIs to be provided is small and the processing is not complicated, E2E tests were not introduced,
-and the manual test was selected for the subfunction unit test.
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
 
+## Service
 
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+
+## SQL file
+
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+
+## Entity
+
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+
+## DTO
+
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).

@@ -22,7 +22,7 @@ public class GeneralCodingRuleForWebTest {
      * Do not use SessionKeyNotFoundException outside of the base.
      */
     @ArchTest
-    public static final ArchRule 基盤以外でSessionKeyNotFoundExceptionを使用しないこと =
+    public static final ArchRule doNotUseSessionKeyNotFoundExceptionOutsideOfTheInfrastructure =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
                     .should().dependOnClassesThat().areAssignableTo(SessionKeyNotFoundException.class);
 
@@ -30,7 +30,7 @@ public class GeneralCodingRuleForWebTest {
      * No classes using OptimisticLockException in any package other than the base.
      */
     @ArchTest
-    public static final ArchRule 基盤以外のパッケージでOptimisticLockExceptionを使用しているクラスがないこと =
+    public static final ArchRule thereAreNoClassesThatUseOptimisticLockExceptionInPackagesOtherThanTheInfrastructure =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
                     .should().dependOnClassesThat().areAssignableTo(OptimisticLockException.class);
 
@@ -38,7 +38,7 @@ public class GeneralCodingRuleForWebTest {
      * No classes using NoDataException in non-instrumental packages.
      */
     @ArchTest
-    public  static  final ArchRule 基盤以外のパッケージでNoDataExceptionを使用しているクラスがないこと =
+    public  static  final ArchRule noClassesUsingNoDataExceptionInPackagesOtherThanTheInfrastructure =
             ArchRuleDefinition.noClasses().that().resideOutsideOfPackage("..common..")
             .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
 

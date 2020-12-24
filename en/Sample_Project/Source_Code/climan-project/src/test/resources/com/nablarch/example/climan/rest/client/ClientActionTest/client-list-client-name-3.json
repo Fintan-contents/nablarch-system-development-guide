@@ -1,0 +1,17 @@
+[
+  {
+    "client_id": 5,
+    "client_name": "Test Company 3 (Construction)",
+    "industry_code": "02"
+  },
+  {
+    "client_id": 6,
+    "client_name": "Test Company 3 (Manufacturing)",
+    "industry_code": "03"
+  },
+  {
+    "client_id": 4,
+    "client_name": "Test Company 3 (Agriculture)",
+    "industry_code": "01"
+  }
+]

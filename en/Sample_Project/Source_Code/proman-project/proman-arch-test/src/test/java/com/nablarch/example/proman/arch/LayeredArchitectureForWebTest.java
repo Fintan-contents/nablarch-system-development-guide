@@ -19,7 +19,7 @@ public class LayeredArchitectureForWebTest {
      * Testing application structure.
      */
     @ArchTest
-    public static final ArchRule アプリケーション構成のテスト = Architectures.layeredArchitecture()
+    public static final ArchRule testingTheApplicationStructure = Architectures.layeredArchitecture()
             .layer("Action").definedBy(JavaClass.Predicates.simpleNameEndingWith("Action"))
             .layer("Service").definedBy(JavaClass.Predicates.simpleNameEndingWith("Service"))
             .layer("Form").definedBy(JavaClass.Predicates.simpleNameEndingWith("Form"))

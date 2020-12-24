@@ -8,6 +8,8 @@ Supplementary notes:
 The link between the method name of the Action class and URL is performed in the following configuration file.   
 `proman-web/src/main/resources/routes.xml`
 
+Supplementary notes:
+For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/WebAPI_URL_design.md).
 
 ## JSP
 ### Naming the deployment location
