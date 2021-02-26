@@ -6,10 +6,13 @@
 ### 更新内容
 #### 変更
 - サンプルプロジェクトの改善
-  - CheckStyleのバージョンを8.29にバージョンアップしました。
+  - CheckStyleのバージョンを8.29にバージョンアップしました。  
     バージョンが古く、不正なXMLを読み込ませることでXXE攻撃成立の可能性があったためです。
   - 使用しているJUnitを4.13.1に更新しました。  
     [Security fix: TemporaryFolder now limits access to temporary folders on Java 1.7 or later](https://github.com/junit-team/junit4/blob/HEAD/doc/ReleaseNotes4.13.1.md#security-fix-temporaryfolder-now-limits-access-to-temporary-folders-on-java-17-or-later) の適用のためです。
+  - jackson-databindを2.10.5.1にバージョンアップしました。  
+    [CVE-2020-25649](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25649)対応の適用のためです。サンプルプロジェクトはCVE-2020-25649の影響を受ける機能は使用していませんが、参考にする方が誤って古いバージョンを使用しないようにするためバージョンアップをしました。
+
 ## 3.2 (2020-12-23)
 ### 更新内容
 #### 変更
