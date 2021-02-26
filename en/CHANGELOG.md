@@ -2,6 +2,15 @@
 
 All significant changes to this project will be documented in this file.
 
+## 3.3 (2021-xx-xx)
+### Updates
+#### Change
+- Improve the sample project
+  - CheckStyle version upgraded to 8.29.  
+    This was because the version was outdated and there was a possibility that an XXE attack could be launched by loading invalid XML.
+  - JUnit version upgraded to 4.13.1.  
+    This is to apply the [Security fix: TemporaryFolder now limits access to temporary folders on Java 1.7 or later](https://github.com/junit-team/junit4/blob/HEAD/doc/ReleaseNotes4.13.1.md#security-fix-temporaryfolder-now-limits-access-to-temporary-folders-on-java-17-or-later) .
+
 ## 3.2 (2020-12-23)
 ### Updates
 #### Change
