@@ -19,4 +19,4 @@ It can be used in conjunction with running SpotBugs to detect security-related b
 
 Please check the official website for details of bugs that can be detected.
 
-- [Bugs Patterns](https://find-sec-bugs.github.io/bugs_ja.htm)
+- [Bugs Patterns](https://find-sec-bugs.github.io/bugs.htm)

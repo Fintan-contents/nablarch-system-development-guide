@@ -12,6 +12,7 @@ All significant changes to this project will be documented in this file.
     This is to apply the [Security fix: TemporaryFolder now limits access to temporary folders on Java 1.7 or later](https://github.com/junit-team/junit4/blob/HEAD/doc/ReleaseNotes4.13.1.md#security-fix-temporaryfolder-now-limits-access-to-temporary-folders-on-java-17-or-later) .
   - jackson-databind version upgraded to 2.10.5.1.  
     This is to apply the [CVE-2020-25649](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25649) issue fix. The sample project does not use any features affected by CVE-2020-25649, but upgraded it to avoid accidentally using an older version for reference.
+  - Added a user guide for Find Security Bugs.
 
 ## 3.2 (2020-12-23)
 ### Updates

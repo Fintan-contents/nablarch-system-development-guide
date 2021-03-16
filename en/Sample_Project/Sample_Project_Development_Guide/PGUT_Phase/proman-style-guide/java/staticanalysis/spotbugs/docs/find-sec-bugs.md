@@ -3,7 +3,7 @@
 Find Security Bugs is the SpotBugs plugin.
 You can use it by simply configuring the plugin in `pom.xml`.
 
-For information on how to exclude checks and how to perform checks, see [Method to Run SpotBugs in Maven](. /Maven-settings.md) and [Method to Collect SpotBugs Execution Results in Jenkins](. /Jenkins-settings.md).
+For information on how to exclude checks and how to perform checks, see [Method to Run SpotBugs in Maven](./Maven-settings.md) and [Method to Collect SpotBugs Execution Results in Jenkins](./Jenkins-settings.md).
 
 ## Incorporate the Find Security Bugs plugin into the SpotBugs Maven Plugin
 

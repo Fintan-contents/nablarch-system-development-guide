@@ -13,7 +13,7 @@
 ## Find Security Bugs の利用方法
 
 Find Security Bugs はセキュリティ監査用のSpotBugsプラグインです。
-SpotBugsの実行と合わせてセキュリティ関連のバグを検出できます。
+SpotBugsの実行時に合わせてセキュリティ関連のバグを検出できます。
 
 - [Find Security Bugsの利用方法](./find-sec-bugs.md)
 
