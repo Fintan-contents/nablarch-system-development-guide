@@ -2,7 +2,7 @@
 
 All significant changes to this project will be documented in this file.
 
-## 3.3 (2021-xx-xx)
+## 3.3 (2021-03-31)
 ### Updates
 #### Change
 - Improve the sample project
