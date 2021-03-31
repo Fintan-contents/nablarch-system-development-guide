@@ -13,6 +13,12 @@ Configure the initial user and password for PostgreSQL as follows.
 
 ## Launching method
 
+Run the following command in proman-project.
+```
+$cd proman-common
+$mvn install
+```
+
 Run the following command in the proman-common module.
 ```
 $cd proman-common

@@ -85,7 +85,7 @@ public class ProjectDto {
 
     /**
      * Project name setter
-     * @param projectNameProject name
+     * @param projectName name
      */
     public void setProjectName(String projectName) {
         this.projectName = projectName;

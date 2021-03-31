@@ -63,7 +63,7 @@ public class LoginAction {
         // after the session prior to login is discarded and the authentication information is stored in the (new) session.
         SessionUtil.invalidate(context);
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
-        SessionUtil.put(context, "userContext", userContext, "httpSession");
+        SessionUtil.put(context, "userContext", userContext);
         return new HttpResponse(303, "redirect:///");
     }
 

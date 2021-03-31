@@ -244,7 +244,8 @@ public class ProjectSearchForm extends SearchFormBase implements Serializable {
      * Set end date from.
      *
      * @param projectEndDateFrom end date from
-     */ void setProjectEndDateFrom(String projectEndDateFrom) {
+     */
+    void setProjectEndDateFrom(String projectEndDateFrom) {
         this.projectEndDateFrom = projectEndDateFrom;
     }
 

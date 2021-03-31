@@ -5,6 +5,11 @@ import nablarch.common.handler.threadcontext.UserIdAttribute;
 import nablarch.common.web.session.SessionUtil;
 import nablarch.fw.ExecutionContext;
 
+/**
+ * スレッドコンテキストに保持するユーザID属性。
+ *
+ * @author Masaya Seko
+ */
 public class SessionStoreUserIdAttribute extends UserIdAttribute {
     @Override
     protected Object getUserIdSession(ExecutionContext ctx, String skey) {

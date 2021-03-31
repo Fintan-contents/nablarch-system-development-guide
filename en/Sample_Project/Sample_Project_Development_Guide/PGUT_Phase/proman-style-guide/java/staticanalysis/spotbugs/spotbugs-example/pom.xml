@@ -20,7 +20,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -51,6 +51,11 @@
               <groupId>com.nablarch.framework</groupId>
               <artifactId>nablarch-testing</artifactId>
               <version>1.2.0</version>
+            </plugin>
+            <plugin>
+              <groupId>com.h3xstream.findsecbugs</groupId>
+              <artifactId>findsecbugs-plugin</artifactId>
+              <version>1.11.0</version>
             </plugin>
           </plugins>
         </configuration>
