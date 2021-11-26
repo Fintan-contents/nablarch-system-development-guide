@@ -25,6 +25,8 @@
 
   <properties>
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
+    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
+    <version.spotbugs>4.5.0</version.spotbugs>
     <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
     <!--
     Path to tools directory. Indicates tools one level above the directory of individual modules executed by a tool (indicates this directory).
@@ -37,7 +39,7 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.3</version>
+        <version>${version.plugins.spotbugs}</version>
         <configuration>
           <xmlOutput>true</xmlOutput>
           <xmlOutputDirectory>target/site</xmlOutputDirectory>
@@ -112,12 +114,12 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>3.1.3</version>
+          <version>${version.plugins.spotbugs}</version>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>3.1.3</version>
+              <version>${version.spotbugs}</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -131,8 +133,8 @@
             <plugins>
               <plugin>
                 <groupId>com.nablarch.framework</groupId>
-                <artifactId>nablarch-testing</artifactId>
-                <version>1.2.0</version>
+                <artifactId>nablarch-unpublished-api-checker</artifactId>
+                <version>5-NEXT-SNAPSHOT</version>
               </plugin>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
