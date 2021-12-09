@@ -2,7 +2,7 @@
 
 この文書ではMavenでSpotBugsの実行をするための設定方法と実行方法をガイドします。
 
-なお、この文書の内容はMaven 3.5.2で動作検証を行っています。
+なお、この文書の内容はMaven 3.6.3で動作検証を行っています。
 
 ## チェックを除外するフィルターファイルを配置する
 
@@ -29,12 +29,12 @@
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>3.1.3</version>
+  <version>4.5.0.0</version>
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs</artifactId>
-      <version>3.1.3</version>
+      <version>4.5.0</version>
     </dependency>
   </dependencies>
   <configuration>
@@ -48,8 +48,8 @@
     <plugins>
       <plugin>
         <groupId>com.nablarch.framework</groupId>
-        <artifactId>nablarch-testing</artifactId>
-        <version>1.2.0</version>
+        <artifactId>nablarch-unpublished-api-checker</artifactId>
+        <version>1.0.0</version>
       </plugin>
     </plugins>
   </configuration>
@@ -81,7 +81,7 @@ mvn spotbugs:check
 もしチェック違反がある場合は次のように指摘内容がコンソールに出力されます。
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
@@ -91,7 +91,7 @@ mvn spotbugs:check
 すべてのチェックをパスした場合は次のようにコンソールに出力されます。
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 0
 [INFO] Error size is 0
 [INFO] No errors/warnings found

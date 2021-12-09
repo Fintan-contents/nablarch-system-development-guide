@@ -13,15 +13,15 @@ Edit `pom.xml`.
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>3.1.3</version>
+  <version>4.5.0.0</version>
   <!-- omission  -->
   <configuration>
     <!-- omission  -->
     <plugins>
       <plugin>
         <groupId>com.nablarch.framework</groupId>
-        <artifactId>nablarch-testing</artifactId>
-        <version>1.2.0</version>
+        <artifactId>nablarch-unpublished-api-checker</artifactId>
+        <version>1.0.0</version>
       </plugin>
       <!-- Add the following -->
       <plugin>
