@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u16</version>
+    <version>5-NEXT-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u18</version>
+        <version>5-NEXT-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
