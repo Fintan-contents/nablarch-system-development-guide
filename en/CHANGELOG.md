@@ -2,6 +2,20 @@
 
 All significant changes to this project will be documented in this file.
 
+## 3.4 (2022-03-31)
+
+- Improve the style guide
+  
+  - SpotBugs maven plugin version upgraded to 4.5.0.0
+    This is to increase the number of detectable bugs by keeping up with the latest version.
+    (SpotBugs4.X also experimentally supports Java 11 and newer.)
+  - Replaced with the unpublised API checker that is compatible with SpotBugs 4.X.
+  
+- Improve the sample project
+
+  - SpotBugs maven plugin version upgraded to 4.5.0.0
+  - Replaced with the unpublised API checker that is compatible with SpotBugs 4.X.
+
 ## 3.3 (2021-03-31)
 ### Updates
 #### Change
