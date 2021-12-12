@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5-NEXT-SNAPSHOT</version>
+    <version>5u21</version>
   </parent>
 
   <groupId>com.nablarch.example.climan</groupId>
@@ -275,7 +275,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5-NEXT-SNAPSHOT</version>
+        <version>5u21</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -487,7 +487,7 @@
             <plugin>
               <groupId>com.nablarch.framework</groupId>
               <artifactId>nablarch-unpublished-api-checker</artifactId>
-              <version>5-NEXT-SNAPSHOT</version>
+              <version>1.0.0</version>
             </plugin>
             <plugin>
               <groupId>com.h3xstream.findsecbugs</groupId>

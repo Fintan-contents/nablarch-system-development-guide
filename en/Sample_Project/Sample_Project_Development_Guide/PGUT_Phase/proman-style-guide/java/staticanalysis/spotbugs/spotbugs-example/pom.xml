@@ -50,7 +50,7 @@
             <plugin>
               <groupId>com.nablarch.framework</groupId>
               <artifactId>nablarch-unpublished-api-checker</artifactId>
-              <version>5-NEXT-SNAPSHOT</version>
+              <version>1.0.0</version>
             </plugin>
             <plugin>
               <groupId>com.h3xstream.findsecbugs</groupId>
