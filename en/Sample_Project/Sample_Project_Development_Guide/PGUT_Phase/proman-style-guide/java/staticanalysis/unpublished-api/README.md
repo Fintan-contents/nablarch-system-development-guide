@@ -223,9 +223,9 @@ Install SpotBugs Eclipse plugin from the eclipse marketplace.
 Open SpotBugs item from the Eclipse settings.
 
 Open the "Plugin and misc. Settings" tab and press the "Add" button. 
-Select `nablarch-testing-<version>.jar`.
+Select `nablarch-unpublished-api-checker-<version>.jar`.
 
-`nablarch-testing-<version>.jar` should be stored in the local repository of Maven. 
+`nablarch-unpublished-api-checker-<version>.jar` should be stored in the local repository of Maven. 
 The local repository of Maven is the `.m2\repository` directory under the home directory.
 
 ![](./assets/add-spotbugs-eclipse-plugin.png)

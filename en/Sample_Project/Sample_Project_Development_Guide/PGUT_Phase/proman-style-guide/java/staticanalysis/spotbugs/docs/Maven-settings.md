@@ -2,7 +2,7 @@
 
 This document will guide you how to configure and run SpotBugs with Maven.
 
-The contents of this document have been verified with Maven 3.5.2.
+The contents of this document have been verified with Maven 3.6.3.
 
 ## Deploy filter files to exclude checks
 
@@ -29,12 +29,12 @@ The location to add the configuration is directly under `build`, which is direct
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>3.1.3</version>
+  <version>4.5.0.0</version>
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs</artifactId>
-      <version>3.1.3</version>
+      <version>4.5.0</version>
     </dependency>
   </dependencies>
   <configuration>
@@ -48,8 +48,8 @@ The location to add the configuration is directly under `build`, which is direct
     <plugins>
       <plugin>
         <groupId>com.nablarch.framework</groupId>
-        <artifactId>nablarch-testing</artifactId>
-        <version>1.2.0</version>
+        <artifactId>nablarch-unpublished-api-checker</artifactId>
+        <version>1.0.0</version>
       </plugin>
     </plugins>
   </configuration>
@@ -81,7 +81,7 @@ mvn spotbugs:check
 If there is a check violation, the following points are output to the console:
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
@@ -91,7 +91,7 @@ If there is a check violation, the following points are output to the console:
 If all checks are passed, they are output to the console as follows:
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 0
 [INFO] Error size is 0
 [INFO] No errors/warnings found

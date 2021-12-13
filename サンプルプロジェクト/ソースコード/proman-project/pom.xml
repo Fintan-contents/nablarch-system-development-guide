@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u16</version>
+    <version>5u21</version>
     <relativePath/>
   </parent>
 
@@ -25,6 +25,8 @@
 
   <properties>
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
+    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
+    <version.spotbugs>4.5.0</version.spotbugs>
     <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
     <!--
     toolsディレクトリへのパス。ツールが実行される個別モジュールのディレクトリから見て1つ上（つまりこのディレクトリ）のtoolsを指す。
@@ -37,7 +39,7 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.3</version>
+        <version>${version.plugins.spotbugs}</version>
         <configuration>
           <xmlOutput>true</xmlOutput>
           <xmlOutputDirectory>target/site</xmlOutputDirectory>
@@ -52,7 +54,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u18</version>
+        <version>5u21</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -112,12 +114,12 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>3.1.3</version>
+          <version>${version.plugins.spotbugs}</version>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>3.1.3</version>
+              <version>${version.spotbugs}</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -131,8 +133,8 @@
             <plugins>
               <plugin>
                 <groupId>com.nablarch.framework</groupId>
-                <artifactId>nablarch-testing</artifactId>
-                <version>1.2.0</version>
+                <artifactId>nablarch-unpublished-api-checker</artifactId>
+                <version>1.0.0</version>
               </plugin>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>

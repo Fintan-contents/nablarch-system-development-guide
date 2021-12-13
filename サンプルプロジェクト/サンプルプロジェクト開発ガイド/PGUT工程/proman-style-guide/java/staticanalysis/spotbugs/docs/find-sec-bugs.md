@@ -13,15 +13,15 @@ Find Security BugsはSpotBugsのプラグインです。
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>3.1.3</version>
+  <version>4.5.0.0</version>
   <!-- 中略 -->
   <configuration>
     <!-- 中略 -->
     <plugins>
       <plugin>
         <groupId>com.nablarch.framework</groupId>
-        <artifactId>nablarch-testing</artifactId>
-        <version>1.2.0</version>
+        <artifactId>nablarch-unpublished-api-checker</artifactId>
+        <version>1.0.0</version>
       </plugin>
       <!-- 以下を追加 -->
       <plugin>
