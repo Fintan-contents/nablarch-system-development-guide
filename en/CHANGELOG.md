@@ -16,6 +16,7 @@ All significant changes to this project will be documented in this file.
   - SpotBugs maven plugin version upgraded to 4.5.0.0.
   - Replaced with the unpublised API checker that is compatible with SpotBugs 4.X.
   - Nablarch version upgraded to 5u21.
+  - Javax WS RS API upgrade to 2.1.1.
 
 ## 3.3 (2021-03-31)
 ### Updates
