@@ -18,7 +18,7 @@ The place to add the configuration is directly under the `dependencies` element.
   <dependencies>
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
-      <artifactId>archunit-junit4</artifactId>
+      <artifactId>archunit-junit5</artifactId>
       <version>0.13.1</version>
       <scope>test</scope>
     </dependency>

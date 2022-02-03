@@ -28,11 +28,10 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().
 
 If this check is done and the class name ends in `Action` but it is a package private,  in violation.
 
-By the way, if the above content is a test that can be executed by JUnit4, it would look like the following.
+By the way, if the above content is a test that can be executed by JUnit5, it would look like the following.
 
 ```java
  
-@RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class ActionRuleTest {
 

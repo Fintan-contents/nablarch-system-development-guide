@@ -27,11 +27,10 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().
 
 このチェックを行ったときにクラス名の末尾が `Action` であるのにパッケージプライベートであるクラスが存在すると違反をおかしていることになります。
 
-ちなみに、上記の内容をJUnit4で実行可能なテストとした場合、以下のようになります。
+ちなみに、上記の内容をJUnit5で実行可能なテストとした場合、以下のようになります。
 
 ```java
  
-@RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class ActionRuleTest {
 
