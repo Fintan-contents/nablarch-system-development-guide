@@ -16,6 +16,15 @@ import static org.hamcrest.Matchers.hasSize;
  * 顧客管理システムで使用するレスポンスのアサーションをもつ。
  */
 public class ClimanRestTestSupport extends RestTestSupport {
+
+    /**
+     * コンストラクタ。
+     * @param testClass  テストクラス
+     */
+    public ClimanRestTestSupport(Class<?> testClass) {
+        super(testClass);
+    }
+
     /**
      * レスポンスのボディが期待値ファイルに一致することを確認する。
      *
@@ -24,7 +33,7 @@ public class ClimanRestTestSupport extends RestTestSupport {
      * @param expectedFileName 期待値のファイル名
      * @throws JSONException JSONのパース失敗時例外
      */
-    protected void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
+    public void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
         JSONAssert.assertEquals(message, readTextResource(expectedFileName)
                 , response.getBodyString(), JSONCompareMode.LENIENT);
     }
@@ -38,7 +47,7 @@ public class ClimanRestTestSupport extends RestTestSupport {
      * @param size      期待される障害メッセージサイズ
      * @param messages  期待される障害メッセージ
      */
-    protected void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
+    public void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
         with(response.getBodyString())
                 .assertThat("$.fault_code", equalTo(faultCode), message + "[障害コード]")
                 .assertThat("$.messages", hasSize(size), message + "[障害メッセージサイズ]")
