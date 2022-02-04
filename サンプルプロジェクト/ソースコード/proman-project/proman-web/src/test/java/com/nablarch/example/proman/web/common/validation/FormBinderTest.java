@@ -7,10 +7,10 @@ import nablarch.core.validation.ee.Required;
 import nablarch.fw.web.HttpRequest;
 import nablarch.fw.web.MockHttpRequest;
 import nablarch.fw.web.servlet.ServletExecutionContext;
-import nablarch.test.TestSupport;
+import nablarch.test.junit5.extension.NablarchTest;
 import nablarch.test.support.web.servlet.MockServletContext;
 import nablarch.test.support.web.servlet.MockServletResponse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -18,20 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 import static nablarch.test.Assertion.fail;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FormBinderTest extends TestSupport {
-
+@NablarchTest
+class FormBinderTest {
     private Input input = new Input();
 
-    /** コンストラクタ */
-    public FormBinderTest() {
-        super(FormBinderTest.class);
-    }
-
     @Test
-    public void Formへの変換ができること() {
+    void Formへの変換ができること() {
         input.setParam("loginId", "aaa");
         input.setParam("loginPassword", "bbbb");
 
@@ -44,7 +40,7 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void prefix付きでFormへの変換ができること() {
+    void prefix付きでFormへの変換ができること() {
         input.setParam("prefix.loginId", "aaa");
         input.setParam("prefix.loginPassword", "bbbb");
 
@@ -58,7 +54,7 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void バリデーションエラーになること() {
+    void バリデーションエラーになること() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
@@ -76,8 +72,8 @@ public class FormBinderTest extends TestSupport {
 
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void バリデーションエラーの場合formは取得できないこと() {
+    @Test
+    void バリデーションエラーの場合formは取得できないこと() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
@@ -85,7 +81,7 @@ public class FormBinderTest extends TestSupport {
         assertThat(result.isValid(), is(false));
 
         // バリデーションに成功していない状態でフォームを取得しようとする
-        result.getValidForm();
+        assertThrows(IllegalStateException.class, result::getValidForm);
     }
 
     private static class Input {

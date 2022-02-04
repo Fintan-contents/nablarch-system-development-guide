@@ -17,6 +17,7 @@ All significant changes to this project will be documented in this file.
   - Replaced with the unpublised API checker that is compatible with SpotBugs 4.X.
   - Nablarch version upgraded to 5u21.
   - javax.ws.rs-api upgrade to 2.1.1.
+  - JUnit version upgrade to 5.8.2.
 
 ## 3.3 (2021-03-31)
 ### Updates

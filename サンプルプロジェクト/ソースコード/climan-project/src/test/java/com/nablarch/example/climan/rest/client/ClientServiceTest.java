@@ -7,21 +7,23 @@ import com.nablarch.example.climan.rest.common.dao.DaoStub;
 import com.nablarch.example.climan.rest.common.repository.ConfigLoader;
 import nablarch.common.dao.EntityList;
 import nablarch.core.repository.SystemRepository;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import static nablarch.test.Assertion.fail;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * ClientServiceのテストクラス。
  */
-public class ClientServiceTest {
+class ClientServiceTest {
 
-    @BeforeClass
-    public static void setUp() {
+    @BeforeAll
+    static void setUp() {
         ConfigLoader.load();
     }
 
@@ -31,7 +33,7 @@ public class ClientServiceTest {
      * {@link SearchResultUpperLimitException}が送出され、上限件数が設定されていること。
      */
     @Test
-    public void testFindClientForSearchResultUpperLimitError() {
+    void testFindClientForSearchResultUpperLimitError() {
 
         ClientService sut = new ClientService(new DaoStub() {
             @Override
@@ -55,7 +57,7 @@ public class ClientServiceTest {
      * 検索結果が返されること。
      */
     @Test
-    public void testFindClient() {
+    void testFindClient() {
 
         ClientService sut = new ClientService(new DaoStub() {
             @Override
@@ -78,8 +80,8 @@ public class ClientServiceTest {
      *
      * {@link DuplicateRegistrationException}が送出される。
      */
-    @Test(expected = DuplicateRegistrationException.class)
-    public void testRegisterClientForDuplicateRegistrationException() {
+    @Test
+    void testRegisterClientForDuplicateRegistrationException() {
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
@@ -87,7 +89,7 @@ public class ClientServiceTest {
             }
         });
 
-        sut.registerClient(new Client());
+        Assertions.assertThrows(DuplicateRegistrationException.class, () -> sut.registerClient(new Client()));
     }
 
     /**
@@ -96,7 +98,7 @@ public class ClientServiceTest {
      * 登録されること。
      */
     @Test
-    public void testRegisterClient() {
+    void testRegisterClient() {
 
         final Map<String, Boolean> invoked = new HashMap<>();
 

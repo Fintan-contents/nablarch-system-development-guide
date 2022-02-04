@@ -7,10 +7,10 @@ import nablarch.core.validation.ee.Required;
 import nablarch.fw.web.HttpRequest;
 import nablarch.fw.web.MockHttpRequest;
 import nablarch.fw.web.servlet.ServletExecutionContext;
-import nablarch.test.TestSupport;
+import nablarch.test.junit5.extension.NablarchTest;
 import nablarch.test.support.web.servlet.MockServletContext;
 import nablarch.test.support.web.servlet.MockServletResponse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -18,20 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 import static nablarch.test.Assertion.fail;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FormBinderTest extends TestSupport {
+@NablarchTest
+class FormBinderTest {
 
     private Input input = new Input();
 
-    /** Constructor */
-    public FormBinderTest() {
-        super(FormBinderTest.class);
-    }
-
     @Test
-    public void canBeConvertedToTestFormClass() {
+    void canBeConvertedToTestFormClass() {
         input.setParam("loginId", "aaa");
         input.setParam("loginPassword", "bbbb");
 
@@ -44,7 +41,7 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void canBeConvertedToTestFormClassWithPrifix() {
+    void canBeConvertedToTestFormClassWithPrifix() {
         input.setParam("prefix.loginId", "aaa");
         input.setParam("prefix.loginPassword", "bbbb");
 
@@ -58,7 +55,7 @@ public class FormBinderTest extends TestSupport {
     }
 
     @Test
-    public void tryCatchApplicationException() {
+    void tryCatchApplicationException() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
@@ -76,8 +73,8 @@ public class FormBinderTest extends TestSupport {
 
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void cannnotGetFormIfValidationFails() {
+    @Test
+    void cannnotGetFormIfValidationFails() {
         input.setParam("loginId", (String) null);
         input.setParam("loginPassword", "bbbbb");
 
@@ -85,7 +82,7 @@ public class FormBinderTest extends TestSupport {
         assertThat(result.isValid(), is(false));
 
         // An attempt to acquire form when validation is unsuccessful
-        result.getValidForm();
+        assertThrows(IllegalStateException.class, result::getValidForm);
     }
 
     private static class Input {

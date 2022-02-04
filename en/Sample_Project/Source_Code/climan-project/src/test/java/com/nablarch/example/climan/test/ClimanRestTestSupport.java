@@ -16,6 +16,15 @@ import static org.hamcrest.Matchers.hasSize;
  * It has response assertions for use in client management systems.
  */
 public class ClimanRestTestSupport extends RestTestSupport {
+
+    /**
+     * Constructor.
+     * @param testClass Test class
+     */
+    public ClimanRestTestSupport(Class<?> testClass) {
+        super(testClass);
+    }
+
     /**
      * Test that the body of the response matches the expected value file.
      *
@@ -24,7 +33,7 @@ public class ClimanRestTestSupport extends RestTestSupport {
      * @param expectedFileName Expected file name
      * @throws JSONException Exception when JSON parsing fails
      */
-    protected void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
+    public void assertJsonEquals(String message, HttpResponse response, String expectedFileName) throws JSONException {
         JSONAssert.assertEquals(message, readTextResource(expectedFileName)
                 , response.getBodyString(), JSONCompareMode.LENIENT);
     }
@@ -38,7 +47,7 @@ public class ClimanRestTestSupport extends RestTestSupport {
      * @param size      Expected fault message size
      * @param messages  Expected fault message
      */
-    protected void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
+    public void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
         with(response.getBodyString())
                 .assertThat("$.fault_code", equalTo(faultCode), message + "[fault code]")
                 .assertThat("$.messages", hasSize(size), message + "[fault message size]")
