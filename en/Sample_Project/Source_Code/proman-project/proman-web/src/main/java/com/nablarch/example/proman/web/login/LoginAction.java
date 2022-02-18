@@ -60,8 +60,8 @@ public class LoginAction {
         }
 
         // If authentication is successful, the user is redirected to the home screen
-        // after the session prior to login is discarded and the authentication information is stored in the (new) session.
-        SessionUtil.invalidate(context);
+        // after the session id is changed and the authentication information is stored in the session.
+        SessionUtil.changeId(context);
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
         SessionUtil.put(context, "userContext", userContext);
         return new HttpResponse(303, "redirect:///");
