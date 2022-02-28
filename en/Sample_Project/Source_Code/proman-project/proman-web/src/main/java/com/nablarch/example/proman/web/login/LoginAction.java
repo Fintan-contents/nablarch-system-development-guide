@@ -6,6 +6,7 @@ import com.nablarch.example.proman.web.common.authentication.AuthenticationUtil;
 import com.nablarch.example.proman.web.common.authentication.context.LoginUserPrincipal;
 import com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException;
 import nablarch.common.dao.UniversalDao;
+import nablarch.common.web.csrf.CsrfTokenUtil;
 import nablarch.common.web.interceptor.InjectForm;
 import nablarch.common.web.session.SessionUtil;
 import nablarch.core.message.ApplicationException;
@@ -62,6 +63,8 @@ public class LoginAction {
         // If authentication is successful, the user is redirected to the home screen
         // after the session id is changed and the authentication information is stored in the session.
         SessionUtil.changeId(context);
+        CsrfTokenUtil.regenerateCsrfToken(context);
+
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
         SessionUtil.put(context, "userContext", userContext);
         return new HttpResponse(303, "redirect:///");
