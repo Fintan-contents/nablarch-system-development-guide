@@ -7,6 +7,7 @@ import com.nablarch.example.proman.web.common.authentication.AuthenticationUtil;
 import com.nablarch.example.proman.web.common.authentication.context.LoginUserPrincipal;
 import com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException;
 import nablarch.common.dao.UniversalDao;
+import nablarch.common.web.csrf.CsrfTokenUtil;
 import nablarch.common.web.interceptor.InjectForm;
 import nablarch.common.web.session.SessionUtil;
 import nablarch.core.message.ApplicationException;
@@ -60,9 +61,11 @@ public class LoginAction {
                     MessageLevel.ERROR, "errors.login"));
         }
 
-        // 認証OKの場合、ログイン前のセッションを破棄後、
-        // 認証情報をセッション（新規）に格納後、トップ画面にリダイレクトする。
-        SessionUtil.invalidate(context);
+        // 認証OKの場合、セッションIDを変更後、
+        // 認証情報をセッションに格納後、トップ画面にリダイレクトする。
+        SessionUtil.changeId(context);
+        CsrfTokenUtil.regenerateCsrfToken(context);
+
         LoginUserPrincipal userContext = createLoginUserContext(form.getLoginId());
         SessionUtil.put(context, "userContext", userContext);
         return new HttpResponse(303, "redirect:///");

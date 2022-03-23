@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u18</version>
+    <version>5u21</version>
   </parent>
 
   <groupId>com.nablarch.example.climan</groupId>
@@ -21,6 +21,8 @@
     <!--suppress UnresolvedMavenProperty -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
+    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
+    <version.spotbugs>4.5.0</version.spotbugs>
     <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
     <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
@@ -34,17 +36,17 @@
   </properties>
 
   <reporting>
-      <plugins>
-          <plugin>
-              <groupId>com.github.spotbugs</groupId>
-              <artifactId>spotbugs-maven-plugin</artifactId>
-              <version>3.1.3</version>
-              <configuration>
-                  <xmlOutput>true</xmlOutput>
-                  <xmlOutputDirectory>target/site</xmlOutputDirectory>
-              </configuration>
-          </plugin>
-      </plugins>
+    <plugins>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${version.plugins.spotbugs}</version>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
   </reporting>
   <!--
     このプロファイルは環境を指定するものであり、相互に排他的である。
@@ -273,7 +275,14 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u18</version>
+        <version>5u21</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.8.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -291,12 +300,6 @@
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-testing</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
@@ -314,6 +317,18 @@
     <dependency>
       <groupId>com.nablarch.configuration</groupId>
       <artifactId>nablarch-testing-default-configuration</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -371,7 +386,7 @@
     <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>javax.ws.rs-api</artifactId>
-      <version>2.0</version>
+      <version>2.1.1</version>
     </dependency>
 
     <dependency>
@@ -418,6 +433,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -458,12 +480,12 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.3</version>
+        <version>${version.plugins.spotbugs}</version>
         <dependencies>
           <dependency>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs</artifactId>
-            <version>3.1.3</version>
+            <version>${version.spotbugs}</version>
           </dependency>
         </dependencies>
         <configuration>
@@ -477,8 +499,8 @@
           <plugins>
             <plugin>
               <groupId>com.nablarch.framework</groupId>
-              <artifactId>nablarch-testing</artifactId>
-              <version>1.2.0</version>
+              <artifactId>nablarch-unpublished-api-checker</artifactId>
+              <version>1.0.0</version>
             </plugin>
             <plugin>
               <groupId>com.h3xstream.findsecbugs</groupId>

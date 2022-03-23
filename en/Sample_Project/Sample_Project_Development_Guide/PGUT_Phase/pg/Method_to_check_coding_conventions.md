@@ -51,7 +51,7 @@ mvn spotbugs:check
 If there is a check violation, the following points are output to the console:
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
@@ -61,7 +61,7 @@ If there is a check violation, the following points are output to the console:
 If all checks are passed, they are output to the console as follows:
 
 ```
-[INFO] --- spotbugs-maven-plugin:3.1.3:check (default-cli) @ spotbugs-example ---
+[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 0
 [INFO] Error size is 0
 [INFO] No errors/warnings found
