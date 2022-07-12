@@ -235,7 +235,7 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 
 - [Nablarch アプリケーション設計標準](https://fintan.jp/?p=1145)
 
-特にアプリケーション開発標準(*1)を参照してください。
+特に[アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)を参照してください。
 
 ここにはDB設計標準やUI標準等、重要な設計標準ドキュメントが含まれています。
 
@@ -251,11 +251,6 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 - [テスト標準](../サンプルプロジェクト/設計書/A1_プロジェクト管理システム/020_方式設計/020_開発標準/020_テスト標準)
 
 アプリケーションのパッケージ構成については[「パッケージ構成検討」](docs/パッケージ構成検討.md)を参照してください。
-
-
-*1: [アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)
-
-
 
 
 #### 単体テスト標準
