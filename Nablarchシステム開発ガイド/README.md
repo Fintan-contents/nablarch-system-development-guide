@@ -233,7 +233,7 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 各工程の開始に間に合うよう、標準化作業を進めます。
 以下の標準をベースにして、プロジェクト用にカスタマイズします。
 
-- [Nablarch アプリケーション設計標準](https://fintan.jp/?p=1145)
+- [Nablarch アプリケーション設計標準](https://fintan.jp/page/1868/#development-standards)
 
 特に[アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)を参照してください。
 
@@ -260,7 +260,7 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 
 - [テスト項目の検討](docs/テスト項目の検討.md)
 
-[Nablarch アプリケーション設計標準](https://fintan.jp/?p=1145) 配下の「単体テスト標準」は大規模向けに重厚型(\*1)のテスト方針を採用しています。
+[Nablarch アプリケーション設計標準](https://fintan.jp/page/1868/#development-standards) 配下の「単体テスト標準」は大規模向けに重厚型(\*1)のテスト方針を採用しています。
 一方、サンプルプロジェクトは軽量型(\*1)のテスト方針を採用しています。
 
 *1: [テスト方針の検討](#テスト方針の検討)を参照
