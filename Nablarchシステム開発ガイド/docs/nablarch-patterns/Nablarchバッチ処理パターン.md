@@ -2,10 +2,14 @@
 
 ## 起動方法による分類
 
-[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)は、起動方法により以下の2種類に分かれます。
+[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)では、主に以下の2つの起動方法を使用します。
 
-- 都度起動バッチ
-- 常駐バッチ
+- [都度起動バッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/architecture.html)
+    - プロセスを都度起動して、バッチ処理を実行します
+    - 日次や月次など、定期的にバッチ処理を実行するような場合に使用します
+- [テーブルをキューとして使ったメッセージング](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/messaging/db/index.html)
+    - プロセスを起動しておき、データベーステーブルを定期的に監視してレコードが登録されたらバッチ処理を実行します
+    - オンライン処理で処理要求を受け付け、非同期でバッチ処理を実行したいような場合に使用します
 
 ## 入出力による分類
 
