@@ -15,14 +15,15 @@ PostgreSQLの初期ユーザーとパスワードは以下の通りに設定し�
 
 proman-projectで以下のコマンドを実行してください。
 ```
-$cd proman-common
-$mvn install
+$cd proman-project
+$mvn -N install
 ```
 
 proman-commonモジュールで以下のコマンドを実行してください。
 ```
 $cd proman-common
 $mvn -P gsp clean generate-resources
+$mvn install
 ```
 
 proman-webディレクトリに入り、jetty-maven-pluginを実行し、Jettyを起動させます。以下のコマンドを実行してください。
