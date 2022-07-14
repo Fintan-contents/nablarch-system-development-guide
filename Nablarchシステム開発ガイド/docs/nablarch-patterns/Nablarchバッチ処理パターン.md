@@ -2,10 +2,14 @@
 
 ## 起動方法による分類
 
-[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)は、起動方法により以下の2種類に分かれます。
+[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)では、主に以下の2つの起動方法を使用します。
 
-- 都度起動バッチ
-- 常駐バッチ
+- [都度起動バッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/architecture.html#nablarch-batch-each-time-batch)
+    - プロセスを都度起動して、バッチ処理を実行します
+    - 日次や月次など、定期的にバッチ処理を実行するような場合に使用します
+- [テーブルをキューとして使ったメッセージング](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/messaging/db/index.html)
+    - プロセスを起動しておき、定期的にデータベース上のテーブルを監視し未処理のレコードを順次処理します
+    - オンライン処理で処理要求を受け付け、非同期でバッチ処理を実行したいような場合に使用します
 
 ## 入出力による分類
 
@@ -53,7 +57,7 @@ FILE to DBバッチでは、できるだけ業務処理を加えず、ファイ�
 
 - 入力はSELECT文の結果セットの各レコードになります。
 - 1レコード分のデータを受け取って、DBの更新を行います。
-- すべての更新が、同一トランザクション下で実行されるため、障害発生時でも不整合が発生しません
+- 1レコードの処理中に行われる更新は全て同一トランザクション下で実行されるため、障害発生時でも不整合が発生しません
 
 ### DB to FILE
 

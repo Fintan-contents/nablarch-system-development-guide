@@ -99,7 +99,7 @@ Nablarchを使ったシステム開発を始めようとしているエンジニ
 
 ### 方式設計
 
-方式設計は、以下のサンプルをベースに行います。
+方式設計は、以下のサンプルを参考にして行います。
 
 - [アプリケーション方式設計書サンプル](https://fintan.jp/?p=1323)
 
@@ -233,9 +233,9 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 各工程の開始に間に合うよう、標準化作業を進めます。
 以下の標準をベースにして、プロジェクト用にカスタマイズします。
 
-- [Nablarch アプリケーション設計標準](https://fintan.jp/?p=1145)
+- [開発標準](https://fintan.jp/page/1868/#development-standards)
 
-特にアプリケーション開発標準(*1)を参照してください。
+特に[アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)を参照してください。
 
 ここにはDB設計標準やUI標準等、重要な設計標準ドキュメントが含まれています。
 
@@ -253,11 +253,6 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 アプリケーションのパッケージ構成については[「パッケージ構成検討」](docs/パッケージ構成検討.md)を参照してください。
 
 
-*1: [アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)
-
-
-
-
 #### 単体テスト標準
 
 どのようなテストを実施するかは、プロジェクトの特性によって大きく変わります。
@@ -265,7 +260,7 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 
 - [テスト項目の検討](docs/テスト項目の検討.md)
 
-[Nablarch アプリケーション設計標準](https://fintan.jp/?p=1145) 配下の「単体テスト標準」は大規模向けに重厚型(\*1)のテスト方針を採用しています。
+[アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準) 配下の「単体テスト標準」は大規模向けに重厚型(\*1)のテスト方針を採用しています。
 一方、サンプルプロジェクトは軽量型(\*1)のテスト方針を採用しています。
 
 *1: [テスト方針の検討](#テスト方針の検討)を参照
@@ -300,7 +295,7 @@ PGUT工程の開発標準を整備します。
 以下のドキュメントを参考にしてください。
 
 品質、生産性、保守性の向上を目的とした、プログラマーが遵守するべきコーティング規約です。
-- [Nablarch コーディング規約](https://fintan.jp/?p=1145)
+- [Nablarchスタイルガイド](https://github.com/nablarch-development-standards/nablarch-style-guide)
 
 
 PG・UT作業の完了条件を開発者が確認するためのチェックリストです。
