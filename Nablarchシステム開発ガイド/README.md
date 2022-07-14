@@ -233,7 +233,7 @@ Nablarchの設計標準をカスタマイズ、または独自に作成したも
 各工程の開始に間に合うよう、標準化作業を進めます。
 以下の標準をベースにして、プロジェクト用にカスタマイズします。
 
-- [Nablarch アプリケーション設計標準](https://fintan.jp/page/1868/#development-standards)
+- [開発標準](https://fintan.jp/page/1868/#development-standards)
 
 特に[アプリケーション開発標準](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)を参照してください。
 
