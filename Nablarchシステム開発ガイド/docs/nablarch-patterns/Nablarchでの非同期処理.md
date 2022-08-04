@@ -15,7 +15,7 @@ NablarchのWebアプリケーションでは、非同期処理は「[テーブ�
 
 Nablarchが提供する[メール送信](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/mail.html)機能は、「[常駐バッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/architecture.html#nablarch-batch-resident-batch)」を前提としています。
 
-「常駐バッチ」と「テーブルをキューとして使ったメッセージング」は、どちらもDBにデータが登録されるのを監視してバッチ処理を実行することができます。
+「常駐バッチ」と「テーブルをキューとして使ったメッセージング」は、どちらもDBにデータが登録されるのを監視してバッチ処理を実行できます。
 しかし、「常駐バッチ」はマルチスレッドで動かしたときに、並列実行されたスレッドが全て終了するまで次のデータ登録の監視が始まらないという問題があります。
 このため、新規プロジェクトでは「常駐バッチ」よりも「テーブルをキューとして使ったメッセージング」を使用することが推奨されています。
 
