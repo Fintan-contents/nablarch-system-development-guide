@@ -3,7 +3,7 @@
 この文書ではJenkinsでプロジェクトのビルドを行った際、SpotBugsの実行結果を収集する方法をガイドします。
 
 JenkinsにはSpotBugsプラグインがありませんが、代わりにFindBugsプラグインを使用できます。
-チェック自体はMavenで実施して、Jenkinsでは結果（XMLファイル）の収集を行うだけなのでFindBugsプラグインを使用しても問題ありません。
+チェック自体はMavenで実施して、Jenkinsでは結果（XMLファイル）を収集するだけなのでFindBugsプラグインを使用しても問題ありません。
 
 この文書の内容はJenkins 2.121.2、FindBugs Plug-in 4.72で動作検証を行っています。
 
