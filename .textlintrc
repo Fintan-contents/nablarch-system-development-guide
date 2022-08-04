@@ -1,4 +1,7 @@
 {
+  "filters": {
+    "comments": true
+  },
   "rules": {
     "preset-ja-technical-writing": {
       "max-kanji-continuous-len": {
@@ -33,6 +36,5 @@
     "prh": {
       "rulePaths": ["prh.yml"]
     },
-    
   }
 }
