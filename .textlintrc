@@ -31,10 +31,15 @@
           allow: [
             "開発環境構築手順"
           ]
+      },
+      "ja-no-successive-word": {
+        allow: [
+          "〇"
+        ]
       }
     },
     "prh": {
       "rulePaths": ["prh.yml"]
-    },
+    }
   }
 }
