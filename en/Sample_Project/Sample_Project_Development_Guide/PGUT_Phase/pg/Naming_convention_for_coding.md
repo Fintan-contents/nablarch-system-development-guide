@@ -101,19 +101,23 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 #### Service class
 
-| Naming conventions    | Example            | Remarks                                                                                |
-| ----------- | ------------- | ----------------------------------------------------------------------------------- |
-| Verb        |               | Simple CRUD etc. See "Simple CRUD" for details                                            |
-| Verb + noun | searchProject | Name based on the business meaning. For example, if it is a method for a search screen, searchProject, etc. |
+- If only executing one SQL
+  - If simple CRUD
+    - See [Name of method to perform a simple CRUD](#name-of-method-to-perform-a-simple-crud).
+  - If not simple CRUD
+    - Make the SQL ID camel-cased (e.g. findAuthorizedRequest).
+- Other than above
+  - Based on the business meaning, name the method with "verb + noun" (e.g. searchProject for a method for the search screen).
 
-##### Simple CRUD
-- Get 1 table Primary key search ... find + Table name + ByID
-- 1 new entry registration… insert + Table name
-- 1 update……update + Table name
-- 1 item delete……delete + Table name
+##### Name of method to perform a simple CRUD
 
+Using "CRUD verb + table name" as a basis, name the table as follows.
 
-##### Other than simple CRUD 
-- Method to issue the specified SQL  
-  SQL ID in camel case  
-  findAuthorizedRequest, etc.
+- Get 1 table Primary key search
+  - find + Table name + ByID
+- 1 new entry registration
+  - insert + Table name
+- 1 update
+  - update + Table name
+- 1 item delete
+  - delete + Table name
