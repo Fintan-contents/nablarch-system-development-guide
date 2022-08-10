@@ -83,20 +83,20 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 ### Method name
 #### Action class
-| Processing           | Naming conventions                    | Example          |
-| -------------- | --------------------------- | ----------- |
-| Initial display       | index                       |             |
-| Enter update       | enterUpdate                 |             |
-| Confirm update       | confirmUpdate               |             |
-| Update           | update                      |             |
-| Registration input       | enterRegistration           |             |
-| Confirm registration       | confirmRegistration         |             |
-| Registration           | register                    |             |
-| List display       | list                        |             |
-| Show details       | show                        |             |
-| Delete           | delete                      |             |
-| Confirm deletion       | confirmDeletion             |             |
-| Other than the above | Verb + noun (or verb only) | backToIndex |
+| Processing           | Naming conventions                    |
+| -------------- | --------------------------- |
+| Initial display       | index                       |
+| Enter update       | enterUpdate                 |
+| Confirm update       | confirmUpdate               |
+| Update           | update                      |
+| Registration input       | enterRegistration           |
+| Confirm registration       | confirmRegistration         |
+| Registration           | register                    |
+| List display       | list                        |
+| Show details       | show                        |
+| Delete           | delete                      |
+| Confirm deletion       | confirmDeletion             |
+| Other than the above | Verb + noun, or verb only (e.g. backToIndex) |
 
 
 #### Service class
