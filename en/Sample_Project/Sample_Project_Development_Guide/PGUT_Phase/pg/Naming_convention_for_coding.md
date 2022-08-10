@@ -21,6 +21,7 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 | JSP types | Naming conventions                                     | Example:                       |
 | --------- | -------------------------------------------- | ------------------------ |
+| Screen for each process | word expressing processing + .jsp | create.jsp, update.jsp |
 | Verification screen  | confirmationOf + word expressing processing + .jsp | confirmationOfUpdate.jsp |
 | Completion screen  | completionOf + word expressing processing + .jsp   | completionOfUpdate.jsp   |
 
