@@ -14,6 +14,7 @@ SQLを実行し妥当性を確認しながら作成します。
 設計担当者、PGUT担当者双方の負担増加になっていました。
 今回はSQLを試しながら作業を進められるため品質向上が期待できます。
 
+SQLファイルの名前や配置場所、SQL IDの命名規約については[コーディング規約に関する命名規約](../PGUT工程/pg/コーディングに関する命名規約.md#SQLファイル)を参照してください。
 
 SQLの実行には、[SQL Exectutor](https://github.com/nablarch/sql-executor)を使用します。
 実行方法は、`SQL Exectutor`のREADMEを参照してください。

@@ -13,6 +13,7 @@ For this reason, even if there is an ambiguous description or incorrect table or
 which increases the burden on both the designer and Programming and Unit testing personnel.
 Now the work can be carried out while trying out the SQL and higher quality can be expected.
 
+See [Naming Convention for Coding](../PGUT_Phase/pg/Naming_convention_for_coding.md#sql-file) for SQL file names, locations, and SQL ID naming conventions.
 
 To execute SQL, [SQL Exectutor](https://github.com/nablarch/sql-executor) is used. 
 See README `SQL Exectutor` for instructions on the execution method.
