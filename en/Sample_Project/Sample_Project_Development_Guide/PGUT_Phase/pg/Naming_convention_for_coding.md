@@ -63,7 +63,7 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 | Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by function units |
 | Form class    | See "Details of form class name"       | ProjectCreateForm   |                    |
 | Dto class     | See "Details of DTO class name"        | -                   |                    |
-| Service class | Words that express business directly + Sercice       | ProjectService      | Create by function units |
+| Service class | Words that express business directly + Service       | ProjectService      | Create by function units |
 
 #### Details of form class name
 
