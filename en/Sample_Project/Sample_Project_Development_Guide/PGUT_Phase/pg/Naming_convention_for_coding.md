@@ -40,11 +40,11 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 ### SQL ID
 
 #### Search
-| Naming conventions                                                                                                | Example                                           |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| (Normal) FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |
-| (When joining two tables)FIND_ + Main table name + WITH + Secondary table name + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |
-| (When there are many search condition columns) FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |
+| Case | Naming conventions                                                                                                | Example                                           |
+| ---- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Normal | FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |
+| When joining two tables | FIND_ + Main table name + WITH + Secondary table name + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |
+| When there are many search condition columns | FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |
 
 
 ## Session key name
