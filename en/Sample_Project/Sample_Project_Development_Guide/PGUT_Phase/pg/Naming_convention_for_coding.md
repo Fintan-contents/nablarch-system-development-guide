@@ -19,10 +19,10 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 ### File name
 
-| JSP types | Naming conventions                                     | Example:                       | Remarks |
-| --------- | -------------------------------------------- | ------------------------ | ---- |
-| Verification screen  | confirmationOf + word expressing processing + .jsp | confirmationOfUpdate.jsp |      |
-| Completion screen  | completionOf + word expressing processing + .jsp   | completionOfUpdate.jsp   |      |
+| JSP types | Naming conventions                                     | Example:                       |
+| --------- | -------------------------------------------- | ------------------------ |
+| Verification screen  | confirmationOf + word expressing processing + .jsp | confirmationOfUpdate.jsp |
+| Completion screen  | completionOf + word expressing processing + .jsp   | completionOfUpdate.jsp   |
 
 
 ## SQL file
@@ -33,32 +33,32 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 ### File name
 
-| Naming conventions                               | Example          | Remarks |
-| -------------------------------------- | ----------- | ---- |
-| Entity class name or DTO class name + .sql | Project.sql |      |
+| Naming conventions                               | Example          |
+| -------------------------------------- | ----------- |
+| Entity class name or DTO class name + .sql | Project.sql |
 
 ### SQL ID
 
 #### Search
-| Naming conventions                                                                                                | Example                                           | Remarks |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ---- |
-| (Normal) FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |      |
-| (When joining two tables)FIND_ + Main table name + WITH + Secondary table name +  + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |      |
-| (When there are many search condition columns) FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |      |
+| Naming conventions                                                                                                | Example                                           |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| (Normal) FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |
+| (When joining two tables)FIND_ + Main table name + WITH + Secondary table name +  + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |
+| (When there are many search condition columns) FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |
 
 
 ## Session key name
 
-| Naming conventions                                                     | Example                        | Remarks |
-| ------------------------------------------------------------ | ------------------------- | ---- |
-| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateAtionProject |      |
+| Naming conventions                                                     | Example                        |
+| ------------------------------------------------------------ | ------------------------- |
+| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateAtionProject |
 
 
 
 ## Java source
 ### Class name
 
-| Class        | Naming conventions                             | Example                  | Remarks               |
+| Class         | Naming conventions                             | Example                  | Remarks               |
 | ------------- | ------------------------------------ | ------------------- | ------------------ |
 | Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by function units |
 | Form class    | See "Details of form class name"       | ProjectCreateForm   |                    |
@@ -67,18 +67,18 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 #### Details of form class name
 
-| Application                                                                 | Naming conventions                     | Example                       | Remarks |
-| -------------------------------------------------------------------- | ---------------------------- | ------------------------ | ---- |
-| Form for storing parameters when transitioning from other functions (search list screen, etc.) | Subfunction name + InitialForm | ProjectUpdateInitialForm |      |
-| Form that stores the data entered in the input screen                               | Input screen name + Form    | ProjectUpdateForm        |      |
+| Application                                                                 | Naming conventions                     | Example                       |
+| -------------------------------------------------------------------- | ---------------------------- | ------------------------ |
+| Form for storing parameters when transitioning from other functions (search list screen, etc.) | Subfunction name + InitialForm | ProjectUpdateInitialForm |
+| Form that stores the data entered in the input screen                               | Input screen name + Form    | ProjectUpdateForm        |
 
 
 #### Details of DTO class name
 
-| Application                                       | Naming conventions                                                       | Example                         | Remarks |
-| ------------------------------------------ | -------------------------------------------------------------- | -------------------------- | ---- |
-| Store in a table that joins multiple tables | Exclude "FIND" at the beginning of the SQL ID and make it a camel case + DTO | ProjectWithOrganizationDTO |      |
-| For data transfer                               | Keyword that expresses data + DTO                             | -                          |      |
+| Application                                       | Naming conventions                                                       | Example                         |
+| ------------------------------------------ | -------------------------------------------------------------- | -------------------------- |
+| Store in a table that joins multiple tables | Exclude "FIND" at the beginning of the SQL ID and make it a camel case + DTO | ProjectWithOrganizationDTO |
+| For data transfer                               | Keyword that expresses data + DTO                             | -                          |
 
 
 ### Method name
