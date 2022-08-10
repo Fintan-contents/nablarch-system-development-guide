@@ -11,7 +11,7 @@ The designer creates the SQL while checking the validity by executing the SQL ba
 Until now, it was necessary to write SQL in a design document while theoretically thinking about SQL. 
 For this reason, even if there is an ambiguous description or incorrect table or column names, it cannot be noticed until the Programming and Unit testing phase, 
 which increases the burden on both the designer and Programming and Unit testing personnel.
-Now the work can be carried out while trying out the SQL and higher quality can be expected.
+In this project, the policy is to check the operation of SQL at the design stage, which is expected to improve quality.
 
 See [Naming Convention for Coding](../PGUT_Phase/pg/Naming_convention_for_coding.md#sql-file) for SQL file names, locations, and SQL ID naming conventions.
 
