@@ -58,7 +58,9 @@ Guide is described for each role and task shown in the development flow.
 
 #### Design (common)
 
-- [Placement location of design document](../Design_Document/A1_Project_Management_System/030_Application_Design)
+- Placement location of design document
+  - [Placement location of design document for Project Management System](../Design_Document/A1_Project_Management_System/030_Application_Design)
+  - [Placement location of design document for Client Management System](../Design_Document/B1_Client_Management_System/030_Application_Design)
 - [Design document format](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/030_%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/010_%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)(Only Japanese Edition)
   - Use the format provided by the Nablarch development standard.
 - [Test preparation in the design phase](Design_Phase/Test_preparation_in_the_design_phase.md)（Unit test case design）
