@@ -125,6 +125,7 @@ Client management system.
 
 - Screen and API server operate 24/7
 - Stoppage is allowed for resident batches when a failure occurs. However, the situation needs to be detected as an alert.
+- Temporary suspension of part or all of the service for maintenance shall be possible by agreement with Company A.
 
 ### Security requirements
 
