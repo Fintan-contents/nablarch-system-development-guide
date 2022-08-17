@@ -26,8 +26,8 @@ Reference： https://semantic-ui.com/collections/grid.html
 
 Use CSS class defined in Semantic UI or CSS defined in existing HTML.
 
-- [Semantic UI Elements](https://semantic-ui.com/elements/button.html) *
-- [Semantic UI Collections](https://semantic-ui.com/collections/form.html) *
+- [Semantic UI Elements](https://semantic-ui.com/elements/button.html)
+- [Semantic UI Collections](https://semantic-ui.com/collections/form.html)
 
 Since the Website does not have an appropriate index page, the link is to a specific part page.  
 When you view the page, a menu is displayed on the left, please search for parts from that menu.
