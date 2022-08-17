@@ -26,7 +26,7 @@ If you are engaged in developing a sample project, please read this development 
 This development guide is maintained by the architect.
 If you have any questions or doubts about this development guide, consult the architect.
 
-This development guide covers from design to the Programming and Unit testing phase.
+This development guide covers from the Requirements definition phase to the Programming and Unit testing phase.
 
 ## Flow of development
 
