@@ -12,9 +12,6 @@ class ProjectServiceTest {
     
     /**
      * 1件検索処理が正常に呼び出し可能かテストをする。
-     * <p>
-     * 例外が発生しなければ正常に呼び出されたと判定する。
-     * </p>
      */
     @Test
     void test() {

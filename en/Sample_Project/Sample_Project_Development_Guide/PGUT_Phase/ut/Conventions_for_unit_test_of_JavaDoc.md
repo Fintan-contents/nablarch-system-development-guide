@@ -12,9 +12,6 @@ class ProjectServiceTest {
     
     /**
      * Test whether one search process can be called successfully.
-     * <p>
-     * Determines that the call was successful if no exception is raised.
-     * </p>
      */
     @Test
     void test() {
