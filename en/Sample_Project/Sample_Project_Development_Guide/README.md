@@ -133,7 +133,7 @@ Guide is described for each role and task shown in the development flow.
 
 > ＜For those referring to the sample project＞  
 > Since the team development environment (Redmine, Jenkins, etc.) of the sample project is not disclosed, the following is not linked. 
-> Links are provided to each tool so that development members can access it immediately.
+> It is recommended to provide links to each tool in the actual project so that development members can quickly access each tool.
 
 - Redmine
   - It is used to manage tasks, issues and defects.
