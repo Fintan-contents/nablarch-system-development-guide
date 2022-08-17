@@ -6,7 +6,7 @@ Include comments that explain what the test checks.
 ### Example
 
 ```
-public class ProjectServiceTest {
+class ProjectServiceTest {
 
     private ProjectService sut;
     
@@ -17,7 +17,7 @@ public class ProjectServiceTest {
      * </p>
      */
     @Test
-    public void test() {
+    void test() {
         sut = new ProjectService(new DaoStub() {
             @Override
             public <T> T findById(Class<T> entityClass, Object... id) {
