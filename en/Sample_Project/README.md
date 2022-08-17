@@ -81,7 +81,6 @@
 - Batch registration of project (File to DB)
     - Register the projects listed in the CSV file linked from the sales system.
         - Update the projects that are already registered.
-    - Use business date.
 - Batch to output list of projects in the period (DB to File)
     - Output the list of projects within the project period to a CSV file.
     - Use business date.
