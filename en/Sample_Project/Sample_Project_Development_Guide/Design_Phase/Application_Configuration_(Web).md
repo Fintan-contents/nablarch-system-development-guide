@@ -3,8 +3,8 @@
 The Web application configuration in this project introduces a class called Service to achieve ease of testing.
 
 - Aggregate business logic into the service class.
-- Do not invoke API or perform input/output processing for Web applications in the Service class.
-  - Allows stubbing of UniversalDao for database access.
+- Do not invoke APIs for web application execution infrastructure such as HttpRequest in the service class.
+- Allows stubbing of UniversalDao for database access.
 
 ![Class diagram](class-diagram.png)
   

@@ -4,8 +4,8 @@
 Serviceというクラスを導入します。
 
 - Serviceクラスにビジネスロジックを集約します。
-- ServiceクラスではWebアプリケーション用API呼び出しや入出力処理を行わないでください。
-  - データベースアクセスについてはUniversalDaoをスタブ化できるようにします。
+- ServiceクラスではHttpRequestのようなWebアプリケーション実行基盤用のAPIを使用しないでください。
+- データベースアクセスについてはUniversalDaoをスタブ化できるようにします。
 
 ![クラス図](class-diagram.png)
   
