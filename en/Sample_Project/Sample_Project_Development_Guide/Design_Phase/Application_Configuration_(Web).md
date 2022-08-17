@@ -76,8 +76,7 @@ it takes time to create a DAO class, due to which, we replaced the DaoContext im
 
 ## Entity
 
-Creates a GSP plugin and automatically generates it from an ER diagram.
-
+Entity is automatically generated from the ER diagram using the GSP plugin.
 
 ## DTO
 
