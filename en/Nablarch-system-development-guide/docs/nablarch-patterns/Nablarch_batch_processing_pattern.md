@@ -4,8 +4,12 @@
 
 [Nablarch batches](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/nablarch_batch/index.html) are divided into two types depending on the startup method:
 
-- On-demand batch
-- Resident batch
+- [On-demand batch](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/nablarch_batch/architecture.html#nablarch-batch-each-time-batch)
+    - Start a process each time and execute a batch process
+    - Used for periodic batch processing, such as daily or monthly
+- [Messaging Using Tables as Queues](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/messaging/db/index.html)
+    - Keep the process running, periodically monitor the tables in the database, and process outstanding records one by one
+    - Used when you want to accept processing requests for online processing and execute batch processing asynchronously
 
 ## Classification by input/output
 
