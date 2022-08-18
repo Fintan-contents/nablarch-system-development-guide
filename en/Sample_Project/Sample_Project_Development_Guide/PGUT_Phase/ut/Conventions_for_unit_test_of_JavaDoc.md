@@ -1,5 +1,19 @@
 # Conventions for Unit Test of Javadoc
 
+## Javadoc for class
+Write "Test for < Name of class to test >.".
+
+### Example
+
+```
+/**
+ * Test for ProjectService.
+ */
+class ProjectServiceTest {
+    // ...
+}
+```
+
 ## Javadoc for method
 Include comments that explain what the test checks.
 
