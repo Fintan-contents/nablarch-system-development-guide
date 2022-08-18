@@ -1,6 +1,6 @@
-# Conventions for Unit Test of JavaDoc
+# Conventions for Unit Test of Javadoc
 
-## JavaDoc for method
+## Javadoc for method
 Include comments that explain what the test checks.
 
 ### Example
