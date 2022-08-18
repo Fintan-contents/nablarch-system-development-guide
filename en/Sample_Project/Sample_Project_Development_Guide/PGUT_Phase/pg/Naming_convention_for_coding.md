@@ -61,10 +61,10 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 | Class         | Naming conventions                             | Example                  | Remarks               |
 | ------------- | ------------------------------------ | ------------------- | ------------------ |
-| Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by function units |
+| Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by system functional design units |
 | Form class    | See "Details of form class name"       | ProjectCreateForm   |                    |
 | Dto class     | See "Details of DTO class name"        | -                   |                    |
-| Service class | Words that express business directly + Service       | ProjectService      | Create by function units |
+| Service class | Function name + Service                | ProjectService | Create by function units |
 
 #### Details of form class name
 
