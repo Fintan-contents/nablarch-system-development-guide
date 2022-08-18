@@ -227,7 +227,7 @@ Customize your project based on the following standards.
 
 - [Nablarch application design standards](https://fintan.jp/?p=5640&lang=en)
 
-In particular, refer to the Application Development Standards (*1).
+In particular, refer to the [Application Development Standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準) (Only Japanese Edition).
 
 These contain important design standard documents such as DB design and UI standards.
 
@@ -243,10 +243,6 @@ For an example of how to customize, refer to the following in the sample project
 - [Test standard](../Sample_Project/Design_Document/A1_Project_Management_System/020_Architecture_Design/020_Development_Standards/020_Test_Standards)
 
 For the package configuration of the application, refer to ["Package Configuration Review"](docs/Package_configuration_review.md).
-
-
-*1: [Application development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)(Only Japanese Edition)
-
 
 
 #### Unit test standards
