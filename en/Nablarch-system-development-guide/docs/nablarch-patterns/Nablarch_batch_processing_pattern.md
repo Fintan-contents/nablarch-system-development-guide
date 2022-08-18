@@ -52,7 +52,7 @@ This provides the following benefits:
 
 - The input is each record of the result set of the SELECT statement.
 - Receives the data of one record and updates the DB.
-- All updates are performed under the same transaction, so there is no inconsistency in the event of a failure.
+- All updates made during the processing of a single record are performed under the same transaction, so there is no inconsistency in the event of a failure.
 
 ### DB to FILE
 
