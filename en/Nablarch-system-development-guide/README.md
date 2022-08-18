@@ -96,7 +96,7 @@ For defining non-functional requirements, refer to the Non-functional Requiremen
 
 ### Architecture design
 
-Carry out the architecture design based on the following sample.
+Design the architecture to use the following sample as reference.
 
 - [Sample document of application architecture design](https://fintan.jp/?p=1323)(Only Japanese Edition)
 
