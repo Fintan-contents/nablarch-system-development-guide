@@ -96,7 +96,7 @@ For defining non-functional requirements, refer to the Non-functional Requiremen
 
 ### Architecture design
 
-Carry out the architecture design based on the following sample.
+Design the architecture to use the following sample as reference.
 
 - [Sample document of application architecture design](https://fintan.jp/?p=1323)(Only Japanese Edition)
 
@@ -225,9 +225,9 @@ For an example of how to create a guide, refer to the following in the sample pr
 Proceed with the standardization work such that it is in time for the start of each phase.
 Customize your project based on the following standards.
 
-- [Nablarch application design standards](https://fintan.jp/?p=5640&lang=en)
+- [Development Standards](https://fintan.jp/en/page/1954/#DevelopmentStandards)
 
-In particular, refer to the Application Development Standards (*1).
+In particular, refer to the [Application Development Standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/en/020_Application_Development_Standards).
 
 These contain important design standard documents such as DB design and UI standards.
 
@@ -245,10 +245,6 @@ For an example of how to customize, refer to the following in the sample project
 For the package configuration of the application, refer to ["Package Configuration Review"](docs/Package_configuration_review.md).
 
 
-*1: [Application development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/020_アプリケーション開発標準)(Only Japanese Edition)
-
-
-
 #### Unit test standards
 
 The types of tests to be performed depend significantly on the characteristics of your project.
@@ -256,7 +252,7 @@ Refer to the following items when preparing the test standards.
 
 - [Examination of test items](docs/Examination_of_test_items.md)
 
-The Unit Test Standards under [Nablarch Application Design Standard](https://fintan.jp/?p=5640&lang=en) adopt a Heavy type (\*1) testing strategy for large projects.
+The Unit Test Standards under [Application Development Standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/en/020_Application_Development_Standards) adopt a Heavy type (\*1) testing strategy for large projects.
 On the other hand, the sample project adopts a Lightweight type (\*1) testing strategy.
 
 *1: see [Consideration of testing policy](#consideration-of-testing-policy)
@@ -291,7 +287,7 @@ Establish development standards for the Programming and Unit testing phase.
 Refer to the following documents.
 
 These are coding conventions that programmers must adhere to, to improve quality, productivity, and maintainability.
-- [Nablarch coding conventions](https://fintan.jp/?p=5640&lang=en)
+- [Nablarch Style Guide](https://github.com/nablarch-development-standards/nablarch-style-guide/tree/master/en)
 
 
 This is a checklist for developers to confirm the completion conditions of Programming and Unit testing work. 
