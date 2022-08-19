@@ -225,7 +225,7 @@ For an example of how to create a guide, refer to the following in the sample pr
 Proceed with the standardization work such that it is in time for the start of each phase.
 Customize your project based on the following standards.
 
-- [Nablarch Development Standard](https://fintan.jp/en/page/1658/)
+- [Development Standards](https://fintan.jp/en/page/1954/#DevelopmentStandards)
 
 In particular, refer to the [Application Development Standards](https://github.com/nablarch-development-standards/nablarch-development-standards/tree/master/en/020_Application_Development_Standards).
 
