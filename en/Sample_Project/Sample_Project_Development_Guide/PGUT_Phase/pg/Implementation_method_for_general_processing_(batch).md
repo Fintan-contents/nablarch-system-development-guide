@@ -35,9 +35,7 @@ Generate a statement as follows and set it in DatabaseRecordReader.
 - The action inherits and implements `BatchAction<form class>`.
 - For specific implementation, refer to [Create batch to register files in DB](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/batch/nablarch_batch/getting_started/nablarch_batch/index.html).
 
-## Batch output
-
-### Batch to output file
+## Batch to output file
 - Use the file path management function for file path management.   
   [Nablarch application framework reference manual 7.5. File path management](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/file_path_management.html#file-path-management)
 - Use data binding for file output.   
