@@ -23,24 +23,24 @@ operation is checked with request unit test.
 
 ## Form
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#form).
 
 ## Domain class
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#domain-class).
 
 ## Service
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#service).
 
 ## SQL file
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#sql-file).
 
 ## Entity
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#entity).
 
 ## DTO
 
-Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md).
+Same as [Unit Test Concept (Web)](./Unit_test_concept_(Web).md#dto).
