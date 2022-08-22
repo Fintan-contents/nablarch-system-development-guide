@@ -182,3 +182,6 @@ Guide is described for each role and task shown in the development flow.
   - This is used for CI. See [CI description](Development_Environment/CI_description.md) for contents of CI.
 - Demo server
   - This server is used to deploy the application for demonstration.
+- Rocket.Chat
+  - Chat tool.
+  - It is used for communication among members and to receive notifications of CI results.
