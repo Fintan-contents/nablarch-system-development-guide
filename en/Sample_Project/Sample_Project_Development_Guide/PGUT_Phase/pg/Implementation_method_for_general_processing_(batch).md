@@ -4,7 +4,7 @@
 
 ### Implementation method of input data reading section
 
-- Inherit and implement BatchAction.
+- Inherit and implement `BatchAction<SqlRow>`.
 - Use DatabaseRecordReader for reader.
 
 Generate a statement as follows and set it in DatabaseRecordReader.
