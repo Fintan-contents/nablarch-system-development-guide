@@ -9,10 +9,11 @@ Describes the deliverables created by the developer and how to test them.
 | Action         |      |            | X              |
 | Form           | X    | X          | X              |
 | Domain class | X    |            | X              |
-| SQL file    | X    |            | X              |
+| SQL file    | X [^1]  |            | X              |
 | Entity         |      |            | X              |
 | DTO            |      |            | X              |
 
+[^1]: Confirmation of SQL is not only the theoretical review, but also by testing SQL by the SQL Executor.
 
 ## Action
 

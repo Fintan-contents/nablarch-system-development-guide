@@ -10,9 +10,11 @@ Describes the deliverables to be created by the developer and how they will be t
 | Form          | X           | X          | X       |
 | Domain class  | X           |            | X       |
 | Service       |             | X          | X       |
-| SQL file      | X           |            | X       |
+| SQL file      | X [^1]      |            | X       |
 | Entity        |             |            | X       |
 | DTO           |             |            | X       |
+
+[^1]: Confirmation of SQL is not only the theoretical review, but also by testing SQL by the SQL Executor.
 
 ## Action
 

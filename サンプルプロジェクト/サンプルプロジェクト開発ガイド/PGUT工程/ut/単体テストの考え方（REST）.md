@@ -10,9 +10,11 @@ RESTでは、原則として[Nablarch標準のテスト方法](https://nablarch.
 | Form           | o    | o          | o              |
 | ドメインクラス | o    | -          | o              |
 | Service        | -    | o          | o              |
-| SQLファイル    | o    | -          | o              |
+| SQLファイル    | o [^1] | -          | o              |
 | Entity         | -    | -          | o              |
 | DTO            | -    | -          | o              |
+
+[^1]: SQLの確認は机上確認だけでなく、SQL Executorを使った動作確認も行う。
 
 ## Action
 

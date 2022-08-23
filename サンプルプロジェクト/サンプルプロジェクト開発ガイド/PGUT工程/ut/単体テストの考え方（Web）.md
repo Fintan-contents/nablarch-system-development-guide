@@ -30,12 +30,13 @@
 | Form           | o    | o      | o    |
 | ドメインクラス | o    | -      | o    |
 | Service        | -    | o      | o    |
-| SQLファイル    | o    | -      | o    |
+| SQLファイル    | o [^1] | -      | o    |
 | Entity         | -    | -      | o    |
 | DTO            | -    | -      | o    |
 | JSP            | -    | -      | o    |
 | routes.xml     | -    | -      | o    |
 
+[^1]: SQLの確認は机上確認だけでなく、SQL Executorを使った動作確認も行う。
 
 ### Action
 
