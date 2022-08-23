@@ -52,7 +52,7 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 | Naming conventions                                                     | Example                        |
 | ------------------------------------------------------------ | ------------------------- |
-| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateAtionProject |
+| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateActionProject |
 
 
 
