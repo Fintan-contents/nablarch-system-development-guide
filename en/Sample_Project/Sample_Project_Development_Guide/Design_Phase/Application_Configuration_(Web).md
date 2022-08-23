@@ -63,7 +63,7 @@ public class MyService {
 ```
 
 ``` java
-DaoContext stub = new DaoContextStub() {
+DaoContext stub = new DaoStub() {
     @Override
     public T findByPk(int id) {
         return (T) new Foo("ふー");

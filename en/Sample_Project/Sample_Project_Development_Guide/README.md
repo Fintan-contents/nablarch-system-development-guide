@@ -132,7 +132,7 @@ Guide is described for each role and task shown in the development flow.
   - [Programming and Unit testing work completion condition checklist](PGUT_Phase/checklist/PGUT_work_completion_condition_checklist.xlsx?raw=true)
   - [Deliverable self-checklist for programmers](PGUT_Phase/checklist/Deliverable_self-checklist_for_programmers.xlsx?raw=true)
 - Rules
-  - [Conventions for unit test of JavaDoc](PGUT_Phase/ut/Conventions_for_unit_test_of_JavaDoc.md)
+  - [Conventions for unit test of Javadoc](PGUT_Phase/ut/Conventions_for_unit_test_of_JavaDoc.md)
 
 #### Class unit test preparation and implementation (Web)
 
@@ -164,7 +164,7 @@ Guide is described for each role and task shown in the development flow.
 
 - [Deliverable self-checklist for programmers](PGUT_Phase/checklist/Deliverable_self-checklist_for_programmers.xlsx?raw=true)
 - [Unit test concept (batch)](PGUT_Phase/ut/Unit_test_concept_(batch).md)
-- [Conventions for unit test of JavaDoc](PGUT_Phase/ut/Conventions_for_unit_test_of_JavaDoc.md)
+- [Conventions for unit test of Javadoc](PGUT_Phase/ut/Conventions_for_unit_test_of_JavaDoc.md)
 
 
 ## Team development environment
@@ -182,3 +182,6 @@ Guide is described for each role and task shown in the development flow.
   - This is used for CI. See [CI description](Development_Environment/CI_description.md) for contents of CI.
 - Demo server
   - This server is used to deploy the application for demonstration.
+- Rocket.Chat
+  - Chat tool.
+  - It is used for communication among members and to receive notifications of CI results.

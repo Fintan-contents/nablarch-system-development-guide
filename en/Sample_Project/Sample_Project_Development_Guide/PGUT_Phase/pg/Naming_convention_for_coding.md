@@ -19,10 +19,12 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 ### File name
 
-| JSP types | Naming conventions                                     | Example:                       | Remarks |
-| --------- | -------------------------------------------- | ------------------------ | ---- |
-| Verification screen  | confirmationOfUpdate + word expressing processing + .jsp | confirmationOfUpdate.jsp |      |
-| Completion screen  | completionOfUpdate + word expressing processing + .jsp   | completionOfUpdate.jsp   |      |
+| JSP types | Naming conventions                                     | Example:                       |
+| --------- | -------------------------------------------- | ------------------------ |
+| Screen for each process | word expressing processing + .jsp | create.jsp, update.jsp |
+| Verification screen  | confirmationOf + word expressing processing + .jsp | confirmationOfUpdate.jsp |
+| Completion screen  | completionOf + word expressing processing + .jsp   | completionOfUpdate.jsp   |
+
 
 ## SQL file
 
@@ -32,87 +34,91 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 
 ### File name
 
-| Naming conventions                               | Example          | Remarks |
-| -------------------------------------- | ----------- | ---- |
-| Entity class name or DTO class name + .sql | Project.sql |      |
+| Naming conventions                               | Example          |
+| -------------------------------------- | ----------- |
+| Entity class name or DTO class name + .sql | Project.sql |
 
 ### SQL ID
 
 #### Search
-| Naming conventions                                                                                                | Example                                           | Remarks |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ---- |
-| (Normal) FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |      |
-| (When joining two tables)FIND_ + Main table name + WITH + Secondary table name +  + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |      |
-| (When there are many search condition columns) FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |      |
+| Case | Naming conventions                                                                                                | Example                                           |
+| ---- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Normal | FIND_ + table name + BY_ + search condition column                                                      | FIND_CLIENT_BY_CLIENT_ID                     |
+| When joining two tables | FIND_ + Main table name + WITH + Secondary table name + BY_ + Search condition columns  | FIND_PROJECT_WITH_ORFANIZATION_BY_PROJECT_ID |
+| When there are many search condition columns | FIND_ + Keyword that expresses what you want to search                           | FIND_AUTHORIZED_REQUEST                      |
 
 
 ## Session key name
 
-| Naming conventions                                                     | Example                        | Remarks |
-| ------------------------------------------------------------ | ------------------------- | ---- |
-| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateAtionProject |      |
+| Naming conventions                                                     | Example                        |
+| ------------------------------------------------------------ | ------------------------- |
+| Action class name (first lowercase letter) + Entity class name or DTO class name | projectCreateActionProject |
 
 
 
 ## Java source
 ### Class name
 
-| Class        | Naming conventions                             | Example                  | Remarks               |
+| Class         | Naming conventions                             | Example                  | Remarks               |
 | ------------- | ------------------------------------ | ------------------- | ------------------ |
-| Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by function units |
+| Action class  | Words that express business directly + Action        | ProjectCreateAction | Create by system functional design units |
 | Form class    | See "Details of form class name"       | ProjectCreateForm   |                    |
 | Dto class     | See "Details of DTO class name"        | -                   |                    |
-| Service class | Words that express business directly + Sercice       | ProjectService      | Create by function units |
+| Service class | Function name + Service                | ProjectService | Create by function units |
 
 #### Details of form class name
 
-| Application                                                                 | Naming conventions                     | Example                       | Remarks |
-| -------------------------------------------------------------------- | ---------------------------- | ------------------------ | ---- |
-| Form for storing parameters when transitioning from other functions (search list screen, etc.) | Subfunction name + InitialForm | ProjectUpdateInitialForm |      |
-| Form that stores the data entered in the input screen                               | Input screen name + Form    | ProjectUpdateForm        |      |
+| Application                                                                 | Naming conventions                     | Example                       |
+| -------------------------------------------------------------------- | ---------------------------- | ------------------------ |
+| Form for storing parameters when transitioning from other functions (search list screen, etc.) | Subfunction name + InitialForm | ProjectUpdateInitialForm |
+| Form that stores the data entered in the input screen                               | Input screen name + Form    | ProjectUpdateForm        |
 
 
 #### Details of DTO class name
 
-| Application                                       | Naming conventions                                                       | Example                         | Remarks |
-| ------------------------------------------ | -------------------------------------------------------------- | -------------------------- | ---- |
-| Store in a table that joins multiple tables | Exclude "FIND" at the beginning of the SQL ID and make it a camel case + DTO | ProjectWithOrganizationDTO |      |
-| For data transfer                               | Keyword that expresses data + DTO                             | -                          |      |
+| Application                                       | Naming conventions                                                       | Example                         |
+| ------------------------------------------ | -------------------------------------------------------------- | -------------------------- |
+| Store in a table that joins multiple tables | Exclude "FIND" at the beginning of the SQL ID and make it a camel case + DTO | ProjectWithOrganizationDTO |
+| For data transfer                               | Keyword that expresses data + DTO                             | -                          |
 
 
 ### Method name
 #### Action class
-| Processing           | Naming conventions                    | Example          |
-| -------------- | --------------------------- | ----------- |
-| Initial display       | index                       |             |
-| Enter update       | enterUpdate                 |             |
-| Confirm update       | confirmUpdate               |             |
-| Update           | update                      |             |
-| Registration input       | enterRegistration           |             |
-| Confirm registration       | confirmRegistration         |             |
-| Registration           | register                    |             |
-| List display       | list                        |             |
-| Show details       | show                        |             |
-| Delete           | delete                      |             |
-| Confirm deletion       | confirmDeletion             |             |
-| Other than the above | Verb + noun (or verb only) | backToIndex |
+| Processing           | Naming conventions                    |
+| -------------- | --------------------------- |
+| Initial display       | index                       |
+| Enter update       | enterUpdate                 |
+| Confirm update       | confirmUpdate               |
+| Update           | update                      |
+| Registration input       | enterRegistration           |
+| Confirm registration       | confirmRegistration         |
+| Registration           | register                    |
+| List display       | list                        |
+| Show details       | show                        |
+| Confirm deletion       | confirmDeletion             |
+| Delete           | delete                      |
+| Other than the above | Verb + noun, or verb only (e.g. backToIndex) |
 
 
 #### Service class
 
-| Naming conventions    | Example            | Remarks                                                                                |
-| ----------- | ------------- | ----------------------------------------------------------------------------------- |
-| Verb        |               | Simple CRUD etc. See "Simple CRUD" for details                                            |
-| Verb + noun | searchProject | Name based on the business meaning. For example, if it is a method for a search screen, searchProject, etc. |
+- If only executing one SQL
+  - If simple CRUD
+    - See [Name of method to perform a simple CRUD](#name-of-method-to-perform-a-simple-crud).
+  - If not simple CRUD
+    - Make the SQL ID camel-cased (e.g. findAuthorizedRequest).
+- Other than above
+  - Based on the business meaning, name the method with "verb + noun" (e.g. searchProject for a method for the search screen).
 
-##### Simple CRUD
-- Get 1 table Primary key search ... find + Table name + ByID
-- 1 new entry registration… insert + Table name
-- 1 update……update + Table name
-- 1 item delete……delete + Table name
+##### Name of method to perform a simple CRUD
 
+Using "CRUD verb + table name" as a basis, name the table as follows.
 
-##### Other than simple CRUD 
-- Method to issue the specified SQL  
-  SQL ID in camel case  
-  findAuthorizedRequest, etc.
+- Get 1 table Primary key search
+  - find + Table name + ByID
+- 1 new entry registration
+  - insert + Table name
+- 1 update
+  - update + Table name
+- 1 item delete
+  - delete + Table name
