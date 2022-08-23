@@ -3,8 +3,8 @@
     "test": "textlint *.md java js jsp sql"
   },
   "devDependencies": {
-    "textlint": "^11.0.0",
-    "textlint-rule-preset-ja-technical-writing": "^3.0.1"
+    "textlint": "^12.2.1",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0"
   },
   "dependencies": {}
 }
