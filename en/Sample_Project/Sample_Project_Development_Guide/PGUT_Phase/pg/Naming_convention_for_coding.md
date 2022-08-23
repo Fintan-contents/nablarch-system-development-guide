@@ -95,8 +95,8 @@ For details about Web service URLs, see [WebAPI URL Design](../../Design_Phase/W
 | Registration           | register                    |
 | List display       | list                        |
 | Show details       | show                        |
-| Delete           | delete                      |
 | Confirm deletion       | confirmDeletion             |
+| Delete           | delete                      |
 | Other than the above | Verb + noun, or verb only (e.g. backToIndex) |
 
 
