@@ -33,7 +33,8 @@
                 <div class="twelve wide column">
                     <h1 class="page-title">エラー画面</h1>
                     <div class="message-area">
-                        セッションから情報を取得できませんでした。再度ログインしてください。
+                        セッションから情報を取得できませんでした。再度ログインしてください。<br>
+                        状況が変わらない場合は、お手数ですが、このシステムの管理者にご連絡ください。
                     </div>
                 </div>
             </div>

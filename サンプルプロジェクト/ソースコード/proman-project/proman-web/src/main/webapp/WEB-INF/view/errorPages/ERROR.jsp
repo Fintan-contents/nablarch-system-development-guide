@@ -33,7 +33,8 @@
                 <div class="twelve wide column">
                     <h1 class="page-title">エラー画面</h1>
                     <div class="message-area">
-                        予期せぬエラーが発生しました。
+                        予期せぬエラーが発生しました。<br>
+                        状況が変わらない場合は、お手数ですが、このシステムの管理者にご連絡ください。
                     </div>
                 </div>
             </div>
