@@ -14,6 +14,7 @@ which increases the burden on both the designer and Programming and Unit testing
 In this project, the policy is to check the operation of SQL at the design stage, which is expected to improve quality.
 
 See [Naming Convention for Coding](../PGUT_Phase/pg/Naming_convention_for_coding.md#sql-file) for SQL file names, locations, and SQL ID naming conventions.
+And see [Database Access (JDBC Wrapper)](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/libraries/database/database.html) in the Nablarch reference manual for how to write SQL.
 
 To execute SQL, [SQL Exectutor](https://github.com/nablarch/sql-executor) is used. 
 See README `SQL Exectutor` for instructions on the execution method.
