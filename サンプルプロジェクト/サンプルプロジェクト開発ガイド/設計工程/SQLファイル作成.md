@@ -12,8 +12,10 @@ SQLを実行し妥当性を確認しながら作成します。
 今までは、机上でSQLを思い浮かべながら設計書に記載する必要がありました。
 このため、曖昧な記述やテーブル名カラム名の間違いがあっても、PGUT工程になるまで気づくことができず、
 設計担当者、PGUT担当者双方の負担増加になっていました。
-今回はSQLを試しながら作業を進められるため品質向上が期待できます。
+本プロジェクトでは設計段階でSQLの動作確認まで行う方針とするため、品質向上が期待できます。
 
+SQLファイルの名前や配置場所、SQL IDの命名規約については[コーディング規約に関する命名規約](../PGUT工程/pg/コーディングに関する命名規約.md#SQLファイル)を参照してください。
+また、SQLの書き方についてはNablarch解説書の[データベースアクセス(JDBCラッパー)](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/database/database.html)を参照してください。
 
 SQLの実行には、[SQL Exectutor](https://github.com/nablarch/sql-executor)を使用します。
 実行方法は、`SQL Exectutor`のREADMEを参照してください。
