@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+    <style type="text/css">
+        .ui.menu .item i.logo {
+            /*Margin of logo in header*/
+            margin-right: 0.5em;
+        }
+
+        .main.container {
+            /*Margin of content section*/
+            margin-top: 7em;
+        }
+
+        .ui.footer.segment {
+            /*Margin of footer section*/
+            margin: 1em 0em 0em;
+            padding: 0em 0em;
+        }
+    </style>
+    <title>
+        Project details | Proman
+    </title>
+</head>
+
+<body>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a href="#" class="header item">
+            <i class="logo fas fa-database"></i>Proman
+        </a>
+        <div class="right menu">
+            <a href="#" class="item">
+                Logout
+            </a>
+        </div>
+    </div>
+</div>
+<div class="ui main container">
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui vertical menu">
+                <div class="item">
+                    <div class="header">Project management</div>
+                    <div class="menu">
+                        <a class="item">Project search</a>
+                        <a class="item">Project registration</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="header">Client management</div>
+                    <div class="menu">
+                        <a class="item">Client search</a>
+                        <a class="item">Client registration</a>
+                    </div>
+                </div>
+                <div class="item">
+                </div>
+            </div>
+        </div>
+        <div class="twelve wide column">
+            <form class ="ui form">
+            <div class="ui two column grid">
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <div class="ui huge header">Project details</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5 class="ui header">Division</h5>
+                        Division 0001
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header">Department</h5>
+                        Department 0001
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <h5 class="ui header">Project name</h5>
+                        Project A
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5 class="ui header">Project type</h5>
+                        New develop
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header">Project classification</h5>
+                        SS
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5 class="ui header">Sales (Thousands of yen)</h5>
+                        1000
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header">Client</h5>
+                        Trade B
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5 class="ui header">PM</h5>
+                        Kato Hifumi
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header">PL</h5>
+                        Sato Hifumi
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5 class="ui header">Start date</h5>
+                        2019/01/01
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header">End date</h5>
+                        2019/06/01
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <h5 class="ui header">Note</h5>
+                        High probability.
+                    </div>
+                </div>
+            </div>
+                <div class ="four fields">
+                    <div class="field centered aligned">&nbsp;</div>
+                    <div class="field centered aligned">
+                        <button class="fluid ui primary button"
+                                onclick="location.href='./search.html'">Back</button>
+
+                    </div>
+                    <div class="field centered aligned">
+                        <button class="fluid ui primary button"
+                                onclick="location.href='./confirmUpdate'">Update</button>
+                    </div>
+                    <div class="field centered aligned">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            TIS Inc
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
