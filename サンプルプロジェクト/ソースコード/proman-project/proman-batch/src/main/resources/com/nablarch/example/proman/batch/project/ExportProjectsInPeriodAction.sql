@@ -12,7 +12,7 @@ SELECT
     project_leader projectLeader,
     note note,
     sales sales,
-    version_no versionNo
+    version version
 FROM
     project
 WHERE
