@@ -8,7 +8,7 @@ FROM
   system_account
 WHERE
   login_id = ?
-  AND ? BETWEEN effective_start_date AND effective_end_date
+  AND ? BETWEEN usage_start_date AND usage_end_date
 
 --------------------------------------------------------------------------------
 -- ログインIDを元にシステムアカウント情報を取得するSQL

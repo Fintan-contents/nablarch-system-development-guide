@@ -1,4 +1,4 @@
-project_id,project_name,project_type,project_class,project_start_date,project_end_date,organization_id,client_id,project_manager,project_leader,note,sales,version
+project_id,project_name,project_type,project_class,project_start_date,project_end_date,organization_id,client_id,pm_kanji_name,pl_kanji_name,note,sales_amount,update_version
 1,プロジェクト名１,01,01,2019-06-01,2019-12-31,3,1,マネージャー１,リーダー１,備考１,10000,0
 2,プロジェクト名２,02,02,2019-06-02,2020-01-01,4,2,マネージャー２,リーダー２,備考２,11000,0
 3,プロジェクト名３,03,03,2019-06-03,2020-01-02,5,3,マネージャー３,リーダー３,備考３,12000,0

@@ -36,7 +36,9 @@ public class ProjectUpdateAction {
         ProjectUpdateInitialForm form = context.getRequestScopedVar("form");
         ProjectService service = new ProjectService();
         Project project = service.findProjectById(Integer.parseInt(form.getProjectId()));
+    	System.out.println("project PM="+project.getPmKanjiName());
         ProjectUpdateForm projectUpdateForm = buildFormFromEntity(project, service);
+    	System.out.println("projectUpdateForm PM="+projectUpdateForm.getPmKanjiName());
         context.setRequestScopedVar("form", projectUpdateForm);
         SessionUtil.put(context, PROJECT_KEY, project);
         return new HttpResponse("forward:///app/project/moveUpdate");

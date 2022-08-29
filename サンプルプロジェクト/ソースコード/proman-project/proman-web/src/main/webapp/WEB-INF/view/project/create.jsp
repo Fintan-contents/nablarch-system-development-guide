@@ -108,11 +108,11 @@
                             <div class="field">
                                 <label>売上高</label>
                                 <n:forInputPage>
-                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="売上高" />
-                                    <n:error errorCss="message-error" name="form.sales" /><span>&nbsp;</span>
+                                    <n:text name="form.salesAmount" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;" placeholder="売上高" />
+                                    <n:error errorCss="message-error" name="form.salesAmount" /><span>&nbsp;</span>
                                 </n:forInputPage>
                                 <n:forConfirmationPage>
-                                    <n:write value="${n:format('number', form.sales, '###,###,###')}" />
+                                    <n:write value="${n:format('number', form.salesAmount, '###,###,###')}" />
                                 </n:forConfirmationPage>
                             </div>
                             <div class="required field">
@@ -136,13 +136,13 @@
                         <div class="two fields">
                             <div class="required field">
                                 <label>PM</label>
-                                <n:text name="form.projectManager" maxlength="64" errorCss="input-error" placeholder="PM" />
-                                <n:error errorCss="message-error" name="form.projectManager" /><span>&nbsp;</span>
+                                <n:text name="form.pmKanjiName" maxlength="64" errorCss="input-error" placeholder="PM" />
+                                <n:error errorCss="message-error" name="form.pmKanjiName" /><span>&nbsp;</span>
                             </div>
                             <div class="required field">
                                 <label>PL</label>
-                                <n:text name="form.projectLeader" maxlength="64" errorCss="input-error" placeholder="PL" />
-                                <n:error errorCss="message-error" name="form.projectLeader" /><span>&nbsp;</span>
+                                <n:text name="form.plKanjiNamer" maxlength="64" errorCss="input-error" placeholder="PL" />
+                                <n:error errorCss="message-error" name="form.plKanjiName" /><span>&nbsp;</span>
                             </div>
                         </div>
                         <div class="two fields row">
