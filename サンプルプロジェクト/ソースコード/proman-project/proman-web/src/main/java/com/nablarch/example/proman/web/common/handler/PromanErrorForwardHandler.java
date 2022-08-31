@@ -32,7 +32,7 @@ public class PromanErrorForwardHandler implements Handler<Object, Object> {
                     "/WEB-INF/view/errorPages/SESSION_KEY_NOT_FOUND_ERROR.jsp", e);
         } catch (NoDataException e) {
             throw new HttpErrorResponse(Status.NOT_FOUND.getStatusCode(),
-                    "/WEB-INF/view/errorPages/DATA_NOT_FOUND_ERROR.jsp", e);
+                    "/WEB-INF/view/errorPages/PAGE_NOT_FOUND_ERROR.jsp", e);
         } catch (OptimisticLockException e) {
             throw new HttpErrorResponse(Status.BAD_REQUEST.getStatusCode(),
                     "/WEB-INF/view/errorPages/OPTIMISTIC_LOCK_ERROR.jsp", e);
