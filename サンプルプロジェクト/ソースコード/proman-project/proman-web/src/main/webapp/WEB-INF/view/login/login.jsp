@@ -46,7 +46,7 @@
                             <div class="two fields">
                                 <div class="required field">
                                     <label>パスワード</label>
-                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" autocomplete="off"/>
+                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" />
                                     <%-- エラー表示領域 --%><n:error errorCss="message-error" name="userPassword" /><span>&nbsp;</span>
                                 </div>
                             </div>
