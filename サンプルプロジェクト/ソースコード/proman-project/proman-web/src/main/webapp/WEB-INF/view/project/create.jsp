@@ -141,7 +141,7 @@
                             </div>
                             <div class="required field">
                                 <label>PL</label>
-                                <n:text name="form.plKanjiNamer" maxlength="64" errorCss="input-error" placeholder="PL" />
+                                <n:text name="form.plKanjiName" maxlength="64" errorCss="input-error" placeholder="PL" />
                                 <n:error errorCss="message-error" name="form.plKanjiName" /><span>&nbsp;</span>
                             </div>
                         </div>
