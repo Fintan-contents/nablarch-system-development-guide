@@ -14,7 +14,7 @@
     <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></n:script>
     <n:script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></n:script>
     <title>
-        トップページ | Proman
+        トップメニュー | Proman
     </title>
 </head>
 <body>
