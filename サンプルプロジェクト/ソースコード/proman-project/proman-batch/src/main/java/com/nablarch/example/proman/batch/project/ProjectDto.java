@@ -57,7 +57,7 @@ public class ProjectDto {
     private String sales;
 
     /** バージョン番号 */
-    private String version;
+    private String versionNo;
 
     /**
      * プロジェクトIDのgetter
@@ -255,15 +255,15 @@ public class ProjectDto {
      * バージョン番号のgetter
      * @return バージョン番号
      */
-    public String getVersion() {
-        return version;
+    public String getVersionNo() {
+        return versionNo;
     }
 
     /**
      * バージョン番号のsetter
-     * @param version バージョン番号
+     * @param versionNo バージョン番号
      */
-    public void setVersion(String version) {
-        this.version = version;
+    public void setVersionNo(String versionNo) {
+        this.versionNo = versionNo;
     }
 }

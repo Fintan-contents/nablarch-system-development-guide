@@ -11,7 +11,7 @@ SELECT
     pm_kanji_name projectManager,
     pl_kanji_name projectLeader,
     note note,
-    amount_sales sales,
+    sales_amount sales,
     version_no version
 FROM
     project
