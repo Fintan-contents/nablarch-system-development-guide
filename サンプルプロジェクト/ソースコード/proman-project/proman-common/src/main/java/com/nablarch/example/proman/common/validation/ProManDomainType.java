@@ -34,11 +34,11 @@ public class ProManDomainType {
     private String loginId;
 
     /**
-     * パスワード
+     * ユーザパスワード
      */
     @Length(max = 44)
     @SystemChar(charsetDef = "ASCII文字")
-    private String password;
+    private String userPassword;
 
     /**
      * プロジェクトID
@@ -54,13 +54,13 @@ public class ProManDomainType {
     private String projectName;
 
     /**
-     * PJ種別コード値
+     * プロジェクト種別
      */
     @CodeValue(codeId = "C0300001", pattern = "PATTERN01")
     private String projectType;
 
     /**
-     * PJ分類コード値
+     * プロジェクト分類
      */
     @CodeValue(codeId = "C0200001", pattern = "PATTERN01")
     private String projectClass;
