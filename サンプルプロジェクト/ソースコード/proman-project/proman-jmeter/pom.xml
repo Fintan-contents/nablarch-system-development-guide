@@ -18,6 +18,12 @@
 
   <profiles>
     <profile>
+      <id>dev</id>
+      <properties>
+        <env.dir>dev</env.dir>
+      </properties>
+    </profile>
+    <profile>
       <id>ci</id>
       <properties>
         <env.dir>ci</env.dir>
