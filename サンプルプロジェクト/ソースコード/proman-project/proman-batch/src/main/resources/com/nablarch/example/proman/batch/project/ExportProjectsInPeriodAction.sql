@@ -12,7 +12,7 @@ SELECT
     pl_kanji_name projectLeader,
     note note,
     sales_amount sales,
-    version_no version
+    version_no versionNo
 FROM
     project
 WHERE
