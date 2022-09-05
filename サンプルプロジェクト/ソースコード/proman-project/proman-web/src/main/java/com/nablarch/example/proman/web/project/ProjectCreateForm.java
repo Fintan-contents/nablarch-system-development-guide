@@ -73,7 +73,7 @@ public class ProjectCreateForm implements Serializable {
      */
     //TODO:顧客選択が実装されたら必須にする。
     //@Required
-    @Domain("id")
+    @Domain("clientId")
     private String clientId;
 
     /**

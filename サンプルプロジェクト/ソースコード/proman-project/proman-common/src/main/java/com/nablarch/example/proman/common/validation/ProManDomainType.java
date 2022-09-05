@@ -15,10 +15,10 @@ import nablarch.core.validation.ee.SystemChar;
 public class ProManDomainType {
 
     /**
-     * ID
+     * 顧客ID
      */
-    @Digits(integer = 9)
-    private String id;
+	@Digits(integer = 9)
+    private String clientId;
 
     /**
      * 組織ID
@@ -43,8 +43,7 @@ public class ProManDomainType {
     /**
      * プロジェクトID
      */
-    @Length(max = 20)
-    @SystemChar(charsetDef = "半角英数")
+    @Digits(integer = 9)
     private String projectId;
 
     /**
@@ -91,12 +90,6 @@ public class ProManDomainType {
      */
     @MoneyRange(max = 999999999)
     private String amountOfMoney;
-
-    /**
-     * バージョン番号
-     */
-    @Digits(integer = 4)
-    private String version;
 
     /**
      * ページ番号
