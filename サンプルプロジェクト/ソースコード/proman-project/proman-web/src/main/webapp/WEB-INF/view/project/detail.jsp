@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="column">
                                 <h5 class="ui header">売上高</h5>
-                                <n:write value="${n:format('number', project.sales, '###,###,### 千円')}"/>
+                                <n:write value="${n:format('number', project.salesAmount, '###,###,### 千円')}"/>
                             </div>
                             <div class="column">
                                 <h5 class="ui header">顧客</h5>
@@ -74,11 +74,11 @@
                         <div class="row">
                             <div class="column">
                                 <h5 class="ui header">PM</h5>
-                                <n:write name="project.projectManager"/>
+                                <n:write name="project.pmKanjiName"/>
                             </div>
                             <div class="column">
                                 <h5 class="ui header">PL</h5>
-                                <n:write name="project.projectLeader"/>
+                                <n:write name="project.plKanjiName"/>
                             </div>
                         </div>
                         <div class="row">

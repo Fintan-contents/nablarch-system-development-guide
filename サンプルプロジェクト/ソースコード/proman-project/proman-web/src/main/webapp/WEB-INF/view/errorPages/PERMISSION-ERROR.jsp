@@ -31,7 +31,8 @@
                 <div class="twelve wide column">
                     <h1 class="page-title">エラー画面</h1>
                     <div class="message-area">
-                        アクセス権限がありません。
+                        アクセス権限がありません。<br>
+                        状況が変わらない場合は、お手数ですが、このシステムの管理者にご連絡ください。
                     </div>
                 </div>
             </div>

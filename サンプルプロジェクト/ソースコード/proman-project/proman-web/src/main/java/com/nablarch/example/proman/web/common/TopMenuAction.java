@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.login;
+package com.nablarch.example.proman.web.common;
 
 import nablarch.common.web.session.SessionUtil;
 import nablarch.fw.ExecutionContext;
@@ -10,7 +10,7 @@ import nablarch.fw.web.HttpResponse;
  *
  * @author Masaya Seko
  */
-public class TopPageAction {
+public class TopMenuAction {
 
     /**
      * Topメニュー画面を表示。
@@ -21,7 +21,7 @@ public class TopPageAction {
      */
     public HttpResponse index(HttpRequest request, ExecutionContext context) {
         SessionUtil.delete(context, "searchForm");
-        return new HttpResponse("/WEB-INF/view/common/topPage.jsp");
+        return new HttpResponse("/WEB-INF/view/common/topMenu.jsp");
     }
 
 }

@@ -244,8 +244,8 @@
                                     <td><n:write name="row.organizationName"/></td>
                                     <td><n:code codeId="C0300001" name="row.projectType"/></td>
                                     <td><n:code codeId="C0200001" name="row.projectClass"/></td>
-                                    <td><n:write name="row.projectManager"/></td>
-                                    <td><n:write value="${n:format('number', row.sales, '###,###,### 千円')}"/></td>
+                                    <td><n:write name="row.pmKanjiName"/></td>
+                                    <td><n:write value="${n:format('number', row.salesAmount, '###,###,### 千円')}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectStartDate)}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectEndDate)}"/></td>
                                 </tr>
