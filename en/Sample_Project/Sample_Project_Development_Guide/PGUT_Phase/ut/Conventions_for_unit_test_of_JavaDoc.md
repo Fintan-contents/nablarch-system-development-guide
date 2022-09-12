@@ -1,23 +1,34 @@
-# Conventions for Unit Test of JavaDoc
+# Conventions for Unit Test of Javadoc
 
-## JavaDoc for method
+## Javadoc for class
+Write "Test for < Name of class to test >.".
+
+### Example
+
+```
+/**
+ * Test for ProjectService.
+ */
+class ProjectServiceTest {
+    // ...
+}
+```
+
+## Javadoc for method
 Include comments that explain what the test checks.
 
 ### Example
 
 ```
-public class ProjectServiceTest {
+class ProjectServiceTest {
 
     private ProjectService sut;
     
     /**
      * Test whether one search process can be called successfully.
-     * <p>
-     * Determines that the call was successful if no exception is raised.
-     * </p>
      */
     @Test
-    public void test() {
+    void test() {
         sut = new ProjectService(new DaoStub() {
             @Override
             public <T> T findById(Class<T> entityClass, Object... id) {

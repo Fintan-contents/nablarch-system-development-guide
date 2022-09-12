@@ -78,6 +78,12 @@ The check can be performed with the following command.
 mvn spotbugs:check
 ```
 
+※When checking, the class file must be output under the target directory. If the class file is not output, please execute the following command.
+
+```sh
+mvn compile
+```
+
 If there is a check violation, the following points are output to the console:
 
 ```

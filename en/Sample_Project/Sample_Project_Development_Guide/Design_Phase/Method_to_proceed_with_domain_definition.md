@@ -11,7 +11,7 @@ Based on this domain definition design document, we will add domains to ER diagr
 The domain added to the ER diagram is used to specify the domain of the column.
 In Object Browser ER, the type and digits are determined automatically by specifying the domain.
 Specifying a domain for a column ensures that the type and digits of the column that takes the same domain will always match. 
-For example, if the column called membership number is `CHAR(10)`, the column with the membership number domain will always be `CHAR(10)`.
+For example, if the membership number domain is `CHAR(10)`, the column with the membership number domain will always be `CHAR(10)`.
 
 ## Domain Bean
 

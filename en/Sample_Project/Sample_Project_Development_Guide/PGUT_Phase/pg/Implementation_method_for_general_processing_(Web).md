@@ -4,7 +4,7 @@
 
 ### Between subfunctions
 
-- Loose coupling between subfunctions. Do not pass via SessionUtil.
+- Loose coupling between subfunctions. Do not pass values via SessionUtil.
   For example, the transition from the project details screen to the search/delete screen will GET/POST the project ID and search the DB again for project information.
 - Parameters are passed using Form.   
   Even if there is only one parameter, create a Form class and do not retrieve the value directly from HttpRequest#getParamMap ().

@@ -11,9 +11,7 @@
                 href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
         <n:link rel="stylesheet" type="text/css"
                 href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css"/>
-        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"/>
+        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"/>
         <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"/>
         <n:script type="text/javascript"
                   src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"/>
@@ -66,7 +64,7 @@
                         <div class="row">
                             <div class="column">
                                 <h5 class="ui header">売上高</h5>
-                                <n:write value="${n:format('number', project.sales, '###,###,### 千円')}"/>
+                                <n:write value="${n:format('number', project.salesAmount, '###,###,### 千円')}"/>
                             </div>
                             <div class="column">
                                 <h5 class="ui header">顧客</h5>
@@ -76,11 +74,11 @@
                         <div class="row">
                             <div class="column">
                                 <h5 class="ui header">PM</h5>
-                                <n:write name="project.projectManager"/>
+                                <n:write name="project.pmKanjiName"/>
                             </div>
                             <div class="column">
                                 <h5 class="ui header">PL</h5>
-                                <n:write name="project.projectLeader"/>
+                                <n:write name="project.plKanjiName"/>
                             </div>
                         </div>
                         <div class="row">
