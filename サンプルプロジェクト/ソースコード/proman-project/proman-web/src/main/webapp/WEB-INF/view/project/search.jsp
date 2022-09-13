@@ -12,9 +12,7 @@
                 href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
         <n:link rel="stylesheet" type="text/css"
                 href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css"/>
-        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"/>
+        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"/>
         <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"/>
         <n:script type="text/javascript"
                   src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"/>
@@ -246,8 +244,8 @@
                                     <td><n:write name="row.organizationName"/></td>
                                     <td><n:code codeId="C0300001" name="row.projectType"/></td>
                                     <td><n:code codeId="C0200001" name="row.projectClass"/></td>
-                                    <td><n:write name="row.projectManager"/></td>
-                                    <td><n:write value="${n:format('number', row.sales, '###,###,### 千円')}"/></td>
+                                    <td><n:write name="row.pmKanjiName"/></td>
+                                    <td><n:write value="${n:format('number', row.salesAmount, '###,###,### 千円')}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectStartDate)}"/></td>
                                     <td><n:write value="${n:formatByDefault('dateTime', row.projectEndDate)}"/></td>
                                 </tr>

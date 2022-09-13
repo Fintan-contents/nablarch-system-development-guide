@@ -8,9 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%-- javascript --%>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
         <%-- stylesheet --%>
@@ -48,7 +46,7 @@
                             <div class="two fields">
                                 <div class="required field">
                                     <label>パスワード</label>
-                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" autocomplete="off"/>
+                                    <n:password name="userPassword" cssClass="form-control" errorCss="input-error" placeholder="パスワード" />
                                     <%-- エラー表示領域 --%><n:error errorCss="message-error" name="userPassword" /><span>&nbsp;</span>
                                 </div>
                             </div>

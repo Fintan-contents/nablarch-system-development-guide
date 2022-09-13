@@ -73,7 +73,7 @@ public class ProjectUpdateForm implements Serializable {
      */
     //TODO:顧客選択が実装されたら必須にする。
     //@Required
-    @Domain("id")
+    @Domain("clientId")
     private String clientId;
 
     /**
@@ -81,14 +81,14 @@ public class ProjectUpdateForm implements Serializable {
      */
     @Required
     @Domain("userName")
-    private String projectManager;
+    private String pmKanjiName;
 
     /**
      * プロジェクトリーダー名
      */
     @Required
     @Domain("userName")
-    private String projectLeader;
+    private String plKanjiName;
 
     /**
      * 備考
@@ -100,7 +100,7 @@ public class ProjectUpdateForm implements Serializable {
      * 売上高
      */
     @Domain("amountOfMoney")
-    private String sales;
+    private String salesAmount;
 
     /**
      * プロジェクト名を取得する。
@@ -251,17 +251,17 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return プロジェクトマネージャー名
      */
-    public String getProjectManager() {
-        return projectManager;
+    public String getPmKanjiName() {
+        return pmKanjiName;
     }
 
     /**
      * プロジェクトマネージャー名を設定する。
      *
-     * @param projectManager 設定するプロジェクトマネージャー名
+     * @param pmKanjiName 設定するプロジェクトマネージャー名
      */
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
+    public void setPmKanjiName(String pmKanjiName) {
+        this.pmKanjiName = pmKanjiName;
     }
 
     /**
@@ -269,17 +269,17 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return プロジェクトリーダー名
      */
-    public String getProjectLeader() {
-        return projectLeader;
+    public String getPlKanjiName() {
+        return plKanjiName;
     }
 
     /**
      * プロジェクトリーダー名を設定する。
      *
-     * @param projectLeader 設定するプロジェクトリーダー名
+     * @param plKanjiName 設定するプロジェクトリーダー名
      */
-    public void setProjectLeader(String projectLeader) {
-        this.projectLeader = projectLeader;
+    public void setPlKanjiName(String plKanjiName) {
+        this.plKanjiName = plKanjiName;
     }
 
     /**
@@ -305,8 +305,8 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return 売上高
      */
-    public String getSales() {
-        return sales;
+    public String getSalesAmount() {
+        return salesAmount;
     }
 
     /**
@@ -314,8 +314,8 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @param sales 設定する売上高
      */
-    public void setSales(String sales) {
-        this.sales = sales;
+    public void setSalesAmount(String salesAmount) {
+        this.salesAmount = salesAmount;
     }
 
     /**
