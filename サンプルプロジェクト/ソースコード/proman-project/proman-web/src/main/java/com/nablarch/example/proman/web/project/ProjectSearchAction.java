@@ -49,7 +49,7 @@ public class ProjectSearchAction {
     @InjectForm(form = ProjectSearchForm.class, prefix = "form")
     @OnError(type = ApplicationException.class, path = "forward://search")
     public HttpResponse list(HttpRequest request, ExecutionContext context) {
-        // ユーザー入力値をDTOに詰め替える
+        // ユーザ入力値をDTOに詰め替える
         ProjectSearchForm form = context.getRequestScopedVar("form");
         if (StringUtil.isNullOrEmpty(form.getPageNumber())) {
             // ページングの場合はページ番号が送られるが検索ボタン押下では空のためここで設定
