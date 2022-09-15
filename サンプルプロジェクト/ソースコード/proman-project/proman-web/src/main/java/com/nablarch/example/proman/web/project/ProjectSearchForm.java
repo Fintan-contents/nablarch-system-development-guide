@@ -315,7 +315,6 @@ public class ProjectSearchForm extends SearchFormBase implements Serializable {
      *
      * @return FROMにTOより後の日付が設定されていた場合は false それ以外（FROM、TOの両方又はいずれかが未定の場合も含む）は true
      */
-
     @AssertTrue(message = "{validator.dateRange.message}")
     public boolean isValidProjectEndDateRange() {
         return DateRelationUtil.isValid(projectEndDateFrom, projectEndDateTo);
