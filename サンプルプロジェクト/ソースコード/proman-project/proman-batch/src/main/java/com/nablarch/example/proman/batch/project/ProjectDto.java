@@ -16,7 +16,7 @@ import java.util.Date;
         properties = { "projectId", "projectName", "projectType", "projectClass", "projectStartDate",
                 "projectEndDate", "organizationId", "clientId", "projectManager", "projectLeader", "note", "sales", "versionNo" },
         headers = { "プロジェクトID", "プロジェクト名", "プロジェクト種別", "プロジェクト分類", "プロジェクト開始日付", "プロジェクト終了日付",
-                "組織ID", "顧客ID", "プロジェクトマネージャー", "プロジェクトリーダー", "備考", "売上高", "バージョン番号" })
+                "組織ID", "顧客ID", "プロジェクトマネージャ", "プロジェクトリーダー", "備考", "売上高", "バージョン番号" })
 @CsvFormat(fieldSeparator = ',', lineSeparator = "\r\n", quote = '\"', ignoreEmptyLine = false,
         requiredHeader = false, charset = "UTF-8", emptyToNull = true, quoteMode = CsvDataBindConfig.QuoteMode.ALL)
 public class ProjectDto {
@@ -44,7 +44,7 @@ public class ProjectDto {
     /** 顧客ID */
     private String clientId;
 
-    /** プロジェクトマネージャー */
+    /** プロジェクトマネージャ */
     private String projectManager;
 
     /** プロジェクトリーダー */
@@ -188,16 +188,16 @@ public class ProjectDto {
     }
 
     /**
-     * プロジェクトマネージャーのgetter
-     * @return プロジェクトマネージャー
+     * プロジェクトマネージャのgetter
+     * @return プロジェクトマネージャ
      */
     public String getProjectManager() {
         return projectManager;
     }
 
     /**
-     * プロジェクトマネージャーのsetter
-     * @param projectManager プロジェクトマネージャー
+     * プロジェクトマネージャのsetter
+     * @param projectManager プロジェクトマネージャ
      */
     public void setProjectManager(String projectManager) {
         this.projectManager = projectManager;

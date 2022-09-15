@@ -77,7 +77,7 @@ public class ProjectCreateForm implements Serializable {
     private String clientId;
 
     /**
-     * プロジェクトマネージャー名
+     * プロジェクトマネージャ名
      */
     @Required
     @Domain("userName")
@@ -247,18 +247,18 @@ public class ProjectCreateForm implements Serializable {
     }
 
     /**
-     * プロジェクトマネージャー名を取得する。
+     * プロジェクトマネージャ名を取得する。
      *
-     * @return プロジェクトマネージャー名
+     * @return プロジェクトマネージャ名
      */
     public String getPmKanjiName() {
         return pmKanjiName;
     }
 
     /**
-     * プロジェクトマネージャー名を設定する。
+     * プロジェクトマネージャ名を設定する。
      *
-     * @param pmKanjiName 設定するプロジェクトマネージャー名
+     * @param pmKanjiName 設定するプロジェクトマネージャ名
      */
     public void setPmKanjiName(String pmKanjiName) {
         this.pmKanjiName = pmKanjiName;

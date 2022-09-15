@@ -56,7 +56,7 @@ public class LoginAction {
         try {
             AuthenticationUtil.authenticate(form.getLoginId(), form.getUserPassword());
         } catch (AuthenticationException ignore) {
-            // パスワード不一致、その他認証エラー（ユーザーが存在しない等）
+            // パスワード不一致、その他認証エラー（ユーザが存在しない等）
             throw new ApplicationException(MessageUtil.createMessage(
                     MessageLevel.ERROR, "errors.login"));
         }
