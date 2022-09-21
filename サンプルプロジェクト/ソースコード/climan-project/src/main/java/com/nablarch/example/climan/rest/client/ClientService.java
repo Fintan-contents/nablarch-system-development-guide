@@ -65,13 +65,16 @@ public class ClientService {
      * 顧客を登録する。
      *
      * @param client 登録する顧客
+     * @return 登録した顧客
      * @throws DuplicateRegistrationException 既に登録されている顧客と同じ顧客名が指定された場合
      */
-    public void registerClient(Client client) {
+    public Client registerClient(Client client) {
         long count = daoContext.countBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
         if (count > 0) {
             throw new DuplicateRegistrationException();
         }
         daoContext.insert(client);
+        List<Client> result = daoContext.findAllBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
+        return result.get(0);
     }
 }

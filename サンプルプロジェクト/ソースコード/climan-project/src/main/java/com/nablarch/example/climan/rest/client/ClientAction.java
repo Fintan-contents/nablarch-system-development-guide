@@ -68,7 +68,7 @@ public class ClientAction {
      * 顧客を登録する。
      *
      * @param form 顧客登録のフォーム
-     * @return HTTPレスポンス
+     * @return 登録した顧客詳細
      */
     @POST
     @Valid
@@ -76,7 +76,6 @@ public class ClientAction {
     public HttpResponse register(ClientForm form) {
         ClientService service = new ClientService();
         Client client = BeanUtil.createAndCopy(Client.class, form);
-        service.registerClient(client);
-        return new HttpResponse().setStatusCode(HttpResponse.Status.CREATED.getStatusCode());
+        return service.registerClient(client);
     }
 }
