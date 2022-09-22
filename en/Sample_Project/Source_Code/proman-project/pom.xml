@@ -27,7 +27,7 @@
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
     <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
     <version.spotbugs>4.5.0</version.spotbugs>
-    <postgres.jdbc.driver.version>9.4.1211</postgres.jdbc.driver.version>
+    <postgres.jdbc.driver.version>42.3.7</postgres.jdbc.driver.version>
     <!--
     Path to tools directory. Indicates tools one level above the directory of individual modules executed by a tool (indicates this directory).
      -->
