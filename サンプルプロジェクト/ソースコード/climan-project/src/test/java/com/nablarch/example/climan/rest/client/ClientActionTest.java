@@ -211,20 +211,24 @@ class ClientActionTest {
         String beforeRegister = "登録する顧客名の顧客が存在しないこと";
         HttpResponse response = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(beforeRegister, HttpResponse.Status.OK, response);
-        with(response.getBodyString()).assertThat("$", empty(), beforeRegister + "[結果件数]");
+        with(support.getBodyString(response)).assertThat("$", empty(), beforeRegister + "[結果件数]");
 
         String register = "新規登録";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
         support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
         assertTrue(StringUtil.isNullOrEmpty(registerResponse.getBodyString()), register + "[レスポンスボディ]");
+        with(support.getBodyString(registerResponse))
+                //.assertThat("$.clientId", is(not(null)), register + "[顧客ID]")
+                .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")
+                .assertThat("$..industryCode", hasItem(industryCode), register + "[業種コード]");
 
         String afterRegister = "登録した顧客名の顧客が取得できること";
         HttpResponse afterRegisterResponse = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(afterRegister, HttpResponse.Status.OK, afterRegisterResponse);
-        with(afterRegisterResponse.getBodyString())
+        with(support.getBodyString(afterRegisterResponse))
                 .assertThat("$", hasSize(1), afterRegister + "[結果件数]")
-                .assertThat("$..client_name", hasItem(clientName), afterRegister + "[顧客名]")
-                .assertThat("$..industry_code", hasItem(industryCode), afterRegister + "[業種コード]");
+                .assertThat("$..clientName", hasItem(clientName), afterRegister + "[顧客名]")
+                .assertThat("$..industryCode", hasItem(industryCode), afterRegister + "[業種コード]");
     }
 
     /**
