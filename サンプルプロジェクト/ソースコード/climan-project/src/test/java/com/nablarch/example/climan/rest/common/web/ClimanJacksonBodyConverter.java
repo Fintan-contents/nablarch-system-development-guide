@@ -7,10 +7,10 @@ import nablarch.fw.web.JacksonBodyConverter;
 
 public class ClimanJacksonBodyConverter extends JacksonBodyConverter {
     public ClimanJacksonBodyConverter() {
-        super(new SnakeCaseObjectMapperFactory());
+        super(new ClimanJacksonObjectMapperFactory());
     }
 
-    private static class SnakeCaseObjectMapperFactory implements ObjectMapperFactory {
+    private static class ClimanJacksonObjectMapperFactory implements ObjectMapperFactory {
         @Override
         public ObjectMapper create() {
             ObjectMapper objectMapper = new ObjectMapper();
