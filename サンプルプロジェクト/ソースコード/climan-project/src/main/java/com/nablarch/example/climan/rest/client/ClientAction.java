@@ -1,5 +1,6 @@
 package com.nablarch.example.climan.rest.client;
 
+import com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter;
 import com.nablarch.example.climan.common.validation.BindingResult;
 import com.nablarch.example.climan.common.validation.FormBinder;
 import com.nablarch.example.climan.entity.Client;
@@ -73,10 +74,13 @@ public class ClientAction {
     @POST
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Client register(ClientForm form) {
+    public HttpResponse register(ClientForm form) {
         ClientService service = new ClientService();
         Client client = BeanUtil.createAndCopy(Client.class, form);
-        return service.registerClient(client);
+        Client result = service.registerClient(client);
+        ClimanJackson2BodyConverter climanJackson2BodyConverter = new ClimanJackson2BodyConverter();
+        return new HttpResponse().setStatusCode(HttpResponse.Status.CREATED.getStatusCode())
+                        .setContentType(MediaType.APPLICATION_JSON)
+                        .write(climanJackson2BodyConverter.write(result));
     }
 }
