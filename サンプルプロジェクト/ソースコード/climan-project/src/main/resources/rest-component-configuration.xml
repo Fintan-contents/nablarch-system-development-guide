@@ -47,7 +47,7 @@
       <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
         <property name="handlerList">
           <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory">
-            <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+            <property name="bodyConverter" ref="jackson2BodyConverter" />
           </component>
         </property>
       </component>
@@ -69,6 +69,7 @@
   <!-- ダイアレクト設定 -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
+  <component name="jackson2BodyConverter" class="nablarch.integration.jaxrs.jackson.Jackson2BodyConverter" />
   <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
 
   <!-- ハンドラキュー構成 -->
