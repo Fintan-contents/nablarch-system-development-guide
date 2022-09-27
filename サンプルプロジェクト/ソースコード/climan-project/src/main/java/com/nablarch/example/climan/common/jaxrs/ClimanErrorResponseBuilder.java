@@ -13,8 +13,6 @@ import nablarch.fw.web.HttpRequest;
 import nablarch.fw.web.HttpResponse;
 import nablarch.integration.jaxrs.jackson.Jackson2BodyConverter;
 
-import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
