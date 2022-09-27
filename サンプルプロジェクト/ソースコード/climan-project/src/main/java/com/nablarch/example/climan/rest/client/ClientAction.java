@@ -73,6 +73,7 @@ public class ClientAction {
     @POST
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Client register(ClientForm form) {
         ClientService service = new ClientService();
         Client client = BeanUtil.createAndCopy(Client.class, form);
