@@ -16,7 +16,6 @@ import java.util.*;
 import static nablarch.test.Assertion.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * ClientServiceのテストクラス。
@@ -127,6 +126,6 @@ class ClientServiceTest {
         Client result = sut.registerClient(new Client());
 
         assertTrue(invoked.containsKey("insert"));
-        assertNotNull(result);
+        assertEquals(client, result);
     }
 }
