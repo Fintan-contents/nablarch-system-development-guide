@@ -74,7 +74,6 @@ public class ClientService {
             throw new DuplicateRegistrationException();
         }
         daoContext.insert(client);
-        Client result = daoContext.findBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
-        return result;
+        return daoContext.findBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
     }
 }
