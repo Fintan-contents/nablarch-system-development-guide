@@ -119,10 +119,8 @@ class ClientServiceTest {
             }
 
             @Override
-            public <T> EntityList<T> findAllBySqlFile(Class<T> entityClass, String sqlId, Object params) {
-                EntityList<T> result = new EntityList<T>();
-                result.add((T) client);
-                return result;
+            public <T> T findBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                return (T) client;
             }
         });
 
