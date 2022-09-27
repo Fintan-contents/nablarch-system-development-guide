@@ -217,6 +217,7 @@ class ClientActionTest {
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
         support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
         with(support.getBodyString(registerResponse))
+                //.assertThat("$.clientId", is(not(null)), register + "[顧客ID]")
                 .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")
                 .assertThat("$..industryCode", hasItem(industryCode), register + "[業種コード]");
 
