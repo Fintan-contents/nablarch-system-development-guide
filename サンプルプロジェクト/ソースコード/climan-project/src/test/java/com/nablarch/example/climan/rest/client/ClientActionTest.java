@@ -87,9 +87,9 @@ class ClientActionTest {
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
                 .assertThat("$", hasSize(1), message + "[結果件数]")
-                .assertThat("$[0].client_id", equalTo(4), message + "[顧客ID]")
-                .assertThat("$[0].client_name", equalTo("テスト会社３（農業）"), message + "[顧客名]")
-                .assertThat("$[0].industry_code", equalTo("01"), message + "[業種コード]");
+                .assertThat("$[0].clientId", equalTo(4), message + "[顧客ID]")
+                .assertThat("$[0].clientName", equalTo("テスト会社３（農業）"), message + "[顧客名]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -141,9 +141,9 @@ class ClientActionTest {
         HttpResponse response = support.sendRequest(support.get(PATH + "/1"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$.client_id", equalTo(1), message + "[顧客ID]")
-                .assertThat("$.client_name", equalTo("テスト会社１（農業）"), message + "[顧客名]")
-                .assertThat("$.industry_code", equalTo("01"), message + "[業種コード]");
+                .assertThat("$.clientId", equalTo(1), message + "[顧客ID]")
+                .assertThat("$.clientName", equalTo("テスト会社１（農業）"), message + "[顧客名]")
+                .assertThat("$.industryCode", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -215,8 +215,7 @@ class ClientActionTest {
 
         String register = "新規登録";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
-        assertTrue(StringUtil.isNullOrEmpty(registerResponse.getBodyString()), register + "[レスポンスボディ]");
+        support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
         with(support.getBodyString(registerResponse))
                 //.assertThat("$.clientId", is(not(null)), register + "[顧客ID]")
                 .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")

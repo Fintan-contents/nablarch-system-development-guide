@@ -16,6 +16,7 @@ import java.util.*;
 import static nablarch.test.Assertion.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * ClientServiceのテストクラス。
@@ -101,6 +102,10 @@ class ClientServiceTest {
     void testRegisterClient() {
 
         final Map<String, Boolean> invoked = new HashMap<>();
+        final Client client = new Client();
+        client.setClientId(1);
+        client.setClientName("顧客１");
+        client.setIndustryCode("01");
 
         ClientService sut = new ClientService(new DaoStub() {
             @Override
@@ -112,10 +117,18 @@ class ClientServiceTest {
             public <T> void insert(T entity) {
                 invoked.put("insert", true);
             }
+
+            @Override
+            public <T> EntityList<T> findAllBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                EntityList<T> result = new EntityList<T>();
+                result.add((T) client);
+                return result;
+            }
         });
 
-        sut.registerClient(new Client());
+        Client result = sut.registerClient(new Client());
 
         assertTrue(invoked.containsKey("insert"));
+        assertNotNull(result);
     }
 }

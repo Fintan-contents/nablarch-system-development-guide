@@ -15,7 +15,6 @@ public class ClimanJacksonBodyConverter extends JacksonBodyConverter {
         public ObjectMapper create() {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.getFactory().configure(JsonWriteFeature.ESCAPE_NON_ASCII.mappedFeature(), true);
-            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
             return objectMapper;
         }
     }
