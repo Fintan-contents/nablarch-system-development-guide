@@ -215,7 +215,7 @@ class ClientActionTest {
 
         String register = "新規登録";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
+        support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
         with(support.getBodyString(registerResponse))
                 .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")
                 .assertThat("$..industryCode", hasItem(industryCode), register + "[業種コード]");
