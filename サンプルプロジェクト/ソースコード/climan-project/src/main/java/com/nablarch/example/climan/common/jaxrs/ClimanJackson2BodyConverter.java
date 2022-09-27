@@ -11,12 +11,7 @@ import java.io.IOException;
  *
  * @author Kiyohito Itoh
  */
-public class ClimanJackson2BodyConverter  extends Jackson2BodyConverter {
-    @Override
-    protected void configure(ObjectMapper objectMapper) {
-        super.configure(objectMapper);
-    }
-
+public class ClimanJackson2BodyConverter extends Jackson2BodyConverter {
     /**
      * オブジェクトをJSON文字列に書き出す。
      * @param value オブジェクト
