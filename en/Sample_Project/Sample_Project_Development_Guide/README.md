@@ -101,7 +101,7 @@ Guide is described for each role and task shown in the development flow.
     - Use the files from the above links for the self-checks that in the case study sheet.
 - Rules
   - [Version management rules](PGUT_Phase/Version_management_rules.md)
-  - [Project・Package configuration](PGUT_Phase/pg/Project・Package_configuration.md)
+  - [Package configuration](PGUT_Phase/pg/Package_configuration.md)
   - [Naming convention for coding](PGUT_Phase/pg/Naming_convention_for_coding.md)
   - [Response method when a static analysis check violation occurs](PGUT_Phase/pg/Response_method_when_a_static_analysis_check_violation_occurs.md)
 - Working method
