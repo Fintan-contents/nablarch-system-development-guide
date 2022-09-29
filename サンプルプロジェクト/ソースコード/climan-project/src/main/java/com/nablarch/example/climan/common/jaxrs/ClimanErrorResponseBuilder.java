@@ -42,28 +42,28 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
     @Override
     public HttpResponse build(HttpRequest request, ExecutionContext context, Throwable throwable) {
         if (throwable instanceof ApplicationException) {
-            return creataHttpResponse(context, (ApplicationException) throwable);
+            return creataHttpResponse((ApplicationException) throwable, context);
         } else if (throwable instanceof SearchResultUpperLimitException) {
-            return createHttpResponse(context,
-                    HttpResponse.Status.BAD_REQUEST, "FB1999902", "errors.upper.limit",
+            return createHttpResponse(
+                    HttpResponse.Status.BAD_REQUEST, context, "FB1999902", "errors.upper.limit",
                     ((SearchResultUpperLimitException) throwable).getLimit());
         } else if (throwable instanceof NoDataException) {
-            return createHttpResponse(context,
-                    HttpResponse.Status.NOT_FOUND, "FB1999903", "errors.nothing");
+            return createHttpResponse(
+                    HttpResponse.Status.NOT_FOUND, context, "FB1999903", "errors.nothing");
         } else if (throwable instanceof DuplicateRegistrationException) {
-            return createHttpResponse(context,
-                    HttpResponse.Status.CONFLICT, "FB1999904", "errors.register.duplicate");
+            return createHttpResponse(
+                    HttpResponse.Status.CONFLICT, context, "FB1999904", "errors.register.duplicate");
         }
         return super.build(request, context, throwable);
     }
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param context 実行コンテキスト
      * @param e アプリケーション例外
+     * @param context 実行コンテキスト
      * @return 共通エラー応答電文のHTTPレスポンス
      */
-    private HttpResponse creataHttpResponse(ExecutionContext context, ApplicationException e) {
+    private HttpResponse creataHttpResponse(ApplicationException e, ExecutionContext context) {
         List<String> messages = e.getMessages().stream().map(message -> {
                                             if (message instanceof ValidationResultMessage) {
                                                 ValidationResultMessage vrm = (ValidationResultMessage) message;
@@ -72,38 +72,37 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
                                             return message.formatMessage();
                                         }).collect(Collectors.toList());
         Error error = new Error("FB1999901", messages);
-        return createHttpResponse(context, HttpResponse.Status.BAD_REQUEST, error);
+        return createHttpResponse(HttpResponse.Status.BAD_REQUEST, context, error);
     }
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param context 実行コンテキスト
      * @param status ステータスコード
+     * @param context 実行コンテキスト
      * @param faultCode 障害コード
      * @param messageId メッセージID
      * @param options メッセージの埋め込みオプション
      * @return 共通エラー応答電文のHTTPレスポンス
      */
     private HttpResponse createHttpResponse(
-            ExecutionContext context,
             HttpResponse.Status status,
+            ExecutionContext context,
             String faultCode, String messageId, Object... options) {
         String message = MessageUtil.createMessage(MessageLevel.ERROR, messageId, options).formatMessage();
         Error error = new Error(faultCode, message);
-        return createHttpResponse(context, status, error);
+        return createHttpResponse(status, context, error);
     }
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
-     * @param context 実行コンテキスト
      * @param status ステータスコード
+     * @param context 実行コンテキスト
      * @param error エラー
      * @return 共通エラー応答電文のHTTPレスポンス
      */
-    private HttpResponse createHttpResponse(ExecutionContext context, HttpResponse.Status status, Error error) {
-        HttpResponse response = bodyConverter.write(error, context);
-        return response.setStatusCode(status.getStatusCode());
-    }
+    private HttpResponse createHttpResponse(HttpResponse.Status status, ExecutionContext context, Error error) {
+        return bodyConverter.write(error, context)
+                .setStatusCode(status.getStatusCode());    }
 
     /**
      * エラー内容を保持するクラス。
