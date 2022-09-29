@@ -47,7 +47,7 @@
       <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
         <property name="handlerList">
           <component class="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory">
-            <property name="bodyConverter" ref="climanJackson2BodyConverter" />
+            <property name="bodyConverter" ref="jackson2BodyConverter" />
           </component>
         </property>
       </component>
@@ -58,7 +58,7 @@
   <component name="jaxRsResponseHandler" class="nablarch.fw.jaxrs.JaxRsResponseHandler">
     <property name="errorResponseBuilder">
       <component class="com.nablarch.example.climan.common.jaxrs.ClimanErrorResponseBuilder">
-        <property name="climanJackson2BodyConverter" ref="climanJackson2BodyConverter" />
+        <property name="bodyConverter" ref="jackson2BodyConverter" />
       </component>
     </property>
     <property name="errorLogWriter">
@@ -69,7 +69,7 @@
   <!-- ダイアレクト設定 -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
-  <component name="climanJackson2BodyConverter" class="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter" />
+  <component name="jackson2BodyConverter" class="nablarch.integration.jaxrs.jackson.Jackson2BodyConverter" />
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
