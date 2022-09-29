@@ -8,9 +8,11 @@ import nablarch.core.message.MessageLevel;
 import nablarch.core.message.MessageUtil;
 import nablarch.core.validation.ValidationResultMessage;
 import nablarch.fw.ExecutionContext;
+import nablarch.fw.jaxrs.BodyConverter;
 import nablarch.fw.jaxrs.ErrorResponseBuilder;
 import nablarch.fw.web.HttpRequest;
 import nablarch.fw.web.HttpResponse;
+import nablarch.integration.jaxrs.jackson.Jackson2BodyConverter;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
@@ -27,29 +29,29 @@ import java.util.stream.Collectors;
 public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /** レスポンスを書きだすコンバータ */
-    private ClimanJackson2BodyConverter climanJackson2BodyConverter;
+    private BodyConverter bodyConverter;
 
     /**
      * レスポンスを書きだすコンバータを設定する。
-     * @param climanJackson2BodyConverter レスポンスを書きだすコンバータ
+     * @param bodyConverter レスポンスを書きだすコンバータ
      */
-    public void setClimanJackson2BodyConverter(ClimanJackson2BodyConverter climanJackson2BodyConverter) {
-        this.climanJackson2BodyConverter = climanJackson2BodyConverter;
+    public void setBodyConverter(BodyConverter bodyConverter) {
+        this.bodyConverter = bodyConverter;
     }
 
     @Override
     public HttpResponse build(HttpRequest request, ExecutionContext context, Throwable throwable) {
         if (throwable instanceof ApplicationException) {
-            return creataHttpResponse((ApplicationException) throwable);
+            return creataHttpResponse(context, (ApplicationException) throwable);
         } else if (throwable instanceof SearchResultUpperLimitException) {
-            return createHttpResponse(
+            return createHttpResponse(context,
                     HttpResponse.Status.BAD_REQUEST, "FB1999902", "errors.upper.limit",
                     ((SearchResultUpperLimitException) throwable).getLimit());
         } else if (throwable instanceof NoDataException) {
-            return createHttpResponse(
+            return createHttpResponse(context,
                     HttpResponse.Status.NOT_FOUND, "FB1999903", "errors.nothing");
         } else if (throwable instanceof DuplicateRegistrationException) {
-            return createHttpResponse(
+            return createHttpResponse(context,
                     HttpResponse.Status.CONFLICT, "FB1999904", "errors.register.duplicate");
         }
         return super.build(request, context, throwable);
@@ -57,10 +59,11 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
+     * @param context 実行コンテキスト
      * @param e アプリケーション例外
      * @return 共通エラー応答電文のHTTPレスポンス
      */
-    private HttpResponse creataHttpResponse(ApplicationException e) {
+    private HttpResponse creataHttpResponse(ExecutionContext context, ApplicationException e) {
         List<String> messages = e.getMessages().stream().map(message -> {
                                             if (message instanceof ValidationResultMessage) {
                                                 ValidationResultMessage vrm = (ValidationResultMessage) message;
@@ -69,11 +72,12 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
                                             return message.formatMessage();
                                         }).collect(Collectors.toList());
         Error error = new Error("FB1999901", messages);
-        return createHttpResponse(HttpResponse.Status.BAD_REQUEST, error);
+        return createHttpResponse(context, HttpResponse.Status.BAD_REQUEST, error);
     }
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
+     * @param context 実行コンテキスト
      * @param status ステータスコード
      * @param faultCode 障害コード
      * @param messageId メッセージID
@@ -81,23 +85,24 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
      * @return 共通エラー応答電文のHTTPレスポンス
      */
     private HttpResponse createHttpResponse(
+            ExecutionContext context,
             HttpResponse.Status status,
             String faultCode, String messageId, Object... options) {
         String message = MessageUtil.createMessage(MessageLevel.ERROR, messageId, options).formatMessage();
         Error error = new Error(faultCode, message);
-        return createHttpResponse(status, error);
+        return createHttpResponse(context, status, error);
     }
 
     /**
      * 共通エラー応答電文のHTTPレスポンスを生成する。
+     * @param context 実行コンテキスト
      * @param status ステータスコード
      * @param error エラー
      * @return 共通エラー応答電文のHTTPレスポンス
      */
-    private HttpResponse createHttpResponse(HttpResponse.Status status, Error error) {
-        return new HttpResponse().setStatusCode(status.getStatusCode())
-                .setContentType(MediaType.APPLICATION_JSON)
-                .write(climanJackson2BodyConverter.write(error));
+    private HttpResponse createHttpResponse(ExecutionContext context, HttpResponse.Status status, Error error) {
+        HttpResponse response = bodyConverter.write(error, context);
+        return response.setStatusCode(status.getStatusCode());
     }
 
     /**
