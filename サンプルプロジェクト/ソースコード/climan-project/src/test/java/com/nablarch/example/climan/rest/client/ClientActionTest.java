@@ -3,7 +3,6 @@ package com.nablarch.example.climan.rest.client;
 import com.nablarch.example.climan.test.ClimanRestTestExtension;
 import com.nablarch.example.climan.test.ClimanRestTestSupport;
 import nablarch.core.date.SystemTimeUtil;
-import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link ClientAction}のテストクラス。
@@ -215,8 +213,9 @@ class ClientActionTest {
 
         String register = "新規登録";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
+        support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
         with(support.getBodyString(registerResponse))
+                .assertNotNull("$..clientId", register + "[顧客ID]")
                 .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")
                 .assertThat("$..industryCode", hasItem(industryCode), register + "[業種コード]");
 
