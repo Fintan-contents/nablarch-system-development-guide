@@ -3,7 +3,6 @@ package com.nablarch.example.climan.rest.client;
 import com.nablarch.example.climan.test.ClimanRestTestExtension;
 import com.nablarch.example.climan.test.ClimanRestTestSupport;
 import nablarch.core.date.SystemTimeUtil;
-import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link ClientAction}のテストクラス。
@@ -87,9 +85,9 @@ class ClientActionTest {
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
                 .assertThat("$", hasSize(1), message + "[結果件数]")
-                .assertThat("$[0].client_id", equalTo(4), message + "[顧客ID]")
-                .assertThat("$[0].client_name", equalTo("テスト会社３（農業）"), message + "[顧客名]")
-                .assertThat("$[0].industry_code", equalTo("01"), message + "[業種コード]");
+                .assertThat("$[0].clientId", equalTo(4), message + "[顧客ID]")
+                .assertThat("$[0].clientName", equalTo("テスト会社３（農業）"), message + "[顧客名]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -141,9 +139,9 @@ class ClientActionTest {
         HttpResponse response = support.sendRequest(support.get(PATH + "/1"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
-                .assertThat("$.client_id", equalTo(1), message + "[顧客ID]")
-                .assertThat("$.client_name", equalTo("テスト会社１（農業）"), message + "[顧客名]")
-                .assertThat("$.industry_code", equalTo("01"), message + "[業種コード]");
+                .assertThat("$.clientId", equalTo(1), message + "[顧客ID]")
+                .assertThat("$.clientName", equalTo("テスト会社１（農業）"), message + "[顧客名]")
+                .assertThat("$.industryCode", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -211,20 +209,23 @@ class ClientActionTest {
         String beforeRegister = "登録する顧客名の顧客が存在しないこと";
         HttpResponse response = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(beforeRegister, HttpResponse.Status.OK, response);
-        with(response.getBodyString()).assertThat("$", empty(), beforeRegister + "[結果件数]");
+        with(support.getBodyString(response)).assertThat("$", empty(), beforeRegister + "[結果件数]");
 
         String register = "新規登録";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
-        assertTrue(StringUtil.isNullOrEmpty(registerResponse.getBodyString()), register + "[レスポンスボディ]");
+        support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
+        with(support.getBodyString(registerResponse))
+                .assertNotNull("$..clientId", register + "[顧客ID]")
+                .assertThat("$..clientName", hasItem(clientName), register + "[顧客名]")
+                .assertThat("$..industryCode", hasItem(industryCode), register + "[業種コード]");
 
         String afterRegister = "登録した顧客名の顧客が取得できること";
         HttpResponse afterRegisterResponse = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(afterRegister, HttpResponse.Status.OK, afterRegisterResponse);
-        with(afterRegisterResponse.getBodyString())
+        with(support.getBodyString(afterRegisterResponse))
                 .assertThat("$", hasSize(1), afterRegister + "[結果件数]")
-                .assertThat("$..client_name", hasItem(clientName), afterRegister + "[顧客名]")
-                .assertThat("$..industry_code", hasItem(industryCode), afterRegister + "[業種コード]");
+                .assertThat("$..clientName", hasItem(clientName), afterRegister + "[顧客名]")
+                .assertThat("$..industryCode", hasItem(industryCode), afterRegister + "[業種コード]");
     }
 
     /**
