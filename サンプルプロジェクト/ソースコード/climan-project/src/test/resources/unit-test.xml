@@ -16,7 +16,7 @@
     <property name="defaultContentType" value="application/json"/>
     <property name="bodyConverters">
       <list>
-        <component class="com.nablarch.example.climan.rest.common.web.ClimanJacksonBodyConverter"/>
+        <component class="nablarch.fw.web.JacksonBodyConverter"/>
         <component class="nablarch.fw.web.StringBodyConverter"/>
       </list>
     </property>

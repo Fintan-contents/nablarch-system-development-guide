@@ -1,32 +1,32 @@
 [
   {
-    "client_id": 1,
-    "client_name": "Test Company 1 (Agriculture)",
-    "industry_code": "01"
+    "clientId": 1,
+    "clientName": "Test Company 1 (Agriculture)",
+    "industryCode": "01"
   },
   {
-    "client_id": 3,
-    "client_name": "Test Company 2 (Construction)",
-    "industry_code": "02"
+    "clientId": 3,
+    "clientName": "Test Company 2 (Construction)",
+    "industryCode": "02"
   },
   {
-    "client_id": 2,
-    "client_name": "Test Company 2 (Agriculture)",
-    "industry_code": "01"
+    "clientId": 2,
+    "clientName": "Test Company 2 (Agriculture)",
+    "industryCode": "01"
   },
   {
-    "client_id": 5,
-    "client_name": "Test Company 3 (Construction)",
-    "industry_code": "02"
+    "clientId": 5,
+    "clientName": "Test Company 3 (Construction)",
+    "industryCode": "02"
   },
   {
-    "client_id": 6,
-    "client_name": "Test Company 3 (Manufacturing)",
-    "industry_code": "03"
+    "clientId": 6,
+    "clientName": "Test Company 3 (Manufacturing)",
+    "industryCode": "03"
   },
   {
-    "client_id": 4,
-    "client_name": "Test Company 3 (Agriculture)",
-    "industry_code": "01"
+    "clientId": 4,
+    "clientName": "Test Company 3 (Agriculture)",
+    "industryCode": "01"
   }
 ]

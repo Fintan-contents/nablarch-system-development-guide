@@ -3,7 +3,6 @@ package com.nablarch.example.climan.rest.client;
 import com.nablarch.example.climan.test.ClimanRestTestExtension;
 import com.nablarch.example.climan.test.ClimanRestTestSupport;
 import nablarch.core.date.SystemTimeUtil;
-import nablarch.core.util.StringUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link ClientAction} test class.
@@ -72,7 +70,7 @@ class ClientActionTest {
         String message = "Search results 0";
         HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=does_not_exist"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(response.getBodyString())
+        with(support.getBodyString(response))
                 .assertThat("$", empty(), message + "[Number of results]");
     }
 
@@ -85,11 +83,11 @@ class ClientActionTest {
         String message = "Search by industry code + client name";
         HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01&clientName=Test%20Company%203"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(response.getBodyString())
+        with(support.getBodyString(response))
                 .assertThat("$", hasSize(1), message + "[Number of results]")
-                .assertThat("$[0].client_id", equalTo(4), message + "[Client ID]")
-                .assertThat("$[0].client_name", equalTo("Test Company 3 (Agriculture)"), message + "[Client name]")
-                .assertThat("$[0].industry_code", equalTo("01"), message + "[Industry Code]");
+                .assertThat("$[0].clientId", equalTo(4), message + "[Client ID]")
+                .assertThat("$[0].clientName", equalTo("Test Company 3 (Agriculture)"), message + "[Client name]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[Industry Code]");
     }
 
     /**
@@ -100,7 +98,7 @@ class ClientActionTest {
         String message = "upper boundary value";
         HttpResponse response = support.sendRequest(support.get(PATH));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(response.getBodyString())
+        with(support.getBodyString(response))
                 .assertThat("$", hasSize(1000), message + "[Number of results]");
     }
 
@@ -140,10 +138,10 @@ class ClientActionTest {
         String message = "Get client details";
         HttpResponse response = support.sendRequest(support.get(PATH + "/1"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(response.getBodyString())
-                .assertThat("$.client_id", equalTo(1), message + "[Client ID]")
-                .assertThat("$.client_name", equalTo("Test Company 1 (Agriculture)"), message + "[Client Name]")
-                .assertThat("$.industry_code", equalTo("01"), message + "[Industry Code]");
+        with(support.getBodyString(response))
+                .assertThat("$.clientId", equalTo(1), message + "[Client ID]")
+                .assertThat("$.clientName", equalTo("Test Company 1 (Agriculture)"), message + "[Client Name]")
+                .assertThat("$.industryCode", equalTo("01"), message + "[Industry Code]");
     }
 
     /**
@@ -211,20 +209,23 @@ class ClientActionTest {
         String beforeRegister = "The client whose name you are going to register does not exist";
         HttpResponse response = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(beforeRegister, HttpResponse.Status.OK, response);
-        with(response.getBodyString()).assertThat("$", empty(), beforeRegister + "[Number of results]");
+        with(support.getBodyString(response)).assertThat("$", empty(), beforeRegister + "[Number of results]");
 
         String register = "Registration";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(register, HttpResponse.Status.CREATED, registerResponse);
-        assertTrue(StringUtil.isNullOrEmpty(registerResponse.getBodyString()), register + "[Response body]");
+        support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
+        with(support.getBodyString(registerResponse))
+                .assertNotNull("$..clientId", register + "[Client ID]")
+                .assertThat("$..clientName", hasItem(clientName), register + "[Client Name]")
+                .assertThat("$..industryCode", hasItem(industryCode), register + "[Industry Code]");
 
         String afterRegister = "Retrieve the client with the client name registered earlier";
         HttpResponse afterRegisterResponse = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(afterRegister, HttpResponse.Status.OK, afterRegisterResponse);
-        with(afterRegisterResponse.getBodyString())
+        with(support.getBodyString(afterRegisterResponse))
                 .assertThat("$", hasSize(1), afterRegister + "[Number of results]")
-                .assertThat("$..client_name", hasItem(clientName), afterRegister + "[Client Name]")
-                .assertThat("$..industry_code", hasItem(industryCode), afterRegister + "[Industry Code]");
+                .assertThat("$..clientName", hasItem(clientName), afterRegister + "[Client Name]")
+                .assertThat("$..industryCode", hasItem(industryCode), afterRegister + "[Industry Code]");
     }
 
     /**
@@ -235,7 +236,7 @@ class ClientActionTest {
         String findMessage = "Search by client name";
         HttpResponse findResponse = support.sendRequest(support.get(PATH + "?clientName=Test%20Company%201%20(Agriculture)"));
         support.assertStatusCode(findMessage, HttpResponse.Status.OK, findResponse);
-        with(findResponse.getBodyString())
+        with(support.getBodyString(findResponse))
                 .assertThat("$", hasSize(1), findMessage + "[Number of results]");
 
         ClientForm client = new ClientForm();
