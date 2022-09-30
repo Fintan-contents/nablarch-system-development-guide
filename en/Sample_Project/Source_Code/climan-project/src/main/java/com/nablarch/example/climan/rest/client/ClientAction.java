@@ -68,15 +68,15 @@ public class ClientAction {
      * Registers client.
      *
      * @param form Client registration form
-     * @return HTTP response
+     * @return Client details
      */
     @POST
     @Valid
     @Consumes(MediaType.APPLICATION_JSON)
-    public HttpResponse register(ClientForm form) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Client register(ClientForm form) {
         ClientService service = new ClientService();
         Client client = BeanUtil.createAndCopy(Client.class, form);
-        service.registerClient(client);
-        return new HttpResponse().setStatusCode(HttpResponse.Status.CREATED.getStatusCode());
+        return service.registerClient(client);
     }
 }

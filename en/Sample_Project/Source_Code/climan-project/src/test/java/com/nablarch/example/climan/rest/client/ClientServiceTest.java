@@ -7,6 +7,7 @@ import com.nablarch.example.climan.rest.common.dao.DaoStub;
 import com.nablarch.example.climan.rest.common.repository.ConfigLoader;
 import nablarch.common.dao.EntityList;
 import nablarch.core.repository.SystemRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,6 @@ import java.util.*;
 
 import static nablarch.test.Assertion.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -89,7 +89,7 @@ class ClientServiceTest {
             }
         });
 
-        assertThrows(DuplicateRegistrationException.class, () -> sut.registerClient(new Client()));
+        Assertions.assertThrows(DuplicateRegistrationException.class, () -> sut.registerClient(new Client()));
     }
 
     /**
@@ -101,6 +101,10 @@ class ClientServiceTest {
     void testRegisterClient() {
 
         final Map<String, Boolean> invoked = new HashMap<>();
+        final Client client = new Client();
+        client.setClientId(1);
+        client.setClientName("Client1");
+        client.setIndustryCode("01");
 
         ClientService sut = new ClientService(new DaoStub() {
             @Override
@@ -112,10 +116,16 @@ class ClientServiceTest {
             public <T> void insert(T entity) {
                 invoked.put("insert", true);
             }
+
+            @Override
+            public <T> T findBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                return (T) client;
+            }
         });
 
-        sut.registerClient(new Client());
+        Client result = sut.registerClient(new Client());
 
         assertTrue(invoked.containsKey("insert"));
+        assertEquals(client, result);
     }
 }
