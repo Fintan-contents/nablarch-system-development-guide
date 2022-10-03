@@ -49,7 +49,7 @@ public class ClimanRestTestSupport extends RestTestSupport {
      */
     public void assertFaultMessages(String message, HttpResponse response, String faultCode, int size, String... messages) {
         with(response.getBodyString())
-                .assertThat("$.fault_code", equalTo(faultCode), message + "[fault code]")
+                .assertThat("$.faultCode", equalTo(faultCode), message + "[fault code]")
                 .assertThat("$.messages", hasSize(size), message + "[fault message size]")
                 .assertThat("$.messages", hasItems(messages), message + "[fault message]");
     }

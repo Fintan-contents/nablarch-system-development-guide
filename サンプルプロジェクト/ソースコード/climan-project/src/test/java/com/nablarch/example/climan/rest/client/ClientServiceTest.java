@@ -101,6 +101,10 @@ class ClientServiceTest {
     void testRegisterClient() {
 
         final Map<String, Boolean> invoked = new HashMap<>();
+        final Client client = new Client();
+        client.setClientId(1);
+        client.setClientName("顧客１");
+        client.setIndustryCode("01");
 
         ClientService sut = new ClientService(new DaoStub() {
             @Override
@@ -112,10 +116,16 @@ class ClientServiceTest {
             public <T> void insert(T entity) {
                 invoked.put("insert", true);
             }
+
+            @Override
+            public <T> T findBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                return (T) client;
+            }
         });
 
-        sut.registerClient(new Client());
+        Client result = sut.registerClient(new Client());
 
         assertTrue(invoked.containsKey("insert"));
+        assertEquals(client, result);
     }
 }

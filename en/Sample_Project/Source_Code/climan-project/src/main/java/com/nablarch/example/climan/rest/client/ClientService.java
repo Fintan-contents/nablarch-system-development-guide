@@ -65,13 +65,16 @@ public class ClientService {
      * Registers client.
      *
      * @param client Client to be registered
+     * @return Registered Clients
      * @throws DuplicateRegistrationException Occurs when the client name that is specified is already registered
      */
-    public void registerClient(Client client) {
+    public Client registerClient(Client client) {
         long count = daoContext.countBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
         if (count > 0) {
             throw new DuplicateRegistrationException();
         }
         daoContext.insert(client);
+        Client result = daoContext.findBySqlFile(Client.class, "FIND_CLIENT_BY_CLIENT_NAME", client);
+        return result;
     }
 }
