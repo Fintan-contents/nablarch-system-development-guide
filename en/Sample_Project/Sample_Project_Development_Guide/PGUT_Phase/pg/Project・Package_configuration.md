@@ -41,7 +41,7 @@ The project packages for each processing method consist of the following hierarc
 | 6                 | Identifier representing function   | login, project, etc         |
 
 For identifiers representing modules in the fifth hierarchy, use an identifier that represents either common or processing architectures.
-Under the common package, you place the base components used in the processing architectures and the System-wide components within Subsystem-wide components
+Under the common package, you place the base components used in the processing architectures and the System-wide components within Subsystem-wide components.
 System-wide components within Subsystem-wide components are also placed in the common project, but they are also placed when referencing System-wide components from other subsystems or processing architectures.
 System-wide components within Subsystem-wide components that are used only within a project of one processing architectures are placed in the common package within that project.
 
