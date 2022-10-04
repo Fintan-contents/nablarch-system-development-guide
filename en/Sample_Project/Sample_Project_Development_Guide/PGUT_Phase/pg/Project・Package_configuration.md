@@ -29,7 +29,7 @@ The packages in the common project consist of the following hierarchy.
 | 6                 | Identifier that classifies each component | login, project, etc         |
 
 
-### Package configuration of the project for each processing method
+### Package configuration of the project for each processing architectures.
 
 The project packages for each processing method consist of the following hierarchies.
 
@@ -40,12 +40,12 @@ The project packages for each processing method consist of the following hierarc
 | 5                 | Identifier representing the module | web、batch、common、rest    |
 | 6                 | Identifier representing function   | login, project, etc         |
 
-For identifiers representing modules in the fifth tier, use an identifier that represents either common or processing architectures.
-Under the common package, you place the underlying components used in the processing architectures and the System-wide components within Subsystem-wide components
+For identifiers representing modules in the fifth hierarchy, use an identifier that represents either common or processing architectures.
+Under the common package, you place the base components used in the processing architectures and the System-wide components within Subsystem-wide components
 System-wide components within Subsystem-wide components are also placed in the common project, but they are also placed when referencing System-wide components from other subsystems or processing architectures.
 System-wide components within Subsystem-wide components that are used only within a project of one processing architectures are placed in the common package within that project.
 
-The sixth tier is created for each function, packages that represent class responsibilities (Action, Form, etc.) are not used.  
+The sixth hierarchy is created for each function, packages that represent class responsibilities (Action, Form, etc.) are not used.  
 Place the Function-wide components in this package.
 
 An example of class placement is shown below.
