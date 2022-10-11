@@ -24,7 +24,7 @@ public class LoginForm implements Serializable {
 
     /** Password */
     @Required
-    @Domain("password")
+    @Domain("userPassword")
     private String userPassword;
 
     /**
