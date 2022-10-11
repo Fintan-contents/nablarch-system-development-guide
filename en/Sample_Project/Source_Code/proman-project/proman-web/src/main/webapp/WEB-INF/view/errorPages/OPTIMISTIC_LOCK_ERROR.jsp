@@ -37,6 +37,7 @@
                             <div class="message-area">
                                 <p>
                                     Could not complete this operation as the information has already been changed by another user. <br>
+                                    If the situation remains the same, please contact the administrator of this system.<br>
                                 </p>
                             </div>
                             <div class="title-nav">
