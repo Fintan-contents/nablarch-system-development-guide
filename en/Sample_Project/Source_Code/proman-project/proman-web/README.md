@@ -41,8 +41,8 @@ You can log in with the following login ID and password.
 
 | Login ID | Password | PM |
 | :--------- | :--------- | :--------- |
-| 10000001   | pass123-   | ÅZ   |
-| 10000002   | pass123-   | ÅZ   |
-| 10000003   | pass123-   | Å~   |
-| 10000004   | pass123-   | Å~   |
-| 10000005   | pass123-   | Å~   |
+| 10000001   | pass123-   | X   |
+| 10000002   | pass123-   | X   |
+| 10000003   | pass123-   | -   |
+| 10000004   | pass123-   | -   |
+| 10000005   | pass123-   | -   |
