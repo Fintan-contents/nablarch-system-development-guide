@@ -39,6 +39,10 @@ After successful startup, please display the login screen with the following URL
 
 You can log in with the following login ID and password.
 
-| Login ID | Password |
-| :--------- | :--------- |
-| 10000001   | pass123-   |
+| Login ID | Password | PM |
+| :--------- | :--------- | :--------- |
+| 10000001   | pass123-   | X   |
+| 10000002   | pass123-   | X   |
+| 10000003   | pass123-   | -   |
+| 10000004   | pass123-   | -   |
+| 10000005   | pass123-   | -   |

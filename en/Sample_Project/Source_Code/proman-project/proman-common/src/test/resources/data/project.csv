@@ -1,4 +1,4 @@
-project_id,project_name,project_type,project_class,project_start_date,project_end_date,organization_id,client_id,project_manager,project_leader,note,sales,version_no
+project_id,project_name,project_type,project_class,project_start_date,project_end_date,organization_id,client_id,pm_kanji_name,pl_kanji_name,note,sales_amount,version_no
 1,Project name 1,01,01,2019-06-01,2019-12-31,3,1,Manager 1,Leader 1,Note 1,10000,1
 2,Project name 2,02,02,2019-06-02,2020-01-01,4,2,Manager 2,Leader 2,Note 2,11000,2
 3,Project name 3,03,03,2019-06-03,2020-01-02,5,3,Manager 3,Leader 3,Note 3,12000,3
