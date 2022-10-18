@@ -1,0 +1,1056 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                function slashFormat(date) {
+                    var day = ('0' + date.getDate()).slice(-2);
+                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    var year = date.getFullYear();
+                    return year + '/' + month + '/' + day;
+                }
+
+                $('#projectStartDateFrom').calendar({
+                    endCalendar: $('#projectStartDateTo'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectStartDateTo').calendar({
+                    startCalendar: $('#projectStartDateFrom'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectEndDateFrom').calendar({
+                    endCalendar: $('#projectEndDateTo'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectEndDateTo').calendar({
+                    startCalendar: $('#projectEndDateFrom'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+            });
+        </script>
+        <title>
+            プロジェクト検索 | Proman
+        </title>
+    </head>
+
+    <body>
+        <div class="mainContents">
+            
+
+
+
+
+<link type="text/css" href="/stylesheets/common.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/javascripts/common.js" charset="UTF-8"></script>
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+        height: auto;
+    }
+
+    .ui.menu .item i.logo {
+        /*　ヘッダ部のロゴのマージン　*/
+        margin-right: 0.5em;
+    }
+
+    .main.container {
+        /*コンテンツ部のマージン*/
+        margin-top: 7em;
+    }
+
+    .ui.footer.segment {
+        /*フッタ部のマージン*/
+        margin: 1em 0em 0em;
+        padding: 0em 0em;
+    }
+</style>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a id="topLink" class="header item" href="/">
+            <i class="logo fas fa-database"></i>Proman
+        </a>
+        
+            <div class="right menu">
+                <a id="logoutLink" class="item" href="/app/logout">
+                    ログアウト
+                </a>
+            </div>
+        
+    </div>
+</div>
+
+        </div>
+        <div class="ui main container">
+            <div class="ui grid">
+                
+
+
+
+
+<div class="four wide column row">
+    <div class="ui vertical menu">
+        <div class="item">
+            <div class="header">プロジェクト管理</div>
+            <div class="menu">
+                <a id="projectSearchkLink" class="item" href="/app/project/search">プロジェクト検索</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">プロジェクト登録</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">顧客管理</div>
+            <div class="menu">
+                <a id="clientSearchkLink" class="item" href="#">顧客検索</a>
+                <a id="clientCreatekLink" class="item" href="#">顧客登録</a>
+            </div>
+        </div>
+        <div class="item">
+        </div>
+    </div>
+</div>
+
+                <div class="twelve wide column row">
+                    <div class="sixteen wide column">
+                        <div class="ui huge header">プロジェクト検索</div>
+                        
+                        
+<form class="ui form" name="nablarch_form1" action="/app/project/list" method="GET">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>
+                                        事業部
+                                        <select class="ui dropdown" name="form.divisionId">
+<option value="">事業部を選択</option>
+<option value="1">Ａ事業本部</option>
+<option value="2">Ｂ事業本部</option>
+<option value="7"></option>
+<option value="5000">G事業本部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長</option></select>
+                                    </label>
+                                    
+                                </div>
+                                <div class="field">
+                                    <label>
+                                        部門
+                                        <select class="ui dropdown" name="form.organizationId">
+<option value="">部門を選択</option>
+<option value="3">Ｃ事業部</option>
+<option value="4">Ｄ事業部</option>
+<option value="5">Ｅ事業部</option>
+<option value="6">Ｆ事業部</option>
+<option value="8"></option>
+<option value="5001">H事業部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文</option></select>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>PJ種別</label>
+                                <div class="fields code-checkbox-fields">
+                                    <span><input id="nablarch_checkbox1" class="code-checkbox" type="checkbox" name="form.projectType" value="01" /><label for="nablarch_checkbox1">新規開発ＰＪ</label></span><span><input id="nablarch_checkbox2" class="code-checkbox" type="checkbox" name="form.projectType" value="02" /><label for="nablarch_checkbox2">保守開発ＰＪ</label></span><span><input id="nablarch_checkbox3" class="code-checkbox" type="checkbox" name="form.projectType" value="03" /><label for="nablarch_checkbox3">ＥＲＰ導入支援</label></span><span><input id="nablarch_checkbox4" class="code-checkbox" type="checkbox" name="form.projectType" value="04" /><label for="nablarch_checkbox4">保守ＰＪ</label></span><span><input id="nablarch_checkbox5" class="code-checkbox" type="checkbox" name="form.projectType" value="05" /><label for="nablarch_checkbox5">運用</label></span><span><input id="nablarch_checkbox6" class="code-checkbox" type="checkbox" name="form.projectType" value="06" /><label for="nablarch_checkbox6">サービス提供（開発・保守）</label></span><span><input id="nablarch_checkbox7" class="code-checkbox" type="checkbox" name="form.projectType" value="07" /><label for="nablarch_checkbox7">サービス提供（開発・保守以外）</label></span><span><input id="nablarch_checkbox8" class="code-checkbox" type="checkbox" name="form.projectType" value="08" /><label for="nablarch_checkbox8">保守案件</label></span><span><input id="nablarch_checkbox9" class="code-checkbox" type="checkbox" name="form.projectType" value="09" /><label for="nablarch_checkbox9">その他</label></span>
+                                </div>
+                                
+                            </div>
+                            <div class="field">
+                                <label>PJ分類</label>
+                                <div class="fields code-checkbox-fields">
+                                    <span><input id="nablarch_checkbox10" class="code-checkbox" type="checkbox" name="form.projectClass" value="01" /><label for="nablarch_checkbox10">ＳＳ</label></span><span><input id="nablarch_checkbox11" class="code-checkbox" type="checkbox" name="form.projectClass" value="02" /><label for="nablarch_checkbox11">Ｓ</label></span><span><input id="nablarch_checkbox12" class="code-checkbox" type="checkbox" name="form.projectClass" value="03" /><label for="nablarch_checkbox12">Ａ</label></span><span><input id="nablarch_checkbox13" class="code-checkbox" type="checkbox" name="form.projectClass" value="04" /><label for="nablarch_checkbox13">Ｂ</label></span><span><input id="nablarch_checkbox14" class="code-checkbox" type="checkbox" name="form.projectClass" value="05" /><label for="nablarch_checkbox14">Ｃ</label></span><span><input id="nablarch_checkbox15" class="code-checkbox" type="checkbox" name="form.projectClass" value="06" /><label for="nablarch_checkbox15">Ｄ</label></span>
+                                </div>
+                                
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>売上高_実績_FROM</label>
+                                    <input type="text" name="form.salesFrom" value="" maxlength="9" placeholder="売上高_実績_FROM" />
+                                    
+                                    
+                                </div>
+                                <div class="field">
+                                    <label>売上高_実績_TO</label>
+                                    <input type="text" name="form.salesTo" value="" maxlength="9" placeholder="売上高_実績_TO" />
+                                    
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field ui calendar" id="projectStartDateFrom">
+                                    <label>開始日_FROM</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectStartDateFrom" value="" maxlength="10" placeholder="開始日_FROM" />
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="field ui calendar" id="projectStartDateTo">
+                                    <label>開始日_TO</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectStartDateTo" value="" maxlength="10" placeholder="開始日_TO" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field ui calendar" id="projectEndDateFrom">
+                                    <label>終了日_FROM</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectEndDateFrom" value="2020/02/20" maxlength="10" placeholder="終了日_FROM" />
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="field ui calendar" id="projectEndDateTo">
+                                    <label>終了日_TO</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectEndDateTo" value="" maxlength="10" placeholder="終了日_TO" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>プロジェクト名で検索</label>
+                                <input type="text" name="form.projectName" value="" maxlength="128" placeholder="プロジェクト名" />
+                                
+                            </div>
+                            <button type="submit" class="ui right floated primary button">検索</button>
+                        
+</form>
+                    </div>
+                    
+                        
+                        
+                        <!-- 検索結果 -->
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="sixteen wide column">
+            
+        <div><span>&nbsp;</span></div>
+    </div>
+    
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sixteen wide column">
+    <div class="ui right floated pagination menu">
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        <a class="item" href="javascript:void(0)">&lt;&lt;</a>
+    
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        <a class="item" href="javascript:void(0)">＜</a>
+    
+
+
+        
+        
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <a class="active item" href="javascript:void(0)">1</a>
+    
+    
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=2&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">2</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=3&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">3</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=4&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">4</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=5&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">5</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=6&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">6</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=7&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">7</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=8&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">8</a>
+
+
+
+            
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=2&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">＞</a>
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=8&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=2020%2F02%2F20&amp;form.projectEndDateTo=">&gt;&gt;&nbsp;</a>
+
+
+
+    </div>
+</div>
+
+        <div class="sixteen wide column">
+            <!-- spacer -->
+            <div><span>&nbsp;</span></div>
+        </div>
+    
+    
+    
+        
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+<div class="sixteen wide column">
+    <table class="ui celled table">
+        
+        <thead>
+            <tr>
+                                    <th>PJ名</th>
+                                    <th>事業部</th>
+                                    <th>部門</th>
+                                    <th>PJ種別</th>
+                                    <th>PJ分類</th>
+                                    <th>PM</th>
+                                    <th>売上高_実績</th>
+                                    <th>開始日</th>
+                                    <th>終了日</th>
+                                </tr>
+        </thead>
+        
+        <tbody>
+            
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/52">
+                                            プロジェクト名５２
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｆ事業部</td>
+                                    <td>サービス提供（開発・保守以外）<br /></td>
+                                    <td>Ｂ<br /></td>
+                                    <td>マネージャー５２</td>
+                                    <td>61,000&nbsp;千円</td>
+                                    <td>2019/07/22</td>
+                                    <td>2020/02/20</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/53">
+                                            プロジェクト名５３
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｃ事業部</td>
+                                    <td>保守案件<br /></td>
+                                    <td>Ｃ<br /></td>
+                                    <td>マネージャー５３</td>
+                                    <td>62,000&nbsp;千円</td>
+                                    <td>2019/07/23</td>
+                                    <td>2020/02/21</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/54">
+                                            プロジェクト名５４
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｄ事業部</td>
+                                    <td>その他<br /></td>
+                                    <td>Ｄ<br /></td>
+                                    <td>マネージャー５４</td>
+                                    <td>63,000&nbsp;千円</td>
+                                    <td>2019/07/24</td>
+                                    <td>2020/02/22</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/55">
+                                            プロジェクト名５５
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｅ事業部</td>
+                                    <td>新規開発ＰＪ<br /></td>
+                                    <td>ＳＳ<br /></td>
+                                    <td>マネージャー５５</td>
+                                    <td>64,000&nbsp;千円</td>
+                                    <td>2019/07/25</td>
+                                    <td>2020/02/23</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/56">
+                                            プロジェクト名５６
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｆ事業部</td>
+                                    <td>保守開発ＰＪ<br /></td>
+                                    <td>Ｓ<br /></td>
+                                    <td>マネージャー５６</td>
+                                    <td>65,000&nbsp;千円</td>
+                                    <td>2019/07/26</td>
+                                    <td>2020/02/24</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/57">
+                                            プロジェクト名５７
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｃ事業部</td>
+                                    <td>ＥＲＰ導入支援<br /></td>
+                                    <td>Ａ<br /></td>
+                                    <td>マネージャー５７</td>
+                                    <td>66,000&nbsp;千円</td>
+                                    <td>2019/07/27</td>
+                                    <td>2020/02/25</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/58">
+                                            プロジェクト名５８
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｄ事業部</td>
+                                    <td>保守ＰＪ<br /></td>
+                                    <td>Ｂ<br /></td>
+                                    <td>マネージャー５８</td>
+                                    <td>67,000&nbsp;千円</td>
+                                    <td>2019/07/28</td>
+                                    <td>2020/02/26</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/59">
+                                            プロジェクト名５９
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｅ事業部</td>
+                                    <td>運用<br /></td>
+                                    <td>Ｃ<br /></td>
+                                    <td>マネージャー５９</td>
+                                    <td>68,000&nbsp;千円</td>
+                                    <td>2019/07/29</td>
+                                    <td>2020/02/27</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/60">
+                                            プロジェクト名６０
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｆ事業部</td>
+                                    <td>サービス提供（開発・保守）<br /></td>
+                                    <td>Ｄ<br /></td>
+                                    <td>マネージャー６０</td>
+                                    <td>69,000&nbsp;千円</td>
+                                    <td>2019/07/30</td>
+                                    <td>2020/02/28</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/61">
+                                            プロジェクト名６１
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｃ事業部</td>
+                                    <td>サービス提供（開発・保守以外）<br /></td>
+                                    <td>ＳＳ<br /></td>
+                                    <td>マネージャー６１</td>
+                                    <td>70,000&nbsp;千円</td>
+                                    <td>2019/07/31</td>
+                                    <td>2020/02/29</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/62">
+                                            プロジェクト名６２
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｄ事業部</td>
+                                    <td>保守案件<br /></td>
+                                    <td>Ｓ<br /></td>
+                                    <td>マネージャー６２</td>
+                                    <td>71,000&nbsp;千円</td>
+                                    <td>2019/08/01</td>
+                                    <td>2020/03/01</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/63">
+                                            プロジェクト名６３
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｅ事業部</td>
+                                    <td>その他<br /></td>
+                                    <td>Ａ<br /></td>
+                                    <td>マネージャー６３</td>
+                                    <td>72,000&nbsp;千円</td>
+                                    <td>2019/08/02</td>
+                                    <td>2020/03/02</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/64">
+                                            プロジェクト名６４
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｆ事業部</td>
+                                    <td>新規開発ＰＪ<br /></td>
+                                    <td>Ｂ<br /></td>
+                                    <td>マネージャー６４</td>
+                                    <td>73,000&nbsp;千円</td>
+                                    <td>2019/08/03</td>
+                                    <td>2020/03/03</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/65">
+                                            プロジェクト名６５
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｃ事業部</td>
+                                    <td>保守開発ＰＪ<br /></td>
+                                    <td>Ｃ<br /></td>
+                                    <td>マネージャー６５</td>
+                                    <td>74,000&nbsp;千円</td>
+                                    <td>2019/08/04</td>
+                                    <td>2020/03/04</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/66">
+                                            プロジェクト名６６
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｄ事業部</td>
+                                    <td>ＥＲＰ導入支援<br /></td>
+                                    <td>Ｄ<br /></td>
+                                    <td>マネージャー６６</td>
+                                    <td>75,000&nbsp;千円</td>
+                                    <td>2019/08/05</td>
+                                    <td>2020/03/05</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/67">
+                                            プロジェクト名６７
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｅ事業部</td>
+                                    <td>保守ＰＪ<br /></td>
+                                    <td>ＳＳ<br /></td>
+                                    <td>マネージャー６７</td>
+                                    <td>76,000&nbsp;千円</td>
+                                    <td>2019/08/06</td>
+                                    <td>2020/03/06</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/68">
+                                            プロジェクト名６８
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｆ事業部</td>
+                                    <td>運用<br /></td>
+                                    <td>Ｓ<br /></td>
+                                    <td>マネージャー６８</td>
+                                    <td>77,000&nbsp;千円</td>
+                                    <td>2019/08/07</td>
+                                    <td>2020/03/07</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/69">
+                                            プロジェクト名６９
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｃ事業部</td>
+                                    <td>サービス提供（開発・保守）<br /></td>
+                                    <td>Ａ<br /></td>
+                                    <td>マネージャー６９</td>
+                                    <td>78,000&nbsp;千円</td>
+                                    <td>2019/08/08</td>
+                                    <td>2020/03/08</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/70">
+                                            プロジェクト名７０
+                                        </a>
+                                    </td>
+                                    <td>Ａ事業本部</td>
+                                    <td>Ｄ事業部</td>
+                                    <td>サービス提供（開発・保守以外）<br /></td>
+                                    <td>Ｂ<br /></td>
+                                    <td>マネージャー７０</td>
+                                    <td>79,000&nbsp;千円</td>
+                                    <td>2019/08/09</td>
+                                    <td>2020/03/09</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/71">
+                                            プロジェクト名７１
+                                        </a>
+                                    </td>
+                                    <td>Ｂ事業本部</td>
+                                    <td>Ｅ事業部</td>
+                                    <td>保守案件<br /></td>
+                                    <td>Ｃ<br /></td>
+                                    <td>マネージャー７１</td>
+                                    <td>80,000&nbsp;千円</td>
+                                    <td>2019/08/10</td>
+                                    <td>2020/03/10</td>
+                                </tr>
+            
+        </tbody>
+    </table>
+</div>
+    
+    
+
+
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+<footer>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            TIS Inc
+        </div>
+    </div>
+</footer>
+
+    </body>
+
+</html>
