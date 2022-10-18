@@ -1,15 +1,13 @@
 package com.nablarch.example.proman.web.project;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import com.nablarch.example.proman.web.test.FormTestSupport;
 
 /**
  * ProjectCreateFormのテスト
  */
-class ProjectCreateFormTest extends FormTestSupport<ProjectCreateForm> {
+class ProjectCreateFormTest {
 
     /**
      * 正常系（プロジェクト開始日＜プロジェクト終了日）
@@ -18,9 +16,9 @@ class ProjectCreateFormTest extends FormTestSupport<ProjectCreateForm> {
     void testIsValidProjectPeriod() {
         ProjectCreateForm form = new ProjectCreateForm();
         form.setProjectStartDate("2022/01/01");
-        form.setProjectEndDate("2022/01/31");
-        boolean result = (Boolean) doMethod(ProjectCreateForm.class, "isValidProjectPeriod", form);
-        assertTrue("プロジェクト開始日＜プロジェクト終了日", result);
+        form.setProjectEndDate("2022/01/02");
+        boolean result = form.isValidProjectPeriod();
+        assertTrue(result, "プロジェクト開始日＜プロジェクト終了日");
     }
 
     /**
@@ -31,8 +29,8 @@ class ProjectCreateFormTest extends FormTestSupport<ProjectCreateForm> {
         ProjectCreateForm form = new ProjectCreateForm();
         form.setProjectStartDate("2022/01/01");
         form.setProjectEndDate("2022/01/01");
-        boolean result = (Boolean) doMethod(ProjectCreateForm.class, "isValidProjectPeriod", form);
-        assertTrue("プロジェクト開始日＝プロジェクト終了日", result);
+        boolean result = form.isValidProjectPeriod();
+        assertTrue(result, "プロジェクト開始日＝プロジェクト終了日");
     }
 
     /**
@@ -41,9 +39,9 @@ class ProjectCreateFormTest extends FormTestSupport<ProjectCreateForm> {
     @Test
     void testIsValidProjectPeriodSmallerThanTo() {
         ProjectCreateForm form = new ProjectCreateForm();
-        form.setProjectStartDate("2022/01/31");
+        form.setProjectStartDate("2022/01/02");
         form.setProjectEndDate("2022/01/01");
-        boolean result = (Boolean) doMethod(ProjectCreateForm.class, "isValidProjectPeriod", form);
-        assertFalse("プロジェクト開始日＞プロジェクト終了日", result);
+        boolean result = form.isValidProjectPeriod();
+        assertFalse(result, "プロジェクト開始日＞プロジェクト終了日");
     }
 }
