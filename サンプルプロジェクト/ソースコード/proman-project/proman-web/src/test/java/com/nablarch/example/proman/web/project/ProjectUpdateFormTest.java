@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.nablarch.example.proman.web.common.FormTestSupport;
+import com.nablarch.example.proman.web.test.FormTestSupport;
 
 /**
  * ProjectUpdateFormのテスト

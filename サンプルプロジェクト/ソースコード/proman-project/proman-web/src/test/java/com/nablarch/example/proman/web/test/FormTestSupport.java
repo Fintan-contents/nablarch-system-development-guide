@@ -1,4 +1,4 @@
-package com.nablarch.example.proman.web.common;
+package com.nablarch.example.proman.web.test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
