@@ -326,7 +326,7 @@ public class ProjectCreateForm implements Serializable {
      * @return 開始日に終了日より後の日付が設定されていた場合は false それ以外（開始日、終了日の両方又はいずれかが未定の場合も含む）は true
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
-    private boolean isValidProjectPeriod() {
+    public boolean isValidProjectPeriod() {
         return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
 }
