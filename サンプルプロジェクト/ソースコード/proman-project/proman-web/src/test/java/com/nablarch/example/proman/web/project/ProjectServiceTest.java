@@ -106,7 +106,7 @@ class ProjectServiceTest {
      */
     @Test
     void testInsertProject() {
-        final Map<String, Boolean> invoked = new HashMap<>();
+        final Map<String, Boolean> invoked = new HashMap<String, Boolean>();
         ProjectService sut = new ProjectService(new DaoStub() {
             @Override
             public <T> void insert(T entity) {
@@ -123,7 +123,7 @@ class ProjectServiceTest {
      */
     @Test
     void testUpdateProject() {
-        final Map<String, Boolean> invoked = new HashMap<>();
+        final Map<String, Boolean> invoked = new HashMap<String, Boolean>();
         ProjectService sut = new ProjectService(new DaoStub() {
             @Override
             public <T> int update(T entity) throws OptimisticLockException {
@@ -167,14 +167,17 @@ class ProjectServiceTest {
         dto2.setPmKanjiName("プロジェクトマネージャー２");
         dto2.setPlKanjiName("リーダー２");
         projectList.add(dto1);
+        final Map<String, Long> invoked = new HashMap<String, Long>();
         ProjectService sut = new ProjectService(new DaoStub() {
             @Override
             public DaoContext per(long per) {
+                invoked.put("per", per);
                 return this;
             }
 
             @Override
             public DaoContext page(long page) {
+                invoked.put("page", page);
                 return this;
             }
 
@@ -187,7 +190,9 @@ class ProjectServiceTest {
 
         ProjectSearchConditionDto condition = new ProjectSearchConditionDto();
         condition.setPageNumber(1L);
-        List<ProjectWithOrganizationDto> result = sut.listProject(condition);
+        List<ProjectWithOrganizationDto> result = sut.listProject(condition);        
+        assertThat(20L, is(invoked.get("per")));
+        assertThat(1L, is(invoked.get("page")));
         assertThat(projectList, is(result));
     }
 
