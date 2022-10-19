@@ -48,6 +48,8 @@ Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual
     - Go to "証明書のインストール(Install Certificates)" -> "現在のユーザー(Current User)" -> "証明書を全て次のストアに配置する(Place All Certificates in Next Store)" and select "信頼されたルート証明機関(Trusted Root Certification Authority)" to install.
     - The certificate is set to expire in 7 days, so you should do this every time it expires.
 1. Open the browser with the Chrome shortcut that has been set to use JMeter as an HTTP proxy server, and access the IP address of your terminal to perform a subfunction unit test. (Start from the login operation)
+    - Be sure to launch a new window from the Chrome shortcut for each scenario.
+      - Once launched, the cache retrieved in the first request is used. Therefore, if multiple scenarios are recorded in the same window in succession, the second and subsequent scenarios will not include requests to retrieve CSS and JavaScript.
     - After the login screen is displayed, go to [Test Plan] > [Thread Group] > [Recording Controller] and confirm that the line has increased and the request has been recorded.
         - Please access with your device's IP address, because accessing with `localhost` will cause the browser to bypass the proxy even if it is set.
         - If there are no more lines of requests in the "Recording Controller" section, the proxy settings are probably wrong.
