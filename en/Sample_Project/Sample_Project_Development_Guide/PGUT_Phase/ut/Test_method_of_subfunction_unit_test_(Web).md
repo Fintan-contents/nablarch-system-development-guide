@@ -59,12 +59,13 @@ Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual
 #### Get a hard copy of the screen
 
 1. Launch the Window Size Tool (Sizer).
-2. Launch the browser.
-3. Place mouse cursor on the bottom right corner of browser and right click.
-4. Click on the menu that appears and change to the size of the browser you want to use for testing.
-5. Launch the screen capture tool (SnapCrab for Windows) to get a hard copy.
-    - By default, you can use ALT + PrintScreen to get a hard copy of the active window.
-    - The retrieved hard copy will be saved to the specified directory.
+1. Launch the browser.
+1. Place mouse cursor on the bottom right corner of browser and right click.
+1. Click on the menu that appears and change to the size of the browser you want to use for testing.
+1. A hard copy of the screen is obtained using Chrome's developer tools.
+    - If your viewpoint is to check the layout, open the developer tool in a separate window so that the size of the window from which the screen hardcopy is obtained is the size specified in the UI standard.
+    - With the developer tools open, press `Ctrl+Shift+P` to display the input window.
+    - Type `full` in the input window and press `Enter` when the function "Capture full size screenshot" is displayed. A download window will appear and save a hard copy of the screen to your desired location.
 
 #### Get a DB dump with the dump tool
 

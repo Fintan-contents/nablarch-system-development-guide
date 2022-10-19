@@ -28,7 +28,6 @@ Install the following software.
 | Browser                                       | Chrome               | -                                   | https://www.google.com/intl/ja/chrome/                        |                                                              |
 | Data modeling tool                            | SI Object Browser ER | SI Object Browser ER 18             | https://products.sint.co.jp/siob/trial                        | Use in-house license                                         |
 | Window size specification tool                | Sizer                | Sizer v3.34                         | http://www.brianapps.net/sizer/                               |                                                              |
-| Screen hard copy tool                         | SnapCrab for Windows | SnapCrab 1.1.3                      | https://www.fenrir-inc.com/jp/snapcrab/                       |                                                              |
 | Data dump tool for unit test                  | YoyoTool             | 3.1-SNAPSHOT                        | [Sample_Project/Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip](../../Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip) | Initialized for this project. Be sure to get it from here.   |
 | Request recording tool for regression testing | Apache JMeter        | 5.5                               | http://jmeter.apache.org/download_jmeter.cgi                  |                                                              |
 
@@ -43,19 +42,6 @@ After installation, the following setting is specified.
 Right-click the sizer icon in the task tray to display the menu. 
 Select the configure sizer.
 Window size described in `5. Basic Design Guidelines for the screen` of `\Sample Project\Design Document\A1_Project Management System\020_Architecture Design\020_Development Standard\010_Design Standard\UI Standard (Screen).xlsx` will be set.
-
-### Screen hard copy tool (SnapCrab for Windows)
-After installation, the following detailed setting is specified.
-
-#### Capture save location
-Select the specified save destination and specify the working directory where screenshots are stored when a screen hard copy of the unit test is obtained. 
-You can save the screenshots in any directory. 
-
-#### Image format
-Select JPEG full color.
-
-#### Others
-Uncheck the sound checkbox as it will be played during each capture.
 
 ### Request recording tool for regression testing(JMeter)
 After installation, configure the following settings.
