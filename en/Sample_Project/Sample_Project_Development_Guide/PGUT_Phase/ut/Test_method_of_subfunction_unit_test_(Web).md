@@ -40,6 +40,8 @@ Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual
 1. Copy the [Test-Plan-template.jmx](Subfunction_Unit_Test_Tool/Test-Plan-template.jmx) for each test scenario and rename it to your desired name.
 1. Launch JMeter with the [start-up-jmeter.bat.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/start-up-jmeter.bat.bat) that you have configured for your environment.
 1. Open the jmx file created in step 1 in JMeter.
+1. Select "User Defined Variables" on the left side of the screen and change `localhost` set as the value of `server.host` to your terminal's IP address.
+  - By setting the IP address of your terminal in `server.host`, the server name of the request recorded below becomes a placeholder named `${server.host}`. This allows you to switch the address of the server you are connecting to at once by changing the value of `server.host`.
 1. select "HTTP(S) Test Script Recorder" on the left side of the screen and click the "Start" button.
 1. Install a dummy certificate for the proxy.
     - Double-click the `ApacheJMeterTemporaryRootCA.crt` which will be generated under the bin directory where you extracted the JMeter.
@@ -50,7 +52,9 @@ Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual
         - Please access with your device's IP address, because accessing with `localhost` will cause the browser to bypass the proxy even if it is set.
         - If there are no more lines of requests in the "Recording Controller" section, the proxy settings are probably wrong.
         - If the above doesn't help, please check the jmeter.log which should be saved in the same location as the "start-up-jmeter.bat" used to start JMeter.
-1. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario. Save the "Test Plan".
+1. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario.
+1. Select "User Defined Variables" on the left side of the screen and change the value of `server.host` to `localhost`.
+1. Save the "Test Plan".
 
 #### Get a hard copy of the screen
 
