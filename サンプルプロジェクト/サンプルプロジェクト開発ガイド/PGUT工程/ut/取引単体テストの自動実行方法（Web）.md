@@ -45,6 +45,14 @@ $cd proman-jmeter
 $mvn clean test
 ```
 
+※プロキシ環境下でツールを実行する場合は起動時にオプションでプロキシを設定する必要があります。
+ツールはデフォルトではプロキシ設定なしにJMeterを実行します。
+実行時に以下のようにプロキシを設定してください。
+
+```
+mvn clean test -Dhttp.proxyHost=<プロキシのホスト名> -Dhttp.proxyPort=<プロキシのポート> -Dhttp.nonProxyHosts=localhost
+```
+
 テストが成功すると、コマンドラインに次のように表示されます。
 
 ```
