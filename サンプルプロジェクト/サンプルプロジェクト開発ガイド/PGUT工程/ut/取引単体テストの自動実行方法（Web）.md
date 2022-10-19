@@ -50,7 +50,7 @@ $mvn clean test
 実行時に以下のようにプロキシを設定してください。
 
 ```
-mvn clean test -Dhttp.proxyHost=<プロキシのホスト名> -Dhttp.proxyPort=<プロキシのポート> -Dhttp.nonProxyHosts=localhost
+mvn clean test -Dhttp.proxyHost=<プロキシのホスト名> -Dhttp.proxyPort=<プロキシのポート> -Dhttps.proxyHost=<プロキシのホスト名> -Dhttps.proxyPort=<プロキシのポート> -Dhttp.nonProxyHosts=localhost
 ```
 
 テストが成功すると、コマンドラインに次のように表示されます。
