@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+        <title>
+            プロジェクト詳細 | Proman
+        </title>
+    </head>
+
+    <body>
+        <div class="mainContents">
+            
+
+
+
+
+<link type="text/css" href="/stylesheets/common.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/javascripts/common.js" charset="UTF-8"></script>
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+        height: auto;
+    }
+
+    .ui.menu .item i.logo {
+        /*　ヘッダ部のロゴのマージン　*/
+        margin-right: 0.5em;
+    }
+
+    .main.container {
+        /*コンテンツ部のマージン*/
+        margin-top: 7em;
+    }
+
+    .ui.footer.segment {
+        /*フッタ部のマージン*/
+        margin: 1em 0em 0em;
+        padding: 0em 0em;
+    }
+</style>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a id="topLink" class="header item" href="/">
+            <i class="logo fas fa-database"></i>Proman
+        </a>
+        
+            <div class="right menu">
+                <a id="logoutLink" class="item" href="/app/logout">
+                    ログアウト
+                </a>
+            </div>
+        
+    </div>
+</div>
+
+        </div>
+        <div class="ui main container">
+            <div class="ui grid">
+                
+
+
+
+
+<div class="four wide column row">
+    <div class="ui vertical menu">
+        <div class="item">
+            <div class="header">プロジェクト管理</div>
+            <div class="menu">
+                <a id="projectSearchkLink" class="item" href="/app/project/search">プロジェクト検索</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">プロジェクト登録</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">顧客管理</div>
+            <div class="menu">
+                <a id="clientSearchkLink" class="item" href="#">顧客検索</a>
+                <a id="clientCreatekLink" class="item" href="#">顧客登録</a>
+            </div>
+        </div>
+        <div class="item">
+        </div>
+    </div>
+</div>
+
+                <div class="twelve wide column">
+                <div class="ui form">
+                    <div class="ui two column grid">
+                        <div class="row">
+                            <div class="sixteen wide column">
+                                <div class="ui huge header">プロジェクト詳細</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h5 class="ui header">事業部/部門</h5>
+                                Ｂ事業本部
+                            </div>
+                            <div class="column">
+                                <h5 class="ui header">&nbsp;</h5>
+                                Ｅ事業部
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="sixteen wide column">
+                                <h5 class="ui header">PJ名</h5>
+                                更新プロジェクト名１
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h5 class="ui header">PJ種別</h5>
+                                保守開発ＰＪ<br />
+                            </div>
+                            <div class="column">
+                                <h5 class="ui header">PJ分類</h5>
+                                Ｓ<br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h5 class="ui header">売上高</h5>
+                                20,000&nbsp;千円
+                            </div>
+                            <div class="column">
+                                <h5 class="ui header">顧客</h5>
+                                ダミー株式会社
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h5 class="ui header">PM</h5>
+                                更新マネージャー１
+                            </div>
+                            <div class="column">
+                                <h5 class="ui header">PL</h5>
+                                更新リーダー１
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h5 class="ui header">開始日</h5>
+                                2019/07/01
+                            </div>
+                            <div class="column">
+                                <h5 class="ui header">終了日</h5>
+                                2020/01/01
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="sixteen wide column">
+                                <h5 class="ui header">備考</h5>
+                                更新備考１
+                            </div>
+                        </div>
+                       </div>
+                        <div class="four fields">
+                            <div class="field centered aligned">&nbsp</div>
+                            <div class="field centered aligned">
+                                <a href="/app/project/backToList">
+                                        <button type="submit" class="fluid ui primary button">
+                                            戻る
+                                        </button>
+                                </a>
+                            </div>
+                            <div class="field centered aligned">
+                               <a href="/app/project/update/1">
+                                        <button type="submit" class="fluid ui primary button">
+                                            更新
+                                        </button>
+                               </a>
+                            </div>
+                            <div class="field centered aligned">&nbsp</div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <footer>
+            <div class="ui inverted vertical footer segment">
+                <div class="ui container">
+                    TIS Inc
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>

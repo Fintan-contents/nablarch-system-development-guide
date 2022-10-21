@@ -1,0 +1,449 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" />
+    <script type="text/javascript">
+            $(function () {
+                $("#projectStartDate").calendar({
+                    type: 'date',
+                    formatter: {
+                        date: function (date) {
+                            var day = ('0' + date.getDate()).slice(-2);
+                            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                            var year = date.getFullYear();
+                            return year + '/' + month + '/' + day;
+                        }
+                    }
+                });
+                $("#projectEndDate").calendar({
+                    type: 'date',
+                    formatter: {
+                        date: function (date) {
+                            var day = ('0' + date.getDate()).slice(-2);
+                            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                            var year = date.getFullYear();
+                            return year + '/' + month + '/' + day;
+                        }
+                    }
+                });
+            });
+        </script>
+    <title>
+        プロジェクト更新 | Proman
+    </title>
+</head>
+<body>
+    <div class="mainContents">
+        
+
+
+
+
+<link type="text/css" href="/stylesheets/common.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/javascripts/common.js" charset="UTF-8"></script>
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+        height: auto;
+    }
+
+    .ui.menu .item i.logo {
+        /*　ヘッダ部のロゴのマージン　*/
+        margin-right: 0.5em;
+    }
+
+    .main.container {
+        /*コンテンツ部のマージン*/
+        margin-top: 7em;
+    }
+
+    .ui.footer.segment {
+        /*フッタ部のマージン*/
+        margin: 1em 0em 0em;
+        padding: 0em 0em;
+    }
+</style>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a id="topLink" class="header item" href="/">
+            <i class="logo fas fa-database"></i>Proman
+        </a>
+        
+            <div class="right menu">
+                <a id="logoutLink" class="item" href="/app/logout">
+                    ログアウト
+                </a>
+            </div>
+        
+    </div>
+</div>
+
+    </div>
+    <div class="ui main container">
+        <div class="ui grid container">
+            
+
+
+
+
+<div class="four wide column row">
+    <div class="ui vertical menu">
+        <div class="item">
+            <div class="header">プロジェクト管理</div>
+            <div class="menu">
+                <a id="projectSearchkLink" class="item" href="/app/project/search">プロジェクト検索</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">プロジェクト登録</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">顧客管理</div>
+            <div class="menu">
+                <a id="clientSearchkLink" class="item" href="#">顧客検索</a>
+                <a id="clientCreatekLink" class="item" href="#">顧客登録</a>
+            </div>
+        </div>
+        <div class="item">
+        </div>
+    </div>
+</div>
+
+            <div class="twelve wide column row">
+                <div class="sixteen wide column row">
+                    <div class="ui huge header">プロジェクト更新</div>
+                </div>
+                <div class="sixteen wide column row">
+                    
+<script type="text/javascript">
+<!--
+function nablarch_submit(event, element) {
+    var isAnchor = element.tagName.match(/a/i);
+    var form = nablarch_findForm(element, isAnchor);
+    if (form == null) {
+        return false;
+    }
+    var formName = form.attributes['name'].nodeValue;
+    if (nablarch_submission_info.endMark[formName] == null) {
+        return false;
+    }
+    if ((typeof form.onsubmit) == "function") {
+        if (!nablarch_invokeOnsubmit(form, event)) {
+            return false;
+        }
+    }
+    var submitName = element.name;
+    var formData = nablarch_submission_info[formName];
+    var submissionData = formData[submitName];
+    if (!submissionData.allowDoubleSubmission) {
+        element.onclick = nablarch_stopSubmission;
+        if (!isAnchor) {
+            element.disabled = true;
+        }
+    }
+    form["nablarch_submit"].value = submitName;
+    if (submissionData.submissionAction == "POPUP"
+            || submissionData.submissionAction == "DOWNLOAD") {
+        nablarch_submitToNewForm(submitName, form, submissionData)
+    } else {
+        nablarch_submitOnWindow(submitName, form, submissionData);
+    }
+    return false;
+}
+function nablarch_submitOnWindow(submitName, form, submissionData) {
+    form.action = submissionData.action;
+    form.submit();
+}
+var nablarch_opened_windows = {};
+function nablarch_submitToNewForm(submitName, form, submissionData) {
+    var target = submissionData.popupWindowName;
+    if (target == null) {
+        target = "nablarch__target_" + (+new Date());
+    }
+    if (submissionData.submissionAction == "POPUP") {
+        var windowOption = submissionData.popupOption;
+        var openedWindow = window.open("about:blank", target, windowOption != null ? windowOption : "");
+        nablarch_opened_windows[target] = openedWindow;
+    }
+    var tempForm = document.createElement("form");
+    var changeParamNames = submissionData.changeParamNames;
+    for (var i = 0; i < form.elements.length; i++) {
+        var element = form.elements[i];
+        if (element.type.match(/^submit$|^button$/i)) {
+            continue;
+        }
+        var paramName = changeParamNames[element.name];
+        if (paramName != null) {
+            nablarch_addHiddenTagFromElement(tempForm, paramName, element);
+        } else {
+            nablarch_addHiddenTagFromElement(tempForm, element.name, element);
+        }
+    }
+    if (submissionData.submissionAction == "POPUP") {
+        tempForm.target = target;
+    }
+    tempForm.action = submissionData.action;
+    tempForm.method = "post";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(tempForm);
+    tempForm.submit();
+    body.removeChild(tempForm);
+}
+function nablarch_findForm(element, isAnchor) {
+    if (isAnchor) {
+        var parent = element.parentNode;
+        while (parent != null && !parent.tagName.match(/^form$|^body$/i)) {
+            parent = parent.parentNode;
+        }
+        if (parent == null || !parent.tagName.match(/form/i)) {
+            return null;
+        }
+        return parent;
+    } else {
+        return element.form;
+    }
+}
+function nablarch_invokeOnsubmit(form, event) {
+    var onSubmitFunc = form.onsubmit;
+    var ret = onSubmitFunc.call(form, event);
+    return !( (ret != undefined && ret != null) && ret == false );
+}
+function nablarch_addHiddenTagFromElement(form, name, element) {
+    if (element.disabled) {
+        return;
+    }
+    if (element.tagName.match(/select/i)) {
+        for (var i = 0; i < element.options.length; i++) {
+            var option = element.options[i];
+            if (option.selected) {
+                nablarch_addHiddenTag(form, name, option.value);
+            }
+        }
+    } else if (element.type.match(/^checkbox$|^radio$/i)) {
+        if (element.checked) {
+            nablarch_addHiddenTag(form, name, element.value);
+        }
+    } else {
+        nablarch_addHiddenTag(form, name, element.value);
+    }
+}
+function nablarch_addHiddenTag(form, name, value) {
+    var input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+}
+function nablarch_stopSubmission() {
+    if ((typeof nablarch_handleDoubleSubmission) == "function") {
+         nablarch_handleDoubleSubmission(this);
+    }
+    return false;
+}
+var nablarch_submission_info = {};
+nablarch_submission_info.endMark = {};
+-->
+</script>
+<form class="ui form" name="nablarch_form1" method="post">
+                        <div class="two fields">
+                            <div class="required field">
+                                <label>事業部/部門</label>
+                                <div class="field">
+                                    
+                                    <select class="ui dropdown nablarch_error" name="form.divisionId">
+<option value=""></option>
+<option class="nablarch_error" value="1">Ａ事業本部</option>
+<option class="nablarch_error" value="2">Ｂ事業本部</option>
+<option class="nablarch_error" value="7">Ｚ事業本部</option>
+<option class="nablarch_error" value="8">Ｙ事業本部</option>
+<option class="nablarch_error" value="11"></option>
+<option class="nablarch_error" value="5000">G事業本部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長</option></select>
+                                    <div class="message-error">入力してください。</div><span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>&nbsp;</label>
+                                <div class="required field">
+                                    
+                                    <select class="ui dropdown nablarch_error" name="form.organizationId">
+<option value=""></option>
+<option class="nablarch_error" value="3">Ｃ事業部</option>
+<option class="nablarch_error" value="4">Ｄ事業部</option>
+<option class="nablarch_error" value="5">Ｅ事業部</option>
+<option class="nablarch_error" value="6">Ｆ事業部</option>
+<option class="nablarch_error" value="9">Ｘ事業部</option>
+<option class="nablarch_error" value="10">Ｗ事業部</option>
+<option class="nablarch_error" value="12"></option>
+<option class="nablarch_error" value="5001">H事業部最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文字列最大長文</option></select>
+                                    <div class="message-error">入力してください。</div><span>&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <label>PJ名</label>
+                            <input class="input-error" type="text" name="form.projectName" value="a" maxlength="128" />
+                            <div class="message-error">プロジェクト名は128文字以下の全角文字で入力してください。</div><span>&nbsp;</span>
+                        </div>
+                        <div class="two fields">
+                            <div class="required field">
+                                <label>PJ種別</label>
+                                <div class="field">
+                                    <select name="form.projectType">
+<option value="01" selected="selected">新規開発ＰＪ</option>
+<option value="02">保守開発ＰＪ</option>
+<option value="03">ＥＲＰ導入支援</option>
+<option value="04">保守ＰＪ</option>
+<option value="05">運用</option>
+<option value="06">サービス提供（開発・保守）</option>
+<option value="07">サービス提供（開発・保守以外）</option>
+<option value="08">保守案件</option>
+<option value="09">その他</option></select>
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>PJ分類</label>
+                                <div class="item">
+                                    <div class = "fields code-radio-fields">
+                                        <div><input id="nablarch_radio1" class="code-radio" type="radio" name="form.projectClass" value="01" checked="checked" /><label for="nablarch_radio1">ＳＳ</label></div><div><input id="nablarch_radio2" class="code-radio" type="radio" name="form.projectClass" value="02" /><label for="nablarch_radio2">Ｓ</label></div><div><input id="nablarch_radio3" class="code-radio" type="radio" name="form.projectClass" value="03" /><label for="nablarch_radio3">Ａ</label></div><div><input id="nablarch_radio4" class="code-radio" type="radio" name="form.projectClass" value="04" /><label for="nablarch_radio4">Ｂ</label></div><div><input id="nablarch_radio5" class="code-radio" type="radio" name="form.projectClass" value="05" /><label for="nablarch_radio5">Ｃ</label></div><div><input id="nablarch_radio6" class="code-radio" type="radio" name="form.projectClass" value="06" /><label for="nablarch_radio6">Ｄ</label></div>
+                                    </div>
+                                    <span>&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>売上高</label>
+                                
+                                    <input class="form-control width-200 input-error" style="float:left;" type="text" name="form.salesAmount" value="b" maxlength="9" />
+                                    <div class="message-error">0円から999999999円の範囲で入力してください。</div><span>&nbsp;</span>
+                                
+                                
+                            </div>
+                            <div class="required field">
+                                <label>顧客</label>
+                                
+                                    <div class="ui action input">
+                                        <input type="hidden" name="form.clientId" value="1" />
+                                        <input id="client-name" tabindex="-1" type="text" name="form.clientName" value="" maxlength="64" readonly="readonly" placeholder="顧客" />
+                                        <button class="ui teal right labeled icon button" name="nablarch_form1_1" disabled="disabled" onclick="return window.nablarch_submit(event, this);">
+                                            <i class="search icon"></i>
+                                            選択
+                                        </button>
+                                    </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="two fields">
+                            <div class="required field">
+                                <label>PM</label>
+                                <input class="input-error" type="text" name="form.pmKanjiName" value="c" maxlength="64" />
+                                <div class="message-error">氏名は128文字以下の全角文字で入力してください。</div><span>&nbsp;</span>
+                            </div>
+                            <div class="required field">
+                                <label>PL</label>
+                                <input class="input-error" type="text" name="form.plKanjiName" value="d" maxlength="64" />
+                                <div class="message-error">氏名は128文字以下の全角文字で入力してください。</div><span>&nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="two fields row">
+                            <div class="required field">
+                                <label>開始日</label>
+                                
+                                    <div class="ui calendar">
+                                        <div class="ui input left icon" id="projectStartDate">
+                                            <i class="calendar icon"></i>
+                                            <input class="input-error" type="text" name="form.projectStartDate" value="" placeholder="開始日" />
+                                        </div>
+                                        <div class="message-error">入力してください。</div><span>&nbsp;</span>
+                                    </div>
+                                
+                                
+                            </div>
+                            <div class="required field">
+                                <label>終了日</label>
+                                
+                                    <div class="ui calendar">
+                                        <div class="ui input left icon" id="projectEndDate">
+                                            <i class="calendar icon"></i>
+                                            <input class="input-error" type="text" name="form.projectEndDate" value="" placeholder="終了日" />
+                                        </div>
+                                        <div class="message-error">入力してください。</div>
+                                        <span>&nbsp;</span>
+                                    </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="field text">
+                            <label>備考</label>
+                            <textarea name="form.note" rows="3" cols="0">
+</textarea>
+                            <span>&nbsp;</span>
+                        </div>
+                        <br>
+                        <div class="four fields">
+                            <div class="field centered aligned">&nbsp;</div>
+                            
+                                <div class="field centered aligned">
+                                    <a class="fluid ui primary button" href="/app/project/detail/1">戻る</a>
+                                </div>
+                                <div class="field centered aligned">
+                                    <button class="fluid ui primary button" name="nablarch_form1_2" onclick="return window.nablarch_submit(event, this);">更新
+                                    </button>
+                                </div>
+                            
+                            
+                            <div class="field centered aligned">&nbsp;</div>
+                        </div>
+                    
+<input type="hidden" name="nablarch_hidden" value="nablarch_token=TMP_VALUE_FOR_EVIDENCE|nablarch_hidden_submit_nablarch_form1_2=|nablarch_hidden_submit_nablarch_form1_1=" />
+<input type="hidden" name="nablarch_submit" value="" />
+<script type="text/javascript">
+<!--
+nablarch_submission_info.nablarch_form1 = {
+"nablarch_form1_1": { "action": "/action", "allowDoubleSubmission": false, "submissionAction": "TRANSITION" },
+"nablarch_form1_2": { "action": "/app/project/confirmUpdate", "allowDoubleSubmission": true, "submissionAction": "TRANSITION" }
+};
+-->
+</script>
+</form>
+<script type="text/javascript">
+<!--
+nablarch_submission_info.endMark.nablarch_form1 = true;
+-->
+</script>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+
+<footer>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            TIS Inc
+        </div>
+    </div>
+</footer>
+
+
+    
+</body>
+
+</html>
