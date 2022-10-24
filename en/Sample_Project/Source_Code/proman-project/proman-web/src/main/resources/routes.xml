@@ -1,10 +1,13 @@
 <routes>
+  <scope module="common">
+    <root to="TopMenu#index"/>
+    <get path="/" to="TopMenu#index"/>
+  </scope>
+  
   <scope module="login">
-    <root to="TopPage#index"/>
     <get path="/app/login" to="Login#index"/>
     <post path="/app/login" to="Login#login"/>
     <get path="/app/logout" to="Login#logout"/>
-    <get path="/" to="TopPage#index"/>
   </scope>
 
   <scope module="project">
