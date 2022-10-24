@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.2.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="テスト計画" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -579,9 +579,9 @@ if(!responseFile.exists()) {
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.sales" elementType="HTTPArgument">
+                <elementProp name="form.salesAmount" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.sales</stringProp>
+                  <stringProp name="Argument.name">form.salesAmount</stringProp>
                   <stringProp name="Argument.value">12345</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
@@ -600,16 +600,16 @@ if(!responseFile.exists()) {
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.projectManager" elementType="HTTPArgument">
+                <elementProp name="form.pmKanjiName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.projectManager</stringProp>
+                  <stringProp name="Argument.name">form.pmKanjiName</stringProp>
                   <stringProp name="Argument.value">%E4%BD%90%E8%97%A4</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.projectLeader" elementType="HTTPArgument">
+                <elementProp name="form.plKanjiName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.projectLeader</stringProp>
+                  <stringProp name="Argument.name">form.plKanjiName</stringProp>
                   <stringProp name="Argument.value">%E9%88%B4%E6%9C%A8</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
@@ -913,6 +913,7 @@ if(!responseFile.exists()) {
         <boolProp name="ProxyControlGui.regex_match">false</boolProp>
         <stringProp name="ProxyControlGui.content_type_include"></stringProp>
         <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
+        <boolProp name="ProxyControlGui.detect_graphql_request">true</boolProp>
       </ProxyControl>
       <hashTree/>
     </hashTree>
