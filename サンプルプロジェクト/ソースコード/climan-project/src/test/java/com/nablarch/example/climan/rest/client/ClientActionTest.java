@@ -10,6 +10,9 @@ import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import static com.jayway.jsonassert.JsonAssert.with;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.empty;
@@ -27,19 +30,39 @@ class ClientActionTest {
     public static final String PATH = "/client";
 
     /** 不正な顧客名（128文字を超えている） */
-    public static final String INVALID_CLIENT_NAME = RandomStringUtils.randomAlphanumeric(129);
+    public static final String INVALID_CLIENT_NAME = RandomStringUtils.random(129, "１２３４５６７８９０");
     /** 不正な業種コード（コードマスタに存在しない） */
     public static final String INVALID_INDUSTRY_CODE = "04";
 
     ClimanRestTestSupport support;
 
     /**
+    * リクエストパラメータのバリデーションエラー時(clientName)は400のステータスとエラーメッセージが返ってくること。
+     */
+    @Test
+    void testInvalidClientSearchFormInvalidClientName() throws UnsupportedEncodingException {
+        RestMockHttpRequest request = support.get(PATH);
+        String encodedName = URLEncoder.encode("invalidp arameter", "UTF-8");
+        request.setParam("clientName", encodedName);
+
+        String message = "顧客一覧取得(clientNameパラメータ不正)";
+        HttpResponse response = support.sendRequest(request);
+        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+        System.out.println(response.toString());
+        support.assertFaultMessages(message, response
+                , "FB1999901"
+                , 1
+                , "clientName:不正な文字種の値が指定されました。");
+    }
+
+    /**
      * リクエストパラメータのバリデーションエラー時は400のステータスとエラーメッセージが返ってくること。
      */
     @Test
-    void testInvalidClientSearchForm() {
+    void testInvalidClientSearchForm() throws UnsupportedEncodingException {
         RestMockHttpRequest request = support.get(PATH);
-        request.setParam("clientName", INVALID_CLIENT_NAME);
+        String encodedName = URLEncoder.encode("invalidp arameter", "UTF-8");
+        request.setParam("clientName", encodedName);
         request.setParam("industryCode", INVALID_INDUSTRY_CODE);
 
         String message = "顧客一覧取得(パラメータ不正)";
@@ -48,7 +71,7 @@ class ClientActionTest {
         support.assertFaultMessages(message, response
                 , "FB1999901"
                 , 2
-                , "clientName:128文字以下の値を入力してください。", "industryCode:不正な値が指定されました。");
+                , "clientName:不正な文字種の値が指定されました。", "industryCode:不正な値が指定されました。");
     }
 
     /**
@@ -63,15 +86,105 @@ class ClientActionTest {
     }
 
     /**
-     * 検索結果が0件となる条件で顧客一覧を取得した場合、正常レスポンスが返ってくること。
+     * 業種コードと顧客名を同時にパラメータに含めた場合、
+     * 業種コードと顧客名に一致する顧客1000件が取得されること。
      */
     @Test
-    void testFindNoClients() {
+    void testFindCodeAndName1000() throws JSONException {
+        String message = "顧客一覧(1000件)取得";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01&clientName=テスト会社"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(1000), message + "[結果件数]");
+    }
+
+    /**
+     * 検索結果が0件となる条件(顧客名)で顧客一覧を取得した場合、正常レスポンスが返ってくること。
+     */
+    @Test
+    void testFindClientNameNoClients() {
         String message = "検索結果０件";
         HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=存在しない会社"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
         with(response.getBodyString())
                 .assertThat("$", empty(), message + "[結果件数]");
+    }
+
+    /**
+     * 検索結果が0件となる条件(業種コード)で顧客一覧を取得した場合、正常レスポンスが返ってくること。
+     */
+    @Test
+    void testFindIndustryCodeNoClients() {
+        String message = "検索結果０件";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=03"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[結果件数]");
+    }
+
+    /**
+     * 検索結果が0件となる条件(業種コード、顧客名)で顧客一覧を取得した場合、正常レスポンスが返ってくること。
+     */
+    @Test
+    void testFindIndustryCodeAndClientNameNoClients() {
+        String message = "検索結果０件";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=03&clientName=存在しない会社"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[結果件数]");
+    }
+
+    /**
+     * 登録件数0件で検索結果が0件となる顧客一覧を取得した場合、正常レスポンスが返ってくること。
+     */
+    @Test
+    void testFindNoClients() {
+        String message = "検索結果０件";
+        HttpResponse response = support.sendRequest(support.get(PATH));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[結果件数]");
+    }
+
+    /**
+     * 顧客名をパラメータに含めた場合、
+     * 顧客名に前方一致する顧客だけが取得されること。
+     */
+    @Test
+    void testFindByClientName() {
+        String message = "顧客名検索";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=テスト会社２"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(2), message + "[結果件数]")
+                .assertThat("$[0].clientId", equalTo(3), message + "[顧客ID]")
+                .assertThat("$[0].clientName", equalTo("テスト会社２（建設業）"), message + "[顧客名]")
+                .assertThat("$[0].industryCode", equalTo("02"), message + "[業種コード]")
+                .assertThat("$[1].clientId", equalTo(2), message + "[顧客ID]")
+                .assertThat("$[1].clientName", equalTo("テスト会社２（農業）"), message + "[顧客名]")
+                .assertThat("$[1].industryCode", equalTo("01"), message + "[業種コード]");
+    }
+
+    /**
+     * 業種コードをパラメータに含めた場合、
+     * 業種コードに一致する顧客だけが取得されること。
+     */
+    @Test
+    void testFindByIndustryCode() {
+        String message = "業種コード検索";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(3), message + "[結果件数]")
+                .assertThat("$[0].clientId", equalTo(1), message + "[顧客ID]")
+                .assertThat("$[0].clientName", equalTo("テスト会社１（農業）"), message + "[顧客名]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[業種コード]")
+                .assertThat("$[1].clientId", equalTo(2), message + "[顧客ID]")
+                .assertThat("$[1].clientName", equalTo("テスト会社２（農業）"), message + "[顧客名]")
+                .assertThat("$[1].industryCode", equalTo("01"), message + "[業種コード]")
+                .assertThat("$[2].clientId", equalTo(4), message + "[顧客ID]")
+                .assertThat("$[2].clientName", equalTo("テスト会社３（農業）"), message + "[顧客名]")
+                .assertThat("$[2].industryCode", equalTo("01"), message + "[業種コード]");
     }
 
     /**
@@ -122,7 +235,21 @@ class ClientActionTest {
     @Test
     void testInvalidClientGetForm() {
         String message = "顧客詳細取得(パラメータ不正)";
-        HttpResponse response = support.sendRequest(support.get(PATH + "/number"));
+        HttpResponse response = support.sendRequest(support.get(PATH + "/aaa"));
+        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+        support.assertFaultMessages(message, response
+                , "FB1999901"
+                , 1
+                , "clientId:数値を入力してください。");
+    }
+
+    /**
+     * パスパラメータのバリデーションエラー時は400のステータスとエラーメッセージが返ってくること。
+     */
+    @Test
+    void testInvalidClientGetForm2() {
+        String message = "顧客詳細取得(パラメータ不正)";
+        HttpResponse response = support.sendRequest(support.get(PATH + "/test"));
         support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
         support.assertFaultMessages(message, response
                 , "FB1999901"
@@ -151,6 +278,20 @@ class ClientActionTest {
     void testShowNotExistsClient() {
         String message = "存在しない顧客詳細取得";
         HttpResponse response = support.sendRequest(support.get(PATH + "/9999"));
+        support.assertStatusCode(message, HttpResponse.Status.NOT_FOUND, response);
+        support.assertFaultMessages(message, response
+                , "FB1999903"
+                , 1
+                , "指定されたデータは存在しません。");
+    }
+
+    /**
+     * 存在しない顧客IDを指定した場合は404のステータスとエラーメッセージが返ってくること。
+     */
+    @Test
+    void testShowNoDataNotExistsClient() {
+        String message = "DB０件で存在しない顧客詳細取得";
+        HttpResponse response = support.sendRequest(support.get(PATH + "/2"));
         support.assertStatusCode(message, HttpResponse.Status.NOT_FOUND, response);
         support.assertFaultMessages(message, response
                 , "FB1999903"
@@ -193,11 +334,28 @@ class ClientActionTest {
     }
 
     /**
+     * 顧客名をパラメータに含まない場合は400のステータスとエラーメッセージが返ってくること。
+     */
+    @Test
+    void testRegisterNoParameterClientName() {
+        ClientForm client = new ClientForm();
+        client.setIndustryCode("01");
+
+        String message = "顧客名なし新規登録";
+        HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
+        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+        support.assertFaultMessages(message, response
+                , "FB1999901"
+                , 1
+                , "clientName:入力してください。");
+    }
+
+    /**
      * 顧客を新規登録できること。
      */
     @Test
     void testRegisterClient() {
-        String clientName = "新規テスト会社" + SystemTimeUtil.getDateTimeMillisString();
+        String clientName = RandomStringUtils.random(128, "１２３４５６７８９０");
         String industryCode = "03";
 
         ClientForm client = new ClientForm();
