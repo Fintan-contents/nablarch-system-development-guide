@@ -83,7 +83,7 @@ class ProjectSearchFormTest {
     }
 
     /**
-     * 異常系（プロジェクト開始日From＜プロジェクト開始日To）
+     * 異常系（プロジェクト開始日From＞プロジェクト開始日To）
      */
     @Test
     void testIsValidProjectStartDateRangeSmallerThanTo() {
@@ -95,7 +95,7 @@ class ProjectSearchFormTest {
     }
 
     /**
-     * 異常系（プロジェクト終了日From＜プロジェクト終了日To）
+     * 異常系（プロジェクト終了日From＞プロジェクト終了日To）
      */
     @Test
     void testIsValidProjectEndDateRangeSmallerThanTo() {
@@ -107,7 +107,7 @@ class ProjectSearchFormTest {
     }
 
     /**
-     * 異常系（売上高From＜売上高To）
+     * 異常系（売上高From＞売上高To）
      */
     @Test
     void testIsValidProjectSalesRangeSmallerThanTo() {
