@@ -363,24 +363,28 @@ if(!responseFile.exists()) {
                   <stringProp name="Argument.name">loginId</stringProp>
                   <stringProp name="Argument.value">10000001</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="userPassword" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">userPassword</stringProp>
                   <stringProp name="Argument.value">pass123-</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="nablarch_hidden" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">nablarch_hidden</stringProp>
                   <stringProp name="Argument.value">csrf-token%3D5ecc4c5b-45e7-4921-bdd6-8c95181a5b2a%7Cnablarch_hidden_submit_nablarch_form1_1%3D</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="nablarch_submit" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">nablarch_submit</stringProp>
                   <stringProp name="Argument.value">nablarch_form1_1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -498,90 +502,105 @@ if(!responseFile.exists()) {
                   <stringProp name="Argument.name">form.divisionId</stringProp>
                   <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.organizationId" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.organizationId</stringProp>
                   <stringProp name="Argument.value">3</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.projectName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.projectName</stringProp>
                   <stringProp name="Argument.value">register+test+project</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.projectType" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.projectType</stringProp>
                   <stringProp name="Argument.value">01</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.projectClass" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.projectClass</stringProp>
                   <stringProp name="Argument.value">01</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.sales" elementType="HTTPArgument">
+                <elementProp name="form.salesAmount" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.sales</stringProp>
+                  <stringProp name="Argument.name">form.salesAmount</stringProp>
                   <stringProp name="Argument.value">2000</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.clientId" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.clientId</stringProp>
                   <stringProp name="Argument.value"></stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.clientName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.clientName</stringProp>
                   <stringProp name="Argument.value"></stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.projectManager" elementType="HTTPArgument">
+                <elementProp name="form.pmKanjiName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.projectManager</stringProp>
+                  <stringProp name="Argument.name">form.pmKanjiName</stringProp>
                   <stringProp name="Argument.value">Tom</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="form.projectLeader" elementType="HTTPArgument">
+                <elementProp name="form.plKanjiName" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">form.projectLeader</stringProp>
+                  <stringProp name="Argument.name">form.plKanjiName</stringProp>
                   <stringProp name="Argument.value">Dick</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.projectStartDate" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.projectStartDate</stringProp>
                   <stringProp name="Argument.value">2020%2F08%2F12</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.projectEndDate" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.projectEndDate</stringProp>
                   <stringProp name="Argument.value">2020%2F08%2F13</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="form.note" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">form.note</stringProp>
                   <stringProp name="Argument.value">This+is+note.</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="nablarch_hidden" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">nablarch_hidden</stringProp>
                   <stringProp name="Argument.value">nablarch_token%3Dc98ab599-dcca-48a9-a752-9e651cc765b3%7Ccsrf-token%3De5658868-7b5c-45c2-9fa2-8ba3e605d8f2%7Cnablarch_hidden_submit_nablarch_form1_2%3D%7Cnablarch_hidden_submit_nablarch_form1_1%3D</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="nablarch_submit" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">nablarch_submit</stringProp>
                   <stringProp name="Argument.value">nablarch_form1_2</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -650,12 +669,14 @@ if(!responseFile.exists()) {
                   <stringProp name="Argument.name">nablarch_hidden</stringProp>
                   <stringProp name="Argument.value">nablarch_token=8026c3d1-bf5a-410a-bef9-3ff598af8fed|csrf-token=e5658868-7b5c-45c2-9fa2-8ba3e605d8f2|nablarch_hidden_submit_nablarch_form1_2=|nablarch_hidden_submit_nablarch_form1_1=</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="nablarch_submit" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">nablarch_submit</stringProp>
                   <stringProp name="Argument.value">nablarch_form1_2</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
