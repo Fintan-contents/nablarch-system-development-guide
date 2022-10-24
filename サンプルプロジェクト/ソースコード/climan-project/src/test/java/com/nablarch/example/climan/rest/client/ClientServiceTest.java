@@ -35,20 +35,24 @@ class ClientServiceTest {
      */
     @Test
     void testFindClient() {
-
+        final Map<String, Boolean> invoked = new HashMap<>();
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> EntityList<T> findAllBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                invoked.put("findAllBySqlFile", true);
                 return new EntityList(Arrays.asList(new Client(), new Client()));
             }
 
             @Override
             public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
-                return Long.valueOf(SystemRepository.get("app.common.search.limit"));
+                invoked.put("countBySqlFile", true);
+                return Long.parseLong(SystemRepository.get("app.common.search.limit"));
             }
         });
 
         List<Client> result = sut.findClient(new Client());
+        assertTrue(invoked.get("countBySqlFile"));
+        assertTrue(invoked.get("findAllBySqlFile"));
         assertEquals(2, result.size());
     }
 
@@ -59,21 +63,17 @@ class ClientServiceTest {
      */
     @Test
     void testFindClientForSearchResultUpperLimitError() {
-
+        final Map<String, Boolean> invoked = new HashMap<>();
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
-                return Long.valueOf(SystemRepository.get("app.common.search.limit")) + 1;
+                invoked.put("countBySqlFile", true);
+                return Long.parseLong(SystemRepository.get("app.common.search.limit")) + 1;
             }
         });
 
-        try {
-            sut.findClient(new Client());
-            fail();
-        } catch (SearchResultUpperLimitException e) {
-            long expected = Long.valueOf(SystemRepository.get("app.common.search.limit"));
-            assertEquals(expected, e.getLimit());
-        }
+        Assertions.assertThrows(SearchResultUpperLimitException.class, () -> sut.findClient(new Client()));
+        assertTrue(invoked.get("countBySqlFile"));
     }
 
     /**
@@ -83,7 +83,7 @@ class ClientServiceTest {
      */
     @Test
     void testFindClientById() {
-        final Map<String, Boolean> invoked = new HashMap<String, Boolean>();
+        final Map<String, Boolean> invoked = new HashMap<>();
         Client client = new Client();
         client.setClientId(1);
         client.setClientName("顧客１");
@@ -93,12 +93,7 @@ class ClientServiceTest {
             @Override
             public <T> T findById(Class<T> entityClass, Object... id) {
                 invoked.put("findById", true);
-                return (T)  client;
-            }
-
-            @Override
-            public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
-                return Long.valueOf(SystemRepository.get("app.common.search.limit"));
+                return (T) client;
             }
         });
 
@@ -113,8 +108,8 @@ class ClientServiceTest {
      * {@link NoDataException}が送出されること。
      */
     @Test
-    void testFindClientByIdForNoDataException() {
-        final Map<String, Boolean> invoked = new HashMap<String, Boolean>();
+    void testFindClientByIdThrowsNoDataException() {
+        final Map<String, Boolean> invoked = new HashMap<>();
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> T findById(Class<T> entityClass, Object... id) {
@@ -123,12 +118,8 @@ class ClientServiceTest {
             }
         });
 
-        try {
-            sut.findClientById(0);
-            fail();
-        } catch (NoDataException e) {
-            assertTrue(invoked.get("findById"));
-        }
+        Assertions.assertThrows(NoDataException.class, () -> sut.findClientById(0));
+        assertTrue(invoked.get("findById"));
     }
 
     /**
@@ -148,6 +139,7 @@ class ClientServiceTest {
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                invoked.put("countBySqlFile", true);
                 return 0;
             }
 
@@ -158,13 +150,16 @@ class ClientServiceTest {
 
             @Override
             public <T> T findBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                invoked.put("findBySqlFile", true);
                 return (T) client;
             }
         });
 
         Client result = sut.registerClient(new Client());
 
-        assertTrue(invoked.containsKey("insert"));
+        assertTrue(invoked.get("countBySqlFile"));
+        assertTrue(invoked.get("insert"));
+        assertTrue(invoked.get("findBySqlFile"));
         assertEquals(client, result);
     }
 
@@ -175,13 +170,16 @@ class ClientServiceTest {
      */
     @Test
     void testRegisterClientForDuplicateRegistrationException() {
+        final Map<String, Boolean> invoked = new HashMap<>();
         ClientService sut = new ClientService(new DaoStub() {
             @Override
             public <T> long countBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+                invoked.put("countBySqlFile", true);
                 return 1;
             }
         });
 
         Assertions.assertThrows(DuplicateRegistrationException.class, () -> sut.registerClient(new Client()));
+        assertTrue(invoked.get("countBySqlFile"));
     }
 }
