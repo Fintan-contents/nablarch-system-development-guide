@@ -1,0 +1,1119 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                function slashFormat(date) {
+                    var day = ('0' + date.getDate()).slice(-2);
+                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    var year = date.getFullYear();
+                    return year + '/' + month + '/' + day;
+                }
+
+                $('#projectStartDateFrom').calendar({
+                    endCalendar: $('#projectStartDateTo'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectStartDateTo').calendar({
+                    startCalendar: $('#projectStartDateFrom'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectEndDateFrom').calendar({
+                    endCalendar: $('#projectEndDateTo'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+                $('#projectEndDateTo').calendar({
+                    startCalendar: $('#projectEndDateFrom'),
+                    type: 'date',
+                    formatter: {
+                        date: slashFormat
+                    }
+                });
+            });
+        </script>
+        <title>
+            Project search | Proman
+        </title>
+    </head>
+
+    <body>
+        <div class="mainContents">
+            
+
+
+
+
+<link type="text/css" href="/stylesheets/common.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/javascripts/common.js" charset="UTF-8"></script>
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+        height: auto;
+    }
+
+    .ui.menu .item i.logo {
+        /*　Margin of logo in header　*/
+        margin-right: 0.5em;
+    }
+
+    .main.container {
+        /* Margin of content section*/
+        margin-top: 7em;
+    }
+
+    .ui.footer.segment {
+        /* Margin of footer section*/
+        margin: 1em 0em 0em;
+        padding: 0em 0em;
+    }
+</style>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <a id="topLink" class="header item" href="/">
+            <i class="logo fas fa-database"></i>Proman
+        </a>
+        
+            <div class="right menu">
+                <a id="logoutLink" class="item" href="/app/logout">
+                    Logout
+                </a>
+            </div>
+        
+    </div>
+</div>
+
+        </div>
+        <div class="ui main container">
+            <div class="ui grid">
+                
+
+
+
+
+<div class="four wide column row">
+    <div class="ui vertical menu">
+        <div class="item">
+            <div class="header">Project management</div>
+            <div class="menu">
+                <a id="projectSearchkLink" class="item" href="/app/project/search">Project search</a>
+                <a id="projectCreatekLink" class="item" href="/app/project/register">Project registration</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">Client management</div>
+            <div class="menu">
+                <a id="clientSearchkLink" class="item" href="#">Client search</a>
+                <a id="clientCreatekLink" class="item" href="#">Register client</a>
+            </div>
+        </div>
+        <div class="item">
+        </div>
+    </div>
+</div>
+
+                <div class="twelve wide column row">
+                    <div class="sixteen wide column">
+                        <div class="ui huge header">Project search</div>
+                        
+                        
+<form class="ui form" name="nablarch_form1" action="/app/project/list" method="GET">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>
+                                        Division
+                                        <select class="ui dropdown" name="form.divisionId">
+<option value="">Select a Division</option>
+<option value="1">A Division</option>
+<option value="2">B Division</option>
+<option value="7"></option>
+<option value="9998">G Division1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678</option></select>
+                                    </label>
+                                    
+                                </div>
+                                <div class="field">
+                                    <label>
+                                        Department
+                                        <select class="ui dropdown" name="form.organizationId">
+<option value="">Select a Department</option>
+<option value="3">C Department</option>
+<option value="4">D Department</option>
+<option value="5">E Department</option>
+<option value="6">F Department</option>
+<option value="8"></option>
+<option value="9999">H Department12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456</option></select>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Project type</label>
+                                <div class="fields code-checkbox-fields">
+                                    <span><input id="nablarch_checkbox1" class="code-checkbox" type="checkbox" name="form.projectType" value="01" /><label for="nablarch_checkbox1">New&nbsp;Development</label></span><span><input id="nablarch_checkbox2" class="code-checkbox" type="checkbox" name="form.projectType" value="02" /><label for="nablarch_checkbox2">Maintenance&nbsp;development</label></span><span><input id="nablarch_checkbox3" class="code-checkbox" type="checkbox" name="form.projectType" value="03" /><label for="nablarch_checkbox3">Support&nbsp;for&nbsp;ERP</label></span><span><input id="nablarch_checkbox4" class="code-checkbox" type="checkbox" name="form.projectType" value="04" /><label for="nablarch_checkbox4">Maintenance</label></span><span><input id="nablarch_checkbox5" class="code-checkbox" type="checkbox" name="form.projectType" value="05" /><label for="nablarch_checkbox5">Operation</label></span><span><input id="nablarch_checkbox6" class="code-checkbox" type="checkbox" name="form.projectType" value="06" /><label for="nablarch_checkbox6">Service&nbsp;(development)</label></span><span><input id="nablarch_checkbox7" class="code-checkbox" type="checkbox" name="form.projectType" value="07" /><label for="nablarch_checkbox7">Service&nbsp;(others)</label></span><span><input id="nablarch_checkbox8" class="code-checkbox" type="checkbox" name="form.projectType" value="08" /><label for="nablarch_checkbox8">Maintenance&nbsp;case</label></span><span><input id="nablarch_checkbox9" class="code-checkbox" type="checkbox" name="form.projectType" value="09" /><label for="nablarch_checkbox9">Other</label></span>
+                                </div>
+                                
+                            </div>
+                            <div class="field">
+                                <label>Project classification</label>
+                                <div class="fields code-checkbox-fields">
+                                    <span><input id="nablarch_checkbox10" class="code-checkbox" type="checkbox" name="form.projectClass" value="01" /><label for="nablarch_checkbox10">SS</label></span><span><input id="nablarch_checkbox11" class="code-checkbox" type="checkbox" name="form.projectClass" value="02" /><label for="nablarch_checkbox11">S</label></span><span><input id="nablarch_checkbox12" class="code-checkbox" type="checkbox" name="form.projectClass" value="03" /><label for="nablarch_checkbox12">A</label></span><span><input id="nablarch_checkbox13" class="code-checkbox" type="checkbox" name="form.projectClass" value="04" /><label for="nablarch_checkbox13">B</label></span><span><input id="nablarch_checkbox14" class="code-checkbox" type="checkbox" name="form.projectClass" value="05" /><label for="nablarch_checkbox14">C</label></span><span><input id="nablarch_checkbox15" class="code-checkbox" type="checkbox" name="form.projectClass" value="06" /><label for="nablarch_checkbox15">D</label></span>
+                                </div>
+                                
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Sales_results_FROM</label>
+                                    <input type="text" name="form.salesFrom" value="" maxlength="9" placeholder="Sales_results_FROM" />
+                                    
+                                    
+                                </div>
+                                <div class="field">
+                                    <label>Sales_results_TO</label>
+                                    <input type="text" name="form.salesTo" value="" maxlength="9" placeholder="Sales_results_TO" />
+                                    
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field ui calendar" id="projectStartDateFrom">
+                                    <label>Start date_FROM</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectStartDateFrom" value="" maxlength="10" placeholder="Start date_FROM" />
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="field ui calendar" id="projectStartDateTo">
+                                    <label>Start date_TO</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectStartDateTo" value="" maxlength="10" placeholder="Start date_TO" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field ui calendar" id="projectEndDateFrom">
+                                    <label>End date_FROM</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectEndDateFrom" value="" maxlength="10" placeholder="End date_FROM" />
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="field ui calendar" id="projectEndDateTo">
+                                    <label>End date_TO</label>
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" name="form.projectEndDateTo" value="" maxlength="10" placeholder="End date_TO" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Search by project name</label>
+                                <input type="text" name="form.projectName" value="" maxlength="128" placeholder="Project name" />
+                                
+                            </div>
+                            <button type="submit" class="ui right floated primary button">Search</button>
+                        
+</form>
+                    </div>
+                    
+                        
+                        
+                        <!-- Search results -->
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="sixteen wide column">
+            
+        <div><span>&nbsp;</span></div>
+    </div>
+    
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sixteen wide column">
+    <div class="ui right floated pagination menu">
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        <a class="item" href="javascript:void(0)">&lt;&lt;</a>
+    
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+        <a class="item" href="javascript:void(0)">＜</a>
+    
+
+
+        
+        
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <a class="active item" href="javascript:void(0)">1</a>
+    
+    
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=2&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">2</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=3&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">3</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=4&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">4</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=5&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">5</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=6&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">6</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=7&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">7</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=8&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">8</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=9&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">9</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=10&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">10</a>
+
+
+
+            
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=11&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">11</a>
+
+
+
+            
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=2&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">＞</a>
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <a class="item" href="/app/project/list?form.pageNumber=11&amp;form.divisionId=&amp;form.organizationId=&amp;form.projectName=&amp;form.salesFrom=&amp;form.salesTo=&amp;form.projectStartDateFrom=&amp;form.projectStartDateTo=&amp;form.projectEndDateFrom=&amp;form.projectEndDateTo=">&gt;&gt;&nbsp;</a>
+
+
+
+    </div>
+</div>
+
+        <div class="sixteen wide column">
+            <!-- spacer -->
+            <div><span>&nbsp;</span></div>
+        </div>
+    
+    
+    
+        
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+<div class="sixteen wide column">
+    <table class="ui celled table">
+        
+        <thead>
+            <tr>
+                                    <th>Project name</th>
+                                    <th>Division</th>
+                                    <th>Department</th>
+                                    <th>Project type</th>
+                                    <th>Project classification</th>
+                                    <th>PM</th>
+                                    <th>Sales_results (1,000 yen)</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                </tr>
+        </thead>
+        
+        <tbody>
+            
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/1">
+                                            Project&nbsp;name&nbsp;1
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>C&nbsp;Department</td>
+                                    <td>New&nbsp;Development<br /></td>
+                                    <td>SS<br /></td>
+                                    <td>Manager&nbsp;1</td>
+                                    <td>10,000</td>
+                                    <td>2019/06/01</td>
+                                    <td>2019/12/31</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/2">
+                                            Project&nbsp;name&nbsp;2
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>D&nbsp;Department</td>
+                                    <td>Maintenance&nbsp;development<br /></td>
+                                    <td>S<br /></td>
+                                    <td>Manager&nbsp;2</td>
+                                    <td>11,000</td>
+                                    <td>2019/06/02</td>
+                                    <td>2020/01/01</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/3">
+                                            Project&nbsp;name&nbsp;3
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>E&nbsp;Department</td>
+                                    <td>Support&nbsp;for&nbsp;ERP<br /></td>
+                                    <td>A<br /></td>
+                                    <td>Manager&nbsp;3</td>
+                                    <td>12,000</td>
+                                    <td>2019/06/03</td>
+                                    <td>2020/01/02</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/4">
+                                            Project&nbsp;name&nbsp;4
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>F&nbsp;Department</td>
+                                    <td>Maintenance<br /></td>
+                                    <td>B<br /></td>
+                                    <td>Manager&nbsp;4</td>
+                                    <td>13,000</td>
+                                    <td>2019/06/04</td>
+                                    <td>2020/01/03</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/5">
+                                            Project&nbsp;name&nbsp;5
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>C&nbsp;Department</td>
+                                    <td>Operation<br /></td>
+                                    <td>C<br /></td>
+                                    <td>Manager&nbsp;5</td>
+                                    <td>14,000</td>
+                                    <td>2019/06/05</td>
+                                    <td>2020/01/04</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/6">
+                                            Project&nbsp;name&nbsp;6
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>D&nbsp;Department</td>
+                                    <td>Service&nbsp;(development)<br /></td>
+                                    <td>D<br /></td>
+                                    <td>Manager&nbsp;6</td>
+                                    <td>15,000</td>
+                                    <td>2019/06/06</td>
+                                    <td>2020/01/05</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/7">
+                                            Project&nbsp;name&nbsp;7
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>E&nbsp;Department</td>
+                                    <td>Service&nbsp;(others)<br /></td>
+                                    <td>SS<br /></td>
+                                    <td>Manager&nbsp;7</td>
+                                    <td>16,000</td>
+                                    <td>2019/06/07</td>
+                                    <td>2020/01/06</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/8">
+                                            Project&nbsp;name&nbsp;8
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>F&nbsp;Department</td>
+                                    <td>Maintenance&nbsp;case<br /></td>
+                                    <td>S<br /></td>
+                                    <td>Manager&nbsp;8</td>
+                                    <td>17,000</td>
+                                    <td>2019/06/08</td>
+                                    <td>2020/01/07</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/9">
+                                            Project&nbsp;name&nbsp;9
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>C&nbsp;Department</td>
+                                    <td>Other<br /></td>
+                                    <td>A<br /></td>
+                                    <td>Manager&nbsp;9</td>
+                                    <td>18,000</td>
+                                    <td>2019/06/09</td>
+                                    <td>2020/01/08</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/10">
+                                            Project&nbsp;name&nbsp;10
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>D&nbsp;Department</td>
+                                    <td>New&nbsp;Development<br /></td>
+                                    <td>B<br /></td>
+                                    <td>Manager&nbsp;10</td>
+                                    <td>19,000</td>
+                                    <td>2019/06/10</td>
+                                    <td>2020/01/09</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/11">
+                                            Project&nbsp;name&nbsp;11
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>E&nbsp;Department</td>
+                                    <td>Maintenance&nbsp;development<br /></td>
+                                    <td>C<br /></td>
+                                    <td>Manager&nbsp;11</td>
+                                    <td>20,000</td>
+                                    <td>2019/06/11</td>
+                                    <td>2020/01/10</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/12">
+                                            Project&nbsp;name&nbsp;12
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>F&nbsp;Department</td>
+                                    <td>Support&nbsp;for&nbsp;ERP<br /></td>
+                                    <td>D<br /></td>
+                                    <td>Manager&nbsp;12</td>
+                                    <td>21,000</td>
+                                    <td>2019/06/12</td>
+                                    <td>2020/01/11</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/13">
+                                            Project&nbsp;name&nbsp;13
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>C&nbsp;Department</td>
+                                    <td>Maintenance<br /></td>
+                                    <td>SS<br /></td>
+                                    <td>Manager&nbsp;13</td>
+                                    <td>22,000</td>
+                                    <td>2019/06/13</td>
+                                    <td>2020/01/12</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/14">
+                                            Project&nbsp;name&nbsp;14
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>D&nbsp;Department</td>
+                                    <td>Operation<br /></td>
+                                    <td>S<br /></td>
+                                    <td>Manager&nbsp;14</td>
+                                    <td>23,000</td>
+                                    <td>2019/06/14</td>
+                                    <td>2020/01/13</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/15">
+                                            Project&nbsp;name&nbsp;15
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>E&nbsp;Department</td>
+                                    <td>Service&nbsp;(development)<br /></td>
+                                    <td>A<br /></td>
+                                    <td>Manager&nbsp;15</td>
+                                    <td>24,000</td>
+                                    <td>2019/06/15</td>
+                                    <td>2020/01/14</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/16">
+                                            Project&nbsp;name&nbsp;16
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>F&nbsp;Department</td>
+                                    <td>Service&nbsp;(others)<br /></td>
+                                    <td>B<br /></td>
+                                    <td>Manager&nbsp;16</td>
+                                    <td>25,000</td>
+                                    <td>2019/06/16</td>
+                                    <td>2020/01/15</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/17">
+                                            Project&nbsp;name&nbsp;17
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>C&nbsp;Department</td>
+                                    <td>Maintenance&nbsp;case<br /></td>
+                                    <td>C<br /></td>
+                                    <td>Manager&nbsp;17</td>
+                                    <td>26,000</td>
+                                    <td>2019/06/17</td>
+                                    <td>2020/01/16</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/18">
+                                            Project&nbsp;name&nbsp;18
+                                        </a>
+                                    </td>
+                                    <td>A&nbsp;Division</td>
+                                    <td>D&nbsp;Department</td>
+                                    <td>Other<br /></td>
+                                    <td>D<br /></td>
+                                    <td>Manager&nbsp;18</td>
+                                    <td>27,000</td>
+                                    <td>2019/06/18</td>
+                                    <td>2020/01/17</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/19">
+                                            Project&nbsp;name&nbsp;19
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>E&nbsp;Department</td>
+                                    <td>New&nbsp;Development<br /></td>
+                                    <td>SS<br /></td>
+                                    <td>Manager&nbsp;19</td>
+                                    <td>28,000</td>
+                                    <td>2019/06/19</td>
+                                    <td>2020/01/18</td>
+                                </tr>
+            
+                
+                
+                
+                
+                <tr class="info">
+                                    <td>
+                                        <a href="/app/project/detail/20">
+                                            Project&nbsp;name&nbsp;20
+                                        </a>
+                                    </td>
+                                    <td>B&nbsp;Division</td>
+                                    <td>F&nbsp;Department</td>
+                                    <td>Maintenance&nbsp;development<br /></td>
+                                    <td>S<br /></td>
+                                    <td>Manager&nbsp;20</td>
+                                    <td>29,000</td>
+                                    <td>2019/06/20</td>
+                                    <td>2020/01/19</td>
+                                </tr>
+            
+        </tbody>
+    </table>
+</div>
+    
+    
+
+
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+<footer>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            TIS Inc
+        </div>
+    </div>
+</footer>
+
+    </body>
+
+</html>
