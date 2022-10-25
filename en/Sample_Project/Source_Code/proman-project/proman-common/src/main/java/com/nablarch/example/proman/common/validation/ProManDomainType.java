@@ -34,7 +34,7 @@ public class ProManDomainType {
 
     /** Project name */
     @Length(max = 128, message = "{domainType.projectName.message}")
-    @SystemChar(charsetDef = "全角文字", message = "{domainType.projectName.message}") // Characters permitted by system
+    @SystemChar(charsetDef = "システム許容文字", message = "{domainType.projectName.message}") // Characters permitted by system
     public String projectName;
 
     /** Project type code value */
@@ -55,7 +55,7 @@ public class ProManDomainType {
 
     /** User name (Kanji characters) */
     @Length(max = 128, message = "{domainType.userName.message}")
-    @SystemChar(charsetDef = "全角文字", message = "{domainType.userName.message}") // Characters permitted by system
+    @SystemChar(charsetDef = "システム許容文字", message = "{domainType.userName.message}") // Characters permitted by system
     public String userName;
 
     /** Note */
@@ -88,7 +88,7 @@ public class ProManDomainType {
 
     /** Organization name **/
     @Length(max = 120)
-    @SystemChar(charsetDef = "全角文字")
+    @SystemChar(charsetDef = "システム許容文字")
     public String organizationName;
 
     /** Project ID_FK **/
@@ -113,7 +113,7 @@ public class ProManDomainType {
 
     /** User Name(Kana characters) **/
     @Length(max = 128)
-    @SystemChar(charsetDef = "全角文字")
+    @SystemChar(charsetDef = "システム許容文字")
     public String kanaNme;
 
     /** Version number */

@@ -8,7 +8,7 @@ FROM
   system_account
 WHERE
   login_id = ?
-  AND ? BETWEEN effective_date_from AND effective_date_to
+  AND ? BETWEEN apply_start_date AND apply_end_date
 
 --------------------------------------------------------------------------------
 -- SQL to retrieve system account information based on login ID

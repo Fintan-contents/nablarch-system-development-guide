@@ -150,7 +150,7 @@ Make sure that the JMeter `bin` directory, etc. is under the directory set here.
 **Configuration example**
 
 ```properties
-jmeter.home=C:\\tools\\apache-jmeter-5.2.1
+jmeter.home=C:\\tools\\apache-jmeter-5.5
 ```
 
 #### server.host

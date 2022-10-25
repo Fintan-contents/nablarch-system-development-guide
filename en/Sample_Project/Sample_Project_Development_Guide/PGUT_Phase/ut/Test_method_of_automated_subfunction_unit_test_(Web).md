@@ -44,6 +44,13 @@ After configuring JMeter, go to the `proman-jmeter` directory on the command lin
 $cd proman-jmeter
 $mvn clean test
 ```
+If you want to run the tool behind the proxy, you must optionally set the proxy at startup.
+The tool runs JMeter without proxy settings by default.
+Please configure the proxy settings at runtime as follows
+
+```
+mvn clean test -Dhttp.proxyHost=<proxy host> -Dhttp.proxyPort=<proxy port> -Dhttps.proxyHost=<proxy host> -Dhttps.proxyPort=<proxy port> -Dhttp.nonProxyHosts=localhost
+```
 
 If the test is successful, you should see the following on the command line.
 

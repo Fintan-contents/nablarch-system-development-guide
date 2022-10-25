@@ -38,29 +38,36 @@ This completes the preparation of the test data registration.
 Use JMeter's "HTTP(S) Test Script Recorder" to record requests during the manual test.  
 
 1. Copy the [Test-Plan-template.jmx](Subfunction_Unit_Test_Tool/Test-Plan-template.jmx) for each test scenario and rename it to your desired name.
-2. Launch JMeter with the [start-up-jmeter.bat.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/start-up-jmeter.bat.bat) that you have configured for your environment.
-3. Open the jmx file created in step 1 in JMeter.
-4. select "HTTP(S) Test Script Recorder" on the left side of the screen and click the "Start" button.
-5. Install a dummy certificate for the proxy.
+1. Launch JMeter with the [start-up-jmeter.bat.bat(JMeter-startup-batch.bat)](Subfunction_Unit_Test_Tool/start-up-jmeter.bat.bat) that you have configured for your environment.
+1. Open the jmx file created in step 1 in JMeter.
+1. Select "User Defined Variables" on the left side of the screen and change `localhost` set as the value of `server.host` to your terminal's IP address.
+  - By setting the IP address of your terminal in `server.host`, the server name of the request recorded below becomes a placeholder named `${server.host}`. This allows you to switch the address of the server you are connecting to at once by changing the value of `server.host`.
+1. select "HTTP(S) Test Script Recorder" on the left side of the screen and click the "Start" button.
+1. Install a dummy certificate for the proxy.
     - Double-click the `ApacheJMeterTemporaryRootCA.crt` which will be generated under the bin directory where you extracted the JMeter.
     - Go to "証明書のインストール(Install Certificates)" -> "現在のユーザー(Current User)" -> "証明書を全て次のストアに配置する(Place All Certificates in Next Store)" and select "信頼されたルート証明機関(Trusted Root Certification Authority)" to install.
     - The certificate is set to expire in 7 days, so you should do this every time it expires.
-6. Open the browser with the Chrome shortcut that has been set to use JMeter as an HTTP proxy server, and access the IP address of your terminal to perform a subfunction unit test. (Start from the login operation)
+1. Open the browser with the Chrome shortcut that has been set to use JMeter as an HTTP proxy server, and access the IP address of your terminal to perform a subfunction unit test. (Start from the login operation)
+    - Be sure to launch a new window from the Chrome shortcut for each scenario.
+      - Once launched, the cache retrieved in the first request is used. Therefore, if multiple scenarios are recorded in the same window in succession, the second and subsequent scenarios will not include requests to retrieve CSS and JavaScript.
     - After the login screen is displayed, go to [Test Plan] > [Thread Group] > [Recording Controller] and confirm that the line has increased and the request has been recorded.
         - Please access with your device's IP address, because accessing with `localhost` will cause the browser to bypass the proxy even if it is set.
         - If there are no more lines of requests in the "Recording Controller" section, the proxy settings are probably wrong.
         - If the above doesn't help, please check the jmeter.log which should be saved in the same location as the "start-up-jmeter.bat" used to start JMeter.
-7. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario. Save the "Test Plan".
+1. Stop JMeter's HTTP proxy server after completing the necessary operations in one test scenario.
+1. Select "User Defined Variables" on the left side of the screen and change the value of `server.host` to `localhost`.
+1. Save the "Test Plan".
 
 #### Get a hard copy of the screen
 
 1. Launch the Window Size Tool (Sizer).
-2. Launch the browser.
-3. Place mouse cursor on the bottom right corner of browser and right click.
-4. Click on the menu that appears and change to the size of the browser you want to use for testing.
-5. Launch the screen capture tool (SnapCrab for Windows) to get a hard copy.
-    - By default, you can use ALT + PrintScreen to get a hard copy of the active window.
-    - The retrieved hard copy will be saved to the specified directory.
+1. Launch the browser.
+1. Place mouse cursor on the bottom right corner of browser and right click.
+1. Click on the menu that appears and change to the size of the browser you want to use for testing.
+1. A hard copy of the screen is obtained using Chrome's developer tools.
+    - If your viewpoint is to check the layout, open the developer tool in a separate window so that the size of the window from which the screen hardcopy is obtained is the size specified in the UI standard.
+    - With the developer tools open, press `Ctrl+Shift+P` to display the input window.
+    - Type `full` in the input window and press `Enter` when the function "Capture full size screenshot" is displayed. A download window will appear and save a hard copy of the screen to your desired location.
 
 #### Get a DB dump with the dump tool
 

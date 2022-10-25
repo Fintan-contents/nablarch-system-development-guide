@@ -7,9 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
     <%-- stylesheets --%>
@@ -113,11 +111,11 @@
                             <div class="field">
                                 <label>Sales (1,000 yen)</label>
                                 <n:forInputPage>
-                                    <n:text name="form.sales" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;"/>
-                                    <n:error errorCss="message-error" name="form.sales" /><span>&nbsp;</span>
+                                    <n:text name="form.salesAmount" maxlength="9" cssClass="form-control width-200" errorCss="input-error" style="float:left;"/>
+                                    <n:error errorCss="message-error" name="form.salesAmount" /><span>&nbsp;</span>
                                 </n:forInputPage>
                                 <n:forConfirmationPage>
-                                    <n:write value="${n:format('number', form.sales, '###,###,###')}" />
+                                    <n:write value="${n:format('number', form.salesAmount, '###,###,###')}" />
                                 </n:forConfirmationPage>
                             </div>
                             <div class="required field">
@@ -141,13 +139,13 @@
                         <div class="two fields">
                             <div class="required field">
                                 <label>PM</label>
-                                <n:text name="form.projectManager" maxlength="64" errorCss="input-error"/>
-                                <n:error errorCss="message-error" name="form.projectManager" /><span>&nbsp;</span>
+                                <n:text name="form.pmKanjiName" maxlength="64" errorCss="input-error"/>
+                                <n:error errorCss="message-error" name="form.pmKanjiName" /><span>&nbsp;</span>
                             </div>
                             <div class="required field">
                                 <label>PL</label>
-                                <n:text name="form.projectLeader" maxlength="64" errorCss="input-error"/>
-                                <n:error errorCss="message-error" name="form.projectLeader" /><span>&nbsp;</span>
+                                <n:text name="form.plKanjiName" maxlength="64" errorCss="input-error"/>
+                                <n:error errorCss="message-error" name="form.plKanjiName" /><span>&nbsp;</span>
                             </div>
                         </div>
                         <div class="two fields row">
