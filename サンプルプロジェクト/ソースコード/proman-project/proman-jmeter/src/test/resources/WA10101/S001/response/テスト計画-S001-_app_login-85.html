@@ -203,22 +203,20 @@ nablarch_submission_info.endMark = {};
 <form class="ui form" name="nablarch_form1" method="post">
                             
                             <div class="message-area margin-top">
-                                <ul class="message-error">
-<li class="nablarch_error">ログインに失敗しました。ログインIDまたはパスワードが誤っています。</li>
-</ul>
+                                
                             </div>
                             <div class="two fields">
                                 <div class="required field">
                                     <label>ログインID</label>
-                                    <input class="form-control" type="text" name="loginId" value="10000002" placeholder="ログインID" />
-                                    <span>&nbsp;</span>
+                                    <input class="form-control input-error" type="text" name="loginId" value="" placeholder="ログインID" />
+                                    <div class="message-error">入力してください。</div><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="two fields">
                                 <div class="required field">
                                     <label>パスワード</label>
-                                    <input class="form-control" type="password" name="userPassword" placeholder="パスワード" />
-                                    <span>&nbsp;</span>
+                                    <input class="form-control input-error" type="password" name="userPassword" placeholder="パスワード" />
+                                    <div class="message-error">入力してください。</div><span>&nbsp;</span>
                                 </div>
                             </div>
                             <div class="six fields">

@@ -202,7 +202,7 @@ if(!responseFile.exists()) {
             <collectionProp name="Arguments.arguments">
               <elementProp name="server.host" elementType="Argument">
                 <stringProp name="Argument.name">server.host</stringProp>
-                <stringProp name="Argument.value">localhost</stringProp>
+                <stringProp name="Argument.value">172.21.72.187</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="server.port" elementType="Argument">
