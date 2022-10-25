@@ -63,15 +63,105 @@ class ClientActionTest {
     }
 
     /**
-     * When retrieving a list of clients with the condition that the search result is 0, a normal response should be returned.
+     * When the industry code and client name are included in the parameter at the same time,
+     * 1000 clients matching the industry code and client name shall be retrieved.
+     */
+    @Test
+    void testFindCodeAndNameUpperLimit() {
+        String message = "Obtain clients list (1000 items)";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01&clientName=Test%20Company"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(1000), message + "[Number of results]");
+    }
+
+    /**
+     * When a clients list is retrieved with the condition (client name) that the search result is 0, a normal response should be returned.
+     */
+    @Test
+    void testFindClientNameNoClients() {
+        String message = "0 results";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=does_not_exist"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[Number of results]");
+    }
+
+    /**
+     * When a clients list is retrieved with the condition (industry code) that the search result is 0, a normal response should be returned.
+     */
+    @Test
+    void testFindIndustryCodeNoClients() {
+        String message = "0 results";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=03"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[Number of results]");
+    }
+
+    /**
+     * When a clients list is retrieved with the condition (industry code and client name) that the search result is 0, a normal response should be returned.
+     */
+    @Test
+    void testFindIndustryCodeAndClientNameNoClients() {
+        String message = "0 results";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=03&clientName=does_not_exist"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", empty(), message + "[Number of results]");
+    }
+
+    /**
+     * When the number of registered data in the DB is 0 and a customer list with a search result of 0 is retrieved, a normal response should be returned.
      */
     @Test
     void testFindNoClients() {
-        String message = "Search results 0";
-        HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=does_not_exist"));
+        String message = "0 results";
+        HttpResponse response = support.sendRequest(support.get(PATH));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(support.getBodyString(response))
+        with(response.getBodyString())
                 .assertThat("$", empty(), message + "[Number of results]");
+    }
+
+    /**
+     * When the client name are included in the parameter at the same time,
+     * only the clients matching the client name shall be retrieved.
+     */
+    @Test
+    void testFindByClientName() {
+        String message = "Search by client name";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?clientName=Test%20Company%202"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(2), message + "[Number of results]")
+                .assertThat("$[0].clientId", equalTo(2), message + "[Client ID]")
+                .assertThat("$[0].clientName", equalTo("Test Company 2 (Agriculture)"), message + "[Client name]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[Industry Code]")
+                .assertThat("$[1].clientId", equalTo(3), message + "[Client ID]")
+                .assertThat("$[1].clientName", equalTo("Test Company 2 (Construction)"), message + "[Client name]")
+                .assertThat("$[1].industryCode", equalTo("02"), message + "[Industry Code]");
+    }
+
+    /**
+     * When the industry code are included in the parameter at the same time,
+     * only the clients matching the industry code shall be retrieved.
+     */
+    @Test
+    void testFindByIndustryCode() {
+        String message = "Search by industry codee";
+        HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01"));
+        support.assertStatusCode(message, HttpResponse.Status.OK, response);
+        with(response.getBodyString())
+                .assertThat("$", hasSize(3), message + "[Number of results]")
+                .assertThat("$[0].clientId", equalTo(1), message + "[Client ID]")
+                .assertThat("$[0].clientName", equalTo("Test Company 1 (Agriculture)"), message + "[Client name]")
+                .assertThat("$[0].industryCode", equalTo("01"), message + "[Industry Code]")
+                .assertThat("$[1].clientId", equalTo(2), message + "[Client ID]")
+                .assertThat("$[1].clientName", equalTo("Test Company 2 (Agriculture)"), message + "[Client name]")
+                .assertThat("$[1].industryCode", equalTo("01"), message + "[Industry Code]")
+                .assertThat("$[2].clientId", equalTo(4), message + "[Client ID]")
+                .assertThat("$[2].clientName", equalTo("Test Company 3 (Agriculture)"), message + "[Client name]")
+                .assertThat("$[2].industryCode", equalTo("01"), message + "[Industry Code]");
     }
 
     /**
@@ -83,23 +173,11 @@ class ClientActionTest {
         String message = "Search by industry code + client name";
         HttpResponse response = support.sendRequest(support.get(PATH + "?industryCode=01&clientName=Test%20Company%203"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(support.getBodyString(response))
+        with(response.getBodyString())
                 .assertThat("$", hasSize(1), message + "[Number of results]")
                 .assertThat("$[0].clientId", equalTo(4), message + "[Client ID]")
                 .assertThat("$[0].clientName", equalTo("Test Company 3 (Agriculture)"), message + "[Client name]")
                 .assertThat("$[0].industryCode", equalTo("01"), message + "[Industry Code]");
-    }
-
-    /**
-     * A normal response should be returned when the number of items retrieved from the client list is equal to the upper limit.
-     */
-    @Test
-    void testFindUnderUpperLimit() {
-        String message = "upper boundary value";
-        HttpResponse response = support.sendRequest(support.get(PATH));
-        support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(support.getBodyString(response))
-                .assertThat("$", hasSize(1000), message + "[Number of results]");
     }
 
     /**
@@ -138,7 +216,7 @@ class ClientActionTest {
         String message = "Get client details";
         HttpResponse response = support.sendRequest(support.get(PATH + "/1"));
         support.assertStatusCode(message, HttpResponse.Status.OK, response);
-        with(support.getBodyString(response))
+        with(response.getBodyString())
                 .assertThat("$.clientId", equalTo(1), message + "[Client ID]")
                 .assertThat("$.clientName", equalTo("Test Company 1 (Agriculture)"), message + "[Client Name]")
                 .assertThat("$.industryCode", equalTo("01"), message + "[Industry Code]");
@@ -159,21 +237,17 @@ class ClientActionTest {
     }
 
     /**
-     * When the validation result of a request parameter is an error, a status of 400 and an error message should be returned.
+     * When specifying a non-existent client ID, a 404 status and error message should be returned.
      */
     @Test
-    void testInvalidClientForm() {
-        ClientForm client = new ClientForm();
-        client.setClientName(INVALID_CLIENT_NAME);
-        client.setIndustryCode(INVALID_INDUSTRY_CODE);
-
-        String message = "registration (invalid parameter)";
-        HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+    void testShowWithEmptyClientTable() {
+        String message = "Get non-existent client details";
+        HttpResponse response = support.sendRequest(support.get(PATH + "/2"));
+        support.assertStatusCode(message, HttpResponse.Status.NOT_FOUND, response);
         support.assertFaultMessages(message, response
-                , "FB1999901"
-                , 2
-                , "clientName:Enter a value up to 128 characters.","industryCode:Invalid value has been specified.");
+                , "FB1999903"
+                , 1
+                , "The specified data does not exist.");
     }
 
     /**
@@ -184,6 +258,24 @@ class ClientActionTest {
         ClientForm client = new ClientForm();
 
         String message = "Registration without required fields";
+        HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
+        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+        support.assertFaultMessages(message, response
+                , "FB1999901"
+                , 2
+                , "clientName:Enter this.","industryCode:Enter this.");
+    }
+
+    /**
+     * When the required field is left blank in the parameter, a status of 400 and an error message should be returned.
+     */
+    @Test
+    void testRegisterEmptyParameter() {
+        ClientForm client = new ClientForm();
+        client.setClientName("");
+        client.setIndustryCode("");
+
+        String message = "Registration required fields is left blank";
         HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
         support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
         support.assertFaultMessages(message, response
@@ -209,12 +301,12 @@ class ClientActionTest {
         String beforeRegister = "The client whose name you are going to register does not exist";
         HttpResponse response = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(beforeRegister, HttpResponse.Status.OK, response);
-        with(support.getBodyString(response)).assertThat("$", empty(), beforeRegister + "[Number of results]");
+        with(response.getBodyString()).assertThat("$", empty(), beforeRegister + "[Number of results]");
 
         String register = "Registration";
         HttpResponse registerResponse = support.sendRequest(support.post(PATH).setBody(client));
         support.assertStatusCode(register, HttpResponse.Status.OK, registerResponse);
-        with(support.getBodyString(registerResponse))
+        with(registerResponse.getBodyString())
                 .assertNotNull("$..clientId", register + "[Client ID]")
                 .assertThat("$..clientName", hasItem(clientName), register + "[Client Name]")
                 .assertThat("$..industryCode", hasItem(industryCode), register + "[Industry Code]");
@@ -222,7 +314,7 @@ class ClientActionTest {
         String afterRegister = "Retrieve the client with the client name registered earlier";
         HttpResponse afterRegisterResponse = support.sendRequest(support.get(PATH + queryString));
         support.assertStatusCode(afterRegister, HttpResponse.Status.OK, afterRegisterResponse);
-        with(support.getBodyString(afterRegisterResponse))
+        with(afterRegisterResponse.getBodyString())
                 .assertThat("$", hasSize(1), afterRegister + "[Number of results]")
                 .assertThat("$..clientName", hasItem(clientName), afterRegister + "[Client Name]")
                 .assertThat("$..industryCode", hasItem(industryCode), afterRegister + "[Industry Code]");
@@ -236,7 +328,7 @@ class ClientActionTest {
         String findMessage = "Search by client name";
         HttpResponse findResponse = support.sendRequest(support.get(PATH + "?clientName=Test%20Company%201%20(Agriculture)"));
         support.assertStatusCode(findMessage, HttpResponse.Status.OK, findResponse);
-        with(support.getBodyString(findResponse))
+        with(findResponse.getBodyString())
                 .assertThat("$", hasSize(1), findMessage + "[Number of results]");
 
         ClientForm client = new ClientForm();
