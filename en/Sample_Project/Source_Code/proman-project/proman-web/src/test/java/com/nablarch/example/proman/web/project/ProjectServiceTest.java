@@ -20,24 +20,24 @@ import nablarch.common.exclusivecontrol.OptimisticLockException;
 import nablarch.core.util.DateUtil;
 
 /**
- * ProjectServiceのテスト
+ * Test ProjectService
  */
 class ProjectServiceTest {
 
     /**
-     * findAllDivisionのテスト
+     * Test findAllDivision
      */
     @Test
     void testFindAllDivision() {
         EntityList<Organization> organizationList = new EntityList<Organization>();
         Organization organization1 = new Organization();
         organization1.setOrganizationId(1);
-        organization1.setOrganizationName("組織１");
+        organization1.setOrganizationName("Organization 1");
         organization1.setUpperOrganization(null);
         organizationList.add(organization1);
         Organization organization2 = new Organization();
         organization2.setOrganizationId(2);
-        organization2.setOrganizationName("組織２");
+        organization2.setOrganizationName("Organization 2");
         organization2.setUpperOrganization(null);
         organizationList.add(organization2);
         ProjectService sut = new ProjectService(new DaoStub() {
@@ -53,19 +53,19 @@ class ProjectServiceTest {
     }
 
     /**
-     * findAllDepartmentのテスト
+     * Test findAllDepartment
      */
     @Test
     void testFindAllDepartment() {
         EntityList<Organization> organizationList = new EntityList<Organization>();
         Organization organization1 = new Organization();
         organization1.setOrganizationId(1);
-        organization1.setOrganizationName("組織１");
+        organization1.setOrganizationName("Organization 1");
         organization1.setUpperOrganization(null);
         organizationList.add(organization1);
         Organization organization2 = new Organization();
         organization2.setOrganizationId(2);
-        organization2.setOrganizationName("組織２");
+        organization2.setOrganizationName("Organization 2");
         organization2.setUpperOrganization(null);
         organizationList.add(organization2);
         ProjectService sut = new ProjectService(new DaoStub() {
@@ -81,13 +81,13 @@ class ProjectServiceTest {
     }
 
     /**
-     * findOrganizationByIdのテスト
+     * Test findOrganizationById
      */
     @Test
     void testFindOrganizationById() {
         Organization organization1 = new Organization();
         organization1.setOrganizationId(1);
-        organization1.setOrganizationName("組織１");
+        organization1.setOrganizationName("Organization 1");
         organization1.setUpperOrganization(null);
         ProjectService sut = new ProjectService(new DaoStub() {
             @SuppressWarnings("unchecked")
@@ -102,7 +102,7 @@ class ProjectServiceTest {
     }
 
     /**
-     * insertProjectのテスト
+     * Test insertProject
      */
     @Test
     void testInsertProject() {
@@ -119,7 +119,7 @@ class ProjectServiceTest {
     }
 
     /**
-     * updateProjectのテスト
+     * Test updateProject
      */
     @Test
     void testUpdateProject() {
@@ -136,36 +136,36 @@ class ProjectServiceTest {
     }
 
     /**
-     * listProjectのテスト
+     * Test listProject
      */
     @Test
     void testListProject() {
         EntityList<ProjectWithOrganizationDto> projectList = new EntityList<ProjectWithOrganizationDto>();
         ProjectWithOrganizationDto dto1 = new ProjectWithOrganizationDto();
         dto1.setProjectId(1);
-        dto1.setProjectName("プロジェクト１");
+        dto1.setProjectName("Project 1");
         dto1.setProjectType("1");
         dto1.setProjectClass("1");
         dto1.setProjectStartDate(DateUtil.getDate("20221001"));
         dto1.setProjectEndDate(DateUtil.getDate("20231001"));
         dto1.setOrganizationId(1);
-        dto1.setOrganizationName("組織１");
+        dto1.setOrganizationName("Organization 1");
         dto1.setClientId(1);
-        dto1.setPmKanjiName("プロジェクトマネージャー１");
-        dto1.setPlKanjiName("リーダー１");
+        dto1.setPmKanjiName("Project Manager 1");
+        dto1.setPlKanjiName("Leader 1");
         projectList.add(dto1);
         ProjectWithOrganizationDto dto2 = new ProjectWithOrganizationDto();
         dto2.setProjectId(2);
-        dto2.setProjectName("プロジェクト２");
+        dto2.setProjectName("Project 2");
         dto2.setProjectType("1");
         dto2.setProjectClass("1");
         dto2.setProjectStartDate(DateUtil.getDate("20221201"));
         dto2.setProjectEndDate(DateUtil.getDate("20231001"));
         dto2.setOrganizationId(2);
-        dto2.setOrganizationName("組織２");
+        dto2.setOrganizationName("Organization 2");
         dto2.setClientId(2);
-        dto2.setPmKanjiName("プロジェクトマネージャー２");
-        dto2.setPlKanjiName("リーダー２");
+        dto2.setPmKanjiName("Project Manager 2");
+        dto2.setPlKanjiName("Leader 2");
         projectList.add(dto1);
         final Map<String, Long> invoked = new HashMap<String, Long>();
         ProjectService sut = new ProjectService(new DaoStub() {
@@ -197,22 +197,22 @@ class ProjectServiceTest {
     }
 
     /**
-     * findProjectByIdWithOrganizationのテスト
+     * Test findProjectByIdWithOrganization
      */
     @Test
     void testFindProjectByIdWithOrganization() {
         ProjectWithOrganizationDto dto1 = new ProjectWithOrganizationDto();
         dto1.setProjectId(1);
-        dto1.setProjectName("プロジェクト１");
+        dto1.setProjectName("Project 1");
         dto1.setProjectType("1");
         dto1.setProjectClass("1");
         dto1.setProjectStartDate(DateUtil.getDate("20221001"));
         dto1.setProjectEndDate(DateUtil.getDate("20231001"));
         dto1.setOrganizationId(1);
-        dto1.setOrganizationName("組織１");
+        dto1.setOrganizationName("Organization 1");
         dto1.setClientId(1);
-        dto1.setPmKanjiName("プロジェクトマネージャー１");
-        dto1.setPlKanjiName("リーダー１");
+        dto1.setPmKanjiName("Project Manager 1");
+        dto1.setPlKanjiName("Leader 1");
         ProjectService sut = new ProjectService(new DaoStub() {
             @SuppressWarnings("unchecked")
             @Override
@@ -226,21 +226,21 @@ class ProjectServiceTest {
     }
 
     /**
-     * findProjectByIdのテスト
+     * Test findProjectById
      */
     @Test
     void testFindProjectById() {
         Project project1 = new Project();
         project1.setProjectId(1);
-        project1.setProjectName("プロジェクト１");
+        project1.setProjectName("Project 1");
         project1.setProjectType("1");
         project1.setProjectClass("1");
         project1.setProjectStartDate(DateUtil.getDate("20221001"));
         project1.setProjectEndDate(DateUtil.getDate("20231001"));
         project1.setOrganizationId(1);
         project1.setClientId(1);
-        project1.setPmKanjiName("プロジェクトマネージャー１");
-        project1.setPlKanjiName("リーダー１");
+        project1.setPmKanjiName("Project Manager 1");
+        project1.setPlKanjiName("Leader 1");
         ProjectService sut = new ProjectService(new DaoStub() {
             @SuppressWarnings("unchecked")
             @Override
