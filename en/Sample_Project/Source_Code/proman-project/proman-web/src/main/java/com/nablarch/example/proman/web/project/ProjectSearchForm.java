@@ -56,7 +56,6 @@ public class ProjectSearchForm extends SearchFormBase implements Serializable {
      *
      * @return division ID
      */
-
     public String getDivisionId() {
         return divisionId;
     }
@@ -245,7 +244,7 @@ public class ProjectSearchForm extends SearchFormBase implements Serializable {
      *
      * @param projectEndDateFrom end date from
      */
-    void setProjectEndDateFrom(String projectEndDateFrom) {
+    public void setProjectEndDateFrom(String projectEndDateFrom) {
         this.projectEndDateFrom = projectEndDateFrom;
     }
 

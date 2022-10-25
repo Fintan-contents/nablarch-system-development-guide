@@ -194,6 +194,7 @@ public class ProjectUpdateForm implements Serializable {
 
     /**
      * Acquires division ID.
+     *
      * @return Division ID
      */
     public String getDivisionId() {
@@ -202,6 +203,7 @@ public class ProjectUpdateForm implements Serializable {
 
     /**
      * Set division ID.
+     *
      * @param divisionId Division ID to be set
      */
     public void setDivisionId(String divisionId) {
@@ -324,7 +326,7 @@ public class ProjectUpdateForm implements Serializable {
      * @return false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
-    private boolean isValidProjectPeriod() {
+    public boolean isValidProjectPeriod() {
         return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
 }
