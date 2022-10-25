@@ -119,7 +119,7 @@ class ProjectServiceTest {
     }
 
     /**
-     * pdateProjectのテスト
+     * updateProjectのテスト
      */
     @Test
     void testUpdateProject() {
