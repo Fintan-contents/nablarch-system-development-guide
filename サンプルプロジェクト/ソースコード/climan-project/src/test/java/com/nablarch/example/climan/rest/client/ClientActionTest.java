@@ -37,24 +37,6 @@ class ClientActionTest {
     ClimanRestTestSupport support;
 
     /**
-    * リクエストパラメータのバリデーションエラー時(clientName)は400のステータスとエラーメッセージが返ってくること。
-     */
-    @Test
-    void testInvalidClientNameForSearch() throws UnsupportedEncodingException {
-        RestMockHttpRequest request = support.get(PATH);
-        String encodedName = URLEncoder.encode("invalid parameter", "UTF-8");
-        request.setParam("clientName", encodedName);
-
-        String message = "顧客一覧取得(clientNameパラメータ不正)";
-        HttpResponse response = support.sendRequest(request);
-        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        support.assertFaultMessages(message, response
-                , "FB1999901"
-                , 1
-                , "clientName:不正な文字種の値が指定されました。");
-    }
-
-    /**
      * リクエストパラメータのバリデーションエラー時は400のステータスとエラーメッセージが返ってくること。
      */
     @Test
@@ -273,24 +255,6 @@ class ClientActionTest {
     }
 
     /**
-     * リクエストパラメータのバリデーションエラー時は400のステータスとエラーメッセージが返ってくること。
-     */
-    @Test
-    void testInvalidClientForm() {
-        ClientForm client = new ClientForm();
-        client.setClientName(INVALID_CLIENT_NAME);
-        client.setIndustryCode(INVALID_INDUSTRY_CODE);
-
-        String message = "新規登録(パラメータ不正)";
-        HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
-        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
-        support.assertFaultMessages(message, response
-                , "FB1999901"
-                , 2
-                , "clientName:128文字以下の値を入力してください。", "industryCode:不正な値が指定されました。");
-    }
-
-    /**
      * 必須項目をパラメータに含まない場合は400のステータスとエラーメッセージが返ってくること。
      */
     @Test
@@ -298,6 +262,24 @@ class ClientActionTest {
         ClientForm client = new ClientForm();
 
         String message = "必須項目なし新規登録";
+        HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
+        support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
+        support.assertFaultMessages(message, response
+                , "FB1999901"
+                , 2
+                , "clientName:入力してください。", "industryCode:入力してください。");
+    }
+
+    /**
+     * 必須項目を空文字にした場合は400のステータスとエラーメッセージが返ってくること。
+     */
+    @Test
+    void testRegisterEmptyParameter() {
+        ClientForm client = new ClientForm();
+        client.setClientName("");
+        client.setIndustryCode("");
+
+        String message = "必須項目を空文字にした場合の新規登録";
         HttpResponse response = support.sendRequest(support.post(PATH).setBody(client));
         support.assertStatusCode(message, HttpResponse.Status.BAD_REQUEST, response);
         support.assertFaultMessages(message, response
