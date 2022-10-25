@@ -12,9 +12,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static nablarch.test.Assertion.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -72,8 +74,10 @@ class ClientServiceTest {
             }
         });
 
-        Assertions.assertThrows(SearchResultUpperLimitException.class, () -> sut.findClient(new Client()));
+        SearchResultUpperLimitException e = Assertions.assertThrows(SearchResultUpperLimitException.class, () -> sut.findClient(new Client()));
         assertTrue(invoked.get("countBySqlFile"));
+        long expected = Long.parseLong(SystemRepository.get("app.common.search.limit"));
+        assertEquals(expected, e.getLimit());
     }
 
     /**
