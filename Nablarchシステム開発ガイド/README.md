@@ -293,7 +293,7 @@ PGUT工程の開発標準を整備します。
 以下のドキュメントを参考にしてください。
 
 品質、生産性、保守性の向上を目的とした、プログラマーが遵守するべきコーティング規約です。
-- [Nablarchスタイルガイド](https://github.com/nablarch-development-standards/nablarch-style-guide)
+- [スタイルガイド](https://github.com/Fintan-contents/coding-standards)
 
 
 PG・UT作業の完了条件を開発者が確認するためのチェックリストです。

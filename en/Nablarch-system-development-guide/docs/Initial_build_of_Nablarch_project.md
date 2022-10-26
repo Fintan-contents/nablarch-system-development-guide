@@ -54,7 +54,7 @@ Refer mainly to the following parts.
 
 ## Introduction of static analysis tool
 
-The installation procedures for the following check tools are described in the [Java style guide](https://github.com/nablarch-development-standards/nablarch-style-guide/tree/master/en/java).
+The installation procedures for the following check tools are described in the [Java style guide](https://github.com/Fintan-contents/coding-standards/tree/main/en/java).
 
 - Checkstyle
 - SpotBugs
