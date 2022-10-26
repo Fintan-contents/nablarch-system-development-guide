@@ -287,7 +287,7 @@ Establish development standards for the Programming and Unit testing phase.
 Refer to the following documents.
 
 These are coding conventions that programmers must adhere to, to improve quality, productivity, and maintainability.
-- [Nablarch Style Guide](https://github.com/nablarch-development-standards/nablarch-style-guide/tree/master/en)
+- [Style Guide](https://github.com/Fintan-contents/coding-standards/tree/main/en)
 
 
 This is a checklist for developers to confirm the completion conditions of Programming and Unit testing work. 

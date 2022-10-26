@@ -56,7 +56,7 @@ TODOコメントに記載された指示に従って修正します。
 
 ## 静的解析ツールの導入
 
-[Javaスタイルガイド](https://github.com/nablarch-development-standards/nablarch-style-guide/tree/master/java)配下に以下のチェックツールの導入手順があります。
+[Javaスタイルガイド](https://github.com/Fintan-contents/coding-standards/tree/main/java)配下に以下のチェックツールの導入手順があります。
 
 - Checkstyle
 - SpotBugs
