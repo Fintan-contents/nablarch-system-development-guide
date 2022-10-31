@@ -8,10 +8,10 @@ SELECT
     project_end_date projectEndDate,
     organization_id organizationId,
     client_id clientId,
-    project_manager projectManager,
-    project_leader projectLeader,
+    pm_kanji_name projectManager,
+    pl_kanji_name projectLeader,
     note note,
-    sales sales,
+    sales_amount sales,
     version_no versionNo
 FROM
     project

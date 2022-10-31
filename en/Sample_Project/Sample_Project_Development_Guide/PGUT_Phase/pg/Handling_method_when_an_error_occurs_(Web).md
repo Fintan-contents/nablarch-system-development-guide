@@ -1,49 +1,53 @@
 # Handling Method When an Error Occurs（Web）
 
-## Exclusive control error when updating
+## Handling of business errors
 
-### What happens when an exclusive control error occurs
+If a business error is detected during processing business logic, throw an ApplicationException.
 
-DaoContext#update throws javax.persistence.OptimisticLockException.
-
-### Handling contents
-
-Nothing is done in the application implementation. 
-Transition to the common error screen is controlled on the runtime platform side.
-
-## When the data that should exist in one acquisition could not be acquired
-
-### What happens when data that should exist in one acquisition could not be acquired
-
-DaoContext#findById throws nablarch.common.dao.NoDataException.
-
-### Handling contents
-
-Nothing is done in the application implementation.
-Transition to the common error screen is controlled on the runtime platform side.
-
-## When the search result is 0 in the search
-
-### What happens when the search result is 0
-
-DaoContext#findAllBySqlFile returns an empty list.
-
-### Handling contents
-
-The Service class does nothing and returns an empty list for the Action class. 
-Throw ApplicationException with Action class method.
-An implementation example is given below. Match MessageLevel and message ID to the implementation example.
-
-````java
+```java
 throw new ApplicationException(
         MessageUtil.createMessage(MessageLevel.ERROR, "errors.search.nothing"));
-````
+```
+
+At this time, set the error message information to the constructor of ApplicationException.
+Use MessageUtil to generate error messages.
+Set MessageLevel.ERROR at the first argument of the createMessage method and set the message ID of the error message at the second argument.
+
+Next, set the [OnError annotation](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/handlers/web_interceptor/on_error.html) on the Action class method to handle the thrown ApplicationException.
+If you want use multiple OnError annotations, use the [OnErrors annotation](https://nablarch.github.io/docs/LATEST/doc/en/application_framework/application_framework/handlers/web_interceptor/on_errors.html).
+
+```java
+@OnError(type = ApplicationException.class, path = "forward:///app/project/errorRegister")
+public HttpResponse confirmRegistration(HttpRequest request, ExecutionContext context) {
+```
 
 In JSPs, n:errors is used to display error messages to the user. 
 An implementation example is given below.
 
-````java
+````jsp
 <n:errors filter="global"/>
 ````
 
 By writing global in the filter attribute, only errors that are not associated with the input item will be output.
+
+### Business errors associated with specific input items
+
+To generate a business error associated with specific input items, use ValidationUtil to generate a Message.
+
+```java
+throw new ApplicationException(
+        ValidationUtil.createMessageForProperty("form.sales", "errors.invalid.sales"));
+```
+
+Set the name of the input item associated with the error  at the first argument of the createMessageForProperty method and set the message ID of the error message at the second argument.
+
+In JSPs, an error message is displayed for n:error with a matching name value.
+
+```jsp
+<n:error errorCss="message-error" name="form.sales" />
+```
+
+## Handling of non-business errors
+
+When errors other than business errors such as exclusion control errors and database connection errors occur, the application implementation does nothing.
+Transition to the common error screen is controlled on the runtime platform side.

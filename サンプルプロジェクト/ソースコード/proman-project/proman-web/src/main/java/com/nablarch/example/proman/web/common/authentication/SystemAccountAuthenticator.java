@@ -103,7 +103,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
                     SystemAccount.class,
                     "FIND_SYSTEM_ACCOUNT", new Object[]{userId, sysDate});
         } catch (NoDataException ignored) {
-            // ユーザIDに一致するユーザーが見つからない場合
+            // ユーザIDに一致するユーザが見つからない場合
             throw new AuthenticationFailedException(userId);
         }
 

@@ -4,8 +4,8 @@
 Serviceというクラスを導入します。
 
 - Serviceクラスにビジネスロジックを集約します。
-- ServiceクラスではWebアプリケーション用API呼び出しや入出力処理を行わないでください。
-  - データベースアクセスについてはUniversalDaoをスタブ化できるようにします。
+- ServiceクラスではHttpRequestのようなWebアプリケーション実行基盤用のAPIを使用しないでください。
+- データベースアクセスについてはUniversalDaoをスタブ化できるようにします。
 
 ![クラス図](class-diagram.png)
   
@@ -64,7 +64,7 @@ public class MyService {
 ```
 
 ``` java
-DaoContext stub = new DaoContextStub() {
+DaoContext stub = new DaoStub() {
     @Override
     public T findByPk(int id) {
         return (T) new Foo("ふー");
@@ -77,8 +77,7 @@ DAOクラス作成にも手間がかかるため、DaoContextの実装を置き�
 
 ## Entity
 
-GSPプラグインを作成してER図から自動生成します。
-
+GSPプラグインを使用してER図から自動生成します。
 
 ## DTO
 

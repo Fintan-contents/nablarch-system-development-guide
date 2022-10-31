@@ -16,7 +16,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
     <style type="text/css">
         .ui.menu .item i.logo {
-            /*　Margin of logo in header　*/
+            /*Margin of logo in header*/
             margin-right: 0.5em;
         }
 
@@ -105,7 +105,7 @@
                     <form class="ui form">
                         <div class="two fields">
                             <div class="required field">
-                                <label>Division/department</label>
+                                <label>Division</label>
                                 <div class="field">
                                     <select class="ui dropdown">
                                         <option value="">Select division</option>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label>&nbsp;</label>
+                                <label>Department</label>
                                 <div class="field">
                                     <select class="ui dropdown">
                                         <option value="">Select department</option>
@@ -140,10 +140,12 @@
                                 <label>Project type</label>
                                 <div class="field">
                                     <select class="ui dropdown">
+                                        <option value="">Select project type</option>
                                         <option value="1">New development</option>
                                         <option value="2">Maintenance development</option>
                                         <option value="3">ERP introduction support</option>
                                         <option value="4">Maintenance project</option>
+                                        <option value="5">System operation</option>
                                         <option value="6">Service provision (development/maintenance)</option>
                                         <option value="7">Service provision (other)</option>
                                         <option value="8">Maintenance case</option>
@@ -197,7 +199,7 @@
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label>Sales</label>
+                                <label>Sales (Thousands of yen)</label>
                                 <input type="text" placeholder="Sales">
                             </div>
                             <div class="field">
@@ -248,10 +250,13 @@
                         <br>
                         <div class="four fields">
                             <div class="field centered aligned">&nbsp;</div>
-                            <div class="field centered aligned">&nbsp;</div>
+                            <div class="field centered aligned">
+                                <button class="fluid ui primary button">Back</button>
+
+                            </div>
                             <div class="field centered aligned">&nbsp;</div>
                             <div class="field centered aligned">
-                                <div class="fluid ui primary button">confirm</div>
+                                <div class="fluid ui primary button">Confirm</div>
                             </div>
                         </div>
                     </form>

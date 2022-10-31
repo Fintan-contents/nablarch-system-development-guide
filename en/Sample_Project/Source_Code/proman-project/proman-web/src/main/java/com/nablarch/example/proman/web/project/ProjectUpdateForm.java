@@ -73,7 +73,7 @@ public class ProjectUpdateForm implements Serializable {
      */
     //TODO: Make this a required item when customer selection is implemented.
     //@Required
-    @Domain("id")
+    @Domain("clientId")
     private String clientId;
 
     /**
@@ -81,14 +81,14 @@ public class ProjectUpdateForm implements Serializable {
      */
     @Required
     @Domain("userName")
-    private String projectManager;
+    private String pmKanjiName;
 
     /**
      * Project leader name
      */
     @Required
     @Domain("userName")
-    private String projectLeader;
+    private String plKanjiName;
 
     /**
      * Note
@@ -100,7 +100,7 @@ public class ProjectUpdateForm implements Serializable {
      * Sales
      */
     @Domain("amountOfMoney")
-    private String sales;
+    private String salesAmount;
 
     /**
      * Acquires project name.
@@ -194,6 +194,7 @@ public class ProjectUpdateForm implements Serializable {
 
     /**
      * Acquires division ID.
+     *
      * @return Division ID
      */
     public String getDivisionId() {
@@ -202,6 +203,7 @@ public class ProjectUpdateForm implements Serializable {
 
     /**
      * Set division ID.
+     *
      * @param divisionId Division ID to be set
      */
     public void setDivisionId(String divisionId) {
@@ -249,17 +251,17 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return Project manager name
      */
-    public String getProjectManager() {
-        return projectManager;
+    public String getPmKanjiName() {
+        return pmKanjiName;
     }
 
     /**
      * Set project manager name.
      *
-     * @param projectManager Project manager name to be set
+     * @param pmKanjiName Project manager name to be set
      */
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
+    public void setPmKanjiName(String pmKanjiName) {
+        this.pmKanjiName = pmKanjiName;
     }
 
     /**
@@ -267,17 +269,17 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return Project leader name
      */
-    public String getProjectLeader() {
-        return projectLeader;
+    public String getPlKanjiName() {
+        return plKanjiName;
     }
 
     /**
      * Set project leader name.
      *
-     * @param projectLeader Project leader name to be set
+     * @param plKanjiName Project leader name to be set
      */
-    public void setProjectLeader(String projectLeader) {
-        this.projectLeader = projectLeader;
+    public void setPlKanjiName(String plKanjiName) {
+        this.plKanjiName = plKanjiName;
     }
 
     /**
@@ -303,8 +305,8 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @return Sales
      */
-    public String getSales() {
-        return sales;
+    public String getSalesAmount() {
+        return salesAmount;
     }
 
     /**
@@ -312,8 +314,8 @@ public class ProjectUpdateForm implements Serializable {
      *
      * @param sales Sales to be set
      */
-    public void setSales(String sales) {
-        this.sales = sales;
+    public void setSalesAmount(String salesAmount) {
+        this.salesAmount = salesAmount;
     }
 
     /**
@@ -324,7 +326,7 @@ public class ProjectUpdateForm implements Serializable {
      * @return false if the start date is set as a date later than the end date, true in other cases (including cases where the start date and/or end date is undetermined)
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
-    private boolean isValidProjectPeriod() {
+    public boolean isValidProjectPeriod() {
         return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
 }

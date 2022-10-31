@@ -37,6 +37,7 @@
                             <div class="message-area">
                                 <p>
                                     Information could not be acquired from session. Log in again. <br>
+                                    If the situation remains the same, please contact the administrator of this system.<br>
                                   </p>
                             </div>
                             <div class="title-nav">

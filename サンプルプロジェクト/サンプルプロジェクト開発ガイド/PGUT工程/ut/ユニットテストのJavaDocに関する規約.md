@@ -1,23 +1,35 @@
-# ユニットテストのJavaDocに関する規約
+# ユニットテストのJavadocに関する規約
 
-## メソッドのJavaDoc
+## クラスのJavadoc
+
+「< テスト対象のクラス名 >のテスト。」と記載してください。
+
+### 例
+
+```
+/**
+ * ProjectServiceのテスト。
+ */
+class ProjectServiceTest {
+    // ...
+}
+```
+
+## メソッドのJavadoc
 何を確認するテストか分かるコメントを記載してください。
 
 ### 例
 
 ```
-public class ProjectServiceTest {
+class ProjectServiceTest {
 
     private ProjectService sut;
     
     /**
      * 1件検索処理が正常に呼び出し可能かテストをする。
-     * <p>
-     * 例外が発生しなければ正常に呼び出されたと判定する。
-     * </p>
      */
     @Test
-    public void test() {
+    void test() {
         sut = new ProjectService(new DaoStub() {
             @Override
             public <T> T findById(Class<T> entityClass, Object... id) {

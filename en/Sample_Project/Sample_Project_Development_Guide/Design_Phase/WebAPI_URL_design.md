@@ -1,6 +1,6 @@
 # WebAPI URL Design
 
-This project provides only simple CRUD, and since the scope of publication is only within the in-house system, 
+This project provides only simple CRUD, and since the scope of publication is only the in-house, 
 rules for URL design are minimized.
 
 

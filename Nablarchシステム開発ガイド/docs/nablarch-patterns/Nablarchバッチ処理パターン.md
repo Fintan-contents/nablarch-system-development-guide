@@ -2,10 +2,14 @@
 
 ## 起動方法による分類
 
-[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)は、起動方法により以下の2種類に分かれます。
+[Nablarchバッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)では、主に以下の2つの起動方法を使用します。
 
-- 都度起動バッチ
-- 常駐バッチ
+- [都度起動バッチ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/architecture.html#nablarch-batch-each-time-batch)
+    - プロセスを都度起動して、バッチ処理を実行します
+    - 日次や月次など、定期的にバッチ処理を実行するような場合に使用します
+- [テーブルをキューとして使ったメッセージング](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/messaging/db/index.html)
+    - プロセスを起動しておき、定期的にデータベース上のテーブルを監視し未処理のレコードを順次処理します
+    - オンライン処理で処理要求を受け付け、非同期でバッチ処理を実行したいような場合に使用します
 
 ## 入出力による分類
 
@@ -52,13 +56,13 @@ FILE to DBバッチでは、できるだけ業務処理を加えず、ファイ�
 ### DB to DB
 
 - 入力はSELECT文の結果セットの各レコードになります。
-- 1レコード分のデータを受け取って、DBの更新を行います。
-- すべての更新が、同一トランザクション下で実行されるため、障害発生時でも不整合が発生しません
+- 1レコード分のデータを受け取って、DBを更新します。
+- 1レコードの処理中に行われる更新は全て同一トランザクション下で実行されるため、障害発生時でも不整合が発生しません
 
 ### DB to FILE
 
 - 入力はSELECT文の結果セットの各レコードになります。
-- 1レコード分のデータを受け取って、ファイルの書き出し(普通は1行分)を行います
+- 1レコード分のデータを受け取って、ファイルを書き出します(普通は1行分)
 
 DBはトランザクション管理されますが、ファイル書き出しは管理外なので、
 障害発生時に、不整合がありえます。
@@ -70,9 +74,10 @@ DBはトランザクション管理されますが、ファイル書き出しは
 この場合は、FILE to FILEということになりますが、Nablarchバッチではこの形態は使用しません。
 それぞれのファイルをDBに取り込んだ後、SQLでJOINすることで同等の処理ができます。
 
+<!-- textlint-disable ja-technical-writing/ja-no-redundant-expression -->
 マッチングやコントロールブレイクといったメインフレームのバッチでよくあるようなファイル処理をNablarchバッチで実現することは可能ですが、バッチプログラムが複雑になる、どこまでをファイルでどこまでをDBで扱うかという切り分けが難しい、というような問題があります。
 それよりも、前述のパターンの組み合わせで実現したほうが、各バッチがシンプルになり設計もしやすく、バグも埋め込みにくくなります。
-
+<!-- textlint-enable ja-technical-writing/ja-no-redundant-expression -->
 
 ## 注意点
 

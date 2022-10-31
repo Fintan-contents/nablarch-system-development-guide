@@ -14,93 +14,182 @@ import nablarch.core.validation.ee.SystemChar;
 @SuppressWarnings("all")
 public class ProManDomainType {
 
-    /**
-     * ID
-     */
-    @Digits(integer = 9)
-    private String id;
-
-    /**
-     * Organization ID
-     */
+    /** Organization ID */
     @Digits(integer = 4)
-    private String organizationId;
+    public String organizationId;
 
-    /**
-     * Login ID
-     */
+    /** Login ID */
     @Length(max = 20)
     @SystemChar(charsetDef = "半角数字") // Single byte numeric characters
-    private String loginId;
+    public String loginId;
 
-    /**
-     * Password
-     */
+    /** User Password */
     @Length(max = 44)
     @SystemChar(charsetDef = "ASCII文字")
-    private String password;
+    public String userPassword;
 
-    /**
-     * Project ID
-     */
-    @Length(max = 20)
-    @SystemChar(charsetDef = "半角英数")
-    private String projectId;
+    /** Project ID */
+    @Digits(integer = 9)
+    public String projectId;
 
-    /**
-     * Project name
-     */
+    /** Project name */
     @Length(max = 128, message = "{domainType.projectName.message}")
     @SystemChar(charsetDef = "システム許容文字", message = "{domainType.projectName.message}") // Characters permitted by system
-    private String projectName;
+    public String projectName;
 
-    /**
-     * Project type code value
-     */
+    /** Project type code value */
     @CodeValue(codeId = "C0300001", pattern = "PATTERN01")
-    private String projectType;
+    public String projectType;
 
-    /**
-     * Project classification code value
-     */
+    /** Project classification code value */
     @CodeValue(codeId = "C0200001", pattern = "PATTERN01")
-    private String projectClass;
+    public String projectClass;
 
-    /**
-     * Date
-     */
+    /** Client ID **/
+	@Digits(integer = 9)
+    public String clientId;
+
+    /** Date */
     @YYYYMMDD()
-    private String date;
+    public String date;
 
-    /**
-     * User name
-     */
+    /** User name (Kanji characters) */
     @Length(max = 128, message = "{domainType.userName.message}")
     @SystemChar(charsetDef = "システム許容文字", message = "{domainType.userName.message}") // Characters permitted by system
-    private String userName;
+    public String userName;
 
-    /**
-     * Note
-     */
+    /** Note */
     @Length(max = 512, message = "{domainType.note.message}")
     @SystemChar(charsetDef = "システム許容文字", allowLineSeparator = true, message = "{domainType.note.message}") // Characters permitted by system
-    private String note;
+    public String note;
 
-    /**
-     * Amount of money
-     */
+    /** Amount of money */
     @MoneyRange(max = 999999999)
-    private String amountOfMoney;
+    public String amountOfMoney;
 
-    /**
-     * Version number
-     */
-    @Digits(integer = 4)
-    private String version;
-
-    /**
-     * Page number
-     */
+    /** Page number **/
     @NumberRange(min = 1, max = 9999)
-    private String pageNumber;
+    public String pageNumber;
+
+    /** User ID **/
+    @NumberRange(max = 999999999)
+    @SystemChar(charsetDef = "半角数字")
+    public String userId;
+
+    /** User ID_FK **/
+    @NumberRange(max = 999999999)
+    @SystemChar(charsetDef = "半角数字")
+    public String userIdFk;
+
+    /** Organization ID_FK **/
+    @NumberRange(max = 9999)
+    @SystemChar(charsetDef = "半角数字")
+    public String organizationIdFk;
+
+    /** Organization name **/
+    @Length(max = 120)
+    @SystemChar(charsetDef = "システム許容文字")
+    public String organizationName;
+
+    /** Project ID_FK **/
+    @NumberRange(max = 999999999)
+    @SystemChar(charsetDef = "半角数字")
+    public String projectIdFk;
+
+    /** Date time **/
+    @Length(min = 19, max = 19)
+    @SystemChar(charsetDef = "半角文字")
+    public String dateTime;
+
+    /** Apply start date **/
+    @Length(min = 8, max = 8)
+    @SystemChar(charsetDef = "半角文字")
+    public String applyStartDate;
+
+    /** Apply end date **/
+    @Length(min = 8, max = 8)
+    @SystemChar(charsetDef = "半角文字")
+    public String applyEndDate;
+
+    /** User Name(Kana characters) **/
+    @Length(max = 128)
+    @SystemChar(charsetDef = "システム許容文字")
+    public String kanaNme;
+
+    /** Version number */
+    @SystemChar(charsetDef = "半角数字")
+    public String versionNo;
+
+    /** Failed count **/
+    @SystemChar(charsetDef = "半角数字")
+    public String failedCount;
+
+    /** Flag **/
+    @Length(min = 1, max = 1)
+    @SystemChar(charsetDef = "半角数字")
+    public String flag;
+
+    /** Code ID **/
+    @Length(max = 8)
+    @SystemChar(charsetDef = "半角英数字")
+    public String codeId;
+
+    /** Code value **/
+    @Length(max = 2)
+    @SystemChar(charsetDef = "半角英数字")
+    public String codeValue;
+
+    /** Code name **/
+    @Length(max = 50)
+    @SystemChar(charsetDef = "システム許容文字")
+    public String codeName;
+
+    /** Option **/
+    @Length(max = 40)
+    @SystemChar(charsetDef = "システム許容文字")
+    public String option;
+
+    /** Pattern **/
+    @Length(min = 1, max = 1)
+    @SystemChar(charsetDef = "半角英数字")
+    public String pattern;
+
+    /** Sort order **/
+    @Length(min = 1, max = 1)
+    @SystemChar(charsetDef = "半角数字")
+    public String sortOrder;
+
+    /** lang **/
+    @Length(max = 2)
+    @SystemChar(charsetDef = "半角英字")
+    public String lang;
+
+    /** Short Name **/
+    @Length(max = 50)
+    @SystemChar(charsetDef = "システム許容文字")
+    public String shortName;
+
+    /** Session ID **/
+    @Length(max = 100)
+    @SystemChar(charsetDef = "半角英数字")
+    public String sessionId;
+
+    /** Session Object **/
+    public String sessionObject;
+
+    /** Token **/
+    @Length(max = 36)
+    @SystemChar(charsetDef = "半角英数字")
+    public String token;
+
+    /** Segment ID **/
+    @Length(min = 2, max = 2)
+    @SystemChar(charsetDef = "半角英数字")
+    public String segmentId;
+
+    /** bizDate **/
+    @Length(min = 8, max = 8)
+    @SystemChar(charsetDef = "半角数字")
+    public String bizDate;
+
 }

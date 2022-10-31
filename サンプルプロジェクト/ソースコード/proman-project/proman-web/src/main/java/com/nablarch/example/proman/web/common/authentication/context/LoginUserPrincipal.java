@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * ログインユーザー情報
+ * ログインユーザ情報
  *
  * @author Masaya Seko
  */

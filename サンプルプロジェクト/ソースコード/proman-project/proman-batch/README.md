@@ -16,18 +16,20 @@ PostgreSQLの初期ユーザーとパスワードは以下の通りに設定し�
 proman-projectで以下のコマンドを実行してください。
 ```
 $cd proman-project
-$mvn install
+$mvn -N install
 ```
 
 proman-commonモジュールで以下のコマンドを実行しておいてください。
 ```
 $cd proman-common
 $mvn -P gsp clean generate-resources
+$mvn install
 ```
 
 次に、アプリケーションをビルドします。以下のコマンドを実行してください。
 
 ```
+$cd proman-batch
 $mvn clean package
 ```
 

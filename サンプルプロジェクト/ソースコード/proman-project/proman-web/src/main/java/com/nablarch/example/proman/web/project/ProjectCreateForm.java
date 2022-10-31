@@ -73,22 +73,22 @@ public class ProjectCreateForm implements Serializable {
      */
     //TODO:顧客選択が実装されたら必須にする。
     //@Required
-    @Domain("id")
+    @Domain("clientId")
     private String clientId;
 
     /**
-     * プロジェクトマネージャー名
+     * プロジェクトマネージャ名
      */
     @Required
     @Domain("userName")
-    private String projectManager;
+    private String pmKanjiName;
 
     /**
      * プロジェクトリーダー名
      */
     @Required
     @Domain("userName")
-    private String projectLeader;
+    private String plKanjiName;
 
     /**
      * 備考
@@ -100,7 +100,7 @@ public class ProjectCreateForm implements Serializable {
      * 売上高
      */
     @Domain("amountOfMoney")
-    private String sales;
+    private String salesAmount;
 
     /**
      * プロジェクト名を取得する。
@@ -247,21 +247,21 @@ public class ProjectCreateForm implements Serializable {
     }
 
     /**
-     * プロジェクトマネージャー名を取得する。
+     * プロジェクトマネージャ名を取得する。
      *
-     * @return プロジェクトマネージャー名
+     * @return プロジェクトマネージャ名
      */
-    public String getProjectManager() {
-        return projectManager;
+    public String getPmKanjiName() {
+        return pmKanjiName;
     }
 
     /**
-     * プロジェクトマネージャー名を設定する。
+     * プロジェクトマネージャ名を設定する。
      *
-     * @param projectManager 設定するプロジェクトマネージャー名
+     * @param pmKanjiName 設定するプロジェクトマネージャ名
      */
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
+    public void setPmKanjiName(String pmKanjiName) {
+        this.pmKanjiName = pmKanjiName;
     }
 
     /**
@@ -269,17 +269,17 @@ public class ProjectCreateForm implements Serializable {
      *
      * @return プロジェクトリーダー名
      */
-    public String getProjectLeader() {
-        return projectLeader;
+    public String getPlKanjiName() {
+        return plKanjiName;
     }
 
     /**
      * プロジェクトリーダー名を設定する。
      *
-     * @param projectLeader 設定するプロジェクトリーダー名
+     * @param plKanjiName 設定するプロジェクトリーダー名
      */
-    public void setProjectLeader(String projectLeader) {
-        this.projectLeader = projectLeader;
+    public void setPlKanjiName(String plKanjiName) {
+        this.plKanjiName = plKanjiName;
     }
 
     /**
@@ -305,17 +305,17 @@ public class ProjectCreateForm implements Serializable {
      *
      * @return 売上高
      */
-    public String getSales() {
-        return sales;
+    public String getSalesAmount() {
+        return salesAmount;
     }
 
     /**
      * 売上高を設定する。
      *
-     * @param sales 設定する売上高
+     * @param salesAmount 設定する売上高
      */
-    public void setSales(String sales) {
-        this.sales = sales;
+    public void setSalesAmount(String salesAmount) {
+        this.salesAmount = salesAmount;
     }
 
     /**
@@ -326,7 +326,7 @@ public class ProjectCreateForm implements Serializable {
      * @return 開始日に終了日より後の日付が設定されていた場合は false それ以外（開始日、終了日の両方又はいずれかが未定の場合も含む）は true
      */
     @AssertTrue(message = "{com.nablarch.example.app.entity.core.validation.validator.DateRelationUtil.message}")
-    private boolean isValidProjectPeriod() {
+    public boolean isValidProjectPeriod() {
         return DateRelationUtil.isValid(projectStartDate, projectEndDate);
     }
 }

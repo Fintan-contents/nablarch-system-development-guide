@@ -4,8 +4,8 @@ SELECT
     project.project_name,
     project.project_type,
     project.project_class,
-    project.project_manager,
-    project.sales,
+    project.pm_kanji_name,
+    project.sales_amount,
     project.project_start_date,
     project.project_end_date,
     project.version_no,
@@ -26,9 +26,9 @@ WHERE
   AND
     $if(projectClass) {project.project_class in (:projectClass[])}
   AND
-    $if(salesFrom) {project.sales >= :salesFrom}
+    $if(salesFrom) {project.sales_amount >= :salesFrom}
   AND
-    $if(salesTo) {project.sales <= :salesTo}
+    $if(salesTo) {project.sales_amount <= :salesTo}
   AND
     $if(projectStartDateFrom) {project.project_start_date >= :projectStartDateFrom}
   AND
@@ -48,10 +48,10 @@ SELECT
     project.project_name,
     project.project_type,
     project.project_class,
-    project.sales,
+    project.sales_amount,
     project.client_id,
-    project.project_manager,
-    project.project_leader,
+    project.pm_kanji_name,
+    project.pl_kanji_name,
     project.project_start_date,
     project.project_end_date,
     project.note,

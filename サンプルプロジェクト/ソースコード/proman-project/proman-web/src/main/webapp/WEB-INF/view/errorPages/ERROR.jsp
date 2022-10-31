@@ -10,9 +10,7 @@
                 href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
         <n:link rel="stylesheet" type="text/css"
                 href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css"/>
-        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"/>
-        <n:script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"/>
+        <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"/>
         <n:script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"/>
         <n:script type="text/javascript"
                   src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"/>
@@ -33,7 +31,8 @@
                 <div class="twelve wide column">
                     <h1 class="page-title">エラー画面</h1>
                     <div class="message-area">
-                        予期せぬエラーが発生しました。
+                        予期せぬエラーが発生しました。<br>
+                        状況が変わらない場合は、お手数ですが、このシステムの管理者にご連絡ください。
                     </div>
                 </div>
             </div>
