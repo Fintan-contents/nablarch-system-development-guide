@@ -87,7 +87,7 @@ public class ProManDomainType {
     public String organizationIdFk;
 
     /** Organization name **/
-    @Length(max = 120)
+    @Length(max = 128)
     @SystemChar(charsetDef = "システム許容文字")
     public String organizationName;
 
