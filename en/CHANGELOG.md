@@ -2,11 +2,12 @@
 
 All significant changes to this project will be documented in this file.
 
-## 3.5 (2022-XX-XX)
+## 3.5 (2022-10-31)
 
 - Improve the sample project
 
   - Corrected build method and launching method described in the "Project Management System (Proman)" description.
+  - Inconsistencies between the design document and implementation have been corrected.
 
 ## 3.4 (2022-03-31)
 
