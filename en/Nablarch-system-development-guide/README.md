@@ -91,7 +91,7 @@ If non-functional requirements such as performance requirements, security requir
 
 For defining non-functional requirements, refer to the Non-functional Requirement Grade provided by IPA.
 
-- [Non-functional requirement grade](https://www.ipa.go.jp/english/sec/reports/20101222.html)
+- [Non-functional requirement grade](https://warp.da.ndl.go.jp/info:ndljp/pid/8233926/www.ipa.go.jp/english/sec/reports/20101222.html)
 
 
 ### Architecture design
@@ -111,7 +111,7 @@ For security design, refer to IPA's "How to Create a Secure Website". Design so 
 To assist in the security design, a "Nablarch function security matrix" is provided to determine if the items in the checklist can be supported by the features provided in Nablarch. Please set up the project so that the features provided by Nablarch will be enabled, and consider how to deal with the items where the features are not provided.  
 The "OWASP Top 10" is also helpful, although there is some overlap with the IPA's "How to Create a Secure Website".
 
-- [How to make a secure website](https://www.ipa.go.jp/security/english/third.html#websecurity)
+- [How to make a secure website](https://warp.da.ndl.go.jp/info:ndljp/pid/9446562/www.ipa.go.jp/security/english/third.html#websecurity)
 - [Nablarch function security matrix](../Sample_Project/Design_Document/Nablarch_function_security_matrix.xlsx?raw=true)
 - [OWASP Top10](https://github.com/OWASP/Top10)
 
