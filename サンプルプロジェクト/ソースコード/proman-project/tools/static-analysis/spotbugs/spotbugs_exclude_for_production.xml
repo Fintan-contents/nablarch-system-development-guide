@@ -14,7 +14,6 @@
     <Or>
       <Class name="com.nablarch.example.proman.common.util.MoneyRelationUtil"/>
       <Class name="com.nablarch.example.proman.common.validation.MoneyRangeValidator"/>
-      <Class name="com.nablarch.example.proman.common.validation.YYYYMMDDValidator"/>
       <Class name="com.nablarch.example.proman.common.dao.DaoFactory"/>
     </Or>
   </Match>
@@ -57,4 +56,3 @@
     <Method name="initialize"/>
   </Match>
 </FindBugsFilter>
-

@@ -88,7 +88,7 @@
         <component-ref name="threadContextHandler"/>
 
         <!-- 追加 -->
-        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
+        <component class="nablarch.fw.jaxrs.JaxRsAccessLogHandler"/>
 
         <component-ref name="dbConnectionManagementHandler"/>
 
