@@ -11,7 +11,7 @@ import nablarch.core.validation.ee.SystemChar;
 public class ClimanDomainType {
 
     /** Client ID */
-    @Digits(integer = 10)
+    @Digits(integer = 9)
     private String clientId;
 
     /** Client name */
