@@ -14,6 +14,7 @@ class LayeredArchitectureForWebTest {
 
     @ArchTest
     static final ArchRule アプリケーション構成のテスト = Architectures.layeredArchitecture()
+            .consideringAllDependencies()
             .layer("Action").definedBy(JavaClass.Predicates.simpleNameEndingWith("Action"))
             .layer("Service").definedBy(JavaClass.Predicates.simpleNameEndingWith("Service"))
             .layer("Form").definedBy(JavaClass.Predicates.simpleNameEndingWith("Form"))
