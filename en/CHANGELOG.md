@@ -2,6 +2,11 @@
 
 All significant changes to this project will be documented in this file.
 
+## 3.6 (2023-09-29)
+
+- Improve the sample project
+  - ArchUnit version upgraded to 1.0.1.
+
 ## 3.5 (2022-10-31)
 
 - Improve the sample project
