@@ -29,6 +29,6 @@
   </component>
 
   <!-- テスト用HttpServerにJetty6を定義する -->
-  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty9"/>
 
 </component-configuration>
