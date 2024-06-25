@@ -7,6 +7,6 @@
   <!-- Main settings -->
   <import file="web-component-configuration.xml"/>
 
-  <!-- Define Jetty6 as a test HttpServer -->
-  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
+  <!-- Define Jetty9 as a test HttpServer -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty9"/>
 </component-configuration>
