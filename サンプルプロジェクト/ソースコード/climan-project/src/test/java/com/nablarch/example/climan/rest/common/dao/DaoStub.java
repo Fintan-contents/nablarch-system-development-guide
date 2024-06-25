@@ -3,7 +3,7 @@ package com.nablarch.example.climan.rest.common.dao;
 import nablarch.common.dao.DaoContext;
 import nablarch.common.dao.EntityList;
 
-import javax.persistence.OptimisticLockException;
+import jakarta.persistence.OptimisticLockException;
 import java.util.List;
 
 /**

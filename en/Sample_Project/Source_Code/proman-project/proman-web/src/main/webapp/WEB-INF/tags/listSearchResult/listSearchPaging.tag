@@ -3,7 +3,7 @@ Tags for outputting list display pagination for search results.
 --------------------------------------------------------------%>
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="n" uri="http://tis.co.jp/nablarch" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="lsr" tagdir="/WEB-INF/tags/listSearchResult" %>
 
 <%--------------------------------------------------------------
