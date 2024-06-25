@@ -2,8 +2,8 @@ package com.nablarch.example.proman.common.validation;
 
 import nablarch.core.util.StringUtil;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * 指定された整数の範囲の金額であることを検証するバリデータ。
