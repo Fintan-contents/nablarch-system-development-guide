@@ -4,7 +4,7 @@ import com.nablarch.example.proman.common.util.DateRelationUtil;
 import nablarch.core.validation.ee.Domain;
 import nablarch.core.validation.ee.Required;
 
-import javax.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.AssertTrue;
 import java.io.Serializable;
 
 /**

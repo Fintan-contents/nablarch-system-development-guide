@@ -6,8 +6,8 @@ import com.nablarch.example.proman.web.common.SearchFormBase;
 import nablarch.core.util.StringUtil;
 import nablarch.core.validation.ee.Domain;
 
-import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.AssertTrue;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;

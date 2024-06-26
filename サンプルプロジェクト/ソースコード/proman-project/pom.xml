@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5-NEXT-SNAPSHOT</version>
+    <version>6-NEXT-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -54,7 +54,15 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5-NEXT-SNAPSHOT</version>
+        <version>6-NEXT-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Jakarta EE -->
+      <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-bom</artifactId>
+        <version>10.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
