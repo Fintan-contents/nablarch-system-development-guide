@@ -174,6 +174,11 @@ public class FormBinder<T extends Serializable> {
             public String validate() {
                 return "";  // 使用しない。
             }
+
+            @Override
+            public Class<?>[] validationGroup() {
+                return new Class<?>[0];  // 使用しない。 }
+            }
         };
     }
 

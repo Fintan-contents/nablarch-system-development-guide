@@ -15,7 +15,7 @@
 
   <properties>
     <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
-    <nablarch.db.url>jdbc:postgresql://localhost:5433/postgres</nablarch.db.url>
+    <nablarch.db.url>jdbc:postgresql://localhost:5432/postgres</nablarch.db.url>
     <nablarch.db.adminUser>postgres</nablarch.db.adminUser>
     <nablarch.db.adminPassword>password</nablarch.db.adminPassword>
     <nablarch.db.user>postgres</nablarch.db.user>
