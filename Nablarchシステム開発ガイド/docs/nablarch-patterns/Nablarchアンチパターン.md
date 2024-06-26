@@ -125,7 +125,7 @@ public Result handle(ExecutionContext context) {
 上記の例ですと、handle内で発行しているSQLをcreateReaderで行うようにします。
 
 
-## JSR352バッチ
+## Jakarta Batchに準拠したバッチ
 
 
 ### Batchletの誤用
