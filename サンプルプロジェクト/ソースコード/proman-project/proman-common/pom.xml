@@ -67,7 +67,6 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Java17を使用するためのセットアップ -->
     <dependency>
       <groupId>jakarta.activation</groupId>
       <artifactId>jakarta.activation-api</artifactId>
