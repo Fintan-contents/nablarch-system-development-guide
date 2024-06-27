@@ -24,10 +24,13 @@
   </modules>
 
   <properties>
+    <!-- ソース及びclassファイルが準拠するJavaのバージョン-->
+    <java.version>21</java.version>
+
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
     <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
     <version.spotbugs>4.5.0</version.spotbugs>
-    <postgres.jdbc.driver.version>42.5.0</postgres.jdbc.driver.version>
+    <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <!--
     toolsディレクトリへのパス。ツールが実行される個別モジュールのディレクトリから見て1つ上（つまりこのディレクトリ）のtoolsを指す。
      -->
