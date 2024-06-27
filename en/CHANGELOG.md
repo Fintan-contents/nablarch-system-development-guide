@@ -2,9 +2,11 @@
 
 All significant changes to this project will be documented in this file.
 
-## 3.6 (2023-09-29)
+## 3.6 (2024-09-30)
 
 - Improve the sample project
+  - Nablarch version upgraded to 6u2.
+  - Removed JSP auto generation tool not provided since Nablarch5.
   - ArchUnit version upgraded to 1.0.1.
 
 ## 3.5 (2022-10-31)
