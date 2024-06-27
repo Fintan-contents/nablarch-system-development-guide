@@ -15,7 +15,7 @@
 
   <properties>
     <!-- ソース及びclassファイルが準拠するJavaのバージョン-->
-    <java.version>17</java.version>
+    <java.version>21</java.version>
 
     <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
     <!--suppress UnresolvedMavenProperty -->
@@ -23,7 +23,7 @@
     <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
     <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
     <version.spotbugs>4.5.0</version.spotbugs>
-    <postgres.jdbc.driver.version>42.5.0</postgres.jdbc.driver.version>
+    <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
     <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
     <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
@@ -544,6 +544,11 @@
         <groupId>org.eclipse.jetty.ee10</groupId>
         <artifactId>jetty-ee10-maven-plugin</artifactId>
         <version>12.0.3</version>
+        <configuration>
+          <httpConnector>
+            <port>9080</port>
+          </httpConnector>
+        </configuration>
       </plugin>      <!-- ================ここから任意で使用するツールの設定================ -->
       <!-- gsp-dba-maven-pluginで自動生成したソースをビルド時に使用するための設定 -->
       <plugin>
