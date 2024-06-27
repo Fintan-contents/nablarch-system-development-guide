@@ -2,7 +2,6 @@ package com.nablarch.example.climan.rest.client;
 
 import com.nablarch.example.climan.test.ClimanRestTestExtension;
 import com.nablarch.example.climan.test.ClimanRestTestSupport;
-import nablarch.core.date.SystemTimeUtil;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import org.apache.commons.lang3.RandomStringUtils;
