@@ -5,9 +5,14 @@ All significant changes to this project will be documented in this file.
 ## 3.6 (2024-09-30)
 
 - Improve the sample project
+
   - Nablarch version upgraded to 6u2.
   - Removed JSP auto generation tool not provided since Nablarch5.
   - ArchUnit version upgraded to 1.0.1.
+
+- README.md
+
+  - Since Nablarch6 series is based on the Jakarta EE 10 assumption, we have added a new section "The reading into the Jakarta EE specification in this document".
 
 ## 3.5 (2022-10-31)
 
