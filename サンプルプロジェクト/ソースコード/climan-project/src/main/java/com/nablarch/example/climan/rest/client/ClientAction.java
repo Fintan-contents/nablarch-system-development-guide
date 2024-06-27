@@ -1,12 +1,10 @@
 package com.nablarch.example.climan.rest.client;
 
-import com.nablarch.example.climan.common.validation.BindingResult;
-import com.nablarch.example.climan.common.validation.FormBinder;
 import com.nablarch.example.climan.entity.Client;
 import nablarch.core.beans.BeanUtil;
+import nablarch.core.validation.ee.ValidatorUtil;
 import nablarch.fw.ExecutionContext;
 import nablarch.fw.web.HttpRequest;
-import nablarch.fw.web.HttpResponse;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -35,9 +33,8 @@ public class ClientAction {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Client> list(HttpRequest request, ExecutionContext context) {
 
-        BindingResult<ClientSearchForm> bindingResult = FormBinder.from(request, context).to(ClientSearchForm.class);
-        bindingResult.abortIfInvalid();
-        ClientSearchForm form = bindingResult.getValidForm();
+        ClientSearchForm form = BeanUtil.createAndCopy(ClientSearchForm.class, request.getParamMap());
+        ValidatorUtil.validate(form);
 
         ClientService service = new ClientService();
         Client condition = BeanUtil.createAndCopy(Client.class, form);
@@ -55,9 +52,8 @@ public class ClientAction {
     @Produces(MediaType.APPLICATION_JSON)
     public Client show(HttpRequest request, ExecutionContext context) {
 
-        BindingResult<ClientGetForm> bindingResult = FormBinder.from(request, context).to(ClientGetForm.class);
-        bindingResult.abortIfInvalid();
-        ClientGetForm form = bindingResult.getValidForm();
+        ClientGetForm form = BeanUtil.createAndCopy(ClientGetForm.class, request.getParamMap());
+        ValidatorUtil.validate(form);
 
         ClientService service = new ClientService();
         Client condition = BeanUtil.createAndCopy(Client.class, form);
