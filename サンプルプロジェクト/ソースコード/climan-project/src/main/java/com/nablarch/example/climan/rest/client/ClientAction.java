@@ -4,7 +4,7 @@ import com.nablarch.example.climan.entity.Client;
 import nablarch.core.beans.BeanUtil;
 import nablarch.core.validation.ee.ValidatorUtil;
 import nablarch.fw.ExecutionContext;
-import nablarch.fw.web.HttpRequest;
+import nablarch.fw.jaxrs.JaxRsHttpRequest;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -31,7 +31,7 @@ public class ClientAction {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Client> list(HttpRequest request, ExecutionContext context) {
+    public List<Client> list(JaxRsHttpRequest request, ExecutionContext context) {
 
         ClientSearchForm form = BeanUtil.createAndCopy(ClientSearchForm.class, request.getParamMap());
         ValidatorUtil.validate(form);
@@ -50,7 +50,7 @@ public class ClientAction {
     @GET
     @Path("/{clientId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Client show(HttpRequest request, ExecutionContext context) {
+    public Client show(JaxRsHttpRequest request, ExecutionContext context) {
 
         ClientGetForm form = BeanUtil.createAndCopy(ClientGetForm.class, request.getParamMap());
         ValidatorUtil.validate(form);
