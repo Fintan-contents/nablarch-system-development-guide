@@ -44,7 +44,7 @@ Reference： https://qiita.com/rubytomato@github/items/d4716c41a2d15c64f791
 
 ## Other rules
 
-- Use only HTML tags. Do not use custom JSP tags.
+- Use only HTML tags. Do not use JSP tags.
 - Use parts that can be converted from HTML to JSP tags.
   For example, do not use button components that are not a tags or form tags.
 - Do not assign unnecessary CSS classes.

@@ -14,6 +14,32 @@ The following content is described in this guide.
 
 To start developing with Nablarch, first, refer to the Nablarch System Development Guide for a complete picture, then check the details of each content described in the development guide.
 
+## The reading into the Jakarta EE specification in this document
+
+Unless otherwise stated, the following notations refer to the Jakarta EE specification.
+
+| notations       | Jakarta EE specification                  |
+|-----------------|-------------------------------------------|
+| JSF             | Jakarta Faces                             |
+| JASPIC          | Jakarta Authentication                    |
+| JACC            | Jakarta Authorization                     |
+| JMS             | Jakarta Messaging                         |
+| JPA             | Jakarta Persistence                       |
+| JTA             | Jakarta Transactions                      |
+| jBatch / JSR352 | Jakarta Batch                             |
+| JCA             | Jakarta Connectors                        |
+| JAF             | Jakarta Activation                        |
+| EL              | Jakarta Expression Language               |
+| EJB             | Jakarta Enterprise Beans                  |
+| JAXB            | Jakarta XML Binding                       |
+| JSON-B          | Jakarta JSON Binding                      |
+| JSON-P          | Jakarta JSON Processing                   |
+| JSP             | Jakarta Server Pages                      |
+| JAX-WS          | Jakarta XML Web Services                  |
+| JAX-RS          | Jakarta RESTful Web Services              |
+| JSTL            | Jakarta Standard Tag Library              |
+| CDI             | Jakarta Contexts and Dependency Injection |
+
 ## License
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
