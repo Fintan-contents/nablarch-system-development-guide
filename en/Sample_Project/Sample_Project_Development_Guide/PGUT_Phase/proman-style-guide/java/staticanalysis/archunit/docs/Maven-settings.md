@@ -4,25 +4,17 @@ ArchUnit can be run as a JUnit test by running the `mvn test`.
 
 ## Place a filter file to exclude checks
 
-If want to exclude the test target by using the exclusion setting file, refer to [here](Ops-Rule.md#exclude-it-from-all-architecture-tests-by-including-it-in-the-exclusion-configuration-file).
-
-If do not want to use the exclusion setting file, please go to the next step.
-
 ## Include ArchUnit dependencies
 
-Edit the `pom.xml`.
-
-The place to add the configuration is directly under the `dependencies` element.
+Edit `pom.xml` to add ArchUnit as a dependency.
 
 ```xml
-  <dependencies>
-    <dependency>
-      <groupId>com.tngtech.archunit</groupId>
-      <artifactId>archunit-junit5</artifactId>
-      <version>1.0.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<dependency>
+    <groupId>com.tngtech.archunit</groupId>
+    <artifactId>archunit-junit5</artifactId>
+    <version>1.0.1</version>
+    <scope>test</scope>
+</dependency>
 ```
 
 ## Running tests with Maven
@@ -36,10 +28,13 @@ mvn test
 If there is a violation, the test and the target of the violation will be output as follows.
 
 ```
-[ERROR] Failures:
-[ERROR]   ServiceClassRuleTest.DaoContextをfieldに持つ場合private_finalであるがstaticじゃないこと Architecture Violation [Priority: MEDIUM] - Rule 'fields that have raw type nablarch.common.dao.DaoContext and are declared in classes that have simple name ending with 'Service' should be final and should not be private and should be static' was violated (2 times):
-Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> does not have modifier STATIC in (ProjectService.java:0)
-Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> has modifier PRIVATE in (ProjectService.java:0)
+[ERROR] ExampleRuleTest.Actionがpublicであること  Time elapsed: 0.409 s  <<< FAILURE!
+java.lang.AssertionError: 
+Architecture Violation [Priority: MEDIUM] - Rule 'classes that have simple name ending with 'Action' should be public' was violated (1 times):
+Class <com.example.ExampleAction> does not have modifier PUBLIC in (ExampleAction.java:0)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.assertNoViolation(ArchRule.java:94)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.check(ArchRule.java:86)
+	...
 ```
 
 If you pass all the tests, the output as follows.

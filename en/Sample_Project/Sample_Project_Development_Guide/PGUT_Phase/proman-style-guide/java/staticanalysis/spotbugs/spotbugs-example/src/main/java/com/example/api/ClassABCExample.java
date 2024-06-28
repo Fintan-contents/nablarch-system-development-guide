@@ -1,5 +1,8 @@
-package com.example;
+package com.example.api;
 
+/**
+ * Example of Unauthorized API check code.
+ */
 public class ClassABCExample {
 
     public void run() {

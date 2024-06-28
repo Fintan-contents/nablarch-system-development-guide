@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of EqualsAvoidNull code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class EqualsAvoidNullExample {
 
@@ -29,7 +26,7 @@ public class EqualsAvoidNullExample {
             System.out.println("equality");
         }
 
-        //OK if both values are variables
+        //OK if all values are variables
         if (value1.equals(value2)) {
             System.out.println("equality");
         }

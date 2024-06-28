@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of StaticVariableName code.
- *
- * @author example
- * @since 1.0.0
  */
 public class StaticVariableNameExample {
 
@@ -26,4 +23,3 @@ public class StaticVariableNameExample {
      */
     private static String goodName;
 }
-

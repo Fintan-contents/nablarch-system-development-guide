@@ -68,8 +68,11 @@
   - [7.10.Avoid using legacy for statement and consider using Stream API or enhanced for statement](#no7-10)
   - [7.11.Use clone method to copy the whole array](#no7-11)
   - [7.12.Use the toArray method when converting collection to array](#no7-12)
-  - [7.13.Use Arrays.asList or List.of when converting an array to collection](#no7-13)
+  - [7.13.Use the of method of collection class when converting an array to collection](#no7-13)
   - [7.14.Add @Override to methods when overriding method and implementing abstract method](#no7-14)
+  - [7.15.Use text blocks to define multi-line strings](#no7-15)
+  - [7.16.Use a switch expression when switching value to be assigned to variable with a branch](#no7-16)
+  - [7.17.If record is available for classes whose main purpose is data hold, such as DTO, use record](#no7-16)
 - [8.Available API](#no8)
   - [8.1.Implement using the available standard API](#no8-1)
 - [9.Nablarch library](#no9)
@@ -81,7 +84,11 @@
 
 These conventions explain rules that should be followed by application programmers and guidelines for writing better code in projects that develop applications using Java.
 
-Though these conventions include some items that are based on [Nablarch Application Framework](https://nablarch.github.io/docs/LATEST/doc/index.html), most of the items can be used generically without being limited to a specific framework.
+Basically, it is not limited to a specific framework and can be used universally, but for [9. Nablarch Library](#9nablarch-library), please refer to [Nablarch Application Framework](https://fintan.jp/en/page/1954/). If you use other frameworks, please delete the item.
+
+Also, the text mentions [Unauthorized API Check Tool](./staticanalysis/unpublished-api/README.md).
+This tool is a framework-independent tool that detects the use of unauthorized APIs.
+A configuration file defining the APIs available in Nablarch is provided so that the tools can be used immediately when using Nablarch.
 
 ### <a name="no1-1">1.1.Prerequisites</a>
 
@@ -93,7 +100,7 @@ For the code covered under these conventions, it is assumed that the following t
 
 Anything that can be handled mechanically is implemented in advance, and these conventions serve as a guide for writing better code, or as code review guidelines.
 
-SonarQube is another well-known static analysis tool, however, as compared to SonarQube which is installed on a server, Checkstyle and SpotBugs are easy to introduce, where checking is made simpler just by running Maven; hence these conventions assume that Checkstyle and SpotBugs are used.
+SonarQube is another well-known static analysis tool, however, as compared to SonarQube which is installed on a server, Checkstyle and SpotBugs are easy to introduce, which complete the check just by running Maven; hence these conventions assume that Checkstyle and SpotBugs are used.
 
 Static analysis may be performed by means other than Checkstyle and SpotBugs depending on the project.
 If required, the preconditions of these conventions can be read by replacing Checkstyle and Spotbug with SonarQube or any other static tool.
@@ -142,9 +149,7 @@ While reading through these conventions, and also while writing the code, it is 
 
 ### <a name="no1-3">1.3.Java version</a>
 
-These conventions are created based on Java 8, and in some items, new functions that can be used in Java 9 and Java 10 have also been cited.
-
-These conventions can be used for projects that use Java 8 and above.
+These conventions are created based on Java 17.
 
 ### <a name="no1-4">1.4.Notation rules</a>
 
@@ -410,6 +415,8 @@ public void updateItem(final String code, final String name, final LocalDateTime
 ### <a name="no4-4">4.4.Provide row comments as required to help understand the code</a>
 
 Ideally it should be possible to understand the contents of a process only by reading the code, however, if any special implementation is intentionally performed due to complex logic or performance, write comments for explanation.
+Also, if the code is easier to understand if you explain the background as to why you are implementing it in this way, write comments for explanation.
+
 Write comments as single line comments starting with `//`.
 
 ---
@@ -787,7 +794,6 @@ Do not use the legacy APIs given below.
 
 |Legacy API|API that can be used alternatively|
 |---|---|
-|`java.lang.StringBuffer`|`java.lang.StringBuilder`|
 |`java.util.Dictionary`|`java.util.Map`|
 |`java.util.Enumeration`|`java.util.Iterator`|
 |`java.util.Hashtable`|`java.util.HashMap`|
@@ -840,7 +846,7 @@ public class ItemList {
 
 In the above example, when `items` is changed, it is better to change the `totalPrice` should at the same time.
 
-```
+```java
 //OK
 public class ItemList {
 
@@ -868,7 +874,7 @@ public class ItemList {
 
 Without holding the total value as a state, it is also a good idea to calculate it every time in `getTotalPrice`.
 
-```
+```java
 //OK
 public class ItemList {
 
@@ -1162,6 +1168,16 @@ If a large number of inner classes and `static` nested classes, or anonymous cla
 Casting is a mechanism in which the value handled as one type is forced to be treated as a different type. It causes situations such as "passes through compile but throws an error during execution".
 
 With generics being introduced from Java 5, there should be no problems even without the use of casting.
+
+If class cast is required, recommended to use pattern matching for instanceof officially introduced in Java 16 can be used.
+By specifying a binding variable when determining type with instanceof operator, you can assign result of cast to the binding variable.
+
+```java
+if (obj instanceof String str) {
+    // If result of instanceof operator is true, result of cast is assigned to the variable str
+    int size = str.length();
+}
+```
 
 ### <a name="no6-10">6.10.Be careful of unboxing when calculating variables and primitive values of wrapper class</a>
 
@@ -1592,7 +1608,7 @@ Hence, it is easy to understand what process is required for each element.
 |`map`|Converts elements|`stream.map(x -> x.getClass()) //Converts to Class`|
 |`collect`|Converts to`Stream` using `Collector`|`stream.collect(Collectors.joining(", ")) //Converts elements to comma separated strings`|
 
-For other methods, check [`java.util.stream.Stream`のJavadoc](https://docs.oracle.com/javase/jp/10/docs/api/java/util/stream/Stream.html).
+For other methods, check [the Javadoc of`java.util.stream.Stream`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html).
 
 A code example that uses Stream API and a code example that uses the enhanced for statement are shown below.
 In both cases, the average age is calculated from the list of employees by narrowing the list down to only those employees whose job type is programmer.
@@ -1706,7 +1722,7 @@ final List<Item> temp = new ArrayList<>(values.length);
 for (Item item : values) {
     temp.add(copyItem(item));
 }
-final Item[] copied = temp.toArray(new Item[0]);
+final Item[] copied = temp.toArray(Item[]::new);
 ```
 
 As in the case shown in the example, using the Stream API introduced from Java 8 makes the code more simple.
@@ -1737,21 +1753,17 @@ for (final Item item : items) {
 ```java
 //OK
 final List<Item> items = ...
-final Item[] itemArray = items.toArray(new Item[0]);
+final Item[] itemArray = items.toArray(Item[]::new);
 
 //The toArray method is available even in the Stream API
 //Use this method to convert a Stream to an array
 final Item[] itemArray = items.stream().toArray(Item[]::new);
 ```
 
-In this code example, the array that is passed to the `toArray` method is initialized with a length of `0`.
-Although it is also possible to initialize the `size` method of the original collection by specifying the length, there is almost no difference in performance.
-Hence any initialization method can be selected, although in this code example for these conventions, it has been initialized with a length of `0` in consideration of readability.
+### <a name="no7-13">7.13.Use the `of` method of collection class when converting an array to collection</a>
 
-### <a name="no7-13">7.13.Use `Arrays.asList` or `List.of` when converting an array to collection</a>
-
-The array utility `java.util.Arrays` class has the `asList` method that converts it to a list.
-Use the `asList` method of the `java.util.Arrays` class instead of looping each element to create a list.
+A collection can be created from an array by using the `of` method of collection class.
+Use the `of` method of collection class instead of looping each element to create a list.
 
 ```java
 //Not Okay
@@ -1765,30 +1777,7 @@ for (final Item item : itemArray) {
 ```java
 //OK
 final Item[] itemArray = ...
-final List<Item> items = Arrays.asList(itemArray);
-```
-
-Since the `of` method has been added to `java.util.List` from Java 9, it can also be used here.
-
-```
-//OK
-final Item[] itemArray = ...
 final List<Item> items = List.of(itemArray);
-```
-
-From Java 9, the `of` method has been added to `java.util.Set` as well.
-When trying to convert from an array to `java.util.Set` thus far, it was converted to `java.util.List` once and then `java.util.Set` was generated. From Java 8, conversion is performed using the Stream API.
-From Java 9, conversion can be performed with a simple code.
-
-```java
-//Conversion method up to Java 7
-final Set<Item> items =  new HashSet<>(Arrays.asList(itemArray));
-
-//Can be converted with stream API from Java 8
-final Set<Item> items =  Arrays.stream(itemArray).collect(Collectors.toSet());
-
-//Can be converted more concisely from Java 9
-final Set<Item> items = Set.of(itemArray);
 ```
 
 ### <a name="no7-14">7.14.Add `@Override` to methods when overriding method and implementing abstract method</a>
@@ -1850,6 +1839,205 @@ public class SomeAction implements Runnable {
 }
 ```
 
+### <a name="no7-15">7.15.Use text blocks to define multi-line strings</a>
+
+When defining multi-line strings, consider using text blocks officially introduced in Java 15.
+
+A text blocks begins with `"""` (three double-quote) followed by a line break and ends with `"""`.
+Within text blocks, following features are available.
+
+- There is no need to write a newline character, and it can be expressed with a newline (LF is used for line separator)
+- No escape sequence when using `"`(double-quote)
+- Indentation whitespace is removed to match the line with the shallowest indentation
+
+If you do not use text blocks, it is common to define a string with embedded newline characters and concatenate the strings for each line.
+
+```java
+//NG
+String html =
+        "<html>\n" +
+        "    <body>\n" +
+        "        <p>\"Hello, world\"</p>\n" +
+        "    </body>\n" +
+        "</html>\n";
+```
+
+Using text blocks eliminates the need to write newline characters and escape sequences, making it easier to read.
+If the previous string were written in a text blocks, it would look like this.
+
+```java
+//OK
+String html = """
+        <html>
+            <body>
+                <p>"Hello, world"</p>
+            </body>
+        </html>""";
+```
+
+When breaking lines at the end, note the indentation of the line with the terminating `"""`.
+For example, if you write the following, the line with the shallowest indentation is the line that describes the ending `"""`, so the line that describes `foo` or `bar` will not be indented.
+
+```java
+//NG
+String name = “””
+        foo
+        bar
+”””;
+```
+
+Outputting the above string will output the string without removing the indentation as follows. (a string equivalent to `"        foo\n        bar\n"`)
+
+```text
+        foo
+        bar
+```
+
+If you want to remove the whitespace and insert a newline at the end, pay attention to the indentation of the line describing the terminating `"""` and write as follows.
+
+```java
+//OK
+String name = “””
+        foo
+        bar
+        ”””;
+```
+
+Outputting the above string will output a string with the indentation removed as follows. (a string equivalent to `"foo\nbar\n"`)
+
+```text
+foo
+bar
+```
+
+If you want to use value of variable to text block, you can use the `String.formatted` method to replace string.
+
+```java
+String id = "xxx";
+String name = "yyy";
+String text = """
+        id  : %s
+        name: %s
+        """.formatted(id, name);
+```
+
+### <a name="no7-16">7.16.Use a `switch` expression when switching value to be assigned to variable with a branch</a>
+
+If you use `if` or `switch` statements to change the value to be assigned to variable depending on conditions, consider using the `switch` expression officially introduced in Java 14.
+
+You can write a `switch` expression using `yield` statement inside `case` and `default` of `switch`.
+A `switch` expression can return value specified in the `yield` statement.
+Also, from Java 14, the following description related to `switch` is possible.
+
+- By writing `->` (arrow syntax) instead of `:` in `case` and `default`, `yield` and `break` can be omitted (no fall-through)
+- Multiple values can be described in `case` label separated by commas.
+
+Using these makes it possible to write highly readable descriptions when switching the values to be assigned to variables depending on conditions.
+
+The following example uses a `switch` statement to select value to assign to `value` variable.
+
+```java
+DayOfWeek dayOfWeek = getDayOfWeek();
+int value;
+switch(dayOfWeek) {
+    case SUNDAY:
+    case MONDAY:
+    case TUESDAY:
+    case WEDNESDAY:
+        value = 1;
+        break;
+    case THURSDAY:
+    case FRIDAY:
+    case SATURDAY:
+        value = 2;
+        break;
+}
+```
+
+By using a `switch` expression, the equivalent can be written as follows.
+
+```java
+int value = switch(dayOfWeek) {
+    case SUNDAY, MONDAY, TUESDAY, WEDNESDAY -> 1;
+    case THURSDAY, FRIDAY, SATURDAY -> 2;
+};
+```
+
+If you want to write multiple statements within `case` or `default`, you can write them by enclosing them in blocks in the arrow syntax.
+Since the `yield` statement cannot be omitted by enclosing it in a block, write it as follows.
+
+```java
+int value = switch(dayOfWeek) {
+    case SUNDAY, MONDAY, TUESDAY, WEDNESDAY -> 1;
+    case THURSDAY, FRIDAY, SATURDAY -> {
+        if (isTarget(dayOfWeek)) {
+            yield 2;
+        } else {
+            yield 3;
+        }
+    }
+};
+```
+
+### <a name="no7-16">7.16.If record is available for classes whose main purpose is data hold, such as DTO, use record</a>
+
+When defining a class whose main purpose is to hold data, such as DTO, consider using record that were officially introduced in Java 16.
+
+By using records, you can implement without writing boilerplate code such as fields, constructors, and accessor methods.
+Record have elements called record components, declared using `record` instead of `class`.
+Record have the following main characteristics.
+
+- Immutable and can be set when created
+- Fields, constructors, and accessor methods corresponding to record components are automatically generated
+- Default constructor (constructor with no arguments) is not generated
+
+The following example is a typical class whose primary purpose is to hold data.
+
+```java
+// NG
+public class Person {
+
+    private final Integer id;
+    private final String name;
+
+    public Person(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+
+The following example implements a record equivalent to the above class by defining a record with `record`.
+
+```java
+// OK
+public record Person(Integer id, String name) {
+}
+```
+
+A defined record can be used in the same way as a normal class.
+
+```java
+// Create instance
+Person person = new Person(1, "foo");
+// Access value
+Integer id = person.id();
+String name = person.name();
+```
+
+However, record have many different rules than normal classes, and may not be used where libraries are used.
+Therefore, when using record, be sure to check that library you use supports record.
+
+Please refer to [this page](https://docs.oracle.com/en/java/javase/16/language/records.html) for details on record specifications.
+
 ---
 
 ## <a name="no8">8.Available API</a>
@@ -1858,7 +2046,7 @@ By carefully selecting enough APIs to develop business applications, quality can
 
 ### <a name="no8-1">8.1.Implement using the available standard API</a>
 
-For APIs available in the Java standard library, see [Available APIs in the Java standard library](./staticanalysis/spotbugs/spotbugs-example/spotbugs/published-config/production/JavaOpenApi.config).
+For APIs available in the Java standard library, see [Available APIs in the Java standard library](./staticanalysis/unpublished-api/published-config/production/JavaOpenApi.config).
 
 Also make use of [Unauthorized API check tool](./staticanalysis/unpublished-api/README.md) to check.
 

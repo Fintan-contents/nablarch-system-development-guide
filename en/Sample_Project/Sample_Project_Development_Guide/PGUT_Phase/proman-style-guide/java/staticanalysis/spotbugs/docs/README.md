@@ -1,6 +1,6 @@
 # SpotBugs Usage Guide
 
-This section explains how to use [SpotBugs](http://spotbugs.readthedocs.io/ja/latest/index.html). Describes the specific configuration methods and operational rules of SpotBugs.
+This section explains how to use [SpotBugs](http://spotbugs.readthedocs.io/en/latest/index.html). Describes the specific configuration methods and operational rules of SpotBugs.
 
 - [SpotBugs operation guide](./Ops-Rule.md)
 - [Method to run SpotBugs in Maven](./Maven-settings.md)
@@ -8,7 +8,7 @@ This section explains how to use [SpotBugs](http://spotbugs.readthedocs.io/ja/la
 
 Please check the official website for details of bugs that can be detected.
 
-- [Details of bugs that can be detected](http://spotbugs.readthedocs.io/ja/latest/bugDescriptions.html)
+- [Details of bugs that can be detected](http://spotbugs.readthedocs.io/en/latest/bugDescriptions.html)
 
 ## How to use Find Security Bugs
 

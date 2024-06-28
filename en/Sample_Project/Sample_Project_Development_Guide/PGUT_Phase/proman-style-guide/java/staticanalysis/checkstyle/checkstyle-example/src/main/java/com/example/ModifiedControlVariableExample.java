@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of ModifiedControlVariable code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class ModifiedControlVariableExample {
 
@@ -27,4 +24,3 @@ public class ModifiedControlVariableExample {
         }
     }
 }
-

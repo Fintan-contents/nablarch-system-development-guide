@@ -6,9 +6,6 @@ package com.example;
 
 /**
  * Example of NoFinalizer code.
- *
- * @author example
- * @since 1.0.0
  */
 public class NoFinalizerExample {
 
@@ -20,4 +17,3 @@ public class NoFinalizerExample {
         // (resource deallocation process)
     }
 }
-

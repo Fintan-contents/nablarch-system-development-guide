@@ -1,8 +1,12 @@
-package com.example;
+package com.example.secure;
 
 import java.util.Random;
 
-public class ClassD {
+/**
+ * Example of PREDICTABLE_RANDOM code.
+ */
+public class PredictableRandom {
+
     String generateSecretToken() {
         Random r = new Random();
         return Long.toHexString(r.nextLong());

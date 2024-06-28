@@ -15,22 +15,20 @@ The table of contents is given below.
 - [ArrayTypeStyle](#arraytypestyle)
 - [AvoidStarImport](#avoidstarimport)
 - [AvoidStaticImport](#avoidstaticimport)
+- [CatchParameterName](#catchparametername)
 - [ClassTypeParameterName](#classtypeparametername)
 - [ConstantName](#constantname)
+- [CyclomaticComplexity](#cyclomaticcomplexity)
 - [EmptyCatchBlock](#emptycatchblock)
 - [EqualsAvoidNull](#equalsavoidnull)
 - [EqualsHashCode](#equalshashcode)
 - [FallThrough](#fallthrough)
 - [FileLength](#filelength)
-- [FileTabCharacter](#filetabcharacter)
-- [GenericWhitespace](#genericwhitespace)
 - [Header](#header)
 - [HiddenField](#hiddenfield)
 - [HideUtilityClassConstructor](#hideutilityclassconstructor)
 - [IllegalCatch](#illegalcatch)
 - [IllegalThrows](#illegalthrows)
-- [IllegalType](#illegaltype)
-- [Indentation](#indentation)
 - [InnerAssignment](#innerassignment)
 - [InterfaceTypeParameterName](#interfacetypeparametername)
 - [MissingJavadocType](#missingjavadoctype)
@@ -39,8 +37,6 @@ The table of contents is given below.
 - [JavadocType](#javadoctype)
 - [JavadocVariable](#javadocvariable)
 - [LambdaParameterName](#lambdaparametername)
-- [LeftCurly](#leftcurly)
-- [LineLength](#linelength)
 - [LocalFinalVariableName](#localfinalvariablename)
 - [LocalVariableName](#localvariablename)
 - [MemberName](#membername)
@@ -51,24 +47,21 @@ The table of contents is given below.
 - [ModifiedControlVariable](#modifiedcontrolvariable)
 - [NeedBraces](#needbraces)
 - [NoFinalizer](#nofinalizer)
-- [NoWhitespaceAfter](#nowhitespaceafter)
-- [NoWhitespaceBefore](#nowhitespacebefore)
 - [PackageDeclaration](#packagedeclaration)
 - [PackageName](#packagename)
 - [ParameterName](#parametername)
+- [RecordComponentName](#recordcomponentname)
+- [RecordTypeParameterName](#recordtypeparametername)
 - [RedundantImport](#redundantimport)
-- [RightCurly](#rightcurly)
 - [SimplifyBooleanExpression](#simplifybooleanexpression)
 - [StaticVariableName](#staticvariablename)
 - [StringLiteralEquality](#stringliteralequality)
 - [TodoComment](#todocomment)
 - [TypeName](#typename)
 - [UnusedImports](#unusedimports)
+- [UnusedLocalVariable](#unusedlocalvariable)
 - [UpperEll](#upperell)
 - [VisibilityModifier](#visibilitymodifier)
-- [WhitespaceAfter](#whitespaceafter)
-- [WhitespaceAround](#whitespacearound)
-- [WriteTag](#writetag)
 
 <!-- END doctoc -->
 
@@ -179,6 +172,23 @@ It is possible to exclude the static import of specified classes from the check 
 
 - http://checkstyle.sourceforge.net/config_imports.html#AvoidStaticImport
 
+## CatchParameterName
+
+```xml
+<module name="CatchParameterName">
+  <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+</module>
+```
+
+Check the name of the catch parameter.
+
+Ensure that the name of the catch parameter satisfies the following rule (OK):
+
+- Start with a lowercase letter, followed by lowercase and uppercase letters, and Arabic numerals
+
+If this condition is not met, it will be Not OK.
+
+Please follow the rules to unify your coding style.
 
 ## ClassTypeParameterName
 
@@ -234,6 +244,54 @@ Ensure that the `static final` field names satisfies the following rule (OK):
 - Start with an uppercase letter, followed by underscores, uppercase letters and Arabic numerals
 
 If this condition is not met, it will be Not OK.
+
+## CyclomaticComplexity
+
+```xml
+<module name="CyclomaticComplexity">
+  <property name="max" value="10"/>
+</module>
+```
+
+Measure and check the cyclical complexity of method.
+
+From cyclic complexity, we can consider the state of the code as follows.
+
+| Value   | Description                     |
+| ------- | ------------------------------- |
+| 1 - 10  | Simple procedure, little risk   |
+| 11 - 20 | More complex, moderate risk     |
+| 21 - 50 | Complex, high risk              | 
+| 50 -    | Untestable code, very high risk |
+
+Cyclic complexity should not exceed the allowable value (OK).
+If cyclomatic complexity exceeds the allowed value, it will be Not OK.
+
+```java
+public int example(int a, int b, int c, String str) {
+    if (a == 1) {                       // +1 (1)
+        return 1;
+    } else if (a == b && a == c) {      // +2 (3)
+        if (b < 1) {                    // +1 (4)
+            return 2;
+        }
+    }
+    try {
+        int d = Integer.parseInt(str);
+        if (a == d) {                   // +1 (5)
+            return switch (d) {
+                case 2 -> 20;           // +1 (6)
+                case 3 -> 30;           // +1 (7)
+                case 4 -> 40;           // +1 (8)
+                default -> 99;          // +1 (9)
+            };
+        }
+    } catch (NumberFormatException e) { // +1 (10)
+        throw new IllegalArgumentException(e);
+    }
+    return a < 0 ? -1 : 1;              // +1 (11)
+}
+```
 
 ## EmptyCatchBlock
 
@@ -324,8 +382,8 @@ This typically leads to performance degradation when retrieving elements from th
 
 See below for overriding the `equals` and `hashCode` methods.
 
-- https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
-- https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html#hashCode--
+- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)
+- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()
 
 
 ## FallThrough
@@ -396,54 +454,6 @@ A Java file that is too large is expected to have a class with a large number of
 Such classes are cumbersome and less maintainable.
 
 When coding, try to keep your classes compact.
-
-## FileTabCharacter
-
-```xml
- <module name="FileTabCharacter"/>
-```
-
-Check for tab characters in the source code.
-
-Do not use tab characters and use spaces (OK).
-If there are tab characters, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-```java
-    // Indent using tabs (Not OK)
-	System.out.println("This line is indented with tabs");
-
-    // Indent using spaces (OK)
-    System.out.println("This line is indented with spaces");
-
-```
-
-The advantage of using spaces instead of tabs is that you do not need to explicitly set the tab width in the editor.
-
-
-## GenericWhitespace
-
-```xml
-<module name="GenericWhitespace"/>
-```
-
-Check for whitespace around generic parentheses.
-
-Please do not put a space after the generic parenthesis `<` and before `>` (OK).
-If there is an unnecessary space, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-```java
-        // An unnecessary space is added after and before the generic parentheses < and > (Not Ok).
-        List< String > bad = new ArrayList<>();
-        Map< String, Integer > badToo = new HashMap<>();
-
-        // There are no unnecessary spaces after and before the generic parentheses < and > (OK).
-        List<String> good = new ArrayList<>();
-        Map<String, Integer> goodToo = new HashMap<>();
-```
 
 
 ## Header
@@ -578,116 +588,6 @@ If these are declared in `throws`, then it will be Not OK.
 These are generic and lack the information to identify the cause of the exception or error.
 If an exception is `thrown` in the application, be sure to select a specific type and declare the specific type in `throws` (OK).
 
-## IllegalType
-
-```xml
-<module name="IllegalType">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
-  <property name="illegalClassNames" value="java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeSet, java.util.TreeMap, java.util.Vector, java.util.IdentityHashMap, java.util.WeakHashMap, java.util.EnumMap, java.util.concurrent.ConcurrentHashMap, java.util.concurrent.CopyOnWriteArrayList, java.util.concurrent.CopyOnWriteArraySet, java.util.EnumSet, java.util.PriorityQueue, java.util.concurrent.ConcurrentLinkedQueue, java.util.concurrent.LinkedBlockingQueue, java.util.concurrent.ArrayBlockingQueue, java.util.concurrent.PriorityBlockingQueue, java.util.concurrent.DelayQueue, java.util.concurrent.SynchronousQueue"/>
-</module>
-```
-
-Check that the specified type has not been used.
-
-Do not use the classes listed below as variable types, return types, or parameter types.
-
-- `java.util.Hashtable`
-- `java.util.HashSet`
-- `java.util.HashMap`
-- `java.util.ArrayList`
-- `java.util.LinkedList`
-- `java.util.LinkedHashMap`
-- `java.util.LinkedHashSet`
-- `java.util.TreeSet`
-- `java.util.TreeMap`
-- `java.util.Vector`
-- `java.util.IdentityHashMap`
-- `java.util.WeakHashMap`
-- `java.util.EnumMap`
-- `java.util.concurrent.ConcurrentHashMap`
-- `java.util.concurrent.CopyOnWriteArrayList`
-- `java.util.concurrent.CopyOnWriteArraySet`
-- `java.util.EnumSet`
-- `java.util.PriorityQueue`
-- `java.util.concurrent.ConcurrentLinkedQueue`
-- `java.util.concurrent.LinkedBlockingQueue`
-- `java.util.concurrent.ArrayBlockingQueue`
-- `java.util.concurrent.PriorityBlockingQueue`
-- `java.util.concurrent.DelayQueue`
-- `java.util.concurrent.SynchronousQueue`
-
-If these are used as variable types, return value types, and parameter types, the result will be Not OK.
-Use the interfaces of these classes instead (OK).
-
-All of the types listed here are specific classes.
-This rule is applied for designing around interfaces rather than specific classes.
-
-
-## Indentation
-
-```xml
-<module name="Indentation">
-  <property name="caseIndent" value="0"/>
-</module>
-```
-
-Check that the indentation matches the rule.
-
-Write the indentation so that it matches the rules (OK).
-If there is an indent that does not match the rule, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-```java
-    /**
-     * Not OK example of indentation.
-     *
-     * @param number Number
-     * @return Numeric value after conversion
-     * @throws IllegalArgumentException if argument is 0
-     */
-    public int invalidExample(int number)
-    throws IllegalArgumentException {   // Not OK because the indent of throws does not match the rule
-
-    int ret;    // Not OK because indent of statement in method does not match the rule
-
-        switch (number) {
-            // Below, the indent of switch and case does not match the rule, so Not OK
-            case 0:
-                throw new IllegalArgumentException("argument 'number' must not be zero.");
-
-            default:
-                ret = number + 1;
-                break;
-        }
-        return ret;
-    }
-
-    /**
-     * OK example of indentation.
-     *
-     * @param number Number
-     * @return Numeric value after conversion
-     * @throws IllegalArgumentException if argument is 0
-     */
-    public int validExample(int number)
-            throws IllegalArgumentException {   // the indent of throws matches the rule OK
-
-        int ret;    // OK because indent of statement in method matches the rule
-
-        switch (number) {
-        // Below, the indent of switch and case matches the rule, so Not OK
-        case 0:
-            throw new IllegalArgumentException("argument 'number' must not be zero.");
-
-        default:
-            ret = number + 1;
-            break;
-        }
-        return ret;
-    }
-```
 
 ## InnerAssignment
 
@@ -876,7 +776,7 @@ In the above settings, variables in the `public` scope will be checked.
 ## LambdaParameterName
 
 ```xml
-<module name="LocalVariableName"/>
+<module name="LambdaParameterName"/>
 ```
 
 Check the name of the lambda expression argument.
@@ -899,62 +799,7 @@ Function<String, String> ng2 = bad_name -> "NG";
 // Name is according to the rules (OK).
 Function<String, String> ok = goodName -> "OK";
 ```
-## LeftCurly
 
-```xml
-    <module name="LeftCurly"/>
-```
-
-
-Check the placement of curly brace (`{`) at the beginning of the code block.
-
-Be sure to put the curly brace (`{`) at the end of the line (OK).
-If a curly brace is not placed at the end of the line, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-
-```java
-        boolean condition = true;
-        if (condition)  // Brace is not put at the end of the line (Not OK).
-        {
-
-        } else
-        {               // Brace is not put at the end of the line (Not OK).
-
-        }
-
-        try
-        {
-
-        } catch (IllegalArgumentException e)
-        {               // Brace is not put at the end of the line (Not OK).
-
-        } finally
-        {               // Brace is not put at the end of the line (Not OK).
-
-        }
-```
-
-## LineLength
-
-```xml
-<module name="LineLength">
-  <property name="ignorePattern" value="^import"/>
-  <property name="max" value="150"/>
-  <property name="tabWidth" value="4"/>
-</module>
-```
-
-Check the number of characters in one line.
-
-Limit the number of characters per line to 150 (OK).
-If one line exceeds 150 characters, it will be Not OK.
-
-Except for the line where the `import` declaration is written.
-
-
-Too many characters per line reduce code readability.
 
 ## LocalFinalVariableName
 
@@ -1255,46 +1100,6 @@ Use `java.lang.AutoCloseable` or `try-with-resources` for releasing some resourc
     }
 ```
 
-## NoWhitespaceAfter
-
-
-```xml
-    <module name="NoWhitespaceAfter">
-      <property name="severity" value="info"/>
-      <property name="tokens" value="BNOT,DEC,INC,LNOT"/>
-    </module>
-```
-
-Check that there is no space after a particular token (such as `~` `!` `++` (prefix)).
-
-Do not put spaces after these tokens (OK).
-If there is a space, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-## NoWhitespaceBefore
-
-```xml
-    <module name="NoWhitespaceBefore">
-      <property name="severity" value="info"/>
-    </module>
-```
-
-Check that there is no space before a particular token (`,` `;`, etc.).
-
-Do not put spaces after these tokens (OK).
-If there is a space, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-
-```java
-        // There is a space before the semicolon that is not required (Not OK).
-        int i = 0 ;
-
-        // There is a space before the comma that is not required (Not OK).
-        List<String> list = Arrays.asList("foo", "bar", "buz");
-```
 
 ## PackageDeclaration
 
@@ -1356,6 +1161,38 @@ Please follow the rules to unify your coding style.
 public void example(String BadName, String bad_name, String goodName) {
 ```
 
+## RecordComponentName
+
+```xml
+<module name="RecordComponentName"/>
+```
+
+Check the name of the record component.
+
+Ensure that the name of the record component satisfies the following rule (OK):
+
+- Start with a lowercase letter, followed by lowercase and uppercase letters, and Arabic numerals
+
+If this condition is not met, it will be Not OK.
+
+Please follow the rules to unify your coding style.
+
+## RecordTypeParameterName
+
+```xml
+<module name="RecordTypeParameterName"/>
+```
+
+Check the name of the type parameter bound to the record class.
+
+Ensure that the name of the type parameter satisfies the following conditions (OK):
+
+- Consist of one uppercase alphabet
+
+If this condition is not met, it will be Not OK.
+
+Please follow the rules to unify your coding style.
+
 ## RedundantImport
 
 ```xml
@@ -1368,43 +1205,6 @@ Delete the redundant `import` statement (OK).
 If there are two or more overlapping `import` or `import` of a class in the `java.lang` package, and then `import` of a class in the same package, it will be Not OK.
 
 Redundant descriptions reduce the readability of the code.
-
-## RightCurly
-
-
-```xml
-    <module name="RightCurly"/>
-```
-
-
-Check the placement of curly braces (`}`) at the end of the `if-else` and `try-catch-finally` code blocks.
-
-Place the curly braces (`}`) at the end of the code block on the same line as the next statement (OK).
-If there is a curly brace placed on a separate line from the next statement, then the result is Not OK.
-
-Please follow the rules to unify your coding style.
-
-
-```java
-
-        boolean condition = true;
-        if (condition) {
-
-        }   // There is an unnecessary line break between } and else (Not OK).
-        else {
-
-        }
-
-        try {
-
-        }   // There is an unnecessary line break between } and catch (Not OK).
-        catch (IllegalArgumentException e) {
-
-        }   // There is an unnecessary line break between } and finally (Not OK).
-        finally {
-
-        }
-```
 
 
 ## SimplifyBooleanExpression
@@ -1524,19 +1324,12 @@ The purpose is not to ban TODO comments. The original purpose of this check is t
 ## TypeName
 
 ```xml
-<module name="TypeName">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="CLASS_DEF"/>
-</module>
-<module name="TypeName">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="INTERFACE_DEF"/>
-</module>
+<module name="TypeName"/>
 ```
 
-Check the name of the class interface.
+Check the name of class, interface, enum, annotation, record.
 
-Ensure that the name of class/interface satisfies the following rule (OK):
+Verify that the name meets the following rules (OK):
 
 - Start with a uppercase letter, followed by lowercase and uppercase letters, and Arabic numerals
 
@@ -1570,6 +1363,20 @@ public class UnusedImportsExample {
 
     private static Pattern alphabet = Pattern.compile("^[a-zA-Z]+$");
 ```
+
+## UnusedLocalVariable
+
+```xml
+    <module name="UnusedLocalVariable"/>
+```
+
+Check for unused local variables.
+
+Delete the unused local variables (OK).
+If unused local variables are present, then it will be Not OK.
+
+Unused local variables have no effect on operation,
+such statements should be deleted as extra burden on the reader of the code .
 
 ## UpperEll
 
@@ -1609,85 +1416,3 @@ All fields should be `private` except for `static final` constants (OK).
 In the case of a field that is not `private`, then it will be Not OK.
 
 This rule is intended to enforce compliance with encapsulation.
-
-## WhitespaceAfter
-
-```xml
-<module name="WhitespaceAfter">
-  <property name="severity" value="info"/>
-</module>
-```
-
-Check for white spaces after certain symbols or keywords.
-
-Ensure that the following rules are satisfied (OK):
-
-- If there is a description enumerated with `,`, such as calling a method having multiple arguments, there must be a space after `,`
-- When writing an expression separated by `;` like a legacy `for` statement, there must be a space after `;`
-- A cast expression has a type that is enclosed in parentheses, but there must be a space after the closing parenthesis
-- There must be a space after the next keyword
-  - `if`
-  - `else`
-  - `while`
-  - `do`
-  - `for`
-
-If these conditions are not met, then it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-## WhitespaceAround
-
-```xml
-<module name="WhitespaceAround">
-  <property name="severity" value="info"/>
-  <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LE,LITERAL_DO,LITERAL_ELSE,LITERAL_FOR,LITERAL_IF,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN"/>
-</module>
-```
-
-Check for whitespace before and after the operator.
-
-Place a space before and after operators such as `+` and `*`, and assignment operators such as `=` `+=` `*=` (OK).
-If this condition is not met, it will be Not OK.
-
-Please follow the rules to unify your coding style.
-
-## WriteTag
-
-```xml
-    <module name="WriteTag">
-      <property name="tag" value="@author"/>
-      <property name="tagFormat" value="\S"/>
-      <property name="tagSeverity" value="ignore"/>
-    </module>
-```
-
-Check that the `@author` tag exists in the Javadoc comment for the type (class, interface, enum and annotation).
-
-Different tags can be supported by copying each `WriteTag` element and rewriting the `tag` property.
-Set as needed in the project.
-
-```java
-/**
- * There is an author tag and the value is set (OK).
- * 
- * @author example
- */
-public class WriteTagExample {
-}
-
-/**
- * There is no author tag (Not OK).
- * 
- */
-interface Ng1WriteTagExample {
-}
-
-/**
- * There is an author tag but no value (Not OK).
- * 
- * @author
- */
-interface Ng2WriteTagExample {
-}
-```

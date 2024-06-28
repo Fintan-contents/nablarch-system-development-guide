@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of MemberName code.
- *
- * @author example
- * @since 1.0.0
  */
 public class MemberNameExample {
 
@@ -26,4 +23,3 @@ public class MemberNameExample {
      */
     private String goodName;
 }
-
