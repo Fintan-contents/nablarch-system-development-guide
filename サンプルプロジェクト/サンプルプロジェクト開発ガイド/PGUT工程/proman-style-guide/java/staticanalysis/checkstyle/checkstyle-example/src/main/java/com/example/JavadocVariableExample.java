@@ -5,11 +5,14 @@ package com.example;
 
 /**
  * JavadocVariableのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class JavadocVariableExample {
+
+    /**
+     *コンストラクタ。
+     */
+    private JavadocVariableExample() {
+    }
 
     public static final String HELLO = "こんにちは";    // javadocコメントがありません（NG）。
 
@@ -17,4 +20,3 @@ public class JavadocVariableExample {
     public static final String GOODBYE = "さようなら";  // javadocコメントがあります（OK）。
 
 }
-

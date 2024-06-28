@@ -12,9 +12,6 @@ import com.example.VisibilityModifierExample; // 同じパッケージにある�
 
 /**
  * RedundantImportのコード例です。
- * 
- * @author example
- * @since 1.0.0
  */
 public class RedundantImportExample {
 
@@ -22,4 +19,3 @@ public class RedundantImportExample {
     private StringBuilder bar;
     private VisibilityModifierExample baz;
 }
-

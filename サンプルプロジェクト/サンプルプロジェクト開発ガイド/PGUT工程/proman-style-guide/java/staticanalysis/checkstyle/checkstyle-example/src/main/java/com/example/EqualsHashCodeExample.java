@@ -7,17 +7,11 @@ import java.util.Objects;
 
 /**
  * EqualsHashCodeのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class EqualsHashCodeExample {
 
     /**
      * equalsメソッドのみオーバーライドした例（NG）。
-     *
-     * @author example
-     * @since 1.0.0
      */
     public static class EqualsOverride {
         /** ID */
@@ -54,8 +48,6 @@ public class EqualsHashCodeExample {
 
     /**
      * equalsメソッドとhashCodeメソッド両方をオーバーライドした例（OK）
-     * @author example
-     * @since 1.0.0
      */
     public static class OverrideEqualsAndHashCode {
         /** ID */
@@ -95,4 +87,3 @@ public class EqualsHashCodeExample {
     }
 
 }
-

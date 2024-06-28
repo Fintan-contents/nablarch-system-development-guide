@@ -15,22 +15,20 @@
 - [ArrayTypeStyle](#arraytypestyle)
 - [AvoidStarImport](#avoidstarimport)
 - [AvoidStaticImport](#avoidstaticimport)
+- [CatchParameterName](#catchparametername)
 - [ClassTypeParameterName](#classtypeparametername)
 - [ConstantName](#constantname)
+- [CyclomaticComplexity](#cyclomaticcomplexity)
 - [EmptyCatchBlock](#emptycatchblock)
 - [EqualsAvoidNull](#equalsavoidnull)
 - [EqualsHashCode](#equalshashcode)
 - [FallThrough](#fallthrough)
 - [FileLength](#filelength)
-- [FileTabCharacter](#filetabcharacter)
-- [GenericWhitespace](#genericwhitespace)
 - [Header](#header)
 - [HiddenField](#hiddenfield)
 - [HideUtilityClassConstructor](#hideutilityclassconstructor)
 - [IllegalCatch](#illegalcatch)
 - [IllegalThrows](#illegalthrows)
-- [IllegalType](#illegaltype)
-- [Indentation](#indentation)
 - [InnerAssignment](#innerassignment)
 - [InterfaceTypeParameterName](#interfacetypeparametername)
 - [MissingJavadocType](#missingjavadoctype)
@@ -39,8 +37,6 @@
 - [JavadocType](#javadoctype)
 - [JavadocVariable](#javadocvariable)
 - [LambdaParameterName](#lambdaparametername)
-- [LeftCurly](#leftcurly)
-- [LineLength](#linelength)
 - [LocalFinalVariableName](#localfinalvariablename)
 - [LocalVariableName](#localvariablename)
 - [MemberName](#membername)
@@ -51,24 +47,21 @@
 - [ModifiedControlVariable](#modifiedcontrolvariable)
 - [NeedBraces](#needbraces)
 - [NoFinalizer](#nofinalizer)
-- [NoWhitespaceAfter](#nowhitespaceafter)
-- [NoWhitespaceBefore](#nowhitespacebefore)
 - [PackageDeclaration](#packagedeclaration)
 - [PackageName](#packagename)
 - [ParameterName](#parametername)
+- [RecordComponentName](#recordcomponentname)
+- [RecordTypeParameterName](#recordtypeparametername)
 - [RedundantImport](#redundantimport)
-- [RightCurly](#rightcurly)
 - [SimplifyBooleanExpression](#simplifybooleanexpression)
 - [StaticVariableName](#staticvariablename)
 - [StringLiteralEquality](#stringliteralequality)
 - [TodoComment](#todocomment)
 - [TypeName](#typename)
 - [UnusedImports](#unusedimports)
+- [UnusedLocalVariable](#unusedlocalvariable)
 - [UpperEll](#upperell)
 - [VisibilityModifier](#visibilitymodifier)
-- [WhitespaceAfter](#whitespaceafter)
-- [WhitespaceAround](#whitespacearound)
-- [WriteTag](#writetag)
 
 <!-- END doctoc -->
 
@@ -154,8 +147,7 @@ static importが無いことをチェックします。
 static importは使用せず、`<クラス名>.<メンバー名>`というように記載してください(OK)。
 static import文が存在する場合、NGとなります。
 
-static importを濫用すると、外部のメソッド呼び出しをローカルのメソッド呼び出しと勘違いしてしまうなど、
-コードの読み手に誤解を与える恐れがあります。
+static importを濫用すると、外部のメソッド呼び出しをローカルのメソッド呼び出しと勘違いしてしまうなど、 コードの読み手に誤解を与える恐れがあります。
 
 ```java
 import static java.lang.System.out;
@@ -179,6 +171,23 @@ import static java.lang.System.out;
 
 - http://checkstyle.sourceforge.net/config_imports.html#AvoidStaticImport
 
+## CatchParameterName
+
+```xml
+<module name="CatchParameterName">
+  <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+</module>
+```
+
+catchパラメータ名をチェックします。
+
+catchパラメータの名前は以下のルールを満たすようにしてください(OK)。
+
+先頭が小文字のアルファベットで、それ以降は小文字のアルファベット・大文字のアルファベット・アラビア数字で構成されていること
+
+この条件を満たさない場合NGとなります。
+
+コーディングスタイル統一のため、ルールに準拠してください。
 
 ## ClassTypeParameterName
 
@@ -235,6 +244,54 @@ class NgClassTypeParameterNameExample2<t> {
 
 この条件を満たさない場合NGとなります。
 
+## CyclomaticComplexity
+
+```xml
+<module name="CyclomaticComplexity">
+  <property name="max" value="10"/>
+</module>
+```
+
+メソッドの循環的複雑度を計測してチェックします。
+
+循環的複雑度からコードの状態を以下のよう考えることができます。
+
+| 値      | 説明                                     |
+| ------- | ---------------------------------------- |
+| 1 - 10  | シンプルな構造, リスクが少ない           |
+| 11 - 20 | やや複雑, リスクが中程度                 |
+| 21 - 50 | 複雑, リスクが高い                       |
+| 50 -    | テスト不可能なコード, 非常にリスクが高い |
+
+循環的複雑度が許容値を超えないようにしてください(OK)。
+循環的複雑度が許容値を超えた場合NGとなります。
+
+```java
+public int example(int a, int b, int c, String str) {
+    if (a == 1) {                       // +1 (1)
+        return 1;
+    } else if (a == b && a == c) {      // +2 (3)
+        if (b < 1) {                    // +1 (4)
+            return 2;
+        }
+    }
+    try {
+        int d = Integer.parseInt(str);
+        if (a == d) {                   // +1 (5)
+            return switch (d) {
+                case 2 -> 20;           // +1 (6)
+                case 3 -> 30;           // +1 (7)
+                case 4 -> 40;           // +1 (8)
+                default -> 99;          // +1 (9)
+            };
+        }
+    } catch (NumberFormatException e) { // +1 (10)
+        throw new IllegalArgumentException(e);
+    }
+    return a < 0 ? -1 : 1;              // +1 (11)
+}
+```
+
 ## EmptyCatchBlock
 
 
@@ -249,8 +306,7 @@ class NgClassTypeParameterNameExample2<t> {
 
 空の`catch`節は、コンパイルエラーを解消するためだけの理由で書かれている可能性があります。
 この場合、本来は適切に処理されるべき例外・エラーが揉み消されて、障害発生時の原因究明が困難になります。
-処理がなくてもよい`catch`節とエラー回避のため`catch`節とを区別できるように
-`catch`節に処理が必要ない適切な理由を記載するようにしてください。
+処理がなくてもよい`catch`節とエラー回避のため`catch`節とを区別できるように`catch`節に処理が必要ない適切な理由を記載するようにしてください。
 
 デフォルト設定では、以下のように`catch`節に何らかのコメントが記載されている場合はNGになりません。
 
@@ -324,8 +380,8 @@ if (value1.equals(value2)) {
 
 `equals`メソッド、`hashCode`メソッドのオーバーライドについては以下を参照してください。
 
-- https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
-- https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html#hashCode--
+- https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)
+- https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/lang/Object.html#hashCode()
 
 
 ## FallThrough
@@ -396,54 +452,6 @@ if (value1.equals(value2)) {
 そういったクラスは扱いづらく、保守性も低くなります。
 
 コーディングのときは、クラスをコンパクトに保つよう心がけてください。
-
-## FileTabCharacter
-
-```xml
- <module name="FileTabCharacter"/>
-```
-
-ソースコード中のタブ文字をチェックします。
-
-タブ文字を使用せず、空白を使用するようにしてください(OK)。
-タブ文字が存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-```java
-    // タブを使用したインデント（NG）
-	System.out.println("この行はタブでインデントされています");
-
-    // 空白を使用したインデント（OK）
-    System.out.println("この行は空白でインデントされています");
-
-```
-
-タブではなく空白を使用した場合、エディタのタブ幅を明示的に設定しなくてもよいというメリットがあります。
-
-
-## GenericWhitespace
-
-```xml
-<module name="GenericWhitespace"/>
-```
-
-ジェネリクスの括弧の周りの空白をチェックします。
-
-ジェネリクスの括弧`<`の後ろと、`>`の前に空白を配置しないようにしてください(OK)。
-不要な空白が存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-```java
-        // ジェネリクスの<>に不要な空白があります（NG）。
-        List< String > bad = new ArrayList<>();
-        Map< String, Integer > badToo = new HashMap<>();
-
-        // ジェネリクスの<>に不要な空白がありません（OK）。
-        List<String> good = new ArrayList<>();
-        Map<String, Integer> goodToo = new HashMap<>();
-```
 
 
 ## Header
@@ -578,117 +586,6 @@ public class HideUtilityClassConstructorExample {
 これらは汎用的なものであり、例外・エラーの原因特定のための情報が不足しています。
 アプリケーションで例外を`throw`する場合は、より具体的な型を選択するようにして、`throws`でも具体的な型を宣言してください(OK)。
 
-## IllegalType
-
-```xml
-<module name="IllegalType">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
-  <property name="illegalClassNames" value="java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeSet, java.util.TreeMap, java.util.Vector, java.util.IdentityHashMap, java.util.WeakHashMap, java.util.EnumMap, java.util.concurrent.ConcurrentHashMap, java.util.concurrent.CopyOnWriteArrayList, java.util.concurrent.CopyOnWriteArraySet, java.util.EnumSet, java.util.PriorityQueue, java.util.concurrent.ConcurrentLinkedQueue, java.util.concurrent.LinkedBlockingQueue, java.util.concurrent.ArrayBlockingQueue, java.util.concurrent.PriorityBlockingQueue, java.util.concurrent.DelayQueue, java.util.concurrent.SynchronousQueue"/>
-</module>
-```
-
-指定された型を使用していないことをチェックします。
-
-次に列挙しているクラスを変数の型、戻り値の型、パラメータの型として使用しないでください。
-
-- `java.util.Hashtable`
-- `java.util.HashSet`
-- `java.util.HashMap`
-- `java.util.ArrayList`
-- `java.util.LinkedList`
-- `java.util.LinkedHashMap`
-- `java.util.LinkedHashSet`
-- `java.util.TreeSet`
-- `java.util.TreeMap`
-- `java.util.Vector`
-- `java.util.IdentityHashMap`
-- `java.util.WeakHashMap`
-- `java.util.EnumMap`
-- `java.util.concurrent.ConcurrentHashMap`
-- `java.util.concurrent.CopyOnWriteArrayList`
-- `java.util.concurrent.CopyOnWriteArraySet`
-- `java.util.EnumSet`
-- `java.util.PriorityQueue`
-- `java.util.concurrent.ConcurrentLinkedQueue`
-- `java.util.concurrent.LinkedBlockingQueue`
-- `java.util.concurrent.ArrayBlockingQueue`
-- `java.util.concurrent.PriorityBlockingQueue`
-- `java.util.concurrent.DelayQueue`
-- `java.util.concurrent.SynchronousQueue`
-
-これらを変数の型、戻り値の型、パラメータの型として場合、NGとなります。
-代わりにこれらのクラスのインタフェースを使用するようにしてください(OK)。
-
-ここに挙げられている型はいずれも具象クラスです。
-具象クラスではなくインターフェースを中心にした設計をするためにこのルールが適用されます。
-
-
-## Indentation
-
-```xml
-<module name="Indentation">
-  <property name="caseIndent" value="0"/>
-</module>
-```
-
-インデントがルールに合致しているかをチェックします。
-
-インデントはルールに合致するように記述してください(OK)。
-ルールに合致しないインデントが存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-```java
-    /**
-     * IndentationのNG例です。
-     *
-     * @param number 数字
-     * @return 変換後の数値
-     * @throws IllegalArgumentException 引数が0の場合
-     */
-    public int invalidExample(int number)
-    throws IllegalArgumentException {   // throwsのインデントがルールに合致しないのでNG
-
-    int ret;    // メソッド内ステートメントのインデントがルールに合致しないのでNG
-
-        switch (number) {
-            // 以下、switchとcaseとのインデントがルールに合致しないのでNG
-            case 0:
-                throw new IllegalArgumentException("argument 'number' must not be zero.");
-
-            default:
-                ret = number + 1;
-                break;
-        }
-        return ret;
-    }
-
-    /**
-     * IndentationのOK例です。
-     *
-     * @param number 数字
-     * @return 変換後の数値
-     * @throws IllegalArgumentException 引数が0の場合
-     */
-    public int validExample(int number)
-            throws IllegalArgumentException {   // throwsのインデントがルールに合致しているOK
-
-        int ret;    // メソッド内ステートメントのインデントがルールに合致しているのでOK
-
-        switch (number) {
-        // 以下、switchとcaseとのインデントがルールに合致するでNG
-        case 0:
-            throw new IllegalArgumentException("argument 'number' must not be zero.");
-
-        default:
-            ret = number + 1;
-            break;
-        }
-        return ret;
-    }
-```
-
 ## InnerAssignment
 
 ```xml
@@ -702,7 +599,7 @@ public class HideUtilityClassConstructorExample {
 変数への代入は式の途中ではなく、トップレベルで行ってください(OK)。
 式途中での代入はNGとなります。
 
-式の途中で代入した場合、どこで代入がされているかがわかりにくくなり可読性を低下させます。
+式の途中での代入を行った場合、どこで代入がされているかがわかりにくくなり可読性を低下させます。
 
 ```java
 // 変数iへの代入がトップレベルで行われている(OK)
@@ -879,7 +776,7 @@ Javadocコメントは、コードの読み手にとって重要な情報とな�
 ## LambdaParameterName
 
 ```xml
-<module name="LocalVariableName"/>
+<module name="LambdaParameterName"/>
 ```
 
 ラムダ式の引数の名前をチェックします。
@@ -902,62 +799,7 @@ Function<String, String> ng2 = bad_name -> "NG";
 // ルールに従った命名です（OK）。
 Function<String, String> ok = goodName -> "OK";
 ```
-## LeftCurly
 
-```xml
-    <module name="LeftCurly"/>
-```
-
-
-コードブロックの始め中括弧（`{`） の配置をチェックします。
-
-コードブロックの中括弧（`{`）は行末へ配置するようにしてください(OK)。
-行末に置かれていない中括弧が存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-
-```java
-        boolean condition = true;
-        if (condition)  // 中括弧が行末にない（NG）。
-        {
-
-        } else
-        {               // 中括弧が行末にない（NG）。
-
-        }
-
-        try
-        {
-
-        } catch (IllegalArgumentException e)
-        {               // 中括弧が行末にない（NG）。
-
-        } finally
-        {               // 中括弧が行末にない（NG）。
-
-        }
-```
-
-## LineLength
-
-```xml
-<module name="LineLength">
-  <property name="ignorePattern" value="^import"/>
-  <property name="max" value="150"/>
-  <property name="tabWidth" value="4"/>
-</module>
-```
-
-一行における文字数をチェックします。
-
-一行あたりの文字数は150以内にしてください(OK)。
-一行が150字を超えるとNGとなります。
-
-ただし、`import`宣言が書かれた行は除きます。
-
-
-一行の文字数が多すぎると、コードの可読性が下がります。
 
 ## LocalFinalVariableName
 
@@ -1258,47 +1100,6 @@ if (foo)
     }
 ```
 
-## NoWhitespaceAfter
-
-
-```xml
-    <module name="NoWhitespaceAfter">
-      <property name="severity" value="info"/>
-      <property name="tokens" value="BNOT,DEC,INC,LNOT"/>
-    </module>
-```
-
-特定のトークン（`~` `!` `++`(前置)など）の後に空白がないことをチェックします。
-
-これらのトークンに後には空白を配置しないでください(OK)。
-空白が存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-## NoWhitespaceBefore
-
-```xml
-    <module name="NoWhitespaceBefore">
-      <property name="severity" value="info"/>
-    </module>
-```
-
-特定のトークン（`,` `;` `;`など）の前に空白がないことをチェックします。
-
-これらのトークンに後には空白を配置しないでください(OK)。
-空白が存在する場合、NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-
-```java
-        // セミコロン前に不要な空白がある（NG）。
-        int i = 0 ;
-
-        // カンマの前に不要な空白がある（NG）。
-        List<String> list = Arrays.asList("foo", "bar", "buz");
-```
-
 ## PackageDeclaration
 
 ```xml
@@ -1359,6 +1160,38 @@ if (foo)
 public void example(String BadName, String bad_name, String goodName) {
 ```
 
+## RecordComponentName
+
+```xml
+<module name="RecordComponentName"/>
+```
+
+レコードコンポーネントの名前をチェックします。
+
+レコードコンポーネントの名前は以下のルールを満たすようにしてください(OK)。
+
+- 先頭が小文字のアルファベットで、それ以降は小文字のアルファベット・大文字のアルファベット・アラビア数字で構成されていること
+
+この条件を満たさない場合NGとなります。
+
+コーディングスタイル統一のため、ルールに準拠してください。
+
+## RecordTypeParameterName
+
+```xml
+<module name="RecordTypeParameterName"/>
+```
+
+レコードクラスにバインドされた型パラメーターの名前をチェックします。
+
+型パラメーターの名前は以下の条件を満たすようにしてください(OK)。
+
+- 大文字のアルファベット1文字で構成されていること
+
+この条件を満たさない場合NGとなります。
+
+コーディングスタイル統一のため、ルールに準拠してください。
+
 ## RedundantImport
 
 ```xml
@@ -1371,43 +1204,6 @@ public void example(String BadName, String bad_name, String goodName) {
 重複する2つ以上の`import`や`java.lang`パッケージにあるクラスの`import`、それから同じパッケージにあるクラスの`import`があるとNGとなります。
 
 冗長な記述はコードの可読性を低下させます。
-
-## RightCurly
-
-
-```xml
-    <module name="RightCurly"/>
-```
-
-
-`if-else`、`try-catch-finally`のコードブロックの終わり中括弧（`}`） の配置をチェックします。
-
-コードブロック終わりの中括弧（`}`）は次のステートメントと同じ行に配置してください(OK)。
-次のステートメントと別の行に配置された中括弧が存在する場合NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-
-```java
-
-        boolean condition = true;
-        if (condition) {
-
-        }   // } と else の間に不要な改行がある（NG）。
-        else {
-
-        }
-
-        try {
-
-        }   // } と catch の間に不要な改行がある（NG）。
-        catch (IllegalArgumentException e) {
-
-        }   // } と finally の間に不要な改行がある（NG）。
-        finally {
-
-        }
-```
 
 
 ## SimplifyBooleanExpression
@@ -1478,8 +1274,7 @@ private static String goodName;
 そのような文字列比較が存在する場合、NGとなります。
 
 
-比較演算子で文字列を比較した場合、文字列が等価かどうかではなく
-オブジェクトが同一かどうかで比較してしまうため、期待しない動作となる場合があります。
+比較演算子による文字列比較を行った場合、文字列が等価かどうかではなくオブジェクトが同一かどうかで比較してしまうため、期待しない動作となる場合があります。
 
 ```xml
     <module name="StringLiteralEquality">
@@ -1527,19 +1322,12 @@ TODOコメントを禁止することが目的ではありません。TODOコメ
 ## TypeName
 
 ```xml
-<module name="TypeName">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="CLASS_DEF"/>
-</module>
-<module name="TypeName">
-  <property name="severity" value="error"/>
-  <property name="tokens" value="INTERFACE_DEF"/>
-</module>
+<module name="TypeName"/>
 ```
 
-クラス・インターフェースの名前をチェックします。
+クラス・インターフェース・列挙型・アノテーション・レコードの名前をチェックします。
 
-クラス・インターフェースの名前は以下のルールを満たすようにしてください(OK)。
+名前は以下のルールを満たすようにしてください(OK)。
 
 - 先頭が大文字のアルファベットで、それ以降は小文字のアルファベット・大文字のアルファベット・アラビア数字で構成されていること
 
@@ -1559,8 +1347,7 @@ TODOコメントを禁止することが目的ではありません。TODOコメ
 未使用の`import`文は削除してください(OK)。
 使用されていない`import`文が存在する場合、NGとなります。
 
-使用されていない`import`文は動作には影響しませんが、
-コードの読み手に当該クラスの依存関係を誤解させる恐れがあるため、取り除くべきです。
+使用されていない`import`文は動作には影響しませんが、コードの読み手に当該クラスの依存関係を誤解させる恐れがあるため、取り除くべきです。
 
 ```java
 // 使用されないimport文（NG）。
@@ -1573,6 +1360,19 @@ public class UnusedImportsExample {
 
     private static Pattern alphabet = Pattern.compile("^[a-zA-Z]+$");
 ```
+
+## UnusedLocalVariable
+
+```xml
+    <module name="UnusedLocalVariable"/>
+```
+
+使用されていないローカル変数をチェックします。
+
+未使用のローカル変数は削除してください(OK)。
+使用されていないローカル変数が存在する場合、NGとなります。
+
+使用されていないローカル変数は動作には影響しませんが、コードの読み手に余計な負荷を掛けてしまうため、取り除くべきです。
 
 ## UpperEll
 
@@ -1612,85 +1412,3 @@ public class UnusedImportsExample {
 `private`でないフィールドが存在する場合、NGとなります。
 
 この規則は、カプセル化を遵守させることを意図しています。
-
-## WhitespaceAfter
-
-```xml
-<module name="WhitespaceAfter">
-  <property name="severity" value="info"/>
-</module>
-```
-
-特定の記号やキーワードの後ろに空白があるかチェックします。
-
-以下のルールを満たすようにしてください(OK)。
-
-- 複数の引数を持つメソッドの呼び出しのように`,`で列挙する記述がある場合、`,`の後ろに空白があること
-- レガシー`for`文のように`;`で区切って式を記述する場合、`;`の後ろに空白があること
-- キャスト式では括弧で囲った型があるが、閉じ括弧の後ろに空白があること
-- 次のキーワードの後ろには空白があること
-  - `if`
-  - `else`
-  - `while`
-  - `do`
-  - `for`
-
-これらの条件を満たさない場合NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-## WhitespaceAround
-
-```xml
-<module name="WhitespaceAround">
-  <property name="severity" value="info"/>
-  <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LE,LITERAL_DO,LITERAL_ELSE,LITERAL_FOR,LITERAL_IF,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN"/>
-</module>
-```
-
-演算子の前後に空白があるかチェックします。
-
-`+`や`*`のような演算子、`=` `+=` `*=`などの代入演算子の前後には空白を配置してください(OK)。
-この条件を満たさない場合NGとなります。
-
-コーディングスタイル統一のため、ルールに準拠してください。
-
-## WriteTag
-
-```xml
-    <module name="WriteTag">
-      <property name="tag" value="@author"/>
-      <property name="tagFormat" value="\S"/>
-      <property name="tagSeverity" value="ignore"/>
-    </module>
-```
-
-型（クラス・インターフェース・列挙型・アノテーション）のJavadocコメント内に`@author`タグが存在するかチェックします。
-
-`WriteTag`要素ごとコピーして`tag`プロパティを書き換えれば異なるタグにも対応できます。
-プロジェクトで必要に応じて設定をしてください。
-
-```java
-/**
- * authorタグがあり、値が設定されています（OK）。
- * 
- * @author example
- */
-public class WriteTagExample {
-}
-
-/**
- * authorタグがありません（NG）。
- * 
- */
-interface Ng1WriteTagExample {
-}
-
-/**
- * authorタグはありますが、値がありません（NG）。
- * 
- * @author
- */
-interface Ng2WriteTagExample {
-}
-```

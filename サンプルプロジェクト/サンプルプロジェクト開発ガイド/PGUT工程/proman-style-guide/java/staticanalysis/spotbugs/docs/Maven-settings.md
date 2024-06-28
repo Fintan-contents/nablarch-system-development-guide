@@ -2,7 +2,7 @@
 
 この文書ではMavenでSpotBugsの実行をするための設定方法と実行方法をガイドします。
 
-なお、この文書の内容はMaven 3.6.3で動作検証を行っています。
+なお、この文書の内容はMaven 3.9.2で動作検証を行っています。
 
 ## チェックを除外するフィルターファイルを配置する
 
@@ -29,14 +29,7 @@
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>4.5.0.0</version>
-  <dependencies>
-    <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs</artifactId>
-      <version>4.5.0</version>
-    </dependency>
-  </dependencies>
+  <version>4.7.3.4</version>
   <configuration>
     <xmlOutput>true</xmlOutput>
     <!-- チェックを除外するフィルターファイル -->
@@ -87,17 +80,15 @@ mvn compile
 もしチェック違反がある場合は次のように指摘内容がコンソールに出力されます。
 
 ```
-[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
-[INFO] String オブジェクトを == や != を使用して比較しています。com.example.App.main(String[]) [com.example.App] 該当箇所 App.java:[line 9] ES_COMPARING_STRINGS_WITH_EQ
+[ERROR] Medium: String オブジェクトを == や != を使用して比較しています。com.example.ComparingStringsWithEq.example() [com.example.ComparingStringsWithEq] 該当箇所 ComparingStringsWithEq.java:[line 11] ES_COMPARING_STRINGS_WITH_EQ
 ```
 
 すべてのチェックをパスした場合は次のようにコンソールに出力されます。
 
 ```
-[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 0
 [INFO] Error size is 0
 [INFO] No errors/warnings found

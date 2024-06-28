@@ -5,17 +5,11 @@ package com.example;
 
 /**
  * FallThroughのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class FallThroughExample {
 
     /**
      * 会員のランクを表す列挙型です。
-     *
-     * @author example
-     * @since 1.0.0
      */
     enum MemberRank {
         /** ゴールド会員 */
@@ -92,4 +86,3 @@ public class FallThroughExample {
         }
     }
 }
-

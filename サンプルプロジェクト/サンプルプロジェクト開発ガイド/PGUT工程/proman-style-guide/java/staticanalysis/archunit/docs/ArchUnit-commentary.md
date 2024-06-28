@@ -27,10 +27,9 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().
 
 このチェックを行ったときにクラス名の末尾が `Action` であるのにパッケージプライベートであるクラスが存在すると違反をおかしていることになります。
 
-ちなみに、上記の内容をJUnit5で実行可能なテストとした場合、以下のようになります。
+ちなみに、上記の内容をJUnit 5で実行可能なテストとした場合、以下のようになります。
 
 ```java
- 
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class ActionRuleTest {
 
@@ -79,7 +78,7 @@ public class ExampleRuleTest {
 
 宣言チェックでは、クラスやメソッド、フィールドの修飾子、型などを確認することになります。
 
-たとえば以下の例では、 `DaoContext` のフィールドはprivateであり、finalであるが、staticでないことをチェックします。
+たとえば以下の例では、 `DaoContext` 型のフィールドはprivateであり、finalであるが、staticでないことをチェックします。
 
 注意しなければならないのは、修飾子について宣言時に付与しないことが意味をもつ場合は「〇〇でないこと」のチェックを含むようにしてください。（以下の例ではstaticでないことのチェックをしています。）
 
@@ -87,7 +86,8 @@ public class ExampleRuleTest {
 ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
                 .should().bePrivate()
                 .andShould().beFinal()
-                .andShould().notBeStatic();
+                .andShould().notBeStatic()
+                .allowEmptyShould(true);
 ```
 
 次の例では、クラス名の末尾がActionの場合、BatchActionを継承していることをチェックします。
@@ -127,16 +127,19 @@ ArchRuleDefinition.noClasses().that().resideInAPackage("..service..")
 
 パッケージなどによりレイヤー名を定義し、定義したレイヤー間の依存関係をチェックします。
 
-たとえば、以下の3つのレイヤーがあった際の例を示します。
+たとえば
 
 - コントローラーを配置するactionパッケージ
 - コントローラーからのみ使用するロジックをまとめたserviceパッケージ
 - 画面の入力内容をコントローラーへ移送するformパッケージ
 
+という3つのレイヤーがあった際の例を示します。
+
 actionパッケージのみ他のパッケージに依存できるものとし、自パッケージへの依存も禁止するものとします。
 
 ```java
 Architectures.layeredArchitecture()
+    .consideringAllDependencies()
     .layer("Action").definedBy("..action..")
     .layer("Service").definedBy("..service..")
     .layer("Form").definedBy("..form..")

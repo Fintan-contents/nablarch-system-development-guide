@@ -8,9 +8,6 @@ import java.util.*;
 
 /**
  * AvoidStarImportのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class AvoidStarImportExample {
 
@@ -21,4 +18,3 @@ public class AvoidStarImportExample {
         List<String> list = new ArrayList<>();
     }
 }
-

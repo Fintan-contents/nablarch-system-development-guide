@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * IllegalThrowsのコード例です。
- * 
- * @author example
- * @since 1.0.0
  */
 public class IllegalThrowsExample {
 

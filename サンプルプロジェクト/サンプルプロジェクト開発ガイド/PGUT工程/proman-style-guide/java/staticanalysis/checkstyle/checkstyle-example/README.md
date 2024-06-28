@@ -1,7 +1,7 @@
 # Checkstyleサンプルプロジェクト
 
 これは[Checkstyle](http://checkstyle.sourceforge.net/)のサンプルプロジェクトです。
-[Checkstyle設定ファイル](./checkstyle/nablarch-checkstyle.xml)とチェック対象のサンプルソースコードを配置しています。
+[Checkstyle設定ファイル](./checkstyle/standard-checkstyle.xml)とチェック対象のサンプルソースコードを配置しています。
 また、すぐにMavenでCheckstyleを実行できる[pom.xml](./pom.xml)も配置しています。
 
 ソースコードを見て具体的にどのようなコードがCheckstyleでチェックされるか確認したり、
