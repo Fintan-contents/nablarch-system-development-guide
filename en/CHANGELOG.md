@@ -7,7 +7,7 @@ All significant changes to this project will be documented in this file.
 - Improve the sample project
 
   - Nablarch version upgraded to 6u2.
-  - Removed JSP auto generation tool not provided since Nablarch 6.
+  - Removed JSP auto generation tool not provided in Nablarch 6.
   - ArchUnit version upgraded to 1.0.1.
 
 - README.md
