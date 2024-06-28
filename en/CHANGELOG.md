@@ -12,7 +12,7 @@ All significant changes to this project will be documented in this file.
 
 - README.md
 
-  - Since Nablarch6 series is based on the Jakarta EE 10 assumption, we have added a new section "The reading into the Jakarta EE specification in this document".
+  - Since Nablarch 6 series is based on the Jakarta EE 10 assumption, we have added a new section "The reading into the Jakarta EE specification in this document".
 
 ## 3.5 (2022-10-31)
 
