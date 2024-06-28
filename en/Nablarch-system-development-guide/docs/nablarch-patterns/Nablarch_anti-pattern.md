@@ -121,7 +121,7 @@ Realize by framework management loop processing instead of self-loop processing.
 In the case of the above example, the SQL issued in the handle will be performed by createReader.
 
 
-## JSR352 batch
+## Jakarta Batch-compliant batch
 
 
 ### Misuse of batchlet
