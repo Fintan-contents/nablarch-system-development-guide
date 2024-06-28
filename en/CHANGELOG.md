@@ -4,6 +4,9 @@ All significant changes to this project will be documented in this file.
 
 ## 3.6 (2023-09-29)
 
+- Improve the style guide
+  - Reflected [corrections made in the 4.0 version of the Style Guide (Java17 support)](https://github.com/Fintan-contents/coding-standards/compare/3.2...4.0).
+
 - Improve the sample project
   - ArchUnit version upgraded to 1.0.1.
 

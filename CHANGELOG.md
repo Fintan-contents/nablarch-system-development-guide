@@ -4,6 +4,9 @@
 
 ## 3.6 (2023-09-29)
 
+- スタイルガイドの修正
+  - [スタイルガイド 4.0版での修正（Java17対応）](https://github.com/Fintan-contents/coding-standards/compare/3.2...4.0)を反映しました。
+
 - サンプルプロジェクトの改善
   - ArchUnitのバージョンを1.0.1にバージョンアップしました。
 
