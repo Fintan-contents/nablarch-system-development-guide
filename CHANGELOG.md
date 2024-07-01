@@ -5,7 +5,10 @@
 ## 3.6 (2023-09-29)
 
 - スタイルガイドの修正
+  - [スタイルガイド 3.2版での修正(Nablarch依存箇所の明示)](https://github.com/Fintan-contents/coding-standards/compare/3.1...3.2)を反映しました。
+    - システム開発ガイドでは、スタイルガイドをサンプルプロジェクト向けにカスタマイズしているため、Nablarch以外のフレームワークを使用する場合の案内は反映していません。
   - [スタイルガイド 4.0版での修正（Java17対応）](https://github.com/Fintan-contents/coding-standards/compare/3.2...4.0)を反映しました。
+  - [スタイルガイド 5.0版での修正（Jakarta EE 10対応）](https://github.com/Fintan-contents/coding-standards/compare/3.2...4.0)を反映しました。
 
 - サンプルプロジェクトの改善
   - ArchUnitのバージョンを1.0.1にバージョンアップしました。
