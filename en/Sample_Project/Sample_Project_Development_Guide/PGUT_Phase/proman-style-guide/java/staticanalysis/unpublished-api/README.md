@@ -11,7 +11,6 @@ By limiting the APIs that can be used, implementations with security issues can 
 ## Specifications
 
 As the specification of the authorized API is described with whitelist format in the configuration file, it can be customized according to the coding conventions of the Nablarch implementation project.
-Also, by creating your own configuration file, it is possible to detect unauthorized APIs in projects that use frameworks other than Nablarch.
 
 Authorized APIs are specified in the configuration file. 
 The configuration file description method will be described later.
