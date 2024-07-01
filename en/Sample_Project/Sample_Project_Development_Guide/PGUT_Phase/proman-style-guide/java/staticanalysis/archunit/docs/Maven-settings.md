@@ -4,6 +4,10 @@ ArchUnit can be run as a JUnit test by running the `mvn test`.
 
 ## Place a filter file to exclude checks
 
+If want to exclude the test target by using the exclusion setting file, refer to [here](Ops-Rule.md#exclude-it-from-all-architecture-tests-by-including-it-in-the-exclusion-configuration-file).
+
+If do not want to use the exclusion setting file, please go to the next step.
+
 ## Include ArchUnit dependencies
 
 Edit `pom.xml` to add ArchUnit as a dependency.
