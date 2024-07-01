@@ -12,6 +12,11 @@ This repository provides coding conventions for Java and other languages, and an
 
 The documents in this repository are provided under the [Fintan Content License Terms And Conditions](https://fintan.jp/en/page/1890/#FintanContentLicenseTermsAndConditions).
 
+The following files and sample projects are provided under the [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt). 
+
+- Sample projects stored under `java/staticanalysis/checkstyle/checkstyle-example/`. 
+- Sample projects stored under `java/staticanalysis/spotbugs/spotbugs-example/`.
+
 ## Version
 
 The version of this style guide is represented by connecting the major and minor versions with a period.
