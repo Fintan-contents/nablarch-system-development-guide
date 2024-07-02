@@ -10,6 +10,11 @@ All significant changes to this project will be documented in this file.
   - Removed JSP auto generation tool not provided in Nablarch 6.
   - ArchUnit version upgraded to 1.0.1.
 
+- Improve the design documents
+  - [corrections made in the 2.3 version of Nablarch development standards](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/2.3/en/CHANGELOG.md).
+    - The validation provided by Nablarch standard in the domain definition document of the sample project was changed to the validation function compliant with Java EE7 Bean Validation (JSR349) (Bean Validation).
+    - Removed change history from unit test standards.
+
 - README.md
 
   - Since Nablarch 6 series is based on the Jakarta EE 10 assumption, we have added a new section "The reading into the Jakarta EE specification in this document".
