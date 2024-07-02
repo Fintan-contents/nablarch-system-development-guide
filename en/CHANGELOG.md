@@ -5,10 +5,10 @@ All significant changes to this project will be documented in this file.
 ## 3.6 (2023-09-29)
 
 - Improve the style guide
-  - Reflected [corrections made in the 3.2 version of the Style Guide (Clarification of Nablarch dependencies)](https://github.com/Fintan-contents/coding-standards/compare/3.1...3.2).
-    - The System Development Guide does not reflect guidance for using frameworks other than Nablarch, as the style guide has been customized for the sample project.
-  - Reflected [corrections made in the 4.0 version of the Style Guide (Java17 support)](https://github.com/Fintan-contents/coding-standards/compare/3.2...4.0).
-  - Reflected [corrections made in the 5.0 version of the Style Guide (Jakarta EE 10 support)](https://github.com/Fintan-contents/coding-standards/compare/4.0...5.0).
+  - Incorporated [corrections made in the 3.2 version of the Style Guide (Clarification of Nablarch dependencies)](https://github.com/Fintan-contents/coding-standards/blob/5.0/en/CHANGELOG.md#32-2022-10-31).
+    - The System Development Guide does not incorporate guidance for using frameworks other than Nablarch, as the style guide has been customized for the sample project.
+  - Incorporated [corrections made in the 4.0 version of the Style Guide (Java17 support)](https://github.com/Fintan-contents/coding-standards/blob/5.0/en/CHANGELOG.md#40-2023-08-01).
+  - Incorporated [corrections made in the 5.0 version of the Style Guide (Jakarta EE 10 support)](https://github.com/Fintan-contents/coding-standards/blob/5.0/en/CHANGELOG.md#50-2024-09-30).
 
 - Improve the sample project
   - ArchUnit version upgraded to 1.0.1.
