@@ -14,7 +14,7 @@ CIに本テストを組み込む場合は実行時間に留意してください
 ## ツールの場所
 自動実行のためのツールは、プロジェクト管理システムの中の次の場所に用意されています。
 
-[proman-jmeter](../../../ソースコード/proman-project/proman-jmeter)
+[proman-jmeter](../../../Source_Code/proman-project/proman-jmeter)
 
 ## サンプルシナリオを実行する
 `proman-jmeter` には、次の２つの取引単体テストのサンプルシナリオが用意されています。
@@ -25,12 +25,12 @@ CIに本テストを組み込む場合は実行時間に留意してください
 ここでは、２つのサンプルシナリオを実際に動かす方法について説明します。
 
 ### プロジェクト管理システムを起動する
-プロジェクト管理システムの起動方法については、プロジェクト管理システムの [README](../../../ソースコード/proman-project/proman-web/README.md) を参照してください。
+プロジェクト管理システムの起動方法については、プロジェクト管理システムの [README](../../../Source_Code/proman-project/proman-web/README.md) を参照してください。
 
 ### ツールを実行する
 ツールを実行する前に、ローカルの JMeter のインストールディレクトリをツールに設定する必要があります。
 
-[proman-jmeter/src/test/resources/env.properties](../../../ソースコード/proman-project/proman-jmeter/src/test/resources/env.properties) をテキストエディタで開き、 `jmeter.home` の値にローカルのJMeterのインストールディレクトリを設定してください。
+[proman-jmeter/src/test/resources/env.properties](../../../Source_Code/proman-project/proman-jmeter/src/test/resources/env.properties) をテキストエディタで開き、 `jmeter.home` の値にローカルのJMeterのインストールディレクトリを設定してください。
 
 ```properties
 （省略）
@@ -62,7 +62,7 @@ mvn clean test -Dhttp.proxyHost=<プロキシのホスト名> -Dhttp.proxyPort=<
 ```
 
 ## 仕組みや詳細な使い方
-ツールの仕組みや詳細な使い方については、ツールの [README](../../../ソースコード/proman-project/proman-jmeter/README.md) を参照してください。
+ツールの仕組みや詳細な使い方については、ツールの [README](../../../Source_Code/proman-project/proman-jmeter/README.md) を参照してください。
 
 ## サンプルプロジェクト以外で使用する
 この自動化ツールは、プロジェクト管理システムに依存していません。
@@ -77,5 +77,5 @@ mvn clean test -Dhttp.proxyHost=<プロキシのホスト名> -Dhttp.proxyPort=<
 3. サンプルのテストシナリオを削除する
     - `src/test/resources` の下に、サンプルのテストシナリオ(`WA10201`, `WA10203`)が存在するので、それらを削除してください。
 4. プロジェクトで使用するテストシナリオを配置する
-    - テストシナリオを新規に作成する手順については、 `proman-jmeter` の [README](../../../ソースコード/proman-project/proman-jmeter/README.md) の「テストシナリオの作り方」を参照してください。
+    - テストシナリオを新規に作成する手順については、 `proman-jmeter` の [README](../../../Source_Code/proman-project/proman-jmeter/README.md) の「テストシナリオの作り方」を参照してください。
 
