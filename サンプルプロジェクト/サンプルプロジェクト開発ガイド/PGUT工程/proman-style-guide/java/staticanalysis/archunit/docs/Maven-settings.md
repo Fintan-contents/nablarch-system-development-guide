@@ -16,7 +16,7 @@ ArchUnitは`mvn test`を実行することで、JUnitのテストとして実行
 <dependency>
     <groupId>com.tngtech.archunit</groupId>
     <artifactId>archunit-junit5</artifactId>
-    <version>1.0.1</version>
+    <version>1.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
