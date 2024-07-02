@@ -5,7 +5,7 @@
 
 - [ArchUnit運用ガイド](./Ops-Rule.md)
 - [MavenでのArchUnitの実行方法](./Maven-settings.md)
-- JenkinsでのArchUnit実行結果収集方法
+- JenkinsでのArchUnit実行結果の収集方法
   - ArchUnitはJUnitのテストとして実行されます。実行結果もJUnitのテスト結果を確認してください。
 
 ArchUnitで頻出するテストの記述方法を以下で解説します。
