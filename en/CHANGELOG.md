@@ -39,7 +39,6 @@ All significant changes to this project will be documented in this file.
       - Java of sample project version upgraded to 17.
       - Authorized API of the Java standard library has been modified due to Java version upgrade.
       - Sample configuration file has been placed.
-    - The description of the content that does not depend on Nablarch was corrected to remove the notation of Nablarch.
 
 - Improve the sample project
   - ArchUnit version upgraded to 1.0.1.
