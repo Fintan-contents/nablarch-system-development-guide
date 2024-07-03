@@ -11,9 +11,9 @@
   - ArchUnitのバージョンを1.0.1にバージョンアップしました。
 
 - 設計書の改善
-  - [Nablarch開発標準 2.3版での修正(Jakarta EE 10対応)](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/2.3/CHANGELOG.md)を取り込みました。
+  - [Nablarch開発標準 2.3版での修正](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/master/CHANGELOG.md)を元に、以下の修正を実施しました。
     - サンプルプロジェクトのドメイン定義書に記載している「Nablarch標準提供のバリデーション」を、Java EE7のBean Validation(JSR349)に準拠したバリデーション機能 (Bean Validation)に変更しました。
-    - Nablarch6系がJakartaEE10前提となったことを踏まえ、UI標準(画面)、UI標準(画面)別紙_UI部品カタログに、「1.3. 本書におけるJakartaEE仕様への読み替えについて」を追加しました。
+    - Nablarch6系がJakarta EE 10前提となったことを踏まえ、UI標準(画面)及びUI標準(画面)別紙_UI部品カタログについてもJakarta EE 10前提の記載に修正しました。
     - 単体テスト標準より、変更履歴を削除しました。
 
 - README.md
