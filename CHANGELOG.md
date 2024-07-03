@@ -9,6 +9,7 @@
   - 依存するNablarchのバージョンを6u2にバージョンアップしました。
   - Nablarch 6で提供していないJSP自動生成ツールを削除しました。
   - ArchUnitのバージョンを1.0.1にバージョンアップしました。
+  - 「顧客管理システム（climan）」で、HTTPアクセスログハンドラを[HTTPアクセスログ（RESTfulウェブサービス用）ハンドラ](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/handlers/rest/jaxrs_access_log_handler.html)に変更しました。
 
 - README.md
 
