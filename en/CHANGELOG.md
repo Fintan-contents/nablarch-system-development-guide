@@ -47,6 +47,11 @@ All significant changes to this project will be documented in this file.
   - ArchUnit version upgraded to 1.0.1.
   - In the "Client Management System (Climan)", HTTP Access Log Handler was replaced by HTTP Access Log (for RESTful Web Service) Handler.
 
+- Improve the design documents
+  - Based on [the corrections made in the Nablarch Development Standards Version 2.3](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/master/en/CHANGELOG.md), the following corrections was made.
+    - The validation provided by Nablarch standard in the domain definition document of the sample project was changed to the validation function compliant with Validation compliant with Jakarta Bean Validation of Jakarta EE (Bean Validation).
+    - Removed change history from unit test standards.
+
 - README.md
 
   - Since Nablarch 6 series is based on the Jakarta EE 10 assumption, we have added a new section "The reading into the Jakarta EE specification in this document".
