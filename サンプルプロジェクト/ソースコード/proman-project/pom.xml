@@ -81,6 +81,7 @@
         <artifactId>HikariCP</artifactId>
         <version>3.3.1</version>
       </dependency>
+      <!-- JUnit -->
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
@@ -89,9 +90,8 @@
         <scope>import</scope>
       </dependency>
     </dependencies>
-
-
   </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>
