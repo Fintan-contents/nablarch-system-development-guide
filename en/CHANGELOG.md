@@ -12,7 +12,7 @@ All significant changes to this project will be documented in this file.
 
 - Improve the design documents
   - Based on [the corrections made in the Nablarch Development Standards Version 2.3](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/master/en/CHANGELOG.md), the following corrections was made.
-    - The validation provided by Nablarch standard in the domain definition document of the sample project was changed to the validation function compliant with Java EE7 Bean Validation (JSR349) (Bean Validation).
+    - The validation provided by Nablarch standard in the domain definition document of the sample project was changed to the validation function compliant with Validation compliant with Jakarta Bean Validation of Jakarta EE (Bean Validation).
     - Removed change history from unit test standards.
 
 - README.md

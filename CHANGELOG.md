@@ -12,7 +12,7 @@
 
 - 設計書の改善
   - [Nablarch開発標準 2.3版での修正](https://github.com/nablarch-development-standards/nablarch-development-standards/blob/master/CHANGELOG.md)を元に、以下の通り変更しました。
-    - サンプルプロジェクトのドメイン定義書に記載している「Nablarch標準提供のバリデーション」を、Java EE7のBean Validation(JSR349)に準拠したバリデーション機能 (Bean Validation)に変更しました。
+    - サンプルプロジェクトのドメイン定義書に記載している「Nablarch標準提供のバリデーション」を、Jakarta EEのJakarta Bean Validationに準拠したバリデーション (Bean Validation) に変更しました。
     - Nablarch6系がJakarta EE 10前提となったことを踏まえ、UI標準(画面)及びUI標準(画面)別紙_UI部品カタログについてもJakarta EE 10前提の記載に修正しました。
     - 単体テスト標準より、変更履歴を削除しました。
 
