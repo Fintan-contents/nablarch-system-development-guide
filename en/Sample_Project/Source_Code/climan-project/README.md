@@ -1,4 +1,7 @@
-# Client Management System
+# Client Management System (Climan)
+
+This is the source code of the "Client management system".  
+(**Cli**ent **Man**agement System is abbreviated as `climan`)
 
 ## Required environment
 
