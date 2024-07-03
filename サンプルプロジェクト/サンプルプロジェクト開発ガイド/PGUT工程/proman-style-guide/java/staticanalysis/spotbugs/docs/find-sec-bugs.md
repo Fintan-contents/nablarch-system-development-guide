@@ -13,7 +13,7 @@ Find Security BugsはSpotBugsのプラグインです。
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>4.5.0.0</version>
+  <version>4.7.3.4</version>
   <!-- 中略 -->
   <configuration>
     <!-- 中略 -->
@@ -27,7 +27,7 @@ Find Security BugsはSpotBugsのプラグインです。
       <plugin>
         <groupId>com.h3xstream.findsecbugs</groupId>
         <artifactId>findsecbugs-plugin</artifactId>
-        <version>1.11.0</version>
+        <version>1.12.0</version>
       </plugin>
     </plugins>
   </configuration>

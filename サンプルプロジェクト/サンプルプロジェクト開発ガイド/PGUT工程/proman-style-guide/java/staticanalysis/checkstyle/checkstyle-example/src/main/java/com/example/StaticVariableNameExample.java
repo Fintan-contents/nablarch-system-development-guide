@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * StaticVariableNameのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class StaticVariableNameExample {
 
@@ -26,4 +23,3 @@ public class StaticVariableNameExample {
      */
     private static String goodName;
 }
-

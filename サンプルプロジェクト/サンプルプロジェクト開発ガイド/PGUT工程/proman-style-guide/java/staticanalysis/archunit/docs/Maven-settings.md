@@ -10,19 +10,15 @@ ArchUnitは`mvn test`を実行することで、JUnitのテストとして実行
 
 ## ArchUnitの依存を組み込む
 
-`pom.xml` を編集します。
-
-設定を追加する場所は`dependencies`要素の直下です。
+`pom.xml` を編集し、依存関係にArchUnitを追加します。
 
 ```xml
-  <dependencies>
-    <dependency>
-      <groupId>com.tngtech.archunit</groupId>
-      <artifactId>archunit-junit5</artifactId>
-      <version>1.0.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<dependency>
+    <groupId>com.tngtech.archunit</groupId>
+    <artifactId>archunit-junit5</artifactId>
+    <version>1.3.0</version>
+    <scope>test</scope>
+</dependency>
 ```
 
 ## Mavenでテストを実施する
@@ -36,10 +32,13 @@ mvn test
 もし違反がある場合は、以下のようにテスト内容と違反した対象が表示されます。
 
 ```
-[ERROR] Failures:
-[ERROR]   ServiceClassRuleTest.DaoContextをfieldに持つ場合private_finalであるがstaticじゃないこと Architecture Violation [Priority: MEDIUM] - Rule 'fields that have raw type nablarch.common.dao.DaoContext and are declared in classes that have simple name ending with 'Service' should be final and should not be private and should be static' was violated (2 times):
-Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> does not have modifier STATIC in (ProjectService.java:0)
-Field <com.nablarch.example.proman.web.project.ProjectService.universalDao> has modifier PRIVATE in (ProjectService.java:0)
+[ERROR] ExampleRuleTest.Actionがpublicであること  Time elapsed: 0.409 s  <<< FAILURE!
+java.lang.AssertionError: 
+Architecture Violation [Priority: MEDIUM] - Rule 'classes that have simple name ending with 'Action' should be public' was violated (1 times):
+Class <com.example.ExampleAction> does not have modifier PUBLIC in (ExampleAction.java:0)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.assertNoViolation(ArchRule.java:94)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.check(ArchRule.java:86)
+	...
 ```
 
 すべてのテストに合格した場合は、次のようにコンソールに出力されます。

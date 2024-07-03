@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of LocalVariableName code.
- *
- * @author example
- * @since 1.0.0
  */
 public class LocalVariableNameExample {
 
@@ -25,4 +22,3 @@ public class LocalVariableNameExample {
         String goodName = "OK";
     }
 }
-

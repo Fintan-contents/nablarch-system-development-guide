@@ -6,9 +6,6 @@ package com.example;
 
 /**
  * NoFinalizerのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class NoFinalizerExample {
 
@@ -20,4 +17,3 @@ public class NoFinalizerExample {
         // （リソース解放処理）
     }
 }
-

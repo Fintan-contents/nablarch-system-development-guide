@@ -5,15 +5,8 @@ package com.example;
 
 /**
  * Example of JavadocMethod code.
- *
- * @author example
- * @since 1.0.0
  */
 public class JavadocMethodExample {
-
-    public void noJavadocComment() {  // No javadoc comment (incorrect).
-
-    }
 
     /**
      * Double the assigned number.
@@ -32,4 +25,3 @@ public class JavadocMethodExample {
         return number * 2;
     }
 }
-

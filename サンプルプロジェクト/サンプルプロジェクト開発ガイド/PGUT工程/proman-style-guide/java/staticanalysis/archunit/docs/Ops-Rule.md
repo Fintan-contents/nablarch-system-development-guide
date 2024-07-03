@@ -53,42 +53,42 @@ ArchUnitではクラスパス・モジュールパスに含まれるクラスか
 - テストコードに除外対象を記載する。
 - 除外設定ファイルに記載し、すべてのアーキテクチャテストから除外する。
 
-前者はテスト対象によって記載が異なるため、注意してください。
-
-### 除外対象クラスの設定（テストコードに除外対象を記載）
-
-テスト対象がクラス（レイヤーも含む）の場合、以下のように `and()`（または元々 `that()` がなければ `that()`）の引数に `DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(除外対象クラス1,除外対象クラス2・・・))` を使用して除外設定を行う。
-
-``` java
-@ArchTest
-public static final ArchRule ActionクラスはBatchActionを継承していること =
-        ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
-        .and(DescribedPredicate.not(
-                JavaClass.Predicates.belongToAnyOf(
-                  PromanExampleAction.class, // #12345
-                  PromanServiceAction.class  // #12346
-                )
-        )).should().beAssignableTo(BatchAction.class);
-```
-
-テスト対象がクラス内に含まれるもの（フィールドやメソッドなど）の場合、 `areNotDeclaredIn()` を使用して除外設定をおこなう。
-
-``` java
-@ArchTest
-public static final ArchRule DaoContextを引数にとるメソッドはパッケージプライベートであること =
-        ArchRuleDefinition.methods().that().haveRawParameterTypes(DaoContext.class)
-            .and().areNotDeclaredIn(PromanExamAction.class)  // #1234
-            .should().bePackagePrivate();
-```
-
-除外設定をする場合は次のようにしておくと、後で経緯を追跡できます。
+除外する場合には、次のようにしておくことで後から経緯を追跡できます。
 
 - 課題管理システムの課題管理番号をコメントに記載する
 - バージョン管理システムのコミットコメントに記載する
 
-### 除外対象パッケージ設定（テストコードに除外対象を記載）
+### 除外対象クラスの設定（テストコードに除外対象を記載）
 
-テスト対象がクラスの場合、以下のようにして特定のパッケージを除外できます。
+テスト対象を指定した後、`and`メソッドを使用することで追加の条件を指定できます。
+
+`doNotBelongToAnyOf`メソッドに特定のクラス名を指定することで、該当クラスおよび該当クラス内に定義されたクラスをテスト対象から除外できます。
+
+``` java
+@ArchTest
+public static final ArchRule ActionクラスはBatchActionを継承していること =
+        ArchRuleDefinition.classes()
+        .that().haveSimpleNameEndingWith("Action")
+        .and().doNotBelongToAnyOf(PromanExampleAction.class, PromanServiceAction.class) // #12345,12346
+        .should().beAssignableTo(BatchAction.class);
+```
+
+特定のクラス内で定義されているフィールドやメソッド等を除外する場合は、 `areNotDeclaredIn`メソッドを使用することでテスト対象から除外できます。
+
+``` java
+@ArchTest
+public static final ArchRule DaoContextを引数にとるメソッドはパッケージプライベートであること =
+        ArchRuleDefinition.methods()
+        .that().haveRawParameterTypes(DaoContext.class)
+        .and().areNotDeclaredIn(PromanExamAction.class) // #1234
+        .should().bePackagePrivate();
+```
+
+### 除外対象パッケージの設定（テストコードに除外対象を記載）
+
+`resideOutsideOfPackage`メソッドで特定のパッケージを指定することで、該当パッケージをテスト対象から除外できます。
+ただし、パッケージは特定の文字列にて対象を決定することになるため、あらかじめパッケージ構成について検討しておく必要があります。
+
 以下の例では `common` を含むパッケージを除外しています。
 
 ```java
@@ -99,7 +99,8 @@ public  static  final ArchRule 基盤以外のパッケージでNoDataException�
         .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
 ```
 
-ただし、パッケージは特定の文字列にて対象を決定することになるため、あらかじめパッケージ構成について検討しておく必要があります。
+なお、特定のパッケージだけをテスト対象にしたい場合は、`resideInAPackage`メソッドを使用することでテスト対象に設定できます。
+
 
 ### カスタムルールによる除外設定（テストコードに除外対象を記載する）
 
@@ -116,10 +117,7 @@ public  static  final ArchRule 基盤以外のパッケージでNoDataException�
 .*some\.pkg\.LegacyService.*
 ```
 
-`#` をつけることでコメントを記載できるため、次のようにしておくと、後で経緯を追跡できます。
-
-- 課題管理システムの課題管理番号をコメントに記載する
-- バージョン管理システムのコミットコメントに記載する
+ファイル内では、先頭に `#` をつけることでコメントを記載できます。
 
 #### 注意事項
 

@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * UpperEllのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class UpperEllExample {
 
@@ -22,4 +19,3 @@ public class UpperEllExample {
         long good = 1L;
     }
 }
-

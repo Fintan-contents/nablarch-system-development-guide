@@ -7,9 +7,6 @@ import java.util.function.Function;
 
 /**
  * LambdaParameterNameのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class LambdaParameterNameExample {
 
@@ -27,4 +24,3 @@ public class LambdaParameterNameExample {
         Function<String, String> ok = goodName -> "OK";
     }
 }
-

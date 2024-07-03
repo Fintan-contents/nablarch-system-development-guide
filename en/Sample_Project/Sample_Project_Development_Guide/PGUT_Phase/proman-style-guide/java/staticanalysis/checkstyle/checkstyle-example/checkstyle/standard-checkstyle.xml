@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+  <property name="severity" value="error"/>
+  <!-- Specify character code for source code -->
+  <property name="charset" value="UTF-8"/>
+  <!-- Set target for removal of Checkstyle using settings file -->
+  <module name="SuppressionFilter">
+    <property name="file" value="${config_loc}/suppressions.xml"/>
+    <property name="optional" value="false"/>
+  </module>
+  <module name="FileLength"/>
+  <module name="Header">
+    <property name="headerFile" value="${config_loc}/header.txt"/>
+  </module>
+  <module name="TreeWalker">
+    <!-- Comment-based setting to remove Checkstyle -->
+    <module name="SuppressWithNearbyCommentFilter">
+      <!--
+        Lines can be set so that Checkstyle is not applied by writing a comment in a specific format.
+        Example of comment: // Setting removal using SUPPRESS CHECKSTYLE #12345
+       -->
+      <property name="commentFormat" value="SUPPRESS CHECKSTYLE #\d+"/>
+    </module>
+    <module name="AbstractClassName">
+      <property name="format" value="^(Abstract.*|.*FormBase)$"/>
+    </module>
+    <module name="ArrayTypeStyle"/>
+    <module name="AvoidStarImport"/>
+    <module name="AvoidStaticImport"/>
+    <module name="CatchParameterName">
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+    </module>
+    <module name="ClassTypeParameterName"/>
+    <module name="ConstantName">
+      <property name="format" value="^[A-Z](_?[A-Z0-9]+)*$"/>
+    </module>
+    <module name="CyclomaticComplexity" >
+      <property name="max" value="10" />
+    </module>
+    <module name="EmptyCatchBlock"/>
+    <module name="EqualsAvoidNull"/>
+    <module name="EqualsHashCode"/>
+    <module name="FallThrough"/>
+    <module name="HiddenField">
+      <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreSetter" value="true"/>
+    </module>
+    <module name="HideUtilityClassConstructor"/>
+    <module name="IllegalCatch">
+      <property name="illegalClassNames" value="java.lang.Exception, java.lang.Throwable, java.lang.RuntimeException, java.lang.Error"/>
+    </module>
+    <module name="IllegalThrows">
+      <property name="illegalClassNames" value="java.lang.Exception, java.lang.Throwable, java.lang.RuntimeException, java.lang.Error"/>
+    </module>
+    <module name="InnerAssignment">
+      <property name="tokens" value="ASSIGN"/>
+    </module>
+    <module name="InterfaceTypeParameterName"/>
+    <module name="MissingJavadocType">
+      <property name="scope" value="private"/>
+    </module>
+    <module name="MissingJavadocMethod">
+      <property name="scope" value="private"/>
+    </module>
+    <module name="JavadocMethod"/>
+    <module name="JavadocType"/>
+    <module name="JavadocVariable">
+      <property name="scope" value="public"/>
+    </module>
+    <module name="LambdaParameterName"/>
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <module name="MemberName"/>
+    <module name="MethodLength"/>
+    <module name="MethodName"/>
+    <module name="MethodTypeParameterName"/>
+    <module name="MissingSwitchDefault"/>
+    <module name="ModifiedControlVariable"/>
+    <module name="NeedBraces"/>
+    <module name="NoFinalizer"/>
+    <module name="PackageDeclaration"/>
+    <module name="PackageName">
+      <property name="format" value="^[a-z]+(\.[a-z_][a-z0-9_]*)*$"/>
+    </module>
+    <module name="ParameterName"/>
+    <module name="RecordComponentName"/>
+    <module name="RecordTypeParameterName"/>
+    <module name="RedundantImport"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="StaticVariableName"/>
+    <module name="StringLiteralEquality"/>
+    <module name="TodoComment">
+      <property name="format" value="TODO\s+"/>
+    </module>
+    <module name="TypeName"/>
+    <module name="UnusedImports"/>
+    <module name="UnusedLocalVariable"/>
+    <module name="UpperEll"/>
+    <module name="VisibilityModifier"/>
+  </module>
+</module>

@@ -10,9 +10,6 @@ import java.util.List;
 
 /**
  * EmptyCatchBlockのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class EmptyCatchBlockExample {
 
@@ -34,4 +31,3 @@ public class EmptyCatchBlockExample {
         }
     }
 }
-

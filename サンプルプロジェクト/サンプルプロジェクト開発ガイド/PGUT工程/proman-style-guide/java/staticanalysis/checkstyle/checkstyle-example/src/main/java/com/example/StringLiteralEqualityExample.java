@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * StringLiteralEqualityのコード例です。
- *
- * @author example
- * @since 1.0.0
  */
 public class StringLiteralEqualityExample {
 
@@ -23,10 +20,9 @@ public class StringLiteralEqualityExample {
         }
 
         // 文字列をequalsで比較しています（OK）。
-        if (s.equals("something")) {
+        if ("something".equals(s)) {
             
         }
 
     }
 }
-

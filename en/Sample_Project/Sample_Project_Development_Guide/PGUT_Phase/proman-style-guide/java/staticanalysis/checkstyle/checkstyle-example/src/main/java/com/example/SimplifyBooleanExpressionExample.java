@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of SimplifyBooleanExpression code.
- *
- * @author example
- * @since 1.0.0
  */
 public class SimplifyBooleanExpressionExample {
 
@@ -26,4 +23,3 @@ public class SimplifyBooleanExpressionExample {
         }
     }
 }
-

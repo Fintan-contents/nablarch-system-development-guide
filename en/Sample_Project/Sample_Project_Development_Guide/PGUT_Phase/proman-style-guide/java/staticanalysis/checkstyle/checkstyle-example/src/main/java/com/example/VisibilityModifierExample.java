@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of VisibilityModifier code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class VisibilityModifierExample {
 
@@ -36,4 +33,3 @@ public class VisibilityModifierExample {
      */
     public static final int OK2 = 0;
 }
-

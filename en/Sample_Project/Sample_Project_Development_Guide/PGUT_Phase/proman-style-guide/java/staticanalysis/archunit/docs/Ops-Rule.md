@@ -53,42 +53,42 @@ There are two main methods to exclude architecture violations from testing.
 - Describe the exclusion target in the test code.
 - Describe in the exclusion configuration file and exclude it from all architecture tests.
 
-Note that the former is described differently depending on the subject of the test.
-
-### Configuration of the exclusion target class (the exclusion target is described in the test code)
-
-If the test target is a class (including layers), then the argument to `and()` (or `that()` if there is no `that()` to begin with) is `DescribedPredicate.not(JavaClass.Predicates.belongToAnyOf(Excluded Exclude classes 1, 2, and so on...)]` to set up the exclusion.
-
-``` java
-@ArchTest
-public static final ArchRule actionClassMustInheritFromBatchAction. =
-        ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
-        .and(DescribedPredicate.not(
-                JavaClass.Predicates.belongToAnyOf(
-                  PromanExampleAction.class, // #12345
-                  PromanServiceAction.class  // #12346
-                )
-        )).should().beAssignableTo(BatchAction.class);
-```
-
-If the test target is contained in a class, such as a field or a method, the `areNotDeclaredIn()` is used to set the exclusion.
-
-``` java
-@ArchTest
-public static final ArchRule methodsThatTakeDaoContextAsAnArgumentMustBePackagePrivate =
-        ArchRuleDefinition.methods().that().haveRawParameterTypes(DaoContext.class)
-            .and().areNotDeclaredIn(PromanExamAction.class)  // #1234
-            .should().bePackagePrivate();
-```
-
 If make an exclusion setting, can follow the history later by doing the following.
 
 - Describe the issue management system's issue management number in the comments of the source code.
 - Include in the commit comments in the version control system.
 
-### Configuring the exclusion package (specifying the exclusion target in the test code)
+### Configuration of the exclusion target class (Describe the exclusion target in the test code)
 
-If test targets are classes, can exclude certain packages in the following way.
+After specifying the test target, additional conditions can be specified by using the `and` method.
+
+By specifying the class name in the `doNotBelongToAnyOf` method, you can exclude the target class and its internally defined classes from being tested.
+
+``` java
+@ArchTest
+public static final ArchRule actionClassMustInheritFromBatchAction. =
+        ArchRuleDefinition.classes()
+        .that().haveSimpleNameEndingWith("Action")
+        .and().doNotBelongToAnyOf(PromanExampleAction.class, PromanServiceAction.class) // #12345,12346
+        .should().beAssignableTo(BatchAction.class);
+```
+
+To exclude fields, methods, etc. defined within a specific class, you can use the `areNotDeclaredIn` method.
+
+``` java
+@ArchTest
+public static final ArchRule methodsThatTakeDaoContextAsAnArgumentMustBePackagePrivate =
+        ArchRuleDefinition.methods()
+        .that().haveRawParameterTypes(DaoContext.class)
+        .and().areNotDeclaredIn(PromanExamAction.class) // #1234
+        .should().bePackagePrivate();
+```
+
+### Configuring of the exclusion package (Describe the exclusion target in the test code)
+
+You can exclude target packages from testing by specifying them in the `resideOutsideOfPackage` method.
+However, you should consider the package structure beforehand, as packages are subject to specific strings.
+
 In the following example, exclude packages containing `common`.
 
 ```java
@@ -99,14 +99,14 @@ public  static  final ArchRule noClassesUsingNoDataExceptionInNonInstrumentalPac
         .should().dependOnClassesThat().areAssignableTo(NoDataException.class);
 ```
 
-However, you should consider the package structure beforehand, as packages are subject to specific strings.
+If you want to test only a specific package, you can use the `resideInAPackage` method.
 
-### Exclusions by custom rules (to list the exclusions in the test code)
+### Exclusions by custom rules (Describe the exclusion target in the test code)
 
 Custom rules can be implemented to allow for more granular exclusions.
 Refer to the [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html#_creating_custom_rules) for more information.
 
-### Exclude it from all architecture tests by including it in the exclusion configuration file
+### Describe in the exclusion configuration file and exclude it from all architecture tests.
 
 Create the `archunit_ignore_patterns.txt` under `src/test/resources` of the module for architecture testing, and write regular expressions to exclude them.
 Can ignore violations of class `some.pkg.LegacyService` by writing the following.
@@ -116,10 +116,7 @@ Can ignore violations of class `some.pkg.LegacyService` by writing the following
 .*some\.pkg\.LegacyService.*
 ```
 
-Can include comments by adding a `#` so that you can track the history later if you do the following.
-
-- Describe the issue management system's issue management number in the comments of the configuration file.
-- Include in the commit comments in the version control system.
+In the file, you can include comments by prefixing them with `#`.
 
 #### Note
 

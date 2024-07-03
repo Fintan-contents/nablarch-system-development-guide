@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of MissingSwitchDefault code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class MissingSwitchDefaultExample {
 

@@ -68,8 +68,11 @@
   - [7.10.レガシーfor文はなるべく使用せず、Stream APIか拡張for文の使用を検討してください](#no7-10)
   - [7.11.配列全体をコピーする場合はcloneメソッドを使用してください](#no7-11)
   - [7.12.コレクションを配列に変換する場合はtoArrayメソッドを使用してください](#no7-12)
-  - [7.13.配列をコレクションに変換する場合はArrays.asList、またはList.ofを使用してください](#no7-13)
+  - [7.13.配列をコレクションに変換する場合はコレクションのofメソッドを使用してください](#no7-13)
   - [7.14.メソッドをオーバーライドしたり、抽象メソッドを実装する場合はメソッドに@Overrideを付けてください](#no7-14)
+  - [7.15.複数行の文字列を定義する場合、テキストブロックを使用してください](#no7-15)
+  - [7.16.変数に代入する値を分岐で切り替えている場合、switch式を使用してください](#no7-16)
+  - [7.17.DTOのようなデータ保持が主目的のクラスにレコードを使用可能な場合、レコードを使用してください](#no7-17)
 - [8.使用可能なAPI](#no8)
   - [8.1.使用可能な標準APIを使用して実装してください](#no8-1)
 - [9.Nablarchライブラリ](#no9)
@@ -81,8 +84,6 @@
 
 本規約はJavaを使用してアプリケーションを開発するプロジェクトにおいて、アプリケーションプログラマーが守るべきルールやより良いコードを書くための指針を解説しています。
 
-一部、[Nablarch Application Framework](https://nablarch.github.io/docs/LATEST/doc/index.html)を前提とした項目も含まれますが、多くの項目は特定のフレームワークに限らず汎用的に使用できるようにしてあります。
-
 ### <a name="no1-1">1.1.前提</a>
 
 本規約が対象とするコードは、次の3つが実施されていることを前提としています。
@@ -93,7 +94,7 @@
 
 機械的に対処できることは予め実施し、本規約ではより良いコードを書くためのガイド、あるいはコードレビューの指針となるように作成しました。
 
-なお著名な静的解析ツールは他にもSonarQubeがありますが、サーバーへインストールする形式のSonarQubeよりもMavenの実行だけでチェックが簡潔するCheckstyleとSpotBugsの方が導入の敷居が低いため、本規約ではCheckstyleとSpotBugsを前提にしています。
+なお著名な静的解析ツールは他にもSonarQubeがありますが、サーバーへインストールする形式のSonarQubeよりもMavenの実行だけでチェックが完結するCheckstyleとSpotBugsの方が導入の敷居が低いため、本規約ではCheckstyleとSpotBugsを前提にしています。
 
 プロジェクトによってはCheckstyle・SpotBugs以外の手段で静的解析をする場合もあるでしょう。
 必要に応じて、規約の前提条件をCheckstyle・SpotBugsからSonarQubeやその他の静的解析ツールに読み換えて頂いて構いません。
@@ -142,9 +143,7 @@ public void appendHello(final String yourName) {
 
 ### <a name="no1-3">1.3.Javaバージョン</a>
 
-本規約はJava 8をベースに作成しており、一部の項目ではJava 9やJava 10で使用できる新機能にも言及しています。
-
-本規約はJava 8以降をお使いのプロジェクトでご利用頂けます。
+本規約はJava 17をベースに作成しています。
 
 ### <a name="no1-4">1.4.表記ルール</a>
 
@@ -266,7 +265,7 @@ Java標準APIで言うと、前者にあたるのは`Integer.toString`です。�
 後者にあたるのは`Arrays.asList`です。配列がリストに変換されますが、配列とリストは性質が似ていますし、元の配列を変更するとリストも変更されます。
 
 Java標準APIを見ても`String.length`や`Optional.of`のように動詞から始まらない名前のメソッドがいくつも存在します。
-Java標準APIも参考にして、適切な命名にしてください。
+Java標準APIも参考にして、適切に命名するようにしてください。
 
 ### <a name="no3-3">3.3.変数は基本的には名詞で命名してください</a>
 
@@ -410,6 +409,8 @@ public void updateItem(final String code, final String name, final LocalDateTime
 ### <a name="no4-4">4.4.コードの理解を助けるため、必要に応じて行コメントを記載してください</a>
 
 コードだけを読んで処理の内容を理解できるのが理想的ですが、複雑なロジックや、パフォーマンスのためにあえて特殊な実装をした場合は説明のコメントを記載してください。
+また、なぜこのような実装にしているのかといった経緯を説明した方が理解しやすいコードである場合にも、説明のコメントを記載してください。
+
 コメントは`//`から始まる一行コメントの形式で記載してください。
 
 ---
@@ -787,7 +788,6 @@ Java標準ライブラリには過去のバージョンでは使われていま�
 
 |レガシーAPI|代替となる使っても良いAPI|
 |---|---|
-|`java.lang.StringBuffer`|`java.lang.StringBuilder`|
 |`java.util.Dictionary`|`java.util.Map`|
 |`java.util.Enumeration`|`java.util.Iterator`|
 |`java.util.Hashtable`|`java.util.HashMap`|
@@ -840,7 +840,7 @@ public class ItemList {
 
 上記の例では`items`を変更した際、同時に`totalPrice`を変更すると良いでしょう。
 
-```
+```java
 //OK
 public class ItemList {
 
@@ -868,7 +868,7 @@ public class ItemList {
 
 もしくは合計値は状態として持たずに`getTotalPrice`内で都度計算するようにしても良いでしょう。
 
-```
+```java
 //OK
 public class ItemList {
 
@@ -1163,11 +1163,21 @@ public void updateItem(final ItemCode code, final String name, final int version
 
 Java 5からジェネリクスが導入されて、キャストを使用しなくてもほとんど困る事はなくなっているはずです。
 
+キャストが必要になる場合は、Java 16から正式導入されたinstanceof演算子のパターンマッチングを使用することを推奨します。
+instanceof演算子で型を判定する際にバインディング変数を指定することで、キャストした結果をバインディング変数に代入できます。
+
+```java
+if (obj instanceof String str) {
+    // instanceof演算子の結果がtrueの場合、キャストした結果が変数strに代入される
+    int size = str.length();
+}
+```
+
 ### <a name="no6-10">6.10.ラッパークラスの変数とプリミティブ値を演算する際は、アンボクシングに注意してください</a>
 
 `java.lang.Integer`のようなラッパークラスを`int`のようなプリミティブ値へ変換することをアンボクシングと言います。
 
-ラッパークラスの変数はプリミティブ値を演算する場合、コンパイラーによって自動でアンボクシング処理が差し込まれます。
+ラッパークラスの変数はプリミティブ値を伴う演算を行う場合、コンパイラーによって自動でアンボクシング処理が差し込まれます。
 
 ```java
 final Integer a = ...
@@ -1294,14 +1304,14 @@ if (value.compareTo(BigDecimal.TEN) == 0) { //comareToはスケールが異な�
 
 ### <a name="no6-15">6.15.ファイル入出力は共通部品のクラスを使用してください</a>
 
-アプリケーションプログラマーが思い思いにファイル入出力を実装すると文字コードや改行コードの取り扱いを統一させるのに労力がかかります。
+アプリケーションプログラマーが思い思いにファイル入出力を行うと文字コードや改行コードの取り扱いを統一させるのに労力がかかります。
 
 アーキテクトはプロジェクトで定めるファイルフォーマット仕様に基づいて、ファイル入出力の共通部品を作成してください。
-そしてアプリケーションプログラマーがファイル入出力を実装する際は、共通部品のクラスを使用してください。
+そしてアプリケーションプログラマーはファイル入出力を行う際は、共通部品のクラスを使用してください。
 
 不足機能は共通部品に追加する方向でアーキテクトへ依頼・相談してください。
 
-共通部品を使ってファイル入出力を実装することで、文字コードや改行コードの取り扱いを統一できます。
+共通部品を使ってファイル入出力を行うことで文字コードや改行コードの取り扱いを統一できます。
 また、共通部品内で要求されたファイルパスのチェックを行うことでディレクトリトラバーサルを防げます。
 
 ### <a name="no6-16">6.16.リソースをクローズする必要がある場合はtry-with-resources構文を使用してください</a>
@@ -1592,7 +1602,7 @@ Stream APIは`filter`や`map`、`collect`といったメソッドを使用して
 |`map`|要素を変換する|`stream.map(x -> x.getClass()) //Classに変換する`|
 |`collect`|`Collector`によって`Stream`を変換する|`stream.collect(Collectors.joining(", ")) //要素をカンマ区切りの文字列に変換する`|
 
-その他のメソッドは[`java.util.stream.Stream`のJavadoc](https://docs.oracle.com/javase/jp/10/docs/api/java/util/stream/Stream.html)で確認してください。
+その他のメソッドは[`java.util.stream.Stream`のJavadoc](https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/util/stream/Stream.html)で確認してください。
 
 Stream APIを使用したコード例と拡張for文を使用したコード例を次に示します。
 どちらも従業員のリストから職種がプログラマーの従業員だけに絞り込んで平均年齢を算出しています。
@@ -1706,7 +1716,7 @@ final List<Item> temp = new ArrayList<>(values.length);
 for (Item item : values) {
     temp.add(copyItem(item));
 }
-final Item[] copied = temp.toArray(new Item[0]);
+final Item[] copied = temp.toArray(Item[]::new);
 ```
 
 例に示したケースではJava 8から導入されたStream APIを使用すると、より簡潔なコードになります。
@@ -1737,21 +1747,17 @@ for (final Item item : items) {
 ```java
 //OK
 final List<Item> items = ...
-final Item[] itemArray = items.toArray(new Item[0]);
+final Item[] itemArray = items.toArray(Item[]::new);
 
 //Stream APIにもtoArrayメソッドが用意されている
 //Streamを配列に変換したい場合はこのメソッドを使用する
 final Item[] itemArray = items.stream().toArray(Item[]::new);
 ```
 
-このコード例では`toArray`メソッドに渡す配列を長さ`0`で初期化しています。
-元となるコレクションの`size`メソッドを長さに指定した初期化も可能ですが、パフォーマンスの差はほぼありません。
-そのため、どちらの初期化方法を選択しても良いですが、本規約のコード例では見やすさを考慮して長さ`0`で初期化しています。
+### <a name="no7-13">7.13.配列をコレクションに変換する場合はコレクションのofメソッドを使用してください</a>
 
-### <a name="no7-13">7.13.配列をコレクションに変換する場合はArrays.asList、またはList.ofを使用してください</a>
-
-配列のユーティリティである`java.util.Arrays`クラスにはリストに変換する`asList`メソッドが用意されています。
-各要素をループしてリストを作ったりせず、`java.util.Arrays`クラスの`asList`メソッドを使用してください。
+コレクションの`of`メソッドを使用することで、配列からコレクションを生成できます。
+各要素をループしてリストを作ったりせず、コレクションの`of`メソッドを使用してください。
 
 ```java
 //NG
@@ -1765,30 +1771,7 @@ for (final Item item : itemArray) {
 ```java
 //OK
 final Item[] itemArray = ...
-final List<Item> items = Arrays.asList(itemArray);
-```
-
-なお、Java 9からは`java.util.List`に`of`メソッドが追加されたので、こちらを使用しても構いません。
-
-```
-//OK
-final Item[] itemArray = ...
 final List<Item> items = List.of(itemArray);
-```
-
-Java 9からは`java.util.Set`にも`of`メソッドが追加されました。
-これまで配列から`java.util.Set`に変換しようとすると、一旦`java.util.List`に変換してから`java.util.Set`を生成したり、Java 8からはStream APIを使用して変換していました。
-Java 9からは簡潔なコードで変換できるようになりました。
-
-```java
-//Java 7までの変換方法
-final Set<Item> items =  new HashSet<>(Arrays.asList(itemArray));
-
-//Java 8からはStream APIで変換できる
-final Set<Item> items =  Arrays.stream(itemArray).collect(Collectors.toSet());
-
-//Java 9からはより簡潔に変換できる
-final Set<Item> items = Set.of(itemArray);
 ```
 
 ### <a name="no7-14">7.14.メソッドをオーバーライドしたり、抽象メソッドを実装する場合はメソッドに@Overrideを付けてください</a>
@@ -1850,6 +1833,205 @@ public class SomeAction implements Runnable {
 }
 ```
 
+### <a name="no7-15">7.15.複数行の文字列を定義する場合、テキストブロックを使用してください</a>
+
+複数行の文字列を定義する場合、Java 15から正式導入されたテキストブロックを使用できないか検討してください。
+
+テキストブロックは、`"""`（二重引用符を3つ）の後に改行することで開始し、`"""`で終了します。
+テキストブロック内では、以下のような特徴があります。
+
+- 改行文字を記述する必要が無く、改行で表現できる（改行文字にはLFが使用される）
+- `"`（二重引用符）を使用する際、エスケープシーケンスが不要
+- インデントの空白は、インデントが一番浅い行に合わせて除去される
+
+テキストブロックを使用しない場合、改行文字を埋め込んだ文字列を定義し、行ごとの文字列を連結する記述が一般的です。
+
+```java
+//NG
+String html =
+        "<html>\n" +
+        "    <body>\n" +
+        "        <p>\"Hello, world\"</p>\n" +
+        "    </body>\n" +
+        "</html>\n";
+```
+
+テキストブロックを使用することで、改行文字やエスケープシーケンスの記述が不要になり、可読性に優れた記述が可能になります。
+先ほどの文字列をテキストブロックで記述した場合、次のようになります。
+
+```java
+//OK
+String html = """
+        <html>
+            <body>
+                <p>"Hello, world"</p>
+            </body>
+        </html>""";
+```
+
+末尾で改行する場合は、終端の`"""`を記述する行のインデントに注意してください。
+例えば次のように記述した場合、インデントが一番浅い行は終端の`"""`を記述した行であるため、`foo`や`bar`を記述した行のインデントは除去されません。
+
+```java
+//NG
+String name = “””
+        foo
+        bar
+”””;
+```
+
+上記の文字列を出力すると、次のようにインデントが除去されていない文字列が出力されます。（`"        foo\n        bar\n"`と同等の文字列）
+
+```text
+        foo
+        bar
+```
+
+空白を除去しつつ末尾で改行したい場合は、終端の`"""`を記述する行のインデントに注意し、次のように記述します。
+
+```java
+//OK
+String name = “””
+        foo
+        bar
+        ”””;
+```
+
+上記の文字列の出力結果は、次のようにインデントが除去された文字列となります。（`"foo\nbar\n"`と同等の文字列）
+
+```text
+foo
+bar
+```
+
+テキストブロック内で変数の値を使用したい場合は、`String.formatted`メソッド等を使用して文字列を置換することで実現できます。
+
+```java
+String id = "xxx";
+String name = "yyy";
+String text = """
+        id  : %s
+        name: %s
+        """.formatted(id, name);
+```
+
+### <a name="no7-16">7.16.変数に代入する値を分岐で切り替えている場合、`switch`式を使用してください</a>
+
+`if`文や`switch`文を使用し、条件によって変数に代入する値を切り替えている場合、Java 14から正式導入された`switch`式を使用できないか検討してください。
+
+`switch`の`case`および`default`内で`yield`文を使用することで、`switch`式を記述できます。 
+`switch`式では、`yield`文で指定した値を返すことができます。
+また、Java 14からは`switch`に関連する以下の記述が可能になっています。
+
+- `case`および`default`で`:`の変わりに`->`（アロー構文）を記述することで、`yield`や`break`を省略できる（フォールスルーしない）
+- `case`のラベルには、カンマ区切りで複数の値を記述できる
+
+これらを使用することで、条件によって変数に代入する値を切り替える場合に、可読性に優れた記述が可能になります。
+
+次の例では、`switch`文を使用して`value`変数に代入する値を切り替えています。
+
+```java
+DayOfWeek dayOfWeek = getDayOfWeek();
+int value;
+switch(dayOfWeek) {
+    case SUNDAY:
+    case MONDAY:
+    case TUESDAY:
+    case WEDNESDAY:
+        value = 1;
+        break;
+    case THURSDAY:
+    case FRIDAY:
+    case SATURDAY:
+        value = 2;
+        break;
+}
+```
+
+`switch`式を使用することで、同等の内容を次のように記述できます。
+
+```java
+int value = switch(dayOfWeek) {
+    case SUNDAY, MONDAY, TUESDAY, WEDNESDAY -> 1;
+    case THURSDAY, FRIDAY, SATURDAY -> 2;
+};
+```
+
+なお、`case`や`default`内で複数の文を記述したい場合、アロー構文ではブロックで囲むことにより記述できます。
+ブロックで囲んだ場合は`yield`文を省略できないため、次のように記述します。
+
+```java
+int value = switch(dayOfWeek) {
+    case SUNDAY, MONDAY, TUESDAY, WEDNESDAY -> 1;
+    case THURSDAY, FRIDAY, SATURDAY -> {
+        if (isTarget(dayOfWeek)) {
+            yield 2;
+        } else {
+            yield 3;
+        }
+    }
+};
+```
+
+### <a name="no7-17">7.17.DTOのようなデータ保持が主目的のクラスにレコードを使用可能な場合、レコードを使用してください</a>
+
+DTOのようなデータ保持が主目的のクラスを定義する場合、Java 16から正式導入されたレコードを使用できないか検討してください。
+
+レコードを使用することで、フィールドやコンストラクタ、アクセサメソッドのような定型的なコードを記述することなく実装できます。
+レコードはレコードコンポーネントと呼ばれる要素を持ち、`class`ではなく`record`を使用して宣言します。
+レコードには、主に以下のような特徴があります。
+
+- イミュータブルであり、生成時のみ値を設定できる
+- レコードコンポーネントに対応するフィールド、コンストラクタ、アクセサメソッドが自動で生成される
+- デフォルトコンストラクタ（引数が無いコンストラクタ）が生成されない
+
+次の例は、データの保持が主目的である典型的なクラスです。
+
+```java
+// NG
+public class Person {
+
+    private final Integer id;
+    private final String name;
+
+    public Person(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+
+次の例は、`record`でレコードを定義して、上記のクラスと同等のレコードを実装しています。
+
+```java
+// OK
+public record Person(Integer id, String name) {
+}
+```
+
+定義したレコードは、通常のクラスと同等に使用できます。
+
+```java
+// インスタンスを生成
+Person person = new Person(1, "foo");
+// 値にアクセス
+Integer id = person.id();
+String name = person.name();
+```
+
+ただし、レコードは通常のクラスと異なるルールが多く、ライブラリを使用する箇所などでは使用できない場合があります。
+そのため、レコードを使用する際には、使用するライブラリがレコードに対応しているか必ず確認してください。
+
+レコードの仕様についての詳細は[こちらのページ](https://docs.oracle.com/javase/jp/16/language/records.html)を参考にしてください。
+
 ---
 
 ## <a name="no8">8.使用可能なAPI</a>
@@ -1858,7 +2040,7 @@ public class SomeAction implements Runnable {
 
 ### <a name="no8-1">8.1.使用可能な標準APIを使用して実装してください</a>
 
-Java標準ライブラリのうち使用可能なAPIについては、[Java標準ライブラリ使用可能API](./staticanalysis/spotbugs/spotbugs-example/spotbugs/published-config/production/JavaOpenApi.config)を参照してください。
+Java標準ライブラリのうち使用可能なAPIについては、[Java標準ライブラリ使用可能API](./staticanalysis/unpublished-api/published-config/production/JavaOpenApi.config)を参照してください。
 
 また、[使用不許可APIチェックツール](./staticanalysis/unpublished-api/README.md)を使用してチェックを行えますので活用してください。
 

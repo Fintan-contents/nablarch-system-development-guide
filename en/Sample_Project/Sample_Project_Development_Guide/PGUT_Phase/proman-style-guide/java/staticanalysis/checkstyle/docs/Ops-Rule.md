@@ -46,6 +46,10 @@ The following two will be explained here.
 - Exclusion configuration using the exclusion configuration file ([SuppressionFilter](http://checkstyle.sourceforge.net/config_filters.html#SuppressionFilter))
 - Exclusion setting using the line comment ([SuppressWithNearbyCommentFilter](http://checkstyle.sourceforge.net/config_filters.html#SuppressWithNearbyCommentFilter))
 
+When setting up exclusions, you can track the history later with the following steps.
+
+- Write the issue management number of the issue management system in the XML comment
+- Describe in the commit comment of the version management system
 
 ### Exclusion configuration using the exclusion configuration file
 
@@ -73,11 +77,6 @@ The following are examples of the description in exclusion configuration files.
   
 </suppressions>
 ```
-
-When setting up exclusions, you can track the history later with the following steps.
-
-- Write the issue management number of the issue management system in the XML comment
-- Describe in the commit comment of the version management system
 
 #### Description method in configuration files
 

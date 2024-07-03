@@ -11,13 +11,9 @@ import java.util.regex.Pattern;
 
 /**
  * Example of UnusedImports code.
- *
- * @author example
- * @since 1.0.0
  */
 public class UnusedImportsExample {
 
     /** Regular expression matching alphanumeric characters */
     private static Pattern alphabet = Pattern.compile("^[a-zA-Z]+$");
 }
-

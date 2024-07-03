@@ -5,34 +5,33 @@ package com.example;
 
 /**
  * Example of MethodTypeParameterName code.
- * 
- * @author example
- * @since 1.0.0
+ *
+ * @param <T> type parameter
  */
 public class MethodTypeParameterNameExample<T> {
 
     /**
-     * Example of correct MethodTypeParameterName.
+     * one upper case letter (OK).
      *
-     * @param <T> type parameter is one upper case letter (OK)
+     * @param <T> type parameter
      */
     public <T> void okMethod() {
     }
 
     /**
-     * Example of incorrect MethodTypeParameterName.
+     * Name consists of 2 or more characters (incorrect).
      *
-     * @param <FOO> Name consists of 2 or more characters (incorrect).
+     * @param <FOO> type parameter
      * 
      */
     public <FOO> void ngMethod1() {
     }
 
     /**
-     * Example of incorrect MethodTypeParameterName.
+     * Name consists of lower-case letter(s) (incorrect).
      *
-     * @param <t> Name consists of lower-case letter(s) (incorrect).
-     * 
+     * @param <t> type parameter
+     *
      */
     public <t> void ngMethod2() {
     }

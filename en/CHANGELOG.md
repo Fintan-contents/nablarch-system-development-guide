@@ -4,6 +4,42 @@ All significant changes to this project will be documented in this file.
 
 ## 3.6 (2024-09-30)
 
+- Improve the style guide
+  - Based on [the Style Guide Revisions from Version 3.2 to 5.0](https://github.com/Fintan-contents/coding-standards/blob/main/CHANGELOG.md), the following corrections was made.
+    - Unauthorized API check tool
+      - With the support of Jakarta EE, we have changed to refer to the latest version of Nablarch's configuration file as a sample configuration file.
+    - JavaScript Style guide
+      - The acronyms of specification in Java EE used in the Readme changed to the Jakarta EE specification name.
+    - JSP Style guide
+      - The acronyms of specification in Java EE used in the Readme and title of coding convention changed to the Jakarta EE specification name.
+      - For the acronyms of specification in Java EE used in the coding convention, the reading to the Jakarta EE specification is noted.
+    - Java coding conventions
+      - Java version upgraded to 17.
+      - New rules have been added due to Java version upgrade.
+      - Some rules have been modified due to Java version upgrade.
+    - Java code formatter
+      - Added instructions on how to configure IntelliJ IDEA and Eclipse.
+      - Reviewed configuration file samples and recreated them for the latest version of IDE.
+      - Added setting in EditorConfig.
+    - Checkstyle guide
+      - CheckStyle version upgraded to 10.12.0.
+      - New rules have been added due to CheckStyle version upgrade.
+      - Reviewed configuration file and deleted some rules.
+      - Reviewed configuration file and modified the severity of each rule to error.
+      - Some rules related to formatting have been removed in consideration of the use of Java code formatter configuration file samples.
+      - Java of CheckStyle sample project version upgraded to 17.
+      - Source code of CheckStyle sample project has been modified due to modification of configuration file.
+      - Plugin used to collect execution results in Jenkins is no longer supported, so changed plugin to use.
+    - SpotBugs guide
+      - SpotBugs version upgraded to 4.7.3.
+      - Java of SpotBugs sample project version upgraded to 17.
+      - Sample code for standard detectable bugs has been added to SpotBugs sample project.
+      - Plugin used to collect execution results in Jenkins is no longer supported, so changed plugin to use.
+    - Unauthorized API check tool
+      - Java of sample project version upgraded to 17.
+      - Authorized API of the Java standard library has been modified due to Java version upgrade.
+      - Sample configuration file has been placed.
+
 - Improve the sample project
 
   - Nablarch version upgraded to 6u2.

@@ -2,7 +2,7 @@
 
 This document will guide you how to configure and run SpotBugs with Maven.
 
-The contents of this document have been verified with Maven 3.6.3.
+The contents of this document have been verified with Maven 3.9.2.
 
 ## Deploy filter files to exclude checks
 
@@ -29,14 +29,7 @@ The location to add the configuration is directly under `build`, which is direct
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>4.5.0.0</version>
-  <dependencies>
-    <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs</artifactId>
-      <version>4.5.0</version>
-    </dependency>
-  </dependencies>
+  <version>4.7.3.4</version>
   <configuration>
     <xmlOutput>true</xmlOutput>
     <!-- Filter file to exclude checks -->
@@ -87,17 +80,15 @@ mvn compile
 If there is a check violation, the following points are output to the console:
 
 ```
-[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 1
 [INFO] Error size is 0
 [INFO] Total bugs: 1
-[INFO] String objects are compared using == and !=. com.example.App.main(String[]) [com.example.App] applicable location App.java:[line 9] ES_COMPARING_STRINGS_WITH_EQ
+[ERROR] Medium: Comparison of String objects using == or != in com.example.ComparingStringsWithEq.example() [com.example.ComparingStringsWithEq] At ComparingStringsWithEq.java:[line 11] ES_COMPARING_STRINGS_WITH_EQ
 ```
 
 If all checks are passed, they are output to the console as follows:
 
 ```
-[INFO] --- spotbugs-maven-plugin:4.5.0.0:check (default-cli) @ spotbugs-example ---
 [INFO] BugInstance size is 0
 [INFO] Error size is 0
 [INFO] No errors/warnings found

@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of NeedBraces code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class NeedBracesExample {
 
@@ -26,4 +23,3 @@ public class NeedBracesExample {
             System.out.println("Bad example");
     }
 }
-

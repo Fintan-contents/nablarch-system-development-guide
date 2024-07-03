@@ -1,5 +1,5 @@
-# JSPスタイルガイド
+# Jakarta Server Pagesスタイルガイド
 
-ここではJSPをコーディングする際に役立つコーディング規約を提供しています。
+ここではJakarta Server Pagesをコーディングする際に役立つコーディング規約を提供しています。
 
-- [JSPコーディング規約.docx](./JSPコーディング規約.docx?raw=true)
+- [JakartaServerPagesコーディング規約.docx](./JakartaServerPagesコーディング規約.docx?raw=true)

@@ -9,8 +9,7 @@ Refer to the Java coding conventions to write better code.
 
 The Java coding conventions assumes that what can be checked automatically with a code formatter or static inspection has been implemented in advance.
 
-Format it with the code formatter. 
-A code formatter that can be used immediately is provided.
+Format it with the code formatter.
 
 - [Java code formatter](./code-formatter.md)
 

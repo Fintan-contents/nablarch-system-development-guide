@@ -7,9 +7,6 @@ import static java.lang.System.out;
 
 /**
  * Example of AvoidStaticImport code.
- *
- * @author example
- * @since 1.0.0
  */
 public class AvoidStaticImportExample {
 
@@ -24,4 +21,3 @@ public class AvoidStaticImportExample {
         System.out.println("Hello World!");
     }
 }
-

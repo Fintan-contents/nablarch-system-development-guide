@@ -8,4 +8,4 @@ ArchUnit provides architecture testing, including naming checks, dependency chec
 This repository contains documentation of the test content, apply rules, etc. for this project.
 
 - [ArchUnit Usage Guide](./docs/README.md)
-- [Sample Project](../../../../../../../Sample_Project/Source_Code/proman-project)
+- [Sample Project](https://github.com/Fintan-contents/nablarch-system-development-guide/tree/master/en/Sample_Project/Source_Code/proman-project/proman-arch-test)
