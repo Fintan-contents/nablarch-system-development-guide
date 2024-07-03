@@ -199,7 +199,7 @@ if(!responseFile.exists()) {
             <collectionProp name="Arguments.arguments">
               <elementProp name="server.host" elementType="Argument">
                 <stringProp name="Argument.name">server.host</stringProp>
-                <stringProp name="Argument.value">172.21.69.16</stringProp>
+                <stringProp name="Argument.value">localhost</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="server.port" elementType="Argument">
@@ -210,7 +210,7 @@ if(!responseFile.exists()) {
             </collectionProp>
           </Arguments>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-4">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-4" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -253,7 +253,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/javascripts/common.js-5">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/javascripts/common.js-5" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -292,7 +292,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/stylesheets/common.css-6">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/stylesheets/common.css-6" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -331,7 +331,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/login-8">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/login-8" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -415,7 +415,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-9">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-9" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -463,7 +463,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/search-10">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/search-10" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -507,7 +507,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/list-11">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/list-11" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -615,7 +615,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/detail/10-12">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/detail/10-12" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -658,7 +658,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/update/10-13">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/update/10-13" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -701,7 +701,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/confirmUpdate-15">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/confirmUpdate-15" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -862,7 +862,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/update-16">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/update-16" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -930,7 +930,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/completeUpdate-17">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/completeUpdate-17" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -979,7 +979,7 @@ if(!responseFile.exists()) {
           </hashTree>
         </hashTree>
       </hashTree>
-      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP プロキシサーバ">
+      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP プロキシサーバ" enabled="true">
         <stringProp name="ProxyControlGui.port">8888</stringProp>
         <collectionProp name="ProxyControlGui.exclude_list">
           <stringProp name="1134409048">(?i).*\.(bmp|gif|ico|jpe?g|png|swf|woff|woff2)</stringProp>
