@@ -10,7 +10,6 @@
   <import file="nablarch/core/db/connection-factory-datasource.xml"/>
 
   <!-- データソース設定 -->
-  <!-- TODO: プロジェクトで使用するDB製品にあわせた定義を設定してください。 -->
   <component name="dataSource"
              class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>

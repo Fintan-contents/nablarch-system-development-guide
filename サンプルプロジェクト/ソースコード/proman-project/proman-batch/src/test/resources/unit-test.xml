@@ -7,11 +7,6 @@
 
   <import file="batch-boot.xml"/>
 
-  <!-- TODO: 使用するDBに合せて設定してください。 -->
-  <!-- Oracle用の設定 -->
-  <!--
-    <import file="nablarch/test/test-db-info-oracle.xml"/>
-  -->
   <!-- 汎用のDB設定 -->
   <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
     <property name="dataSource" ref="dataSource"/>

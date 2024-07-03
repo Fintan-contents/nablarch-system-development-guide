@@ -27,20 +27,6 @@
 
         <component-ref name="transactionManagementHandler"/>
 
-        <!-- ホットデプロイハンドラ -->
-        <!--　TODO:開発環境で本ハンドラを使用する場合、各PJでホットデプロイ対象となるパッケージを指定すること
-        <component class="nablarch.fw.hotdeploy.HotDeployHandler">
-          <property name="targetPackages">
-            <list>
-              <value>com.nablarch.example.app.web.action</value>
-              <value>com.nablarch.example.app.web.form</value>
-              <value>com.nablarch.example.app.web.core.validation.validator</value>
-              <value>com.nablarch.example.app.web.util</value>
-            </list>
-          </property>
-        </component>
-        -->
-
         <component-ref name="packageMapping"/>
       </list>
     </property>

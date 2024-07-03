@@ -82,19 +82,12 @@
 
   <!-- セッションストア機能 -->
   <import file="nablarch/webui/session-store.xml"/>
-  <!-- TODO: アプリケーションサーバが冗長化されている場合は、HIDDENストアの暗号化に使用するコンポーネントのプロパティに明示的に暗号化/復号のキーを設定する。-->
-  <!--
-  <component name="hiddenStoreEncryptor" class="nablarch.common.encryption.AesEncryptor">
-    <property name="key" value="1234567890123456" />
-    <property name="iv" value="6543210987654321" />
-  </component>
-  -->
+
   <import file="com/nablarch/example/proman/web/webui/session-store.xml"/>
 
   <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler">
     <property name="defaultPages">
       <map>
-        <!-- TODO: 適切なエラー画面作成して設定してください。設定の際は、あわせてweb.xmlも修正してください -->
         <entry key="4.." value="/WEB-INF/view/errorPages/USER_ERROR.jsp"/>
         <entry key="403" value="/WEB-INF/view/errorPages/PERMISSION-ERROR.jsp"/>
         <entry key="404" value="/WEB-INF/view/errorPages/PAGE_NOT_FOUND_ERROR.jsp"/>
@@ -106,7 +99,6 @@
   </component>
 
   <!-- ダイアレクト設定 -->
-  <!-- TODO:使用するDBに合わせてダイアレクトを設定すること -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>
 
   <import file="com/nablarch/example/proman/web/webui/threadcontext-for-webui.xml"/>

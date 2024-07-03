@@ -75,12 +75,7 @@
         <artifactId>postgresql</artifactId>
         <version>${postgres.jdbc.driver.version}</version>
       </dependency>
-      <!--
-       Connection Pool
-       Commons DBCP2はJava8でしか動作しない
-       > DBCP 2.6.0 compiles and runs under Java 8 only (JDBC 4.2)
-       HikariCPの3系はJava8から11まで
-       -->
+      <!-- Connection Pool -->
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
