@@ -1,4 +1,4 @@
-# 顧客管理システム（climan）
+# 顧客管理システム（Climan）
 
 これは「顧客管理システム」のソースコードです。  
 （**Cli**ent **Man**agement Systemを略して、`climan`と名付けています）
