@@ -5,7 +5,7 @@
 ## 3.6 (2023-09-29)
 
 - スタイルガイドの修正
-  - [スタイルガイド 3.2版から5.0版までの修正](https://github.com/Fintan-contents/coding-standards/blob/main/CHANGELOG.md)を元に、以下の変更を実施しました。
+  - [スタイルガイド 3.2版から5.0版までの修正](https://github.com/Fintan-contents/coding-standards/blob/main/CHANGELOG.md)を元に、以下の点を変更しました。
     - 使用不許可APIチェックツール
       - Jakarta EE への対応に伴い、設定ファイルのサンプルとして最新版のNablarchの設定ファイルを参照するように変更しました。
     - JavaScriptスタイルガイド
