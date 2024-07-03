@@ -9,6 +9,7 @@ All significant changes to this project will be documented in this file.
   - Nablarch version upgraded to 6u2.
   - Removed JSP auto generation tool not provided in Nablarch 6.
   - ArchUnit version upgraded to 1.0.1.
+  - In the "Client Management System (Climan)", HTTP Access Log Handler was replaced by HTTP Access Log (for RESTful Web Service) Handler.
 
 - README.md
 
