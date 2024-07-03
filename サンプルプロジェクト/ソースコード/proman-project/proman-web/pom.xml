@@ -179,6 +179,13 @@
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <version>1.3.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -221,9 +228,6 @@
               <Target-Environment>${env.name}</Target-Environment>
             </manifestEntries>
           </archive>
-          <!-- 下位モジュールでこのモジュールに含まれるクラスのテストを行うため、war作成時にjarも作成する。 -->
-          <attachClasses>true</attachClasses>
-          <classesClassifier>classes</classesClassifier>
         </configuration>
       </plugin>
 
