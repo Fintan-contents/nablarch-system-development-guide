@@ -10,15 +10,13 @@
   <import file="nablarch/core/db/connection-factory-datasource.xml"/>
 
   <!-- データソース設定 -->
-  <!-- TODO: プロジェクトで使用するDB製品にあわせた定義を設定してください。 -->
   <component name="dataSource"
-             class="org.apache.commons.dbcp.BasicDataSource">
-    <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>
-    <property name="url"             value="${nablarch.db.url}"/>
+             class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
+    <property name="jdbcUrl"         value="${nablarch.db.url}"/>
     <property name="username"        value="${nablarch.db.user}"/>
     <property name="password"        value="${nablarch.db.password}"/>
-    <property name="maxActive"       value="${nablarch.db.maxPoolSize}"/>
-    <property name="initialSize"     value="${nablarch.db.initialPoolSize}"/>
-   </component>
+    <property name="maximumPoolSize" value="${nablarch.db.maxPoolSize}"/>
+    <property name="minimumIdle"     value="${nablarch.db.initialPoolSize}"/>
+  </component>
 
 </component-configuration>

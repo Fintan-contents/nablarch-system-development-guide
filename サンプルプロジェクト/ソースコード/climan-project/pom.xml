@@ -70,7 +70,6 @@
           <groupId>com.nablarch.framework</groupId>
           <artifactId>nablarch-fw-web-hotdeploy</artifactId>
         </dependency>
-        <!-- TODO: プロジェクトで使用するDB製品にあわせたJDBCドライバに修正してください。 -->
         <dependency>
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
@@ -78,10 +77,9 @@
           <scope>runtime</scope>
         </dependency>
         <dependency>
-          <groupId>commons-dbcp</groupId>
-          <artifactId>commons-dbcp</artifactId>
-          <version>1.4</version>
-          <scope>runtime</scope>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+          <version>3.3.1</version>
         </dependency>
       </dependencies>
     </profile>

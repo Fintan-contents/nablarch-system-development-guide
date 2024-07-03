@@ -63,10 +63,6 @@
           <groupId>com.zaxxer</groupId>
           <artifactId>HikariCP</artifactId>
         </dependency>
-        <dependency>
-          <groupId>jakarta.servlet</groupId>
-          <artifactId>jakarta.servlet-api</artifactId>
-        </dependency>
       </dependencies>
     </profile>
 
@@ -103,12 +99,6 @@
     <dependency>
       <groupId>com.nablarch.profile</groupId>
       <artifactId>nablarch-web</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish.web</groupId>
-          <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
@@ -120,12 +110,6 @@
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-testing</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jdt.core.compiler</groupId>
-          <artifactId>ecj</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.nablarch.framework</groupId>
@@ -135,12 +119,6 @@
     <dependency>
       <groupId>com.nablarch.configuration</groupId>
       <artifactId>nablarch-testing-default-configuration</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.nablarch.dev</groupId>
-      <artifactId>nablarch-test-support</artifactId>
-      <version>2.0.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -169,10 +147,13 @@
       <artifactId>jakarta.servlet.jsp-api</artifactId>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>jakarta.servlet.jsp.jstl</groupId>
       <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
     </dependency>
 
     <dependency>
@@ -197,19 +178,6 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>jakarta.activation</groupId>
-      <artifactId>jakarta.activation-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.xml.bind</groupId>
-      <artifactId>jakarta.xml.bind-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
     </dependency>
   </dependencies>
 
