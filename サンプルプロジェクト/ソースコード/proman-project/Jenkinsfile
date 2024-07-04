@@ -26,8 +26,9 @@ pipeline {
         echo 'mvn install'
         dir(PROJECT_CURRENT_DIR) {
           sh 'mvn clean -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -N install -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
           sh 'mvn -P gsp clean generate-resources -pl proman-common -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
-          sh 'mvn -P demo,!development install -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -P demo,!development install -pl proman-common -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
         }
       }
       post {
