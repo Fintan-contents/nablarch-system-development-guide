@@ -114,7 +114,6 @@ Guide is described for each role and task shown in the development flow.
 
 - [Application configuration (Web)](Design_Phase/Application_Configuration_(Web).md)
 - [Implementation method for general processing (Web)](PGUT_Phase/pg/Implementation_method_for_general_processing_(Web).md)
-- [Implementation method to perform validation at any timing (Web)](PGUT_Phase/pg/Implementation_method_to_perform_validation_at_any_timing_(Web).md)
 - [Handling method when an error occurs (Web)](PGUT_Phase/pg/Handling_method_when_an_error_occurs_(Web).md)
 
 #### App implementation (batch)
