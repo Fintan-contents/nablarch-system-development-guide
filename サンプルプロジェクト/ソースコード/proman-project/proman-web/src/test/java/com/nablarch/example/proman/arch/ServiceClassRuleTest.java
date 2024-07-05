@@ -1,15 +1,17 @@
 package com.nablarch.example.proman.arch;
 
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import nablarch.common.dao.DaoContext;
 
+
 /**
  * Serviceクラスの実装方法に関するルール。
  */
-@AnalyzeClasses(packages = "com.nablarch.example.proman")
+@AnalyzeClasses(packages = "com.nablarch.example.proman", importOptions = DoNotIncludeTests.class)
 class ServiceClassRuleTest {
 
     @ArchTest

@@ -10,6 +10,5 @@
 | proman-common    | 基盤部品、Entity等のプロジェクト共有モジュール |
 | proman-web       | Webモジュール                                  |
 | proman-batch     | バッチモジュール                               |
-| proman-arch-test | アーキテクチャテスト用のモジュール             |
 
 `proman-jmeter`は回帰テストの自動実行ツールです。詳細は[単体テストの考え方（Web）](../../サンプルプロジェクト開発ガイド/PGUT工程/ut/単体テストの考え方（Web）.md)を参照してください。

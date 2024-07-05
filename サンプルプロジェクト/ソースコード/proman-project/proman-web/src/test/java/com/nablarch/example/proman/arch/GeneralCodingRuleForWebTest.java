@@ -1,5 +1,6 @@
 package com.nablarch.example.proman.arch;
 
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
@@ -12,7 +13,7 @@ import jakarta.persistence.OptimisticLockException;
 /**
  * webの実装方法に関するテスト。
  */
-@AnalyzeClasses(packages = "com.nablarch.example.proman.web")
+@AnalyzeClasses(packages = "com.nablarch.example.proman.web", importOptions = DoNotIncludeTests.class)
 class GeneralCodingRuleForWebTest {
 
     @ArchTest
