@@ -82,46 +82,33 @@ hoge.methodB(); // 使用不可
 設定ファイルを格納したディレクトリ（以後、設定ファイルディレクトリ）には、複数の設定ファイルを配置できます。
 設定ファイルの拡張子は「`config`」としてください。
 
-例えば、Nablarchが提供するブランクプロジェクトには、Javaコーディング規約に準拠した設定ファイルとして以下のファイルが格納されています。
+本プロジェクトでは、Javaコーディング規約に準拠した設定ファイルとして以下のファイルが格納されています。
 
 | 設定ファイル名                                  | 概要                                                                        |
 |------------------------------------------|---------------------------------------------------------------------------|
 | `JavaOpenApi.config`                     | Nablarchが規定するJava標準ライブラリ使用可能API                                           |
 | `JakartaEEOpenApi.config`                | Nablarchが規定するJakarta EE標準ライブラリ使用可能API                                     |
 | `NablarchApiForProgrammer.config`        | プログラマ向け Nablarch Application Framework 使用可能API （業務機能の実装に必要なAPI）           |
-| `NablarchTestingApiForProgrammer.config` | プログラマ向け Nablarch Testing Framework 使用可能API （業務機能のテストに必要なAPI）              |
 | `NablarchApiForArchitect.config`         | アーキテクト向け Nablarch Application Framework 使用可能API （NAFの機能拡張などで利用する必要があるAPI） |
-| `NablarchTestingApiForArchitect.config`  | アーキテクト向け Nablarch Testing Framework 使用可能API （NTFの機能拡張などで利用する必要があるAPI）     |
+| `ProjectOpenApi.config`                  | 本プロジェクトで宣言している使用可能API    |
 
-設定ファイルは [published-config](https://github.com/nablarch/nablarch-single-module-archetype/tree/master/nablarch-web/tools/static-analysis/spotbugs/published-config) に格納されていますので、これらを参考に自プロジェクトで必要な設定ファイルをご用意ください。
-また、上記はJakarta EEを前提とした設定ファイルですが、Nablarchのプロダクトバージョン5(5、5u1、5u2...)ではJava EEを前提としているため、Java EEを使用する場合は[Nablarch5の最新ブランチ](https://github.com/nablarch/nablarch-single-module-archetype/tree/v5-master/nablarch-web/tools/static-analysis/spotbugs/published-config)の設定ファイルを参考にしてください。
+※Nablarchでは、テスティングフレームワーク用の設定である `NablarchTestingApiForProgrammer.config`, `NablarchTestingApiForArchitect.config` も提供していますが、
+本プロジェクトではテストコードに対する仕様不許可APIのチェックを実施しません。
 
-前述の通り、Nablarchは対象とする開発者・スコープごとに4種類の設定ファイルを提供しています。
-これらの設定ファイルの配置例を以下に示します。
+これらの設定ファイルは以下のように配置されています。
 
 ```
 <ワークスペース>
-├─<プロジェクト>
-│  │  ├─tool
+├─proman-project
+│  │  ├─tools
 │  │  │   ├─staticanalysis
 │  │  │   │  ├─production（プロダクションコード用設定ファイルディレクトリ）
-│  │  │   │  │  └─ NablarchApiForProgrammer.config
-│  │  │   │  ├─test（テストコード用設定ファイルディレクトリ）
+│  │  │   │  │  ├─ JavaOpenApi.config
+│  │  │   │  │  ├─ JakartaEEOpenApi.config
 │  │  │   │  │  ├─ NablarchApiForProgrammer.config
-│  │  │   │  │  └─ NablarchTestingApiForProgrammer.config
+│  │  │   │  │  ├─ NablarchApiForArchitect.config
+│  │  │   │  │  └─ ProjectOpenApi.config
 ```
-
-チェック対象がフレームワークの拡張などを行うためのコードの場合には、`NablarchApiForArchitect.config`, `NablarchTestingApiForArchitect.config`を利用してください。
-
-**注意事項**
-
-当ツールは、使用されている全てのAPIに対してチェックを実施します。
-そのため、デフォルトで提供する設定ファイルのみでは、自プロジェクトで宣言しているAPIが使用不許可APIとして検知されます。
-
-これを避けるには、自プロジェクトで宣言しているAPIの使用を許可するよう設定する必要があります。
-自プロジェクト用の設定ファイルを設定ファイルディレクトリに配置し、自プロジェクトのパッケージを一意に特定できるパッケージを記述してください。
-
-例えば、プロジェクトにて作成する全てのパッケージが`com.example.project`で始まる場合、`com.example.project`と記述したテキストファイルを1つ設定ファイルディレクトリに配置してください。
 
 ### 設定ファイル記述方法
 
