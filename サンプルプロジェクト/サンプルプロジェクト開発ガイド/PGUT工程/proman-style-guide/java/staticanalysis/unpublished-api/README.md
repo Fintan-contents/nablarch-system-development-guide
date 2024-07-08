@@ -92,8 +92,7 @@ hoge.methodB(); // 使用不可
 | `NablarchApiForArchitect.config`         | アーキテクト向け Nablarch Application Framework 使用可能API （NAFの機能拡張などで利用する必要があるAPI） |
 | `ProjectOpenApi.config`                  | 本プロジェクトで宣言している使用可能API    |
 
-※Nablarchでは、テスティングフレームワーク用の設定である `NablarchTestingApiForProgrammer.config`, `NablarchTestingApiForArchitect.config` も提供していますが、
-本プロジェクトではテストコードに対する仕様不許可APIのチェックを実施しません。
+本プロジェクトではテストコードはチェック対象外とします。
 
 これらの設定ファイルは以下のように配置されています。
 

@@ -92,8 +92,7 @@ This project contains the following files as configuration files that conform to
 | `NablarchApiForArchitect.config`         | Nablarch Application Framework APIs available for architects (APIs that are required to be used for NAF function extensions, etc.) |
 | `ProjectOpenApi.config`                  | APIs declared in this project                                                                                                      |
 
-Nablarch also provides `NablarchTestingApiForProgrammer.config` and `NablarchTestingApiForArchitect.config`, which are settings for the testing framework. 
-However, this project does not check for unpublished APIs in the testing code.
+The test code is not subject to checking in this project.
 
 These configuration files are located as follows.
 
