@@ -82,47 +82,32 @@ This section describes how to deploy and describe the configuration file of this
 Multiple configuration files can be deployed in the directory where the configuration files are stored (hereinafter, the configuration file directory). 
 The extension of the configuration file should be `config`.
 
-For example, the blank project provided by Nablarch contains the following files as configuration files that conform to Java coding conventions.
+This project contains the following files as configuration files that conform to Java coding conventions.
 
 | Configuration file name                  | Summary                                                                                                                            |
 |------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | `JavaOpenApi.config`                     | APIs that can be used by the Java standard library specified by Nablarch                                                           |
 | `JakartaEEOpenApi.config`                | APIs that can be used by the Jakarta EE standard library specified by Nablarch                                                     |
 | `NablarchApiForProgrammer.config`        | Nablarch Application Framework APIs for programmers (APIs required for implementing business functions)                            |
-| `NablarchTestingApiForProgrammer.config` | Nablarch Testing Framework APIs for programmers (API required for testing business functions)                                      |
 | `NablarchApiForArchitect.config`         | Nablarch Application Framework APIs available for architects (APIs that are required to be used for NAF function extensions, etc.) |
-| `NablarchTestingApiForArchitect.config`  | Nablarch Testing Framework APIs available for architects (APIs that are required to be used for NTF function extensions, etc.)     |
+| `ProjectOpenApi.config`                  | APIs declared in this project                                                                                                      |
 
-The configuration files are stored in [published-config](https://github.com/nablarch/nablarch-single-module-archetype/tree/master/nablarch-web/tools/static-analysis/spotbugs/published-config), so please prepare the necessary configuration files for your own project by referring to these files.
-The above configuration file assumes Jakarta EE, but Nablarch product version 5 (5, 5u1, 5u2...) assumes Java EE.
-If you want to use Java EE, please refer to the configuration file of [the latest branch of Nablarch5](https://github.com/nablarch/nablarch-single-module-archetype/tree/v5-master/nablarch-web/tools/static-analysis/spotbugs/published-config).
+The test code is not subject to checking in this project.
 
-As mentioned earlier, Nablarch provides 4 types of configuration files for each target developer and scope. 
-The following is an example of the location of these configuration files.
+These configuration files are located as follows.
 
 ```
 <Workspace>
-├─<Project>
-│  │  ├─tool
+├─proman-project
+│  │  ├─tools
 │  │  │   ├─staticanalysis
 │  │  │   │  ├─production（configuration files directory for production code）
-│  │  │   │  │  └─ NablarchApiForProgrammer.config
-│  │  │   │  ├─test（test code configuration file directory）
+│  │  │   │  │  ├─ JavaOpenApi.config
+│  │  │   │  │  ├─ JakartaEEOpenApi.config
 │  │  │   │  │  ├─ NablarchApiForProgrammer.config
-│  │  │   │  │  └─ NablarchTestingApiForProgrammer.config
+│  │  │   │  │  ├─ NablarchApiForArchitect.config
+│  │  │   │  │  └─ ProjectOpenApi.config
 ```
-
-If the check target is a code for extending the framework, use `NablarchApiForArchitect.config`, `NablarchTestingApiForArchitect.config`.
-
-**Note**
-
-The tool performs checks on all APIs used. 
-Therefore, if only the default configuration file is used, APIs declared in the project are checked as disallowed APIs for use.
-
-To avoid this, you need to make settings to authorize the APIs declared in your project.
-In addition to the 2 default configuration files, deploy the configuration file for your project in the configuration file directory and describe a package that can uniquely identify the package of your project.
-
-For example, if all the packages created in the project start with `com.example.project`, deploy the file with `com.example.project` to the configuration file directory.
 
 ### Configuration file description method
 
