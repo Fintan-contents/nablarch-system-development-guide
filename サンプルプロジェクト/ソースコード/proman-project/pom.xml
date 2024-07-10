@@ -26,9 +26,13 @@
     <!-- ソース及びclassファイルが準拠するJavaのバージョン-->
     <java.version>21</java.version>
 
-    <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
-    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
-    <version.spotbugs>4.5.0</version.spotbugs>
+    <version.plugins.checkstyle>3.4.0</version.plugins.checkstyle>
+    <version.checkstyle>10.17.0</version.checkstyle>
+    <version.plugins.spotbugs>4.8.6.2</version.plugins.spotbugs>
+    <version.spotbugs>4.8.6</version.spotbugs>
+    <version.plugins.findsecbugs>1.13.0</version.plugins.findsecbugs>
+    <version.plugins.unpublished.api.checker>5-NEXT-SNAPSHOT</version.plugins.unpublished.api.checker>
+    <version.archunit>1.3.0</version.archunit>
     <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <!--
     toolsディレクトリへのパス。ツールが実行される個別モジュールのディレクトリから見て1つ上（つまりこのディレクトリ）のtoolsを指す。
@@ -88,6 +92,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>com.tngtech.archunit</groupId>
+        <artifactId>archunit-junit5</artifactId>
+        <version>${version.archunit}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -112,7 +122,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>8.29</version>
+              <version>${version.checkstyle}</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -146,12 +156,12 @@
               <plugin>
                 <groupId>com.nablarch.framework</groupId>
                 <artifactId>nablarch-unpublished-api-checker</artifactId>
-                <version>1.0.0</version>
+                <version>${version.plugins.unpublished.api.checker}</version>
               </plugin>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
                 <artifactId>findsecbugs-plugin</artifactId>
-                <version>1.11.0</version>
+                <version>${version.plugins.findsecbugs}</version>
               </plugin>
             </plugins>
           </configuration>
