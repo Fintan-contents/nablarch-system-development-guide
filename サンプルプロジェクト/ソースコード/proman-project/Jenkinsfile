@@ -108,20 +108,20 @@ pipeline {
       steps {
         echo 'Create app resources'
         dir(PROJECT_CURRENT_DIR) {
-          sh 'rm -rf app-proman'
-          sh 'mkdir -p app-proman/webapps'
-          sh 'cp -r proman-web/ci/deploy-to-demo/* app-proman/'
-          sh 'cp $(find proman-web/target/ -name *.war) app-proman/webapps/ROOT.war'
-          sh 'cp $(find proman-batch/target/ -name *.jar) app-proman/'
+          sh 'rm -rf app-proman-web'
+          sh 'mkdir -p app-proman-web/webapps'
+          sh 'cp -r proman-web/ci/deploy-to-demo/* app-proman-web/'
+          sh 'cp $(find proman-web/target/ -name *.war) app-proman-web/webapps/ROOT.war'
+          sh 'cp $(find proman-batch/target/ -name *.jar) app-proman-web/'
           sh 'mvn clean -s ci/settings.xml'
           echo 'Send app to demo'
-          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "sudo rm -rf app-proman"'
-          sh 'sshpass -p ${DEMO_PASSWORD} scp -P ${DEMO_PORT} -oStrictHostKeyChecking=no -r app-proman/ ${DEMO_USERNAME}@${DEMO_HOST}:~/'
-          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "ls -lR app-proman"'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "sudo rm -rf app-proman-web"'
+          sh 'sshpass -p ${DEMO_PASSWORD} scp -P ${DEMO_PORT} -oStrictHostKeyChecking=no -r app-proman-web/ ${DEMO_USERNAME}@${DEMO_HOST}:~/'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "ls -lR app-proman-web"'
           echo 'Start app'
-          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "cd app-proman && sh up.sh"'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "cd app-proman-web && sh up.sh"'
           sh 'mvn -P gsp gsp-dba:generate-ddl gsp-dba:execute-ddl gsp-dba:load-data -pl proman-common -s ci/settings.xml -Dnablarch.db.url=jdbc:postgresql://${DEMO_HOST}:5432/postgres'
-          archiveArtifacts 'app-proman/**'
+          archiveArtifacts 'app-proman-web/**'
         }
       }
       post {
