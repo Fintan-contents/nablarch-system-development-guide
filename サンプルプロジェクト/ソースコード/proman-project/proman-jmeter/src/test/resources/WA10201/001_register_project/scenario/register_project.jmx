@@ -31,16 +31,6 @@
             <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
           </CookieManager>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正規表現抽出" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">unescaped</stringProp>
-            <stringProp name="RegexExtractor.refname">hidden_param</stringProp>
-            <stringProp name="RegexExtractor.regex">input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;([^&quot;]+)&quot;</stringProp>
-            <stringProp name="RegexExtractor.template">$1$</stringProp>
-            <stringProp name="RegexExtractor.default"></stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-            <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
-          </RegexExtractor>
-          <hashTree/>
           <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
@@ -106,8 +96,8 @@ def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jm
 // ファイル名として使えない文字は全て「_」に置換する。
 def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + extension;
 def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
-// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
-def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
+// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン、CSRFトークン）は書き出さない。
+def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;).replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(csrf-token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2csrf-token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
 // jsessionid を削除
 def responseWithoutJsessionId = responseWithoutNablarchToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, &quot;&quot;);
 
@@ -247,6 +237,16 @@ if(!responseFile.exists()) {
                 </elementProp>
               </collectionProp>
             </HeaderManager>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正規表現抽出" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">unescaped</stringProp>
+              <stringProp name="RegexExtractor.refname">hidden_param</stringProp>
+              <stringProp name="RegexExtractor.regex">input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;([^&quot;]+)&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
+            </RegexExtractor>
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/stylesheets/common.css-5" enabled="true">
@@ -501,6 +501,16 @@ if(!responseFile.exists()) {
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正規表現抽出" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">unescaped</stringProp>
+              <stringProp name="RegexExtractor.refname">hidden_param</stringProp>
+              <stringProp name="RegexExtractor.regex">input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;([^&quot;]+)&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
+            </RegexExtractor>
+            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/confirmRegistration-12" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
@@ -663,7 +673,7 @@ if(!responseFile.exists()) {
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/register-13">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/app/project/register-13" enabled="true">
             <stringProp name="HTTPSampler.domain">${server.host}</stringProp>
             <stringProp name="HTTPSampler.port">${server.port}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>

@@ -11,7 +11,4 @@
   -->
   <import file="db-for-webui_dev.xml"/>
 
-  <!-- ローカル開発環境用にビルドする際にCSRFトークン検証ハンドラは不要であるため、無効化する -->
-  <component name="csrfTokenVerificationHandler" class="com.nablarch.example.proman.common.handler.PassThroughHandler" />
-
 </component-configuration>

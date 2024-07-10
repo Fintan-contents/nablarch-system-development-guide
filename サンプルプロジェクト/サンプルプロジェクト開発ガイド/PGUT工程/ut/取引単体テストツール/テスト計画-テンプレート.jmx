@@ -106,8 +106,8 @@ def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jm
 // ファイル名として使えない文字は全て「_」に置換する。
 def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + extension;
 def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
-// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
-def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
+// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン、CSRFトークン）は書き出さない。
+def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;).replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(csrf-token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2csrf-token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
 // jsessionid を削除
 def responseWithoutJsessionId = responseWithoutNablarchToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, &quot;&quot;);
 
