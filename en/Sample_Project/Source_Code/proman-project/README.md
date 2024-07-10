@@ -1,7 +1,7 @@
 # Project Management System (Proman)
 
 This is the source code of the "Project management system".  
-(**Pro**ject **Man**agement System is abbreviated as `proman`)
+(**Pro**ject **Man**agement System is abbreviated as **Proman**)
 
 Proman consists of the following four modules.
 

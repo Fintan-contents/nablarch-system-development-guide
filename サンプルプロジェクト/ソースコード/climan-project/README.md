@@ -1,7 +1,7 @@
 # 顧客管理システム（Climan）
 
 これは「顧客管理システム」のソースコードです。  
-（**Cli**ent **Man**agement Systemを略して、`climan`と名付けています）
+（**Cli**ent **Man**agement Systemを略して、**Climan**と名付けています）
 
 ## 動作環境
 
