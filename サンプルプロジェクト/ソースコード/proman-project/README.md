@@ -1,7 +1,7 @@
-# プロジェクト管理システム（proman）
+# プロジェクト管理システム（Proman）
 
 これは「プロジェクト管理システム」のソースコードです。  
-（**Pro**ject **Man**agement Systemを略して、`proman`と名付けています）
+（**Pro**ject **Man**agement Systemを略して、**Proman**と名付けています）
 
 以下の4つのモジュールにより構成されます。
 
