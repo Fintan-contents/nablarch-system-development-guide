@@ -312,7 +312,7 @@ public class ProjectUpdateForm implements Serializable {
     /**
      * 売上高を設定する。
      *
-     * @param sales 設定する売上高
+     * @param salesAmount 設定する売上高
      */
     public void setSalesAmount(String salesAmount) {
         this.salesAmount = salesAmount;
