@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="テスト計画" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="テスト計画">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="ユーザー定義変数" enabled="true">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="ユーザー定義変数">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -106,8 +106,8 @@ def fileNamePrefix = FileServer.getFileServer().getScriptName().replaceAll(/\.jm
 // ファイル名として使えない文字は全て「_」に置換する。
 def outputFileName = sampler.getName().replaceAll(/[\\\/:\*\?\&quot;&lt;&gt;\|]/,&quot;_&quot;) + extension;
 def responseFile = new File(baseDir + &quot;/&quot; + fileNamePrefix + outputFileName);
-// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン）は書き出さない。
-def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
+// エビデンスとして使用するファイルには実行ごとに変更される値（二重サブミットトークン、CSRFトークン）は書き出さない。
+def responseWithoutNablarchToken = prev.getResponseDataAsString().replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(nablarch_token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2nablarch_token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;).replaceAll(/(input type=&quot;hidden&quot; name=&quot;nablarch_hidden&quot; value=&quot;)(.*?)(csrf-token=[^&quot;\|]+)(\|?)(.*?&quot;)/, &quot;\$1\$2csrf-token=TMP_VALUE_FOR_EVIDENCE\$4\$5&quot;);
 // jsessionid を削除
 def responseWithoutJsessionId = responseWithoutNablarchToken.replaceAll(/;jsessionid=[a-zA-Z0-9.]+/, &quot;&quot;);
 

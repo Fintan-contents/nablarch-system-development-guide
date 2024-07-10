@@ -9,4 +9,6 @@
 
   <!-- テスト用HttpServerにJetty12を定義する -->
   <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty12"/>
+  <!-- CSRF対策の無効化 -->
+  <component name="csrfTokenVerificationHandler" class="nablarch.test.NopHandler" />
 </component-configuration>
