@@ -8,5 +8,5 @@ ArchUnitでは命名のチェック、依存性のチェック、依存方向（
 このリポジトリには、本プロジェクトでのテスト内容、運用ルール等のドキュメントが含まれます。
 
 - [ArchUnit利用ガイド](./docs/README.md)
-- [サンプルプロジェクト（proman-web）](https://github.com/Fintan-contents/nablarch-system-development-guide/tree/master/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89/proman-project/proman-web/src/test/java/com/nablarch/example/proman/arch)
-- [サンプルプロジェクト（proman-batch）](https://github.com/Fintan-contents/nablarch-system-development-guide/tree/master/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89/proman-project/proman-batch/src/test/java/com/nablarch/example/proman/arch)
+- [サンプルプロジェクト（proman-web）](../../../../../../../Sample_Project/Source_Code/proman-project/proman-web/src/test/java/com/nablarch/example/proman/arch)
+- [サンプルプロジェクト（proman-batch）](../../../../../../../Sample_Project/Source_Code/proman-project/proman-batch/src/test/java/com/nablarch/example/proman/arch)
