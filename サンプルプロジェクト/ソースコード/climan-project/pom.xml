@@ -20,11 +20,17 @@
     <!-- 環境ごとのリソースディレクトリ(プロファイルにより切り替わる) -->
     <!--suppress UnresolvedMavenProperty -->
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
-    <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
-    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
-    <version.spotbugs>4.5.0</version.spotbugs>
+
+    <version.plugins.checkstyle>3.4.0</version.plugins.checkstyle>
+    <version.checkstyle>10.17.0</version.checkstyle>
+    <version.plugins.spotbugs>4.8.6.2</version.plugins.spotbugs>
+    <version.spotbugs>4.8.6</version.spotbugs>
+    <version.plugins.findsecbugs>1.13.0</version.plugins.findsecbugs>
+    <version.plugins.unpublished.api.checker>5-NEXT-SNAPSHOT</version.plugins.unpublished.api.checker>
+    
     <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
+    
     <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
     <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
     <nablarch.db.url>jdbc:postgresql://localhost:5432/postgres</nablarch.db.url>
@@ -487,7 +493,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.29</version>
+            <version>${version.checkstyle}</version>
           </dependency>
         </dependencies>
         <configuration>
@@ -521,12 +527,12 @@
             <plugin>
               <groupId>com.nablarch.framework</groupId>
               <artifactId>nablarch-unpublished-api-checker</artifactId>
-              <version>1.0.0</version>
+              <version>${version.plugins.unpublished.api.checker}</version>
             </plugin>
             <plugin>
               <groupId>com.h3xstream.findsecbugs</groupId>
               <artifactId>findsecbugs-plugin</artifactId>
-              <version>1.11.0</version>
+              <version>${version.plugins.findsecbugs}</version>
             </plugin>
           </plugins>
         </configuration>
