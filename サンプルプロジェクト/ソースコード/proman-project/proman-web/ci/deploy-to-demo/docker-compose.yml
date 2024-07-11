@@ -1,23 +1,30 @@
-version: "3"
- 
 services:
   web:
-    build: $PWD/web/ # Specifying the file to build
-    image: web # Image name
+    image: tomcat:10.1.25-jre21-temurin-jammy # Image name
     container_name: web # Container name
     ports: # Port on the left to access,right side is the port inside the container
-      - "80:3333"
-    links:
-      - postgres
+      - "80:8080"
+    volumes:
+      - ./webapps:/usr/local/tomcat/webapps
+    depends_on:
+      postgres:
+        condition: service_healthy
     stdin_open: true
     tty: true
- 
+
   postgres:
-    image: postgres:10.4-alpine # Base image file
+    image: postgres:16.2-alpine # Image name
     container_name: postgres # Container name
     ports: # Port on the left to access,right side is the port inside the container
-      - "5432:5432" 
+      - "5432:5432"
     environment: # Container internal environment variable
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=password"
       - "POSTGRES_DB=postgres"
+    restart: always
+    healthcheck:
+      test: "psql -U postgres"
+      interval: 3s
+      timeout: 3s
+      retries: 100
+      start_period: 10s
