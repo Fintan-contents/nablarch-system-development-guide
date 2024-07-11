@@ -123,21 +123,6 @@ pipeline {
           sh 'mvn -P gsp gsp-dba:generate-ddl gsp-dba:execute-ddl gsp-dba:load-data -pl proman-common -s ci/settings.xml -Dnablarch.db.url=jdbc:postgresql://${DEMO_HOST}:5432/postgres'
           archiveArtifacts 'app-proman-web/**'
         }
-      }
-      post {
-        success { rocketSend message: ":blush: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
-        failure { rocketSend message: ":sob: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
-      }
-    }
-
-    stage('Transaction Test') {
-      when {
-        allOf {
-          branch 'develop'
-          expression { return currentBuild.result != 'FAILURE' }
-        }
-      }
-      steps {
         echo 'Waiting for demo server starting...'
         script {
           try {
@@ -154,7 +139,21 @@ pipeline {
             error "Timeout. Demo server does not start. ${exception}: ${exception.message}"
           }
         }
+      }
+      post {
+        success { rocketSend message: ":blush: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
 
+    stage('Transaction Test') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
         echo 'Run Test'
         dir("${PROJECT_CURRENT_DIR}/proman-jmeter") {
           catchError {
