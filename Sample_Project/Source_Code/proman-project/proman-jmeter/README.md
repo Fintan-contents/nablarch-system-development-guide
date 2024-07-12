@@ -149,7 +149,7 @@ JMeter実行後に、ここのファイルと実際のレスポンスが比較�
 **設定例**
 
 ```properties
-jmeter.home=C:\\tools\\apache-jmeter-5.5
+jmeter.home=C:\\tools\\apache-jmeter-5.6.3
 ```
 
 #### server.host

@@ -29,7 +29,7 @@ Install the following software.
 | Data modeling tool                            | SI Object Browser ER | SI Object Browser ER 18             | https://products.sint.co.jp/siob/trial                        | Use in-house license                                         |
 | Window size specification tool                | Sizer                | Sizer v3.34                         | http://www.brianapps.net/sizer/                               |                                                              |
 | Data dump tool for unit test                  | YoyoTool             | 3.1-SNAPSHOT                        | [Sample_Project/Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip](../../Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip) | Initialized for this project. Be sure to get it from here.   |
-| Request recording tool for regression testing | Apache JMeter        | 5.5                               | http://jmeter.apache.org/download_jmeter.cgi                  |                                                              |
+| Request recording tool for regression testing | Apache JMeter        | 5.6.3                               | http://jmeter.apache.org/download_jmeter.cgi                  |                                                              |
 
 
 ## Development environment construction supplementary notes
@@ -63,7 +63,7 @@ Possible to switch to Japanese after launching, but can't save configuration. Th
 Save and edit the [start-up-jmeter.bat](./ut/Subfunction_Unit_Test_Tool/start-up-jmeter.bat) to the desired location. (JMeter's own log is saved in the same location as the bat file).
 Set the JMeter save/extraction directory to `JMETER_HOME` as shown below.
 ```
-set JMETER_HOME=C:\tool\apache-jmeter-5.5
+set JMETER_HOME=C:\tool\apache-jmeter-5.6.3
 ```
 
 #### Proxy configuration

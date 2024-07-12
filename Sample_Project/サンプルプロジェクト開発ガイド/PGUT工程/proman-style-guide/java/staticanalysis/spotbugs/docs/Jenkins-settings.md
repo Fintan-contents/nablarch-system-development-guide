@@ -2,7 +2,7 @@
 
 この文書ではJenkinsでプロジェクトのビルドを行った際、SpotBugsの実行結果を収集する方法をガイドします。
 
-なお、この文書の内容はJenkins 2.401.1、Warnings Next Generation Plugin 10.2.0で動作検証を行っています。
+なお、この文書の内容はJenkins 2.414.1、Warnings Next Generation Plugin 10.2.0で動作検証を行っています。
 
 ## JenkinsにWarnings Next Generation Pluginをインストールする
 
