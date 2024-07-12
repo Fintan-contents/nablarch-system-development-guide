@@ -65,28 +65,28 @@ Also, the settings in the exclusion configuration file (`archunit_ignore_pattern
 
 Note that the method to specify the test target is different between the case of a class and other cases.
 
-If the test target is a class (including layers), the following `and()` (or `that()` if it doesn't have `that()`) is used to exclude the test target with `PromanRuleUtil.notType()`.
-
-`PromanRuleUtil` is a class implemented for this project.
+If the test target is a class (including layers), by specifying the class name in the `doNotBelongToAnyOf` method, you can exclude the target class and its internally defined classes from being tested.
 
 ``` java
 @ArchTest
-public static final ArchRule actionClassMustInheritFromBatchAction =
-        ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action")
-        .and(PromanRuleUtil.notType(
-                PromanExampleAction.class       // #12345
-                , PromanExampleService.class))  // #12346
+public static final ArchRule actionClassMustInheritFromBatchAction. =
+        ArchRuleDefinition.classes()
+        .that().haveSimpleNameEndingWith("Action")
+        .and().doNotBelongToAnyOf(
+            PromanExampleAction.class,    // #12345
+            PromanServiceAction.class)    // #12346
         .should().beAssignableTo(BatchAction.class);
 ```
 
-If the test target is a field or method in a class, the `areNotDeclaredIn()` is used to configure the exclusion.
+To exclude fields, methods, etc. defined within a specific class, you can use the `areNotDeclaredIn` method.
 
 ``` java
 @ArchTest
-public static final ArchRule methodsThatTakeDaoContextAsArgumentMustBePackagePrivate =
-        ArchRuleDefinition.methods().that().haveRawParameterTypes(DaoContext.class)
-            .and().areNotDeclaredIn(PromanExamAction.class)  // #1234
-            .should().bePackagePrivate();
+public static final ArchRule methodsThatTakeDaoContextAsAnArgumentMustBePackagePrivate =
+        ArchRuleDefinition.methods()
+        .that().haveRawParameterTypes(DaoContext.class)
+        .and().areNotDeclaredIn(PromanExamAction.class) // #1234
+        .should().bePackagePrivate();
 ```
 
 And in any case, should write only excluded class in one line and write Redmine ticket number in line comment.
