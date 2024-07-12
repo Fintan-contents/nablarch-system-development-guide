@@ -90,6 +90,30 @@
       </dependencies>
     </profile>
 
+    <!-- デモ環境 -->
+    <profile>
+      <id>demo</id>
+      <properties>
+        <env.name>デモ環境</env.name>
+        <!-- Mavenの環境別リソースのディレクトリ名 -->
+        <env.dir>demo</env.dir>
+        <env.classifier>demo</env.classifier>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>${postgres.jdbc.driver.version}</version>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+          <version>3.3.1</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
     <!-- 本番環境 -->
     <profile>
       <id>prod</id>
