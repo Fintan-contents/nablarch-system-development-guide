@@ -2,7 +2,7 @@
 
 This document will guide you how to configure and run SpotBugs with Maven.
 
-The contents of this document have been verified with Maven 3.9.2.
+The contents of this document have been verified with Maven 3.9.8.
 
 ## Deploy filter files to exclude checks
 
@@ -29,7 +29,7 @@ The location to add the configuration is directly under `build`, which is direct
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>4.7.3.4</version>
+  <version>4.8.6.2</version>
   <configuration>
     <xmlOutput>true</xmlOutput>
     <!-- Filter file to exclude checks -->
