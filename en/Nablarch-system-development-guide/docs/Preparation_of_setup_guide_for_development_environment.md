@@ -54,13 +54,13 @@ The image of the actual guide is shown below.
 
 ## Development environment construction procedure
 
-| Item                   | Name                 | Version, edition, etc.           | Supply source                                      |
-|------------------------|----------------------|-------------------------------------|---------------------------------------------|
-| JDK                    | AdoptOpenJDK         | OpenJDK 8 (LTS) HotSpot Windows x64 | https://adoptopenjdk.net/                   |
-| RDBMS                  | PostgreSQL           | PostgreSQL Portable v10.4.1         | https://github.com/garethflowers/postgresql-portable/releases |
-| Build tools           | Apache Maven         | 3.6.1                               | https://maven.apache.org/                   |
-| IDE                    | IntelliJ             | Community Edition                   | https://www.jetbrains.com/idea/             |
-| Version control tools   | Git                  | 2.21.0 for Windows                  | https://git-scm.com/                        |
-| Browser               | Chrome               | -                                   | https://www.google.com/intl/ja/chrome/      |
-| Data modeling tool | SI Object Browser ER | SI Object Browser ER 18             | https://products.sint.co.jp/ober/trial <br> (Use in-house license) |
+| Item                  | Name                 | Version, edition, etc.  | Supply source                                                                                                            |
+|-----------------------|----------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| JDK                   | Eclipse Temurin      | OpenJDK 21              | https://adoptium.net/temurin/                                                                                            |
+| RDBMS                 | PostgreSQL           | 16                      | https://www.postgresql.org/download/windows/ <br> (The actual project should be guided so that the version can be fixed) |
+| Build tools           | Apache Maven         | 3.9.8                   | https://maven.apache.org/                                                                                                |
+| IDE                   | IntelliJ             | Community Edition       | https://www.jetbrains.com/idea/                                                                                          |
+| Version control tools | Git                  | Git for Windows         | https://gitforwindows.org/                                                                                               |
+| Browser               | Chrome               | -                       | https://www.google.com/intl/ja/chrome/                                                                                   |
+| Data modeling tool    | SI Object Browser ER | SI Object Browser ER 23 | https://products.sint.co.jp/ober/trial <br> (Use in-house license)                                                       |
 
