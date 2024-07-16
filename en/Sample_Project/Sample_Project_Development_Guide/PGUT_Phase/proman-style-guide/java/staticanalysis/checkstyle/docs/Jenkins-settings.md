@@ -2,7 +2,7 @@
 
 This document guides how to collect Checkstyle execution results after building a project with Jenkins.
 
-The contents of this document have been verified with Jenkins 2.401.1 and Warnings Next Generation Plugin 10.2.0
+The contents of this document have been verified with Jenkins 2.414.1 and Warnings Next Generation Plugin 10.2.0
 
 ## Install Warnings Next Generation Plugin on Jenkins
 

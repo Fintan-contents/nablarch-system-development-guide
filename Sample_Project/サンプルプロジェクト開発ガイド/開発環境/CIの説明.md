@@ -2,8 +2,8 @@
 
 ## 使用ソフト
 
-- Jenkins ver. 2.60.3
-- Apache JMeter ver. 5.5
+- Jenkins ver. 2.414.1
+- Apache JMeter ver. 5.6.3
    - 取引単体テストの自動テストで必要になります。  
      あらかじめ Jenkins が稼働しているサーバー上にインストールしておいてください。
 

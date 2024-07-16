@@ -18,18 +18,18 @@
 
 Install the following software.
 
-| Item                                          | Name                 | Version, edition, etc.              | Supply source                                                 | Supplement                                                   |
-| --------------------------------------------- | -------------------- | ----------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
-| JDK                                           | AdoptOpenJDK         | OpenJDK 8 (LTS) HotSpot Windows x64 | https://adoptopenjdk.net/                                     |                                                              |
-| RDBMS                                         | PostgreSQL           | PostgreSQL Portable v10.4.1         | https://github.com/garethflowers/postgresql-portable/releases |                                                              |
-| Build tools                                   | Apache Maven         | 3.6.1                               | https://maven.apache.org/                                     |                                                              |
-| IDE                                           | IntelliJ             | Community Edition                   | https://www.jetbrains.com/idea/                               |                                                              |
-| Version control tools                         | Git                  | 2.21.0 for Windows                  | https://git-scm.com/                                          |                                                              |
-| Browser                                       | Chrome               | -                                   | https://www.google.com/intl/ja/chrome/                        |                                                              |
-| Data modeling tool                            | SI Object Browser ER | SI Object Browser ER 18             | https://products.sint.co.jp/siob/trial                        | Use in-house license                                         |
-| Window size specification tool                | Sizer                | Sizer v3.34                         | http://www.brianapps.net/sizer/                               |                                                              |
-| Data dump tool for unit test                  | YoyoTool             | 3.1-SNAPSHOT                        | [Sample_Project/Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip](../../Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip) | Initialized for this project. Be sure to get it from here.   |
-| Request recording tool for regression testing | Apache JMeter        | 5.5                               | http://jmeter.apache.org/download_jmeter.cgi                  |                                                              |
+| Item                                          | Name                 | Version, edition, etc.  | Supply source                                | Supplement                                                                                                   |
+| --------------------------------------------- | -------------------- | ----------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| JDK                                           | Eclipse Temurin      | OpenJDK 21              | https://adoptium.net/temurin/                |                                                                                                              |
+| RDBMS                                         | PostgreSQL           | 16                      | https://www.postgresql.org/download/windows/ | The actual project should be guided so that the version can be fixed.                                        |
+| Build tools                                   | Apache Maven         | 3.9.8                   | https://maven.apache.org/                    |                                                                                                              |
+| IDE                                           | IntelliJ             | Community Edition       | https://www.jetbrains.com/idea/              |                                                                                                              |
+| Version control tools                         | Git                  | Git for Windows         | https://gitforwindows.org/                   |                                                                                                              |
+| Browser                                       | Chrome               | -                       | https://www.google.com/intl/ja/chrome/       |                                                                                                              |
+| Data modeling tool                            | SI Object Browser ER | SI Object Browser ER 23 | https://products.sint.co.jp/siob/trial       | Use in-house license                                                                                         |
+| Window size specification tool                | Sizer                | Sizer v3.34             | http://www.brianapps.net/sizer/              |                                                                                                              |
+| Data dump tool for unit test                  | YoyoTool             | 3.1-SNAPSHOT            | [Sample_Project/Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip](../../Design_Document/A1_Project_Management_System/080_Tools/DUMP_3.1-SNAPSHOT.zip) | Initialized for this project. Be sure to get it from here.<br/>This tool should be run set a path to Java 8. |
+| Request recording tool for regression testing | Apache JMeter        | 5.6.3                   | http://jmeter.apache.org/download_jmeter.cgi |                                                                                                              |
 
 
 ## Development environment construction supplementary notes
@@ -63,7 +63,7 @@ Possible to switch to Japanese after launching, but can't save configuration. Th
 Save and edit the [start-up-jmeter.bat](./ut/Subfunction_Unit_Test_Tool/start-up-jmeter.bat) to the desired location. (JMeter's own log is saved in the same location as the bat file).
 Set the JMeter save/extraction directory to `JMETER_HOME` as shown below.
 ```
-set JMETER_HOME=C:\tool\apache-jmeter-5.5
+set JMETER_HOME=C:\tool\apache-jmeter-5.6.3
 ```
 
 #### Proxy configuration
