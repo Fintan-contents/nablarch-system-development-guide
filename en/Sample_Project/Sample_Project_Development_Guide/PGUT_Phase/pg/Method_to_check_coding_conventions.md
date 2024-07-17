@@ -4,7 +4,7 @@ This section is a guide to check the coding rules on your local PC.
 Please follow this before requesting a review.
 
 ## Format
-- [Java code formatter](https://github.com/nablarch-development-standards/nablarch-style-guide/blob/master/en/java/code-formatter.md)  
+- [Java code formatter](https://github.com/Fintan-contents/coding-standards/blob/main/en/java/code-formatter.md)  
   Please set the formatter according to the explanation.
 
 ## Check coding conventions
