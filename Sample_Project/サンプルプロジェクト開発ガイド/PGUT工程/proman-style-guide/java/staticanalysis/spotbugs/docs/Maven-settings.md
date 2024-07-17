@@ -2,7 +2,7 @@
 
 この文書ではMavenでSpotBugsの実行をするための設定方法と実行方法をガイドします。
 
-なお、この文書の内容はMaven 3.9.2で動作検証を行っています。
+なお、この文書の内容はMaven 3.9.8で動作検証を行っています。
 
 ## チェックを除外するフィルターファイルを配置する
 
@@ -29,7 +29,7 @@
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>4.7.3.4</version>
+  <version>4.8.6.2</version>
   <configuration>
     <xmlOutput>true</xmlOutput>
     <!-- チェックを除外するフィルターファイル -->

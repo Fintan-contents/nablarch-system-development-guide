@@ -1919,7 +1919,7 @@ String text = """
 
 `if`文や`switch`文を使用し、条件によって変数に代入する値を切り替えている場合、Java 14から正式導入された`switch`式を使用できないか検討してください。
 
-`switch`の`case`および`default`内で`yield`文を使用することで、`switch`式を記述できます。 
+`switch`の`case`および`default`内で`yield`文を使用することで、`switch`式を記述できます。
 `switch`式では、`yield`文で指定した値を返すことができます。
 また、Java 14からは`switch`に関連する以下の記述が可能になっています。
 

@@ -2,7 +2,7 @@
 
 This document will guide you on how to configure and run Checkstyle with Maven.
 
-The contents of this document have been verified with Maven 3.9.2.
+The contents of this document have been verified with Maven 3.9.8.
 
 ## Incorporate Checkstyle configuration file into the project
 
@@ -22,12 +22,12 @@ The location to add the configuration is directly under `build`, which is direct
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-checkstyle-plugin</artifactId>
-  <version>3.3.0</version>
+  <version>3.4.0</version>
   <dependencies>
     <dependency>
       <groupId>com.puppycrawl.tools</groupId>
       <artifactId>checkstyle</artifactId>
-      <version>10.12.0</version>
+      <version>10.17.0</version>
     </dependency>
   </dependencies>
   <configuration>
