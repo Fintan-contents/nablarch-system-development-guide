@@ -1,26 +1,9 @@
 # スタイルガイド
 
-本リポジトリではJavaをはじめとする各言語のコーディング規約と、Checkstyle・SpotBugsといった静的解析ツールの導入ガイドを提供します。
+Javaをはじめとする各言語のコーディング規約と、Checkstyle・SpotBugsといった静的解析ツールの導入ガイドを提供します。
 
 - [Javaスタイルガイド](./java/README.md)
 - [JavaScriptスタイルガイド](./js/README.md)
 - [Jakarta Server Pagesスタイルガイド](./jsp/README.md)
 - [SQLスタイルガイド](./sql/README.md)
 - [シェルスクリプトスタイルガイド](./shell/README.md)
-
-## ライセンス
-
-本リポジトリ内のドキュメントは[Fintan コンテンツ 使用許諾条項](https://fintan.jp/page/295/#Fintanコンテンツ使用許諾条項)の下に提供されています。
-
-また次に示すファイルやサンプルプロジェクトは [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt) の下に提供されています。
-
-- `java/staticanalysis/checkstyle/checkstyle-example/` 以下に格納されているサンプルプロジェクト
-- `java/staticanalysis/spotbugs/spotbugs-example/` 以下に格納されているサンプルプロジェクト
-
-## バージョンについて
-
-本スタイルガイドのバージョンは、メジャーバージョンとマイナーバージョンをピリオドで繋いだものにより表されます。
-新たな言語のスタイルガイドを追加した場合や、Javaコーディング規約などに新たな項目が追加された場合にメジャーバージョンがインクリメントされます。
-誤字脱字の修正や、意味はそのままに表現を変更した場合はマイナーバージョンがインクリメントされます。
-
-変更履歴は[CHANGELOG.md](./CHANGELOG.md)を参照してください。
