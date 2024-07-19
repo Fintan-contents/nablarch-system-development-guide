@@ -23,7 +23,7 @@ class ServiceClassRuleTest {
                 .andShould().notBeStatic();
 
     /**
-     * サービスクラスのDaoContextを引数に持つコンストラクタがpackage privateであること。
+     * The constructor with DaoContext as an argument must be package_private.
      */
     @ArchTest
     static final ArchRule constructorWithDaoContextAsArgumentMustBePackagePrivate =
