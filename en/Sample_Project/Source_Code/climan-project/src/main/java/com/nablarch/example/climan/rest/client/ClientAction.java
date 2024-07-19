@@ -1,20 +1,18 @@
 package com.nablarch.example.climan.rest.client;
 
-import com.nablarch.example.climan.common.validation.BindingResult;
-import com.nablarch.example.climan.common.validation.FormBinder;
 import com.nablarch.example.climan.entity.Client;
 import nablarch.core.beans.BeanUtil;
+import nablarch.core.validation.ee.ValidatorUtil;
 import nablarch.fw.ExecutionContext;
-import nablarch.fw.web.HttpRequest;
-import nablarch.fw.web.HttpResponse;
+import nablarch.fw.jaxrs.JaxRsHttpRequest;
 
-import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
@@ -33,11 +31,10 @@ public class ClientAction {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Client> list(HttpRequest request, ExecutionContext context) {
+    public List<Client> list(JaxRsHttpRequest request, ExecutionContext context) {
 
-        BindingResult<ClientSearchForm> bindingResult = FormBinder.from(request, context).to(ClientSearchForm.class);
-        bindingResult.abortIfInvalid();
-        ClientSearchForm form = bindingResult.getValidForm();
+        ClientSearchForm form = BeanUtil.createAndCopy(ClientSearchForm.class, request.getParamMap());
+        ValidatorUtil.validate(form);
 
         ClientService service = new ClientService();
         Client condition = BeanUtil.createAndCopy(Client.class, form);
@@ -53,11 +50,10 @@ public class ClientAction {
     @GET
     @Path("/{clientId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Client show(HttpRequest request, ExecutionContext context) {
+    public Client show(JaxRsHttpRequest request, ExecutionContext context) {
 
-        BindingResult<ClientGetForm> bindingResult = FormBinder.from(request, context).to(ClientGetForm.class);
-        bindingResult.abortIfInvalid();
-        ClientGetForm form = bindingResult.getValidForm();
+        ClientGetForm form = BeanUtil.createAndCopy(ClientGetForm.class, request.getParamMap());
+        ValidatorUtil.validate(form);
 
         ClientService service = new ClientService();
         Client condition = BeanUtil.createAndCopy(Client.class, form);

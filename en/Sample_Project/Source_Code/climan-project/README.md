@@ -20,7 +20,8 @@ Execute the following commands.
 
 ```
 $ mvn -P gsp clean generate-resources
-$ mvn compile waitt:run-headless
+$ mvn compile
+$ mvn jetty:run
 ```
 
 ## Verify operation

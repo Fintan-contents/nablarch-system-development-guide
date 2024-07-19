@@ -1,6 +1,7 @@
 package com.nablarch.example.proman.arch;
 
 import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
@@ -9,12 +10,9 @@ import com.tngtech.archunit.library.Architectures;
 /**
  * Testing application structure.
  */
-@AnalyzeClasses(packages = "com.nablarch.example.proman")
+@AnalyzeClasses(packages = "com.nablarch.example.proman", importOptions = DoNotIncludeTests.class)
 class LayeredArchitectureForWebTest {
 
-    /**
-     * Testing application structure.
-     */
     @ArchTest
     static final ArchRule testingTheApplicationStructure = Architectures.layeredArchitecture()
             .consideringAllDependencies()

@@ -21,28 +21,18 @@
   <!-- #217 -->
   <Match>
     <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.encrypt.PBKDF2PasswordEncryptor" />
+    <Class name="com.nablarch.example.proman.web.common.authentication.encrypt.PBKDF2PasswordEncryptor"/>
   </Match>
 
   <!-- #218 -->
   <Match>
     <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException" />
-  </Match>
-
-  <!-- #224 -->
-  <Match>
-    <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Or>
-      <Class name="com.nablarch.example.proman.web.common.validation.FormBinder" />
-      <Class name="com.nablarch.example.proman.web.common.validation.BindingResult$ValidBindingResult" />
-      <Class name="com.nablarch.example.proman.web.common.validation.BindingResult$InvalidBindingResult" />
-    </Or>
+    <Class name="com.nablarch.example.proman.web.common.authentication.exception.AuthenticationException"/>
   </Match>
 
   <Match>
     <Bug pattern="UPU_UNPUBLISHED_API_USAGE"/>
-    <Class name="com.nablarch.example.proman.web.common.authentication.AuthenticationUtil" />
+    <Class name="com.nablarch.example.proman.web.common.authentication.AuthenticationUtil"/>
     <Method name="authenticate"/>
   </Match>
   <Match>
