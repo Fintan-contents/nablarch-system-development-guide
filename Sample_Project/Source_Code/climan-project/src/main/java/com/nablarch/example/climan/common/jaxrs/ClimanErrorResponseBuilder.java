@@ -100,7 +100,8 @@ public class ClimanErrorResponseBuilder extends ErrorResponseBuilder {
      */
     private HttpResponse createHttpResponse(HttpResponse.Status status, ExecutionContext context, Error error) {
         return bodyConverter.write(error, context)
-                .setStatusCode(status.getStatusCode());    }
+                .setStatusCode(status.getStatusCode());
+    }
 
     /**
      * エラー内容を保持するクラス。

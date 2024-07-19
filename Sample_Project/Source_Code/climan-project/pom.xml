@@ -577,7 +577,8 @@
             <port>9080</port>
           </httpConnector>
         </configuration>
-      </plugin>      <!-- ================ここから任意で使用するツールの設定================ -->
+      </plugin>
+      <!-- ================ここから任意で使用するツールの設定================ -->
       <!-- gsp-dba-maven-pluginで自動生成したソースをビルド時に使用するための設定 -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
