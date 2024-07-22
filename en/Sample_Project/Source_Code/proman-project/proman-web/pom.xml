@@ -122,7 +122,7 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- コード管理 -->
+    <!-- Code management -->
     <dependency>
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-common-code-jdbc</artifactId>
