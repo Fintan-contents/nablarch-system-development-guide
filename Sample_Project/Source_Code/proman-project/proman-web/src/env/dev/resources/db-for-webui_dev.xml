@@ -12,6 +12,7 @@
   <!-- データソース設定 -->
   <component name="dataSource"
              class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
+    <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>
     <property name="jdbcUrl"         value="${nablarch.db.url}"/>
     <property name="username"        value="${nablarch.db.user}"/>
     <property name="password"        value="${nablarch.db.password}"/>

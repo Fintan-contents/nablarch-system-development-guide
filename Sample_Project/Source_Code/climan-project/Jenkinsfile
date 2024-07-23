@@ -41,8 +41,8 @@ pipeline {
         }
       }
       post {
-        success { rocketSend message: ":blush: proman-common checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
-        failure { rocketSend message: ":sob: proman-common checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        success { rocketSend message: ":blush: checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
       }
     }
   }

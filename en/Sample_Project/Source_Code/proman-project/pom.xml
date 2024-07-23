@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5-NEXT-SNAPSHOT</version>
+    <version>6-NEXT-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -20,17 +20,23 @@
     <module>proman-common</module>
     <module>proman-web</module>
     <module>proman-batch</module>
-    <module>proman-arch-test</module>
   </modules>
 
   <properties>
-    <version.plugins.checkstyle>3.1.0</version.plugins.checkstyle>
-    <version.plugins.spotbugs>4.5.0.0</version.plugins.spotbugs>
-    <version.spotbugs>4.5.0</version.spotbugs>
-    <postgres.jdbc.driver.version>42.5.0</postgres.jdbc.driver.version>
+    <!-- Version of Java used as a basis for the source and class file -->
+    <java.version>21</java.version>
+
+    <version.plugins.checkstyle>3.4.0</version.plugins.checkstyle>
+    <version.checkstyle>10.17.0</version.checkstyle>
+    <version.plugins.spotbugs>4.8.6.2</version.plugins.spotbugs>
+    <version.spotbugs>4.8.6</version.spotbugs>
+    <version.plugins.findsecbugs>1.13.0</version.plugins.findsecbugs>
+    <version.plugins.unpublished.api.checker>5-NEXT-SNAPSHOT</version.plugins.unpublished.api.checker>
+    <version.archunit>1.3.0</version.archunit>
+    <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <!--
-    Path to tools directory. Indicates tools one level above the directory of individual modules executed by a tool (indicates this directory).
-     -->
+     Path to tools directory. Indicates tools one level above the directory of individual modules executed by a tool (indicates this directory).
+    -->
     <nablarch.tools.dir>${project.basedir}/../tools</nablarch.tools.dir>
   </properties>
 
@@ -54,15 +60,15 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5-NEXT-SNAPSHOT</version>
+        <version>6-NEXT-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- JUnit5 -->
+      <!-- Jakarta EE -->
       <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>5.8.2</version>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-bom</artifactId>
+        <version>10.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -72,21 +78,29 @@
         <artifactId>postgresql</artifactId>
         <version>${postgres.jdbc.driver.version}</version>
       </dependency>
-      <!--
-       Connection Pool
-       Commons DBCP2 operates only in Java8
-       > DBCP 2.6.0 compiles and runs under Java 8 only (JDBC 4.2)
-       Version 3 of the HikariCP system operates in Java8 to 11
-       -->
+      <!-- Connection Pool -->
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
         <version>3.3.1</version>
       </dependency>
+      <!-- JUnit -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.8.2</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.tngtech.archunit</groupId>
+        <artifactId>archunit-junit5</artifactId>
+        <version>${version.archunit}</version>
+      </dependency>
+
     </dependencies>
-
-
   </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -108,7 +122,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>8.29</version>
+              <version>${version.checkstyle}</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -142,12 +156,12 @@
               <plugin>
                 <groupId>com.nablarch.framework</groupId>
                 <artifactId>nablarch-unpublished-api-checker</artifactId>
-                <version>1.0.0</version>
+                <version>${version.plugins.unpublished.api.checker}</version>
               </plugin>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
                 <artifactId>findsecbugs-plugin</artifactId>
-                <version>1.11.0</version>
+                <version>${version.plugins.findsecbugs}</version>
               </plugin>
             </plugins>
           </configuration>

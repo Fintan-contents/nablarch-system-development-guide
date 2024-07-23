@@ -1,20 +1,19 @@
 package com.nablarch.example.proman.arch;
 
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import nablarch.common.dao.DaoContext;
 
+
 /**
  * Rules on how to implement the Service class.
  */
-@AnalyzeClasses(packages = "com.nablarch.example.proman")
+@AnalyzeClasses(packages = "com.nablarch.example.proman", importOptions = DoNotIncludeTests.class)
 class ServiceClassRuleTest {
 
-    /**
-     * If you have DaoContext in a field, it is private_final but not static.
-     */
     @ArchTest
     static final ArchRule ifYouHaveDaoContextAsFieldItMustBePrivateFinalButNotStatic =
             ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)

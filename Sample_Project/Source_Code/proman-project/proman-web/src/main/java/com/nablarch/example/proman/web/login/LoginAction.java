@@ -1,6 +1,5 @@
 package com.nablarch.example.proman.web.login;
 
-
 import com.nablarch.example.proman.entity.SystemAccount;
 import com.nablarch.example.proman.entity.Users;
 import com.nablarch.example.proman.web.common.authentication.AuthenticationUtil;

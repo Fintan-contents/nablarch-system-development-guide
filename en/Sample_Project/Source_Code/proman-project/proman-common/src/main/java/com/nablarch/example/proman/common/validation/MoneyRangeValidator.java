@@ -2,8 +2,8 @@ package com.nablarch.example.proman.common.validation;
 
 import nablarch.core.util.StringUtil;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * Validator to verify that the specified integer is a monetary value within the range.

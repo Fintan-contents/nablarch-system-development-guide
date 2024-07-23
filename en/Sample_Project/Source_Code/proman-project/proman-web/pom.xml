@@ -63,11 +63,6 @@
           <groupId>com.zaxxer</groupId>
           <artifactId>HikariCP</artifactId>
         </dependency>
-        <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>jstl</artifactId>
-          <version>1.2</version>
-        </dependency>
       </dependencies>
     </profile>
 
@@ -104,12 +99,6 @@
     <dependency>
       <groupId>com.nablarch.profile</groupId>
       <artifactId>nablarch-web</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>taglibs</groupId>
-          <artifactId>standard</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
@@ -121,27 +110,15 @@
       <groupId>com.nablarch.framework</groupId>
       <artifactId>nablarch-testing</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jdt.core.compiler</groupId>
-          <artifactId>ecj</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.nablarch.framework</groupId>
-      <artifactId>nablarch-testing-jetty6</artifactId>
+      <artifactId>nablarch-testing-jetty12</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.nablarch.configuration</groupId>
       <artifactId>nablarch-testing-default-configuration</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.nablarch.dev</groupId>
-      <artifactId>nablarch-test-support</artifactId>
-      <version>0.1.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -166,22 +143,23 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.1</version>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
-      <groupId>javax.servlet.jsp.jstl</groupId>
-      <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-      <version>1.2.1</version>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.hibernate</groupId>
+      <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>5.1.3.Final</version>
+      <version>8.0.0.Final</version>
     </dependency>
 
     <dependency>
@@ -199,6 +177,12 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -223,18 +207,13 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>net.unit8.waitt</groupId>
-        <artifactId>waitt-maven-plugin</artifactId>
-        <version>1.2.3</version>
+        <groupId>org.eclipse.jetty.ee10</groupId>
+        <artifactId>jetty-ee10-maven-plugin</artifactId>
+        <version>12.0.3</version>
         <configuration>
-          <port>9080</port>
-          <servers>
-            <server>
-              <groupId>net.unit8.waitt.server</groupId>
-              <artifactId>waitt-tomcat8</artifactId>
-              <version>1.2.3</version>
-            </server>
-          </servers>
+          <httpConnector>
+            <port>9088</port>
+          </httpConnector>
         </configuration>
       </plugin>
       <plugin>
@@ -248,9 +227,6 @@
               <Target-Environment>${env.name}</Target-Environment>
             </manifestEntries>
           </archive>
-          <!-- In order to test the classes included in this module in the lower level modules, we also create a jar when creating the war. -->
-          <attachClasses>true</attachClasses>
-          <classesClassifier>classes</classesClassifier>
         </configuration>
       </plugin>
 
@@ -283,21 +259,6 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- Preliminary measure to avoid errors occurring in the waitt plugin -->
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.4.18.v20190429</version>
-        <configuration>
-          <webAppConfig>
-            <contextPath>/</contextPath>
-          </webAppConfig>
-          <httpConnector>
-            <port>9088</port>
-          </httpConnector>
-        </configuration>
       </plugin>
     </plugins>
   </build>

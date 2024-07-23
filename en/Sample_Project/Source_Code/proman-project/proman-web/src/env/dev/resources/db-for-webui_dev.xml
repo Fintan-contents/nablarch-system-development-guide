@@ -10,9 +10,9 @@
   <import file="nablarch/core/db/connection-factory-datasource.xml"/>
 
   <!-- Database settings -->
-  <!-- TODO: Set definitions suited to the database products used in the project. -->
   <component name="dataSource"
              class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
+    <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>
     <property name="jdbcUrl"         value="${nablarch.db.url}"/>
     <property name="username"        value="${nablarch.db.user}"/>
     <property name="password"        value="${nablarch.db.password}"/>

@@ -7,7 +7,7 @@ import nablarch.fw.Handler;
 import nablarch.fw.web.HttpErrorResponse;
 import nablarch.fw.web.HttpResponse.Status;
 
-import javax.persistence.OptimisticLockException;
+import jakarta.persistence.OptimisticLockException;
 
 /**
  * Handler to transition to the applicable error screen when a specific exception is sent.

@@ -4,11 +4,13 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
+  <import file="handler_dev.xml"/>
   <!--
-  This is configured so that connections to the database are acquired from the local data source by loading db-for-webui_dev.xml.
-  Make sure that db-for-webui_dev.xml is not loaded if you intend to use JNDI.
-  Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for JNDI lookup in the config file.
-  -->
+    This is configured so that connections to the database are acquired from the local data source by loading db-for-webui_dev.xml.
+    Make sure that db-for-webui_dev.xml is not loaded if you intend to use JNDI.
+    Set "nablarch.connectionFactory.jndiResourceName" as a placeholder for the name to be used for JNDI lookup in the config file.
+    -->
   <import file="db-for-webui_dev.xml"/>
+
 
 </component-configuration>
