@@ -26,7 +26,7 @@
     <version.plugins.spotbugs>4.8.6.2</version.plugins.spotbugs>
     <version.spotbugs>4.8.6</version.spotbugs>
     <version.plugins.findsecbugs>1.13.0</version.plugins.findsecbugs>
-    <version.plugins.unpublished.api.checker>5-NEXT-SNAPSHOT</version.plugins.unpublished.api.checker>
+    <version.plugins.unpublished.api.checker>1.0.0</version.plugins.unpublished.api.checker>
 
     <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
     <nablarch.tools.dir>${project.basedir}/tools</nablarch.tools.dir>
