@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>6-NEXT-SNAPSHOT</version>
+    <version>6u2</version>
     <relativePath/>
   </parent>
 
