@@ -127,7 +127,7 @@
     <!--
     Nablarchのマスタデータ復旧機能用にデータを格納する際に使用するプロファイル。
     使用の際は、以下を参照すること。
-    https://github.com/coastland/gsp-dba-maven-plugin/blob/master/recipe/backupToDifferentSchema.md
+    https://github.com/coastland/gsp-dba-maven-plugin/blob/main/recipe/backupToDifferentSchema.md
 
     gsp-dba-pluginでは、H2の場合はデフォルトスキーマのPUBLICしか扱えないためバックアップスキーマ名にPUBLICを指定しています。
     gsp-dba-pluginで任意のスキーマ名を指定出来るDBの場合は、バックアップスキーマ名を指定して下さい。
