@@ -149,13 +149,20 @@
     <finalName>proman-batch</finalName>
     <resources>
       <resource>
-        <directory>${env.resources}</directory>
+        <directory>src/main/resources</directory>
       </resource>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>${env.resources}</directory>
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <overwrite>true</overwrite>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
