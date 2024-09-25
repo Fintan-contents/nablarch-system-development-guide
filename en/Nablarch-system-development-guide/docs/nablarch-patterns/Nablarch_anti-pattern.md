@@ -5,7 +5,7 @@ it may lead to major rework, poor performance, or production failure in the wors
 
 Here are some examples of actual errors.
 
-## Web application
+## Web Application
 
 ### Multithreaded bugs due to the misunderstanding of component lifecycle
 
@@ -20,7 +20,7 @@ When using Nablarch, there are not many cases where it is necessary to obtain co
 Since the component life cycle is a `singleton`, it is not used to rewrite the state of the component except for the initialization process. 
 If you see a code that changes the state of a component, you need to suspect that it may be a bug due to the misunderstanding described above.
 
-## Nablarch batch
+## Nablarch Batch
 
 If you do not understand how the framework works when designing and implementing batches, you may create batches having an incorrect structure. 
 Even in such cases, the business requirements may be satisfied as a batch process, 
@@ -121,7 +121,7 @@ Realize by framework management loop processing instead of self-loop processing.
 In the case of the above example, the SQL issued in the handle will be performed by createReader.
 
 
-## Jakarta Batch-compliant batch
+## Jakarta Batch-compliant Batch
 
 
 ### Misuse of batchlet

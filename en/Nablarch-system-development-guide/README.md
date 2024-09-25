@@ -3,8 +3,8 @@
 ## Contents
 
 - [Preface](#Preface)
-  - [Purpose of this document](#Purpose-of-this-document)
-  - [Who should read this document?](#Who-should-read-this-document?)
+  - [Purpose of this guide](#Purpose-of-this-guide)
+  - [Who should read this guide?](#Who-should-read-this-guide?)
   - [Notes on reading](#Notes-on-reading)
 - [Overall picture](#Overall-picture)
 - [Project plan](#Project-plan)
@@ -23,19 +23,17 @@
   - [Establishment of development standards](#Establishment-of-development-standards)
 - [Integration test phase](#Integration-test-phase)
   - [Preparation for integration test (communication confirmation)](#Preparation-for-integration-test-communication-confirmation)
-- [System test phase](#System-test-phase)
-- [Maintenance operation](#Maintenance-operation)
 
 
 ## Preface
 
-This document indicates as to what should be done before and during development, and what should be referred to, by engineers engaged in system development using Nablarch. The document describes the method considered ideal for most projects to proceed with activities that are considered necessary for system development using Nablarch.
+This guide indicates as to what should be done before and during development, and what should be referred to, by engineers engaged in system development using Nablarch. The guide describes the method considered ideal for most projects to proceed with activities that are considered necessary for system development using Nablarch.
 Given the characteristics of most projects using Nablarach, the development process assumes waterfall development.
-Before starting the project, review this document and study how to proceed with the development.
+Before starting the project, review this guide and study how to proceed with the development.
 
-### Purpose of this document
+### Purpose of this guide
 
-This document aims to achieve the following.
+This guide aims to achieve the following.
 
 * Ensure that the content provided by Nablarch (development standards, check tools, etc.) is used effectively
 * Clear description of the most suitable method combining the contents of [Fintan](https://fintan.jp/) and Nablarch
@@ -44,14 +42,14 @@ This document aims to achieve the following.
 * Enabling a person who is not familiar with Nablarch (experienced in application development) to carry out development preparation and promotion confidently using the shortest route
 * Guide persons having experience using other frameworks (Struts, Spring) on the correct usage of Nablarch
 
-### Who should read this document?
+### Who should read this guide?
 
-This document is intended for engineers (especially IT architects and project managers) who want to start system development using Nablarch.
+This guide is intended for engineers (especially IT architects and project managers) who want to start system development using Nablarch.
 
 ### Notes on reading
 
-This document contains many links. If you go on clicking the links while reading the document at the beginning,
-it will become challenging to get the overall picture as there are many linked documents. At first, when reading the document, just understand that ‘there are such links’ without clicking each of them and read the document up to the end.
+This guide contains many links. If you go on clicking the links while reading the guide at the beginning,
+it will become challenging to get the overall picture as there are many linked documents. At first, when reading the guide, just understand that ‘there are such links’ without clicking each of them and read the guide up to the end.
 
 
 ## Overall picture
@@ -330,13 +328,3 @@ For parts with differences, change the settings according to the environment.
 
 Confirm the communication mainly at places where there are differences.
 In particular, functions that have a significant impact on overall testing (testing cannot be done if these functions stop working) are tested on a priority basis.
-
-
-## System test phase
-
-(This will be added after receiving feedback from the project)
-
-## Maintenance operation
-
-(This will be added after receiving feedback from the project)
-
