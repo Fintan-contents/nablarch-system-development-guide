@@ -20,7 +20,6 @@ PostgreSQLの初期ユーザーとパスワードは以下の通りに設定し�
 
 ```
 $ mvn -P gsp clean generate-resources
-$ mvn compile
 $ mvn jetty:run
 ```
 
