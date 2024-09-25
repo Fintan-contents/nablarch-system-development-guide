@@ -496,9 +496,6 @@
   <build>
     <resources>
       <resource>
-        <directory>${env.resources}</directory>
-      </resource>
-      <resource>
         <directory>src/main/resources</directory>
       </resource>
       <resource>
@@ -507,8 +504,18 @@
           <include>**/*.sql</include>
         </includes>
       </resource>
+      <resource>
+        <directory>${env.resources}</directory>
+      </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <overwrite>true</overwrite>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -576,6 +583,10 @@
           <httpConnector>
             <port>9080</port>
           </httpConnector>
+          <webApp>
+            <!-- Jettyに含まれるJSTLと重複するので、Webアプリに含まれるJSTLはJettyで起動する際には除外する -->
+            <webInfIncludeJarPattern><![CDATA[.*/[^/]+(?<!jakarta\.servlet\.jsp\.jstl-[^/]+)\.jar$]]></webInfIncludeJarPattern>
+          </webApp>
         </configuration>
       </plugin>
       <!-- ================ここから任意で使用するツールの設定================ -->
