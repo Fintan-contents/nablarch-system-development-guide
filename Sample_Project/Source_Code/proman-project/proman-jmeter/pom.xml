@@ -150,14 +150,21 @@
   <build>
     <testResources>
       <testResource>
-        <directory>${env.resources}</directory>
+        <directory>src/test/resources</directory>
       </testResource>
       <testResource>
-        <directory>src/test/resources</directory>
+        <directory>${env.resources}</directory>
       </testResource>
     </testResources>
 
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <overwrite>true</overwrite>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.lazerycode.jmeter</groupId>
         <artifactId>jmeter-maven-plugin</artifactId>
