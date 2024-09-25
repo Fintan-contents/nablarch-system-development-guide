@@ -60,7 +60,7 @@ The image of the actual guide is shown below.
 | Build tools           | Apache Maven         | 3.9.9                   | https://maven.apache.org/                                                                                                |
 | IDE                   | IntelliJ IDEA        | Community Edition       | https://www.jetbrains.com/idea/                                                                                          |
 | Version control tools | Git                  | Git for Windows         | https://gitforwindows.org/                                                                                               |
-| Browser               | Google Chrome        | -                       | https://www.google.com/intl/ja/chrome/                                                                                   |
+| Browser               | Google Chrome        | -                       | https://www.google.com/chrome/                                                                                           |
 | Data modeling tool    | SI Object Browser ER | SI Object Browser ER 23 | https://products.sint.co.jp/ober/trial <br> (Use in-house license)                                                       |
 | Office tool           | Microsoft Office     | Microsoft 365           | - <br> (Use in-house license)                    f                                                                       |
 
