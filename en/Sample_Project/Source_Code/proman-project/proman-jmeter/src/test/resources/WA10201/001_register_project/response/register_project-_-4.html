@@ -74,6 +74,12 @@
 <script type="text/javascript">
 <!--
 function nablarch_submit(event, element) {
+    if (element == null) {
+        element = event.currentTarget;
+        if (element == null) {
+            element = event.target;
+        }
+    }
     var isAnchor = element.tagName.match(/a/i);
     var form = nablarch_findForm(element, isAnchor);
     if (form == null) {
@@ -226,7 +232,7 @@ nablarch_submission_info.endMark = {};
                                 </div>
                             </div>
                         
-<input type="hidden" name="nablarch_hidden" value="nablarch_hidden_submit_nablarch_form1_1=" />
+<input type="hidden" name="nablarch_hidden" value="csrf-token=TMP_VALUE_FOR_EVIDENCE|nablarch_hidden_submit_nablarch_form1_1=" />
 <input type="hidden" name="nablarch_submit" value="" />
 <script type="text/javascript">
 <!--
