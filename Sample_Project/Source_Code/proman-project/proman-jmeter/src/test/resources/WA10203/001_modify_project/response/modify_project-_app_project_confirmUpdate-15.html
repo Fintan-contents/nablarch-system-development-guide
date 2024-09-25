@@ -130,6 +130,12 @@
 <script type="text/javascript">
 <!--
 function nablarch_submit(event, element) {
+    if (element == null) {
+        element = event.currentTarget;
+        if (element == null) {
+            element = event.target;
+        }
+    }
     var isAnchor = element.tagName.match(/a/i);
     var form = nablarch_findForm(element, isAnchor);
     if (form == null) {
