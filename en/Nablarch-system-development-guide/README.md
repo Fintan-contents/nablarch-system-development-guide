@@ -48,10 +48,10 @@ This guide is intended for engineers (especially IT architects and project manag
 
 ### Notes on reading
 
-The sections of this guide from “Overall picture” to “Integration Test Phase” describe the overall system development process. 
+The sections of this guide from "Overall picture" to "Integration Test Phase" describe the overall system development process. 
 Many links exist in descriptions of the overall system development process. 
 There are many linked documents, and it is difficult to get the overall picture if you go on clicking the links while reading the guide at the beginning. 
-At first, do not click too many links and read the overall system development process to the end, with the understanding that “there are such and such links".
+At first, do not click too many links and read the overall system development process to the end, with the understanding that "there are such and such links".
 
 
 ## Overall picture
