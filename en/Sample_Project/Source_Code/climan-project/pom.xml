@@ -127,7 +127,7 @@
     <!--
     Profile used to store data for Nablarch's master data restoration feature.
     Reference the following when using this.
-    https://github.com/coastland/gsp-dba-maven-plugin/blob/master/recipe/backupToDifferentSchema.md
+    https://github.com/coastland/gsp-dba-maven-plugin/blob/main/recipe/backupToDifferentSchema.md
 
     PUBLIC is specified as the backup schema name for H2 when using gsp-dba-plugin, as only PUBLIC can be handled as the default schema for H2.
     For databases allowing any schema name to be specified when using gsp-dba-plugin, specify the backup schema name.

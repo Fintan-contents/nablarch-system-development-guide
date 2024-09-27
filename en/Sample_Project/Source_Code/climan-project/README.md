@@ -20,7 +20,6 @@ Execute the following commands.
 
 ```
 $ mvn -P gsp clean generate-resources
-$ mvn compile
 $ mvn jetty:run
 ```
 
