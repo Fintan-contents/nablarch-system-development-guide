@@ -2,8 +2,8 @@
 
 ## Software used
 
-- Jenkins ver. 2.60.3
-- Apache JMeter ver. 5.5
+- Jenkins ver. 2.414.1
+- Apache JMeter ver. 5.6.3
    - It is needed for automated subfunction unit tests.  
      Install it on a server working Jenkins beforehand.
 

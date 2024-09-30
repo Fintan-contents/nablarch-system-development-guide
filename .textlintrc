@@ -13,12 +13,12 @@
       "max-ten": {
         max: 4
       },
-      "no-exclamation-question-mark": false,   // ？を使いたいときもある
-      "no-doubled-joshi": false,   // そこまで問題なさげなものまでNGになるため
+      "no-exclamation-question-mark": false,    // ？を使いたいときもある
+      "no-doubled-joshi": false,                // そこまで問題なさげなものまでNGになるため
       "no-mix-dearu-desumasu": {
-        "preferInHeader": "である", // "である" or "ですます"
-        "preferInBody": "ですます",// "である" or "ですます"
-        "preferInList": "である",    // "である" or "ですます"
+        "preferInHeader": "",                   // "である" or "ですます"
+        "preferInBody": "ですます",             // "である" or "ですます"
+        "preferInList": "",                     // "である" or "ですます"
         // 文末以外でも、敬体(ですます調)と常体(である調)を厳しくチェックするかどうか
         "strict": false
       },

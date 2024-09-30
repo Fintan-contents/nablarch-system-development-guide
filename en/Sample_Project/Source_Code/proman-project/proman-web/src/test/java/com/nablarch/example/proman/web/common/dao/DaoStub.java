@@ -3,7 +3,7 @@ package com.nablarch.example.proman.web.common.dao;
 import nablarch.common.dao.DaoContext;
 import nablarch.common.dao.EntityList;
 
-import javax.persistence.OptimisticLockException;
+import jakarta.persistence.OptimisticLockException;
 import java.util.List;
 
 /**
@@ -14,6 +14,11 @@ import java.util.List;
 public class DaoStub implements DaoContext {
     @Override
     public <T> T findById(Class<T> entityClass, Object... id) {
+        return null;
+    }
+
+    @Override
+    public <T> T findByIdOrNull(Class<T> entityClass, Object... id) {
         return null;
     }
 
@@ -34,6 +39,11 @@ public class DaoStub implements DaoContext {
 
     @Override
     public <T> T findBySqlFile(Class<T> entityClass, String sqlId, Object params) {
+        return null;
+    }
+
+    @Override
+    public <T> T findBySqlFileOrNull(Class<T> entityClass, String sqlId, Object params) {
         return null;
     }
 

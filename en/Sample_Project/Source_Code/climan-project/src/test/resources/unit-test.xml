@@ -28,7 +28,7 @@
     <property name="schema" value="${nablarch.db.schema}"/>
   </component>
 
-  <!-- Define Jetty6 as a test HttpServer -->
-  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
+  <!-- Define Jetty12 as a test HttpServer -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty12"/>
 
 </component-configuration>

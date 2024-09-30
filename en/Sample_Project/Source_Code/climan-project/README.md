@@ -1,4 +1,7 @@
-# Client Management System
+# Client Management System (Climan)
+
+This is the source code of the "Client management system".  
+(**Cli**ent **Man**agement System is abbreviated as **Climan**)
 
 ## Required environment
 
@@ -17,7 +20,7 @@ Execute the following commands.
 
 ```
 $ mvn -P gsp clean generate-resources
-$ mvn compile waitt:run-headless
+$ mvn jetty:run
 ```
 
 ## Verify operation

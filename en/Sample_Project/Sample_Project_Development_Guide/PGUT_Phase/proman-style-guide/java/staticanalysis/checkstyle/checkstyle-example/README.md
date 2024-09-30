@@ -1,7 +1,7 @@
 # Checkstyle Sample Project
 
 This is a sample project for [Checkstyle](http://checkstyle.sourceforge.net/).
-The [Checkstyle configuration file](./checkstyle/nablarch-checkstyle.xml) and sample source code to be checked are deployed in the sample file.
+The [Checkstyle configuration file](./checkstyle/standard-checkstyle.xml) and sample source code to be checked are deployed in the sample file.
 It also has a [pom.xml](./pom.xml) that allows you to run Checkstyle in Maven immediately.
 
 Check the source code to see the code that is checked in Checkstyle,

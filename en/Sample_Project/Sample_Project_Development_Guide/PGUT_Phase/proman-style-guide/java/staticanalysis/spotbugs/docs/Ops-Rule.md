@@ -2,7 +2,7 @@
 
 ## Basic concept
 
-### Principle 1: All SpotBugs warnings should be resolved
+### Principle 1: All SpotBugs warnings will be resolved
 
 SpotBugs detects either bug-embedded code or dangerous code that is likely to cause problems later.
 Allowing warnings is synonymous with accepting the risk of a bug or potential problem and should not be done.
@@ -17,7 +17,7 @@ In such cases, consult with an expert or project architect to get the appropriat
 
 Do not try to avoid SpotBugs warnings at your own discretion. SpotBugs is for improving (and not reducing) the code quality, and reducing code quality to avoid this is a step in the wrong direction.
 
-### Principle 3: If you allow a SpotBugs warning for a good reason, remove it from the check
+### Principle 3: If there is a SpotBugs warning for a good reason, remove it from the check
 
 As mentioned in Principle 1, SpotBugs warnings basically indicate the risk of a bug or potential problem.
 Therefore, it is difficult to think of a good reason to exclude it from the check.
@@ -32,7 +32,7 @@ Even in such cases, the exclusion settings should be localized so that only spec
 
 ### Exclusion method using filter files
 
-SpotBugs uses an XML file called [Filter File](http://spotbugs.readthedocs.io/ja/latest/filter.html) to exclude certain classes from being checked. 
+SpotBugs uses an XML file called [Filter File](http://spotbugs.readthedocs.io/en/latest/filter.html) to exclude certain classes from being checked. 
 If SpotBugs is installed according to [How to run SpotBugs with Maven](./Maven-settings.md), the filter file is located in `spotbugs/spotbugs_exclude_for_production.xml`.
 
 Exclusion requests from developers are received and managed by an issue management system such as Redmine.
@@ -78,7 +78,7 @@ The `name` attribute value is a regular expression if it starts with a tilde (`~
 
 `Method` element is available in the setting example for excluding the unauthorized API check, and it is set to be excluded from the check for each method.
 
-For more details, see [Filter File Description on Official Website](http://spotbugs.readthedocs.io/ja/latest/filter.html).
+For more details, see [Filter File Description on Official Website](http://spotbugs.readthedocs.io/en/latest/filter.html).
 
 When setting up exclusions, you can track the history later with the following steps.
 

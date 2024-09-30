@@ -7,9 +7,6 @@ import java.util.Arrays;
 
 /**
  * Example of ArrayTypeStyle code.
- * 
- * @author example
- * @since 1.0.0
  */
 public class ArrayTypeStyleExample {
 

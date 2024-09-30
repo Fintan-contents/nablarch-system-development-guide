@@ -2,47 +2,34 @@
 
 This document guides how to collect execution results of SpotBugs after building a project with Jenkins.
 
-Jenkins does not have a SpotBugs plugin, but you can use the FindBugs plugin instead.
-The check is performed by Maven, and Jenkins only collects the results (XML file), so there is no problem using the FindBugs plugin.
+The contents of this document have been verified with Jenkins 2.414.1 and Warnings Next Generation Plugin 10.2.0
 
-The contents of this document have been verified with Jenkins 2.121.2 and FindBugs Plug-in 4.72
+## Install Warnings Next Generation Plugin on Jenkins
 
-## Install SpotBugs plugin on Jenkins
+First install the Warnings Next Generation Plugin on Jenkins.
 
-First install the FindBugs plugin on Jenkins.
+Open "Manage Jenkins" from the menu and select "Plugins" under "System Configuration".
 
-Open Jenkins, on the menu go to "Manage Jenkins" then to "Manage plugins" and open the "Available" tab.
+Search for "Warnings Next Generation Plugin" in "Available plugins", check "Warnings Next Generation Plugin" and click "Install without restart".
 
-Select "FindBugs Plugin" and click on "Install without restarting".
+## Collect the check results
 
-## Collect the check results (freestyle project)
+Open the job's "Configure" and add "Invoke top-level Maven targets" to "Build Steps".
+Add `spotbugs:spotbugs` to your "Goals" to create a check result.
 
-Open the "settings" of the job. 
-Select "Call Maven" in "Build" and add it.
+When checking, it must be done after building, so if you build the project with `package`, the value configured in the "Goals" will be `package spotbugs:spotbugs`.
 
-Add `spotbugs:spotbugs` to "Goals".
-If the project is built with `mvn package`, the value configured in the "Goals" will be `package spotbugs:spotbugs`.
+![](./assets/jenkins-spotbugs-build.png)
 
-![](./assets/jenkins-maven-build.png)
+Add "Record compiler warnings and static analysis results" to "Post-build Actions" to collect check results.
+Select "SpotBugs" in "Tool" to collect SpotBugs check results.
 
-And then select "Aggregate FindBugs Warnings" in "Post Build Process" and add it.
-
-Set the "Files to Collect" to `**/spotbugsXml.xml`.
-
-![](./assets/jenkins-maven-findbugs.png)
+![](./assets/jenkins-spotbugs-postbuild.png)
 
 This completes the configuration for collecting check results.
+Check results will now be collected when build is implemented.
 
-Check results will now be collected when build is exected. 
-Once the check results are collected, a link called "FindBugs warning" will be displayed on the job menu.
-Follow the link for more details on the warning.
+When the check results are collected, you will see "SpotBugs Warnings" in the menu.
+Open "SpotBugs Warnings" to see the details of the latest results and the history of violation counts.
 
-![](./assets/jenkins-result-link.png)
-
-![](./assets/jenkins-result-detail.png)
-
-Also, "Progress of FindBugs warning" is displayed on the top page of the job.
-The status of warnings of each build can be viewed on a graph.
-
-![](./assets/jenkins-result-transition.png)
-
+![](./assets/jenkins-spotbugs-warnings.png)

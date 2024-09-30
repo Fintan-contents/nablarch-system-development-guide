@@ -1,6 +1,7 @@
 package com.nablarch.example.proman.common.validation;
 
 import nablarch.common.code.validator.ee.CodeValue;
+import nablarch.core.validation.ee.DateFormat;
 import nablarch.core.validation.ee.Digits;
 import nablarch.core.validation.ee.Length;
 import nablarch.core.validation.ee.NumberRange;
@@ -50,7 +51,7 @@ public class ProManDomainType {
     public String clientId;
 
     /** Date */
-    @YYYYMMDD()
+    @DateFormat("yyyy/MM/dd")
     public String date;
 
     /** User name (Kanji characters) */
@@ -97,8 +98,7 @@ public class ProManDomainType {
     public String projectIdFk;
 
     /** Date time **/
-    @Length(min = 19, max = 19)
-    @SystemChar(charsetDef = "半角文字")
+    @DateFormat("yyyy/MM/dd HH:mm:ss")
     public String dateTime;
 
     /** Apply start date **/

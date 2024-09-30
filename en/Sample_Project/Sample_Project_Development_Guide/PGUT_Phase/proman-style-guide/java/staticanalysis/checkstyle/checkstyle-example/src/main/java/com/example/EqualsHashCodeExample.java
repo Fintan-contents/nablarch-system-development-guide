@@ -7,17 +7,11 @@ import java.util.Objects;
 
 /**
  * Example of EqualsHashCode code.
- *
- * @author example
- * @since 1.0.0
  */
 public class EqualsHashCodeExample {
 
     /**
      * Example in which only the equals method is overwritten (OK)
-     *
-     * @author example
-     * @since 1.0.0
      */
     public static class EqualsOverride {
         /** ID */
@@ -54,8 +48,6 @@ public class EqualsHashCodeExample {
 
     /**
      * An example where both the equals method and the hashCode method are overwritten (OK)
-     * @author example
-     * @since 1.0.0
      */
     public static class OverrideEqualsAndHashCode {
         /** ID */
@@ -95,4 +87,3 @@ public class EqualsHashCodeExample {
     }
 
 }
-

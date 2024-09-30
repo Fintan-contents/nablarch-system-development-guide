@@ -1,0 +1,49 @@
+pipeline {
+  agent any
+  triggers {
+    pollSCM('*/1 * * * *')
+  }
+  tools {
+    maven 'mvn3'
+    jdk 'JDK21'
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '3'))
+  }
+  environment {
+    //ビルドする際のカレントディレクトリ
+    PROJECT_CURRENT_DIR = 'Sample_Project/Source_Code/climan-project/'
+  }
+  stages {
+    stage('mvn install') {
+      steps {
+        echo 'mvn install'
+        dir(PROJECT_CURRENT_DIR) {
+          sh 'mvn -P gsp clean generate-resources -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -P demo,!development test -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+         }
+       }
+       post {
+        success { rocketSend message: ":blush: mvn install, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: mvn install, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+
+    stage('checkstyle and spotbugs') {
+      steps {
+        echo 'checkstyle and spotbugs'
+        dir(PROJECT_CURRENT_DIR) {
+          catchError {
+            sh 'mvn -P demo,!development checkstyle:checkstyle spotbugs:check  -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          }
+          sh 'mvn -P demo,!development site -s ci/settings.xml'
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/**'
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: checkstyle and spotbugs', ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+  }
+}

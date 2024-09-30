@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of FileLength.
- * 
- * @author example
- * @since 1.0.0
  */
 public class FileLengthExample {
 

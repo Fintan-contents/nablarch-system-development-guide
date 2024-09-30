@@ -5,9 +5,6 @@ package com.example;
 
 /**
  * Example of InnerAssignment code.
- *
- * @author example
- * @since 1.0.0
  */
 public class InnerAssignmentExample {
 
@@ -23,4 +20,3 @@ public class InnerAssignmentExample {
         System.out.println(s);
     }
 }
-

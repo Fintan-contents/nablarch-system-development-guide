@@ -5,17 +5,11 @@ package com.example;
 
 /**
  * Example of FallThrough code.
- *
- * @author example
- * @since 1.0.0
  */
 public class FallThroughExample {
 
     /**
      * An enumeration indicating members' rank.
-     *
-     * @author example
-     * @since 1.0.0
      */
     enum MemberRank {
         /** Gold member */
@@ -92,4 +86,3 @@ public class FallThroughExample {
         }
     }
 }
-

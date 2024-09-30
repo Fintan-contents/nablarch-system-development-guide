@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u16</version>
+    <version>6u2</version>
     <relativePath/>
   </parent>
 
@@ -27,7 +27,21 @@
 
   <properties>
     <env.resources>${project.basedir}/src/env/${env.dir}/resources</env.resources>
+    <java.version>21</java.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Jakarta EE -->
+      <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-bom</artifactId>
+        <version>10.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -40,20 +54,20 @@
     <dependency>
       <groupId>org.apache.jmeter</groupId>
       <artifactId>ApacheJMeter_java</artifactId>
-      <version>5.2.1</version>
+      <version>5.6.3</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_http -->
     <dependency>
       <groupId>org.apache.jmeter</groupId>
       <artifactId>ApacheJMeter_http</artifactId>
-      <version>5.2.1</version>
+      <version>5.6.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.jmeter</groupId>
       <artifactId>ApacheJMeter_functions</artifactId>
-      <version>5.2.1</version>
+      <version>5.6.3</version>
       <scope>test</scope>
     </dependency>
 
@@ -91,7 +105,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.5.0</version>
+      <version>42.7.2</version>
       <scope>test</scope>
     </dependency>
     <!-- YoyoTool -->
@@ -116,19 +130,41 @@
       <version>3.3.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>jakarta.activation</groupId>
+      <artifactId>jakarta.activation-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
     <testResources>
       <testResource>
-        <directory>${env.resources}</directory>
+        <directory>src/test/resources</directory>
       </testResource>
       <testResource>
-        <directory>src/test/resources</directory>
+        <directory>${env.resources}</directory>
       </testResource>
     </testResources>
 
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <overwrite>true</overwrite>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.lazerycode.jmeter</groupId>
         <artifactId>jmeter-maven-plugin</artifactId>

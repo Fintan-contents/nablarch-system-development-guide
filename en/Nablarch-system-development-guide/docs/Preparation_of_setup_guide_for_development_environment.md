@@ -23,13 +23,13 @@ The main software that may be used are as follows.
 
 | Item                  | Product example                |
 |------------------------|-----------------------------|
-| JDK                    | AdoptOpenJDK, OracleJDK     |
+| JDK                    | Eclipse Temurin             |
 | RDBMS                  | PostgreSQL, Oracle Database |
 | Build tools           | Maven, Gradle               |
-| IDE                    | Eclipse, IntelliJ           |
+| IDE                    | Eclipse, IntelliJ IDEA      |
 | Version control tools   | Git, SVN                    |
-| Browser            | Chrome                      |
-| Data modeling tool | Object Browser ER           |
+| Browser            | Google Chrome               |
+| Data modeling tool | SI Object Browser ER        |
 
 -----
 
@@ -47,20 +47,20 @@ The image of the actual guide is shown below.
 | Required      | OS       | Windows 10 Pro 64bit  |
 | Required      | CPU      | Core i7-8550U or higher    |
 | Required      | Memory   | 8GB or more              |
-| Required      | Office   | Microsoft Office 2010 |
 | Recommended      | Monitor   | Full HD or higher           |
 | Recommended      | Disc | SSD                   |
 
 
 ## Development environment construction procedure
 
-| Item                   | Name                 | Version, edition, etc.           | Supply source                                      |
-|------------------------|----------------------|-------------------------------------|---------------------------------------------|
-| JDK                    | AdoptOpenJDK         | OpenJDK 8 (LTS) HotSpot Windows x64 | https://adoptopenjdk.net/                   |
-| RDBMS                  | PostgreSQL           | PostgreSQL Portable v10.4.1         | https://github.com/garethflowers/postgresql-portable/releases |
-| Build tools           | Apache Maven         | 3.6.1                               | https://maven.apache.org/                   |
-| IDE                    | IntelliJ             | Community Edition                   | https://www.jetbrains.com/idea/             |
-| Version control tools   | Git                  | 2.21.0 for Windows                  | https://git-scm.com/                        |
-| Browser               | Chrome               | -                                   | https://www.google.com/intl/ja/chrome/      |
-| Data modeling tool | SI Object Browser ER | SI Object Browser ER 18             | https://products.sint.co.jp/ober/trial <br> (Use in-house license) |
+| Item                  | Name                 | Version, edition, etc.  | Supply source                                                                                                            |
+|-----------------------|----------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| JDK                   | Eclipse Temurin      | OpenJDK 21              | https://adoptium.net/temurin/                                                                                            |
+| RDBMS                 | PostgreSQL           | 16                      | https://www.postgresql.org/download/windows/ <br> (The actual project should be guided so that the version can be fixed) |
+| Build tools           | Apache Maven         | 3.9.9                   | https://maven.apache.org/                                                                                                |
+| IDE                   | IntelliJ IDEA        | Community Edition       | https://www.jetbrains.com/idea/                                                                                          |
+| Version control tools | Git                  | Git for Windows         | https://gitforwindows.org/                                                                                               |
+| Browser               | Google Chrome        | -                       | https://www.google.com/chrome/                                                                                           |
+| Data modeling tool    | SI Object Browser ER | SI Object Browser ER 23 | https://products.sint.co.jp/ober/trial <br> (Use in-house license)                                                       |
+| Office tool           | Microsoft Office     | Microsoft 365           | - <br> (Use in-house license)                    f                                                                       |
 

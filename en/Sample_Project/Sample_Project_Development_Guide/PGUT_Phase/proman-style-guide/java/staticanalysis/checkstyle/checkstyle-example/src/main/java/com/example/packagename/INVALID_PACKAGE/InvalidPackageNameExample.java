@@ -5,9 +5,6 @@ package com.example.packagename.INVALID_PACKAGE;    // Package name violates nam
 
 /**
  * Example of PackageName code.
- *
- * @author example
- * @since 1.0.0
  */
 public class InvalidPackageNameExample {
 }

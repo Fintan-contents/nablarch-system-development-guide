@@ -5,9 +5,6 @@ package com.example.suppression;
 
 /**
  * Example of SuppressionFilter.
- *
- * @author example
- * @since 1.0.0
  */
 public class SuppressionFilterExample {
 
@@ -15,9 +12,5 @@ public class SuppressionFilterExample {
     // as suppressions.xml is used to set removal of the 'JavaDocMethod' check.
     public void thisMethodShouldNotBeChecked() {
         return;
-    }
-
-    // Incorrect as there is no javadoc comment.
-    public void thisMethodShouldBeChecked() {
     }
 }

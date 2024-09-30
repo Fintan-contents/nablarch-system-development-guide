@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             web-app_6_0.xsd"
+         version="6.0">
+
+  <context-param>
+    <!-- DIコンテナの設定ファイルパス -->
+    <param-name>di.config</param-name>
+    <param-value>rest-boot.xml</param-value>
+  </context-param>
+
+  <context-param>
+    <!-- 設定重複時の動作設定 -->
+    <param-name>di.duplicate-definition-policy</param-name>
+    <param-value>OVERRIDE</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>nablarch.fw.web.servlet.NablarchServletContextListener</listener-class>
+  </listener>
+
+  <display-name>RESTful Web Services Example</display-name>
+  <description>RESTful Web Services Example</description>
+
+  <filter>
+    <filter-name>entryPoint</filter-name>
+    <filter-class>nablarch.fw.web.servlet.RepositoryBasedWebFrontController</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>entryPoint</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--
+  <resource-ref>
+    <description>Nablarch Connection</description>
+    <res-ref-name>jdbc/sampleOracleDS</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  -->
+</web-app>

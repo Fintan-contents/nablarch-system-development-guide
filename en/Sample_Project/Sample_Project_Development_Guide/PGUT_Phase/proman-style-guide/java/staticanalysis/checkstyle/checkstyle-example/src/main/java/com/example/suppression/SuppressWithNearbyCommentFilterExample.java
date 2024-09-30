@@ -5,9 +5,6 @@ package com.example.suppression;
 
 /**
  * Example of SuppressWithNearbyCommentFilter.
- *
- * @author example
- * @since 1.0.0
  */
 public class SuppressWithNearbyCommentFilterExample {
 

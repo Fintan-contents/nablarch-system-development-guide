@@ -1,6 +1,6 @@
 # SpotBugs Guide
 
-Provides materials for using [SpotBugs](http://spotbugs.readthedocs.io/ja/latest/index.html) in projects.
+Provides materials for using [SpotBugs](https://spotbugs.readthedocs.io/en/latest/index.html) in projects.
 
 SpotBugs is the successor to FindBugs. 
 Development of FindBugs has been stopped, but SpotBugs is a fork of the source code that supports Java 8 or later versions. 

@@ -28,10 +28,9 @@ ArchRuleDefinition.classes().that().haveSimpleNameEndingWith("Action").should().
 
 If this check is done and the class name ends in `Action` but it is a package private,  in violation.
 
-By the way, if the above content is a test that can be executed by JUnit5, it would look like the following.
+By the way, if the above content is a test that can be executed by JUnit 5, it would look like the following.
 
 ```java
- 
 @AnalyzeClasses(packages = "com.nablarch.example.proman")
 public class ActionRuleTest {
 
@@ -81,7 +80,7 @@ Here are three frequently used checks, along with some code examples.
 
 The declaration check involves checking classes, methods, field qualifiers, types, etc.
 
-For example, the following example checks that the `DaoContext` field is private and final, but not static.
+For example, the following example checks that field of type `DaoContext` are private and final, and not static.
 
 It should be noted that if the qualifier does not have to be given at the time of declaration, it should include a check "not xx". (The following example checks that it is not static.)
 
@@ -89,7 +88,8 @@ It should be noted that if the qualifier does not have to be given at the time o
 ArchRuleDefinition.fields().that().haveRawType(DaoContext.class)
                 .should().bePrivate()
                 .andShould().beFinal()
-                .andShould().notBeStatic();
+                .andShould().notBeStatic()
+                .allowEmptyShould(true);
 ```
 
 In the following example, if the class name ends in Action, we check that it extends BatchAction.
@@ -138,6 +138,7 @@ Only the action package can depend on other packages, and the dependency on its 
 
 ```java
 Architectures.layeredArchitecture()
+    .consideringAllDependencies()
     .layer("Action").definedBy("..action..")
     .layer("Service").definedBy("..service..")
     .layer("Form").definedBy("..form..")

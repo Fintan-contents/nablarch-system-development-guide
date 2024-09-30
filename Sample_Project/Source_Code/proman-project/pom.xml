@@ -1,0 +1,193 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nablarch.archetype</groupId>
+    <artifactId>nablarch-archetype-parent</artifactId>
+    <version>6u2</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.nablarch.example.proman</groupId>
+  <artifactId>proman-project</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>proman-common</module>
+    <module>proman-web</module>
+    <module>proman-batch</module>
+  </modules>
+
+  <properties>
+    <!-- ソース及びclassファイルが準拠するJavaのバージョン-->
+    <java.version>21</java.version>
+
+    <version.plugins.checkstyle>3.4.0</version.plugins.checkstyle>
+    <version.checkstyle>10.17.0</version.checkstyle>
+    <version.plugins.spotbugs>4.8.6.2</version.plugins.spotbugs>
+    <version.spotbugs>4.8.6</version.spotbugs>
+    <version.plugins.findsecbugs>1.13.0</version.plugins.findsecbugs>
+    <version.plugins.unpublished.api.checker>1.0.0</version.plugins.unpublished.api.checker>
+    <version.archunit>1.3.0</version.archunit>
+    <postgres.jdbc.driver.version>42.7.2</postgres.jdbc.driver.version>
+    <!--
+    toolsディレクトリへのパス。ツールが実行される個別モジュールのディレクトリから見て1つ上（つまりこのディレクトリ）のtoolsを指す。
+     -->
+    <nablarch.tools.dir>${project.basedir}/../tools</nablarch.tools.dir>
+  </properties>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${version.plugins.spotbugs}</version>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Nablarch -->
+      <dependency>
+        <groupId>com.nablarch.profile</groupId>
+        <artifactId>nablarch-bom</artifactId>
+        <version>6u2</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Jakarta EE -->
+      <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-bom</artifactId>
+        <version>10.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- JDBC Driver -->
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgres.jdbc.driver.version}</version>
+      </dependency>
+      <!-- Connection Pool -->
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>3.3.1</version>
+      </dependency>
+      <!-- JUnit -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.11.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.tngtech.archunit</groupId>
+        <artifactId>archunit-junit5</artifactId>
+        <version>${version.archunit}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <configuration>
+            <!-- entityとdomainをカバレッジ対象から外す -->
+            <excludes>
+              <exclude>com/nablarch/example/proman/entity/**</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${version.plugins.checkstyle}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${version.checkstyle}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <!-- Checkstyle設定ファイルへのパス -->
+            <configLocation>${nablarch.tools.dir}/static-analysis/checkstyle/nablarch-checkstyle.xml</configLocation>
+            <!-- Checkstyle除外対象の設定ファイルへのパス -->
+            <suppressionsLocation>${nablarch.tools.dir}/static-analysis/checkstyle/suppressions.xml</suppressionsLocation>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>${version.plugins.spotbugs}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>${version.spotbugs}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <xmlOutput>true</xmlOutput>
+            <!-- チェックを除外するフィルターファイル -->
+            <excludeFilterFile>${nablarch.tools.dir}/static-analysis/spotbugs/spotbugs_exclude_for_production.xml</excludeFilterFile>
+            <!-- 使用不許可APIチェックツールの設定ファイル -->
+            <jvmArgs>-Dnablarch-findbugs-config=${nablarch.tools.dir}/static-analysis/spotbugs/published-config/production</jvmArgs>
+            <!-- ヒープサイズが足りない場合は増やすことも可能 -->
+            <maxHeap>1024</maxHeap>
+            <plugins>
+              <plugin>
+                <groupId>com.nablarch.framework</groupId>
+                <artifactId>nablarch-unpublished-api-checker</artifactId>
+                <version>${version.plugins.unpublished.api.checker}</version>
+              </plugin>
+              <plugin>
+                <groupId>com.h3xstream.findsecbugs</groupId>
+                <artifactId>findsecbugs-plugin</artifactId>
+                <version>${version.plugins.findsecbugs}</version>
+              </plugin>
+            </plugins>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${version.plugins.surefire}</version>
+          <configuration>
+            <trimStackTrace>false</trimStackTrace>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+          <executions>
+            <execution>
+              <id>attach-descriptor</id>
+              <goals>
+                <goal>attach-descriptor</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

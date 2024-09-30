@@ -20,10 +20,6 @@
       <Class name="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory"/>
       <Class name="com.nablarch.example.climan.common.jaxrs.ClimanJaxRsHandlerListFactory$ClimanJackson2BodyConverter"/>
       <Class name="com.nablarch.example.climan.common.jaxrs.ClimanJackson2BodyConverter"/>
-      <Class name="com.nablarch.example.climan.common.validation.FormBinder" />
-      <Class name="com.nablarch.example.climan.common.validation.FormBinder$BindingSource" />
-      <Class name="com.nablarch.example.climan.common.validation.BindingResult$ValidBindingResult" />
-      <Class name="com.nablarch.example.climan.common.validation.BindingResult$InvalidBindingResult" />
     </Or>
   </Match>
 </FindBugsFilter>

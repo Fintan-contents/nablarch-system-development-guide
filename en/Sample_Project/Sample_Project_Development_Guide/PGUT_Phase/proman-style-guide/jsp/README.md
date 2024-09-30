@@ -1,5 +1,5 @@
-# JSP Style Guide
+# Jakarta Server Pages Style Guide
 
-Here you will find coding conventions to help you code in JSP.
+Here you will find coding conventions to help you code in Jakarta Server Pages.
 
-- [JSP coding conventions.docx](./JSP_Coding_Conventions.docx?raw=true)
+- [Jakarta Server Pages coding conventions.docx](./JakartaServerPages_Coding_Conventions.docx?raw=true)

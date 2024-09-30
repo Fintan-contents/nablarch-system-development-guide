@@ -9,44 +9,32 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>checkstyle-example</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.4.0</version>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.29</version>
+            <version>10.17.0</version>
           </dependency>
         </dependencies>
         <configuration>
           <!-- Path to Checkstyle setting file -->
-          <configLocation>${basedir}/checkstyle/nablarch-checkstyle.xml</configLocation>
+          <configLocation>${basedir}/checkstyle/standard-checkstyle.xml</configLocation>
           <propertyExpansion>config_loc=${basedir}/checkstyle/</propertyExpansion>
         </configuration>
       </plugin>
     </plugins>
   </build>
 </project>
-

@@ -1,0 +1,172 @@
+pipeline {
+  agent any
+  triggers {
+    pollSCM('*/1 * * * *')
+  }
+  tools {
+    maven 'mvn3'
+    jdk 'JDK21'
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '3'))
+  }
+  environment {
+    // 以下は開発環境の接続情報である。
+    // 全ての開発者が知っても差し支えない情報であるため、全ての開発者が参照できるファイル(本ファイル)に記載している。
+    DEMO_HOST = '10.0.1.100'
+    DEMO_PORT = '22'
+    DEMO_USERNAME = 'centos'
+    DEMO_PASSWORD = 'pass789-'
+    //ビルドする際のカレントディレクトリ
+    PROJECT_CURRENT_DIR = 'Sample_Project/Source_Code/proman-project/'
+  }
+  stages {
+    stage('mvn install') {
+      steps {
+        echo 'mvn install'
+        dir(PROJECT_CURRENT_DIR) {
+          sh 'mvn clean -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -N install -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -P gsp clean generate-resources -pl proman-common -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          sh 'mvn -P demo,!development install -pl proman-common -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: mvn install, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: mvn install, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+
+    stage('checkstyle and spotbugs') {
+      steps {
+        echo 'checkstyle and spotbugs'
+        dir(PROJECT_CURRENT_DIR) {
+          catchError {
+            sh 'mvn checkstyle:checkstyle spotbugs:check -pl proman-common -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+            sh 'mvn checkstyle:checkstyle spotbugs:check -pl proman-web -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+            sh 'mvn checkstyle:checkstyle spotbugs:check -pl proman-batch -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+          }
+          sh 'mvn site -pl proman-common -s ci/settings.xml'
+          sh 'mvn site -pl proman-web -s ci/settings.xml'
+          sh 'mvn site -pl proman-batch -s ci/settings.xml'
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-common/target/site/**'
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-web/target/site/**'
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'proman-batch/target/site/**'
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: checkstyle and spotbugs, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: checkstyle and spotbugs, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+    
+    stage('create batch jar') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
+        echo 'create batch jar'
+        dir(PROJECT_CURRENT_DIR) {
+          sh 'mvn -P demo,!development clean package -pl proman-batch -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository -DskipTests=true'
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: create batch jar, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: create batch jar, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+
+    stage('create war') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
+        echo 'Create war'
+        dir(PROJECT_CURRENT_DIR) {
+          sh 'mvn -P demo,!development clean package -pl proman-web -s ci/settings.xml -Dmaven.repo.local=${WORKSPACE}/repository'
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: create war, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: create war, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+
+    stage('Deploy to demo') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
+        echo 'Create app resources'
+        dir(PROJECT_CURRENT_DIR) {
+          sh 'rm -rf app-proman-web'
+          sh 'mkdir -p app-proman-web/webapps'
+          sh 'cp -r proman-web/ci/deploy-to-demo/* app-proman-web/'
+          sh 'cp $(find proman-web/target/ -name *.war) app-proman-web/webapps/ROOT.war'
+          sh 'cp $(find proman-batch/target/ -name *.jar) app-proman-web/'
+          sh 'mvn clean -s ci/settings.xml'
+          echo 'Send app to demo'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "sudo rm -rf app-proman-web"'
+          sh 'sshpass -p ${DEMO_PASSWORD} scp -P ${DEMO_PORT} -oStrictHostKeyChecking=no -r app-proman-web/ ${DEMO_USERNAME}@${DEMO_HOST}:~/'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "ls -lR app-proman-web"'
+          echo 'Start app'
+          sh 'sshpass -p ${DEMO_PASSWORD} ssh -p ${DEMO_PORT} -oStrictHostKeyChecking=no ${DEMO_USERNAME}@${DEMO_HOST} "cd app-proman-web && sh up.sh"'
+          sh 'mvn -P gsp gsp-dba:generate-ddl gsp-dba:execute-ddl gsp-dba:load-data -pl proman-common -s ci/settings.xml -Dnablarch.db.url=jdbc:postgresql://${DEMO_HOST}:5432/postgres'
+          archiveArtifacts 'app-proman-web/**'
+        }
+        echo 'Waiting for demo server starting...'
+        script {
+          try {
+            timeout(time: 10, unit: "MINUTES") {
+              waitUntil(initialRecurrencePeriod: 15000) {
+                def status = sh(
+                  script: "curl http://${DEMO_HOST} -f",
+                  returnStatus: true
+                )
+                return (status == 0)
+              }
+            }
+          } catch (exception) {
+            error "Timeout. Demo server does not start. ${exception}: ${exception.message}"
+          }
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: Deploy to demo, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+
+    stage('Transaction Test') {
+      when {
+        allOf {
+          branch 'develop'
+          expression { return currentBuild.result != 'FAILURE' }
+        }
+      }
+      steps {
+        echo 'Run Test'
+        dir("${PROJECT_CURRENT_DIR}/proman-jmeter") {
+          catchError {
+            sh "mvn -s ../ci/settings.xml -P ci clean test"
+          }
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'target/test-classes/**'
+          junit "target/surefire-reports/TEST-com.nablarch.example.proman.JMeterTest.xml"
+        }
+      }
+      post {
+        success { rocketSend message: ":blush: Transaction Test, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+        failure { rocketSend message: ":sob: Transaction Test, ${JOB_NAME} #${BUILD_ID}, ${BUILD_URL}", rawMessage: true }
+      }
+    }
+  }
+}

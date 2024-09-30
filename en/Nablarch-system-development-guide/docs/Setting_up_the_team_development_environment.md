@@ -5,8 +5,8 @@ A variety of tools are required to get started with team development.
 |--------------------------|----------------------|
 | Source code repository   | GitBucket, GitLab    |
 | Issue management system         | Redmine              |
-| CI environment                   | Jenkins, ConcourseCI |
-| Communication tool | Slack, RocketChat    |
+| CI environment                   | Jenkins, GitLab |
+| Communication tool | Slack, Rocket.Chat    |
 
 
 It is good if an environment is already available, but if not, use

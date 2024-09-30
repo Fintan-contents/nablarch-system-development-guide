@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- ハンドラキュー構成 -->
+  <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <!-- 追加 -->
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component-ref name="jaxRsResponseHandler" />
+
+        <!-- 追加 -->
+        <component-ref name="threadContextHandler"/>
+
+        <!-- 追加 -->
+        <component class="nablarch.fw.jaxrs.JaxRsAccessLogHandler"/>
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+</component-configuration>
