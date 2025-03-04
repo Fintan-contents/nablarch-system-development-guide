@@ -42,7 +42,7 @@ The location to add the configuration is directly under `build`, which is direct
       <plugin>
         <groupId>com.nablarch.framework</groupId>
         <artifactId>nablarch-unpublished-api-checker</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
       </plugin>
     </plugins>
   </configuration>

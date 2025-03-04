@@ -2,6 +2,14 @@
 
 All significant changes to this project will be documented in this file.
 
+## 3.7 (20XX-XX-XX)
+
+- Improve the style guide
+  - SpotBugs guide
+    - Unauthorized API check tool version upgraded to 1.0.1.
+- Improve the sample project
+  - Unauthorized API check tool version upgraded to 1.0.1.
+
 ## 3.6 (2024-09-30)
 
 - Improve the style guide

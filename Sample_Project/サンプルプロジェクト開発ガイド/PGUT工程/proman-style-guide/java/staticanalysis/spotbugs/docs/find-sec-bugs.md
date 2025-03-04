@@ -21,7 +21,7 @@ Find Security BugsはSpotBugsのプラグインです。
       <plugin>
         <groupId>com.nablarch.framework</groupId>
         <artifactId>nablarch-unpublished-api-checker</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
       </plugin>
       <!-- 以下を追加 -->
       <plugin>
