@@ -2,7 +2,7 @@
 
 All significant changes to this project will be documented in this file.
 
-## 3.7 (2025-03-27)
+## 3.7 (20XX-XX-XX)
 
 - Improve the style guide
   - SpotBugs guide
