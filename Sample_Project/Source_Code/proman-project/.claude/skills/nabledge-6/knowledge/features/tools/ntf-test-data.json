@@ -1,0 +1,355 @@
+{
+  "id": "ntf-test-data",
+  "title": "NTFテストデータ",
+  "official_doc_urls": [
+    "https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/guide/development_guide/06_TestFWGuide/01_Abstract.html#excel",
+    "https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/guide/development_guide/06_TestFWGuide/02_DbAccessTest.html"
+  ],
+  "index": [
+    {
+      "id": "overview",
+      "hints": ["テストデータ", "Excel", "Excelファイル", "スプレッドシート", "外部化"]
+    },
+    {
+      "id": "naming_conventions",
+      "hints": ["命名規約", "ファイル名", "シート名", "配置", "ディレクトリ"]
+    },
+    {
+      "id": "data_types",
+      "hints": ["データタイプ", "SETUP_TABLE", "EXPECTED_TABLE", "LIST_MAP", "SETUP_FIXED", "EXPECTED_VARIABLE"]
+    },
+    {
+      "id": "special_notation",
+      "hints": ["特殊記法", "null", "systemTime", "setUpTime", "文字種", "binaryFile", "改行"]
+    },
+    {
+      "id": "cell_format",
+      "hints": ["セル", "書式", "文字列", "日付", "コメント", "マーカーカラム"]
+    },
+    {
+      "id": "column_omission",
+      "hints": ["カラム省略", "EXPECTED_COMPLETE_TABLE", "デフォルト値", "省略記述", "可読性"]
+    }
+  ],
+  "sections": {
+    "overview": {
+      "description": "データベースの準備データやデータベース検索結果などのデータを表すには、Javaソースコードよりスプレッドシートのほうが可読性や編集のしやすさという点で有利である。Excelファイルを使用することにより、このようなデータをスプレッドシート形式で扱うことができる。",
+      "supported_formats": ["Excel2003形式（.xls）", "Excel2007以降形式（.xlsx）"],
+      "location": "src/test/java配下（デフォルト）。テストソースコードと同じディレクトリに配置することを推奨。",
+      "benefits": ["可読性の向上", "編集の容易さ", "テストケースの把握が容易", "テストデータとテストロジックの役割分担が明確"]
+    },
+    "naming_conventions": {
+      "description": "Excelファイル名、ファイルパスには推奨される規約が存在する。この規約に従うことにより、テストクラスで明示的にディレクトリ名やファイル名を指定してファイルを読み込む必要がなくなり、簡潔にテストソースコードを記述できる。",
+      "file_conventions": [
+        {
+          "rule": "Excelファイル名は、テストソースコードと同じ名前にする（拡張子のみ異なる）",
+          "example": {
+            "test_class": "ExampleDbAccessTest.java",
+            "excel_file": "ExampleDbAccessTest.xlsx"
+          }
+        },
+        {
+          "rule": "Excelファイルを、テストソースコードと同じディレクトリに配置する",
+          "example": {
+            "directory": "<PROJECT_ROOT>/test/jp/co/tis/example/db/",
+            "files": ["ExampleDbAccessTest.java", "ExampleDbAccessTest.xlsx"]
+          }
+        }
+      ],
+      "sheet_conventions": [
+        {
+          "rule": "1テストメソッドにつき1シート用意する",
+          "notes": "この規約は制約事項ではない。テストメソッド名とExcelシート名が同名でなくても正しく動作する。"
+        },
+        {
+          "rule": "シート名はテストメソッド名と同名にする",
+          "example": {
+            "test_method": "@Test public void testInsert()",
+            "sheet_name": "testInsert"
+          },
+          "recommendation": "今後の機能追加は上記規約をデフォルトとして開発されるので、命名規約に準拠することを推奨する。仮に命名規約を変更する場合であってもプロジェクト内で統一を図ること。"
+        }
+      ]
+    },
+    "data_types": {
+      "description": "シート内には、データベースに格納するデータやデータベース検索結果など、さまざまな種類のデータを記載できる。テストデータの種類を判別するために「データタイプ」というメタ情報をテストデータに付与する必要がある。",
+      "format": "データタイプ=値",
+      "types": [
+        {
+          "name": "SETUP_TABLE",
+          "description": "テスト実行前にデータベースに登録するデータ",
+          "value": "登録対象のテーブル名",
+          "format": "1行目：SETUP_TABLE=<テーブル名>、2行目：カラム名、3行目以降：登録するレコード",
+          "example": "SETUP_TABLE=EMPLOYEE\nID          EMP_NAME     DEPT_CODE\n00001       山田太郎     0001\n00002       田中一郎     0002"
+        },
+        {
+          "name": "EXPECTED_TABLE",
+          "description": "テスト実行後の期待するデータベースのデータ。省略したカラムは、比較対象外となる。",
+          "value": "確認対象のテーブル名",
+          "format": "1行目：EXPECTED_TABLE=<テーブル名>、2行目：カラム名、3行目以降：期待する値",
+          "notes": "省略されたカラムは比較対象外となる。主キーカラムは省略できない。"
+        },
+        {
+          "name": "EXPECTED_COMPLETE_TABLE",
+          "description": "テスト実行後の期待するデータベースのデータ。省略したカラムにはデフォルト値が設定されているものとして扱われる。",
+          "value": "確認対象のテーブル名",
+          "format": "1行目：EXPECTED_COMPLETE_TABLE=<テーブル名>、2行目：カラム名、3行目以降：期待する値",
+          "notes": "EXPECTED_TABLEとの違い：省略されたカラムはデフォルト値が格納されているものとして比較が行われる。更新系テストで「無関係なカラムが更新されていないことを確認する」という観点で使用する。"
+        },
+        {
+          "name": "LIST_MAP",
+          "description": "List<Map<String,String>>形式のデータ",
+          "value": "シート内で一意になるID（期待値のID、任意の文字列）",
+          "format": "1行目：LIST_MAP=<ID>、2行目：Mapのキー、3行目以降：Mapの値",
+          "usage": "入力パラメータ、メソッドの戻り値に対する期待値などを記載する"
+        },
+        {
+          "name": "SETUP_FIXED",
+          "description": "事前準備用の固定長ファイル",
+          "value": "準備ファイルの配置場所"
+        },
+        {
+          "name": "EXPECTED_FIXED",
+          "description": "期待値を示す固定長ファイル",
+          "value": "比較対象ファイルの配置場所"
+        },
+        {
+          "name": "SETUP_VARIABLE",
+          "description": "事前準備用の可変長ファイル",
+          "value": "準備ファイルの配置場所"
+        },
+        {
+          "name": "EXPECTED_VARIABLE",
+          "description": "期待値を示す可変長ファイル",
+          "value": "比較対象ファイルの配置場所"
+        },
+        {
+          "name": "MESSAGE",
+          "description": "メッセージング処理のテストで使用するデータ",
+          "value": "固定値（setUpMessages または expectedMessages）"
+        },
+        {
+          "name": "EXPECTED_REQUEST_HEADER_MESSAGES",
+          "description": "要求電文（ヘッダ）の期待値を示す固定長ファイル",
+          "value": "リクエストID"
+        },
+        {
+          "name": "EXPECTED_REQUEST_BODY_MESSAGES",
+          "description": "要求電文（本文）の期待値を示す固定長ファイル",
+          "value": "リクエストID"
+        },
+        {
+          "name": "RESPONSE_HEADER_MESSAGES",
+          "description": "応答電文（ヘッダ）を示す固定長ファイル",
+          "value": "リクエストID"
+        },
+        {
+          "name": "RESPONSE_BODY_MESSAGES",
+          "description": "応答電文（本文）を示す固定長ファイル",
+          "value": "リクエストID"
+        }
+      ],
+      "notes": "データの個数も複数記述できる。複数のデータタイプを使用する場合、使用するデータタイプごとにまとめてデータを記述すること。"
+    },
+    "special_notation": {
+      "description": "自動テストの利便性を向上させるために、いくつかの特殊記法を提供する。",
+      "notations": [
+        {
+          "notation": "null（大文字小文字の区別なし）",
+          "value": "null",
+          "description": "セル内に「null」と記述されている場合は、null値として扱う。データベースにnull値を登録したい場合や、期待値でnull値を設定したい場合に使用する。",
+          "examples": ["null", "Null", "NULL"]
+        },
+        {
+          "notation": "\"null\"（ダブルクォートで囲む）",
+          "value": "文字列のnull",
+          "description": "文字列の前後がダブルクォート（半角、全角問わず）で囲われている場合は、前後のダブルクォートを取り除いた文字列を扱う。「null」や「NULL」を文字列として扱う必要がある場合に使用。",
+          "examples": ["\"null\"", "\"NULL\"", "\"1 \"", "\" \""],
+          "notes": "本記述方法を利用した場合であっても、文字列中のダブルクォートをエスケープする必要はない。"
+        },
+        {
+          "notation": "\"\"（空のダブルクォート）",
+          "value": "空文字列",
+          "description": "空文字列を表す。空行を表現する場合にも使用可能。",
+          "usage": "可変長ファイルで空行を含めたい場合、行のうちのいずれか1セルに\"\"を記載する。"
+        },
+        {
+          "notation": "${systemTime}",
+          "value": "システム日時（Timestamp）",
+          "description": "システム日時を記載したい場合に使用する。コンポーネント設定ファイルにて設定されたSystemTimeProvider実装クラスから取得したTimestampの文字列形式に変換される。",
+          "format": "yyyy-MM-dd HH:mm:ss.fffffffff（例：2011-04-11 01:23:45.0）"
+        },
+        {
+          "notation": "${updateTime}",
+          "value": "システム日時（Timestamp）",
+          "description": "${systemTime}の別名。特にデータベースのタイムスタンプ更新時の期待値として使用する。"
+        },
+        {
+          "notation": "${setUpTime}",
+          "value": "コンポーネント設定ファイルに記載された固定値",
+          "description": "データベースセットアップ時のタイムスタンプに、決まった値を使用したい場合に使用する。"
+        },
+        {
+          "notation": "${文字種,文字数}",
+          "value": "指定した文字種を指定した文字数分まで増幅した値",
+          "description": "文字種と文字数を指定して、テストデータを生成する。",
+          "available_types": [
+            "半角英字",
+            "半角数字",
+            "半角記号",
+            "半角カナ",
+            "全角英字",
+            "全角数字",
+            "全角ひらがな",
+            "全角カタカナ",
+            "全角漢字",
+            "全角記号その他",
+            "外字"
+          ],
+          "examples": [
+            {
+              "notation": "${半角英字,5}",
+              "result": "geDSfe（半角英字5文字に変換）"
+            },
+            {
+              "notation": "${全角ひらがな,4}",
+              "result": "ぱさぇん（全角ひらがな4文字に変換）"
+            },
+            {
+              "notation": "${半角数字,2}-${半角数字,4}",
+              "result": "37-3425（-以外が変換）"
+            },
+            {
+              "notation": "${全角漢字,4}123",
+              "result": "山川海森123（末尾123以外が変換）"
+            }
+          ],
+          "notes": "本記法は単独でも使用可能であるし、組み合わせても使用できる。"
+        },
+        {
+          "notation": "${binaryFile:ファイルパス}",
+          "value": "BLOB列に格納するバイナリデータ",
+          "description": "BLOB列にファイルのデータを格納したい場合に使用する。ファイルパスはExcelファイルからの相対パスで記述する。"
+        },
+        {
+          "notation": "\\r",
+          "value": "CR（改行コード0x0D）",
+          "description": "改行コードを明示的に記述する場合に使用する。"
+        },
+        {
+          "notation": "\\n",
+          "value": "LF（改行コード0x0A）",
+          "description": "改行コードを明示的に記述する場合に使用する。Excelセル内の改行（Alt+Enter）もLFとして扱われる。"
+        }
+      ]
+    },
+    "cell_format": {
+      "description": "セルの書式とExcelシートの記述に関する規約",
+      "cell_format_rule": {
+        "description": "セルの書式には、文字列のみを使用する。テストデータを作成する前に、全てのセルの書式を文字列に設定しておくこと。",
+        "important": "Excelファイルに文字列以外の書式でデータを記述した場合、正しくデータが読み取れなくなる。",
+        "formatting": "罫線やセルの色付けについては任意に設定可能である。罫線やセルの色付けを行うことでデータが見やすくなり、レビュー品質や保守性の向上が期待できる。"
+      },
+      "date_format": {
+        "description": "日付の記述形式",
+        "supported_formats": [
+          {
+            "format": "yyyyMMddHHmmssSSS",
+            "example": "20210123123456789",
+            "result": "2021年1月23日 12時34分56秒789"
+          },
+          {
+            "format": "yyyy-MM-dd HH:mm:ss.SSS",
+            "example": "2021-01-23 12:34:56.789",
+            "result": "2021年1月23日 12時34分56秒789"
+          }
+        ],
+        "omission_rules": [
+          {
+            "omission": "ミリ秒を省略（yyyyMMddHHmmss または yyyy-MM-dd HH:mm:ss）",
+            "behavior": "ミリ秒として0を指定したものとして扱われる",
+            "example": "20210123123456 → 2021年1月23日 12時34分56秒000"
+          },
+          {
+            "omission": "時刻全部を省略（yyyyMMdd または yyyy-MM-dd）",
+            "behavior": "時刻として0時0分0秒000を指定したものとして扱われる",
+            "example": "20210123 → 2021年1月23日 00時00分00秒000"
+          }
+        ]
+      },
+      "comment": {
+        "description": "セル内に\"//\"から開始する文字列を記載した場合、そのセルから右のセルは全て読み込み対象外となる。テストデータ自体には含めたくないが、可読性を向上させるために付加情報を記載したい場合には、コメント機能が使用できる。",
+        "usage": "可読性を向上させるために、テーブルの論理名や期待する結果についてコメントを付与する。"
+      },
+      "marker_column": {
+        "description": "実際のデータには含めたくないがExcelシート上には記述しておきたい場合に使用する。カラム名が半角角括弧で囲まれている場合、そのカラムは「マーカーカラム」とみなされ、テスト実行時には読み込まれない。",
+        "format": "[カラム名]",
+        "example": "LIST_MAP=EXAMPLE_MARKER_COLUMN\n[no]  id      name\n1     U0001   山田\n2     U0002   田中",
+        "notes": "全くの空行は無視されるため、それ以外のデータタイプでも同様に使用できる。左端のセルに[no]のようなマーカーカラムを記載することで、連番を振ることができる。"
+      }
+    },
+    "column_omission": {
+      "description": "データベースの準備データおよび期待値を記述する際、テストに関係の無いカラムについては記述を省略できる。省略したカラムには、自動テストフレームワークによりデフォルト値が設定される。この機能を使用することにより、テストデータの可読性が向上する。また、テーブル定義が変更された場合でも、関係無いカラムであればテストデータ修正作業は発生しなくなる為、保守性が向上する。",
+      "setup_data_omission": {
+        "description": "データベース準備データを記述する際にカラムを省略すると、省略されたカラムにはデフォルト値が設定されているものとして扱われる。",
+        "important": "主キーカラムは省略できない。",
+        "usage": "多くのカラムのうち一部のカラムだけを設定する場合、不要なカラムを省略できる。"
+      },
+      "expected_data_omission": {
+        "description": "DB期待値から単純に無関係なカラムを省略すると、省略されたカラムは比較対象外となる。",
+        "expected_table": {
+          "name": "EXPECTED_TABLE",
+          "behavior": "省略されたカラムは比較対象外となる",
+          "usage": "検索系テストで、検索対象カラムのみを確認する場合"
+        },
+        "expected_complete_table": {
+          "name": "EXPECTED_COMPLETE_TABLE",
+          "behavior": "省略されたカラムにはデフォルト値が格納されているものとして比較が行われる",
+          "usage": "更新系テストで「無関係なカラムが更新されていないことを確認する」という観点が必要な場合"
+        },
+        "important": "データベース検索結果の期待値を記述する際は、検索対象カラム全てを記述しなければならない（レコードの主キーだけを確認する、というような確認方法は不可）。また、登録系テストの場合も、新規に登録されたレコードの全カラムを確認する必要があるので、カラムを省略できない。"
+      },
+      "default_values": {
+        "description": "自動テストフレームワークのコンポーネント設定ファイルにて明示的に指定していない場合、デフォルト値には以下の値が使用される。",
+        "values": [
+          {
+            "column_type": "数値型",
+            "default_value": "0"
+          },
+          {
+            "column_type": "文字列型",
+            "default_value": "半角スペース"
+          },
+          {
+            "column_type": "日付型",
+            "default_value": "1970-01-01 00:00:00.0"
+          }
+        ],
+        "customization": {
+          "class": "nablarch.test.core.db.BasicDefaultValues",
+          "properties": [
+            {
+              "name": "charValue",
+              "description": "文字列型のデフォルト値",
+              "value_type": "1文字のASCII文字",
+              "example": "a"
+            },
+            {
+              "name": "numberValue",
+              "description": "数値型のデフォルト値",
+              "value_type": "0または正の整数",
+              "example": "1"
+            },
+            {
+              "name": "dateValue",
+              "description": "日付型のデフォルト値",
+              "value_type": "JDBCタイムスタンプエスケープ形式（yyyy-mm-dd hh:mm:ss.fffffffff）",
+              "example": "2000-01-01 12:34:56.123456789"
+            }
+          ],
+          "configuration_example": "<component name=\"testDataParser\" class=\"nablarch.test.core.reader.BasicTestDataParser\">\n  <property name=\"defaultValues\">\n    <component class=\"nablarch.test.core.db.BasicDefaultValues\">\n      <property name=\"charValue\" value=\"a\"/>\n      <property name=\"dateValue\" value=\"2000-01-01 12:34:56.123456789\"/>\n      <property name=\"numberValue\" value=\"1\"/>\n    </component>\n  </property>\n</component>"
+        }
+      }
+    }
+  }
+}

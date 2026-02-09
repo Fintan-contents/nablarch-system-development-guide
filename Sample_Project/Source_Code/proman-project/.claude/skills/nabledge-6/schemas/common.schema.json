@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/common.schema.json",
+  "title": "Common Schema Definitions",
+  "description": "Shared definitions used across all knowledge file schemas",
+  "$defs": {
+    "indexItem": {
+      "type": "object",
+      "required": ["id", "hints"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "index": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/indexItem"
+      },
+      "minItems": 1
+    },
+    "sections": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "officialDocUrls": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "moduleInfo": {
+      "type": "object",
+      "required": ["groupId", "artifactId"],
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "pattern": "^com\\.nablarch\\."
+        },
+        "artifactId": {
+          "type": "string",
+          "pattern": "^nablarch-"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

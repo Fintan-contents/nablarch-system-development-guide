@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/processing.schema.json",
+  "title": "Processing Knowledge File Schema",
+  "description": "Schema for features/processing category knowledge files",
+  "type": "object",
+  "required": ["id", "title", "official_doc_urls", "index", "sections"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "official_doc_urls": {
+      "$ref": "common.schema.json#/$defs/officialDocUrls"
+    },
+    "index": {
+      "$ref": "common.schema.json#/$defs/index"
+    },
+    "sections": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "anti-patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["pattern", "reason", "correct"],
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string"
+              },
+              "correct": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

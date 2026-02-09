@@ -1,0 +1,936 @@
+{
+  "id": "universal-dao",
+  "title": "ユニバーサルDAO",
+  "official_doc_urls": [
+    "https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/database/universal_dao.html"
+  ],
+  "index": [
+    { "id": "overview", "hints": ["ユニバーサルDAO", "UniversalDao", "O/Rマッパー", "Jakarta Persistence", "JPA"] },
+    { "id": "crud", "hints": ["登録", "更新", "削除", "insert", "update", "delete", "findById", "主キー検索"] },
+    { "id": "sql-file", "hints": ["SQLファイル", "findAllBySqlFile", "SQL ID", "任意SQL", "検索"] },
+    { "id": "join", "hints": ["JOIN", "テーブル結合", "複数テーブル", "一覧検索"] },
+    { "id": "lazy-load", "hints": ["遅延ロード", "defer", "DeferredEntityList", "大量データ", "フェッチサイズ", "カーソル"] },
+    { "id": "search-condition", "hints": ["条件検索", "検索条件", "Form", "検索画面"] },
+    { "id": "type-conversion", "hints": ["型変換", "@Temporal", "Date", "Calendar", "マッピング", "データ型"] },
+    { "id": "paging", "hints": ["ページング", "per", "page", "Pagination", "EntityList", "件数取得"] },
+    { "id": "surrogate-key", "hints": ["サロゲートキー", "採番", "@GeneratedValue", "シーケンス", "IDENTITY", "TABLE", "AUTO"] },
+    { "id": "batch-execute", "hints": ["バッチ実行", "一括登録", "一括更新", "一括削除", "batchInsert", "batchUpdate", "batchDelete"] },
+    { "id": "optimistic-lock", "hints": ["楽観的ロック", "@Version", "OptimisticLockException", "排他制御", "バージョンカラム"] },
+    { "id": "pessimistic-lock", "hints": ["悲観的ロック", "行ロック", "SELECT FOR UPDATE"] },
+    { "id": "exclusive-control", "hints": ["排他制御", "バージョンカラム", "ロック単位", "設計指針"] },
+    { "id": "binary-data", "hints": ["バイナリデータ", "BLOB", "大容量データ", "Stream"] },
+    { "id": "text-data", "hints": ["テキストデータ", "CLOB", "大容量テキスト"] },
+    { "id": "transaction", "hints": ["別トランザクション", "SimpleDbTransactionManager", "UniversalDao.Transaction", "個別トランザクション"] },
+    { "id": "anti-patterns", "hints": ["アンチパターン", "注意点", "制限事項", "できないこと"] },
+    { "id": "errors", "hints": ["例外", "エラー", "OptimisticLockException", "型変換エラー"] }
+  ],
+  "sections": {
+    "overview": {
+      "classes": ["nablarch.common.dao.UniversalDao"],
+      "annotations": ["jakarta.persistence.*"],
+      "description": "Jakarta Persistenceアノテーションを使った簡易的なO/Rマッパー。SQLを書かずに単純なCRUDを実行し、検索結果をBeanにマッピングできる",
+      "purpose": "単純なCRUD操作とBean検索を簡潔に実現する",
+      "modules": [
+        {
+          "groupId": "com.nablarch.framework",
+          "artifactId": "nablarch-common-dao"
+        }
+      ],
+      "positioning": "簡易的なO/Rマッパーとして位置付け。全てのデータベースアクセスをカバーする設計ではない。実現できない場合はDatabaseを使用",
+      "prerequisites": "内部でDatabaseを使用するため、Databaseの設定が必要",
+      "limitations": [
+        "主キー以外の条件を指定した更新/削除は不可（Databaseを使用）",
+        "共通項目（登録ユーザ、更新ユーザ等）の自動設定機能は未提供",
+        "CRUDでの@Tableスキーマ指定時、replace_schema機能は使用不可"
+      ],
+      "tips": [
+        {
+          "title": "共通項目の自動設定",
+          "description": "Domaアダプタのエンティティリスナー機能を推奨。ユニバーサルDAO使用時はアプリケーションで明示的に設定"
+        },
+        {
+          "title": "基本方針",
+          "description": "ユニバーサルDAOで実現できない場合は、素直にDatabaseを使う"
+        }
+      ]
+    },
+    "crud": {
+      "description": "Jakarta PersistenceアノテーションをEntityに付けることで、SQLを書かずに単純なCRUDが可能。SQL文は実行時に自動構築",
+      "methods": [
+        {
+          "name": "insert",
+          "signature": "UniversalDao.insert(T entity)",
+          "description": "エンティティを1件登録",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "T",
+              "description": "登録するエンティティオブジェクト"
+            }
+          ],
+          "returns": "void",
+          "example": "UniversalDao.insert(user);"
+        },
+        {
+          "name": "batchInsert",
+          "signature": "UniversalDao.batchInsert(List<T> entities)",
+          "description": "エンティティを一括登録",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "登録するエンティティリスト"
+            }
+          ],
+          "returns": "void",
+          "example": "UniversalDao.batchInsert(users);"
+        },
+        {
+          "name": "update",
+          "signature": "UniversalDao.update(T entity)",
+          "description": "主キーを指定して1件更新",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "T",
+              "description": "更新するエンティティオブジェクト（主キー指定必須）"
+            }
+          ],
+          "returns": "int（更新件数）",
+          "example": "UniversalDao.update(user);"
+        },
+        {
+          "name": "batchUpdate",
+          "signature": "UniversalDao.batchUpdate(List<T> entities)",
+          "description": "主キーを指定して一括更新（排他制御なし）",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "更新するエンティティリスト"
+            }
+          ],
+          "returns": "void",
+          "example": "UniversalDao.batchUpdate(users);",
+          "important": "排他制御を行わない。バージョン不一致でも更新されず正常終了"
+        },
+        {
+          "name": "delete",
+          "signature": "UniversalDao.delete(T entity)",
+          "description": "主キーを指定して1件削除",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "T",
+              "description": "削除するエンティティオブジェクト（主キー指定必須）"
+            }
+          ],
+          "returns": "int（削除件数）",
+          "example": "UniversalDao.delete(user);"
+        },
+        {
+          "name": "batchDelete",
+          "signature": "UniversalDao.batchDelete(List<T> entities)",
+          "description": "主キーを指定して一括削除",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "削除するエンティティリスト"
+            }
+          ],
+          "returns": "void",
+          "example": "UniversalDao.batchDelete(users);"
+        },
+        {
+          "name": "findById",
+          "signature": "UniversalDao.findById(Class<T> entityClass, Object... pk)",
+          "description": "主キーを指定して1件検索",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "検索結果をマッピングするエンティティクラス"
+            },
+            {
+              "name": "pk",
+              "type": "Object...",
+              "description": "主キーの値（可変長引数）"
+            }
+          ],
+          "returns": "T（エンティティオブジェクト）",
+          "example": "User user = UniversalDao.findById(User.class, 1L);"
+        },
+        {
+          "name": "findAll",
+          "signature": "UniversalDao.findAll(Class<T> entityClass)",
+          "description": "エンティティを全件検索",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "検索結果をマッピングするエンティティクラス"
+            }
+          ],
+          "returns": "EntityList<T>",
+          "example": "EntityList<User> users = UniversalDao.findAll(User.class);"
+        },
+        {
+          "name": "findAllBySqlFile",
+          "signature": "UniversalDao.findAllBySqlFile(Class<T> entityClass, String sqlId)",
+          "description": "SQLファイルを使った全件検索",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "検索結果をマッピングするBeanクラス"
+            },
+            {
+              "name": "sqlId",
+              "type": "String",
+              "description": "SQL ID"
+            }
+          ],
+          "returns": "EntityList<T>",
+          "example": "EntityList<User> users = UniversalDao.findAllBySqlFile(User.class, \"FIND_BY_NAME\");"
+        },
+        {
+          "name": "findAllBySqlFile",
+          "signature": "UniversalDao.findAllBySqlFile(Class<T> entityClass, String sqlId, Object condition)",
+          "description": "条件を指定したSQLファイル検索",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "検索結果をマッピングするBeanクラス"
+            },
+            {
+              "name": "sqlId",
+              "type": "String",
+              "description": "SQL ID"
+            },
+            {
+              "name": "condition",
+              "type": "Object",
+              "description": "検索条件オブジェクト"
+            }
+          ],
+          "returns": "EntityList<T>",
+          "example": "EntityList<Project> projects = UniversalDao.findAllBySqlFile(Project.class, \"SEARCH_PROJECT\", condition);"
+        },
+        {
+          "name": "findBySqlFile",
+          "signature": "UniversalDao.findBySqlFile(Class<T> entityClass, String sqlId, Object condition)",
+          "description": "SQLファイルで1件検索（悲観的ロック用SELECT FOR UPDATEにも使用）",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "検索結果をマッピングするBeanクラス"
+            },
+            {
+              "name": "sqlId",
+              "type": "String",
+              "description": "SQL ID"
+            },
+            {
+              "name": "condition",
+              "type": "Object",
+              "description": "検索条件オブジェクト"
+            }
+          ],
+          "returns": "T",
+          "example": "User user = UniversalDao.findBySqlFile(User.class, \"FIND_USER_FOR_UPDATE\", condition);"
+        }
+      ],
+      "annotations_required": "@Entity、@Table、@Id、@Column等のJakarta Persistenceアノテーションを使用",
+      "sql_generation": "アノテーション情報を元に実行時にSQL文を構築"
+    },
+    "sql-file": {
+      "description": "任意のSQLで検索する場合、SQLファイルを作成しSQL IDを指定して検索",
+      "method": "UniversalDao.findAllBySqlFile / findBySqlFile",
+      "sql_file_path_derivation": "検索結果をマッピングするBeanのクラスから導出。sample.entity.User → sample/entity/User.sql",
+      "sql_id_with_hash": {
+        "description": "SQL IDに#を含めると「SQLファイルのパス#SQL ID」と解釈",
+        "example": "UniversalDao.findAllBySqlFile(GoldUser.class, \"sample.entity.Member#FIND_BY_NAME\")",
+        "sql_file_path": "sample/entity/Member.sql",
+        "sql_id": "FIND_BY_NAME",
+        "use_case": "機能単位（Actionハンドラ単位）にSQLを集約したい場合",
+        "recommendation": "基本は#を付けない指定を使用（指定が煩雑になるため）"
+      },
+      "bean_mapping": {
+        "description": "検索結果をBean（Entity、Form、DTO）にマッピング",
+        "mapping_rule": "Beanのプロパティ名とSELECT句の名前が一致する項目をマッピング"
+      },
+      "typical_usage": "Database機能のuse_sql_fileと同様の使い方"
+    },
+    "join": {
+      "description": "複数テーブルをJOINした結果を取得する場合の対応",
+      "use_case": "一覧検索などで複数テーブルをJOINした結果を取得",
+      "recommendation": "非効率なため個別検索せず、1回で検索できるSQLとJOIN結果をマッピングするBeanを作成",
+      "implementation": [
+        "JOINした結果をマッピングするBean（DTO）を作成",
+        "SQLファイルに複数テーブルをJOINするSQLを記述",
+        "findAllBySqlFileでDTOにマッピング"
+      ]
+    },
+    "lazy-load": {
+      "description": "大量データでメモリ不足を防ぐための遅延ロード機能",
+      "use_cases": [
+        "ウェブで大量データをダウンロード",
+        "バッチで大量データを処理"
+      ],
+      "method": {
+        "name": "defer",
+        "signature": "UniversalDao.defer()",
+        "description": "遅延ロードを有効化するメソッド。検索メソッドの前に呼び出す",
+        "returns": "UniversalDao（メソッドチェーン可能）"
+      },
+      "return_type": "DeferredEntityList<T>",
+      "requires_close": true,
+      "close_method": "DeferredEntityList.close()（try-with-resources推奨）",
+      "mechanism": "内部でサーバサイドカーソルを使用。JDBCのフェッチサイズでメモリ使用量が変わる",
+      "example": "try (DeferredEntityList<User> users = (DeferredEntityList<User>) UniversalDao.defer().findAllBySqlFile(User.class, \"FIND_BY_NAME\")) {\n    for (User user : users) {\n        // userを使った処理\n    }\n}",
+      "fetch_size_note": "JDBCのフェッチサイズの詳細はデータベースベンダー提供のマニュアルを参照",
+      "important": "RDBMSによってはカーソルオープン中にトランザクション制御が行われるとカーソルがクローズされる。遅延ロード使用中のトランザクション制御でエラーの可能性。ページングで回避またはカーソル挙動を調整"
+    },
+    "search-condition": {
+      "description": "検索画面のような条件指定検索",
+      "method": "UniversalDao.findAllBySqlFile(Class<T>, String sqlId, Object condition)",
+      "condition_object": "検索条件を持つ専用のBean（Form等）。ただし1テーブルのみアクセスの場合はEntity指定も可",
+      "example": "ProjectSearchForm condition = context.getRequestScopedVar(\"form\");\nList<Project> projects = UniversalDao.findAllBySqlFile(Project.class, \"SEARCH_PROJECT\", condition);",
+      "important": "検索条件はEntityではなく検索条件を持つ専用のBeanを指定。1テーブルのみの場合はEntity可"
+    },
+    "type-conversion": {
+      "description": "データベース型とJava型の変換",
+      "temporal_annotation": "@Temporalでjava.util.Date/java.util.Calendar型のDBマッピング方法を指定可能",
+      "other_types": "任意のマッピングは不可。DBの型とJDBCドライバ仕様に応じてEntityプロパティを定義",
+      "auto_generated_sql": {
+        "description": "Entityから自動生成したSQL実行時",
+        "output_to_db": "@Temporal設定プロパティは指定型へ変換。それ以外はDatabaseに委譲",
+        "input_from_db": "@Temporal設定プロパティは指定型から変換。それ以外はEntity情報を元に変換"
+      },
+      "custom_sql": {
+        "description": "任意のSQLで検索する場合",
+        "output_to_db": "Databaseに委譲して変換",
+        "input_from_db": "自動生成SQLと同様の処理"
+      },
+      "important": [
+        "DB型とプロパティ型不一致で実行時型変換エラーの可能性",
+        "SQL実行時の暗黙的型変換でindex未使用による性能劣化の可能性",
+        "データベースとJavaのデータタイプマッピングはJDBCドライバマニュアルを参照"
+      ],
+      "type_examples": [
+        {
+          "db_type": "date",
+          "java_type": "java.sql.Date"
+        },
+        {
+          "db_type": "数値型（integer, bigint, number）",
+          "java_type": "int (Integer), long (Long)"
+        }
+      ]
+    },
+    "paging": {
+      "description": "検索結果のページング機能",
+      "methods": [
+        {
+          "name": "per",
+          "signature": "UniversalDao.per(long perPage)",
+          "description": "1ページあたりの件数を指定",
+          "parameters": [
+            {
+              "name": "perPage",
+              "type": "long",
+              "description": "1ページあたりの件数"
+            }
+          ],
+          "returns": "UniversalDao（メソッドチェーン可能）"
+        },
+        {
+          "name": "page",
+          "signature": "UniversalDao.page(long pageNumber)",
+          "description": "ページ番号を指定",
+          "parameters": [
+            {
+              "name": "pageNumber",
+              "type": "long",
+              "description": "ページ番号"
+            }
+          ],
+          "returns": "UniversalDao（メソッドチェーン可能）"
+        }
+      ],
+      "example": "EntityList<User> users = UniversalDao.per(3).page(1).findAllBySqlFile(User.class, \"FIND_ALL_USERS\");",
+      "pagination_info": {
+        "class": "nablarch.common.dao.Pagination",
+        "description": "ページング画面表示に必要な検索結果件数等の情報を保持",
+        "retrieval": "Pagination pagination = users.getPagination();"
+      },
+      "internal": "Databaseの範囲指定検索機能を使用して実装",
+      "count_sql": {
+        "description": "範囲指定レコード取得前に件数取得SQLが発行される",
+        "default_behavior": "元のSQLをSELECT COUNT(*) FROMで包んだSQL",
+        "performance_note": "件数取得SQLによる性能劣化時は拡張例を参照してカスタマイズ"
+      }
+    },
+    "surrogate-key": {
+      "description": "サロゲートキーの自動採番機能",
+      "annotations": ["@GeneratedValue", "@SequenceGenerator", "@TableGenerator"],
+      "strategies": [
+        {
+          "type": "GenerationType.AUTO",
+          "description": "Dialectを元に採番方法を自動選択",
+          "priority": "IDENTITY → SEQUENCE → TABLE",
+          "sequence_name_rule": "SEQUENCE選択時、シーケンスオブジェクト名は<テーブル名>_<カラム名>",
+          "generator_note": "generator属性に対応するGenerator設定がある場合、そのGeneratorを使用",
+          "example": "@Id\n@Column(name = \"USER_ID\", length = 15)\n@GeneratedValue(strategy = GenerationType.AUTO)\npublic Long getId() { return id; }"
+        },
+        {
+          "type": "GenerationType.IDENTITY",
+          "description": "DB自動採番機能（IDENTITY）を使用",
+          "example": "@Id\n@Column(name = \"USER_ID\", length = 15)\n@GeneratedValue(strategy = GenerationType.IDENTITY)\npublic Long getId() { return id; }"
+        },
+        {
+          "type": "GenerationType.SEQUENCE",
+          "description": "シーケンスオブジェクトで採番",
+          "sequence_generator_required": true,
+          "sequence_name_config": "@SequenceGeneratorのsequenceName属性で指定。省略時は<テーブル名>_<カラム名>",
+          "example": "@Id\n@Column(name = \"USER_ID\", length = 15)\n@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = \"seq\")\n@SequenceGenerator(name = \"seq\", sequenceName = \"USER_ID_SEQ\")\npublic Long getId() { return id; }"
+        },
+        {
+          "type": "GenerationType.TABLE",
+          "description": "採番テーブルで採番",
+          "table_generator_required": true,
+          "pk_value_config": "@TableGeneratorのpkColumnValue属性で指定。省略時は<テーブル名>_<カラム名>",
+          "example": "@Id\n@Column(name = \"USER_ID\", length = 15)\n@GeneratedValue(strategy = GenerationType.TABLE, generator = \"table\")\n@TableGenerator(name = \"table\", pkColumnValue = \"USER_ID\")\npublic Long getId() { return id; }"
+        }
+      ],
+      "generator_configuration": "シーケンス/テーブル採番はGenerator機能を使用。別途設定が必要（generator参照）"
+    },
+    "batch-execute": {
+      "description": "大量データの一括登録/更新/削除でバッチ実行",
+      "purpose": "アプリケーションサーバとDBサーバ間のラウンドトリップ回数削減によるパフォーマンス向上",
+      "methods": [
+        {
+          "name": "batchInsert",
+          "signature": "UniversalDao.batchInsert(List<T> entities)",
+          "description": "エンティティを一括登録",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "登録するエンティティリスト"
+            }
+          ],
+          "returns": "void"
+        },
+        {
+          "name": "batchUpdate",
+          "signature": "UniversalDao.batchUpdate(List<T> entities)",
+          "description": "エンティティを一括更新",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "更新するエンティティリスト"
+            }
+          ],
+          "returns": "void",
+          "important": "排他制御を行わない。更新対象EntityとDBのバージョン不一致でも、そのレコードは更新されず処理が正常終了"
+        },
+        {
+          "name": "batchDelete",
+          "signature": "UniversalDao.batchDelete(List<T> entities)",
+          "description": "エンティティを一括削除",
+          "parameters": [
+            {
+              "name": "entities",
+              "type": "List<T>",
+              "description": "削除するエンティティリスト"
+            }
+          ],
+          "returns": "void"
+        }
+      ],
+      "important": "batchUpdateは排他制御を行わない。排他制御が必要な更新は1レコード毎の更新処理を使用"
+    },
+    "optimistic-lock": {
+      "description": "@Version付きEntity更新時に自動で楽観的ロック実行",
+      "annotation": "@Version",
+      "mechanism": "更新処理時にバージョンカラムが条件に自動追加され楽観ロックが行われる",
+      "exception": {
+        "class": "jakarta.persistence.OptimisticLockException",
+        "cause": "排他エラー発生（バージョン不一致）"
+      },
+      "version_annotation_constraints": [
+        "数値型のプロパティのみ指定可（文字列型不可）",
+        "Entity内に1つのみ指定可能"
+      ],
+      "error_handling": {
+        "annotation": "@OnError",
+        "description": "排他エラー時の画面遷移制御",
+        "example": "@OnError(type = OptimisticLockException.class, path = \"/WEB-INF/view/common/errorPages/userError.jsp\")\npublic HttpResponse update(HttpRequest request, ExecutionContext context) {\n    UniversalDao.update(user);\n}"
+      },
+      "batch_update_note": "batchUpdateでは楽観的ロックは使用できない"
+    },
+    "pessimistic-lock": {
+      "description": "悲観的ロック機能は特に提供していない",
+      "implementation": "データベースの行ロック（SELECT FOR UPDATE）を使用",
+      "method": {
+        "name": "findBySqlFile",
+        "signature": "UniversalDao.findBySqlFile(Class<T> entityClass, String sqlId, Object condition)",
+        "description": "SELECT FOR UPDATEを記載したSQLファイルを実行"
+      },
+      "example": "User user = UniversalDao.findBySqlFile(User.class, \"FIND_USER_FOR_UPDATE\", condition);"
+    },
+    "exclusive-control": {
+      "description": "排他制御の設計指針",
+      "principle": "バージョンカラムは排他制御を行う単位ごとに定義し、競合が許容される最大の単位で定義",
+      "example": "「ユーザ」単位でロックが業務的に許容されるなら、ユーザテーブルにバージョン番号を定義",
+      "trade_off": "単位を大きくすると競合可能性が高まり、更新失敗（楽観的ロック）や処理遅延（悲観的ロック）を招く",
+      "design_consideration": "業務的観点で排他制御単位を決定する必要がある"
+    },
+    "binary-data": {
+      "description": "OracleのBLOBのようなデータサイズの大きいバイナリデータの登録/更新",
+      "limitation": "ユニバーサルDAOは全データをメモリに展開するため不向き",
+      "recommendation": "データベース提供機能を使ってファイルから直接登録/更新",
+      "reference": "database-binary_column参照"
+    },
+    "text-data": {
+      "description": "OracleのCLOBのようなデータサイズの大きいテキストデータの登録/更新",
+      "limitation": "ユニバーサルDAOは全データをメモリに展開するため不向き",
+      "recommendation": "データベース提供機能を使ってファイルから直接登録/更新",
+      "reference": "database-clob_column参照"
+    },
+    "transaction": {
+      "description": "現在のトランザクションとは異なるトランザクションでDAO実行",
+      "use_case": "Databaseのdatabase-new_transactionと同じことをユニバーサルDAOで実行",
+      "steps": [
+        "コンポーネント設定ファイルにSimpleDbTransactionManagerを定義",
+        "SimpleDbTransactionManagerを使用して新たなトランザクションでDAO実行"
+      ],
+      "component_configuration": {
+        "component_name": "任意の名前（例: find-persons-transaction）",
+        "class": "nablarch.core.db.transaction.SimpleDbTransactionManager",
+        "properties": [
+          {
+            "name": "connectionFactory",
+            "type": "nablarch.core.db.connection.ConnectionFactory",
+            "required": true,
+            "description": "ConnectionFactory実装クラス"
+          },
+          {
+            "name": "transactionFactory",
+            "type": "nablarch.core.transaction.TransactionFactory",
+            "required": true,
+            "description": "TransactionFactory実装クラス"
+          },
+          {
+            "name": "dbTransactionName",
+            "type": "String",
+            "required": true,
+            "description": "トランザクションを識別するための名前"
+          }
+        ],
+        "xml_example": "<component name=\"find-persons-transaction\" class=\"nablarch.core.db.transaction.SimpleDbTransactionManager\">\n  <property name=\"connectionFactory\" ref=\"connectionFactory\" />\n  <property name=\"transactionFactory\" ref=\"transactionFactory\" />\n  <property name=\"dbTransactionName\" value=\"update-login-failed-count-transaction\" />\n</component>"
+      },
+      "implementation": {
+        "parent_class": "nablarch.common.dao.UniversalDao.Transaction",
+        "description": "UniversalDao.Transactionを継承したクラスを作成",
+        "constructor": "super(\"transaction-name\")でSimpleDbTransactionManagerの名前またはオブジェクトを指定",
+        "execute_method": {
+          "description": "executeメソッドにDAO処理を実装",
+          "behavior": "正常終了でコミット、例外/エラーでロールバック"
+        }
+      },
+      "example": "private static final class FindPersonsTransaction extends UniversalDao.Transaction {\n    private EntityList<Person> persons;\n\n    FindPersonsTransaction() {\n        super(\"find-persons-transaction\");\n    }\n\n    @Override\n    protected void execute() {\n        persons = UniversalDao.findAllBySqlFile(Person.class, \"FIND_PERSONS\");\n    }\n\n    public EntityList<Person> getPersons() {\n        return persons;\n    }\n}\n\nFindPersonsTransaction tx = new FindPersonsTransaction();\nEntityList<Person> persons = tx.getPersons();"
+    },
+    "configuration": {
+      "description": "ユニバーサルDAO使用のための設定",
+      "required_component": {
+        "component_name": "daoContextFactory",
+        "class": "nablarch.common.dao.BasicDaoContextFactory",
+        "description": "コンポーネント定義に追加が必要",
+        "xml_example": "<component name=\"daoContextFactory\" class=\"nablarch.common.dao.BasicDaoContextFactory\" />"
+      },
+      "prerequisites": "Databaseの設定が必要（内部でDatabaseを使用）"
+    },
+    "extensions": {
+      "metadata_extractor": {
+        "description": "DatabaseMetaDataから主キー情報を取得できない場合の対応",
+        "cause": "シノニム使用や権限問題",
+        "impact": "主キー指定検索が正しく動作しない",
+        "solution": "DatabaseMetaDataExtractorを継承したクラスを作成",
+        "parent_class": "nablarch.common.dao.DatabaseMetaDataExtractor",
+        "configuration": {
+          "component_name": "databaseMetaDataExtractor",
+          "example": "<component name=\"databaseMetaDataExtractor\" class=\"sample.dao.CustomDatabaseMetaDataExtractor\" />"
+        }
+      },
+      "count_sql_customization": {
+        "description": "ページング処理の件数取得SQL変更",
+        "use_case": "ORDER BY句等で処理負荷が大きい場合に負荷軽減（ORDER BY句を外す等）",
+        "default_behavior": "元のSQLをSELECT COUNT(*) FROMで包んだSQL",
+        "implementation": {
+          "method": "Dialect.convertCountSql(String sqlId, Object params, StatementFactory statementFactory)をオーバーライド",
+          "approach": "使用中のDialectを継承し、元SQLと件数取得SQLのマッピングをコンポーネント設定"
+        },
+        "important": "件数取得SQLは元SQLと同一の検索条件が必要。検索条件に差分が発生しないよう注意",
+        "example_class": "CustomH2Dialect extends H2Dialect",
+        "example_method": "@Override\npublic String convertCountSql(String sqlId, Object params, StatementFactory statementFactory) {\n    if (sqlMap.containsKey(sqlId)) {\n        return statementFactory.getVariableConditionSqlBySqlId(sqlMap.get(sqlId), params);\n    }\n    return convertCountSql(statementFactory.getVariableConditionSqlBySqlId(sqlId, params));\n}",
+        "configuration": {
+          "component_name": "dialect",
+          "example": "<component name=\"dialect\" class=\"com.nablarch.example.app.db.dialect.CustomH2Dialect\">\n  <property name=\"sqlMap\">\n    <map>\n      <entry key=\"com.nablarch.example.app.entity.Project#SEARCH_PROJECT\" value=\"com.nablarch.example.app.entity.Project#SEARCH_PROJECT_FORCOUNT\"/>\n    </map>\n  </property>\n</component>"
+        }
+      }
+    },
+    "jpa-annotations": {
+      "description": "Entityに使用できるJakarta Persistenceアノテーション",
+      "important": "記載のないアノテーション/属性は機能しない",
+      "access_rule": "@Accessで明示的にフィールド指定した場合のみフィールドのアノテーションを参照",
+      "getter_setter_required": "フィールドにアノテーション設定でもgetter/setter必須（値の取得/設定はプロパティ経由）",
+      "naming_rule": "フィールド名とプロパティ名（get〇〇/set〇〇の〇〇）は同一にすること",
+      "lombok_tip": "Lombokのようなボイラープレートコード生成ライブラリ使用時、フィールドにアノテーション設定でgetter自動生成の利点を活用可能",
+      "class_annotations": [
+        {
+          "name": "@Entity",
+          "package": "jakarta.persistence.Entity",
+          "description": "データベースのテーブルに対応したEntityクラスに設定",
+          "table_name_derivation": "クラス名（パスカルケース）→スネークケース（大文字）",
+          "examples": [
+            {
+              "class": "Book",
+              "table": "BOOK"
+            },
+            {
+              "class": "BookAuthor",
+              "table": "BOOK_AUTHOR"
+            }
+          ],
+          "tip": "クラス名からテーブル名を導出できない場合は@Tableで明示指定"
+        },
+        {
+          "name": "@Table",
+          "package": "jakarta.persistence.Table",
+          "description": "テーブル名を明示指定するアノテーション",
+          "attributes": {
+            "name": {
+              "type": "String",
+              "required": false,
+              "description": "テーブル名。指定した値がテーブル名として使用される"
+            },
+            "schema": {
+              "type": "String",
+              "required": false,
+              "description": "スキーマ名。指定されたスキーマ名を修飾子としてテーブルにアクセス。例: schema=\"work\" → work.users_work"
+            }
+          }
+        },
+        {
+          "name": "@Access",
+          "package": "jakarta.persistence.Access",
+          "description": "アノテーション設定場所を指定するアノテーション",
+          "behavior": "明示的にフィールド指定した場合のみフィールドのアノテーションを参照"
+        }
+      ],
+      "property_annotations": [
+        {
+          "name": "@Column",
+          "package": "jakarta.persistence.Column",
+          "description": "カラム名を指定するアノテーション",
+          "attributes": {
+            "name": {
+              "type": "String",
+              "required": false,
+              "description": "カラム名。指定した値がカラム名として使用される"
+            }
+          },
+          "default_derivation": "未設定時はプロパティ名からカラム名を導出（テーブル名導出と同じ方法）"
+        },
+        {
+          "name": "@Id",
+          "package": "jakarta.persistence.Id",
+          "description": "主キーに設定するアノテーション",
+          "composite_key": "複合主キーの場合は複数のgetterまたはフィールドに設定"
+        },
+        {
+          "name": "@Version",
+          "package": "jakarta.persistence.Version",
+          "description": "排他制御用バージョンカラムに設定するアノテーション",
+          "constraints": [
+            "数値型のプロパティのみ指定可（文字列型不可）",
+            "Entity内に1つのみ指定可能"
+          ],
+          "behavior": "更新処理時にバージョンカラムが条件に自動追加され楽観ロック実行"
+        },
+        {
+          "name": "@Temporal",
+          "package": "jakarta.persistence.Temporal",
+          "description": "java.util.Date/java.util.Calendar型のDBマッピング方法を指定",
+          "attributes": {
+            "value": {
+              "type": "TemporalType",
+              "required": true,
+              "description": "データベース型（DATE, TIME, TIMESTAMP）"
+            }
+          },
+          "behavior": "value属性に指定されたDB型へJavaオブジェクトの値を変換してDB登録"
+        },
+        {
+          "name": "@GeneratedValue",
+          "package": "jakarta.persistence.GeneratedValue",
+          "description": "自動採番された値を登録することを示すアノテーション",
+          "attributes": {
+            "strategy": {
+              "type": "GenerationType",
+              "required": false,
+              "default": "AUTO",
+              "description": "採番方法（AUTO, IDENTITY, SEQUENCE, TABLE）"
+            },
+            "generator": {
+              "type": "String",
+              "required": false,
+              "description": "Generator設定名"
+            }
+          },
+          "auto_behavior": [
+            "generator属性に対応するGenerator設定がある場合、そのGeneratorを使用",
+            "generatorが未設定または対応設定がない場合、Dialectを元に選択（IDENTITY→SEQUENCE→TABLE）"
+          ],
+          "default_name_rule": "シーケンス名/レコード識別値を取得できない場合、<テーブル名>_<カラム名>から導出"
+        },
+        {
+          "name": "@SequenceGenerator",
+          "package": "jakarta.persistence.SequenceGenerator",
+          "description": "シーケンス採番を使用する場合に設定",
+          "attributes": {
+            "name": {
+              "type": "String",
+              "required": true,
+              "description": "@GeneratedValueのgenerator属性と同じ値"
+            },
+            "sequenceName": {
+              "type": "String",
+              "required": false,
+              "default": "<テーブル名>_<カラム名>",
+              "description": "データベース上に作成されているシーケンスオブジェクト名"
+            }
+          },
+          "note": "シーケンス採番はGenerator機能を使用。採番用の設定を別途行う必要がある"
+        },
+        {
+          "name": "@TableGenerator",
+          "package": "jakarta.persistence.TableGenerator",
+          "description": "テーブル採番を使用する場合に設定",
+          "attributes": {
+            "name": {
+              "type": "String",
+              "required": true,
+              "description": "@GeneratedValueのgenerator属性と同じ値"
+            },
+            "pkColumnValue": {
+              "type": "String",
+              "required": false,
+              "default": "<テーブル名>_<カラム名>",
+              "description": "採番テーブルのレコードを識別するための値"
+            }
+          },
+          "note": "テーブル採番はGenerator機能を使用。採番用の設定を別途行う必要がある"
+        }
+      ]
+    },
+    "bean-data-types": {
+      "description": "検索結果をマッピングするBeanに使用可能なデータタイプ",
+      "important": "記載のないデータタイプへのマッピングは実行時例外",
+      "types": [
+        {
+          "type": "java.lang.String",
+          "note": null
+        },
+        {
+          "type": "java.lang.Short",
+          "primitive": true,
+          "note": "プリミティブ型も指定可。プリミティブ型でnullは0として扱う"
+        },
+        {
+          "type": "java.lang.Integer",
+          "primitive": true,
+          "note": "プリミティブ型も指定可。プリミティブ型でnullは0として扱う"
+        },
+        {
+          "type": "java.lang.Long",
+          "primitive": true,
+          "note": "プリミティブ型も指定可。プリミティブ型でnullは0として扱う"
+        },
+        {
+          "type": "java.math.BigDecimal",
+          "note": null
+        },
+        {
+          "type": "java.lang.Boolean",
+          "primitive": true,
+          "note": "プリミティブ型も指定可。プリミティブ型でnullはfalseとして扱う。ラッパー型のリードメソッド名はgetから開始必須。プリミティブ型はisで開始可"
+        },
+        {
+          "type": "java.util.Date",
+          "note": "@Temporalでデータベース上のデータ型を指定する必要がある"
+        },
+        {
+          "type": "java.sql.Date",
+          "note": null
+        },
+        {
+          "type": "java.sql.Timestamp",
+          "note": null
+        },
+        {
+          "type": "java.time.LocalDate",
+          "note": null
+        },
+        {
+          "type": "java.time.LocalDateTime",
+          "note": null
+        },
+        {
+          "type": "byte[]",
+          "note": "BLOB等の非常に大きいサイズのデータ型の値は、本機能でヒープ上に展開しないよう注意。非常に大きいサイズのバイナリデータを扱う場合は、Databaseを直接使用しStream経由でデータを参照"
+        }
+      ]
+    },
+    "anti-patterns": [
+      {
+        "pattern": "主キー以外の条件で更新/削除しようとする",
+        "reason": "ユニバーサルDAOは主キー指定の更新/削除のみ対応",
+        "correct": "主キー以外の条件が必要な場合はDatabaseを直接使用"
+      },
+      {
+        "pattern": "検索条件にEntityを無条件に使用する",
+        "reason": "複数テーブル検索時にEntityを使うと設計が不明瞭になる",
+        "correct": "検索条件は専用のBean（Form等）を指定。ただし1テーブルのみアクセスの場合はEntity指定も可"
+      },
+      {
+        "pattern": "フィールドにアノテーション設定してgetter/setterを省略する",
+        "reason": "UniversalDaoは値の取得/設定をプロパティ経由で行うため、フィールドアノテーション設定でもgetter/setterが必要",
+        "correct": "フィールドにアノテーションを設定する場合でもgetter/setterを必ず作成する"
+      },
+      {
+        "pattern": "共通項目（登録ユーザ、更新ユーザ等）の自動設定を期待する",
+        "reason": "自動設定機能は未提供",
+        "correct": "Domaアダプタのエンティティリスナー使用、またはアプリケーションで明示的に設定"
+      },
+      {
+        "pattern": "@Tableのスキーマ指定でreplace_schema機能を使用しようとする",
+        "reason": "ユニバーサルDAOのCRUD機能ではreplace_schema未対応",
+        "correct": "環境毎のスキーマ切替はDatabaseを使用"
+      },
+      {
+        "pattern": "batchUpdateで排他制御を期待する",
+        "reason": "batchUpdateは排他制御を行わない。バージョン不一致でも更新されず正常終了し、更新失敗に気付けない",
+        "correct": "排他制御が必要な場合は1レコード毎の更新処理（update）を使用"
+      },
+      {
+        "pattern": "@Versionを文字列型プロパティに設定する",
+        "reason": "数値型のみ対応。文字列型は正しく動作しない",
+        "correct": "@Versionは数値型プロパティに設定"
+      },
+      {
+        "pattern": "大きいBLOB/CLOBデータをユニバーサルDAOで登録/更新する",
+        "reason": "全データをメモリに展開するため、大容量データでメモリ不足になる",
+        "correct": "データベース提供機能でファイルから直接登録/更新"
+      },
+      {
+        "pattern": "遅延ロード中にトランザクション制御を行う",
+        "reason": "RDBMSによってはカーソルオープン中のトランザクション制御でカーソルがクローズされエラーになる",
+        "correct": "ページングで回避、またはDBベンダマニュアルに沿ってカーソル挙動を調整"
+      },
+      {
+        "pattern": "JOIN対象のデータを個別に検索する",
+        "reason": "複数回のクエリで非効率",
+        "correct": "1回で検索できるSQLとJOIN結果をマッピングするBeanを作成"
+      },
+      {
+        "pattern": "DeferredEntityListをcloseせずに放置する",
+        "reason": "内部でサーバサイドカーソルを使用しており、リソースリークの原因になる",
+        "correct": "try-with-resourcesでclose呼び出し"
+      },
+      {
+        "pattern": "フィールドとプロパティを異なる名前にする（@Accessでフィールド指定時）",
+        "reason": "フィールド名とプロパティ名で紐づいているため、異なるとフィールドのアノテーションをプロパティで参照できなくなる",
+        "correct": "フィールド名とプロパティ名（get〇〇/set〇〇の〇〇）は同一にする"
+      },
+      {
+        "pattern": "記載のないアノテーション/属性を使用する",
+        "reason": "Jakarta Persistenceの全機能には対応していない",
+        "correct": "公式ドキュメント記載のアノテーション/属性のみ使用"
+      },
+      {
+        "pattern": "サポートされていないデータタイプにマッピングする",
+        "reason": "実行時例外が発生する",
+        "correct": "bean-data-typesに記載のデータタイプを使用"
+      },
+      {
+        "pattern": "DB型とプロパティ型を不一致にする",
+        "reason": "実行時型変換エラーや暗黙的型変換によるindex未使用で性能劣化",
+        "correct": "JDBCドライバマニュアルを参照し適切な型でプロパティを定義"
+      }
+    ],
+    "errors": [
+      {
+        "exception": "jakarta.persistence.OptimisticLockException",
+        "cause": "楽観的ロックで排他エラー発生（@Version付きEntity更新時にバージョン不一致）",
+        "solution": "@OnErrorで画面遷移を制御。例: @OnError(type = OptimisticLockException.class, path = \"/WEB-INF/view/common/errorPages/userError.jsp\")"
+      },
+      {
+        "exception": "型変換エラー（実行時例外）",
+        "cause": "データベースの型とプロパティの型が不一致",
+        "solution": "JDBCドライバのマニュアルを参照し、データベースとJavaのデータタイプマッピングに従って適切な型でプロパティを定義"
+      },
+      {
+        "exception": "実行時例外（マッピングエラー）",
+        "cause": "サポートされていないデータタイプへのマッピング",
+        "solution": "bean-data-typesに記載のデータタイプを使用"
+      },
+      {
+        "exception": "主キー検索が正しく動作しない",
+        "cause": "DatabaseMetaDataから主キー情報を取得できない（シノニム使用、権限問題）",
+        "solution": "DatabaseMetaDataExtractorを継承したクラスを作成し、databaseMetaDataExtractorコンポーネントとして設定"
+      }
+    ],
+    "tips": [
+      {
+        "title": "ユニバーサルDAOの位置付け",
+        "description": "簡易的なO/Rマッパー。全てのDBアクセスをカバーする設計ではない。実現できない場合は素直にDatabaseを使用"
+      },
+      {
+        "title": "共通項目の自動設定",
+        "description": "Domaアダプタのエンティティリスナー機能を推奨。ユニバーサルDAO使用時はアプリケーションで明示的に設定"
+      },
+      {
+        "title": "SQLファイルのパス指定",
+        "description": "#を含めた指定は機能単位にSQL集約に使えるが、基本は#なしを推奨（指定が煩雑になるため）"
+      },
+      {
+        "title": "ページングの内部実装",
+        "description": "Databaseの範囲指定検索機能を使用。範囲指定レコード取得前に件数取得SQLが発行される"
+      },
+      {
+        "title": "シーケンス/テーブル採番の設定",
+        "description": "Generator機能を使用するため、別途採番用の設定が必要"
+      },
+      {
+        "title": "Lombokとの相性",
+        "description": "フィールドにアノテーション設定でgetter自動生成の利点を活用可能"
+      }
+    ],
+    "limitations": [
+      "主キー以外の条件を指定した更新/削除は不可",
+      "共通項目の自動設定機能は未提供",
+      "CRUDでの@Tableスキーマ指定時、replace_schema機能は使用不可",
+      "batchUpdateでは排他制御不可",
+      "@Versionは数値型のみ対応（文字列型不可）",
+      "大容量BLOB/CLOBデータは全データをメモリ展開するため不向き",
+      "Jakarta Persistenceの全機能には対応していない（記載のないアノテーション/属性は機能しない）"
+    ]
+  }
+}

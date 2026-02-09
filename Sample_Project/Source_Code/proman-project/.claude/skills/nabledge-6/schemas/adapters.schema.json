@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/adapters.schema.json",
+  "title": "Adapters Knowledge File Schema",
+  "description": "Schema for features/adapters category knowledge files",
+  "type": "object",
+  "required": ["id", "title", "official_doc_urls", "index", "sections"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "official_doc_urls": {
+      "$ref": "common.schema.json#/$defs/officialDocUrls"
+    },
+    "index": {
+      "$ref": "common.schema.json#/$defs/index"
+    },
+    "sections": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "overview": {
+          "type": "object",
+          "properties": {
+            "class_name": {
+              "type": "string",
+              "pattern": "^nablarch\\."
+            },
+            "external_library": {
+              "type": "object",
+              "required": ["name", "version", "url"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["groupId", "artifactId"],
+            "properties": {
+              "groupId": {
+                "type": "string"
+              },
+              "artifactId": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "modules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/moduleInfo"
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "dependencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,476 @@
+{
+  "id": "security",
+  "title": "セキュリティチェック項目",
+  "official_doc_urls": [
+    "システム開発ガイド/設計書/Nablarch機能のセキュリティ対応表.xlsx"
+  ],
+  "index": [
+    {
+      "id": "overview",
+      "hints": [
+        "セキュリティ",
+        "脆弱性",
+        "IPA",
+        "チェック"
+      ]
+    },
+    {
+      "id": "check_items",
+      "hints": [
+        "チェック項目",
+        "セキュリティチェック",
+        "SQLインジェクション",
+        "OSコマンドインジェクション",
+        "パストラバーサル",
+        "セッション管理",
+        "XSS",
+        "CSRF",
+        "HTTPヘッダインジェクション",
+        "メールヘッダインジェクション",
+        "クリックジャッキング"
+      ]
+    }
+  ],
+  "sections": {
+    "overview": {
+      "description": "IPAで公開されている脆弱性の種類ごとにNablarchでの対応状況を記載",
+      "source": "IPA 安全なウェブサイトの作り方",
+      "nablarch_support": "Nablarchで対応できないものについては、プロジェクトで個別に対応を検討。根本的解決となっているものについては必ず対応すること"
+    },
+    "check_items": [
+      {
+        "id": 1,
+        "category": "SQLインジェクション",
+        "explanation": "Nablarchはデータベースアクセス機能として、簡易的なO/Rマッパーを実現するユニバーサルDAOと、JDBCを使いやすくしたJDBCラッパーを提供しています。どちらの機能でもSQL文を外部ファイルに記述し、PreparedStatement を使用したSQL実行の仕組みを提供しており、SQLインジェクションの脆弱性を排除できます。\nまた、使用不許可APIの使用を検出するツールも提供しており、このツールでチェックすることでNablarchの提供するデータベースアクセス以外の方式を検出することが可能です。\n\n上記に加え、HTTPエラー制御ハンドラを使用することでエラーメッセージやスタックトレースがユーザに表示されることを防ぎ、より強固なアプリケーションとすることが可能です。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "SQL文の組み立ては全てプレースホルダで実装する。",
+            "nablarch_feature": "データベースアクセス（JDBCラッパー）\nユニバーサルDAO",
+            "nablarch_support": "〇",
+            "reference": "1-(i)-a",
+            "explanation": "Nablarchはデータベースアクセス機能として、簡易的なO/Rマッパーを実現するユニバーサルDAOと、JDBCを使いやすくしたJDBCラッパーを提供しています。どちらの機能でもSQL文を外部ファイルに記述し、PreparedStatement を使用したSQL実行の仕組みを提供しており、SQLインジェクションの脆弱性を排除できます。\nまた、使用不許可APIの使用を検出するツールも提供しており、このツールでチェックすることでNablarchの提供するデータベースアクセス以外の方式を検出することが可能です。\n\n上記に加え、HTTPエラー制御ハンドラを使用することでエラーメッセージやスタックトレースがユーザに表示されることを防ぎ、より強固なアプリケーションとすることが可能です。"
+          },
+          {
+            "type": "",
+            "description": "SQL文の構成を文字列連結により行う場合は、アプリケーションの変数をSQL文のリテラルとして正しく構成する。",
+            "nablarch_feature": "データベースアクセス（JDBCラッパー）\nユニバーサルDAO",
+            "nablarch_support": "〇",
+            "reference": "1-(i)-b"
+          },
+          {
+            "type": "根本的解決",
+            "description": "ウェブアプリケーションに渡されるパラメータにSQL文を直接指定しない。",
+            "nablarch_feature": "データベースアクセス（JDBCラッパー）\nユニバーサルDAO",
+            "nablarch_support": "〇",
+            "reference": "1-(ii)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "エラーメッセージをそのままブラウザに表示しない。",
+            "nablarch_feature": "HTTPエラー制御ハンドラ",
+            "nablarch_support": "〇",
+            "reference": "1-(iii)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "データベースアカウントに適切な権限を与える。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "1-(iv)"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "category": "OSコマンド・インジェクション",
+        "explanation": "使用不許可APIの使用を検出するツールを提供しています。このツールでチェックすることでRuntimeなどOSコマンドを実行する機能の使用箇所を検出することができます。\nシステムとして一律OSコマンドの使用を禁止する場合は上記の対応で根本的解決が見込めます。\nシステム要件としてOSコマンドの使用が必要な場合には右記の保険的対策をプロジェクトの方式として取り入れるようにしてください。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "シェルを起動できる言語機能の利用を避ける。",
+            "nablarch_feature": "許可していないAPIが使用されていないかチェックする",
+            "nablarch_support": "〇",
+            "reference": "2-(i)",
+            "explanation": "使用不許可APIの使用を検出するツールを提供しています。このツールでチェックすることでRuntimeなどOSコマンドを実行する機能の使用箇所を検出することができます。\nシステムとして一律OSコマンドの使用を禁止する場合は上記の対応で根本的解決が見込めます。\nシステム要件としてOSコマンドの使用が必要な場合には右記の保険的対策をプロジェクトの方式として取り入れるようにしてください。"
+          },
+          {
+            "type": "保険的対策",
+            "description": "シェルを起動できる言語機能を利用する場合は、その引数を構成する全ての変数に対してチェックを行い、あらかじめ許可した処理のみを実行する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "2-(ii)"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "category": "パス名パラメータの未チェック／ディレクトリ・トラバーサル",
+        "explanation": "Nablarchではファイルパス管理機能を提供しています。サーバ内のファイルへのアクセスにこの機能を使用することで、アクセス対象のベースディレクトリを指定することができます。これにより公開するディレクトリが限定されます。同時に、特定の拡張子のファイルのみにアクセスさせることがきます。\nファイル名をユーザに入力させる場合、上記に組み合わせて、入力値チェックで \".\"などの文字を許容しないことでディレクトリトラバーサルを防ぐことが可能となります。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "外部からのパラメータでウェブサーバ内のファイル名を直接指定する実装を避ける。",
+            "nablarch_feature": "ファイルパス管理",
+            "nablarch_support": "〇",
+            "reference": "3-(i)-a",
+            "explanation": "Nablarchではファイルパス管理機能を提供しています。サーバ内のファイルへのアクセスにこの機能を使用することで、アクセス対象のベースディレクトリを指定することができます。これにより公開するディレクトリが限定されます。同時に、特定の拡張子のファイルのみにアクセスさせることがきます。\nファイル名をユーザに入力させる場合、上記に組み合わせて、入力値チェックで \".\"などの文字を許容しないことでディレクトリトラバーサルを防ぐことが可能となります。"
+          },
+          {
+            "type": "",
+            "description": "ファイルを開く際は、固定のディレクトリを指定し、かつファイル名にディレクトリ名が含まれないようにする。",
+            "nablarch_feature": "ファイルパス管理",
+            "nablarch_support": "〇",
+            "reference": "3-(i)-b"
+          },
+          {
+            "type": "保険的対策",
+            "description": "ウェブサーバ内のファイルへのアクセス権限の設定を正しく管理する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "3-(ii)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "ファイル名のチェックを行う。",
+            "nablarch_feature": "入力値のチェック",
+            "nablarch_support": "〇",
+            "reference": "3-(iii)"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "category": "セッション管理の不備",
+        "explanation": "NablarchはHTTPセッションを抽象化したものとしてセッションストア機能を提供しています。\nセッションストアでは以下の機能を提供しており、セッション管理の脆弱性について根本的解決が見込めます。\n　・　セッションを追跡するためセッションIDをCookieに格納します。\n　・　セッションIDには推測困難なUUIDを使用しています。\n　・　セッションストアのデフォルト設定では、HTTPヘッダーのSet-Cookieにsecure属性を設定していません。\n　　　HTTPSを利用する際は設定でsecure属性を指定してください。\n　・　セッション作成ごとにセッションID採番を行っています。\n　・　セッションストアのデフォルト設定では、CookieにMaxAge属性を設定しません。\n　　　そのため、Cookieの有効期限はブラウザが閉じるまでとなります。\n\n4-(iv)についてはNablarchのExampleで提供している、ログイン処理の実装例を参考に、ログイン成功後に新しくセッションを開始するようプロジェクトで対応してください。\n\n",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "セッションIDを推測が困難なものにする。",
+            "nablarch_feature": "セッションストア",
+            "nablarch_support": "〇",
+            "reference": "4-(i)",
+            "explanation": "NablarchはHTTPセッションを抽象化したものとしてセッションストア機能を提供しています。\nセッションストアでは以下の機能を提供しており、セッション管理の脆弱性について根本的解決が見込めます。\n　・　セッションを追跡するためセッションIDをCookieに格納します。\n　・　セッションIDには推測困難なUUIDを使用しています。\n　・　セッションストアのデフォルト設定では、HTTPヘッダーのSet-Cookieにsecure属性を設定していません。\n　　　HTTPSを利用する際は設定でsecure属性を指定してください。\n　・　セッション作成ごとにセッションID採番を行っています。\n　・　セッションストアのデフォルト設定では、CookieにMaxAge属性を設定しません。\n　　　そのため、Cookieの有効期限はブラウザが閉じるまでとなります。\n\n4-(iv)についてはNablarchのExampleで提供している、ログイン処理の実装例を参考に、ログイン成功後に新しくセッションを開始するようプロジェクトで対応してください。\n\n"
+          },
+          {
+            "type": "根本的解決",
+            "description": "セッションIDをURLパラメータに格納しない。",
+            "nablarch_feature": "セッションストア",
+            "nablarch_support": "〇",
+            "reference": "4-(ii)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "HTTPS通信で利用するCookieにはsecure属性を加える。",
+            "nablarch_feature": "セッションストア",
+            "nablarch_support": "〇",
+            "reference": "4-(iii)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "ログイン成功後に、新しくセッションを開始する。",
+            "nablarch_feature": "Nablarch Example",
+            "nablarch_support": "△",
+            "reference": "4-(iv)-a"
+          },
+          {
+            "type": "",
+            "description": "ログイン成功後に、既存のセッションIDとは別に秘密情報を発行し、ページの遷移ごとにその値を確認する。",
+            "nablarch_feature": "4-(iv)-a の対策を実施する",
+            "nablarch_support": "",
+            "reference": "4-(iv)-b"
+          },
+          {
+            "type": "保険的対策",
+            "description": "セッションIDを固定値にしない。",
+            "nablarch_feature": "セッションストア",
+            "nablarch_support": "〇",
+            "reference": "4-(v)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "セッションIDをCookieにセットする場合、有効期限の設定に注意する。",
+            "nablarch_feature": "セッションストア",
+            "nablarch_support": "〇",
+            "reference": "4-(vi)"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "category": "クロスサイト・スクリプティング",
+        "explanation": "Nablarchのカスタムタグはサニタイジングを行います。これによりNablarchのカスタムタグを使った場合には5-(i)の根本的解決が可能です。\nまた、NablarchはJSPで使用を許可する構文とタグを規定し、許可する構文とタグのみを使用していることをチェックするJSP静的解析ツールを提供しています。このツールを使用することでカスタムタグ以外のタグを使用したことによるエスケープ漏れを防止することが可能です。\n\nhttps://nablarch.github.io/docs/LATEST/doc/development_tools/toolbox/JspStaticAnalysis/01_JspStaticAnalysis.html\n\n5-(ii)～(iv)の対策についてはプロジェクトで対応してください。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "ウェブページに出力する全ての要素に対して、エスケープ処理を施す。",
+            "nablarch_feature": "カスタムタグ",
+            "nablarch_support": "〇",
+            "reference": "5-(i)",
+            "explanation": "Nablarchのカスタムタグはサニタイジングを行います。これによりNablarchのカスタムタグを使った場合には5-(i)の根本的解決が可能です。\nまた、NablarchはJSPで使用を許可する構文とタグを規定し、許可する構文とタグのみを使用していることをチェックするJSP静的解析ツールを提供しています。このツールを使用することでカスタムタグ以外のタグを使用したことによるエスケープ漏れを防止することが可能です。\n\nhttps://nablarch.github.io/docs/LATEST/doc/development_tools/toolbox/JspStaticAnalysis/01_JspStaticAnalysis.html\n\n5-(ii)～(iv)の対策についてはプロジェクトで対応してください。"
+          },
+          {
+            "type": "根本的解決",
+            "description": "URLを出力するときは、「http://」や 「https://」で始まるURLのみを許可する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(ii)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "<script>...</script> 要素の内容を動的に生成しない。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(iii)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "スタイルシートを任意のサイトから取り込めるようにしない。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(iv)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "入力値の内容チェックを行う。",
+            "nablarch_feature": "入力値のチェック",
+            "nablarch_support": "〇",
+            "reference": "5-(v)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "入力されたHTMLテキストから構文解析木を作成し、スクリプトを含まない必要な要素のみを抽出する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(vi)",
+            "explanation": "以下のような方法での対応を検討してください。\n\n・OSSのHTMLパーサを使用して入力された値をパースし、使用できないHTMLタグが含まれていないかをバリデーションする\n・簡易的な装飾であれば、利用者にはMarkdownで入力してもらい、 OSSのJavaScriptライブラリを使用してクライアントサイドでMarkdownからHTMLに変換する"
+          },
+          {
+            "type": "保険的対策",
+            "description": "入力されたHTMLテキストから、スクリプトに該当する文字列を排除する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(vii)"
+          },
+          {
+            "type": "根本的解決",
+            "description": "HTTPレスポンスヘッダのContent-Typeフィールドに文字コード（charset）の指定を行う。",
+            "nablarch_feature": "HTTP文字エンコード制御ハンドラ",
+            "nablarch_support": "〇",
+            "reference": "5-(viii)",
+            "explanation": "NablarchはHTTPレスポンスのHTTPヘッダのContent-TypeにMIME Type・文字コードを設定しています。これにより特定のブラウザで発生し得る 5-(i) の対策を回避したクロスサイト・スクリプティングを防ぐことができます。\nまた、Nablarchはセキュリティ関連のヘッダをレスポンスオブジェクトに設定するセキュアハンドラを提供しています。このハンドラにより、ユーザがクロスサイト・スクリプティングの脆弱性対策を無効にしていた場合でもサーバからブラウザの機能を有効にするよう指示することが可能です。"
+          },
+          {
+            "type": "保険的対策",
+            "description": "Cookie情報の漏えい対策として、発行するCookieにHttpOnly属性を加え、TRACEメソッドを無効化する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "5-(ix)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "クロスサイト・スクリプティングの潜在的な脆弱性対策として有効なブラウザの機能を有効にするレスポンスヘッダを返す。",
+            "nablarch_feature": "セキュアハンドラ",
+            "nablarch_support": "〇",
+            "reference": "5-(x)"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "category": "CSRF\n（クロスサイト・リクエスト・フォージェリ）",
+        "explanation": "CSRF対策として、NablarchのCSRF対策機能を使用できます。この機能は一意なトークンを発行し、サーバサイドでチェックすることで不正な画面遷移を防ぎます。\n\nNablarchのHttpSessionを使用した二重サブミット防止機能を使用した場合も、CSRF対策機能と同じ効果が得られCSRF対策として機能します。CSRF対策機能はハンドラを追加するだけで漏れなくチェックできるのに対し、二重サブミット防止機能はアプリケーションプログラマが明示的に実装する必要があり、CSRF対策が洩れる可能性があります。そのため、CSRF対策にはCSRF対策機能の使用を推奨します。\n\nデータベースを使用した二重サブミット防止機能はCSRF対策に対応していません。データベースを使用した二重サブミット防止機能を使用する場合はCSRF対策機能を使用してください。\n",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "処理を実行するページを POST メソッドでアクセスするようにし、その「hidden パラメータ」に秘密情報が挿入されるよう、前のページを自動生成して、実行ページではその値が正しい場合のみ処理を実行する。",
+            "nablarch_feature": "CSRF対策",
+            "nablarch_support": "〇",
+            "reference": "6-(i)-a",
+            "explanation": "CSRF対策として、NablarchのCSRF対策機能を使用できます。この機能は一意なトークンを発行し、サーバサイドでチェックすることで不正な画面遷移を防ぎます。\n\nNablarchのHttpSessionを使用した二重サブミット防止機能を使用した場合も、CSRF対策機能と同じ効果が得られCSRF対策として機能します。CSRF対策機能はハンドラを追加するだけで漏れなくチェックできるのに対し、二重サブミット防止機能はアプリケーションプログラマが明示的に実装する必要があり、CSRF対策が洩れる可能性があります。そのため、CSRF対策にはCSRF対策機能の使用を推奨します。\n\nデータベースを使用した二重サブミット防止機能はCSRF対策に対応していません。データベースを使用した二重サブミット防止機能を使用する場合はCSRF対策機能を使用してください。\n"
+          },
+          {
+            "type": "",
+            "description": "処理を実行する直前のページで再度パスワードの入力を求め、実行ページでは、再度入力されたパスワードが正しい場合のみ処理を実行する。",
+            "nablarch_feature": "6-(i)-a の対策を実施する",
+            "nablarch_support": "",
+            "reference": "6-(i)-b"
+          },
+          {
+            "type": "",
+            "description": "Refererが正しいリンク元かを確認し、正しい場合のみ処理を実行する。",
+            "nablarch_feature": "6-(i)-a の対策を実施する",
+            "nablarch_support": "",
+            "reference": "6-(i)-c"
+          },
+          {
+            "type": "保険的対策",
+            "description": "重要な操作を行った際に、その旨を登録済みのメールアドレスに自動送信する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "6-(ii)"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "category": "HTTPヘッダ・インジェクション",
+        "explanation": "Nablarchでのヘッダ出力はHttpServletResponseのAPIを使用しているため、Nablarchを使用する場合はヘッダにおける改行の扱いをAPIに移譲することでHTTPヘッダ・インジェクションの対策が可能です。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "ヘッダの出力を直接行わず、ウェブアプリケーションの実行環境や言語に用意されているヘッダ出力用APIを使用する。",
+            "nablarch_feature": "Nablarchで提供する機能全般",
+            "nablarch_support": "〇",
+            "reference": "7-(i)-a",
+            "explanation": "Nablarchでのヘッダ出力はHttpServletResponseのAPIを使用しているため、Nablarchを使用する場合はヘッダにおける改行の扱いをAPIに移譲することでHTTPヘッダ・インジェクションの対策が可能です。"
+          },
+          {
+            "type": "",
+            "description": "改行コードを適切に処理するヘッダ出力用APIを利用できない場合は、改行を許可しないよう、開発者自身で適切な処理を実装する。",
+            "nablarch_feature": "7-(i)-a の対策を実施する",
+            "nablarch_support": "",
+            "reference": "7-(i)-b"
+          },
+          {
+            "type": "保険的対策",
+            "description": "外部からの入力の全てについて、改行コードを削除する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "7-(ii)"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "category": "メールヘッダ・インジェクション",
+        "explanation": "Nablarchはメール送信機能を提供しており、メールヘッダインジェクション攻撃への対策をガイドしています。\n　・メールヘッダは固定値を使用する。外部からの入力値を使用しない。\n　・プログラミング言語の標準APIを使用してメール送信を行う。Javaの場合は JavaMail APIを使用する。\n\n8-(ii)についてはプロジェクトで対応してください。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "メールヘッダを固定値にして、外部からの入力はすべてメール本文に出力する。",
+            "nablarch_feature": "メール送信",
+            "nablarch_support": "△",
+            "reference": "8-(i)-a",
+            "explanation": "Nablarchはメール送信機能を提供しており、メールヘッダインジェクション攻撃への対策をガイドしています。\n　・メールヘッダは固定値を使用する。外部からの入力値を使用しない。\n　・プログラミング言語の標準APIを使用してメール送信を行う。Javaの場合は JavaMail APIを使用する。\n\n8-(ii)についてはプロジェクトで対応してください。"
+          },
+          {
+            "type": "",
+            "description": "ウェブアプリケーションの実行環境や言語に用意されているメール送信用APIを使用する（8-(i) を採用できない場合）。",
+            "nablarch_feature": "メール送信",
+            "nablarch_support": "△",
+            "reference": "8-(i)-b"
+          },
+          {
+            "type": "根本的解決",
+            "description": "HTMLで宛先を指定しない。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "8-(ii)"
+          },
+          {
+            "type": "保険的対策",
+            "description": "外部からの入力の全てについて、改行コードを削除する。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "8-(iii)"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "category": "クリックジャッキング",
+        "explanation": "Nablarchはセキュリティ関連のヘッダをレスポンスオブジェクトに設定するセキュアハンドラを提供しています。このハンドラにより、デフォルトで X-Frame-Options: SAMEORIGIN が出力されるため、クリックジャッキング対策が可能です。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "HTTPレスポンスヘッダに、X-Frame-Optionsヘッダフィールドを出力し、他ドメインのサイトからのframe要素やiframe要素による読み込みを制限する。",
+            "nablarch_feature": "セキュアハンドラ",
+            "nablarch_support": "〇",
+            "reference": "9-(i)-a",
+            "explanation": "Nablarchはセキュリティ関連のヘッダをレスポンスオブジェクトに設定するセキュアハンドラを提供しています。このハンドラにより、デフォルトで X-Frame-Options: SAMEORIGIN が出力されるため、クリックジャッキング対策が可能です。"
+          },
+          {
+            "type": "",
+            "description": "処理を実行する直前のページで再度パスワードの入力を求め、実行ページでは、再度入力されたパスワードが正しい場合のみ処理を実行する。",
+            "nablarch_feature": "9-(i)-a の対策を実施する",
+            "nablarch_support": "",
+            "reference": "9-(i)-b"
+          },
+          {
+            "type": "保険的対策",
+            "description": "重要な処理は、一連の操作をマウスのみで実行できないようにする。",
+            "nablarch_feature": "-",
+            "nablarch_support": "×",
+            "reference": "9-(ii)"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "category": "バッファオーバーフロー",
+        "explanation": "NablarchはJavaで記述されているため、言語レベルでバッファオーバーフローの脆弱性はありません。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "直接メモリにアクセスできない言語で記述する。",
+            "nablarch_feature": "Nablarchで提供する機能全般",
+            "nablarch_support": "〇",
+            "reference": "10-(i)-a",
+            "explanation": "NablarchはJavaで記述されているため、言語レベルでバッファオーバーフローの脆弱性はありません。"
+          },
+          {
+            "type": "",
+            "description": "直接メモリにアクセスできる言語で記述する部分を最小限にする。",
+            "nablarch_feature": "Nablarchで提供する機能全般",
+            "nablarch_support": "〇",
+            "reference": "10-(i)-b"
+          },
+          {
+            "type": "根本的解決",
+            "description": "脆弱性が修正されたバージョンのライブラリを使用する。",
+            "nablarch_feature": "Nablarchで提供する機能全般",
+            "nablarch_support": "〇",
+            "reference": "10-(ii)"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "category": "アクセス制御や認可制御の欠落",
+        "explanation": "Nablarchは認証チェックを行う機能を提供していません。NablarchのExampleとして提供している実装例を参考に認証機能を実装してください。\nNablarchは認可チェック機能を提供しています。この機能は、細かく権限を設定できる反面、非常に細かいデータ設計が必要となり、 開発時の生産性低下やリリース後の運用負荷が高まる可能性があります。プロジェクトでは、システム要件に適合する場合に使用してください。",
+        "items": [
+          {
+            "type": "根本的解決",
+            "description": "アクセス制御機能による防御措置が必要とされるウェブサイトには、パスワード等の秘密情報の入力を必要とする認証機能を設ける。",
+            "nablarch_feature": "Nablarch Example",
+            "nablarch_support": "△",
+            "reference": "11-(i)",
+            "explanation": "Nablarchは認証チェックを行う機能を提供していません。NablarchのExampleとして提供している実装例を参考に認証機能を実装してください。\nNablarchは認可チェック機能を提供しています。この機能は、細かく権限を設定できる反面、非常に細かいデータ設計が必要となり、 開発時の生産性低下やリリース後の運用負荷が高まる可能性があります。プロジェクトでは、システム要件に適合する場合に使用してください。"
+          },
+          {
+            "type": "根本的解決",
+            "description": "認証機能に加えて認可制御の処理を実装し、ログイン中の利用者が他人になりすましてアクセスできないようにする。",
+            "nablarch_feature": "認可チェック",
+            "nablarch_support": "〇",
+            "reference": "11-(ii)"
+          }
+        ]
+      }
+    ],
+    "tips": [
+      {
+        "title": "チェック項目の実施方法",
+        "description": "※印のチェック項目は、実施項目のいずれかを実施すればよい（全てを実施する必要はない）"
+      },
+      {
+        "title": "保険的対策の判断",
+        "description": "保険的対策については、システム要件に合わせて対応要否を判断すること。根本的解決が基本だが、実現困難な場合の補完として検討"
+      },
+      {
+        "title": "根本的解決の優先",
+        "description": "根本的解決となっている対策は必ず実施すること。脆弱性の原因そのものを排除する対策であり、セキュリティの基本"
+      }
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/overview.schema.json",
+  "title": "Overview Knowledge File Schema",
+  "description": "Schema for overview category knowledge files",
+  "type": "object",
+  "required": ["id", "title", "official_doc_urls", "index", "sections"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "const": "overview"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "official_doc_urls": {
+      "$ref": "common.schema.json#/$defs/officialDocUrls"
+    },
+    "index": {
+      "$ref": "common.schema.json#/$defs/index"
+    },
+    "sections": {
+      "type": "object",
+      "required": [
+        "identity",
+        "versioning",
+        "requirements",
+        "compatibility",
+        "environment",
+        "architecture",
+        "processing-types",
+        "ecosystem"
+      ],
+      "properties": {
+        "identity": {
+          "type": "object"
+        },
+        "versioning": {
+          "type": "object",
+          "required": ["current", "active_versions"],
+          "properties": {
+            "current": {
+              "type": "object",
+              "required": ["version", "release_date"],
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "release_date": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            },
+            "active_versions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["version", "status", "java", "ee", "maintenance"],
+                "properties": {
+                  "version": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "java": {
+                    "type": "string"
+                  },
+                  "ee": {
+                    "type": "string"
+                  },
+                  "maintenance": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "nablarch6": {
+              "type": "object",
+              "required": ["java", "ee", "build_tool"],
+              "properties": {
+                "java": {
+                  "type": "string"
+                },
+                "ee": {
+                  "type": "string"
+                },
+                "build_tool": {
+                  "type": "string"
+                }
+              }
+            },
+            "nablarch5": {
+              "type": "object",
+              "required": ["java", "ee", "build_tool"],
+              "properties": {
+                "java": {
+                  "type": "string"
+                },
+                "ee": {
+                  "type": "string"
+                },
+                "build_tool": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "compatibility": {
+          "type": "object"
+        },
+        "environment": {
+          "type": "object"
+        },
+        "architecture": {
+          "type": "object"
+        },
+        "processing-types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "description", "use_case"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string"
+              },
+              "use_case": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "ecosystem": {
+          "type": "object",
+          "properties": {
+            "official_contents": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "url", "description", "target"],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,217 @@
+{
+  "id": "ntf-batch-request-test",
+  "title": "NTFバッチリクエスト単体テスト",
+  "official_doc_urls": [
+    "https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/guide/development_guide/06_TestFWGuide/RequestUnitTest_batch.html"
+  ],
+  "index": [
+    {
+      "id": "overview",
+      "hints": ["バッチリクエスト単体テスト", "バッチ処理", "リクエスト単体テスト", "コマンドライン起動", "BatchRequestTestSupport"]
+    },
+    {
+      "id": "test_class",
+      "hints": ["テストクラス", "継承", "@ExtendWith", "JUnit 5", "Extension", "BatchRequestTestSupport"]
+    },
+    {
+      "id": "test_support_classes",
+      "hints": ["StandaloneTestSupportTemplate", "TestShot", "MainForRequestTesting", "FileSupport", "DbAccessTestSupport"]
+    },
+    {
+      "id": "test_execution",
+      "hints": ["execute", "テスト実行", "テストショット", "入力データ準備", "結果確認"]
+    },
+    {
+      "id": "resident_batch_config",
+      "hints": ["常駐バッチ", "RequestThreadLoopHandler", "OneShotLoopHandler", "ハンドラ構成", "テスト用設定"]
+    },
+    {
+      "id": "directive_defaults",
+      "hints": ["ディレクティブ", "デフォルト値", "固定長ファイル", "可変長ファイル", "text-encoding", "record-separator"]
+    }
+  ],
+  "sections": {
+    "overview": {
+      "description": "実際にバッチをコマンドラインから起動したときの動作を擬似的に再現し、テストを行う。",
+      "purpose": "バッチアクションのリクエスト単体テストをサポートし、入力ファイル作成から出力ファイル検証まで自動化する。",
+      "test_target": "バッチ処理（Actionクラス）",
+      "related_files": ["ntf-overview.json", "ntf-test-data.json", "ntf-assertion.json"]
+    },
+    "test_class": {
+      "description": "バッチリクエスト単体テストのテストクラスの作成方法",
+      "junit5_approach": {
+        "inheritance": "継承不要（JUnit 5 Extension使用）",
+        "annotations": ["@ExtendWith(BatchRequestTestExtension.class)"],
+        "required_field": "BatchRequestTestSupport support",
+        "example": "@ExtendWith(PromanBatchRequestExtension.class)\nclass ExportProjectsInPeriodActionRequestTest {\n    PromanBatchRequestTestSupport support;\n\n    @Test\n    void testNormalEnd() {\n        support.execute(support.testName.getMethodName());\n    }\n}",
+        "notes": "JUnit 5のExtension機構を使用することで、継承なしでテスト機能を利用できる。supportフィールドはExtensionによって自動的に初期化される。"
+      },
+      "junit4_approach": {
+        "inheritance": "BatchRequestTestSupportを継承",
+        "example": "public class SampleBatchRequestTest extends BatchRequestTestSupport {\n    @Test\n    public void testNormalEnd() {\n        execute(\"testNormalEnd\");\n    }\n}",
+        "notes": "JUnit 4を使用する場合は、BatchRequestTestSupportクラスを継承する。"
+      }
+    },
+    "test_support_classes": {
+      "description": "バッチリクエスト単体テストで使用する主要なクラス",
+      "classes": [
+        {
+          "name": "StandaloneTestSupportTemplate",
+          "description": "バッチやメッセージング処理などコンテナ外で動作する処理のテスト実行環境を提供する。",
+          "responsibilities": [
+            "テストデータを読み取り、全テストショット(TestShot)を実行"
+          ],
+          "creation_unit": "フレームワーク提供"
+        },
+        {
+          "name": "TestShot",
+          "description": "1テストショットの情報保持とテストショットを実行する。",
+          "responsibilities": [
+            "入力データの準備（データベースのセットアップ）",
+            "メインクラス起動",
+            "出力結果の確認（データベース更新内容確認、ログ出力結果確認、ステータスコード確認）"
+          ],
+          "customization": "入力データ準備や結果確認ロジックはバッチや各種メッセージング処理ごとに異なるので方式に応じたカスタマイズが可能。",
+          "creation_unit": "フレームワーク提供"
+        },
+        {
+          "name": "BatchRequestTestSupport",
+          "description": "バッチ処理テスト用のスーパクラス。TestShotが提供する準備処理、結果確認に入力ファイル作成と出力ファイル確認機能を追加する。",
+          "inheritance": "アプリケーションプログラマは本クラスを継承してテストクラスを作成する（JUnit 4の場合）。JUnit 5の場合はExtensionとして使用。",
+          "additional_features": [
+            "入力ファイルの作成",
+            "出力ファイルの内容確認"
+          ],
+          "benefits": "リクエスト単体テストのテストソース、テストデータを定型化でき、テストソース記述量を大きく削減できる。",
+          "creation_unit": "フレームワーク提供"
+        },
+        {
+          "name": "MainForRequestTesting",
+          "description": "リクエスト単体テスト用のメインクラス。",
+          "differences_from_production": [
+            "テスト用のコンポーネント設定ファイルからシステムリポジトリを初期化する",
+            "常駐化機能を無効化する"
+          ],
+          "creation_unit": "フレームワーク提供"
+        },
+        {
+          "name": "FileSupport",
+          "description": "ファイルに関する操作を提供するクラス。主に入力ファイル作成とファイル内容比較を提供。",
+          "responsibilities": [
+            "テストデータから入力ファイルを作成する",
+            "テストデータの期待値と実際に出力されたファイルの内容を比較する"
+          ],
+          "notes": "ファイルに関する操作は、バッチ処理以外でも必要となるため（例えば、ファイルダウンロード等）、独立したクラスとして提供している。",
+          "creation_unit": "フレームワーク提供"
+        },
+        {
+          "name": "DbAccessTestSupport",
+          "description": "準備データ投入などデータベースを使用するテストに必要な機能を提供する。",
+          "creation_unit": "フレームワーク提供"
+        }
+      ]
+    },
+    "test_execution": {
+      "description": "バッチリクエスト単体テストの実行方法",
+      "method": {
+        "name": "execute",
+        "signature": "support.execute(testCaseName)",
+        "description": "テストケースを実行する。指定されたテストケース名に対応するExcelシートからテストデータを読み込み、TestShotを実行する。",
+        "parameters": [
+          {
+            "name": "testCaseName",
+            "type": "String",
+            "description": "テストケース名（テストメソッド名と同名のExcelシート名）"
+          }
+        ],
+        "return_type": "void"
+      },
+      "test_shot_flow": [
+        "1. Excelシートからテストデータを読み込み",
+        "2. データベースに準備データをセットアップ",
+        "3. 入力ファイルを作成（固定長・可変長）",
+        "4. MainForRequestTestingを使用してバッチを実行",
+        "5. ステータスコードを確認",
+        "6. データベースの更新内容を確認",
+        "7. 出力ファイルの内容を確認",
+        "8. ログ出力結果を確認"
+      ],
+      "naming_convention": "testXxx形式（Xxxはテストシナリオ）。Excelシート名はテストメソッド名と同名にする。"
+    },
+    "resident_batch_config": {
+      "description": "常駐バッチのテスト用ハンドラ構成",
+      "reason": "常駐バッチのテストを実施する際には、プロダクション用ハンドラ構成をテスト用に変更する必要がある。この変更をせずにテストを実施した場合、テスト対象の常駐バッチアプリケーションの処理が終わらないため、テストが正常に実施できなくなる。",
+      "handler_changes": [
+        {
+          "production_handler": "RequestThreadLoopHandler",
+          "test_handler": "OneShotLoopHandler",
+          "change_reason": "RequestThreadLoopHandlerでテストを実施すると、バッチ実行が終わらずにテストコードに制御が戻らなくなるため。OneShotLoopHandlerにハンドラを差し替えることで、テスト実行前にセットアップした要求データを全件処理後にバッチ実行が終了しテストコードに制御が戻るようになる。"
+        }
+      ],
+      "configuration_example": {
+        "production": "<component name=\"requestThreadLoopHandler\" class=\"nablarch.fw.handler.RequestThreadLoopHandler\">\n  <!-- プロパティへの値設定は省略 -->\n</component>",
+        "test": "<component name=\"requestThreadLoopHandler\" class=\"nablarch.test.OneShotLoopHandler\" />",
+        "notes": "プロダクション用設定と同名でコンポーネントを設定し、テスト用のハンドラを使用するように上書きする。"
+      }
+    },
+    "directive_defaults": {
+      "description": "ファイルのディレクティブのデフォルト値設定",
+      "purpose": "ファイルのディレクティブがシステム内である程度統一されている場合、個々のテストデータに同じディレクティブを記載することは冗長である。デフォルトのディレクティブをコンポーネント設定ファイルに記載することで、個々のテストデータではディレクティブの記述を省略できる。",
+      "configuration_names": [
+        {
+          "name": "defaultDirectives",
+          "target": "共通ディレクティブ",
+          "description": "固定長・可変長ファイル共通のデフォルト値"
+        },
+        {
+          "name": "fixedLengthDirectives",
+          "target": "固定長ファイル",
+          "description": "固定長ファイル固有のデフォルト値"
+        },
+        {
+          "name": "variableLengthDirectives",
+          "target": "可変長ファイル",
+          "description": "可変長ファイル固有のデフォルト値"
+        }
+      ],
+      "configuration_example": "<map name=\"defaultDirectives\">\n  <entry key=\"text-encoding\" value=\"Windows-31J\" />\n</map>\n\n<map name=\"fixedLengthDirectives\">\n  <entry key=\"record-separator\" value=\"NONE\"/>\n</map>\n\n<map name=\"variableLengthDirectives\">\n  <entry key=\"quoting-delimiter\" value=\"\" />\n  <entry key=\"record-separator\" value=\"CRLF\"/>\n</map>",
+      "common_directives": [
+        {
+          "key": "text-encoding",
+          "description": "ファイルの文字エンコーディング",
+          "example_value": "Windows-31J"
+        },
+        {
+          "key": "record-separator",
+          "description": "レコード区切り文字",
+          "example_values": ["NONE", "CRLF", "LF"]
+        },
+        {
+          "key": "quoting-delimiter",
+          "description": "引用符（可変長ファイルのみ）",
+          "example_value": "\"\""
+        }
+      ]
+    },
+    "file_data": {
+      "description": "バッチ処理固有のテストデータ",
+      "fixed_length": {
+        "description": "固定長ファイルのテストデータ記述方法",
+        "padding": {
+          "description": "指定したフィールド長に対して、データのバイト長が短い場合、そのフィールドのデータ型に応じたパディングが行われる。",
+          "algorithm": "パディングのアルゴリズムはNablarch Application Framework本体と同様"
+        },
+        "binary_data": {
+          "description": "バイナリデータを表現するには、16進数形式でテストデータを記述する。",
+          "format": "0xプレフィックス付き16進数（例：0x4AD）",
+          "example": "0x4ADと記述した場合、0000 0100 1010 1101（0x04AD）という2バイトのバイト配列に解釈される。",
+          "notes": "プレフィックス0xが付与されていない場合、そのデータを文字列とみなし、その文字列をディレクティブの文字コードでエンコードしてバイト配列に変換する。"
+        }
+      },
+      "variable_length": {
+        "description": "可変長ファイルのテストデータ記述方法",
+        "reference": "batch_request_testを参照"
+      }
+    }
+  }
+}

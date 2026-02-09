@@ -1,0 +1,1082 @@
+# Nablarchバッチ（都度起動型・常駐型）
+
+Nablarchバッチアプリケーションは、DBやファイルに格納されたデータレコード1件ごとに処理を繰り返し実行するバッチ処理を構築するための機能を提供する。javaコマンドから直接起動するスタンドアロンアプリケーションとして実行する。
+
+**機能**:
+
+- 大量データの効率的な処理
+
+- トランザクション制御（コミット間隔の設定）
+
+- マルチスレッド実行による並列処理
+
+- ファイル・データベースからのデータ読み込み
+
+- バリデーション機能
+
+- エラーハンドリング・リラン機能
+
+- 常駐型バッチの定期実行
+
+
+
+**use_cases**:
+
+- ファイルからデータベースへの一括登録
+- データベースからファイルへの一括出力
+- データベース内のデータ更新・変換
+- 定期的なバッチ処理（日次・月次）
+- オンライン処理で作成された要求データの一括処理
+
+**公式ドキュメント**:
+- [Nablarchバッチ（都度起動型・常駐型）](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/nablarch_batch/index.html)
+
+---
+
+## batch-types
+
+**each_time_batch**:
+
+**name**: 都度起動バッチ
+
+**description**: 日次や月次など、定期的にプロセスを起動してバッチ処理を実行する
+
+**use_cases**:
+
+- 定期的なデータ処理（日次・月次）
+- スケジューラからの起動によるバッチ実行
+
+**resident_batch**:
+
+**name**: 常駐バッチ
+
+**description**: プロセスを起動しておき、一定間隔でバッチ処理を実行する。例えば、オンライン処理で作成された要求データを定期的に一括処理するような場合に使用する
+
+**use_cases**:
+
+- オンライン処理で作成された要求データの定期的な一括処理
+- データ監視と定期処理
+
+**important_notes**:
+
+- 常駐バッチは、マルチスレッドで実行しても、処理が遅いスレッドの終了を他のスレッドが待つことにより、要求データの取り込み遅延が発生する可能性がある
+- 新規開発プロジェクトでは、常駐バッチではなく、上記問題が発生しないdb_messagingを使用することを推奨する
+- 既存プロジェクトにおいては、常駐バッチをこのまま稼働させることはできるが、上記問題が発生する可能性がある場合（既に発生している場合）には、db_messagingへの変更を検討すること
+
+---
+
+## architecture
+
+Nablarchバッチアプリケーションはjavaコマンドから直接起動し、システムリポジトリやログの初期化処理を行い、ハンドラキューを実行する
+
+**コンポーネント**:
+
+- **Main**: 
+  - responsibility: Nablarchバッチアプリケーションの起点となるメインクラス。javaコマンドから直接起動し、システムリポジトリやログの初期化処理を行い、ハンドラキューを実行する
+  - classes: nablarch.fw.launcher.Main
+- **Handler Queue**: 
+  - responsibility: リクエストの処理を行うハンドラの連鎖。往路処理、復路処理、例外処理を制御する
+  - classes: nablarch.fw.Handler
+- **DataReader**: 
+  - responsibility: 入力データを読み込み、データレコードを1件ずつ提供する
+  - classes: nablarch.fw.DataReader, nablarch.fw.reader.DatabaseRecordReader, nablarch.fw.reader.FileDataReader, nablarch.fw.reader.ValidatableFileDataReader, nablarch.fw.reader.ResumeDataReader
+- **Action**: 
+  - responsibility: DataReaderを生成し、DataReaderが読み込んだデータレコードを元に業務ロジックを実行し、Resultを返却する
+  - classes: nablarch.fw.action.BatchAction, nablarch.fw.action.FileBatchAction, nablarch.fw.action.NoInputDataBatchAction, nablarch.fw.messaging.action.AsyncMessageSendAction
+- **Form**: 
+  - responsibility: DataReaderが読み込んだデータレコードをマッピングし、バリデーションを行う。プロパティは全てStringで定義する（バイナリ項目を除く）
+  - notes: 外部から連携されるファイルなど、入力データが安全でない場合にバリデーションを行う, データベースなど、入力データが安全な場合は、Formクラスを使用せず、データレコードからEntityクラスを作成する
+- **Entity**: 
+  - responsibility: テーブルと1対1で対応するクラス。カラムに対応するプロパティを持つ
+
+**process_flow**:
+
+- 共通起動ランチャ(Main)がハンドラキューを実行する
+- DataReaderが入力データを読み込み、データレコードを1件ずつ提供する
+- DispatchHandlerが、コマンドライン引数(-requestPath)で指定するリクエストパスを元に処理すべきアクションクラスを特定し、ハンドラキューの末尾に追加する
+- アクションクラスは、FormクラスやEntityクラスを使用して、データレコード1件ごとの業務ロジックを実行する
+- アクションクラスは、処理結果を示すResultを返却する
+- 処理対象データがなくなるまで繰り返す
+- StatusCodeConvertHandlerが、処理結果のステータスコードをプロセス終了コードに変換し、バッチアプリケーションの処理結果としてプロセス終了コードが返される
+
+---
+
+## responsibility
+
+**action**:
+
+**description**: アクションクラスは2つのことを行う
+
+**responsibilities**:
+
+- 入力データの読み込みに使うDataReaderを生成する（createReaderメソッド）
+- DataReaderが読み込んだデータレコードを元に業務ロジックを実行し、Resultを返却する（handleメソッド）
+
+**example**: ファイルの取り込みバッチであれば、業務ロジックとして以下の処理を行う：データレコードからフォームクラスを作成してバリデーションを行う、フォームクラスからエンティティクラスを作成してデータベースにデータを追加する、処理結果としてSuccessを返す
+
+**form**:
+
+**description**: DataReaderが読み込んだデータレコードをマッピングするクラス
+
+**responsibilities**:
+
+- データレコードをバリデーションするためのアノテーションの設定
+- 相関バリデーションのロジックを持つ
+
+**rules**:
+
+- フォームクラスのプロパティは全てStringで定義する（バイナリ項目の場合はバイト配列で定義）
+- 外部から連携されるファイルなど、入力データが安全でない場合に使用する
+- データベースなど、入力データが安全な場合は、フォームクラスを使用せず、データレコードからエンティティクラスを作成して業務ロジックを実行する
+
+**notes**:
+
+- 外部からの入力データによっては、階層構造（formがformを持つ）となる場合もある
+
+**entity**:
+
+**description**: テーブルと1対1で対応するクラス。カラムに対応するプロパティを持つ
+
+---
+
+## request-path
+
+Nablarchバッチアプリケーションでは、コマンドライン引数(-requestPath)で、実行するアクションとリクエストIDを指定する
+
+**example**:
+
+```java
+-requestPath=com.sample.SampleBatchAction/BATCH0001
+```
+
+**format**: -requestPath=アクションのクラス名/リクエストID
+
+**request_id**:
+
+**description**: リクエストIDは、各バッチプロセスの識別子として用いられる
+
+**use_case**: 同一の業務アクションクラスを実行するプロセスを複数起動する場合などは、このリクエストIDが識別子となる
+
+---
+
+## handler-queue-each-time
+
+**db_enabled**:
+
+**description**: 都度起動バッチ（DB接続有り）の最小ハンドラ構成
+
+**handlers**:
+
+- 項目 1:
+  **no**: 1
+
+  **name**: StatusCodeConvertHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: ステータスコードをプロセス終了コードに変換する
+
+  **exception**: 
+
+  **reference**: status_code_convert_handler
+
+- 項目 2:
+  **no**: 2
+
+  **name**: GlobalErrorHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: 
+
+  **exception**: 実行時例外、またはエラーの場合、ログ出力を行う
+
+  **reference**: global_error_handler
+
+- 項目 3:
+  **no**: 3
+
+  **name**: DatabaseConnectionManagementHandler（初期処理/終了処理用）
+
+  **thread**: メイン
+
+  **forward**: DB接続を取得する
+
+  **backward**: DB接続を解放する
+
+  **exception**: 
+
+  **reference**: database_connection_management_handler
+
+- 項目 4:
+  **no**: 4
+
+  **name**: TransactionManagementHandler（初期処理/終了処理用）
+
+  **thread**: メイン
+
+  **forward**: トランザクションを開始する
+
+  **backward**: トランザクションをコミットする
+
+  **exception**: トランザクションをロールバックする
+
+  **reference**: transaction_management_handler
+
+- 項目 5:
+  **no**: 5
+
+  **name**: RequestPathJavaPackageMapping
+
+  **thread**: メイン
+
+  **forward**: コマンドライン引数をもとに呼び出すアクションを決定する
+
+  **backward**: 
+
+  **exception**: 
+
+  **reference**: request_path_java_package_mapping
+
+- 項目 6:
+  **no**: 6
+
+  **name**: MultiThreadExecutionHandler
+
+  **thread**: メイン
+
+  **forward**: サブスレッドを作成し、後続ハンドラの処理を並行実行する
+
+  **backward**: 全スレッドの正常終了まで待機する
+
+  **exception**: 処理中のスレッドが完了するまで待機し起因例外を再送出する
+
+  **reference**: multi_thread_execution_handler
+
+- 項目 7:
+  **no**: 7
+
+  **name**: DatabaseConnectionManagementHandler（業務処理用）
+
+  **thread**: サブ
+
+  **forward**: DB接続を取得する
+
+  **backward**: DB接続を解放する
+
+  **exception**: 
+
+  **reference**: database_connection_management_handler
+
+- 項目 8:
+  **no**: 8
+
+  **name**: LoopHandler
+
+  **thread**: サブ
+
+  **forward**: 業務トランザクションを開始する
+
+  **backward**: コミット間隔毎に業務トランザクションをコミットする。また、データリーダ上に処理対象データが残っていればループを継続する
+
+  **exception**: 業務トランザクションをロールバックする
+
+  **reference**: loop_handler
+
+- 項目 9:
+  **no**: 9
+
+  **name**: DataReadHandler
+
+  **thread**: サブ
+
+  **forward**: データリーダを使用してレコードを1件読み込み、後続ハンドラの引数として渡す。また実行時IDを採番する
+
+  **backward**: 
+
+  **exception**: 読み込んだレコードをログ出力した後、元例外を再送出する
+
+  **reference**: data_read_handler
+
+
+**notes**:
+
+- これは必要最小限のハンドラキュー構成であり、プロジェクト要件に従ってNablarchの標準ハンドラやプロジェクトで作成したカスタムハンドラを追加する
+
+**db_disabled**:
+
+**description**: 都度起動バッチ（DB接続無し）の最小ハンドラ構成。DB接続関連ハンドラが不要であり、ループ制御ハンドラでトランザクション制御が不要
+
+**handlers**:
+
+- 項目 1:
+  **no**: 1
+
+  **name**: StatusCodeConvertHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: ステータスコードをプロセス終了コードに変換する
+
+  **exception**: 
+
+  **reference**: status_code_convert_handler
+
+- 項目 2:
+  **no**: 2
+
+  **name**: GlobalErrorHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: 
+
+  **exception**: 実行時例外、またはエラーの場合、ログ出力を行う
+
+  **reference**: global_error_handler
+
+- 項目 3:
+  **no**: 3
+
+  **name**: RequestPathJavaPackageMapping
+
+  **thread**: メイン
+
+  **forward**: コマンドライン引数をもとに呼び出すアクションを決定する
+
+  **backward**: 
+
+  **exception**: 
+
+  **reference**: request_path_java_package_mapping
+
+- 項目 4:
+  **no**: 4
+
+  **name**: MultiThreadExecutionHandler
+
+  **thread**: メイン
+
+  **forward**: サブスレッドを作成し、後続ハンドラの処理を並行実行する
+
+  **backward**: 全スレッドの正常終了まで待機する
+
+  **exception**: 処理中のスレッドが完了するまで待機し起因例外を再送出する
+
+  **reference**: multi_thread_execution_handler
+
+- 項目 5:
+  **no**: 5
+
+  **name**: DblessLoopHandler
+
+  **thread**: サブ
+
+  **forward**: 
+
+  **backward**: データリーダ上に処理対象データが残っていればループを継続する
+
+  **exception**: 
+
+  **reference**: dbless_loop_handler
+
+- 項目 6:
+  **no**: 6
+
+  **name**: DataReadHandler
+
+  **thread**: サブ
+
+  **forward**: データリーダを使用してレコードを1件読み込み、後続ハンドラの引数として渡す。また実行時IDを採番する
+
+  **backward**: 
+
+  **exception**: 読み込んだレコードをログ出力した後、元例外を再送出する
+
+  **reference**: data_read_handler
+
+
+**notes**:
+
+- これは必要最小限のハンドラキュー構成であり、プロジェクト要件に従ってNablarchの標準ハンドラやプロジェクトで作成したカスタムハンドラを追加する
+
+---
+
+## handler-queue-resident
+
+常駐バッチの最小ハンドラ構成。都度起動バッチに加えて、ThreadContextHandler、ThreadContextClearHandler、RetryHandler、ProcessResidentHandler、ProcessStopHandlerがメインスレッド側に追加されている
+
+**handlers**:
+
+- 項目 1:
+  **no**: 1
+
+  **name**: StatusCodeConvertHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: ステータスコードをプロセス終了コードに変換する
+
+  **exception**: 
+
+  **reference**: status_code_convert_handler
+
+- 項目 2:
+  **no**: 2
+
+  **name**: ThreadContextClearHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: ThreadContextHandlerでスレッドローカル上に設定した値を全て削除する
+
+  **exception**: 
+
+  **reference**: thread_context_clear_handler
+
+- 項目 3:
+  **no**: 3
+
+  **name**: GlobalErrorHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: 
+
+  **exception**: 実行時例外、またはエラーの場合、ログ出力を行う
+
+  **reference**: global_error_handler
+
+- 項目 4:
+  **no**: 4
+
+  **name**: ThreadContextHandler
+
+  **thread**: メイン
+
+  **forward**: コマンドライン引数からリクエストID、ユーザID等のスレッドコンテキスト変数を初期化する
+
+  **backward**: 
+
+  **exception**: 
+
+  **reference**: thread_context_handler
+
+  **notes**:
+
+  - ProcessStopHandlerのために必要
+
+- 項目 5:
+  **no**: 5
+
+  **name**: RetryHandler
+
+  **thread**: メイン
+
+  **forward**: 
+
+  **backward**: 
+
+  **exception**: リトライ可能な実行時例外を捕捉し、かつリトライ上限に達していなければ後続のハンドラを再実行する
+
+  **reference**: retry_handler
+
+- 項目 6:
+  **no**: 6
+
+  **name**: ProcessResidentHandler
+
+  **thread**: メイン
+
+  **forward**: データ監視間隔ごとに後続のハンドラを繰り返し実行する
+
+  **backward**: ループを継続する
+
+  **exception**: ログ出力を行い、実行時例外が送出された場合はリトライ可能例外にラップして送出する。エラーが送出された場合はそのまま再送出する
+
+  **reference**: process_resident_handler
+
+- 項目 7:
+  **no**: 7
+
+  **name**: ProcessStopHandler
+
+  **thread**: メイン
+
+  **forward**: リクエストテーブル上の処理停止フラグがオンであった場合は、後続ハンドラの処理は行なわずにプロセス停止例外(ProcessStop)を送出する
+
+  **backward**: 
+
+  **exception**: 
+
+  **reference**: process_stop_handler
+
+- 項目 8:
+  **no**: 8
+
+  **name**: DatabaseConnectionManagementHandler（初期処理/終了処理用）
+
+  **thread**: メイン
+
+  **forward**: DB接続を取得する
+
+  **backward**: DB接続を解放する
+
+  **exception**: 
+
+  **reference**: database_connection_management_handler
+
+- 項目 9:
+  **no**: 9
+
+  **name**: TransactionManagementHandler（初期処理/終了処理用）
+
+  **thread**: メイン
+
+  **forward**: トランザクションを開始する
+
+  **backward**: トランザクションをコミットする
+
+  **exception**: トランザクションをロールバックする
+
+  **reference**: transaction_management_handler
+
+- 項目 10:
+  **no**: 10
+
+  **name**: RequestPathJavaPackageMapping
+
+  **thread**: メイン
+
+  **forward**: コマンドライン引数をもとに呼び出すアクションを決定する
+
+  **backward**: 
+
+  **exception**: 
+
+  **reference**: request_path_java_package_mapping
+
+- 項目 11:
+  **no**: 11
+
+  **name**: MultiThreadExecutionHandler
+
+  **thread**: メイン
+
+  **forward**: サブスレッドを作成し、後続ハンドラの処理を並行実行する
+
+  **backward**: 全スレッドの正常終了まで待機する
+
+  **exception**: 処理中のスレッドが完了するまで待機し起因例外を再送出する
+
+  **reference**: multi_thread_execution_handler
+
+- 項目 12:
+  **no**: 12
+
+  **name**: DatabaseConnectionManagementHandler（業務処理用）
+
+  **thread**: サブ
+
+  **forward**: DB接続を取得する
+
+  **backward**: DB接続を解放する
+
+  **exception**: 
+
+  **reference**: database_connection_management_handler
+
+- 項目 13:
+  **no**: 13
+
+  **name**: LoopHandler
+
+  **thread**: サブ
+
+  **forward**: 業務トランザクションを開始する
+
+  **backward**: コミット間隔毎に業務トランザクションをコミットする。また、データリーダ上に処理対象データが残っていればループを継続する
+
+  **exception**: 業務トランザクションをロールバックする
+
+  **reference**: loop_handler
+
+- 項目 14:
+  **no**: 14
+
+  **name**: DataReadHandler
+
+  **thread**: サブ
+
+  **forward**: データリーダを使用してレコードを1件読み込み、後続ハンドラの引数として渡す。また実行時IDを採番する
+
+  **backward**: 
+
+  **exception**: 読み込んだレコードをログ出力した後、元例外を再送出する
+
+  **reference**: data_read_handler
+
+
+**notes**:
+
+- 常駐バッチの最小ハンドラ構成は、ThreadContextHandler、ThreadContextClearHandler、RetryHandler、ProcessResidentHandler、ProcessStopHandlerがメインスレッド側に追加されている点を除けば都度起動バッチと同じ
+- これは必要最小限のハンドラキュー構成であり、プロジェクト要件に従ってNablarchの標準ハンドラやプロジェクトで作成したカスタムハンドラを追加する
+
+---
+
+## data-readers
+
+Nablarchでは、バッチアプリケーションを構築するために必要なデータリーダを標準で幾つか提供している
+
+**readers**:
+
+- 項目 1:
+  **name**: DatabaseRecordReader
+
+  **class**: nablarch.fw.reader.DatabaseRecordReader
+
+  **description**: データベースからデータを読み込むデータリーダ
+
+  **use_case**: データベースからレコードを1件ずつ読み込む
+
+- 項目 2:
+  **name**: FileDataReader
+
+  **class**: nablarch.fw.reader.FileDataReader
+
+  **description**: ファイルからデータを読み込むデータリーダ。データへのアクセスにdata_formatを使用している
+
+  **use_case**: ファイルからレコードを1件ずつ読み込む
+
+  **important**: data_bindを使用する場合は、このデータリーダを使用しないこと
+
+- 項目 3:
+  **name**: ValidatableFileDataReader
+
+  **class**: nablarch.fw.reader.ValidatableFileDataReader
+
+  **description**: バリデーション機能付きファイル読み込みデータリーダ。データへのアクセスにdata_formatを使用している
+
+  **use_case**: ファイルからレコードを1件ずつ読み込み、バリデーションを行う
+
+  **important**: data_bindを使用する場合は、このデータリーダを使用しないこと
+
+- 項目 4:
+  **name**: ResumeDataReader
+
+  **class**: nablarch.fw.reader.ResumeDataReader
+
+  **description**: レジューム機能付き読み込みデータリーダ。障害発生ポイントからの再実行ができる
+
+  **use_case**: ファイル入力で障害発生ポイントからの再実行が必要な場合
+
+
+**custom_reader**:
+
+**description**: 上記のデータリーダでプロジェクトの要件を満たせない場合は、DataReaderインタフェースを実装したクラスをプロジェクトで作成して対応する
+
+**interface**: nablarch.fw.DataReader
+
+**methods**:
+
+- **name**: read
+- **signature**: T read(ExecutionContext ctx)
+- **description**: 1件分のデータを返却する。このメソッドで読み込んだデータが業務アクションハンドラへ引き渡される
+- **name**: hasNext
+- **signature**: boolean hasNext(ExecutionContext ctx)
+- **description**: 次のデータの有無を判定する。このメソッドがfalseを返却するとデータの読み込み処理は終了となる
+- **name**: close
+- **signature**: void close(ExecutionContext ctx)
+- **description**: データの読み込み終了後のストリームのclose処理を実装する
+
+---
+
+## actions
+
+Nablarchでは、バッチアプリケーションを構築するために必要なアクションクラスを標準で幾つか提供している
+
+**actions**:
+
+- 項目 1:
+  **name**: BatchAction
+
+  **class**: nablarch.fw.action.BatchAction
+
+  **description**: 汎用的なバッチアクションのテンプレートクラス
+
+  **methods**:
+
+  - **name**: createReader
+  - **signature**: DataReader<TData> createReader(ExecutionContext ctx)
+  - **description**: 使用するDataReaderのインスタンスを返却する
+  - **name**: handle
+  - **signature**: Result handle(TData inputData, ExecutionContext ctx)
+  - **description**: DataReaderから渡された1件分のデータに対する業務ロジックを実装する
+
+- 項目 2:
+  **name**: FileBatchAction
+
+  **class**: nablarch.fw.action.FileBatchAction
+
+  **description**: ファイル入力のバッチアクションのテンプレートクラス。データへのアクセスにdata_formatを使用している
+
+  **important**: data_bindを使用する場合は、このアクションクラスを使用しないこと。他のアクションクラスを使用すること
+
+- **name**: NoInputDataBatchAction
+- **class**: nablarch.fw.action.NoInputDataBatchAction
+- **description**: 入力データを使用しないバッチアクションのテンプレートクラス
+- **name**: AsyncMessageSendAction
+- **class**: nablarch.fw.messaging.action.AsyncMessageSendAction
+- **description**: 応答不要メッセージ送信用のアクションクラス
+
+---
+
+## patterns-file-to-db
+
+ファイルからデータを読み込み、バリデーションを行い、データベースに登録するパターン
+
+**form**: ZipCodeForm.javaを参照。@Csv、@CsvFormat、@Domain、@Required、@LineNumberを使用
+
+**reader**: ZipCodeFileReader.javaを参照。DataReaderインタフェースを実装し、read、hasNext、closeメソッドを実装
+
+**action**: ImportZipCodeFileAction.javaを参照。BatchActionを継承し、createReaderとhandleメソッドを実装
+
+**処理フロー**:
+
+- ファイルを受け付けるフォームクラスを作成する（data_bindを使用）
+- DataReaderの実装クラスを作成する（ファイルを読み込んで一行ずつ業務アクションメソッドへ引き渡す）
+- BatchActionを継承した業務アクションクラスを作成する
+- createReaderメソッドで使用するDataReaderのインスタンスを返却する
+- handleメソッドで、DataReaderから渡された一行分のデータをバリデーションし、データベースに登録する
+
+**name**: FILE to DB パターン
+
+**use_cases**:
+
+- CSVファイルからデータベースへの一括登録
+- 外部システムから連携されたファイルの取り込み
+
+**implementation_points**:
+
+- data_bindを用いてフォームにCSVをバインドするため、@Csvおよび@CsvFormatを付与する
+- bean_validationを実施するために、バリデーション用のアノテーションを付与する
+- 行数プロパティを定義し、ゲッタに@LineNumberを付与することで、対象データが何行目のデータであるかを自動的に設定できる
+- DataReaderのreadメソッドに一行分のデータを返却する処理を実装する
+- DataReaderのhasNextメソッドに次行の有無を判定する処理を実装する
+- DataReaderのcloseメソッドにファイルの読み込み終了後のストリームのclose処理を実装する
+- handleメソッドで、UniversalDao#insertを使用してエンティティをデータベースに登録する
+
+---
+
+## patterns-db-to-file
+
+データベースからデータを読み込み、ファイルに出力するパターン
+
+**処理フロー**:
+
+- DatabaseRecordReaderを使用してデータベースからレコードを読み込む
+- BatchActionを継承した業務アクションクラスを作成する
+- createReaderメソッドでDatabaseRecordReaderのインスタンスを返却する
+- handleメソッドで、読み込んだレコードをファイルに出力する
+
+**name**: DB to FILE パターン
+
+**use_cases**:
+
+- データベースからCSVファイルへの一括出力
+- 外部システムへのデータ連携ファイルの作成
+
+**implementation_points**:
+
+- DatabaseRecordReaderにSQLを設定する
+- ファイル出力にはFileRecordWriterやdata_bindを使用する
+- 大量データの場合は、コミット間隔を適切に設定する
+
+---
+
+## patterns-db-to-db
+
+データベースからデータを読み込み、加工・変換してデータベースに書き込むパターン
+
+**処理フロー**:
+
+- DatabaseRecordReaderを使用してデータベースからレコードを読み込む
+- BatchActionを継承した業務アクションクラスを作成する
+- createReaderメソッドでDatabaseRecordReaderのインスタンスを返却する
+- handleメソッドで、読み込んだレコードを加工・変換し、UniversalDaoを使用してデータベースに更新する
+
+**name**: DB to DB パターン
+
+**use_cases**:
+
+- データベース内のデータ更新・変換
+- 集計処理・マスタメンテナンス
+
+**implementation_points**:
+
+- DatabaseRecordReaderにSQLを設定する
+- UniversalDao#update、UniversalDao#insertなどを使用してデータベースに更新する
+- 大量データの場合は、コミット間隔を適切に設定する
+
+---
+
+## multithread
+
+バッチ処理をマルチスレッドで並列実行することで、処理性能を向上させる
+
+**handler**:
+
+**name**: MultiThreadExecutionHandler
+
+**class**: nablarch.fw.handler.MultiThreadExecutionHandler
+
+**description**: サブスレッドを作成し、後続ハンドラの処理を並行実行する
+
+**reference**: multi_thread_execution_handler
+
+**configuration**:
+
+**thread_count**:
+
+**description**: 並列実行するスレッド数を設定する
+
+**note**: スレッド数はCPUコア数やDB接続数を考慮して設定する
+
+**notes**:
+
+- マルチスレッドで実行されるバッチについては、アプリケーション側でスレッドセーフであることを保証する必要がある
+
+---
+
+## transaction-control
+
+バッチ処理のコミット間隔を制御する
+
+**handler**:
+
+**name**: LoopHandler
+
+**class**: nablarch.fw.handler.LoopHandler
+
+**description**: 業務トランザクションを開始し、コミット間隔毎に業務トランザクションをコミットする。また、データリーダ上に処理対象データが残っていればループを継続する
+
+**reference**: loop_handler
+
+**configuration**:
+
+**commit_interval**:
+
+**description**: コミット間隔（処理件数）を設定する
+
+**reference**: loop_handler-commit_interval
+
+**callback**:
+
+**description**: 処理成功や失敗時にステータスを変更する場合、LoopHandlerのコールバック機能を使用する
+
+**reference**: loop_handler-callback
+
+---
+
+## error-handling
+
+**rerun**:
+
+**title**: バッチ処理をリランできるようにする
+
+**description**: Nablarchバッチアプリケーションでは、ファイル入力を除き、バッチ処理をリランできるようにする機能を提供していない
+
+**approach**: 処理対象レコードにステータスを持たせ、処理成功や失敗時にステータスを変更するといった、アプリケーションでの設計と実装が必要となる
+
+**file_input**:
+
+**description**: ファイル入力については、ResumeDataReader（レジューム機能付き読み込み）を使用することで、障害発生ポイントからの再実行ができる
+
+**class**: nablarch.fw.reader.ResumeDataReader
+
+**reference**: loop_handler-callback
+
+**continue**:
+
+**title**: バッチ処理でエラー発生時に処理を継続する
+
+**description**: エラー発生時の処理継続は、常駐バッチのみ対応している。都度起動バッチは対応していない
+
+**approach**: 常駐バッチでは、TransactionAbnormalEndを送出すると、RetryHandlerにより処理が継続される。ただし、バッチ処理がリランできるようになっている必要がある
+
+**exception**: nablarch.fw.results.TransactionAbnormalEnd
+
+**note**: 都度起動バッチでTransactionAbnormalEndが送出されると、バッチ処理が異常終了となる
+
+**abnormal_end**:
+
+**title**: バッチ処理を異常終了にする
+
+**description**: アプリケーションでエラーを検知した場合に、処理を継続せずにバッチ処理を異常終了させたい場合がある
+
+**approach**: Nablarchバッチアプリケーションでは、ProcessAbnormalEndを送出すると、バッチ処理を異常終了にできる。ProcessAbnormalEndが送出された場合、プロセス終了コードはこのクラスに指定された値となる
+
+**exception**: nablarch.fw.launcher.ProcessAbnormalEnd
+
+---
+
+## pessimistic-lock
+
+Nablarchバッチアプリケーションで悲観的ロックを行うための実装方法。ロック時間が短縮され他プロセスへの影響を抑えることができる
+
+SampleAction.javaを参照
+
+**reader**: DatabaseRecordReaderで主キーのみ取得する
+
+**handle**: handleメソッド内でUniversalDao.findBySqlFileを使用して悲観的ロックを行う
+
+**approach**:
+
+- データリーダでは処理対象レコードの主キーのみ取得する
+- handleメソッド内で悲観的ロックを行う
+
+**reference**: universal_dao_jpa_pessimistic_lock
+
+---
+
+## state-retention
+
+バッチアプリケーションの実行中の状態（登録件数や更新件数など）を保持する
+
+**approach**: バッチアクション内で状態を保持することで対応する
+
+**multithread**:
+
+**description**: マルチスレッドで実行されるバッチについては、アプリケーション側でスレッドセーフであることを保証する必要がある
+
+**example**: AtomicIntegerを使用してスレッドセーフを保証する
+
+**execution_context**:
+
+**description**: ExecutionContextのスコープを使用して同じことが実現できるが、どのような値を保持しているかが分かりづらいデメリットがある
+
+**recommendation**: ExecutionContextを使用するのではなく、バッチアクション側で状態を保持することを推奨する
+
+**scopes**:
+
+**request_scope**: スレッドごとに状態を保持する領域
+
+**session_scope**: バッチ全体の状態を保持する領域
+
+---
+
+## multi-process
+
+常駐バッチアプリケーションのマルチプロセス化
+
+**approach**: 基本的にはデータベースをキューとしたメッセージングのマルチプロセス化(db_messaging-multiple_process)と同様
+
+**action_implementation**:
+
+**description**: Actionの実装についてはデータベースをキューとしたメッセージングとは異なる
+
+**points**:
+
+- プロセスIDを生成する（例: UUIDを使用）
+- 自身が悲観ロックした未処理データを抽出するDatabaseRecordReaderを作成する
+- DatabaseRecordReaderがデータ抽出前に行うコールバック処理に、悲観ロックSQLを実行する処理を登録する
+- コールバック処理は別トランザクションで実行する必要がある
+
+**listener**:
+
+**interface**: DatabaseRecordListener
+
+**method**: beforeReadRecords
+
+**description**: DatabaseRecordReaderがデータ抽出前に実行するコールバック処理
+
+**custom_reader**:
+
+**description**: Readerを自作している場合には、悲観ロック後に処理対象データを抽出するようにするとよい
+
+---
+
+## configuration
+
+**system_repository**:
+
+**description**: システムリポジトリの初期化は、アプリケーション起動時にシステムリポジトリの設定ファイルのパスを指定することで行う
+
+**reference**: main-run_application
+
+**launch**:
+
+**description**: Nablarchバッチアプリケーションの起動方法
+
+**command**: java -cp ... nablarch.fw.launcher.Main -requestPath=<action class>/<request id> -diConfig=<config file> -userId=<user id>
+
+**parameters**:
+
+- **name**: requestPath
+- **description**: 実行するアクションとリクエストIDを指定する。形式: アクションのクラス名/リクエストID
+- **required**: True
+- **name**: diConfig
+- **description**: システムリポジトリの設定ファイルのパスを指定する
+- **required**: True
+- **name**: userId
+- **description**: 実行ユーザIDを指定する
+- **required**: False
+
+---
+
+## anti-patterns
+
+| パターン | 理由 | 正しい方法 |
+|----------|------|------------|
+| FileDataReaderまたはValidatableFileDataReaderをdata_bindと併用する | FileDataReaderとValidatableFileDataReaderは、データへのアクセスにdata_formatを使用している。data_bindを使用する場合は、これらのデータリーダを使用しないこと | data_bindを使用する場合は、DataReaderインタフェースを実装したカスタムデータリーダを作成するか、他のアクションクラスを使用する |
+| FileBatchActionをdata_bindと併用する | FileBatchActionは、データへのアクセスにdata_formatを使用している。data_bindを使用する場合は、このアクションクラスを使用しないこと | data_bindを使用する場合は、BatchActionや他のアクションクラスを使用する |
+| フォームクラスのプロパティをString以外で定義する | Bean Validationの要件により、フォームクラスのプロパティは全てStringで定義する必要がある（バイナリ項目を除く） | フォームクラスのプロパティは全てStringで定義する。バイナリ項目の場合はバイト配列で定義する |
+| データベースなど安全な入力データに対してもフォームクラスを使用する | フォームクラスは外部から連携されるファイルなど、入力データが安全でない場合にバリデーションを行うために使用する | データベースなど、入力データが安全な場合は、フォームクラスを使用せず、データレコードからエンティティクラスを作成して業務ロジックを実行する |
+| 新規開発で常駐バッチを採用する | 常駐バッチは、マルチスレッドで実行しても、処理が遅いスレッドの終了を他のスレッドが待つことにより、要求データの取り込み遅延が発生する可能性がある | 新規開発プロジェクトでは、常駐バッチではなく、上記問題が発生しないdb_messagingを使用することを推奨する |
+| ExecutionContextを使用して状態を保持する | ExecutionContextを使用した場合、どのような値を保持しているかが分かりづらいデメリットがある | ExecutionContextを使用するのではなく、バッチアクション側で状態を保持することを推奨する |
+| 悲観的ロックをデータリーダで行う | データリーダで悲観的ロックを行うと、ロック時間が長くなり他プロセスへの影響が大きい | データリーダでは処理対象レコードの主キーのみ取得し、handleメソッド内で悲観的ロックを行う。これによりロック時間が短縮され他プロセスへの影響を抑えることができる |
+| 都度起動バッチでTransactionAbnormalEndを送出してエラー継続を期待する | 都度起動バッチは、エラー発生時の処理継続に対応していない。TransactionAbnormalEndが送出されると、バッチ処理が異常終了となる | エラー発生時の処理継続は、常駐バッチのみ対応している。常駐バッチでTransactionAbnormalEndを送出すると、RetryHandlerにより処理が継続される |
+
+---
+
+## errors
+
+| 例外 | 原因 | 対処 |
+|------|------|------|
+| `nablarch.fw.results.TransactionAbnormalEnd` | トランザクションの異常終了を示す例外 |  |
+| `nablarch.fw.launcher.ProcessAbnormalEnd` | プロセスの異常終了を示す例外 |  |
+| `nablarch.fw.handler.ProcessStopHandler.ProcessStop` | プロセスの停止を示す例外 |  |
+
+**nablarch.fw.results.TransactionAbnormalEnd**:
+
+使用ケース: 常駐バッチでエラー発生時に処理を継続する場合に送出する
+
+動作: 常駐バッチでは、RetryHandlerにより処理が継続される。都度起動バッチでは、バッチ処理が異常終了となる
+
+**nablarch.fw.launcher.ProcessAbnormalEnd**:
+
+使用ケース: アプリケーションでエラーを検知した場合に、処理を継続せずにバッチ処理を異常終了させる場合に送出する
+
+動作: バッチ処理が異常終了となる。プロセス終了コードはこのクラスに指定された値となる
+
+**nablarch.fw.handler.ProcessStopHandler.ProcessStop**:
+
+使用ケース: ProcessStopHandlerがリクエストテーブル上の処理停止フラグがオンであることを検知した場合に送出される
+
+動作: 後続ハンドラの処理は行なわずにプロセスが停止する
+
+---

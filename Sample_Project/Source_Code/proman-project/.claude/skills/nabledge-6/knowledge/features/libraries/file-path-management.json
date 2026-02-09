@@ -1,0 +1,198 @@
+{
+  "id": "file-path-management",
+  "title": "ファイルパス管理",
+  "official_doc_urls": [
+    "https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/file_path_management.html"
+  ],
+  "index": [
+    {
+      "id": "overview",
+      "hints": [
+        "FilePathSetting",
+        "ファイルパス管理",
+        "論理名",
+        "ディレクトリ管理"
+      ]
+    },
+    {
+      "id": "configuration",
+      "hints": [
+        "basePathSettings",
+        "fileExtensions",
+        "file",
+        "classpath",
+        "スキーム"
+      ]
+    },
+    {
+      "id": "usage",
+      "hints": [
+        "getFileWithoutCreate",
+        "getBaseDirectory",
+        "論理名",
+        "ファイルパス取得"
+      ]
+    },
+    {
+      "id": "anti-patterns",
+      "hints": [
+        "classpath",
+        "JBoss",
+        "Wildfly",
+        "vfs",
+        "スペース"
+      ]
+    },
+    {
+      "id": "tips",
+      "hints": [
+        "拡張子なし",
+        "論理名複数",
+        "filePathSetting"
+      ]
+    },
+    {
+      "id": "limitations",
+      "hints": [
+        "制約事項",
+        "注意事項",
+        "制限"
+      ]
+    }
+  ],
+  "sections": {
+    "overview": {
+      "classes": [
+        "nablarch.core.util.FilePathSetting"
+      ],
+      "annotations": [],
+      "description": "システムで使用するファイルの入出力先のディレクトリや拡張子を管理するための機能を提供する",
+      "purpose": "ディレクトリや拡張子を論理名で管理し、ファイルの入出力を行う機能では論理名を指定するだけでそのディレクトリ配下のファイルに対する入出力を実現できる",
+      "modules": [
+        {
+          "groupId": "com.nablarch.framework",
+          "artifactId": "nablarch-core"
+        }
+      ],
+      "features": [
+        "ディレクトリを論理名で管理できる",
+        "拡張子を論理名で管理できる",
+        "論理名を指定するだけでファイルの入出力が可能"
+      ]
+    },
+    "configuration": {
+      "component_name": "filePathSetting",
+      "component_class": "nablarch.core.util.FilePathSetting",
+      "properties": [
+        {
+          "name": "basePathSettings",
+          "type": "Map<String, String>",
+          "required": true,
+          "description": "ディレクトリの論理名とパスのマッピング。キーは論理名、値はファイルパス（スキーム付き）",
+          "notes": [
+            "スキームは file と classpath が使用できる",
+            "省略した場合は classpath となる",
+            "classpathスキームの場合、そのパスがディレクトリとして存在している必要がある（jarなどのアーカイブされたファイル内のパスは指定できない）",
+            "パスにはスペースを含めない（スペースが含まれているパスは指定できない）"
+          ]
+        },
+        {
+          "name": "fileExtensions",
+          "type": "Map<String, String>",
+          "required": false,
+          "description": "拡張子の論理名と拡張子のマッピング。キーは論理名、値は拡張子",
+          "notes": [
+            "1つのディレクトリに対して複数の拡張子を設定する場合には、論理名を複数設定する",
+            "拡張子のないファイルの場合には、その論理名の拡張子設定を省略する"
+          ]
+        }
+      ],
+      "xml_example": "<component name=\"filePathSetting\" class=\"nablarch.core.util.FilePathSetting\">\n  <!-- ディレクトリの設定 -->\n  <property name=\"basePathSettings\">\n    <map>\n      <entry key=\"csv-input\" value=\"file:/var/nablarch/input\" />\n      <entry key=\"csv-output\" value=\"file:/var/nablarch/output\" />\n      <entry key=\"dat-input\" value=\"file:/var/nablarch/input\" />\n      <entry key=\"fixed-file-input\" value=\"file:/var/nablarch/input\" />\n    </map>\n  </property>\n\n  <!-- 拡張子の設定 -->\n  <property name=\"fileExtensions\">\n    <map>\n      <entry key=\"csv-input\" value=\"csv\" />\n      <entry key=\"csv-output\" value=\"csv\" />\n      <entry key=\"dat-input\" value=\"dat\" />\n      <!-- fixed-file-inputは拡張子が存在しないので、拡張子の設定は行わない -->\n    </map>\n  </property>\n</component>",
+      "configuration_points": [
+        "FilePathSettingのコンポーネント名は filePathSetting とすること（固定）",
+        "basePathSettingsにディレクトリを設定する",
+        "fileExtensionsに拡張子を設定する",
+        "1つのディレクトリに対して複数の拡張子を設定する場合には、論理名を複数設定する",
+        "拡張子のないファイルの場合には、その論理名の拡張子設定を省略する"
+      ]
+    },
+    "usage": {
+      "methods": [
+        {
+          "name": "getFileWithoutCreate",
+          "signature": "public File getFileWithoutCreate(String logicalPathName, String fileName)",
+          "description": "論理名とファイル名から、ファイルパスを取得する。ファイルが存在しない場合でも、ファイルオブジェクトを生成して返す",
+          "parameters": [
+            {
+              "name": "logicalPathName",
+              "type": "String",
+              "description": "論理名"
+            },
+            {
+              "name": "fileName",
+              "type": "String",
+              "description": "ファイル名（拡張子なし）"
+            }
+          ],
+          "returns": "Fileオブジェクト（ディレクトリパス + ファイル名 + 拡張子）",
+          "example": "// /var/nablarch/input/users.csv\nFile users = filePathSetting.getFileWithoutCreate(\"csv-input\", \"users\");\n\n// /var/nablarch/input/users (拡張子なし)\nFile users = filePathSetting.getFileWithoutCreate(\"fixed-file-input\", \"users\");"
+        },
+        {
+          "name": "getBaseDirectory",
+          "signature": "public File getBaseDirectory(String logicalPathName)",
+          "description": "論理名からベースディレクトリのパスを取得する",
+          "parameters": [
+            {
+              "name": "logicalPathName",
+              "type": "String",
+              "description": "論理名"
+            }
+          ],
+          "returns": "Fileオブジェクト（ディレクトリパス）",
+          "example": "// /var/nablarch/output\nFile csvOutputDir = filePathSetting.getBaseDirectory(\"csv-output\");"
+        }
+      ],
+      "typical_usage": "論理名を使ってファイルパスを取得し、ファイル入出力処理に渡す。環境ごとに異なるディレクトリパスをコンポーネント設定ファイルで切り替えることで、コードを変更せずに複数環境に対応できる"
+    },
+    "anti-patterns": [
+      {
+        "pattern": "classpathスキームを使用してウェブアプリケーションサーバ（JBoss、Wildfly等）で実行する",
+        "reason": "一部のウェブアプリケーションサーバでは本機能を使用できない。これは、ウェブアプリケーションサーバが独自のファイルシステム（例: JbossやWildflyのvfsというバーチャルファイルシステム）を使用して、クラスパス配下のリソースなどを管理していることに起因する",
+        "correct": "fileスキームを使用する（classpathスキームではなくfileスキームを使用することを推奨）"
+      },
+      {
+        "pattern": "パスにスペースを含める",
+        "reason": "スペースが含まれているパスは指定できない（仕様上の制限）",
+        "correct": "スペースを含まないパスを使用する"
+      },
+      {
+        "pattern": "jarなどのアーカイブされたファイル内のパスをclasspathスキームで指定する",
+        "reason": "classpathスキームの場合、そのパスがディレクトリとして存在している必要がある（アーカイブされたファイル内のパスは指定できない）",
+        "correct": "ディレクトリとして存在するパスを指定するか、fileスキームを使用する"
+      }
+    ],
+    "tips": [
+      {
+        "title": "拡張子のないファイルの扱い",
+        "description": "拡張子のないファイルの場合には、その論理名のfileExtensions設定を省略する。getFileWithoutCreateメソッドを呼び出すと、拡張子なしのファイルパスが取得できる"
+      },
+      {
+        "title": "1つのディレクトリに対する複数の拡張子の設定",
+        "description": "1つのディレクトリに対して複数の拡張子を設定する場合には、論理名を複数設定する。例えば、csv-inputとdat-inputで同じディレクトリを指定し、それぞれ異なる拡張子を設定する"
+      },
+      {
+        "title": "コンポーネント名の固定",
+        "description": "FilePathSettingのコンポーネント名は filePathSetting とすること（固定）。この名前でコンポーネントを登録することで、フレームワークが自動的に参照できる"
+      },
+      {
+        "title": "スキームのデフォルト動作",
+        "description": "スキームを省略した場合は classpath となる。ただし、classpathスキームには制限があるため、fileスキームの使用を推奨"
+      }
+    ],
+    "limitations": [
+      "classpathスキームを使用した場合、一部のウェブアプリケーションサーバ（JBoss、Wildfly等）では本機能を使用できない",
+      "classpathスキームの場合、そのパスがディレクトリとして存在している必要がある（jarなどのアーカイブされたファイル内のパスは指定できない）",
+      "パスにはスペースを含めない（スペースが含まれているパスは指定できない）"
+    ]
+  }
+}

@@ -1,0 +1,915 @@
+{
+  "id": "data-bind",
+  "title": "データバインド",
+  "official_doc_urls": [
+    "https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/data_io/data_bind.html"
+  ],
+  "index": [
+    {
+      "id": "overview",
+      "hints": [
+        "データバインド",
+        "CSV",
+        "固定長",
+        "Java Beans",
+        "Map",
+        "ObjectMapper",
+        "ObjectMapperFactory"
+      ]
+    },
+    {
+      "id": "modules",
+      "hints": [
+        "モジュール",
+        "依存関係",
+        "nablarch-common-databind",
+        "nablarch-fw-web-extension",
+        "Maven"
+      ]
+    },
+    {
+      "id": "csv_format_beans",
+      "hints": [
+        "CSVフォーマット",
+        "@Csv",
+        "@CsvFormat",
+        "Csv.CsvType",
+        "フィールド区切り",
+        "ヘッダ行"
+      ]
+    },
+    {
+      "id": "csv_format_map",
+      "hints": [
+        "CsvDataBindConfig",
+        "withProperties",
+        "withHeaderTitles",
+        "プロパティ名",
+        "ヘッダタイトル"
+      ]
+    },
+    {
+      "id": "fixed_length_format_beans",
+      "hints": [
+        "固定長フォーマット",
+        "@FixedLength",
+        "@Field",
+        "offset",
+        "length",
+        "パディング",
+        "Lpad",
+        "Rpad",
+        "fillChar"
+      ]
+    },
+    {
+      "id": "fixed_length_format_map",
+      "hints": [
+        "FixedLengthDataBindConfig",
+        "FixedLengthDataBindConfigBuilder",
+        "singleLayout",
+        "field設定"
+      ]
+    },
+    {
+      "id": "multi_layout",
+      "hints": [
+        "マルチレイアウト",
+        "複数フォーマット",
+        "MultiLayout",
+        "RecordIdentifier",
+        "@Record",
+        "multiLayout属性"
+      ]
+    },
+    {
+      "id": "formatter",
+      "hints": [
+        "フォーマット",
+        "日付フォーマット",
+        "数値フォーマット",
+        "表示形式",
+        "format機能"
+      ]
+    },
+    {
+      "id": "extension",
+      "hints": [
+        "拡張",
+        "ファイル形式追加",
+        "ObjectMapper実装",
+        "ObjectMapperFactory継承",
+        "カスタムフォーマット"
+      ]
+    },
+    {
+      "id": "csv_format_sets",
+      "hints": [
+        "フォーマットセット",
+        "DEFAULT",
+        "RFC4180",
+        "EXCEL",
+        "TSV",
+        "クォートモード",
+        "NORMAL",
+        "ALL"
+      ]
+    },
+    {
+      "id": "anti-patterns",
+      "hints": [
+        "NGパターン",
+        "非推奨",
+        "注意事項",
+        "String型定義",
+        "スレッドセーフ"
+      ]
+    },
+    {
+      "id": "errors",
+      "hints": [
+        "例外",
+        "エラー",
+        "InvalidDataFormatException",
+        "型変換エラー",
+        "フォーマット不正"
+      ]
+    },
+    {
+      "id": "tips",
+      "hints": [
+        "Tips",
+        "ベストプラクティス",
+        "try-with-resources",
+        "null値出力",
+        "行番号制限"
+      ]
+    },
+    {
+      "id": "usage",
+      "hints": [
+        "使用方法",
+        "ファイル読み込み",
+        "ファイル書き込み",
+        "Java Beans",
+        "Map",
+        "ObjectMapper"
+      ]
+    },
+    {
+      "id": "limitations",
+      "hints": [
+        "制約事項",
+        "注意事項",
+        "制限"
+      ]
+    }
+  ],
+  "sections": {
+    "overview": {
+      "classes": [
+        "nablarch.common.databind.ObjectMapper",
+        "nablarch.common.databind.ObjectMapperFactory",
+        "nablarch.common.databind.DataBindConfig",
+        "nablarch.core.beans.BeanUtil"
+      ],
+      "annotations": [
+        "@Csv",
+        "@CsvFormat",
+        "@FixedLength",
+        "@Field",
+        "@LineNumber",
+        "@Record",
+        "@Lpad",
+        "@Rpad"
+      ],
+      "description": "CSVやTSV、固定長といったデータをJava BeansオブジェクトまたはMapオブジェクトとして扱う機能を提供する。データファイルとJavaオブジェクト間の双方向変換をサポートする。",
+      "purpose": "データファイルのデータをオブジェクト指向的に扱い、CSV/TSV/固定長ファイルの読み書きを簡潔に実装できるようにする。アノテーションまたはDataBindConfigでフォーマットを定義することで、様々な形式のファイルに対応可能。",
+      "features": [
+        "データをJava Beansオブジェクトとして扱える（BeanUtilによる自動型変換）",
+        "データをMapオブジェクトとして扱える（値は全てString型）",
+        "フォーマット指定はアノテーションまたはDataBindConfigで定義",
+        "CSV/TSV/固定長ファイルをサポート",
+        "複数フォーマットを持つ固定長ファイル（マルチレイアウト）に対応",
+        "論理行番号の取得が可能（@LineNumber）",
+        "Bean Validationとの連携による入力値チェック",
+        "ファイルダウンロード/アップロード機能との連携"
+      ],
+      "modules": [
+        "com.nablarch.framework:nablarch-common-databind"
+      ]
+    },
+    "modules": {
+      "dependencies": [
+        {
+          "groupId": "com.nablarch.framework",
+          "artifactId": "nablarch-common-databind",
+          "required": true,
+          "description": "データバインド機能のコアモジュール"
+        },
+        {
+          "groupId": "com.nablarch.framework",
+          "artifactId": "nablarch-fw-web-extension",
+          "required": false,
+          "description": "ファイルダウンロード機能を使用する場合に必要"
+        }
+      ]
+    },
+    "usage": {
+      "methods": [
+        {
+          "name": "ObjectMapperFactory.create (Java Beans読み込み用)",
+          "signature": "public static <T> ObjectMapper<T> create(Class<T> entityClass, InputStream inputStream)",
+          "description": "Java Beansクラスにバインドしてデータを読み込むためのObjectMapperを生成する。Java Beansクラスに定義されたアノテーションをもとにフォーマットを決定する。",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "バインド対象のJava Beansクラス"
+            },
+            {
+              "name": "inputStream",
+              "type": "InputStream",
+              "description": "読み込み元のストリーム"
+            }
+          ],
+          "returns": "ObjectMapper<T> - データ読み込み用のマッパー",
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        // 処理\n    }\n}"
+        },
+        {
+          "name": "ObjectMapperFactory.create (Java Beans書き込み用)",
+          "signature": "public static <T> ObjectMapper<T> create(Class<T> entityClass, OutputStream outputStream)",
+          "description": "Java Beansオブジェクトをデータファイルに書き込むためのObjectMapperを生成する。Java Beansクラスに定義されたアノテーションをもとにフォーマットを決定する。",
+          "parameters": [
+            {
+              "name": "entityClass",
+              "type": "Class<T>",
+              "description": "バインド対象のJava Beansクラス"
+            },
+            {
+              "name": "outputStream",
+              "type": "OutputStream",
+              "description": "書き込み先のストリーム"
+            }
+          ],
+          "returns": "ObjectMapper<T> - データ書き込み用のマッパー",
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, outputStream)) {\n    for (Person person : personList) {\n        mapper.write(person);\n    }\n}"
+        },
+        {
+          "name": "ObjectMapperFactory.create (Map読み込み用)",
+          "signature": "public static <T> ObjectMapper<T> create(Class<T> clazz, InputStream inputStream, DataBindConfig config)",
+          "description": "Mapオブジェクトにバインドしてデータを読み込むためのObjectMapperを生成する。DataBindConfigで指定したフォーマット設定をもとにデータを読み込む。",
+          "parameters": [
+            {
+              "name": "clazz",
+              "type": "Class<T>",
+              "description": "Map.classを指定"
+            },
+            {
+              "name": "inputStream",
+              "type": "InputStream",
+              "description": "読み込み元のストリーム"
+            },
+            {
+              "name": "config",
+              "type": "DataBindConfig",
+              "description": "フォーマット設定（CsvDataBindConfigまたはFixedLengthDataBindConfig）"
+            }
+          ],
+          "returns": "ObjectMapper<Map> - Map形式でのデータ読み込み用マッパー",
+          "example": "DataBindConfig config = CsvDataBindConfig.DEFAULT.withHeaderTitles(\"年齢\", \"名前\")\n                                                 .withProperties(\"age\", \"name\");\ntry (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, inputStream, config)) {\n    Map person;\n    while ((person = mapper.read()) != null) {\n        // 処理\n    }\n}"
+        },
+        {
+          "name": "ObjectMapperFactory.create (Map書き込み用)",
+          "signature": "public static <T> ObjectMapper<T> create(Class<T> clazz, OutputStream outputStream, DataBindConfig config)",
+          "description": "Mapオブジェクトをデータファイルに書き込むためのObjectMapperを生成する。DataBindConfigで指定したフォーマット設定をもとにデータを書き込む。",
+          "parameters": [
+            {
+              "name": "clazz",
+              "type": "Class<T>",
+              "description": "Map.classを指定"
+            },
+            {
+              "name": "outputStream",
+              "type": "OutputStream",
+              "description": "書き込み先のストリーム"
+            },
+            {
+              "name": "config",
+              "type": "DataBindConfig",
+              "description": "フォーマット設定（CsvDataBindConfigまたはFixedLengthDataBindConfig）"
+            }
+          ],
+          "returns": "ObjectMapper<Map> - Map形式でのデータ書き込み用マッパー",
+          "example": "DataBindConfig config = CsvDataBindConfig.DEFAULT.withHeaderTitles(\"年齢\", \"名前\")\n                                                 .withProperties(\"age\", \"name\");\ntry (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, outputStream, config)) {\n    for (Map<String, Object> person : personList) {\n        mapper.write(person);\n    }\n}"
+        },
+        {
+          "name": "ObjectMapper.read",
+          "signature": "public T read() throws IOException, InvalidDataFormatException",
+          "description": "データファイルから1データずつ読み込み、Java BeansまたはMapオブジェクトとして返却する。全データ読み込み後はnullを返す。",
+          "parameters": [],
+          "returns": "T - 読み込んだデータのオブジェクト（全データ読み込み後はnull）",
+          "throws": [
+            "IOException - I/Oエラー発生時",
+            "InvalidDataFormatException - データフォーマット不正時"
+          ],
+          "example": "Person person;\nwhile ((person = mapper.read()) != null) {\n    // Java Beansオブジェクトごとの処理\n}"
+        },
+        {
+          "name": "ObjectMapper.write",
+          "signature": "public void write(T object) throws IOException",
+          "description": "Java BeansまたはMapオブジェクトの内容をデータファイルに1データずつ書き込む。プロパティ値がnullの場合は空文字が出力される。",
+          "parameters": [
+            {
+              "name": "object",
+              "type": "T",
+              "description": "書き込むオブジェクト（Java BeansまたはMap）"
+            }
+          ],
+          "returns": "void",
+          "throws": [
+            "IOException - I/Oエラー発生時"
+          ],
+          "example": "for (Person person : personList) {\n    mapper.write(person);\n}"
+        },
+        {
+          "name": "ObjectMapper.close",
+          "signature": "public void close() throws IOException",
+          "description": "ObjectMapperが使用しているリソースを解放する。全データの読み込み・書き込み完了後に必ず呼び出すこと。try-with-resourcesを使用することで自動的にクローズ処理が実行される。",
+          "parameters": [],
+          "returns": "void",
+          "throws": [
+            "IOException - I/Oエラー発生時"
+          ],
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    // 処理\n} // 自動的にclose()が呼ばれる"
+        }
+      ],
+      "typical_usage": {
+        "file_to_bean": {
+          "description": "データファイルを先頭から1データずつ読み込み、Java Beansオブジェクトとして取得する。Java Beansクラスに定義されたアノテーションをもとにデータを読み込む。読み込み時にBeanUtilを使用して自動的に型変換が行われ、型変換に失敗した場合は例外が発生する。",
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        // Java Beansオブジェクトごとの処理を記述\n    }\n} catch (InvalidDataFormatException e) {\n    // 読み込んだデータのフォーマットが不正な場合の処理を記述\n}"
+        },
+        "bean_to_file": {
+          "description": "Java Beansオブジェクトの内容をデータファイルに1データずつ書き込む。Java Beansクラスに定義されたアノテーションをもとにデータを書き込む。プロパティの値がnullの場合は未入力を表す値（CSVファイルの場合は空文字）が出力される。",
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, outputStream)) {\n    for (Person person : personList) {\n        mapper.write(person);\n    }\n}"
+        },
+        "file_to_map": {
+          "description": "データファイルを先頭から1データずつ読み込み、Mapオブジェクトとして取得する。DataBindConfigの設定値をもとにデータを読み込む。Mapオブジェクトへの変換時、値は全てString型で格納される。",
+          "example": "DataBindConfig config = CsvDataBindConfig.DEFAULT.withHeaderTitles(\"年齢\", \"名前\")\n                                                 .withProperties(\"age\", \"name\");\ntry (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, inputStream, config)) {\n    Map person;\n    while ((person = mapper.read()) != null) {\n        // Mapオブジェクトごとの処理を記述\n    }\n} catch (InvalidDataFormatException e) {\n    // 読み込んだデータのフォーマットが不正な場合の処理を記述\n}"
+        },
+        "map_to_file": {
+          "description": "Mapオブジェクトの内容をデータファイルに1データずつ書き込む。DataBindConfigの設定値をもとにデータを書き込む。Mapオブジェクトのvalue値がnullの場合は未入力を表す値（CSVファイルの場合は空文字）が出力される。",
+          "example": "DataBindConfig config = CsvDataBindConfig.DEFAULT.withHeaderTitles(\"年齢\", \"名前\")\n                                                 .withProperties(\"age\", \"name\");\ntry (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, outputStream, config)) {\n    for (Map<String, Object> person : personList) {\n        mapper.write(person);\n    }\n}"
+        },
+        "line_number": {
+          "description": "ファイルのデータをJava Beansオブジェクトとして取得する際、Java Beansクラスにプロパティを定義して@LineNumberアノテーションを使用することで、データの論理行番号も一緒に取得できる。入力値チェック時にバリデーションエラーが発生したデータの行番号をログに出力したい場合などに使用する。",
+          "example": "// Java Beansクラスの定義\nprivate Long lineNumber;\n\n@LineNumber\npublic Long getLineNumber() {\n    return lineNumber;\n}\n\n// 使用例\ntry (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        System.out.println(\"行番号: \" + person.getLineNumber());\n        // 処理\n    }\n}",
+          "note": "Mapオブジェクトとして取得する場合は、データの行番号を取得できない点に注意すること。"
+        },
+        "validation": {
+          "description": "データをJava Beansオブジェクトとして読み込むことができるため、Bean Validationによる入力値チェックを行うことができる。",
+          "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        // 入力値チェックを実行\n        ValidatorUtil.validate(person);\n        // 後続の処理\n    }\n} catch (InvalidDataFormatException e) {\n    // データファイルのフォーマット不正時の処理を記述\n}"
+        },
+        "file_download": {
+          "description": "ウェブアプリケーションで、Java Beansオブジェクトの内容をデータファイルとしてダウンロードする。データをメモリ上に展開すると大量データのダウンロード時などにメモリを圧迫する恐れがあるため、一時ファイルに出力する。FileResponseオブジェクト生成時にデータファイルを指定し、レスポンスにContent-Type及びContent-Dispositionを設定する。",
+          "example": "public HttpResponse download(HttpRequest request, ExecutionContext context) {\n    // 業務処理\n\n    final Path path = Files.createTempFile(null, null);\n    try (ObjectMapper<Person> mapper =\n            ObjectMapperFactory.create(Person.class, Files.newOutputStream(path))) {\n        for (Person person : persons) {\n            mapper.write(BeanUtil.createAndCopy(PersonDto.class, person));\n        }\n    }\n\n    // ファイルをボディに設定する。\n    FileResponse response = new FileResponse(path.toFile(), true);\n\n    // Content-Typeヘッダ、Content-Dispositionヘッダを設定する\n    response.setContentType(\"text/csv; charset=Shift_JIS\");\n    response.setContentDisposition(\"person.csv\");\n\n    return response;\n}",
+          "points": [
+            "データをメモリ上に展開すると大量データのダウンロード時などにメモリを圧迫する恐れがあるため、一時ファイルに出力する",
+            "FileResponseのコンストラクタの第二引数にtrueを指定すると、リクエスト処理の終了時に自動的にファイルを削除する",
+            "レスポンスにContent-Type及びContent-Dispositionを設定する"
+          ]
+        },
+        "upload_file": {
+          "description": "ウェブアプリケーションで、画面からアップロードされたデータファイルをJava Beansオブジェクトとして読み込む。PartInfo#getInputStreamを使用してアップロードファイルのストリームを取得し、不正なデータが入力されている可能性があるため、Bean Validationを使用して入力チェックを行う。",
+          "example": "List<PartInfo> partInfoList = request.getPart(\"uploadFile\");\nif (partInfoList.isEmpty()) {\n    // アップロードファイルが見つからない場合の処理を記述\n}\n\nPartInfo partInfo = partInfoList.get(0);\ntry (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, partInfo.getInputStream())) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        // 入力値チェックを実行\n        ValidatorUtil.validate(person);\n        // 後続の処理は省略\n    }\n} catch (InvalidDataFormatException e) {\n    // データファイルのフォーマット不正時の処理を記述\n}",
+          "points": [
+            "PartInfo#getInputStreamを使用して、アップロードファイルのストリームを取得する",
+            "不正なデータが入力されている可能性があるため、Bean Validationを使用して入力チェックを行う"
+          ]
+        }
+      }
+    },
+    "csv_format_beans": {
+      "description": "Java BeansクラスにバインドしてCSVファイルを扱う場合、@Csvおよび@CsvFormatアノテーションを使用してフォーマットを指定する。CSVファイルのフォーマットは予め用意したフォーマットセットの中から選択できる。フォーマットセットのいずれにも当てはまらない場合は、@CsvFormatを使用して個別にフォーマットを指定できる。",
+      "annotations": [
+        {
+          "name": "@Csv",
+          "class": "nablarch.common.databind.csv.Csv",
+          "attributes": [
+            {
+              "name": "type",
+              "type": "Csv.CsvType",
+              "required": true,
+              "description": "CSVフォーマットのタイプ（DEFAULT, RFC4180, EXCEL, TSV, CUSTOM）"
+            },
+            {
+              "name": "properties",
+              "type": "String[]",
+              "required": true,
+              "description": "バインドするプロパティ名の配列（CSV項目順）"
+            },
+            {
+              "name": "headers",
+              "type": "String[]",
+              "required": false,
+              "description": "ヘッダタイトルの配列（CSV項目順）"
+            }
+          ],
+          "example": "@Csv(type = Csv.CsvType.DEFAULT, properties = {\"age\", \"name\"}, headers = {\"年齢\", \"氏名\"})\npublic class Person {\n    private Integer age;\n    private String name;\n    // getter、setterは省略\n}"
+        },
+        {
+          "name": "@CsvFormat",
+          "class": "nablarch.common.databind.csv.CsvFormat",
+          "description": "CSVフォーマットが予め用意したフォーマットセットのいずれにも当てはまらない場合に、個別にフォーマットを指定する。@CsvのtypeにCUSTOMを指定する必要がある。",
+          "attributes": [
+            {
+              "name": "fieldSeparator",
+              "type": "char",
+              "required": false,
+              "default": ",",
+              "description": "列区切り文字"
+            },
+            {
+              "name": "lineSeparator",
+              "type": "String",
+              "required": false,
+              "default": "\\r\\n",
+              "description": "行区切り文字"
+            },
+            {
+              "name": "quote",
+              "type": "char",
+              "required": false,
+              "default": "\"",
+              "description": "フィールド囲み文字"
+            },
+            {
+              "name": "ignoreEmptyLine",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "空行を無視するか"
+            },
+            {
+              "name": "requiredHeader",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "ヘッダ行が必須か"
+            },
+            {
+              "name": "charset",
+              "type": "String",
+              "required": false,
+              "default": "UTF-8",
+              "description": "文字コード"
+            },
+            {
+              "name": "quoteMode",
+              "type": "CsvDataBindConfig.QuoteMode",
+              "required": false,
+              "default": "NORMAL",
+              "description": "クォートモード（NORMAL, ALL）"
+            },
+            {
+              "name": "emptyToNull",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "空文字をnullとして扱うか"
+            }
+          ],
+          "example": "@Csv(type = Csv.CsvType.CUSTOM, properties = {\"age\", \"name\"})\n@CsvFormat(\n        fieldSeparator = '\\t',\n        lineSeparator = \"\\r\\n\",\n        quote = '\\'',\n        ignoreEmptyLine = false,\n        requiredHeader = false,\n        charset = \"UTF-8\",\n        quoteMode = CsvDataBindConfig.QuoteMode.ALL,\n        emptyToNull = true)\npublic class Person {\n    private Integer age;\n    private String name;\n    // getter、setterは省略\n}"
+        }
+      ],
+      "note": "Java Beansクラスにバインドする場合、フォーマット指定はアノテーションで行うため、ObjectMapperの生成時にDataBindConfigを使用したフォーマットの指定はできない。"
+    },
+    "csv_format_map": {
+      "description": "MapクラスにバインドしてCSVファイルを扱う場合、ObjectMapperの生成時にCsvDataBindConfigを使用してフォーマットを指定する。CsvDataBindConfig#withPropertiesで設定したプロパティ名がMapオブジェクトのキーとして使用される。CSVにヘッダ行が存在する場合は、プロパティ名の設定を省略することでヘッダタイトルをキーとして使用できる。",
+      "class": "nablarch.common.databind.csv.CsvDataBindConfig",
+      "methods": [
+        {
+          "name": "withProperties",
+          "signature": "public CsvDataBindConfig withProperties(String... properties)",
+          "description": "プロパティ名を設定する。設定したプロパティ名がMapオブジェクトのキーとして使用される。",
+          "parameters": [
+            {
+              "name": "properties",
+              "type": "String...",
+              "description": "プロパティ名（CSV項目順）"
+            }
+          ],
+          "returns": "CsvDataBindConfig"
+        },
+        {
+          "name": "withHeaderTitles",
+          "signature": "public CsvDataBindConfig withHeaderTitles(String... headerTitles)",
+          "description": "ヘッダタイトルを設定する。",
+          "parameters": [
+            {
+              "name": "headerTitles",
+              "type": "String...",
+              "description": "ヘッダタイトル（CSV項目順）"
+            }
+          ],
+          "returns": "CsvDataBindConfig"
+        }
+      ],
+      "example": "// ヘッダタイトル、プロパティ名はCSVの項目順と一致するように定義する\nDataBindConfig config = CsvDataBindConfig.DEFAULT.withHeaderTitles(\"年齢\", \"名前\")\n                                                 .withProperties(\"age\", \"name\");\nObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, outputStream, config);",
+      "point": "ヘッダタイトル、プロパティ名はCSVの項目順と一致するように定義すること"
+    },
+    "fixed_length_format_beans": {
+      "description": "Java Beansクラスにバインドして固定長ファイルを扱う場合、@FixedLengthおよび@Fieldアノテーションを使用してフォーマットを指定する。各フィールドに対し、パディングやトリム等を変換するコンバータ（@Lpad, @Rpad等）を指定できる。未使用領域が存在するフォーマットの場合、固定長ファイルへの書き込み時にFixedLength#fillCharに設定した文字で自動的にパディングされる。",
+      "annotations": [
+        {
+          "name": "@FixedLength",
+          "class": "nablarch.common.databind.fixedlength.FixedLength",
+          "attributes": [
+            {
+              "name": "length",
+              "type": "int",
+              "required": true,
+              "description": "1レコードの長さ（バイト数）"
+            },
+            {
+              "name": "charset",
+              "type": "String",
+              "required": false,
+              "default": "UTF-8",
+              "description": "文字コード"
+            },
+            {
+              "name": "lineSeparator",
+              "type": "String",
+              "required": false,
+              "default": "\\r\\n",
+              "description": "行区切り文字"
+            },
+            {
+              "name": "fillChar",
+              "type": "char",
+              "required": false,
+              "default": " (半角スペース)",
+              "description": "未使用領域のパディング文字"
+            },
+            {
+              "name": "multiLayout",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "複数フォーマットを持つファイルか"
+            }
+          ],
+          "example": "@FixedLength(length = 19, charset = \"MS932\", lineSeparator = \"\\r\\n\")\npublic class Person {\n    @Field(offset = 1, length = 3)\n    @Lpad\n    private Integer age;\n\n    @Field(offset = 4, length = 16)\n    @Rpad\n    private String name;\n    // getter、setterは省略\n}"
+        },
+        {
+          "name": "@Field",
+          "class": "nablarch.common.databind.fixedlength.Field",
+          "attributes": [
+            {
+              "name": "offset",
+              "type": "int",
+              "required": true,
+              "description": "フィールドの開始位置（1始まり）"
+            },
+            {
+              "name": "length",
+              "type": "int",
+              "required": true,
+              "description": "フィールドの長さ（バイト数）"
+            }
+          ]
+        },
+        {
+          "name": "@Lpad",
+          "class": "nablarch.common.databind.fixedlength.converter.Lpad",
+          "description": "左詰めでパディング（読み込み時はトリム）を行うコンバータ"
+        },
+        {
+          "name": "@Rpad",
+          "class": "nablarch.common.databind.fixedlength.converter.Rpad",
+          "description": "右詰めでパディング（読み込み時はトリム）を行うコンバータ"
+        }
+      ],
+      "converters": [
+        "nablarch.common.databind.fixedlength.converter.Lpad - 左詰めパディング",
+        "nablarch.common.databind.fixedlength.converter.Rpad - 右詰めパディング",
+        "その他のコンバータはnablarch.common.databind.fixedlength.converterパッケージ配下を参照"
+      ],
+      "example": "@FixedLength(length = 24, charset = \"MS932\", lineSeparator = \"\\r\\n\", fillChar = '0')\npublic class Person {\n    @Field(offset = 1, length = 3)\n    @Lpad\n    private Integer age;\n\n    @Field(offset = 9, length = 16)\n    @Rpad\n    private String name;\n    // getter、setterは省略\n}",
+      "note": "未使用領域（offset 4-8）は、fillCharに設定した文字（この例では'0'）で自動的にパディングされる。"
+    },
+    "fixed_length_format_map": {
+      "description": "Mapクラスにバインドして固定長ファイルを扱う場合、ObjectMapperの生成時にFixedLengthDataBindConfigを使用してフォーマットを指定する。FixedLengthDataBindConfigは、FixedLengthDataBindConfigBuilderを使用して生成できる。",
+      "class": "nablarch.common.databind.fixedlength.FixedLengthDataBindConfig",
+      "builder_class": "nablarch.common.databind.fixedlength.FixedLengthDataBindConfigBuilder",
+      "methods": [
+        {
+          "name": "newBuilder",
+          "signature": "public static FixedLengthDataBindConfigBuilder newBuilder()",
+          "description": "ビルダーのインスタンスを生成する",
+          "returns": "FixedLengthDataBindConfigBuilder"
+        },
+        {
+          "name": "length",
+          "signature": "public FixedLengthDataBindConfigBuilder length(int length)",
+          "description": "1レコードの長さを設定する",
+          "parameters": [
+            {
+              "name": "length",
+              "type": "int",
+              "description": "1レコードの長さ（バイト数）"
+            }
+          ],
+          "returns": "FixedLengthDataBindConfigBuilder"
+        },
+        {
+          "name": "charset",
+          "signature": "public FixedLengthDataBindConfigBuilder charset(Charset charset)",
+          "description": "文字コードを設定する",
+          "parameters": [
+            {
+              "name": "charset",
+              "type": "Charset",
+              "description": "文字コード"
+            }
+          ],
+          "returns": "FixedLengthDataBindConfigBuilder"
+        },
+        {
+          "name": "lineSeparator",
+          "signature": "public FixedLengthDataBindConfigBuilder lineSeparator(String lineSeparator)",
+          "description": "行区切り文字を設定する",
+          "parameters": [
+            {
+              "name": "lineSeparator",
+              "type": "String",
+              "description": "行区切り文字"
+            }
+          ],
+          "returns": "FixedLengthDataBindConfigBuilder"
+        },
+        {
+          "name": "singleLayout",
+          "signature": "public SingleLayoutBuilder singleLayout()",
+          "description": "シングルレイアウト（単一フォーマット）の設定を開始する",
+          "returns": "SingleLayoutBuilder"
+        },
+        {
+          "name": "field",
+          "signature": "public SingleLayoutBuilder field(String name, int offset, int length, FieldConverter converter)",
+          "description": "フィールドを定義する",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "String",
+              "description": "フィールド名（Mapのキーとして使用）"
+            },
+            {
+              "name": "offset",
+              "type": "int",
+              "description": "開始位置（1始まり）"
+            },
+            {
+              "name": "length",
+              "type": "int",
+              "description": "長さ（バイト数）"
+            },
+            {
+              "name": "converter",
+              "type": "FieldConverter",
+              "description": "コンバータ（Lpad.Converter, Rpad.RpadConverter等）"
+            }
+          ],
+          "returns": "SingleLayoutBuilder"
+        },
+        {
+          "name": "build",
+          "signature": "public DataBindConfig build()",
+          "description": "FixedLengthDataBindConfigを生成する",
+          "returns": "DataBindConfig"
+        }
+      ],
+      "example": "final DataBindConfig config = FixedLengthDataBindConfigBuilder\n        .newBuilder()\n        .length(19)\n        .charset(Charset.forName(\"MS932\"))\n        .lineSeparator(\"\\r\\n\")\n        .singleLayout()\n        .field(\"age\", 1, 3, new Lpad.Converter('0'))\n        .field(\"name\", 4, 16, new Rpad.RpadConverter(' '))\n        .build();\n\nfinal ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, outputStream, config);"
+    },
+    "multi_layout": {
+      "description": "複数のフォーマットを持つ固定長ファイルに対応する。Java BeansクラスまたはMapクラスにバインドできる。",
+      "beans_approach": {
+        "description": "フォーマットごとにJava Beansクラスを定義し、それらのJava Beansクラスをプロパティとして持つMultiLayoutの継承クラスを作成する。",
+        "class": "nablarch.common.databind.fixedlength.MultiLayout",
+        "steps": [
+          "フォーマットごとにJava Beansクラスを定義する",
+          "上記のフォーマットを定義したJava Beansクラスをプロパティとして持つMultiLayoutの継承クラスを定義する",
+          "MultiLayoutの継承クラスに@FixedLengthアノテーションを設定し、multiLayout属性にtrueを設定する",
+          "MultiLayout#getRecordIdentifierメソッドをオーバーライドして、対象のデータがどのフォーマットに紐づくかを識別するRecordIdentifierの実装クラスを返却する"
+        ],
+        "annotations": [
+          {
+            "name": "@Record",
+            "class": "nablarch.common.databind.fixedlength.Record",
+            "description": "フォーマットを表すJava Beansクラスのプロパティに付与する"
+          }
+        ],
+        "example": "@FixedLength(length = 20, charset = \"MS932\", lineSeparator = \"\\r\\n\", multiLayout = true)\npublic class Person extends MultiLayout {\n    @Record\n    private Header header;\n\n    @Record\n    private Data data;\n\n    @Override\n    public RecordIdentifier getRecordIdentifier() {\n        return new RecordIdentifier() {\n            @Override\n            public RecordName identifyRecordName(byte[] record) {\n                return record[0] == 0x31 ? RecordType.HEADER : RecordType.DATA;\n            }\n        };\n    }\n    // getter、setterは省略\n}\n\npublic class Header {\n    @Field(offset = 1, length = 1)\n    private Long id;\n\n    @Rpad\n    @Field(offset = 2, length = 19)\n    private String field;\n    // getter、setterは省略\n}\n\npublic class Data {\n    @Field(offset = 1, length = 1)\n    private Long id;\n\n    @Lpad\n    @Field(offset = 2, length = 3)\n    private Long age;\n\n    @Rpad\n    @Field(offset = 5, length = 16)\n    private String name;\n    // getter、setterは省略\n}\n\nenum RecordType implements MultiLayoutConfig.RecordName {\n    HEADER {\n        @Override\n        public String getRecordName() {\n            return \"header\";\n        }\n    },\n    DATA {\n        @Override\n        public String getRecordName() {\n            return \"data\";\n        }\n    }\n}",
+        "usage_read": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    final Person person = mapper.read();\n    if (RecordType.HEADER == person.getRecordName()) {\n        final Header header = person.getHeader();\n        // 後続の処理は省略\n    }\n}",
+        "usage_write": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, outputStream)) {\n    final Person person = new Person();\n    person.setHeader(new Header(\"1\", \"test\"));\n    mapper.write(person);\n}"
+      },
+      "map_approach": {
+        "description": "FixedLengthDataBindConfigBuilderのmultiLayoutメソッドを使用して複数フォーマットを定義する。",
+        "methods": [
+          {
+            "name": "multiLayout",
+            "signature": "public MultiLayoutBuilder multiLayout()",
+            "description": "マルチレイアウト用のDataBindConfigを生成する",
+            "returns": "MultiLayoutBuilder"
+          },
+          {
+            "name": "record",
+            "signature": "public RecordBuilder record(String recordName)",
+            "description": "レコードタイプを定義する",
+            "parameters": [
+              {
+                "name": "recordName",
+                "type": "String",
+                "description": "レコード名"
+              }
+            ],
+            "returns": "RecordBuilder"
+          },
+          {
+            "name": "recordIdentifier",
+            "signature": "public MultiLayoutBuilder recordIdentifier(RecordIdentifier recordIdentifier)",
+            "description": "対象のデータがどのフォーマットに紐づくかを識別するRecordIdentifierを設定する",
+            "parameters": [
+              {
+                "name": "recordIdentifier",
+                "type": "RecordIdentifier",
+                "description": "レコード識別子の実装"
+              }
+            ],
+            "returns": "MultiLayoutBuilder"
+          }
+        ],
+        "example": "final DataBindConfig config = FixedLengthDataBindConfigBuilder\n        .newBuilder()\n        .length(20)\n        .charset(Charset.forName(\"MS932\"))\n        .lineSeparator(\"\\r\\n\")\n        .multiLayout()\n        .record(\"header\")\n        .field(\"id\", 1, 1, new DefaultConverter())\n        .field(\"field\", 2, 19, new Rpad.RpadConverter(' '))\n        .record(\"data\")\n        .field(\"id\", 1, 1, new DefaultConverter())\n        .field(\"age\", 2, 3, new Lpad.LpadConverter('0'))\n        .field(\"name\", 5, 16, new Rpad.RpadConverter(' '))\n        .recordIdentifier(new RecordIdentifier() {\n            @Override\n            public RecordName identifyRecordName(byte[] record) {\n                return record[0] == 0x31 ? RecordType.HEADER : RecordType.DATA;\n            }\n        })\n        .build();",
+        "usage_read": "try (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, inputStream, config)) {\n    final Map<String, ?> map = mapper.read();\n    if (RecordType.HEADER == map.get(\"recordName\")) {\n        final Map<String, ?> header = map.get(\"header\");\n        // 後続の処理は省略\n    }\n}",
+        "usage_write": "try (ObjectMapper<Map> mapper = ObjectMapperFactory.create(Map.class, outputStream, config)) {\n    final Map<String, ?> header = new HashMap<>();\n    header.put(\"id\", \"1\");\n    header.put(\"field\", \"test\");\n\n    final Map<String, ?> map = new HashMap<>();\n    map.put(\"recordName\", RecordType.HEADER);\n    map.put(\"header\", header);\n\n    mapper.write(map);\n}"
+      }
+    },
+    "formatter": {
+      "description": "データを出力する際に、format機能を使用することで日付や数値などのデータの表示形式をフォーマットできる。",
+      "reference": "詳細はformat機能のドキュメントを参照すること。"
+    },
+    "extension": {
+      "description": "Java Beansクラスにバインドできるファイル形式を追加する方法",
+      "steps": [
+        {
+          "step": 1,
+          "description": "指定した形式のファイルとJava Beansクラスをバインドさせるため、ObjectMapperの実装クラスを作成する"
+        },
+        {
+          "step": 2,
+          "description": "ObjectMapperFactoryを継承したクラスを作成し、先ほど作成したObjectMapperの実装クラスを生成する処理を追加する"
+        },
+        {
+          "step": 3,
+          "description": "ObjectMapperFactoryの継承クラスをコンポーネント設定ファイルに設定する。コンポーネント名はobjectMapperFactoryとすること。",
+          "example": "<component name=\"objectMapperFactory\" class=\"sample.SampleObjectMapperFactory\" />"
+        }
+      ]
+    },
+    "csv_format_sets": {
+      "description": "デフォルトで提供しているCSVファイルのフォーマットセット及び設定値",
+      "format_sets": [
+        {
+          "name": "DEFAULT",
+          "fieldSeparator": "カンマ(,)",
+          "lineSeparator": "改行(\\r\\n)",
+          "quote": "ダブルクォート(\")",
+          "ignoreEmptyLine": true,
+          "requiredHeader": true,
+          "charset": "UTF-8",
+          "quoteMode": "NORMAL"
+        },
+        {
+          "name": "RFC4180",
+          "fieldSeparator": "カンマ(,)",
+          "lineSeparator": "改行(\\r\\n)",
+          "quote": "ダブルクォート(\")",
+          "ignoreEmptyLine": false,
+          "requiredHeader": false,
+          "charset": "UTF-8",
+          "quoteMode": "NORMAL"
+        },
+        {
+          "name": "EXCEL",
+          "fieldSeparator": "カンマ(,)",
+          "lineSeparator": "改行(\\r\\n)",
+          "quote": "ダブルクォート(\")",
+          "ignoreEmptyLine": false,
+          "requiredHeader": false,
+          "charset": "UTF-8",
+          "quoteMode": "NORMAL"
+        },
+        {
+          "name": "TSV",
+          "fieldSeparator": "タブ(\\t)",
+          "lineSeparator": "改行(\\r\\n)",
+          "quote": "ダブルクォート(\")",
+          "ignoreEmptyLine": false,
+          "requiredHeader": false,
+          "charset": "UTF-8",
+          "quoteMode": "NORMAL"
+        }
+      ],
+      "quote_modes": [
+        {
+          "name": "NORMAL",
+          "description": "フィールド囲み文字、列区切り文字、改行のいずれかを含むフィールドのみフィールド囲み文字で囲む"
+        },
+        {
+          "name": "ALL",
+          "description": "全てのフィールドをフィールド囲み文字で囲む"
+        }
+      ],
+      "note": "CSVファイルの読み込み時は、クォートモードは使用せずに自動的にフィールド囲み文字の有無を判定して読み込みを行う。"
+    },
+    "anti-patterns": [
+      {
+        "pattern": "外部から受け付けたアップロードファイルのデータをJava Beansとして読み込む際、Java BeansクラスのプロパティをIntegerやDate等の型で定義する",
+        "reason": "アップロードファイルなどの外部から受け付けたデータには不正なデータが含まれる可能性がある。型変換に失敗すると例外が発生しJava Beansオブジェクトが生成されないため、不正な値を業務エラーとして通知できず異常終了となってしまう。",
+        "correct": "外部から受け付けたデータを読み込む場合は、Java BeansクラスのプロパティをすべてString型で定義し、Bean Validationで入力値チェックを行うこと。",
+        "example_correct": "@Csv(type = Csv.CsvType.DEFAULT, properties = {\"age\", \"name\"})\npublic class Person {\n    @NumberRange(min = 0, max = 150)\n    private String age;  // String型で定義\n\n    @Required\n    private String name; // String型で定義\n    // getter、setterは省略\n}"
+      },
+      {
+        "pattern": "ObjectMapperのclose()を呼び出さずにリソースを解放しない",
+        "reason": "ObjectMapperは内部でストリームなどのリソースを保持しているため、close()を呼び出さないとリソースリークが発生する。",
+        "correct": "try-with-resourcesを使用してObjectMapperを生成することで、自動的にclose()が呼ばれるようにする。",
+        "example_correct": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    // 処理\n} // 自動的にclose()が呼ばれる"
+      },
+      {
+        "pattern": "ObjectMapperのインスタンスを複数スレッドで共有する",
+        "reason": "ObjectMapperの読み込み及び書き込みはスレッドアンセーフであるため、複数スレッドから同時に呼び出された場合の動作は保証されない。",
+        "correct": "ObjectMapperのインスタンスを複数スレッドで共有するような場合には、呼び出し元にて同期処理を行うこと。または、スレッドごとにObjectMapperのインスタンスを生成すること。"
+      },
+      {
+        "pattern": "Java Beansクラスにバインドする際に、ObjectMapperの生成時にDataBindConfigを指定する",
+        "reason": "Java Beansクラスにバインドする場合、フォーマット指定はアノテーションで行うため、DataBindConfigを使用したフォーマットの指定はできない。DataBindConfigはMapクラスにバインドする場合にのみ使用する。",
+        "correct": "Java Beansクラスにバインドする場合は、@Csvや@FixedLengthなどのアノテーションでフォーマットを指定すること。"
+      },
+      {
+        "pattern": "ファイルダウンロード時にデータをメモリ上に全て展開してからレスポンスに設定する",
+        "reason": "大量データのダウンロード時にメモリを圧迫する恐れがある。",
+        "correct": "一時ファイルに出力し、FileResponseでファイルを指定する。FileResponseのコンストラクタの第二引数にtrueを指定すると、リクエスト処理の終了時に自動的にファイルを削除する。",
+        "example_correct": "final Path path = Files.createTempFile(null, null);\ntry (ObjectMapper<Person> mapper =\n        ObjectMapperFactory.create(Person.class, Files.newOutputStream(path))) {\n    for (Person person : persons) {\n        mapper.write(person);\n    }\n}\nFileResponse response = new FileResponse(path.toFile(), true);"
+      },
+      {
+        "pattern": "CsvDataBindConfigやFixedLengthDataBindConfigで定義したプロパティ名やフィールド名の順序がファイルの項目順と一致していない",
+        "reason": "ヘッダタイトル、プロパティ名、フィールド定義はファイルの項目順と一致するように定義する必要がある。順序が一致していないと、データが正しくバインドされない。",
+        "correct": "ヘッダタイトル、プロパティ名、フィールド定義はファイルの項目順と一致するように定義すること。"
+      }
+    ],
+    "errors": [
+      {
+        "exception": "nablarch.common.databind.InvalidDataFormatException",
+        "cause": "読み込んだデータのフォーマットが不正な場合に発生する。例えば、CSVファイルで囲み文字が閉じられていない、固定長ファイルでレコード長が不正、型変換に失敗した場合などに発生する。",
+        "solution": "データファイルのフォーマットを確認し、正しいフォーマットで作成されているか検証する。外部から受け付けるファイルの場合は、try-catchでInvalidDataFormatExceptionを捕捉し、ユーザーに適切なエラーメッセージを表示する。",
+        "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        // 処理\n    }\n} catch (InvalidDataFormatException e) {\n    // データファイルのフォーマット不正時の処理を記述\n    log.error(\"データフォーマットが不正です: \" + e.getMessage());\n}"
+      },
+      {
+        "exception": "型変換エラー（InvalidDataFormatExceptionの一種）",
+        "cause": "Java Beansクラスへの変換時、Java Beansクラスに定義されたプロパティの型に自動的に型変換するが、型変換に失敗した場合に発生する。例えば、Integerプロパティにアルファベットがバインドされようとした場合など。",
+        "solution": "外部から受け付けたデータを読み込む場合は、Java BeansクラスのプロパティはすべてString型で定義し、Bean Validationで入力値チェックを行うこと。",
+        "example": "// Java Beansクラスの定義\n@Csv(type = Csv.CsvType.DEFAULT, properties = {\"age\", \"name\"})\npublic class Person {\n    @NumberRange(min = 0, max = 150)\n    private String age;  // String型で定義\n\n    @Required\n    private String name; // String型で定義\n}\n\n// 使用例\ntry (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    Person person;\n    while ((person = mapper.read()) != null) {\n        ValidatorUtil.validate(person); // Bean Validationで検証\n    }\n}"
+      }
+    ],
+    "tips": [
+      {
+        "title": "try-with-resourcesの使用",
+        "description": "全データの読み込みが完了したら、ObjectMapper#closeでリソースを解放すること。try-with-resourcesを使用することでクローズ処理を省略可能。",
+        "example": "try (ObjectMapper<Person> mapper = ObjectMapperFactory.create(Person.class, inputStream)) {\n    // 処理\n} // 自動的にclose()が呼ばれる"
+      },
+      {
+        "title": "null値の出力",
+        "description": "プロパティの値がnullの場合は、未入力を表す値が出力される。例えば、CSVファイルに書き込む場合は空文字が出力される。Mapオブジェクトの場合も同様に、value値がnullの場合は空文字が出力される。"
+      },
+      {
+        "title": "Mapオブジェクトでは行番号取得不可",
+        "description": "論理行番号の取得は@LineNumberアノテーションを使用するが、これはJava Beansクラスにのみ適用可能。Mapオブジェクトとして取得する場合は、データの行番号を取得できない点に注意すること。"
+      },
+      {
+        "title": "CSVファイル読み込み時のクォートモード",
+        "description": "CSVファイルの読み込み時は、クォートモードは使用せずに自動的にフィールド囲み文字の有無を判定して読み込みを行う。クォートモードはCSVファイル書き込み時にのみ使用される。"
+      },
+      {
+        "title": "ヘッダタイトルをMapのキーとして使用",
+        "description": "MapクラスにバインドしてCSVを読み込む場合、CSVにヘッダ行が存在する場合は、CsvDataBindConfig#withPropertiesの設定を省略することでヘッダタイトルをMapのキーとして使用できる。"
+      }
+    ],
+    "limitations": [
+      "ObjectMapperの読み込み及び書き込みはスレッドアンセーフであるため、複数スレッドから同時に呼び出された場合の動作は保証しない。ObjectMapperのインスタンスを複数スレッドで共有する場合には、呼び出し元にて同期処理を行うこと。",
+      "Java Beansクラスにバインドする場合、フォーマット指定はアノテーションで行うため、ObjectMapperの生成時にDataBindConfigを使用したフォーマットの指定はできない。",
+      "Mapオブジェクトとして取得する場合は、データの論理行番号を取得できない。行番号が必要な場合はJava Beansクラスを使用すること。",
+      "Mapオブジェクトへの変換時、値は全てString型で格納される。型変換が必要な場合は別途実装する必要がある。"
+    ]
+  }
+}

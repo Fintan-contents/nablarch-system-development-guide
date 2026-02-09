@@ -1,0 +1,127 @@
+# NTF（Nablarch Testing Framework）概要
+
+Nablarchアプリケーションの自動テストを効率的に実施するためのフレームワーク。JUnit4をベースとし、テストデータの外部化とNablarch特有の機能をサポート。
+
+**目的**: リクエスト単体テスト、DBテスト、クラス単体テストを効率的に実施し、テストの可読性と保守性を向上させる。
+
+
+**related_files**:
+
+- ntf-batch-request-test.json
+- ntf-test-data.json
+- ntf-assertion.json
+
+**公式ドキュメント**:
+- [NTF（Nablarch Testing Framework）概要](https://nablarch.github.io/docs/LATEST/doc/development_tools/testing_framework/guide/development_guide/06_TestFWGuide/01_Abstract.html)
+
+---
+
+## features
+
+NTFが提供する主要な特徴
+
+**機能**:
+
+- {'name': 'JUnit4ベース', 'description': 'JUnit4をベースとしており、各種アノテーション、assertメソッド、Matcherクラスなど、JUnit4で提供されている機能を使用できる。', 'notes': 'JUnit 5上でも動作可能（JUnit Vintageを使用）'}
+
+- {'name': 'テストデータの外部化', 'description': 'テストデータをExcelファイルに記述でき、データベース準備データや期待するテスト結果などを記載したExcelファイルをAPIを通じて使用できる。', 'benefits': ['可読性の向上', '編集の容易さ', 'テストとロジックの分離']}
+
+- {'name': 'Nablarchに特化したテスト補助機能', 'description': 'トランザクション制御やシステム日付設定など、Nablarchアプリケーションに特化したAPIを提供する。', 'examples': ['トランザクション制御', 'システム日付固定', 'ThreadContext設定']}
+
+
+
+---
+
+## architecture
+
+自動テストフレームワークの構成要素
+
+**コンポーネント**:
+
+- **テストクラス**: テスト処理を記述する。DbAccessTestSupportやHttpRequestTestSupportなどのスーパークラスを継承する。
+  - creator: アプリケーションプログラマ
+  - creation_unit: テスト対象クラスにつき1つ作成
+- **Excelファイル**: テストデータを記載する。自動テストフレームワークを使用することにより、データを読み取ることができる。
+  - creator: アプリケーションプログラマ
+  - creation_unit: テストクラスにつき1つ作成
+  - supported_formats: Excel2003形式（.xls）, Excel2007以降形式（.xlsx）
+- **テスト対象クラス**: テスト対象となるクラス（Action以降の業務ロジックを実装する各クラスを含む）
+  - creator: アプリケーションプログラマ
+- **コンポーネント設定ファイル・環境設定ファイル**: テスト実行時の各種設定を記載する。
+  - creator: アプリケーションプログラマ（個別のテストに固有の設定が必要な場合）
+- **自動テストフレームワーク**: テストに必要な機能を提供する。DbAccessTestSupport、HttpRequestTestSupport、BatchRequestTestSupport等が含まれる。
+- **Nablarch Application Framework**: フレームワーク本体（本機能の対象外）
+
+---
+
+## test_method
+
+テストメソッドの記述方法
+
+**example**:
+
+```java
+public class SampleTest {
+    @Test
+    public void testSomething() {
+        // テスト処理
+    }
+}
+```
+
+**annotation**: @Test
+
+**framework**: JUnit4
+
+**notes**: @Beforeや@Afterなどのアノテーションも使用できる。これらを用いて、テストメソッド前後にリソースの取得解放などの共通処理を行うことが可能。
+
+---
+
+## junit5_support
+
+JUnit 5で自動テストフレームワークを動かす方法
+
+**依存関係**:
+
+- `org.junit.jupiter:junit-jupiter` (scope: test) - JUnit 5のコアライブラリ
+- `org.junit.vintage:junit-vintage-engine` (scope: test) - JUnit 4テストをJUnit 5上で実行するためのエンジン
+
+**mechanism**: JUnit Vintage
+
+**mechanism_description**: JUnit 5の上でJUnit 4で書かれたテストを実行できるようにするための機能。この機能を利用することで、自動テストフレームワークをJUnit 5の上で動かすことができる。
+
+**important_notes**: この機能は、あくまでJUnit 4のテストをJUnit 4として動かしているにすぎない。したがって、JUnit 4のテストの中でJUnit 5の機能が使えるわけではない。JUnit 4からJUnit 5への移行を段階的進めるための補助として利用できる。
+
+**prerequisites**:
+
+- **item**: maven-surefire-plugin
+- **version**: 2.22.0以上
+
+**configuration_example**: <dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit</groupId>
+      <artifactId>junit-bom</artifactId>
+      <version>5.8.2</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.junit.vintage</groupId>
+    <artifactId>junit-vintage-engine</artifactId>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+
+**related_info**: JUnit 5のテストで自動テストフレームワークを使用する方法については、ntf_junit5_extensionを参照。
+
+---

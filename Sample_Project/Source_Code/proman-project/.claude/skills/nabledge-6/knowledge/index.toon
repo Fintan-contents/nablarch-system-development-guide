@@ -1,0 +1,103 @@
+# Nabledge-6 Knowledge Index
+
+files[93,]{title,hints,path}:
+  Nablarchバッチ（都度起動型・常駐型）, バッチ 都度起動 常駐 大量データ処理 アーキテクチャ ハンドラ DataReader, features/processing/nablarch-batch.json
+  JSR352準拠バッチ（Jakarta Batch）, バッチ JSR352 Jakarta Batch Batchlet Chunk 標準仕様, not yet created
+  ユニバーサルDAO, データベース DAO O/Rマッパー CRUD JPA 検索 ページング 排他制御, features/libraries/universal-dao.json
+  データベースアクセス（JDBCラッパー）, データベース JDBC SQL 接続 PreparedStatement Dialect, features/libraries/database-access.json
+  データベースコードジェネレータ, データベース コード生成 自動生成 Entity DAO スキーマ, not yet created
+  データバインド, ファイル データ変換 CSV TSV 固定長 JavaBeans Map, features/libraries/data-bind.json
+  汎用データフォーマット, ファイル データ形式 CSV 固定長 JSON XML マルチレイアウト, not yet created
+  ログ出力, ログ ロギング Logger LogWriter ファイル出力 ローテーション, not yet created
+  SLF4Jアダプタ, ログ SLF4J アダプタ log4j logback ロギングフレームワーク, features/adapters/slf4j-adapter.json
+  入力値のチェック, バリデーション 入力チェック Bean Validation Nablarch Validation 妥当性検証, not yet created
+  トランザクション管理, トランザクション データベース コミット ロールバック リソース制御, not yet created
+  コード管理, コード マスタ 区分値 名称 国際化 静的データ, not yet created
+  メッセージ管理, メッセージ 国際化 エラーメッセージ プロパティ フォーマット, not yet created
+  排他制御, 排他制御 楽観的ロック 悲観的ロック バージョン番号 同時更新, not yet created
+  業務日付, 日付 業務日付 システム日付 日時管理, features/libraries/business-date.json
+  ファイルパス管理, ファイル パス管理 ファイルパス 論理名 物理パス, features/libraries/file-path-management.json
+  リポジトリ, リポジトリ DI 依存性注入 コンポーネント定義 設定管理, not yet created
+  データベース管理, データベース スキーマ管理 マイグレーション DDL 初期データ, not yet created
+  データコンバータ, データ変換 型変換 フォーマット 文字列変換, not yet created
+  システム間連携メッセージング, メッセージング システム連携 HTTP MOM JMS キュー, not yet created
+  メール送信, メール SMTP 送信 テンプレート 添付ファイル, not yet created
+  静的データキャッシュ, キャッシュ 静的データ メモリ 初期化 マスタデータ, not yet created
+  サービス提供可否チェック, サービス可否 稼働状態 メンテナンス時間 閉塞制御, not yet created
+  セッションストア, セッション HTTP セッション管理 状態保持 分散環境, not yet created
+  ステートレスWebアプリケーション, Web ステートレス 隠し項目 画面遷移 状態管理, not yet created
+  カスタムタグ, タグ JSPタグ UI部品 画面表示 入力フォーム, not yet created
+  二重サブミット防止, 二重サブミット トークン 画面 フォーム送信, not yet created
+  BeanUtil, Bean ユーティリティ プロパティ コピー 型変換, not yet created
+  ユーティリティ, ユーティリティ 共通機能 文字列 コレクション 変換, not yet created
+  フォーマット, フォーマット 数値 日付 文字列 変換 表示形式, not yet created
+  認可チェック（Permission Check）, 認可 権限チェック Permission アクセス制御 セキュリティ, not yet created
+  ロールベース認可, 認可 ロール 権限 アクセス制御 セキュリティ, not yet created
+  データベース接続管理ハンドラ, ハンドラ データベース 接続管理 接続取得 接続解放 コネクション, features/handlers/common/db-connection-management-handler.json
+  トランザクション管理ハンドラ, ハンドラ トランザクション コミット ロールバック データベース, features/handlers/common/transaction-management-handler.json
+  グローバルエラーハンドラ, ハンドラ エラーハンドリング 例外処理 共通エラー処理, not yet created
+  ファイルレコードライタ破棄ハンドラ, ハンドラ ファイル 出力 リソース解放 クローズ処理, not yet created
+  リクエストパスJavaパッケージマッピング, ハンドラ ルーティング パス マッピング ディスパッチ, not yet created
+  リクエストハンドラエントリ, ハンドラ リクエスト処理 エントリポイント ディスパッチ, not yet created
+  スレッドコンテキストハンドラ, ハンドラ スレッド コンテキスト リクエスト情報 実行時情報, not yet created
+  スレッドコンテキストクリアハンドラ, ハンドラ スレッド コンテキスト クリア リソース解放, not yet created
+  権限チェックハンドラ, ハンドラ 認可 権限チェック アクセス制御 セキュリティ, not yet created
+  サービス提供可否チェックハンドラ, ハンドラ サービス可否 稼働状態 メンテナンス 閉塞, not yet created
+  プロセス常駐化ハンドラ, ハンドラ バッチ 常駐プロセス 定期実行 監視, not yet created
+  ループ制御ハンドラ, ハンドラ バッチ ループ データベース レコード処理, not yet created
+  データベースレスループ制御ハンドラ, ハンドラ バッチ ループ データベースなし 繰り返し処理, not yet created
+  データリードハンドラ, ハンドラ バッチ データ読み込み ファイル データベース, features/handlers/batch/data-read-handler.json
+  メインクラス, ハンドラ スタンドアロン Main エントリポイント 起動, not yet created
+  リトライハンドラ, ハンドラ リトライ 再試行 エラーハンドリング 例外処理, not yet created
+  ステータスコード変換ハンドラ, ハンドラ ステータスコード 終了コード リターンコード 変換, not yet created
+  プロセス停止ハンドラ, ハンドラ プロセス停止 シャットダウン 終了処理, not yet created
+  二重起動防止ハンドラ, ハンドラ 二重起動防止 プロセス制御 ロック 排他制御, not yet created
+  マルチスレッド実行制御ハンドラ, ハンドラ マルチスレッド 並列処理 スレッドプール 同時実行, not yet created
+  リクエストスレッドループ制御ハンドラ, ハンドラ スレッド ループ制御 リクエスト処理, not yet created
+  HTTPエラー制御ハンドラ, ハンドラ Web HTTP エラー 例外処理 画面遷移, not yet created
+  セッションストアハンドラ, ハンドラ Web セッション 状態保持 セッション管理, not yet created
+  CSRFトークン検証ハンドラ, ハンドラ Web セキュリティ CSRF トークン 検証, not yet created
+  フォワーディングハンドラ, ハンドラ Web フォワード ディスパッチ 画面遷移, not yet created
+  ヘルスチェックエンドポイントハンドラ, ハンドラ Web ヘルスチェック 監視 稼働確認 死活監視, not yet created
+  ホットデプロイハンドラ, ハンドラ Web ホットデプロイ 開発支援 自動リロード, not yet created
+  HTTPアクセスログハンドラ, ハンドラ Web ログ アクセスログ HTTP リクエストログ, not yet created
+  HTTP文字エンコーディングハンドラ, ハンドラ Web 文字エンコーディング 文字コード リクエスト レスポンス, not yet created
+  HTTPリクエストJavaパッケージマッピング, ハンドラ Web ルーティング パス マッピング ディスパッチ, not yet created
+  HTTPレスポンスハンドラ, ハンドラ Web レスポンス 画面表示 出力, not yet created
+  HTTPリライトハンドラ, ハンドラ Web URL書き換え リライト リダイレクト, not yet created
+  携帯電話対応ハンドラ, ハンドラ Web モバイル 携帯電話 ガラケー 端末判定, not yet created
+  マルチパートハンドラ, ハンドラ Web ファイルアップロード マルチパート フォーム, not yet created
+  Nablarchカスタムタグ制御ハンドラ, ハンドラ Web カスタムタグ JSP 画面制御, not yet created
+  正規化ハンドラ, ハンドラ Web 正規化 サニタイジング 入力値, not yet created
+  二重サブミット防止ハンドラ, ハンドラ Web 二重サブミット トークン フォーム, not yet created
+  静的リソースマッピング, ハンドラ Web 静的リソース CSS JavaScript 画像, not yet created
+  セキュアハンドラ, ハンドラ Web セキュリティ HTTPS SSL/TLS, not yet created
+  セッション同時アクセス制御ハンドラ, ハンドラ Web セッション 同時アクセス 排他制御, not yet created
+  InjectFormインターセプタ, インターセプタ Web フォーム 入力値 バインド, not yet created
+  OnDoubleSubmissionインターセプタ, インターセプタ Web 二重サブミット エラー処理, not yet created
+  OnErrorインターセプタ, インターセプタ Web エラー処理 例外ハンドリング 画面遷移, not yet created
+  OnErrorsインターセプタ, インターセプタ Web エラー処理 入力チェック バリデーション, not yet created
+  UseTokenインターセプタ, インターセプタ Web トークン CSRF 二重サブミット, not yet created
+  ボディ変換ハンドラ, ハンドラ REST JSON XML 変換 シリアライズ, not yet created
+  CORSプリフライトリクエストハンドラ, ハンドラ REST CORS プリフライト オプション OPTIONS, not yet created
+  JAX-RSアクセスログハンドラ, ハンドラ REST ログ アクセスログ JAX-RS, not yet created
+  JAX-RS BeanValidationハンドラ, ハンドラ REST バリデーション Bean Validation 入力チェック, not yet created
+  JAX-RSレスポンスハンドラ, ハンドラ REST レスポンス JSON エラー処理, not yet created
+  HTTPメッセージングエラーハンドラ, ハンドラ メッセージング HTTP エラー処理 同期応答, not yet created
+  HTTPメッセージング要求電文解析ハンドラ, ハンドラ メッセージング HTTP 電文解析 リクエスト パース, not yet created
+  HTTPメッセージング応答電文構築ハンドラ, ハンドラ メッセージング HTTP 電文構築 レスポンス 応答, not yet created
+  メッセージ応答ハンドラ, ハンドラ メッセージング MOM 応答 返信 メッセージキュー, not yet created
+  メッセージ再送ハンドラ, ハンドラ メッセージング MOM 再送 リトライ エラー処理, not yet created
+  メッセージングコンテキストハンドラ, ハンドラ メッセージング MOM コンテキスト メッセージ情報, not yet created
+  自動テストフレームワーク概要, テスト NTF テストフレームワーク 自動テスト JUnit, features/tools/ntf-overview.json
+  データベースアクセステスト, テスト NTF データベース DAO CRUD テストデータ, not yet created
+  リクエスト単体テスト（Web）, テスト NTF Web リクエスト 画面 単体テスト, not yet created
+  リクエスト単体テスト（REST）, テスト NTF REST API リクエスト 単体テスト, not yet created
+  リクエスト単体テスト（バッチ）, テスト NTF バッチ リクエスト 単体テスト, features/tools/ntf-batch-request-test.json
+  リクエスト単体テスト（メッセージング）, テスト NTF メッセージング リクエスト 単体テスト, not yet created
+  テストデータ管理, テスト NTF テストデータ Excel データベース セットアップ, features/tools/ntf-test-data.json
+  アサーション機能, テスト NTF アサーション 検証 期待値 実測値, features/tools/ntf-assertion.json
+  マスタデータリストア, テスト NTF マスタデータ リストア バックアップ テスト環境, not yet created
+  JUnit5拡張機能, テスト NTF JUnit5 拡張 アノテーション テスト実行, not yet created
+  セキュリティチェックリスト, セキュリティ チェック項目 脆弱性 PCIDSS OWASP, checks/security.json
+  リリースノート6u3, リリースノート バージョン6 アップデート 変更点 新機能, releases/6u3.json
