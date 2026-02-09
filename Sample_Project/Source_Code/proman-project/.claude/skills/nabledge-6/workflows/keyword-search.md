@@ -20,11 +20,22 @@ This workflow searches the knowledge index (index.toon) using keyword matching t
 
 ## Overview
 
+**Who executes**: Claude Code (you)
+
 **Input**: User's request (natural language)
 
-**Output**: `pointers` object containing candidate files and sections with matched hints
+**Output**: Candidates list for section-judgement workflow
 
 **Strategy**: Technical axis - match keywords from the request against search hints in index.toon
+
+**Tools you will use**:
+- Read tool: Read knowledge/index.toon
+- Grep tool (optional): Search for keywords in index.toon
+- Bash tool with jq: Extract .index from knowledge files
+
+**Expected tool calls**: 10-15 calls
+
+**Expected output**: 20-30 candidate sections
 
 ## Search process
 
@@ -43,7 +54,13 @@ Keyword Search Progress:
 
 ### Step 1: Extract keywords from user request
 
-Identify keywords at three levels to match the structure of index.toon hints.
+**Tool**: None (mental process)
+
+**Input**: User's natural language request
+
+**Output**: List of keywords at 3 levels
+
+**Action**: Analyze the user request and extract keywords at three levels to match the structure of index.toon hints.
 
 **Three-level keyword extraction**:
 
@@ -81,141 +98,250 @@ Identify keywords at three levels to match the structure of index.toon hints.
 
 **Tip**: Include both Japanese and English terms, common abbreviations, and related concepts at all three levels.
 
+**Your checklist**:
+- [ ] Extracted technical domain keywords (e.g., データベース, バッチ, ハンドラ)
+- [ ] Extracted technical component keywords (e.g., DAO, JDBC, JPA)
+- [ ] Extracted functional keywords (e.g., ページング, 検索, 更新)
+- [ ] Included both Japanese and English terms
+- [ ] Included common abbreviations and related concepts
+
+**Proceed to Step 2** with your keyword list.
+
 ### Step 2: Read index.toon
 
-Read the knowledge index:
+**Tool**: Read tool
 
-```bash
-cat knowledge/index.toon
-```
+**Input**: knowledge/index.toon file path
 
-Each line: `Title, hint1 hint2 ..., path.json`
-- **hints**: Space-separated search terms for matching
-- **path**: Knowledge file location
+**Output**: 93 entries with titles, hints, and paths
+
+**Action you must take**:
+
+Use Read tool to load knowledge/index.toon.
+
+**After reading**:
+- You now have 93 entries loaded in context
+- Each line format: `Title, hint1 hint2 ..., path.json`
+  - **hints**: Space-separated search terms for matching
+  - **path**: Knowledge file location
+- Proceed to Step 3 with this data
+
+**Your checklist**:
+- [ ] Read tool called successfully
+- [ ] 93 entries loaded
+- [ ] Line format understood (Title, hints, path)
+
+**Proceed to Step 3** with index.toon data.
 
 ### Step 3: Match keywords against hints
 
-For each file in index.toon:
-1. Check if any of your keywords match the hints
-2. Count the number of matched hints
-3. Record which hints matched
+**Tool**: None (mental process, or optionally Grep tool)
+
+**Input**: Keywords from Step 1 + index.toon data from Step 2
+
+**Output**: List of files with matched hint counts
+
+**Action you must take**:
+
+For each of the 93 entries in index.toon:
+1. Check if any keyword from Step 1 matches the hints in this entry
+2. Count how many hints matched
+3. Record the matched hints
 
 **Matching rules**:
-- Case-insensitive matching
-- Partial matching allowed (e.g., "ページ" matches "ページング")
-- Exact matches have higher weight than partial matches
+- Case-insensitive: "ページング" matches "ページング" or "PAGING"
+- Partial matching allowed: "ページ" matches "ページング"
+- Exact match preferred over partial match
+
+**Example**:
+- Keywords: ["ページング", "DAO", "UniversalDao"]
+- Entry: "ユニバーサルDAO, データベース DAO O/Rマッパー CRUD 検索 ページング, features/libraries/universal-dao.json"
+- Matched hints: ["DAO", "ページング"] (2 matches)
+
+**Your output format** (mental or notes):
+```
+universal-dao.json: 5 matched hints ["データベース", "DAO", "O/Rマッパー", "検索", "ページング"]
+database-access.json: 2 matched hints ["データベース", "JDBC"]
+nablarch-batch.json: 1 matched hint ["バッチ"]
+```
+
+**Your checklist**:
+- [ ] Checked all 93 entries
+- [ ] Counted matched hints for each entry
+- [ ] Recorded which hints matched
+
+**Proceed to Step 4** with your matched files list.
 
 ### Step 4: Select candidate files
 
-For each file in index.toon:
-1. Count the number of matched hints
-2. Keep files with at least 1 matched hint
+**Tool**: None (selection process)
 
-Sort files by number of matched hints (descending).
+**Input**: Matched files list from Step 3
 
-**Limit**: Select top 10-15 files (rationale: section-judgement can efficiently process 20-30 sections. 15 files × 2 sections/file = 30 sections).
+**Output**: Top 10-15 candidate files
 
-**Note**: Identify candidates only. Scoring happens in section-judgement workflow (Step 6).
+**Action you must take**:
+
+1. **Sort files** by number of matched hints (descending order)
+2. **Keep files with ≥1 matched hint**
+3. **Select top 10-15 files** (limit rationale: 15 files × 2 sections/file = 30 sections for judgement)
+
+**Note**: Identify candidates only. Relevance scoring happens in section-judgement workflow (Step 6).
+
+**Your checklist**:
+- [ ] Sorted by matched hint count (highest first)
+- [ ] Filtered out files with 0 matches
+- [ ] Selected top 10-15 files
+- [ ] Ready to read section indexes
+
+**Proceed to Step 5** with your selected files list.
 
 ### Step 5: Identify candidate sections
 
-For each selected file:
+**Tool**: Bash tool with jq command
 
-1. Extract only the `index` field (avoids reading entire file):
+**Input**: Selected files from Step 4
+
+**Output**: 20-30 candidate sections with matched hints
+
+**Action you must take**:
+
+For each of the 10-15 selected files:
+
+1. **Read only the .index field** (NOT the entire file) using Bash tool with jq:
    ```bash
    jq '.index' knowledge/features/libraries/universal-dao.json
    ```
 
-2. The index contains section-level hints:
+   **Tool call example**:
+   ```
+   Use Bash tool with command:
+   jq '.index' knowledge/features/libraries/universal-dao.json
+   ```
+   (Use the full path from skill base directory)
+
+2. **The index output** will look like:
    ```json
    [
-     { "id": "overview", "hints": ["UniversalDao", "ユニバーサルDAO"] },
-     { "id": "paging", "hints": ["ページング", "per", "page", "offset"] },
+     { "id": "overview", "hints": ["UniversalDao", "ユニバーサルDAO", "O/Rマッパー"] },
+     { "id": "paging", "hints": ["ページング", "per", "page", "Pagination"] },
      { "id": "crud", "hints": ["登録", "更新", "削除", "insert", "update"] }
    ]
    ```
 
-3. Match keywords against section hints using the same rules as Step 3
+3. **Match your keywords** against section hints using same rules as Step 3
 
-4. Keep sections with at least 1 matched hint
+4. **Keep sections with ≥1 matched hint**
+
+5. **Stop when you have 20-30 candidate sections total** (across all files)
+
+**Example for one file**:
+- File: universal-dao.json
+- Your keywords: ["ページング", "DAO", "検索"]
+- Section "paging": matched = ["ページング"] → KEEP
+- Section "overview": matched = ["DAO"] → KEEP
+- Section "search": matched = ["検索"] → KEEP
+- Section "crud": matched = [] → SKIP
 
 **Important**: Only read the `index` field, not the entire file. This saves tokens and improves efficiency.
 
-**Limit**: Collect up to 20-30 candidate sections total (rationale: section-judgement will filter to 10-15 final sections; starting with 20-30 provides enough candidates while keeping processing efficient).
+**Your checklist**:
+- [ ] Called Bash+jq for each selected file
+- [ ] Read only .index field (efficient)
+- [ ] Matched keywords against section hints
+- [ ] Collected 20-30 candidate sections total
+- [ ] Recorded file_path + section_id + matched_hints for each
 
-**Note**: Identify candidates that match keywords only. Relevance judgement happens in Step 6 (section-judgement workflow).
+**Proceed to Step 6** with your candidates list.
 
 ### Step 6: Call section-judgement workflow
 
-Build a candidates list and pass to section-judgement:
+**Tool**: None (workflow transition)
 
-```json
-{
-  "candidates": [
-    {
-      "file_id": "F1",
-      "file_path": "features/libraries/universal-dao.json",
-      "section": "paging",
-      "matched_hints": ["ページング", "per", "page"]
-    },
-    {
-      "file_id": "F1",
-      "file_path": "features/libraries/universal-dao.json",
-      "section": "search",
-      "matched_hints": ["検索", "search"]
-    },
-    {
-      "file_id": "F2",
-      "file_path": "features/libraries/database-access.json",
-      "section": "query",
-      "matched_hints": ["SQL"]
-    }
-  ]
-}
-```
+**Input**: Candidates list from Step 5
 
-**Call section-judgement workflow** with this candidates list.
+**Output**: Will come from section-judgement workflow
 
-See [workflows/section-judgement.md](workflows/section-judgement.md) for the judgement process.
+**Action you must take**:
+
+1. **Build candidates list** in this format (mental or notes):
+   ```json
+   {
+     "candidates": [
+       {
+         "file_path": "features/libraries/universal-dao.json",
+         "section": "paging",
+         "matched_hints": ["ページング", "per", "page"]
+       },
+       {
+         "file_path": "features/libraries/universal-dao.json",
+         "section": "overview",
+         "matched_hints": ["DAO", "UniversalDao"]
+       }
+     ]
+   }
+   ```
+
+2. **Transition to section-judgement workflow**:
+   - Read workflows/section-judgement.md (if needed)
+   - Follow its steps with your candidates list
+   - Section-judgement will read actual content and judge relevance
+
+**Your checklist**:
+- [ ] Built candidates list with all required fields
+- [ ] Ready to execute section-judgement workflow
+
+**Proceed to section-judgement workflow** (workflows/section-judgement.md).
 
 ### Step 7: Return final results
 
-Section-judgement workflow will:
-1. Read each section's content
-2. Judge relevance (High/Partial/None)
-3. Filter out None-relevance sections
-4. Return final results with relevance scores
+**Tool**: None (this is done by section-judgement)
 
-**Final output structure**:
+**Input**: Results from section-judgement workflow
+
+**Output**: Final knowledge sections with relevance scores
+
+**What happens**:
+- Section-judgement filters out None-relevance sections
+- Only High and Partial relevance sections remain
+- Final list has 5-15 sections (~5,000 tokens)
+
+**Final output structure** (from section-judgement):
 ```json
 {
   "sections": [
     {
-      "file_id": "F1",
       "file_path": "features/libraries/universal-dao.json",
       "section": "paging",
       "matched_hints": ["ページング", "per", "page"],
       "relevance": 2,
-      "judgement": "High - contains pagination API and examples"
+      "judgement": "High - pagination API and examples"
     },
     {
-      "file_id": "F1",
       "file_path": "features/libraries/universal-dao.json",
-      "section": "search",
-      "matched_hints": ["検索", "search"],
+      "section": "overview",
+      "matched_hints": ["DAO", "UniversalDao"],
       "relevance": 1,
-      "judgement": "Partial - related search functionality"
+      "judgement": "Partial - DAO basics for context"
     }
   ],
   "summary": {
     "high_count": 1,
     "partial_count": 1,
-    "total_tokens": "~1500"
+    "total_tokens": "~1000"
   }
 }
 ```
 
-Return this final result to the user.
+**Your action**:
+- Receive the filtered, scored sections from section-judgement
+- Use this knowledge to answer the user's question
+- Answer ONLY using information from the returned sections
+
+**Your checklist**:
+- [ ] Received final sections from section-judgement
+- [ ] Sections have relevance scores (High=2, Partial=1)
+- [ ] Ready to answer using only this knowledge
 
 ## Output
 
@@ -223,20 +349,39 @@ Return the final results from section-judgement workflow (sections with relevanc
 
 ## Error handling
 
-**If no keyword matches found** (Step 3):
-1. Return empty candidates: `{"candidates": []}`
-2. Suggest alternative keywords or broader search terms
-3. Consider using intent-search workflow as fallback
+### If no keyword matches found (Step 3):
 
-**If too many candidates** (>30 sections):
+**Action**:
+1. Inform user: "キーワードマッチが見つかりませんでした"
+2. List your extracted keywords
+3. Suggest: "より具体的な技術用語を含めてください"
+4. Show available categories from index.toon
+
+**Example response**:
+```
+抽出したキーワード: ["ページング", "paging"]
+マッチしたファイル: 0件
+
+利用可能なカテゴリ（index.toonより）:
+- データベース関連: ユニバーサルDAO, データベースアクセス
+- バッチ関連: Nablarchバッチ, データリードハンドラ
+- テスト関連: 自動テストフレームワーク
+```
+
+### If too many candidates (>30 sections):
+
+**Action**:
 1. Select files with 2+ matched hints (stronger signal)
 2. Limit to top 15 files and top 30 sections total
 3. Pass to section-judgement for further filtering
 
-**If section-judgement returns no results** (all None):
+### If section-judgement returns no results (all None):
+
+**Action**:
 1. Return the error message from section-judgement
 2. Show available knowledge from index.toon
 3. State clearly: "この情報は知識ファイルに含まれていません"
+4. DO NOT answer from LLM training data
 
 ## Notes
 
@@ -301,3 +446,40 @@ Return the final results from section-judgement workflow (sections with relevanc
 ```
 
 **Note**: search and query sections were judged as None by section-judgement and filtered out.
+
+## Tools reference
+
+### Read tool
+**Use for**: Reading knowledge/index.toon, workflow files
+
+**Example**:
+```
+Use Read tool with file_path: knowledge/index.toon
+```
+
+### Bash tool with jq
+**Use for**: Extracting .index or .sections from JSON files
+
+**Command format**:
+```bash
+jq '.index' knowledge/features/libraries/universal-dao.json
+```
+
+**Example usage**:
+```
+Use Bash tool with command:
+jq '.index' knowledge/features/libraries/universal-dao.json
+```
+
+### Grep tool (optional)
+**Use for**: Searching keywords in index.toon
+
+**Example**:
+```
+Use Grep tool with:
+- pattern: "ページング"
+- path: "knowledge/index.toon"
+- output_mode: "content"
+```
+
+**Note**: Manual matching is often more efficient than Grep for 93 entries.
