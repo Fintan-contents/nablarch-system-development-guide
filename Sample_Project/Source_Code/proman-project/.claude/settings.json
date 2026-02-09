@@ -131,6 +131,8 @@
       "Bash(chown *)",
       "Bash(tail *)",
       "Bash(head *)",
+      "Bash(wc *)",
+      "Bash(jq *)",
       "Bash(echo *)",
       "Bash(pwd)",
       "Bash(cd *)"
