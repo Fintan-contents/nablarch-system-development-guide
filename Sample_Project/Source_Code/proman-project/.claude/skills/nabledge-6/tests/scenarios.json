@@ -1,0 +1,422 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-02-09",
+    "description": "Test scenarios for nabledge-6 skill workflow validation",
+    "total_scenarios": 25
+  },
+  "scenarios": [
+    {
+      "id": "handlers-001",
+      "category": "handlers",
+      "file": "handlers/batch/data-read-handler.json",
+      "question": "データリードハンドラでファイルを読み込むにはどうすればいいですか？",
+      "expected_keywords": [
+        "DataReadHandler",
+        "DataReader",
+        "ファイル読み込み",
+        "データ入力",
+        "レコード処理"
+      ],
+      "expected_sections": ["overview", "usage"],
+      "relevance": "high"
+    },
+    {
+      "id": "handlers-002",
+      "category": "handlers",
+      "file": "handlers/common/transaction-management-handler.json",
+      "question": "トランザクション管理ハンドラでロールバックする方法は？",
+      "expected_keywords": [
+        "TransactionManagementHandler",
+        "ロールバック",
+        "rollback",
+        "エラー処理",
+        "トランザクション制御"
+      ],
+      "expected_sections": ["rollback", "error-handling"],
+      "relevance": "high"
+    },
+    {
+      "id": "handlers-003",
+      "category": "handlers",
+      "file": "handlers/common/db-connection-management-handler.json",
+      "question": "データベース接続管理ハンドラの設定方法を教えてください",
+      "expected_keywords": [
+        "DbConnectionManagementHandler",
+        "データベース接続",
+        "コネクション管理",
+        "設定",
+        "コンポーネント定義"
+      ],
+      "expected_sections": ["configuration", "setup"],
+      "relevance": "high"
+    },
+    {
+      "id": "handlers-004",
+      "category": "handlers",
+      "file": "handlers/common/transaction-management-handler.json",
+      "question": "トランザクションのコミットタイミングはいつですか？",
+      "expected_keywords": [
+        "コミット",
+        "commit",
+        "トランザクション",
+        "タイミング",
+        "正常終了"
+      ],
+      "expected_sections": ["commit", "lifecycle"],
+      "relevance": "high"
+    },
+    {
+      "id": "handlers-005",
+      "category": "handlers",
+      "file": "handlers/batch/data-read-handler.json",
+      "question": "データリードハンドラで大量データを処理するには？",
+      "expected_keywords": [
+        "大量データ",
+        "データ処理",
+        "バッチ",
+        "DataReader",
+        "ループ処理"
+      ],
+      "expected_sections": ["large-data", "performance"],
+      "relevance": "high"
+    },
+    {
+      "id": "libraries-001",
+      "category": "libraries",
+      "file": "libraries/universal-dao.json",
+      "question": "UniversalDaoでページングを実装したい",
+      "expected_keywords": [
+        "ページング",
+        "paging",
+        "per",
+        "page",
+        "Pagination",
+        "EntityList"
+      ],
+      "expected_sections": ["paging"],
+      "relevance": "high"
+    },
+    {
+      "id": "libraries-002",
+      "category": "libraries",
+      "file": "libraries/universal-dao.json",
+      "question": "UniversalDaoで楽観的ロックを使う方法は？",
+      "expected_keywords": [
+        "楽観的ロック",
+        "@Version",
+        "OptimisticLockException",
+        "排他制御",
+        "バージョンカラム"
+      ],
+      "expected_sections": ["optimistic-lock"],
+      "relevance": "high"
+    },
+    {
+      "id": "libraries-003",
+      "category": "libraries",
+      "file": "libraries/database-access.json",
+      "question": "データベースアクセスでSQLを実行する方法を教えてください",
+      "expected_keywords": [
+        "SQL実行",
+        "Database",
+        "SqlPStatement",
+        "クエリ",
+        "検索"
+      ],
+      "expected_sections": ["sql-execution", "query"],
+      "relevance": "high"
+    },
+    {
+      "id": "libraries-004",
+      "category": "libraries",
+      "file": "libraries/file-path-management.json",
+      "question": "ファイルパス管理でファイルパスを取得するには？",
+      "expected_keywords": [
+        "ファイルパス",
+        "FilePathSetting",
+        "論理名",
+        "物理パス",
+        "パス取得"
+      ],
+      "expected_sections": ["usage", "configuration"],
+      "relevance": "high"
+    },
+    {
+      "id": "libraries-005",
+      "category": "libraries",
+      "file": "libraries/business-date.json",
+      "question": "業務日付を取得する方法は？",
+      "expected_keywords": [
+        "業務日付",
+        "SystemTimeUtil",
+        "日付取得",
+        "システム日付"
+      ],
+      "expected_sections": ["overview", "usage"],
+      "relevance": "high"
+    },
+    {
+      "id": "tools-001",
+      "category": "tools",
+      "file": "tools/ntf-test-data.json",
+      "question": "NTFでテストデータを準備する方法を教えてください",
+      "expected_keywords": [
+        "テストデータ",
+        "NTF",
+        "データ準備",
+        "Excel",
+        "データベース"
+      ],
+      "expected_sections": ["preparation", "setup"],
+      "relevance": "high"
+    },
+    {
+      "id": "tools-002",
+      "category": "tools",
+      "file": "tools/ntf-assertion.json",
+      "question": "NTFのアサーション機能の使い方は？",
+      "expected_keywords": [
+        "アサーション",
+        "検証",
+        "期待値",
+        "実測値",
+        "NTF"
+      ],
+      "expected_sections": ["assertion", "verification"],
+      "relevance": "high"
+    },
+    {
+      "id": "tools-003",
+      "category": "tools",
+      "file": "tools/ntf-batch-request-test.json",
+      "question": "バッチのリクエスト単体テストを実行するには？",
+      "expected_keywords": [
+        "リクエスト単体テスト",
+        "バッチテスト",
+        "NTF",
+        "テスト実行",
+        "BatchRequestTestSupport"
+      ],
+      "expected_sections": ["test-execution", "setup"],
+      "relevance": "high"
+    },
+    {
+      "id": "tools-004",
+      "category": "tools",
+      "file": "tools/ntf-test-data.json",
+      "question": "テストデータの初期化はどうやりますか？",
+      "expected_keywords": [
+        "初期化",
+        "データクリア",
+        "セットアップ",
+        "テストデータ",
+        "前処理"
+      ],
+      "expected_sections": ["initialization", "cleanup"],
+      "relevance": "high"
+    },
+    {
+      "id": "tools-005",
+      "category": "tools",
+      "file": "tools/ntf-overview.json",
+      "question": "NTFの基本的な使い方を教えてください",
+      "expected_keywords": [
+        "NTF",
+        "自動テストフレームワーク",
+        "テスト実行",
+        "JUnit",
+        "テストケース"
+      ],
+      "expected_sections": ["overview", "getting-started"],
+      "relevance": "high"
+    },
+    {
+      "id": "processing-001",
+      "category": "processing",
+      "file": "processing/nablarch-batch.json",
+      "question": "Nablarchバッチの基本構造を教えてください",
+      "expected_keywords": [
+        "バッチ",
+        "基本構造",
+        "アーキテクチャ",
+        "ハンドラ構成",
+        "処理フロー"
+      ],
+      "expected_sections": ["overview", "architecture"],
+      "relevance": "high"
+    },
+    {
+      "id": "processing-002",
+      "category": "processing",
+      "file": "processing/nablarch-batch.json",
+      "question": "バッチアクションの実装方法は？",
+      "expected_keywords": [
+        "BatchAction",
+        "アクション実装",
+        "バッチ処理",
+        "execute",
+        "ビジネスロジック"
+      ],
+      "expected_sections": ["action-implementation", "business-logic"],
+      "relevance": "high"
+    },
+    {
+      "id": "processing-003",
+      "category": "processing",
+      "file": "processing/nablarch-batch.json",
+      "question": "バッチで大量データを処理する方法は？",
+      "expected_keywords": [
+        "大量データ",
+        "データ処理",
+        "ループ処理",
+        "DataReader",
+        "パフォーマンス"
+      ],
+      "expected_sections": ["large-data-processing", "performance"],
+      "relevance": "high"
+    },
+    {
+      "id": "processing-004",
+      "category": "processing",
+      "file": "processing/nablarch-batch.json",
+      "question": "バッチのエラーハンドリングはどうすればいいですか？",
+      "expected_keywords": [
+        "エラーハンドリング",
+        "例外処理",
+        "エラー処理",
+        "リトライ",
+        "異常終了"
+      ],
+      "expected_sections": ["error-handling", "exception"],
+      "relevance": "high"
+    },
+    {
+      "id": "processing-005",
+      "category": "processing",
+      "file": "processing/nablarch-batch.json",
+      "question": "バッチの起動方法を教えてください",
+      "expected_keywords": [
+        "バッチ起動",
+        "Main",
+        "コマンドライン",
+        "起動クラス",
+        "実行"
+      ],
+      "expected_sections": ["launch", "execution"],
+      "relevance": "high"
+    },
+    {
+      "id": "adapters-001",
+      "category": "adapters",
+      "file": "adapters/slf4j-adapter.json",
+      "question": "SLF4Jアダプタの設定方法を教えてください",
+      "expected_keywords": [
+        "SLF4J",
+        "アダプタ",
+        "設定",
+        "ログ出力",
+        "log4j"
+      ],
+      "expected_sections": ["configuration", "setup"],
+      "relevance": "high"
+    },
+    {
+      "id": "adapters-002",
+      "category": "adapters",
+      "file": "adapters/slf4j-adapter.json",
+      "question": "SLF4Jでログレベルを変更するには？",
+      "expected_keywords": [
+        "ログレベル",
+        "設定変更",
+        "DEBUG",
+        "INFO",
+        "ERROR"
+      ],
+      "expected_sections": ["log-level", "configuration"],
+      "relevance": "high"
+    },
+    {
+      "id": "adapters-003",
+      "category": "adapters",
+      "file": "adapters/slf4j-adapter.json",
+      "question": "SLF4Jでログファイルを出力する設定は？",
+      "expected_keywords": [
+        "ログファイル",
+        "ファイル出力",
+        "Appender",
+        "設定",
+        "ログ出力先"
+      ],
+      "expected_sections": ["file-output", "appender"],
+      "relevance": "high"
+    },
+    {
+      "id": "adapters-004",
+      "category": "adapters",
+      "file": "adapters/slf4j-adapter.json",
+      "question": "NablarchとSLF4Jを連携させる方法は？",
+      "expected_keywords": [
+        "連携",
+        "統合",
+        "Nablarch",
+        "SLF4J",
+        "アダプタ"
+      ],
+      "expected_sections": ["integration", "overview"],
+      "relevance": "high"
+    },
+    {
+      "id": "adapters-005",
+      "category": "adapters",
+      "file": "adapters/slf4j-adapter.json",
+      "question": "SLF4Jでログフォーマットを変更するには？",
+      "expected_keywords": [
+        "ログフォーマット",
+        "フォーマット設定",
+        "出力形式",
+        "パターン",
+        "カスタマイズ"
+      ],
+      "expected_sections": ["format", "pattern"],
+      "relevance": "high"
+    }
+  ],
+  "evaluation_criteria": {
+    "workflow_execution": {
+      "description": "ワークフローが正しく実行されたか",
+      "checks": [
+        "keyword-search workflowが実行された",
+        "section-judgement workflowが実行された",
+        "適切なツール呼び出しが行われた（Read, Bash+jq）"
+      ]
+    },
+    "keyword_matching": {
+      "description": "期待されるキーワードが回答に含まれているか",
+      "threshold": "80%以上のキーワードが含まれている"
+    },
+    "section_relevance": {
+      "description": "適切なセクションが特定されたか",
+      "checks": [
+        "expected_sectionsに含まれるセクションが特定された",
+        "関連性の高いセクション（High relevance）が優先された"
+      ]
+    },
+    "knowledge_file_only": {
+      "description": "知識ファイルのみを使って回答したか",
+      "checks": [
+        "LLM訓練データを使用していない",
+        "外部知識を補足していない",
+        "知識ファイルに記載されている情報のみを使用"
+      ]
+    },
+    "token_efficiency": {
+      "description": "トークン効率が適切か",
+      "target": "5,000-15,000 tokens per query"
+    },
+    "tool_call_efficiency": {
+      "description": "ツール呼び出し回数が適切か",
+      "target": "10-20 tool calls per query"
+    }
+  }
+}
