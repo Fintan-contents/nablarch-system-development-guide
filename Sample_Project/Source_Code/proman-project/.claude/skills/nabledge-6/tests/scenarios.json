@@ -1,9 +1,10 @@
 {
   "metadata": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "created": "2026-02-09",
+    "updated": "2026-02-10",
     "description": "Test scenarios for nabledge-6 skill workflow validation",
-    "total_scenarios": 25
+    "total_scenarios": 30
   },
   "scenarios": [
     {
@@ -380,6 +381,118 @@
       ],
       "expected_sections": ["format", "pattern"],
       "relevance": "high"
+    },
+    {
+      "id": "code-analysis-001",
+      "category": "code-analysis",
+      "target_code": "proman-web/src/main/java/com/nablarch/example/proman/web/action/ProjectAction.java",
+      "question": "ProjectActionの構造を理解したい",
+      "expected_components": [
+        "ProjectAction (Action)",
+        "ProjectForm (Form)",
+        "Project (Entity)",
+        "UniversalDao (Nablarch)"
+      ],
+      "expected_knowledge": [
+        "libraries/universal-dao.json",
+        "libraries/data-bind.json"
+      ],
+      "expected_output_sections": [
+        "Overview",
+        "Architecture",
+        "Components",
+        "Flow",
+        "Nablarch Framework Usage"
+      ],
+      "relevance": "high"
+    },
+    {
+      "id": "code-analysis-002",
+      "category": "code-analysis",
+      "target_code": "proman-batch",
+      "question": "proman-batchモジュール全体の構造を教えてください",
+      "expected_components": [
+        "BatchAction (multiple)",
+        "Entity classes",
+        "Nablarch handlers"
+      ],
+      "expected_knowledge": [
+        "processing/nablarch-batch.json",
+        "handlers/batch/data-read-handler.json",
+        "handlers/common/transaction-management-handler.json"
+      ],
+      "expected_output_sections": [
+        "Overview",
+        "Architecture",
+        "Components"
+      ],
+      "relevance": "high"
+    },
+    {
+      "id": "code-analysis-003",
+      "category": "code-analysis",
+      "target_code": "proman-web/src/main/java/com/nablarch/example/proman/web/form",
+      "question": "Formクラスの設計パターンを理解したい",
+      "expected_components": [
+        "Form classes (multiple)",
+        "Bean Validation annotations",
+        "Domain validation"
+      ],
+      "expected_knowledge": [
+        "libraries/data-bind.json"
+      ],
+      "expected_output_sections": [
+        "Overview",
+        "Components",
+        "Nablarch Framework Usage"
+      ],
+      "relevance": "high"
+    },
+    {
+      "id": "code-analysis-004",
+      "category": "code-analysis",
+      "target_code": "proman-common/src/main/java/com/nablarch/example/proman/entity",
+      "question": "Entityクラスの設計を理解したい",
+      "expected_components": [
+        "Entity classes (multiple)",
+        "Table annotations",
+        "UniversalDao integration"
+      ],
+      "expected_knowledge": [
+        "libraries/universal-dao.json"
+      ],
+      "expected_output_sections": [
+        "Overview",
+        "Architecture",
+        "Components"
+      ],
+      "relevance": "high"
+    },
+    {
+      "id": "code-analysis-005",
+      "category": "code-analysis",
+      "target_code": "proman-web/src/main/java/com/nablarch/example/proman/web/action/LoginAction.java",
+      "question": "ログイン機能の実装を詳しく知りたい",
+      "expected_components": [
+        "LoginAction (Action)",
+        "LoginForm (Form)",
+        "SystemAccount (Entity)",
+        "UniversalDao (Nablarch)",
+        "Bean Validation (Nablarch)"
+      ],
+      "expected_knowledge": [
+        "libraries/universal-dao.json",
+        "libraries/data-bind.json",
+        "libraries/database-access.json"
+      ],
+      "expected_output_sections": [
+        "Overview",
+        "Architecture",
+        "Components",
+        "Flow",
+        "Nablarch Framework Usage"
+      ],
+      "relevance": "high"
     }
   ],
   "evaluation_criteria": {
@@ -417,6 +530,28 @@
     "tool_call_efficiency": {
       "description": "ツール呼び出し回数が適切か",
       "target": "10-20 tool calls per query"
+    },
+    "code_explanation_workflow": {
+      "description": "code-analysisワークフローが正しく実行されたか",
+      "checks": [
+        "対象コードが正しく識別された",
+        "依存関係が適切に分析された",
+        "構成要素が適切に分解された",
+        "関連するNablarch知識が検索された",
+        "ドキュメントが生成された（Markdown + Mermaid図）",
+        "ソースコードへの相対パスリンクが含まれている",
+        "Nablarch知識ファイルへのリンクが含まれている"
+      ]
+    },
+    "code_explanation_output": {
+      "description": "出力ドキュメントの品質が適切か",
+      "checks": [
+        "Overview, Architecture, Components, Flow, Nablarch Framework Usageセクションが含まれている",
+        "Mermaid図が適切に生成されている",
+        "構成要素の説明が明確である",
+        "ソースコードへのリンクが正しい",
+        "Nablarch知識の引用が適切である"
+      ]
     }
   }
 }

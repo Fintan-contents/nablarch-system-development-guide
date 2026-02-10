@@ -2,10 +2,11 @@
 
 ## Metadata
 
-- **Version**: 1.0.0
+- **Version**: 1.1.0
 - **Created**: 2026-02-09
-- **Total Scenarios**: 25 (5 per category)
-- **Purpose**: Validate nabledge-6 skill workflow execution (keyword-search + section-judgement)
+- **Updated**: 2026-02-10
+- **Total Scenarios**: 30 (5 per category)
+- **Purpose**: Validate nabledge-6 skill workflows (keyword-search + section-judgement + code-analysis)
 
 ---
 
@@ -494,6 +495,116 @@
 
 ---
 
+## Category 6: Code Analysis (5 scenarios)
+
+### code-analysis-001: ProjectActionの構造理解
+
+**Question**: ProjectActionの構造を理解したい
+
+**Target Code**: proman-web/src/main/java/com/nablarch/example/proman/web/action/ProjectAction.java
+
+**Expected Components**:
+- ProjectAction (Action)
+- ProjectForm (Form)
+- Project (Entity)
+- UniversalDao (Nablarch)
+
+**Expected Knowledge**:
+- libraries/universal-dao.json
+- libraries/data-bind.json
+
+**Expected Output Sections**: Overview, Architecture, Components, Flow, Nablarch Framework Usage
+
+**Expected Relevance**: High
+
+---
+
+### code-analysis-002: proman-batchモジュール全体の理解
+
+**Question**: proman-batchモジュール全体の構造を教えてください
+
+**Target Code**: proman-batch
+
+**Expected Components**:
+- BatchAction (multiple)
+- Entity classes
+- Nablarch handlers
+
+**Expected Knowledge**:
+- processing/nablarch-batch.json
+- handlers/batch/data-read-handler.json
+- handlers/common/transaction-management-handler.json
+
+**Expected Output Sections**: Overview, Architecture, Components
+
+**Expected Relevance**: High
+
+---
+
+### code-analysis-003: Formクラスの設計パターン
+
+**Question**: Formクラスの設計パターンを理解したい
+
+**Target Code**: proman-web/src/main/java/com/nablarch/example/proman/web/form
+
+**Expected Components**:
+- Form classes (multiple)
+- Bean Validation annotations
+- Domain validation
+
+**Expected Knowledge**:
+- libraries/data-bind.json
+
+**Expected Output Sections**: Overview, Components, Nablarch Framework Usage
+
+**Expected Relevance**: High
+
+---
+
+### code-analysis-004: Entityクラスの設計理解
+
+**Question**: Entityクラスの設計を理解したい
+
+**Target Code**: proman-common/src/main/java/com/nablarch/example/proman/entity
+
+**Expected Components**:
+- Entity classes (multiple)
+- Table annotations
+- UniversalDao integration
+
+**Expected Knowledge**:
+- libraries/universal-dao.json
+
+**Expected Output Sections**: Overview, Architecture, Components
+
+**Expected Relevance**: High
+
+---
+
+### code-analysis-005: ログイン機能の詳細実装
+
+**Question**: ログイン機能の実装を詳しく知りたい
+
+**Target Code**: proman-web/src/main/java/com/nablarch/example/proman/web/action/LoginAction.java
+
+**Expected Components**:
+- LoginAction (Action)
+- LoginForm (Form)
+- SystemAccount (Entity)
+- UniversalDao (Nablarch)
+- Bean Validation (Nablarch)
+
+**Expected Knowledge**:
+- libraries/universal-dao.json
+- libraries/data-bind.json
+- libraries/database-access.json
+
+**Expected Output Sections**: Overview, Architecture, Components, Flow, Nablarch Framework Usage
+
+**Expected Relevance**: High
+
+---
+
 ## Evaluation Criteria
 
 ### 1. Workflow Execution
@@ -548,6 +659,32 @@
 - Read: index.toon読み込み (1回)
 - Bash+jq: .index抽出 (5-10回)
 - Bash+jq: .sections抽出 (5-10回)
+
+### 7. Code Analysis Workflow (code-analysis scenarios only)
+
+code-analysisワークフローが正しく実行されたか確認：
+
+- [ ] 対象コードが正しく識別された
+- [ ] 依存関係が適切に分析された（Read, Grep, Glob使用）
+- [ ] 構成要素が適切に分解された
+- [ ] 関連するNablarch知識が検索された（keyword-search workflow実行）
+- [ ] ドキュメントが生成された（Write tool使用）
+- [ ] Markdown + Mermaid図形式で出力された
+- [ ] ソースコードへの相対パスリンクが含まれている
+- [ ] Nablarch知識ファイルへのリンクが含まれている
+
+### 8. Code Analysis Output Quality (code-analysis scenarios only)
+
+出力ドキュメントの品質が適切か：
+
+- [ ] Overview, Architecture, Components, Flow, Nablarch Framework Usageセクションが含まれている
+- [ ] Mermaid図（依存関係図、シーケンス図）が適切に生成されている
+- [ ] 構成要素の説明が明確である
+- [ ] ソースコードへのリンクが正しい（相対パス）
+- [ ] Nablarch知識の引用が適切である
+- [ ] Expected Componentsが全て記載されている
+- [ ] Expected Knowledgeが参照されている
+- [ ] ファイルパス形式: `work/YYYYMMDD/code-analysis-<target>.md`
 
 ---
 
