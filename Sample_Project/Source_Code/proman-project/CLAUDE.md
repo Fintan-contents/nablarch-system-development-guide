@@ -1,19 +1,19 @@
-# CLAUDE.md - プロジェクト管理システム（Proman）開発ガイド
+# CLAUDE.md - Proman Development Guide
 
-## プロジェクト概要
+## Project Overview
 
-**Proman**（**Pro**ject **Man**agement System）は、Nablarchフレームワークを使用したプロジェクト管理システムです。
+**Proman** (**Pro**ject **Man**agement System) is a project management system built with the Nablarch framework.
 
-### モジュール構成
+### Module Structure
 
-| モジュール名 | 役割 | 説明 |
+| Module Name | Role | Description |
 |------------|------|------|
-| `proman-common` | 共通モジュール | 基盤部品、Entity、ドメインクラス等のプロジェクト共有コンポーネント |
-| `proman-web` | Webモジュール | Webアプリケーション（UIとAction） |
-| `proman-batch` | バッチモジュール | バッチ処理（夜間処理等） |
-| `proman-jmeter` | テストモジュール | 回帰テスト自動実行ツール |
+| `proman-common` | Common Module | Shared components including foundation classes, entities, and domain classes |
+| `proman-web` | Web Module | Web application (UI and Actions) |
+| `proman-batch` | Batch Module | Batch processing (nightly jobs, etc.) |
+| `proman-jmeter` | Test Module | Automated regression testing tool |
 
-### 技術スタック
+### Technology Stack
 
 - **Java**: 21
 - **Framework**: Nablarch 6u2
@@ -26,250 +26,179 @@
 - **Code Coverage**: Jacoco
 - **CI/CD**: Jenkins
 
-## 開発ルール
+## Development Rules
 
-### 1. コーディング規約
+### 1. Coding Standards
 
-#### 1.1 静的解析ツールの遵守
+#### 1.1 Static Analysis Tools
 
-- **Checkstyle**: `tools/static-analysis/checkstyle/nablarch-checkstyle.xml`の設定に従う
-- **SpotBugs**: バグパターンを検出し、必ず修正する
-- **FindSecBugs**: セキュリティ脆弱性を検出し、必ず修正する
-- **使用不許可APIチェック**: Nablarchの公開APIのみを使用する
+- **Checkstyle**: Follow `tools/static-analysis/checkstyle/nablarch-checkstyle.xml` configuration
+- **SpotBugs**: Detect and fix bug patterns
+- **FindSecBugs**: Detect and fix security vulnerabilities
+- **Unpermitted API Check**: Use only Nablarch public APIs
 
-#### 1.2 セキュリティ
+#### 1.2 Security
 
-以下の脆弱性を作り込まないこと：
-- SQLインジェクション
-- XSS（クロスサイトスクリプティング）
-- コマンドインジェクション
-- パストラバーサル
-- CSRF（クロスサイトリクエストフォージェリ）
+Prevent the following vulnerabilities:
+- SQL Injection
+- XSS (Cross-Site Scripting)
+- Command Injection
+- Path Traversal
+- CSRF (Cross-Site Request Forgery)
 
-#### 1.3 コーディングスタイル
+#### 1.3 Coding Style
 
-- Java標準のコーディング規約に準拠
-- インデント：スペース4つ
-- 改行コード：LF
-- 文字コード：UTF-8
-- 命名規則：
-  - クラス名：PascalCase
-  - メソッド名・変数名：camelCase
-  - 定数：UPPER_SNAKE_CASE
+- Follow standard Java coding conventions
+- Indentation: 4 spaces
+- Line endings: LF
+- Character encoding: UTF-8
+- Naming conventions:
+  - Class names: PascalCase
+  - Method/variable names: camelCase
+  - Constants: UPPER_SNAKE_CASE
 
-### 2. ファイル配置規約
+### 2. File Structure
 
 ```
 proman-project/
-├── proman-common/          # 共通モジュール
-│   ├── src/main/java/      # Javaソース
+├── proman-common/          # Common module
+│   ├── src/main/java/      # Java source
 │   │   └── com/nablarch/example/proman/
-│   │       ├── entity/     # Entityクラス（DB定義と対応）
-│   │       ├── common/     # 共通ユーティリティ
+│   │       ├── entity/     # Entity classes (mapped to DB)
+│   │       ├── common/     # Common utilities
 │   │       └── ...
-│   ├── src/main/resources/ # 設定ファイル・SQLファイル等
-│   └── src/test/           # テストコード
-├── proman-web/             # Webモジュール
-│   ├── src/main/java/      # Javaソース
+│   ├── src/main/resources/ # Config files, SQL files, etc.
+│   └── src/test/           # Test code
+├── proman-web/             # Web module
+│   ├── src/main/java/      # Java source
 │   │   └── com/nablarch/example/proman/web/
-│   │       ├── action/     # Actionクラス（Controller）
-│   │       ├── form/       # Formクラス（入力検証）
+│   │       ├── action/     # Action classes (Controllers)
+│   │       ├── form/       # Form classes (Input validation)
 │   │       └── ...
-│   ├── src/main/webapp/    # JSP、HTML、CSS、JavaScript
-│   └── src/test/           # テストコード
-├── proman-batch/           # バッチモジュール
-│   ├── src/main/java/      # Javaソース
-│   └── src/test/           # テストコード
-└── tools/                  # 静的解析設定ファイル
+│   ├── src/main/webapp/    # JSP, HTML, CSS, JavaScript
+│   └── src/test/           # Test code
+├── proman-batch/           # Batch module
+│   ├── src/main/java/      # Java source
+│   └── src/test/           # Test code
+└── tools/                  # Static analysis config files
     └── static-analysis/
 ```
 
-### 3. テスト方針
+### 3. Testing Policy
 
-#### 3.1 単体テスト
+#### 3.1 Unit Tests
 
-- JUnit 5を使用
-- テストカバレッジ：原則として全てのビジネスロジックをカバー
-- Entityクラスはカバレッジ対象外（自動生成のため）
-- テストクラス名：`<対象クラス名>Test`
-- テストメソッド名：日本語可（例：`testログイン成功時の動作()`）
+- Use JUnit 5
+- Test coverage: Cover all business logic in principle
+- Entity classes are excluded from coverage (auto-generated)
+- Test class naming: `<TargetClassName>Test`
+- Test method naming: Japanese allowed (e.g., `testログイン成功時の動作()`)
 
 #### 3.2 ArchUnit
 
-- アーキテクチャテストを実施
-- レイヤー間の依存関係をテストで保証
-- パッケージ構造の規約をテストで保証
+- Conduct architecture tests
+- Ensure layer dependencies through tests
+- Ensure package structure conventions through tests
 
-#### 3.3 テストデータ
+#### 3.3 Test Data
 
-- `src/test/resources/data/`にCSV形式で配置
-- テストクラス単位またはテストメソッド単位でデータを準備
+- Place in `src/test/resources/data/` in CSV format
+- Prepare data per test class or test method
 
-### 4. データベース
+### 4. Database
 
 #### 4.1 Entity
 
-- `proman-common/src/main/java/com/nablarch/example/proman/entity/`に配置
-- Gsp-dba-maven-pluginで自動生成
-- **手動編集禁止**：スキーマ変更後に再生成する
+- Place in `proman-common/src/main/java/com/nablarch/example/proman/entity/`
+- Auto-generated by Gsp-dba-maven-plugin
+- **Manual editing prohibited**: Regenerate after schema changes
 
 #### 4.2 SQL
 
-- SQLファイルは`src/main/resources/`配下に配置
-- Nablarchの命名規則に従う
-- 動的SQLはNablarchのSQL記述ルールに従う
+- Place SQL files under `src/main/resources/`
+- Follow Nablarch naming conventions
+- Follow Nablarch SQL syntax rules for dynamic SQL
 
-### 5. Nablarch固有のルール
+### 5. Nablarch-Specific Rules
 
-#### 5.1 Actionクラス（Web）
+#### 5.1 Action Classes (Web)
 
-- `proman-web/src/main/java/com/nablarch/example/proman/web/action/`に配置
-- クラス名：`<機能名>Action`
-- メソッドは業務アクションメソッドとして実装
-- `ExecutionContext`を引数に取る
+- Place in `proman-web/src/main/java/com/nablarch/example/proman/web/action/`
+- Class naming: `<FeatureName>Action`
+- Implement methods as business action methods
+- Accept `ExecutionContext` as argument
 
-#### 5.2 Formクラス
+#### 5.2 Form Classes
 
-- `proman-web/src/main/java/com/nablarch/example/proman/web/form/`に配置
-- Bean Validationアノテーションで入力検証を定義
-- ドメインバリデーションとの組み合わせ
+- Place in `proman-web/src/main/java/com/nablarch/example/proman/web/form/`
+- Define input validation with Bean Validation annotations
+- Combine with domain validation
 
-#### 5.3 バッチアクション
+#### 5.3 Batch Actions
 
-- `proman-batch/src/main/java/com/nablarch/example/proman/batch/`に配置
-- `BatchAction`インターフェースを実装
+- Place in `proman-batch/src/main/java/com/nablarch/example/proman/batch/`
+- Implement `BatchAction` interface
 
 ### 6. Maven
 
-#### 6.1 ビルドコマンド
+#### 6.1 Build Commands
 
 ```bash
-# クリーン＆ビルド
+# Clean & Build
 mvn clean install
 
-# 静的解析実行
+# Run static analysis
 mvn checkstyle:check spotbugs:check
 
-# テスト実行
+# Run tests
 mvn test
 
-# カバレッジレポート生成
+# Generate coverage report
 mvn jacoco:report
 ```
 
-#### 6.2 モジュール間依存
+#### 6.2 Module Dependencies
 
 - `proman-web` → `proman-common`
 - `proman-batch` → `proman-common`
-- 循環依存禁止
+- Circular dependencies prohibited
 
-### 7. バージョン管理（Git）
+## Claude Working Guidelines
 
-#### 7.1 コミットの単位
+### Required Checks
 
-- **目的単位でコミットを分割する**
-  - 1つのコミットには1つの目的（機能追加、バグ修正、リファクタリング等）のみを含める
-  - 複数の異なる目的の変更を1つのコミットにまとめない
-  - テストコードの追加・修正は対応する実装コードと同じコミットに含めてよい
+1. **Read files**: Always read target files before modifying code to understand current state
+2. **Static analysis**: Ensure code changes pass static analysis tools
+3. **Tests**: Do not break existing tests; add new tests as needed
+4. **Security**: Do not introduce OWASP Top 10 vulnerabilities
 
-#### 7.2 コミットメッセージ
+### Working Process
 
-- 簡潔かつ明確に記述する
-- 何を変更したかではなく、なぜ変更したかを記述する
-- 日本語で記述する
-- 形式：`<種別>: <変更内容の概要>`
-  - 種別の例：`feat`（機能追加）、`fix`（バグ修正）、`refactor`（リファクタリング）、`test`（テスト追加）、`docs`（ドキュメント）
+1. **Understand requirements**: Accurately understand user requests (ask questions if unclear)
+2. **Investigate impact**: Identify target files and dependencies
+3. **Implementation**: Implement according to Nablarch conventions
+4. **Testing**: Run unit tests and verify behavior
+5. **Static analysis**: Run Checkstyle and SpotBugs to ensure no issues
 
-#### 7.3 コミット前の確認
+### Prohibited Actions
 
-- 静的解析（Checkstyle、SpotBugs）が通ることを確認
-- 単体テストが全て成功することを確認
-- 不要なファイル（IDE設定ファイル、ビルド成果物等）を含めない
+- Manual editing of Entity classes
+- Ignoring static analysis errors
+- Changing code without tests
+- Coding without security considerations
+- Excessive refactoring (unrequested changes)
+- Adding unused features (violates YAGNI principle)
+- Adding unnecessary comments or documentation
 
-#### 7.4 プッシュ
+### Recommendations
 
-- **コミット後は必ずプッシュする**
-- 作業内容の喪失を防ぐため、コミットとプッシュは一連の操作として実施する
-- リモートリポジトリに作業内容を常に保存することで安全性を確保する
+- Write simple, maintainable code
+- Follow Nablarch best practices
+- Match existing code style
+- Keep commit messages concise and clear
 
-## Claude作業時の注意事項
+## References
 
-### 作業ディレクトリの制限
-
-**重要**: `/home/tie303177/work/nablarch-system-development-guide/Sample_Project/Source_Code/proman-project` 配下のファイルのみを対象に作業すること。
-
-- このディレクトリ外のファイルへのアクセス・読み込み・変更は禁止
-- 親ディレクトリや他のプロジェクトへの移動は禁止
-- 全てのファイルパスは `proman-project` をルートとして扱う
-
-### 権限設定
-
-Claude Codeの権限は`.claude/settings.json`で制御しています。
-
-#### 設計方針
-
-| 分類 | 目的 | 説明 |
-|------|------|------|
-| **allow** | 頻繁に使うコマンド・ツールを許可 | ユーザー確認（ask）を減らし、開発効率を向上 |
-| **deny** | allowの制限 | ホストの保護、機密情報の保護、破壊行為の防止 |
-| **ask** | それ以外すべて | ユーザーが個別に判断 |
-
-#### denyの保護観点（allowの制限）
-
-| 観点 | ルール | 理由 |
-|------|--------|------|
-| **allowの例外** | `git *`の中で`git clone http*`, `git clone git@*`を禁止<br>`rm *`の中で`rm -rf /`, `rm -rf /*`を禁止 | ネットワーク経由の不正なコードダウンロード防止<br>システムルート削除の防止 |
-| **機密情報保護** | `Read/Edit/Write`で`.env`, `.aws`, `.ssh`を禁止 | 認証情報・秘密鍵・環境変数の漏洩防止 |
-| **ホスト保護** | 全allowコマンド・ツールで`/mnt/*`, `*.exe`を禁止 | WSL環境からWindowsホスト領域への不正アクセス防止 |
-
-※ allowにないコマンド（`sudo`, `dd`, `curl`, `reboot`等）は自動的にaskとなりユーザー判断
-
-具体的な設定内容は`.claude/settings.json`を参照してください。
-
-### 必須確認事項
-
-1. **ファイル読み込み**: コードを変更する前に必ず対象ファイルを読み込んで現状を把握する
-2. **静的解析**: コード変更後は静的解析ツールのチェックを通過させる
-3. **テスト**: 既存テストを壊さないこと、必要に応じて新規テストを追加する
-4. **セキュリティ**: OWASP Top 10の脆弱性を作り込まない
-
-### 作業手順
-
-1. **要件確認**: ユーザーの要求を正確に理解する（不明点は質問する）
-2. **影響範囲調査**: 変更対象のファイルと依存関係を把握する
-3. **実装**: Nablarchの規約に従って実装する
-4. **テスト**: 単体テストを実行し、動作を確認する
-5. **静的解析**: Checkstyle、SpotBugsを実行し、問題がないことを確認する
-
-### 禁止事項
-
-- Entityクラスの手動編集
-- 静的解析エラーの放置
-- テストなしでのコード変更
-- セキュリティを考慮しないコーディング
-- 過度なリファクタリング（要求されていない変更）
-- 未使用の機能追加（YAGNI原則に反する）
-- 不要なコメントやドキュメントの追加
-
-### 推奨事項
-
-- シンプルで保守性の高いコードを書く
-- Nablarchのベストプラクティスに従う
-- 既存コードのスタイルに合わせる
-- コミットメッセージは簡潔かつ明確に
-
-### 作業記録
-
-- **ディレクトリ**: `work/yyyymmdd/`（例：`work/20260209/`）
-- **ファイル名**: 英語で簡潔に（例：`add-validation.md`）
-- **記載内容**: 最小限の情報のみ
-  - 何をしたか（変更ファイルと概要）
-  - 結果（成功/問題点）
-  - 次のステップ（あれば）
-- **タイミング**: 作業完了時に作成
-
-## 参考情報
-
-- [Nablarch公式ドキュメント](https://nablarch.github.io/docs/LATEST/doc/)
-- プロジェクト開発ガイド：`../../サンプルプロジェクト開発ガイド/`
-- 静的解析設定：`tools/static-analysis/`
+- [Nablarch Official Documentation](https://nablarch.github.io/docs/LATEST/doc/)
+- Project Development Guide: `../../サンプルプロジェクト開発ガイド/`
+- Static analysis config: `tools/static-analysis/`
