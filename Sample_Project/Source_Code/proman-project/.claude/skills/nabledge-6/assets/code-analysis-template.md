@@ -3,7 +3,7 @@
 **Generated**: {{generation_date}} {{generation_time}}
 **Target**: {{target_description}}
 **Modules**: {{modules}}
-**Analysis Duration**: {{analysis_duration}}
+**Analysis Duration**: {{DURATION_PLACEHOLDER}}
 
 ---
 
@@ -61,13 +61,13 @@
 
 {{source_files_links}}
 
-### Nablarch Knowledge
+### Knowledge Base (Nabledge-6)
 
-{{knowledge_files_links}}
+{{knowledge_base_links}}
 
 ### Official Documentation
 
-- [Nablarch Official Docs](https://nablarch.github.io/docs/LATEST/doc/)
+{{official_docs_links}}
 
 ---
 

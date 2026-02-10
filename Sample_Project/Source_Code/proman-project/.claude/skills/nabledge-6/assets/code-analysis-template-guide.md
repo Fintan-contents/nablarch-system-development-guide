@@ -41,7 +41,9 @@ Replace the following placeholders with actual content (using `{{variable}}` for
 - `{{target_name}}`: Name of analyzed code/feature (e.g., "LoginAction", "ログイン機能")
 - `{{generation_date}}`: Current date in YYYY-MM-DD format (e.g., "2026-02-10")
 - `{{generation_time}}`: Current time in HH:MM:SS format (e.g., "14:30:15")
-- `{{analysis_duration}}`: Analysis duration text (e.g., "約2分", "約30秒")
+- `{{DURATION_PLACEHOLDER}}`: Placeholder for analysis duration (replaced by sed after Write completes)
+  - Initial value: "{{DURATION_PLACEHOLDER}}" (literal string in template)
+  - Final value: "約2分30秒", "約45秒", etc. (replaced by workflow Step 3.3-7)
 - `{{target_description}}`: One-line description of the target
 - `{{modules}}`: Affected modules (e.g., "proman-web, proman-common")
 
@@ -69,8 +71,9 @@ Replace the following placeholders with actual content (using `{{variable}}` for
 
 ### References Section
 
-- `{{source_files_links}}`: List of source file links
-- `{{knowledge_files_links}}`: List of knowledge file links
+- `{{source_files_links}}`: List of source file links with relative paths
+- `{{knowledge_base_links}}`: List of knowledge base links (`.claude/skills/nabledge-6/docs`)
+- `{{official_docs_links}}`: List of official Nablarch documentation links
 
 ## Usage Instructions
 
@@ -86,7 +89,7 @@ Read: .claude/skills/nabledge-6/assets/code-analysis-template.md
 
 Based on analysis results from workflow Steps 0-5, build content for each placeholder:
 
-1. **Header placeholders**: Use current timestamp and calculated duration
+1. **Header placeholders**: Use current timestamp ({{DURATION_PLACEHOLDER}} stays as-is)
 2. **Overview**: Summarize purpose and architecture
 3. **Architecture diagrams**: Generate Mermaid classDiagram (class names only)
 4. **Flow diagrams**: Generate Mermaid sequenceDiagram (with phases)
@@ -94,9 +97,11 @@ Based on analysis results from workflow Steps 0-5, build content for each placeh
 6. **Nablarch usage**: Extract framework usage patterns
 7. **References**: Build relative file path links
 
-### Step 3: Replace Placeholders
+### Step 3: Replace Placeholders (except duration)
 
-Replace all `{{variable}}` placeholders with actual content.
+Replace all `{{variable}}` placeholders with actual content, EXCEPT {{DURATION_PLACEHOLDER}}.
+
+**IMPORTANT**: Leave {{DURATION_PLACEHOLDER}} as-is. It will be replaced after Write completes.
 
 ### Step 4: Write Output File
 
@@ -104,8 +109,31 @@ Use Write tool to create the documentation file:
 
 ```
 file_path: work/YYYYMMDD/code-analysis-<target>.md
-content: [Generated documentation with placeholders replaced]
+content: [Generated documentation with {{DURATION_PLACEHOLDER}} still present]
 ```
+
+### Step 5: Calculate and Replace Duration
+
+**IMMEDIATELY after Write completes**:
+
+**Step 5.1**: Get end time and calculate duration
+```bash
+date '+%Y-%m-%d %H:%M:%S'
+```
+- Calculate elapsed time from Step 0 start time
+- Format as Japanese text (e.g., "約5分18秒")
+
+**Step 5.2**: Replace placeholder using sed
+```bash
+sed -i 's/{{DURATION_PLACEHOLDER}}/約5分18秒/g' work/YYYYMMDD/code-analysis-<target>.md
+```
+
+**Error handling**:
+- If sed fails, inform user of the calculated duration
+- User can manually edit the file to replace {{DURATION_PLACEHOLDER}}
+- The documentation remains valid even with the placeholder
+
+**Why this matters**: This ensures the analysis duration includes all work including the Write operation itself, providing accurate timing that matches the "Baked for" time shown in the IDE.
 
 ## Example Placeholder Values
 
@@ -118,6 +146,73 @@ content: [Generated documentation with placeholders replaced]
 {{analysis_duration}} = "約2分"
 {{target_description}} = "期間内プロジェクト一覧出力バッチアクション"
 {{modules}} = "proman-batch"
+```
+
+### {{component_summary_table}}
+
+```markdown
+| Component | Role | Type | Dependencies |
+|-----------|------|------|--------------|
+| ExportProjectsInPeriodAction | CSV出力バッチアクション | Action | DatabaseRecordReader, ObjectMapper, FilePathSetting |
+| ProjectDto | プロジェクト情報DTO | Bean | なし |
+| FIND_PROJECT_IN_PERIOD | 期間内プロジェクト検索SQL | SQL | なし |
+```
+
+### {{nablarch_usage}}
+
+For each Nablarch component, include:
+1. **クラス名**: Full class name
+2. **説明**: Brief description
+3. **使用方法**: Code example
+4. **重要ポイント**: Critical points (why use, gotchas, performance)
+5. **このコードでの使い方**: How it's used in analyzed code
+6. **詳細**: Link to knowledge base
+
+**Example**:
+
+```markdown
+### ObjectMapper
+
+**クラス**: `nablarch.common.databind.ObjectMapper`
+
+**説明**: CSVやTSV、固定長データをJava Beansとして扱う機能を提供する
+
+**使用方法**:
+\`\`\`java
+ObjectMapper<ProjectDto> mapper = ObjectMapperFactory.create(ProjectDto.class, outputStream);
+mapper.write(dto);
+mapper.close();
+\`\`\`
+
+**重要ポイント**:
+- ✅ **必ず`close()`を呼ぶ**: バッファをフラッシュし、リソースを解放する（`terminate()`で実施）
+- ⚠️ **大量データ処理時**: メモリに全データを保持しないため、大量データでも問題なく処理可能
+- ⚠️ **型変換の制限**: `EntityUtil`と同様に、型変換が必要な項目は個別設定が必要
+- 💡 **アノテーション駆動**: `@Csv`, `@CsvFormat`でフォーマットを宣言的に定義できる
+
+**このコードでの使い方**:
+- `initialize()`でProjectDto用のObjectMapperを生成
+- `handle()`で各レコードを`mapper.write(dto)`で出力
+- `terminate()`で`mapper.close()`してリソース解放
+
+**詳細**: [データバインド知識ベース](../../.claude/skills/nabledge-6/docs/features/libraries/data-bind.md)
+```
+
+### {{knowledge_base_links}}
+
+```markdown
+- [Nablarchバッチ処理](../../.claude/skills/nabledge-6/docs/features/processing/nablarch-batch.md) - BatchActionの詳細、DB to FILEパターン
+- [データバインド](../../.claude/skills/nabledge-6/docs/features/libraries/data-bind.md) - ObjectMapperの詳細仕様
+- [業務日付管理](../../.claude/skills/nabledge-6/docs/features/libraries/business-date.md) - BusinessDateUtilの使い方
+- [ファイルパス管理](../../.claude/skills/nabledge-6/docs/features/libraries/file-path-management.md) - FilePathSettingの設定方法
+```
+
+### {{official_docs_links}}
+
+```markdown
+- [Nablarchバッチ処理](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/batch/index.html)
+- [データバインド](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/data_io/data_bind.html)
+- [業務日付管理](https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/libraries/system_utility/business_date.html)
 ```
 
 ## Tips
