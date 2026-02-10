@@ -90,15 +90,15 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 ```
 
 **Type Examples**:
-- `feat: ユーザー認証機能を追加` (Add user authentication)
-- `fix: ログイン時のセッションタイムアウトを修正` (Fix session timeout on login)
-- `refactor: API層のエラーハンドリングを改善` (Improve error handling in API layer)
-- `update: ユーザー設定画面のUIを改善` (Improve user settings UI)
-- `docs: READMEにセットアップ手順を追加` (Add setup guide to README)
+- `feat: Add user authentication feature`
+- `fix: Fix session timeout on login`
+- `refactor: Improve error handling in API layer`
+- `update: Improve user settings UI`
+- `docs: Add setup guide to README`
 
 **Generation Rules**:
 - First line: Target 50 chars (max 70)
-- Write in Japanese (project requirement)
+- Follow project language requirements (check `.claude/rules/commit-rules.md`)
 - Convey "why" not just "what"
 - Use clear action verbs ("add", "fix", "improve")
 - No technical details in title
@@ -106,7 +106,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 **Project-Specific Commit Rules** (from `.claude/rules/commit-rules.md`):
 1. **Split by purpose**: Each commit = one purpose (feature/fix/refactor)
 2. **Write clearly**: Describe why the change was made
-3. **Japanese**: Write commit messages in Japanese
+3. **Language**: Follow project requirements for commit message language
 4. **Format**: `<type>: <summary>`
 5. **Test code**: Can be included in same commit as implementation
 6. **Always push**: Push immediately after commit to prevent work loss

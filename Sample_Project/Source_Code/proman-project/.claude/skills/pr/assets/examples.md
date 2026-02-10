@@ -14,7 +14,7 @@ git checkout feature/add-login
 
 # Commit changes (assuming already completed)
 git add .
-git commit -m "feat: ログイン機能を追加"
+git commit -m "feat: Add login functionality"
 
 # Create PR
 /pr create
@@ -32,7 +32,7 @@ git commit -m "feat: ログイン機能を追加"
 
 **PR**: https://github.com/owner/repo/pull/123
 **Branch**: feature/add-login → main
-**Title**: ログイン機能を追加
+**Title**: Add login functionality
 
 Please request a review from reviewers.
 ```
@@ -68,7 +68,7 @@ Please request a review from reviewers.
 
 **Example Output**:
 ```
-## PR Review Response Completed
+## PR Review Response Complete
 
 **PR**: https://github.com/owner/repo/pull/123
 
@@ -77,7 +77,7 @@ Please request a review from reviewers.
 - Questioned and replied: 1 item
 - Skipped: 0 items
 
-Please ask reviewers to resolve
+Please request reviewer to resolve threads
 ```
 
 ### 4. Respond to Specific PR Review Comments
@@ -126,19 +126,19 @@ Or
 
 **Example Output**:
 ```
-## Merge Completed
+## Merge Complete
 
 **PR**: https://github.com/owner/repo/pull/123
 **Branch**: feature/add-login → main
 
 ### Actions Performed
-- PR merged
-- Remote branch 'feature/add-login' deleted (automatic deletion on GitHub side)
-- Local branch 'feature/add-login' deleted
+- Merged PR
+- Deleted remote branch 'feature/add-login' (automatically deleted by GitHub)
+- Deleted local branch 'feature/add-login'
 - Switched to branch 'main'
-- Pulled latest code
+- Fetched latest code
 
-Good work
+Good work!
 ```
 
 ## Advanced Usage Examples
@@ -256,7 +256,7 @@ git checkout -b feature/user-profile
 
 # 3. Commit
 git add .
-git commit -m "feat: ユーザープロフィール機能を追加"
+git commit -m "feat: Add user profile feature"
 
 # 4. Create PR
 /pr create
@@ -274,7 +274,7 @@ git commit -m "feat: ユーザープロフィール機能を追加"
 
 # 8. Merge
 /pr merge
-# → Merge completed, branch cleanup completed
+# → Merge complete, branch cleanup complete
 ```
 
 ### Team Development Tips
@@ -304,7 +304,7 @@ git commit -m "feat: ユーザープロフィール機能を追加"
 
 ```bash
 # Create as draft PR (for sharing before review)
-gh pr create --draft --title "WIP: 新機能開発中" --body "まだ作業中です"
+gh pr create --draft --title "WIP: Developing new feature" --body "Still work in progress"
 ```
 
 ### Specify Reviewers
@@ -357,22 +357,22 @@ gh pr merge 123 --auto --squash --delete-branch
 By placing `.github/pull_request_template.md` in the project, you can set a default template for PR creation:
 
 ```markdown
-## 変更概要
-<!-- 変更の目的と内容を記載 -->
+## Summary
+<!-- Describe the purpose and content of changes -->
 
-## 変更内容
-- [ ] 機能追加
-- [ ] バグ修正
-- [ ] リファクタリング
+## Changes
+- [ ] Feature addition
+- [ ] Bug fix
+- [ ] Refactoring
 
-## テスト
-- [ ] 単体テスト追加
-- [ ] 動作確認完了
+## Testing
+- [ ] Unit tests added
+- [ ] Manual testing completed
 
-## レビューポイント
-<!-- 特に注目してほしい点を記載 -->
+## Review Points
+<!-- Describe points that require special attention -->
 
-## 関連Issue
+## Related Issues
 Closes #
 ```
 
@@ -383,7 +383,7 @@ Customize to automatically run tests after review response:
 ```bash
 # Customize workflows/resolve.md
 # Add the following after fixes:
-echo "関連テストを実行中..."
+echo "Running related tests..."
 npm test -- --related "$modified_file"
 ```
 

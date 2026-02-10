@@ -55,7 +55,7 @@ Use `/git commit` to commit changes.
 ## Commit Complete
 
 **Branch**: add-user-auth
-**Commit Message**: feat: ユーザー認証機能を追加
+**Commit Message**: feat: Add user authentication feature
 **Changed Files**: 3 files
 
 Changes have been pushed to remote.
@@ -178,7 +178,7 @@ These files will be excluded from the commit.
 ## Commit Complete
 
 **Branch**: add-feature
-**Commit Message**: feat: 新機能を追加
+**Commit Message**: feat: Add new feature
 **Changed Files**: 5 files (2 sensitive files excluded)
 ```
 
@@ -217,7 +217,7 @@ Remote has new commits. Rebasing and retrying push...
 ## Commit Complete
 
 **Branch**: add-feature
-**Commit Message**: feat: 新機能を追加
+**Commit Message**: feat: Add new feature
 **Changed Files**: 3 files
 
 Changes have been pushed to remote.

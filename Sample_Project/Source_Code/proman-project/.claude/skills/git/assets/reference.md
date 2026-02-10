@@ -36,18 +36,18 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 
 | Type | Description | Example |
 |------|-------------|---------|
-| `feat` | New feature | `feat: ユーザー認証機能を追加` |
-| `fix` | Bug fix | `fix: ログイン時のセッションタイムアウトを修正` |
-| `refactor` | Refactoring | `refactor: API層のエラーハンドリングを改善` |
-| `update` | Improvement to existing feature | `update: ユーザー設定画面のUIを改善` |
-| `docs` | Documentation | `docs: READMEにセットアップ手順を追加` |
-| `test` | Tests | `test: ユーザー認証のテストを追加` |
-| `chore` | Build/config | `chore: 依存パッケージを最新化` |
+| `feat` | New feature | `feat: Add user authentication feature` |
+| `fix` | Bug fix | `fix: Fix session timeout on login` |
+| `refactor` | Refactoring | `refactor: Improve error handling in API layer` |
+| `update` | Improvement to existing feature | `update: Improve user settings UI` |
+| `docs` | Documentation | `docs: Add setup guide to README` |
+| `test` | Tests | `test: Add authentication tests` |
+| `chore` | Build/config | `chore: Update dependencies` |
 
 ### Message Guidelines
 
 1. **First line**: Target 50 chars (max 70)
-2. **Language**: Japanese (project requirement)
+2. **Language**: Follow project requirements (check `.claude/rules/commit-rules.md`)
 3. **Focus**: Convey "why" not just "what"
 4. **Style**: Use clear action verbs
 5. **Scope**: No technical details in title
