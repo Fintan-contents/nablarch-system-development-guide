@@ -139,3 +139,8 @@ fabric.properties
 
 #VSCode
 .vscode/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
