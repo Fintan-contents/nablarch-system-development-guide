@@ -32,43 +32,37 @@ NTF（Nablarch Testing Framework）のAI対応として、既存のExcelテス�
 
 # Tasks
 
-### #1: Excelテストデータ（xlsx）をYAMLに変換してリポジトリに配置する
+### #1: 現状のビルド・テストで全PASSを確認する
 
-**Purpose**: `TestDataConverter` を使って2つのExcelテストデータをYAMLに変換し、各テストのソースツリー内に配置する。
+**Purpose**: 移行前のベースラインとして、proman-project と climan-project のビルドとテストが全てパスすることを確認する。
 
 **Prerequisites**: none
 
 **Steps**:
 
-- [ ] `nablarch-testing-converter` の `TestDataConverter.convert()` API を確認し、変換実行方法を決定する（Maven exec plugin による一時的な変換プログラム、またはGroovy/Javaスクリプト）
-- [ ] `proman-batch` の `ExportProjectsInPeriodActionRequestTest.xlsx` をYAMLに変換する
-- [ ] `climan-project` の `ClientActionTest.xlsx` をYAMLに変換する
-- [ ] 変換済みのYAMLファイルを各テストクラスと同じディレクトリ（`src/test/java/...`）に配置する
-- [ ] 変換済みYAMLファイルをgitに追加する
+- [ ] `proman-project` で `mvn test` を実行する
+- [ ] `climan-project` で `mvn test` を実行する
+- [ ] 全テストがパスすることを確認する（失敗があれば報告して止まる）
 - [ ] self-check (OK/NG per completion criterion, record in checks/task-1.md)
 - [ ] QA expert review (subagent)
-- [ ] language expert review (subagent)
-- [ ] software-engineering expert review (subagent)
 - [ ] user review
 
 **Completion criteria**:
 
-- `proman-batch` の `ExportProjectsInPeriodActionRequestTest.yaml`（またはディレクトリ）が `src/test/java/com/nablarch/example/proman/batch/project/` 配下に存在する
-- `climan-project` の `ClientActionTest.yaml`（またはディレクトリ）が `src/test/java/com/nablarch/example/climan/rest/client/` 配下に存在する
-- 変換されたYAMLが `ntf-testdata-yaml-schema.json` スキーマに対して有効である（変換ツールが検証済み）
-- gitステータスで変換済みYAMLがtracked filesとして存在する
+- `proman-project` の `mvn test` が BUILD SUCCESS で終了する
+- `climan-project` の `mvn test` が BUILD SUCCESS で終了する
 
-### #2: pom.xml に nablarch-testing-yaml 依存を追加する
+### #2: pom.xml に nablarch-testing-yaml / nablarch-testing-converter の依存を追加する
 
-**Purpose**: `proman-batch` と `climan-project` の `pom.xml` に `nablarch-testing-yaml` をtest依存として追加する。
+**Purpose**: `proman-batch` と `climan-project` の `pom.xml` に `nablarch-testing-yaml` と `nablarch-testing-converter` をtest依存として追加する。
 
-**Prerequisites**: none（#1と並行可能だが、#3の前に完了が必要）
+**Prerequisites**: #1
 
 **Steps**:
 
-- [ ] `proman-batch/pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` をtest scopeで追加する
-- [ ] `climan-project/pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` をtest scopeで追加する
-- [ ] `mvn dependency:resolve -Dclassifier=test` などで依存が解決できることを確認する
+- [ ] `proman-batch/pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` と `nablarch-testing-converter:1.0.0-SNAPSHOT` をtest scopeで追加する
+- [ ] `climan-project/pom.xml` に同様に追加する
+- [ ] `mvn dependency:resolve` で依存が解決できることを確認する
 - [ ] self-check (OK/NG per completion criterion, record in checks/task-2.md)
 - [ ] QA expert review (subagent)
 - [ ] software-engineering expert review (subagent)
@@ -76,24 +70,48 @@ NTF（Nablarch Testing Framework）のAI対応として、既存のExcelテス�
 
 **Completion criteria**:
 
-- `proman-batch/pom.xml` に `nablarch-testing-yaml` のtest依存が追加されている
-- `climan-project/pom.xml` に `nablarch-testing-yaml` のtest依存が追加されている
-- `mvn -f proman-batch/pom.xml dependency:resolve` が成功する
-- `mvn -f climan-project/pom.xml dependency:resolve` が成功する
+- `proman-batch/pom.xml` に `nablarch-testing-yaml` と `nablarch-testing-converter` のtest依存が追加されている
+- `climan-project/pom.xml` に同様の依存が追加されている
+- 各モジュールの `mvn dependency:resolve` が成功する
 
-### #3: unit-test.xml を更新して YamlTestDataParser を使うよう設定する
+### #3: ExcelテストデータをYAMLに変換してリポジトリに配置する
 
-**Purpose**: 各プロジェクトのテスト用コンポーネント設定を変更し、`testDataParser` に `YamlTestDataParser` を使うよう切り替える。
+**Purpose**: `TestDataConverter` を使って2つのExcelテストデータをYAMLに変換し、各テストのソースツリー内に配置する。
 
-**Prerequisites**: #1, #2
+**Prerequisites**: #2
 
 **Steps**:
 
-- [ ] `nablarch-testing-yaml` の `unit-test-yaml.xml` と `unit-test-yaml.config` のパターンを確認する
-- [ ] `proman-batch/src/test/resources/unit-test.xml`（またはオーバーライドファイル）に `YamlTestDataParser` の設定を追加し、`nablarch.test.resource-root` を変換済みYAMLの配置先に合わせる
-- [ ] `climan-project/src/test/resources/unit-test.xml`（またはオーバーライドファイル）に同様の設定を追加する
-- [ ] `interpreters` として `yamlInterpreters`（`QuotationTrimmer` を含まない）が使われるよう設定する
+- [ ] `proman-batch` の `ExportProjectsInPeriodActionRequestTest.xlsx` をYAMLに変換する
+- [ ] `climan-project` の `ClientActionTest.xlsx` をYAMLに変換する
+- [ ] 変換済みのYAMLファイルを各テストクラスと同じディレクトリ（`src/test/java/...`）に配置する
+- [ ] 変換済みYAMLファイルをgitに追加してコミットする
 - [ ] self-check (OK/NG per completion criterion, record in checks/task-3.md)
+- [ ] QA expert review (subagent)
+- [ ] user review
+
+**Completion criteria**:
+
+- `proman-batch` の変換済みYAMLが `src/test/java/com/nablarch/example/proman/batch/project/` 配下に存在する
+- `climan-project` の変換済みYAMLが `src/test/java/com/nablarch/example/climan/rest/client/` 配下に存在する
+- 変換されたYAMLがスキーマに対して有効である（変換ツールが検証済み）
+- 変換済みYAMLがgitでtracked filesとして存在する
+
+### #4: 設定変更してYAMLテストデータで全テストをパスさせる
+
+**Purpose**: `unit-test.xml` 等の設定を変更して `YamlTestDataParser` に切り替え、全テストがパスすることを確認する。失敗があれば原因を調査して報告する。
+
+**Prerequisites**: #3
+
+**Steps**:
+
+- [ ] `proman-batch/src/test/resources/unit-test.xml`（またはオーバーライドファイル）に `YamlTestDataParser` の設定を追加し、`nablarch.test.resource-root` を変換済みYAMLの配置先に合わせる
+- [ ] `climan-project/src/test/resources/unit-test.xml`（または関連設定ファイル）に同様の設定を追加する
+- [ ] `interpreters` として `yamlInterpreters`（`QuotationTrimmer` を含まない）が使われるよう設定する
+- [ ] `proman-project` で `mvn test` を実行する
+- [ ] `climan-project` で `mvn test` を実行する
+- [ ] テスト失敗があれば原因を調査して報告する（設定・YAML内容の問題に限り修正する）
+- [ ] self-check (OK/NG per completion criterion, record in checks/task-4.md)
 - [ ] QA expert review (subagent)
 - [ ] language expert review (subagent)
 - [ ] software-engineering expert review (subagent)
@@ -104,28 +122,9 @@ NTF（Nablarch Testing Framework）のAI対応として、既存のExcelテス�
 - `proman-batch/src/test/resources/unit-test.xml`（または関連設定ファイル）に `testDataParser` として `YamlTestDataParser` が定義されている
 - `climan-project/src/test/resources/unit-test.xml`（または関連設定ファイル）に同様の定義がある
 - `nablarch.test.resource-root` が変換済みYAMLファイルのルートを指している
-
-### #4: 全テストをパスさせる
-
-**Purpose**: `proman-project` および `climan-project` の全テストを実行し、YAML移行後も全テストがパスすることを確認する。
-
-**Prerequisites**: #1, #2, #3
-
-**Steps**:
-
-- [ ] `proman-project` でテストを実行する（`mvn test`）
-- [ ] `climan-project` でテストを実行する（`mvn test`）
-- [ ] テスト失敗があれば原因を調査して修正する（設定やYAMLの問題に限る）
-- [ ] 全テストがパスすることを確認する
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-4.md)
-- [ ] QA expert review (subagent)
-- [ ] user review
-
-**Completion criteria**:
-
 - `proman-project` の `mvn test` が BUILD SUCCESS で終了する
 - `climan-project` の `mvn test` が BUILD SUCCESS で終了する
-- `ExportProjectsInPeriodActionRequestTest` および `ClientActionTest` がYAMLテストデータを使って実行され、パスしている（テストログで確認）
+- `ExportProjectsInPeriodActionRequestTest` および `ClientActionTest` がYAMLテストデータで実行されパスしている（テストログで確認）
 
 # Decisions
 
@@ -134,5 +133,5 @@ NTF（Nablarch Testing Framework）のAI対応として、既存のExcelテス�
 - **Status**: not suspended
 - **Date**: 2026-06-24
 - **Last completed**: (none)
-- **Next**: #1 ExcelテストデータをYAMLに変換してリポジトリに配置する
+- **Next**: #1 現状のビルド・テストで全PASSを確認する
 - **Notes**: nablarch-testing-converter に CLI/Mojo 未整備。TestDataConverter.convert() を Maven exec plugin 経由で呼び出す方針が有力。
