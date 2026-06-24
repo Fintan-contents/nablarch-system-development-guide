@@ -121,21 +121,19 @@ mvn test
 - 変換されたYAMLがスキーマに対して有効である（変換ツールが検証済み）
 - 変換済みYAMLがgitでtracked filesとして存在する
 
-### #4: 設定変更してYAMLテストデータで全テストをパスさせる
+### #4: proman-batch — 設定変更してYAMLテストデータで全テストをパスさせる
 
-**Purpose**: `unit-test.xml` 等の設定を変更して `YamlTestDataParser` に切り替え、全テストがパスすることを確認する。失敗があれば原因を調査して報告する。
+**Purpose**: `proman-batch/unit-test.xml` に `YamlTestDataParser` を設定し、Excel なしで全テストがパスすることを確認する。
 
 **Prerequisites**: #3
 
 **Steps**:
 
-- [ ] `proman-batch/src/test/resources/unit-test.xml`（またはオーバーライドファイル）に `YamlTestDataParser` の設定を追加し、`nablarch.test.resource-root` を変換済みYAMLの配置先に合わせる
-- [ ] `climan-project/src/test/resources/unit-test.xml`（または関連設定ファイル）に同様の設定を追加する
-- [ ] `interpreters` として `yamlInterpreters`（`QuotationTrimmer` を含まない）が使われるよう設定する
-- [ ] `proman-project` で `mvn test` を実行する
-- [ ] `climan-project` で `mvn test` を実行する
-- [ ] テスト失敗があれば原因を調査して報告する（設定・YAML内容の問題に限り修正する）
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-4.md)
+- [x] `proman-batch/src/test/resources/unit-test.xml` に `YamlTestDataParser` の設定を追加する
+- [x] `interpreters` として `yamlInterpreters`（`QuotationTrimmer` を含まない）が使われるよう設定する
+- [x] `ExportProjectsInPeriodActionRequestTest.xlsx` を削除し、YAML のみで `mvn test` が BUILD SUCCESS になることを確認する（Tests run: 1, Failures: 0, Errors: 0）
+- [x] proman-web も含め全テストがパスすることを確認する（Tests run: 29, Failures: 0, Errors: 0）
+- [x] self-check (OK/NG per completion criterion, record in checks/task-4.md)
 - [ ] QA expert review (subagent)
 - [ ] language expert review (subagent)
 - [ ] software-engineering expert review (subagent)
@@ -143,12 +141,33 @@ mvn test
 
 **Completion criteria**:
 
-- `proman-batch/src/test/resources/unit-test.xml`（または関連設定ファイル）に `testDataParser` として `YamlTestDataParser` が定義されている
-- `climan-project/src/test/resources/unit-test.xml`（または関連設定ファイル）に同様の定義がある
+- `proman-batch/src/test/resources/unit-test.xml` に `testDataParser` として `YamlTestDataParser` が定義されている
 - `nablarch.test.resource-root` が変換済みYAMLファイルのルートを指している
 - `proman-project` の `mvn test` が BUILD SUCCESS で終了する
+- `ExportProjectsInPeriodActionRequestTest` がYAMLテストデータで実行されパスしている（テストログで確認）
+
+### #5: climan-project — RestTestSupport 対応後にYAMLテストデータで全テストをパスさせる
+
+**Purpose**: `nablarch-testing-rest` の `RestTestSupport` が `testDataParser` 経由でYAMLを読めるよう対応した後、`climan-project` の設定を完成させ全テストをパスさせる。
+
+**Prerequisites**: #4、nablarch-testing-rest の RestTestSupport YAML 対応
+
+**Steps**:
+
+- [x] `climan-project/src/test/resources/unit-test.xml` に `YamlTestDataParser` の設定を追加する（commit c836a46 済み）
+- [ ] `nablarch-testing-rest` の RestTestSupport YAML 対応版がリリースされたら依存バージョンを更新する
+- [ ] `ClientActionTest.xlsx` を削除し、YAML のみで `mvn test` が BUILD SUCCESS になることを確認する（Tests run: 19, Failures: 0, Errors: 0）
+- [ ] self-check (OK/NG per completion criterion, record in checks/task-5.md)
+- [ ] QA expert review (subagent)
+- [ ] language expert review (subagent)
+- [ ] software-engineering expert review (subagent)
+- [ ] user review
+
+**Completion criteria**:
+
+- `climan-project/src/test/resources/unit-test.xml` に `testDataParser` として `YamlTestDataParser` が定義されている
 - `climan-project` の `mvn test` が BUILD SUCCESS で終了する
-- `ExportProjectsInPeriodActionRequestTest` および `ClientActionTest` がYAMLテストデータで実行されパスしている（テストログで確認）
+- `ClientActionTest` がYAMLテストデータで実行されパスしている（テストログで確認）
 
 # Decisions
 
@@ -157,26 +176,26 @@ mvn test
 - **Status**: paused
 - **Date**: 2026-06-24
 - **Last completed**: #3 ExcelテストデータをYAMLに変換してリポジトリに配置する
-- **Next**: #4 設定変更してYAMLテストデータで全テストをパスさせる（続き）
+- **Next**: #4 Verify フェーズ（QA/Language/SE レビュー）
 - **Notes**: |
-    タスク #4 進行中。proman-batch は完了済み、climan は未完了（ブロッカーあり）。
+    タスク #4（proman-batch）の実装ステップは全完了。Verify フェーズ（レビュー）が残っている。
+    タスク #5（climan）は nablarch-testing-rest の RestTestSupport YAML 対応待ちでブロック中。
     
-    【proman-batch 完了済み】
-    - unit-test.xml に YamlTestDataParser 設定追加済み（commit c836a46）
-    - ExportProjectsInPeriodActionRequestTest.xlsx を削除し、YAML のみで Tests run: 1, Failures: 0, Errors: 0 を実証済み（commit 41e65cf）
+    【#4 proman-batch — 実装完了、Verify 待ち】
+    - unit-test.xml に YamlTestDataParser 設定追加済み
+    - ExportProjectsInPeriodActionRequestTest.xlsx 削除済み
+    - YAML のみで Tests run: 1, Failures: 0, Errors: 0 実証済み
     - proman-web も Tests run: 29, Failures: 0, Errors: 0（リグレッションなし）
-    - task-4.md self-check 記録済み（commit 56a83be）
-    - 次は Verify フェーズ（QA/Language/SE レビュー）を proman-batch の変更に対して実施する
+    - self-check 記録済み（checks/task-4.md）
+    - 次のアクション: QA/Language/SE レビューを proman-batch の変更に対して実施する
     
-    【climan ブロッカー】
-    - RestTestSupport.getSheet() が testDataParser を経由せず .xlsx を直接開く実装のため、Excel なしでは ClientActionTest が全 ERROR になる
-    - nablarch-testing-rest の修正が必要（RestTestSupport が testDataParser 経由で YAML を読むよう対応）
-    - climan の ClientActionTest.xlsx はリポジトリに残したまま
+    【#5 climan — ブロック中】
+    - RestTestSupport.getSheet() が testDataParser を経由せず .xlsx を直接開くため YAML 対応不可
+    - nablarch-testing-rest 側の修正が必要
+    - climan の unit-test.xml への YamlTestDataParser 設定は追加済み
+    - ClientActionTest.xlsx はリポジトリに残したまま
     
     【ブランチ状況】
-    - upstream/develop にリベース済み（--onto で我々の15コミットのみ移植）
+    - upstream/develop にリベース済み
     - PR: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211（base: develop）
-    
-    【次のアクション】
-    Verify フェーズ: proman-batch の差分（unit-test.xml + YAML ファイル + xlsx 削除）に対して QA/Language/SE レビューを実施する。
 
