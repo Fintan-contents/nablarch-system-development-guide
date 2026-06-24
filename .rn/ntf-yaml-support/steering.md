@@ -29,6 +29,30 @@ NTF（Nablarch Testing Framework）のAI対応として、既存のExcelテス�
 - テストクラス（`.java`）は変更しない
 - ブランチ `ntf-yaml-support` で作業し、全変更をPRに含める
 - Mavenのビルドは `Sample_Project/Source_Code/proman-project` または `Sample_Project/Source_Code/climan-project` の配下で実行する
+- 推測で作業しない。各アプリのREADMEやドキュメントを先に確認してから進める
+
+## ビルド・テスト手順（READMEより）
+
+### 共通
+- JDK: OpenJDK 21（`JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-amd64`）
+- PostgreSQL 16: `docker start postgres16` で起動（postgres/password）
+
+### proman-project
+READMEに従い、以下の順序で実行する（`Sample_Project/Source_Code/proman-project` 配下）：
+```
+cd proman-project && mvn -N install
+cd proman-common && mvn -P gsp clean generate-resources && mvn install
+cd proman-web または proman-batch で mvn test
+```
+※ proman-common の gsp が entity 生成を行うため、proman-batch/web のテスト前に必須
+
+### climan-project
+READMEに従い、以下の順序で実行する（`Sample_Project/Source_Code/climan-project` 配下）：
+```
+mvn -P gsp clean generate-resources  ← entity 生成（com.nablarch.example.climan.entity）
+mvn test
+```
+※ gsp プロファイルがエンティティクラスを生成するため、先に実行が必須
 
 # Tasks
 
