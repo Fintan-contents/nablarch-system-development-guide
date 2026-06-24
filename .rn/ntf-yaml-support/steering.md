@@ -134,9 +134,9 @@ mvn test
 - [x] `ExportProjectsInPeriodActionRequestTest.xlsx` を削除し、YAML のみで `mvn test` が BUILD SUCCESS になることを確認する（Tests run: 1, Failures: 0, Errors: 0）
 - [x] proman-web も含め全テストがパスすることを確認する（Tests run: 29, Failures: 0, Errors: 0）
 - [x] self-check (OK/NG per completion criterion, record in checks/task-4.md)
-- [ ] QA expert review (subagent)
-- [ ] language expert review (subagent)
-- [ ] software-engineering expert review (subagent)
+- [x] QA expert review (subagent)
+- [x] language expert review (subagent)
+- [x] software-engineering expert review (subagent)
 - [ ] user review
 
 **Completion criteria**:
