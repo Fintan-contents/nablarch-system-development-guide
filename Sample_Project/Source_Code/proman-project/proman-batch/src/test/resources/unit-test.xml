@@ -20,8 +20,7 @@
   <import file="nablarch/test/test-data.xml"/>
   <import file="nablarch/test/test-transaction.xml"/>
 
-  <!-- YAMLテストデータ用インタープリタ（QuotationTrimmerを除く）
-       TODO: nablarch-testing-yaml が default-configuration artifact を提供したら <import> に差し替える -->
+  <!-- YAMLテストデータ用インタープリタ（QuotationTrimmerを除く） -->
   <list name="yamlInterpreters">
     <component-ref name="nullInterpreter"/>
     <component-ref name="dateTimeInterpreter"/>
