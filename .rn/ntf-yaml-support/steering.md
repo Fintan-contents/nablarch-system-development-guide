@@ -154,8 +154,5 @@ mvn test
 
 # State
 
-- **Status**: paused
-- **Date**: 2026-06-24
-- **Last completed**: #1 現状のビルド・テストで全PASSを確認する
-- **Next**: #2 pom.xml に nablarch-testing-yaml / nablarch-testing-converter の依存を追加する
-- **Notes**: タスク #1 完了・PR作成済み（https://github.com/kiyotis/nablarch-system-development-guide/pull/1）。ユーザーレビュー待ち。次は proman-batch/pom.xml と climan-project/pom.xml に nablarch-testing-yaml:1.0.0-SNAPSHOT と nablarch-testing-converter:1.0.0-SNAPSHOT を test scope で追加する。両ライブラリはローカルの Maven リポジトリにインストール済み。ビルド前に docker start postgres16 と JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-amd64 の設定が必要。
+<!-- rn:state -->
+
