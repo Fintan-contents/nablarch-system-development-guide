@@ -110,9 +110,9 @@ mvn test
 - [ ] `climan-project` の `ClientActionTest.xlsx` をYAMLに変換する
 - [ ] 変換済みのYAMLファイルを各テストクラスと同じディレクトリ（`src/test/java/...`）に配置する
 - [ ] 変換済みYAMLファイルをgitに追加してコミットする
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-3.md)
-- [ ] QA expert review (subagent)
-- [ ] user review
+- [x] self-check (OK/NG per completion criterion, record in checks/task-3.md)
+- [x] QA expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
