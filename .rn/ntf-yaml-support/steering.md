@@ -64,11 +64,11 @@ mvn test
 
 **Steps**:
 
-- [ ] `proman-project` で `mvn test` を実行する
-- [ ] `climan-project` で `mvn test` を実行する
-- [ ] 全テストがパスすることを確認する（失敗があれば報告して止まる）
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-1.md)
-- [ ] QA expert review (subagent)
+- [x] `proman-project` で `mvn test` を実行する
+- [x] `climan-project` で `mvn test` を実行する
+- [x] 全テストがパスすることを確認する（失敗があれば報告して止まる）
+- [x] self-check (OK/NG per completion criterion, record in checks/task-1.md)
+- [x] QA expert review (subagent)
 - [ ] user review
 
 **Completion criteria**:
@@ -156,6 +156,6 @@ mvn test
 
 - **Status**: not suspended
 - **Date**: 2026-06-24
-- **Last completed**: (none)
-- **Next**: #1 現状のビルド・テストで全PASSを確認する
+- **Last completed**: #1 現状のビルド・テストで全PASSを確認する
+- **Next**: #2 pom.xml に nablarch-testing-yaml / nablarch-testing-converter の依存を追加する
 - **Notes**: nablarch-testing-converter に CLI/Mojo 未整備。TestDataConverter.convert() を Maven exec plugin 経由で呼び出す方針が有力。
