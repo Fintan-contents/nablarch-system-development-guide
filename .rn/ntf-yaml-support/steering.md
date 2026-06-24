@@ -154,5 +154,18 @@ mvn test
 
 # State
 
-<!-- rn:state -->
+- **Status**: paused
+- **Date**: 2026-06-24
+- **Last completed**: #3 ExcelテストデータをYAMLに変換してリポジトリに配置する
+- **Next**: #4 設定変更してYAMLテストデータで全テストをパスさせる（続き）
+- **Notes**: |
+    再開後は proman-batch を先に進めること。
+    タスク #4 の unit-test.xml 変更は commit 済み（b879dd9）。proman-batch は BUILD SUCCESS 確認済み。
+    climan-project は RestTestSupport が YamlTestDataParser を経由せず直接 .xls を開こうとする問題が発覚。
+    `nablarch-testing-rest` の `RestTestSupport.getSheet()` が testDataParser を使わず `.xls` ファイルを直接開く実装のため、
+    Excel なしでは `ClientActionTest.xls (No such file or directory)` で全19テスト ERROR になる。
+    `nablarch-testing-rest` 側の修正が必要（`RestTestSupport` が `testDataParser` 経由で YAML を読むよう対応）。
+    proman-batch の ExportProjectsInPeriodActionRequestTest は Excel なしで BUILD SUCCESS 確認済み（YAML で動いている根拠あり）。
+    climan の修正は nablarch-testing-rest の対応待ち。
+    task-4.md の self-check は記録済み（未コミット）。レビューはまだ未実施。
 
