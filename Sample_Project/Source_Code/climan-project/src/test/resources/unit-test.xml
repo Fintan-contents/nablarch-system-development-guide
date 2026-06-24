@@ -12,6 +12,20 @@
   <import file="nablarch/test/test-transaction.xml"/>
   <import file="nablarch/test/rest-request-test.xml"/>
 
+  <!-- YAMLテストデータ用インタープリタ（QuotationTrimmerを除く） -->
+  <list name="yamlInterpreters">
+    <component-ref name="nullInterpreter"/>
+    <component-ref name="dateTimeInterpreter"/>
+    <component-ref name="lineSeparatorInterpreter"/>
+    <component-ref name="compositeInterpreter"/>
+  </list>
+
+  <!-- YamlTestDataParser でtestDataParserを上書き -->
+  <component name="testDataParser" class="nablarch.test.core.reader.YamlTestDataParser">
+    <property name="dbInfo" ref="dbInfo"/>
+    <property name="interpreters" ref="yamlInterpreters"/>
+  </component>
+
   <component name="restMockHttpRequestBuilder" class="nablarch.fw.web.RestMockHttpRequestBuilder">
     <property name="defaultContentType" value="application/json"/>
     <property name="bodyConverters">
