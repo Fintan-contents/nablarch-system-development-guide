@@ -159,13 +159,24 @@ mvn test
 - **Last completed**: #3 ExcelテストデータをYAMLに変換してリポジトリに配置する
 - **Next**: #4 設定変更してYAMLテストデータで全テストをパスさせる（続き）
 - **Notes**: |
-    再開後は proman-batch を先に進めること。
-    タスク #4 の unit-test.xml 変更は commit 済み（b879dd9）。proman-batch は BUILD SUCCESS 確認済み。
-    climan-project は RestTestSupport が YamlTestDataParser を経由せず直接 .xls を開こうとする問題が発覚。
-    `nablarch-testing-rest` の `RestTestSupport.getSheet()` が testDataParser を使わず `.xls` ファイルを直接開く実装のため、
-    Excel なしでは `ClientActionTest.xls (No such file or directory)` で全19テスト ERROR になる。
-    `nablarch-testing-rest` 側の修正が必要（`RestTestSupport` が `testDataParser` 経由で YAML を読むよう対応）。
-    proman-batch の ExportProjectsInPeriodActionRequestTest は Excel なしで BUILD SUCCESS 確認済み（YAML で動いている根拠あり）。
-    climan の修正は nablarch-testing-rest の対応待ち。
-    task-4.md の self-check は記録済み（未コミット）。レビューはまだ未実施。
+    タスク #4 進行中。proman-batch は完了済み、climan は未完了（ブロッカーあり）。
+    
+    【proman-batch 完了済み】
+    - unit-test.xml に YamlTestDataParser 設定追加済み（commit c836a46）
+    - ExportProjectsInPeriodActionRequestTest.xlsx を削除し、YAML のみで Tests run: 1, Failures: 0, Errors: 0 を実証済み（commit 41e65cf）
+    - proman-web も Tests run: 29, Failures: 0, Errors: 0（リグレッションなし）
+    - task-4.md self-check 記録済み（commit 56a83be）
+    - 次は Verify フェーズ（QA/Language/SE レビュー）を proman-batch の変更に対して実施する
+    
+    【climan ブロッカー】
+    - RestTestSupport.getSheet() が testDataParser を経由せず .xlsx を直接開く実装のため、Excel なしでは ClientActionTest が全 ERROR になる
+    - nablarch-testing-rest の修正が必要（RestTestSupport が testDataParser 経由で YAML を読むよう対応）
+    - climan の ClientActionTest.xlsx はリポジトリに残したまま
+    
+    【ブランチ状況】
+    - upstream/develop にリベース済み（--onto で我々の15コミットのみ移植）
+    - PR: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211（base: develop）
+    
+    【次のアクション】
+    Verify フェーズ: proman-batch の差分（unit-test.xml + YAML ファイル + xlsx 削除）に対して QA/Language/SE レビューを実施する。
 
