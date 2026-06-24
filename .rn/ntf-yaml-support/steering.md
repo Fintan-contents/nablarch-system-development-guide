@@ -87,10 +87,10 @@ mvn test
 - [ ] `proman-batch/pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` と `nablarch-testing-converter:1.0.0-SNAPSHOT` をtest scopeで追加する
 - [ ] `climan-project/pom.xml` に同様に追加する
 - [ ] `mvn dependency:resolve` で依存が解決できることを確認する
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-2.md)
-- [ ] QA expert review (subagent)
-- [ ] software-engineering expert review (subagent)
-- [ ] user review
+- [x] self-check (OK/NG per completion criterion, record in checks/task-2.md)
+- [x] QA expert review (subagent)
+- [x] software-engineering expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
