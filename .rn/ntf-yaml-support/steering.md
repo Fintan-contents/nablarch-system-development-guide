@@ -184,5 +184,7 @@ mvn test
     - nablarch-testing-rest:6-NEXT-SNAPSHOT インストール済み。BOM 経由のため pom.xml 変更不要
     - Tests run: 25, Failures: 0, Errors: 0（ClientActionTest: 19, ClientServiceTest: 6）
     - QA レビュー: OK（checks/task-5.md に記録済み）
+    - PR タイトル・本文更新済み
     - PR: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211（base: develop）
+    - 次のアクション: user review 承認 → #5 Complete（steering.md チェックオフ＋completion marker コミット）→ Acceptance criteria 確認
 
