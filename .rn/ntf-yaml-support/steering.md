@@ -174,28 +174,27 @@ mvn test
 # State
 
 - **Status**: paused
-- **Date**: 2026-06-24
+- **Date**: 2026-06-25
 - **Last completed**: #3 ExcelテストデータをYAMLに変換してリポジトリに配置する
-- **Next**: #4 Verify フェーズ（QA/Language/SE レビュー）
+- **Next**: #4 user review → Complete
 - **Notes**: |
-    タスク #4（proman-batch）の実装ステップは全完了。Verify フェーズ（レビュー）が残っている。
+    タスク #4 の Verify フェーズ（QA/Language/SE レビュー）完了済み。user review 待ち。
     タスク #5（climan）は nablarch-testing-rest の RestTestSupport YAML 対応待ちでブロック中。
-    
-    【#4 proman-batch — 実装完了、Verify 待ち】
+
+    【#4 proman-batch — Verify 完了、user review 待ち】
     - unit-test.xml に YamlTestDataParser 設定追加済み
     - ExportProjectsInPeriodActionRequestTest.xlsx 削除済み
-    - YAML のみで Tests run: 1, Failures: 0, Errors: 0 実証済み
+    - YAML のみで Tests run: 1, Failures: 0, Errors: 0 実証済み（surefire 2026-06-24 18:50）
     - proman-web も Tests run: 29, Failures: 0, Errors: 0（リグレッションなし）
-    - self-check 記録済み（checks/task-4.md）
-    - 次のアクション: QA/Language/SE レビューを proman-batch の変更に対して実施する
-    
+    - QA/Language/SE レビュー全 OK（checks/task-4.md に記録済み）
+    - 次のアクション: PR でユーザーに承認もらう → Complete（steering.md チェックオフ＋completion marker コミット）
+
     【#5 climan — ブロック中】
     - RestTestSupport.getSheet() が testDataParser を経由せず .xlsx を直接開くため YAML 対応不可
     - nablarch-testing-rest 側の修正が必要
     - climan の unit-test.xml への YamlTestDataParser 設定は追加済み
     - ClientActionTest.xlsx はリポジトリに残したまま
-    
+
     【ブランチ状況】
-    - upstream/develop にリベース済み
     - PR: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211（base: develop）
 
