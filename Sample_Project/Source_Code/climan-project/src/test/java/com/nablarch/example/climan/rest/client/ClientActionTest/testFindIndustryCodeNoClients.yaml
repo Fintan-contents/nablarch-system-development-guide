@@ -1,0 +1,18 @@
+setup_tables:
+  - table: "CLIENT"
+    rows:
+      - CLIENT_ID: "1"
+        CLIENT_NAME: "テスト会社１（農業）"
+        INDUSTRY_CODE: "01"
+      - CLIENT_ID: "2"
+        CLIENT_NAME: "テスト会社２（農業）"
+        INDUSTRY_CODE: "01"
+      - CLIENT_ID: "3"
+        CLIENT_NAME: "テスト会社２（建設業）"
+        INDUSTRY_CODE: "02"
+      - CLIENT_ID: "4"
+        CLIENT_NAME: "テスト会社３（農業）"
+        INDUSTRY_CODE: "01"
+      - CLIENT_ID: "5"
+        CLIENT_NAME: "テスト会社３（建設業）"
+        INDUSTRY_CODE: "02"

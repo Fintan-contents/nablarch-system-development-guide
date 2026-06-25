@@ -20,6 +20,20 @@
   <import file="nablarch/test/test-data.xml"/>
   <import file="nablarch/test/test-transaction.xml"/>
 
+  <!-- YAMLテストデータ用インタープリタ（QuotationTrimmerを除く） -->
+  <list name="yamlInterpreters">
+    <component-ref name="nullInterpreter"/>
+    <component-ref name="dateTimeInterpreter"/>
+    <component-ref name="lineSeparatorInterpreter"/>
+    <component-ref name="compositeInterpreter"/>
+  </list>
+
+  <!-- YamlTestDataParser でtestDataParserを上書き -->
+  <component name="testDataParser" class="nablarch.test.core.reader.YamlTestDataParser">
+    <property name="dbInfo" ref="dbInfo"/>
+    <property name="interpreters" ref="yamlInterpreters"/>
+  </component>
+
   <!--
   マスタデータ復旧設定
   マスタデータ復旧を使用する際には、いくつかの手順が必要になります。
