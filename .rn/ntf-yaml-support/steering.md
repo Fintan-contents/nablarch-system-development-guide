@@ -155,12 +155,12 @@ mvn test
 **Steps**:
 
 - [x] `climan-project/src/test/resources/unit-test.xml` に `YamlTestDataParser` の設定を追加する（commit c836a46 済み）
-- [ ] `nablarch-testing-rest` の RestTestSupport YAML 対応版がリリースされたら依存バージョンを更新する
-- [ ] `ClientActionTest.xlsx` を削除し、YAML のみで `mvn test` が BUILD SUCCESS になることを確認する（Tests run: 19, Failures: 0, Errors: 0）
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-5.md)
-- [ ] QA expert review (subagent)
-- [ ] language expert review (subagent)
-- [ ] software-engineering expert review (subagent)
+- [x] `nablarch-testing-rest` の RestTestSupport YAML 対応版がリリースされたら依存バージョンを更新する（nablarch-testing-rest:6-NEXT-SNAPSHOT がインストール済み。BOM 経由のため pom.xml 変更不要）
+- [x] `ClientActionTest.xlsx` を削除し、YAML のみで `mvn test` が BUILD SUCCESS になることを確認する（Tests run: 25, Failures: 0, Errors: 0）
+- [x] self-check (OK/NG per completion criterion, record in checks/task-5.md)
+- [x] QA expert review (subagent)
+- [x] language expert review (subagent) — N/A（設定ファイル変更・xlsx削除のみ）
+- [x] software-engineering expert review (subagent) — N/A（設定ファイル変更・xlsx削除のみ）
 - [ ] user review
 
 **Completion criteria**:
@@ -173,5 +173,16 @@ mvn test
 
 # State
 
-{{state}}
+- **Status**: paused
+- **Date**: 2026-06-25
+- **Last completed**: #4 proman-batch YAMLテストデータ移行
+- **Next**: #5 user review → Complete
+- **Notes**: |
+    タスク #5 の Verify フェーズ完了済み。user review 待ち。
+    - unit-test.xml への YamlTestDataParser 設定は commit c836a46 済み
+    - ClientActionTest.xlsx 削除済み（commit e016480）
+    - nablarch-testing-rest:6-NEXT-SNAPSHOT インストール済み。BOM 経由のため pom.xml 変更不要
+    - Tests run: 25, Failures: 0, Errors: 0（ClientActionTest: 19, ClientServiceTest: 6）
+    - QA レビュー: OK（checks/task-5.md に記録済み）
+    - PR: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211（base: develop）
 
