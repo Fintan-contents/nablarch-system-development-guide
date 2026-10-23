@@ -108,8 +108,15 @@
 **Steps**:
 - [x] `mvn clean test` が BUILD SUCCESS（3件）になることを確認する
 - [x] テストログで YamlTestDataParser が使われていることを確認する
-- [ ] self-check / QA / language / software-engineering expert review
+- [x] self-check / QA / language / software-engineering expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `mvn test` が BUILD SUCCESS で終了する（全テストパス、Excel なし、件数が Task #1 と同数）
 - テストログで YamlTestDataParser が使われていることが確認できる
+
+## Notes（ユーザー確認事項）
+- CI（Jenkins、ci/settings.xml の Nexus）から `nablarch-testing-yaml` の 1.0.0-SNAPSHOT を取得できないと、develop の `create batch jar`（`-DskipTests` でもテストのコンパイルで test 依存を解決する）と site 生成が失敗する。ローカルでは `~/.m2` のものを使用した
+- Task #3 の表記差46件（Excel の "null" → YAML null、quoting-delimiter の `"`+CR → `"`、可変長ファイルの既定値 file-type / field-separator を YAML に明示）は、NTF の解釈で同一と判断した（QA が独立に検証済み）
+- YAML 側の interpreters に NullInterpreter はないため、null は引用符なしの `null` で書く（`"null"` は文字列になる）
+- Excel でコメントアウトされていたテストケース6（`//6`）は YAML の testShots に含まれない（NTF と同じ扱い）。group_id 6 の setup / expected は YAML に残っているが、参照されていない
+- 英語版 `en/Sample_Project/Source_Code/proman-project/proman-batch` にも同名の Excel が残っている（本指示書の対象外のため未変更）
