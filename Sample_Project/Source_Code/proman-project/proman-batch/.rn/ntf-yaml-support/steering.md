@@ -45,9 +45,9 @@
 - [x] 親 pom のインストール、proman-common の `generate-resources` / `install` を実行する（ファイル変更なし）
 - [x] proman-batch で `mvn test` を実行し全テストがパスすることを確認する（3件）
 - [x] 結果を `checks/task-1.md` に記録する
-- [ ] 変更ファイルをコミットする
-- [ ] self-check
-- [ ] QA expert review
+- [x] 変更ファイルをコミットする
+- [x] self-check
+- [x] QA expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `NAB-682` ブランチ上で作業しており、コミット履歴が維持されている
