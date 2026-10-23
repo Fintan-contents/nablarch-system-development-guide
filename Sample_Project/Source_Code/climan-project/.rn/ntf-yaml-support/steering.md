@@ -79,7 +79,7 @@
 - [x] converter README の手順で全対象 Excel を YAML 変換する（`mvn nablarch-testing-converter:convert`。YAML 6件）
 - [x] サンプリング比較（各ファイル最低3件）を行い `checks/task-3.md` に記録する（全件比較で差異0件）
 - [x] YAML をコミットする（Excel はまだ削除しない）
-- [ ] self-check / QA expert review
+- [x] self-check / QA expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - 変換対象の全Excelに対応するYAMLが生成されている

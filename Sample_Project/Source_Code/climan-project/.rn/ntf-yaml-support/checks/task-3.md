@@ -4,16 +4,16 @@
 
 | Criterion | Self-check | Evidence | QA | QA Evidence |
 |---|---|---|---|---|
-| 変換対象の全てのExcelファイルに対応するYAMLファイルが生成されている | OK | 対象 Excel は `src/test/java/com/nablarch/example/climan/rest/client/ClientActionTest.xlsx` の1件（`find src -name '*.xls' -o -name '*.xlsx'`）。`MAVEN_SKIP_RC=true mvn nablarch-testing-converter:convert` → `Converted 1 file(s).` BUILD SUCCESS。全6シートに対応する YAML 6件（`ClientActionTest/setUpDb.yaml` ほか5件）が生成された | | |
-| サンプリング比較でExcelとYAMLの内容が一致している | OK | `scripts/compare_xlsx_yaml.py` で全シートの SETUP_TABLE を全件比較し差異0件（未対応ブロックなし）。各ファイル3件（元データ0件のファイルは rows 空の一致を確認）のサンプリング結果は下記 Sampling Comparison のとおり全て一致 | | |
-| 変換後のYAMLファイルがコミットされている | OK | YAML 6件と比較スクリプトを Task #3 のコミットに含めた（Excel は未削除） | | |
+| 変換対象の全てのExcelファイルに対応するYAMLファイルが生成されている | OK | 対象 Excel は `src/test/java/com/nablarch/example/climan/rest/client/ClientActionTest.xlsx` の1件（`find src -name '*.xls' -o -name '*.xlsx'`）。`MAVEN_SKIP_RC=true mvn nablarch-testing-converter:convert` → `Converted 1 file(s).` BUILD SUCCESS。全6シートに対応する YAML 6件（`ClientActionTest/setUpDb.yaml` ほか5件）が生成された | OK | 配下の Excel は ClientActionTest.xlsx の1件のみ。シート6枚すべて可視で、コメント・結合セル・数式なし。各シートは `//` コメント行と `SETUP_TABLE=CLIENT` 1ブロックのみで取りこぼしなし。同名 YAML 6件が揃っている |
+| サンプリング比較でExcelとYAMLの内容が一致している | OK | `scripts/compare_xlsx_yaml.py` で全シートの SETUP_TABLE を全件比較し差異0件（未対応ブロックなし）。各ファイル3件（元データ0件のファイルは rows 空の一致を確認）のサンプリング結果は下記 Sampling Comparison のとおり全て一致 | OK | 独自実装で xlsx を解析し全6ファイル・全行（6/0/0/5/1001/1001）が一致。比較スクリプトに誤り（値変更・ゼロ落ち・列欠落）を混入させたコピーはいずれも NG・rc=1 で検出し、偽の一致がないことを確認 |
+| 変換後のYAMLファイルがコミットされている | OK | YAML 6件と比較スクリプトを Task #3 のコミットに含めた（Excel は未削除） | OK | コミット 90ed15a に YAML 6件・スクリプト・task-3.md を含む。ClientActionTest.xlsx は未削除で git 管理下に残存 |
 
 ## QA Expert Review
 
 | Aspect | Verdict | Evidence / Improvement |
 |---|---|---|
-| Meaningful tests/verification | | |
-| Edge case coverage | | |
+| Meaningful tests/verification | OK | サンプリングに加えて全件比較を行い、未対応ブロックは終了コード2で通知する。独立実装でも同じ結果。（改善提案）sharedStrings のふりがな（rPh）を除外していないため、ふりがな付きセルがあると偽の NG になり得る（偽の一致は起きない。今回のデータには該当なし） |
+| Edge case coverage | OK | 0行テーブル（`rows: []`）、先頭ゼロのコード（"01"）、全角文字、1001行の大きなシートを確認。空行を区切りとしない独立比較でも一致し、テーブル途中の空行による取りこぼしなし |
 
 ## Expert Reviews (code changes only)
 
@@ -46,7 +46,7 @@ N/A — no code changes in this task.
 ## Overall Verdict
 
 - Self-check: OK
-- QA:
+- QA: OK
 - Language expert: N/A
 - Software-engineering expert: N/A
-- Ready for user review:
+- Ready for user review: Yes
