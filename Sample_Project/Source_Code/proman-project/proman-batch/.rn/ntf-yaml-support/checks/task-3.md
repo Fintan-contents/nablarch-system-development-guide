@@ -4,16 +4,16 @@
 
 | Criterion | Self-check | Evidence | QA | QA Evidence |
 |---|---|---|---|---|
-| 変換対象の全てのExcelファイルに対応するYAMLファイルが生成されている | OK | 対象 Excel は `src/test/java/com/nablarch/example/proman/batch/project/ExportProjectsInPeriodActionRequestTest.xlsx` の1件。`MAVEN_SKIP_RC=true mvn nablarch-testing-converter:convert` → `Converted 1 file(s).` BUILD SUCCESS（WARN なし）。全2シートに対応する `ExportProjectsInPeriodActionRequestTest/setUpDb.yaml`・`testNormalEnd.yaml` を生成。ブロック数も一致（setUpDb: SETUP_TABLE 2 / testNormalEnd: LIST_MAP 1・SETUP_TABLE 6・EXPECTED_VARIABLE 6） | | |
-| サンプリング比較でExcelとYAMLの内容が一致している | OK | `scripts/compare_xlsx_yaml.py` で全ブロック・全セル（929セル）を比較し、NTF 解釈後の不一致は0件。サンプリング（各ブロック先頭・中央・末尾。3件未満は全件）は下記 Sampling Comparison のとおり全て一致。生の値が異なり NTF 解釈で一致する「表記差」46件は、すべて NTF の Excel 読み込み時の解釈で説明できる（内訳は下記）ため、差異ではないと判断した | | |
-| 変換後のYAMLファイルがコミットされている | OK | YAML 2件と比較スクリプトを Task #3 のコミットに含めた（Excel は未削除） | | |
+| 変換対象の全てのExcelファイルに対応するYAMLファイルが生成されている | OK | 対象 Excel は `src/test/java/com/nablarch/example/proman/batch/project/ExportProjectsInPeriodActionRequestTest.xlsx` の1件。`MAVEN_SKIP_RC=true mvn nablarch-testing-converter:convert` → `Converted 1 file(s).` BUILD SUCCESS（WARN なし）。全2シートに対応する `ExportProjectsInPeriodActionRequestTest/setUpDb.yaml`・`testNormalEnd.yaml` を生成。ブロック数も一致（setUpDb: SETUP_TABLE 2 / testNormalEnd: LIST_MAP 1・SETUP_TABLE 6・EXPECTED_VARIABLE 6） | OK | Excel は1件・2シートで、YAML 2件と過不足なし。NTF と同じ手順の独自比較でもブロック数（setUpDb 2 / testNormalEnd 13）が一致し、どのブロックにも属さない行はない。`//6` の testShots 行は NTF の isCommentRow で除外される扱いと同じ |
+| サンプリング比較でExcelとYAMLの内容が一致している | OK | `scripts/compare_xlsx_yaml.py` で全ブロック・全セル（929セル）を比較し、NTF 解釈後の不一致は0件。サンプリング（各ブロック先頭・中央・末尾。3件未満は全件）は下記 Sampling Comparison のとおり全て一致。生の値が異なり NTF 解釈で一致する「表記差」46件は、すべて NTF の Excel 読み込み時の解釈で説明できる（内訳は下記）ため、差異ではないと判断した | OK | 担当スクリプトの再実行結果は記録と同じ（929セル / 表記差46 / 不一致0）。NTF と nablarch-testing-yaml の処理を再現した独自比較でも NG 0件。YAML を15通り改変したコピーは、両スクリプトともすべて NG として検出した |
+| 変換後のYAMLファイルがコミットされている | OK | YAML 2件と比較スクリプトを Task #3 のコミットに含めた（Excel は未削除） | OK | YAML 2件は f3bd3f1 で追跡済み、Excel は未削除。誤コミットした .pyc は d3872de で削除済みで、`__pycache__` は残っていない。git status はクリーン |
 
 ## QA Expert Review
 
 | Aspect | Verdict | Evidence / Improvement |
 |---|---|---|
-| Meaningful tests/verification | | |
-| Edge case coverage | | |
+| Meaningful tests/verification | OK | 全セルを比較しており、改変の検出も15通りで実証。NTF の解釈を当てはめるのは表記差の3種類（null、引用符・ディレクティブ値の trim、ディレクティブの既定値）だけで、それ以外は完全一致を条件にしている。表記差46件は、NTF・nablarch-testing-yaml のソースで両経路の読み込み後の値が同じになることを独立に確認し、「同一として進めてよい」と判断した（null は BasicTestDataParser の NullInterpreter が EXPECTED_VARIABLE を含む全セルに適用される。defaultDirectives・variableLengthDirectives はプロジェクトと jar 72個のどこにも定義なし。`"\r` は setDirective の trim で `"` になる） |
+| Edge case coverage | OK | コメント行、改行を含むセル、0件の期待ファイル（`rows: []`）、行途中の空セル、group_id、`no:` キーの真偽値化、ふりがなを扱えている。スクリプトがモデル化していない NTF の処理（`\r` 記法、大文字小文字を区別しない null、空行で切らないブロック、行途中の `//` 以降の除外）は、今回のデータでは該当がないことを確認した。他のファイルへ流用する場合は注意が必要 |
 
 ## Expert Reviews (code changes only)
 
@@ -59,7 +59,7 @@ N/A — no code changes in this task.
 ## Overall Verdict
 
 - Self-check: OK
-- QA:
+- QA: OK
 - Language expert: N/A
 - Software-engineering expert: N/A
-- Ready for user review:
+- Ready for user review: Yes
