@@ -106,8 +106,8 @@
 **Purpose**: Excelなしで全テストがパスすることを確認する。
 **Prerequisites**: #4
 **Steps**:
-- [ ] `mvn clean test` が BUILD SUCCESS（3件）になることを確認する
-- [ ] テストログで YamlTestDataParser が使われていることを確認する
+- [x] `mvn clean test` が BUILD SUCCESS（3件）になることを確認する
+- [x] テストログで YamlTestDataParser が使われていることを確認する
 - [ ] self-check / QA / language / software-engineering expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
