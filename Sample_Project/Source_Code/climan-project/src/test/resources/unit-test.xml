@@ -28,6 +28,17 @@
     <property name="schema" value="${nablarch.db.schema}"/>
   </component>
 
+  <!-- YamlTestDataParser でtestDataParserを上書き -->
+  <component name="testDataParser" class="nablarch.test.core.reader.YamlTestDataParser">
+    <property name="dbInfo" ref="dbInfo"/>
+    <property name="interpreters">
+      <list>
+        <component-ref name="dateTimeInterpreter"/>
+        <component-ref name="compositeInterpreter"/>
+      </list>
+    </property>
+  </component>
+
   <!-- テスト用HttpServerにJetty12を定義する -->
   <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty12"/>
 
