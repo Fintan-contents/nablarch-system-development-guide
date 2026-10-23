@@ -24,7 +24,7 @@
 - ベースラインのテスト件数: 25件（`ClientActionTest` 19 / `ClientServiceTest` 6）
 
 ## Scripts
-- （作成時に用途を追記する）
+- `scripts/compare_xlsx_yaml.py`（Task #3）: Excel(.xlsx) の SETUP_TABLE と変換後 YAML の setup_tables を全件比較し、各ファイル先頭・中央・末尾の3件をサンプル表示する（標準ライブラリのみ。SETUP_TABLE 以外のブロックは未対応として終了コード2）。実行: `python3 -I .rn/ntf-yaml-support/scripts/compare_xlsx_yaml.py <xlsx> <YAMLディレクトリ>`
 
 ## Tasks
 
@@ -74,11 +74,11 @@
 **Purpose**: `nablarch-testing-converter` で Excel を YAML に変換し、サンプリングで内容一致を確認する。
 **Prerequisites**: #2
 **Steps**:
-- [ ] 対象 Excel の所在を確認する（事前調査: `ClientActionTest.xlsx` の1件）
-- [ ] 同名 `.xls` / `.xlsx` の併存を確認する
-- [ ] converter README の手順で全対象 Excel を YAML 変換する
-- [ ] サンプリング比較（各ファイル最低3件）を行い `checks/task-3.md` に記録する
-- [ ] YAML をコミットする（Excel はまだ削除しない）
+- [x] 対象 Excel の所在を確認する（`ClientActionTest.xlsx` の1件）
+- [x] 同名 `.xls` / `.xlsx` の併存を確認する（併存なし）
+- [x] converter README の手順で全対象 Excel を YAML 変換する（`mvn nablarch-testing-converter:convert`。YAML 6件）
+- [x] サンプリング比較（各ファイル最低3件）を行い `checks/task-3.md` に記録する（全件比較で差異0件）
+- [x] YAML をコミットする（Excel はまだ削除しない）
 - [ ] self-check / QA expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
