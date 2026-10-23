@@ -59,11 +59,11 @@
 **Purpose**: proman-batch の `pom.xml` に `nablarch-testing-yaml`（test 依存）と `nablarch-testing-converter`（ビルドプラグイン）を追加し、`YamlTestDataParser` を `testDataParser` が参照される全フェーズで有効になる設定ファイル（想定: `src/test/resources/unit-test.xml`）に追加する。参考実装: nablarch-example-batch（`NAB-682`）。
 **Prerequisites**: #1
 **Steps**:
-- [ ] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する
-- [ ] `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` を追加する（from=xls / to=yaml / input・output=`${project.basedir}/src/test/java` / overwrite=true）
-- [ ] 応答電文を読む同期送信系テストに該当するかを判定する
-- [ ] `YamlTestDataParser` を配置する（`interpreters` は `dateTimeInterpreter` → `compositeInterpreter` の2つのみ）
-- [ ] `mvn dependency:resolve` と `mvn help:describe` で依存・プラグインの解決を確認する
+- [x] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する
+- [x] `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` を追加する（from=xls / to=yaml / input・output=`${project.basedir}/src/test/java` / overwrite=true）
+- [x] 応答電文を読む同期送信系テストに該当するかを判定する（非該当）
+- [x] `YamlTestDataParser` を配置する（`src/test/resources/unit-test.xml`）（`interpreters` は `dateTimeInterpreter` → `compositeInterpreter` の2つのみ）
+- [x] `mvn dependency:resolve` と `mvn help:describe` で依存・プラグインの解決を確認する
 - [ ] 変更したファイルをコミットする
 - [ ] self-check / QA / language / software-engineering expert review
 - [ ] user review（全 task 完了後にまとめて実施）
