@@ -105,8 +105,13 @@
 **Steps**:
 - [x] `mvn clean test` が BUILD SUCCESS（25件）になることを確認する
 - [x] テストログで YamlTestDataParser が使われていることを確認する
-- [ ] self-check / QA / language / software-engineering expert review
+- [x] self-check / QA / language / software-engineering expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `mvn test` が BUILD SUCCESS で終了する（全テストパス、Excel なし、件数が Task #1 と同数）
 - テストログで YamlTestDataParser が使われていることが確認できる
+
+## Notes（ユーザー確認事項）
+- CI（Jenkins、ci/settings.xml の Nexus）に `nablarch-testing-yaml` / `nablarch-testing-converter` の 1.0.0-SNAPSHOT が公開されていないと、Jenkins の `mvn test` は依存解決に失敗する。ローカルでは `~/.m2` のものを使用した
+- 英語版 `en/Sample_Project/Source_Code/climan-project` にも `ClientActionTest.xlsx` が残っている（本指示書の対象外のため未変更）
+- converter の `overwrite=true` は参考実装に合わせたもの。今後 YAML を正とする場合、再変換すると手修正した YAML を上書きする点に注意
