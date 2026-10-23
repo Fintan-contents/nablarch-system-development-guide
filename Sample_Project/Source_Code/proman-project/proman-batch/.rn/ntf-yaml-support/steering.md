@@ -96,7 +96,7 @@
 - [x] 変換対象の Excel を `git rm` で削除する
 - [x] 残存Excelが0件であることを `checks/task-4.md` に記録する
 - [x] 削除をコミットする
-- [ ] self-check / QA expert review
+- [x] self-check / QA expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - 変換対象だった全 Excel が削除されている
