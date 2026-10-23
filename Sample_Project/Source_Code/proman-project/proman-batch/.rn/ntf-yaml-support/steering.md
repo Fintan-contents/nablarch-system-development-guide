@@ -64,8 +64,8 @@
 - [x] 応答電文を読む同期送信系テストに該当するかを判定する（非該当）
 - [x] `YamlTestDataParser` を配置する（`src/test/resources/unit-test.xml`）（`interpreters` は `dateTimeInterpreter` → `compositeInterpreter` の2つのみ）
 - [x] `mvn dependency:resolve` と `mvn help:describe` で依存・プラグインの解決を確認する
-- [ ] 変更したファイルをコミットする
-- [ ] self-check / QA / language / software-engineering expert review
+- [x] 変更したファイルをコミットする
+- [x] self-check / QA / language / software-engineering expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` が test スコープで追加されている
