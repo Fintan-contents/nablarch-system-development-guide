@@ -27,7 +27,7 @@
 - ベースラインのテスト件数: 3件（`ExportProjectsInPeriodActionRequestTest` 1 / `GeneralCodingRuleForBatchTest` 2）
 
 ## Scripts
-- （作成時に用途を追記する）
+- `scripts/compare_xlsx_yaml.py`（Task #3）: Excel(.xlsx) と変換後 YAML を全ブロック・全セルで比較し、各ブロックの先頭・中央・末尾の3件（3件未満は全件）をサンプル表示する。対応ブロックは LIST_MAP / SETUP_TABLE（グループ付き含む）/ EXPECTED_VARIABLE。生値（RAW）比較と、NTF の Excel 読み込み時の解釈（NullInterpreter・QuotationTrimmer・大文字化・コメント行除外・ディレクティブ trim と可変長ファイルの既定値）を適用した比較を行い、後者の不一致があれば終了コード1。xlsx は標準ライブラリで読み（ふりがな rPh は除外）、YAML は PyYAML（YAML 1.1 の真偽値解釈を無効化）で読む。実行: `python3 -I .rn/ntf-yaml-support/scripts/compare_xlsx_yaml.py <xlsx> <YAMLディレクトリ>`
 
 ## Tasks
 
@@ -77,11 +77,11 @@
 **Purpose**: `nablarch-testing-converter` で Excel を YAML に変換し、サンプリングで内容一致を確認する。
 **Prerequisites**: #2
 **Steps**:
-- [ ] 対象 Excel の所在を確認する（事前調査: `ExportProjectsInPeriodActionRequestTest.xlsx` の1件）
-- [ ] 同名 `.xls` / `.xlsx` の併存を確認する
-- [ ] converter README の手順で全対象 Excel を YAML 変換する
-- [ ] サンプリング比較（各ファイル最低3件）を行い `checks/task-3.md` に記録する
-- [ ] YAML をコミットする（Excel はまだ削除しない）
+- [x] 対象 Excel の所在を確認する（`ExportProjectsInPeriodActionRequestTest.xlsx` の1件）
+- [x] 同名 `.xls` / `.xlsx` の併存を確認する（併存なし）
+- [x] converter README の手順で全対象 Excel を YAML 変換する（`mvn nablarch-testing-converter:convert`。YAML 2件）
+- [x] サンプリング比較（各ファイル最低3件）を行い `checks/task-3.md` に記録する（全929セルを比較し NTF 解釈後の不一致0件。表記差46件は NTF の解釈で説明できる）
+- [x] YAML をコミットする（Excel はまだ削除しない）
 - [ ] self-check / QA expert review
 - [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
