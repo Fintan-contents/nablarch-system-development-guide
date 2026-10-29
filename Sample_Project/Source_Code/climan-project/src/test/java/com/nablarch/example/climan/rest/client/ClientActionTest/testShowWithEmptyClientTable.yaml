@@ -1,0 +1,3 @@
+setup_tables:
+  - table: "CLIENT"
+    rows: []
