@@ -180,7 +180,7 @@
                         </div>
                         <div class="field">
                             <label>備考</label>
-                            <n:textarea rows="3" cols="" name="form.note" errorCss="input-error"/>
+                            <n:textarea rows="3" cols="50" name="form.note" errorCss="input-error"/>
                             <n:error errorCss="message-error" name="form.note" /><span>&nbsp;</span>
                         </div>
                         <br>
